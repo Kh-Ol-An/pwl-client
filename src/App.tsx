@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
+import LoginForm from './components/LoginForm';
 
 const App: FC = () => {
     return (
         <div>
-            Lets go
+            <LoginForm />
         </div>
     );
 };
 
 export default App;
+// 1.30.00
