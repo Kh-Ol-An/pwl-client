@@ -7,6 +7,10 @@ import { StoreContext } from './index';
 const App: FC = () => {
     const { store } = useContext(StoreContext);
 
+    const getUsers = async () => {
+        await store.getUsers();
+    };
+
     useEffect(() => {
         if (localStorage.getItem('token')) {
             store.checkAuth();
@@ -17,6 +21,25 @@ const App: FC = () => {
         return <div>Завантаження...</div>;
     }
 
+    if (store.isAuth) {
+        return (
+            <>
+                <h1>{store.isAuth ? 'Привіт' : 'Ти хто?'}</h1>
+                <p>{store?.user?.email}</p>
+                <button type="button" onClick={() => store.logout()}>Вийти</button>
+                <button type="button" onClick={getUsers}>RRRRRRRRR</button>
+
+                {store?.users.length > 0 && store?.users.map((user) => (
+                    <>
+                        <div>{user?.id}</div>
+                        <div>{user?.email}</div>
+                        <div>{user?.isActivated}</div>
+                    </>
+                ))}
+            </>
+        );
+    }
+
     return (
         <div className={styles.root}>
             <AuthForm />
@@ -25,4 +48,4 @@ const App: FC = () => {
 };
 
 export default observer(App);
-// 1.37.40
+// 1.39.00

@@ -4,9 +4,11 @@ import { API_URL } from '../utils/api';
 import AuthService from '../services/AuthService';
 import { IUser } from '../models/IUser';
 import { IAuthResponse } from '../models/response/IAuthResponse';
+import UserService from '../services/UserService';
 
 export default class Store {
     user = {} as IUser;
+    users = [] as IUser[];
     isAuth = false;
     isLoading = false;
 
@@ -16,6 +18,10 @@ export default class Store {
 
     setUser(user: IUser) {
         this.user = user;
+    }
+
+    setUsers(users: IUser[]) {
+        this.users = users;
     }
 
     setAuth(bool: boolean) {
@@ -79,6 +85,19 @@ export default class Store {
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
+        } catch (e: any) { // TODO: any
+            console.error(e.response?.data?.message); // TODO: notification
+        } finally {
+            this.setLoading(false);
+        }
+    }
+
+    async getUsers() {
+        this.setLoading(true);
+        try {
+            const response = await UserService.fetchUsers();
+
+            this.setUsers(response.data);
         } catch (e: any) { // TODO: any
             console.error(e.response?.data?.message); // TODO: notification
         } finally {

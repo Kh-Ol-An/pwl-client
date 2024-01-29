@@ -9,16 +9,25 @@ const AuthForm: FC = () => {
 
     const { store } = useContext(StoreContext);
 
-    console.log('store.isAuth: ', store.isAuth);
+    const getUsers = async () => {
+        await store.getUsers();
+    };
+
     return (
         <div className={styles.root}>
-            <h1>{store.isAuth ? 'Привіт' : 'Ти хто?'}</h1>
-            <p>{store?.user?.email}</p>
             <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="password" placeholder="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
             <button type="button" onClick={() => store.login(email, password)}>Логін</button>
             <button type="button" onClick={() => store.registration(email, password)}>Реєстрація</button>
-            <button type="button" onClick={() => store.logout()}>Вийти</button>
+            <button type="button" onClick={getUsers}>RRRRRRRRR</button>
+
+            {store?.users.length > 0 && store?.users.map((user) => (
+                <>
+                    <div>{user?.id}</div>
+                    <div>{user?.email}</div>
+                    <div>{user?.isActivated}</div>
+                </>
+            ))}
         </div>
     );
 };
