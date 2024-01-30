@@ -19,7 +19,7 @@ const AuthForm: FC = () => {
             <input type="password" placeholder="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
             <button type="button" onClick={() => store.login(email, password)}>Логін</button>
             <button type="button" onClick={() => store.registration(email, password)}>Реєстрація</button>
-            <button type="button" onClick={getUsers}>RRRRRRRRR</button>
+            <button type="button" onClick={getUsers}>Get All Users</button>
 
             {store?.users.length > 0 && store?.users.map((user) => (
                 <>

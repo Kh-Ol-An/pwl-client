@@ -24,10 +24,10 @@ const App: FC = () => {
     if (store.isAuth) {
         return (
             <>
-                <h1>{store.isAuth ? 'Привіт' : 'Ти хто?'}</h1>
+                <h1>{store?.user.isActivated ? 'Привіт' : 'Ти хто?'}</h1>
                 <p>{store?.user?.email}</p>
                 <button type="button" onClick={() => store.logout()}>Вийти</button>
-                <button type="button" onClick={getUsers}>RRRRRRRRR</button>
+                <button type="button" onClick={getUsers}>Get All Users</button>
 
                 {store?.users.length > 0 && store?.users.map((user) => (
                     <>
@@ -48,4 +48,3 @@ const App: FC = () => {
 };
 
 export default observer(App);
-// 1.39.00
