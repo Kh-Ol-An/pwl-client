@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { ToastContainer } from 'react-toastify';
 import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
 import App from './App';
 import Store from './store/store';
 
@@ -19,6 +21,7 @@ root.render(
     <React.StrictMode>
         <StoreContext.Provider value={{ store }}>
             <App />
+            <ToastContainer theme="colored" />
         </StoreContext.Provider>
     </React.StrictMode>
 );

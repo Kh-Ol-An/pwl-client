@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import AuthService from '../services/AuthService';
 
 const $api = axios.create({
@@ -21,8 +22,8 @@ $api.interceptors.response.use(
                 const response = await AuthService.refresh();
                 localStorage.setItem('token', response.data.accessToken);
                 return $api.request(originalRequest);
-            } catch (e) {
-                console.error('Не авторизован'); // TODO: notification
+            } catch (e: any) {
+                toast(e.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
             }
         }
         throw error;

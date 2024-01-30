@@ -1,7 +1,7 @@
 import React, { FC, useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { StoreContext } from '../../index';
-import styles from './AuthForm.module.css';
+import { Root } from './AuthFormStyles';
 
 const AuthForm: FC = () => {
     const [email, setEmail] = useState('');
@@ -14,7 +14,7 @@ const AuthForm: FC = () => {
     };
 
     return (
-        <div className={styles.root}>
+        <Root>
             <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="password" placeholder="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
             <button type="button" onClick={() => store.login(email, password)}>Логін</button>
@@ -28,7 +28,7 @@ const AuthForm: FC = () => {
                     <div>{user?.isActivated}</div>
                 </>
             ))}
-        </div>
+        </Root>
     );
 };
 

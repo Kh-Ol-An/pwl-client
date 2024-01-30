@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import { toast } from 'react-toastify';
 import AuthService from '../services/AuthService';
 import { IUser } from '../models/IUser';
 import UserService from '../services/UserService';
@@ -34,12 +35,11 @@ export default class Store {
         try {
             const response = await AuthService.registration(email, password);
 
-//            console.log('registration: ', response);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
-        } catch (e: any) { // TODO: any
-            console.error(e.response?.data?.message); // TODO: notification
+        } catch (e: any) {
+            toast(e.response?.data?.message || 'Не вдалось зареєструватися.', { type: 'error' });
         } finally {
             this.setLoading(false);
         }
@@ -50,12 +50,11 @@ export default class Store {
         try {
             const response = await AuthService.login(email, password);
 
-//            console.log('login: ', response);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
-        } catch (e: any) { // TODO: any
-            console.error(e.response?.data?.message); // TODO: notification
+        } catch (e: any) {
+            toast(e.response?.data?.message || 'Не вдалось авторизуватись.', { type: 'error' });
         } finally {
             this.setLoading(false);
         }
@@ -68,8 +67,8 @@ export default class Store {
             localStorage.removeItem('token');
             this.setAuth(false);
             this.setUser({} as IUser);
-        } catch (e: any) { // TODO: any
-            console.error(e.response?.data?.message); // TODO: notification
+        } catch (e: any) {
+            toast(e.response?.data?.message || 'Не вдалось вийти.', { type: 'error' });
         } finally {
             this.setLoading(false);
         }
@@ -80,12 +79,11 @@ export default class Store {
         try {
             const response = await AuthService.refresh();
 
-//            console.log('checkAuth: ', response);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
-        } catch (e: any) { // TODO: any
-            console.error(e.response?.data?.message); // TODO: notification
+        } catch (e: any) {
+            toast(e.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
         } finally {
             this.setLoading(false);
         }
@@ -97,8 +95,8 @@ export default class Store {
             const response = await UserService.fetchUsers();
 
             this.setUsers(response.data);
-        } catch (e: any) { // TODO: any
-            console.error(e.response?.data?.message); // TODO: notification
+        } catch (e: any) {
+            toast(e.response?.data?.message || 'Не вдалось отримати всіх юзерів.', { type: 'error' });
         } finally {
             this.setLoading(false);
         }
