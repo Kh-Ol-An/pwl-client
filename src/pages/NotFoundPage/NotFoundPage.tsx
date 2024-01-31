@@ -1,10 +1,13 @@
 import React, { FC } from 'react';
-import { Root, Title } from './NotFoundPageStyles';
+import { Root, SubText, SubTitle, Text, Title } from './NotFoundPageStyles';
 
 const NotFoundPage: FC = () => {
     return (
         <Root>
-            <Title variant="h1">404</Title>
+            <Title variant="h1">Сторінку не знайдено</Title>
+            <SubTitle variant="h2">404</SubTitle>
+            <Text variant="h2">Ой! Сторінки, яку ви шукали, не існує.</Text>
+            <SubText variant="h2">Можливо, ви неправильно ввели адресу сторінки.</SubText>
         </Root>
     );
 };
