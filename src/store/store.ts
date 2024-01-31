@@ -1,8 +1,8 @@
 import { makeAutoObservable } from 'mobx';
 import { toast } from 'react-toastify';
-import AuthService from '../services/AuthService';
+import Auth from '../services/auth';
+import User from '../services/user';
 import { IUser } from '../models/IUser';
-import UserService from '../services/UserService';
 
 export default class Store {
     user = {} as IUser;
@@ -33,7 +33,7 @@ export default class Store {
     async registration(email: string, password: string) {
         this.setLoading(true);
         try {
-            const response = await AuthService.registration(email, password);
+            const response = await Auth.registration(email, password);
 
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
@@ -48,7 +48,7 @@ export default class Store {
     async login(email: string, password: string) {
         this.setLoading(true);
         try {
-            const response = await AuthService.login(email, password);
+            const response = await Auth.login(email, password);
 
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
@@ -63,7 +63,7 @@ export default class Store {
     async logout() {
         this.setLoading(true);
         try {
-            await AuthService.logout();
+            await Auth.logout();
             localStorage.removeItem('token');
             this.setAuth(false);
             this.setUser({} as IUser);
@@ -77,7 +77,7 @@ export default class Store {
     async checkAuth() {
         this.setLoading(true);
         try {
-            const response = await AuthService.refresh();
+            const response = await Auth.refresh();
 
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
@@ -92,7 +92,7 @@ export default class Store {
     async getUsers() {
         this.setLoading(true);
         try {
-            const response = await UserService.fetchUsers();
+            const response = await User.fetchUsers();
 
             this.setUsers(response.data);
         } catch (e: any) {

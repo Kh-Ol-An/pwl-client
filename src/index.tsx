@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import './index.css';
+import './styles/reset.css';
+import './styles/fonts.css';
+import './styles/base.css';
 import 'react-toastify/dist/ReactToastify.css';
 import App from './App';
 import Store from './store/store';
@@ -20,7 +23,9 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <StoreContext.Provider value={{ store }}>
-            <App />
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
             <ToastContainer theme="colored" />
         </StoreContext.Provider>
     </React.StrictMode>
