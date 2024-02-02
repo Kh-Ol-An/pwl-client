@@ -1,6 +1,11 @@
 import { styled, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { primaryColor, whiteColor } from '../../styles/variables';
+import {
+    actionLightShadow,
+    primaryFontFamily,
+    primaryLinearGradient,
+    whiteColor,
+} from '../../styles/variables';
 
 const styles = {
     margin: 0,
@@ -12,8 +17,9 @@ const styles = {
     gap: '0.8em',
     border: 'none',
     borderRadius: 6,
-    backgroundColor: primaryColor,
+    background: primaryLinearGradient,
     color: whiteColor,
+    fontFamily: primaryFontFamily,
     fontSize: '1.8em',
     fontWeight: 700,
     lineHeight: 1.5,
@@ -27,11 +33,12 @@ const styles = {
     },
 
     '&:hover': {
-        backgroundColor: primaryColor,
+        backgroundColor: primaryLinearGradient,
+        boxShadow: actionLightShadow,
     },
 
     '&:active': {
-        backgroundColor: primaryColor,
+        backgroundColor: primaryLinearGradient,
     },
 };
 

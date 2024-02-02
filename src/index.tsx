@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import './styles/reset.css';
 import './styles/fonts.css';
 import './styles/base.css';
+import './styles/toast.css';
 import 'react-toastify/dist/ReactToastify.css';
 import App from './App';
 import Store from './store/store';
@@ -26,7 +27,7 @@ root.render(
             <BrowserRouter>
                 <App />
             </BrowserRouter>
-            <ToastContainer theme="colored" />
+            <ToastContainer theme="colored" bodyClassName={() => "toast-body"} />
         </StoreContext.Provider>
     </React.StrictMode>
 );

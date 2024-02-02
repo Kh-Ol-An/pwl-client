@@ -1,15 +1,25 @@
 import { styled, Box } from '@mui/material';
+import { secondaryColor, secondaryLightColor, lightShadow } from '../../styles/variables';
 
 export const Root = styled(Box)({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100svh',
+    padding: '2em',
+    backgroundColor: secondaryColor,
+});
+
+export const Wrap = styled(Box)({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 10,
-    width: '100%',
-    height: '100svh',
-    padding: 20,
+    gap: '1em',
+    width: '30em',
+    padding: '1.6em 2em',
     borderRadius: 6,
-    backgroundColor: '#fff',
-    boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.5)',
+    backgroundColor: secondaryLightColor,
+    boxShadow: lightShadow,
 });

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import Auth from '../services/auth';
 import User from '../services/user';
 import { IUser } from '../models/IUser';
-import sleep from '../utils/sleep';
+import { sleep } from '../utils/sleep';
 
 export default class Store {
     user = {} as IUser;
