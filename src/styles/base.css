@@ -1,9 +1,7 @@
-* {
-    box-sizing: border-box;
-}
-
 html {
-    font-size: 16px;
+    font-size: 10px;
+    box-sizing: border-box;
+    line-height: 1.5;
 }
 
 body {
@@ -15,4 +13,15 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
 }

@@ -1,15 +1,37 @@
 import React, { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Auth from './pages/Auth/Auth';
-import Home from './pages/Home/Home';
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import { privateRoutes, publicRoutes, unauthenticatedRoutes } from './pages/routes';
+import PrivateRoutes from './components/Guards/PrivateRoutes';
+import UnauthenticatedRoutes from './components/Guards/UnauthentificatedRoutes';
 
 const App: FC = () => {
     return (
         <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/*" element={<NotFoundPage />} />
+            {publicRoutes.map(({ path, component }) => (
+                <Route key={path} path={path} element={React.createElement(component)} />
+            ))}
+            {privateRoutes.map(({ path, component }) => (
+                <Route
+                    key={path}
+                    path={path}
+                    element={
+                        <PrivateRoutes>
+                            {React.createElement(component)}
+                        </PrivateRoutes>
+                    }
+                />
+            ))}
+            {unauthenticatedRoutes.map(({ path, component }) => (
+                <Route
+                    key={path}
+                    path={path}
+                    element={
+                        <UnauthenticatedRoutes>
+                            {React.createElement(component)}
+                        </UnauthenticatedRoutes>
+                    }
+                />
+            ))}
         </Routes>
     );
 };

@@ -6,10 +6,10 @@ export const Root = styled(Box)({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '0.625em',
+    gap: '1em',
     width: '100%',
     height: '100svh',
-    padding: '1.25em',
+    padding: '2em',
     backgroundImage: `url(${require("../../assets/images/invisible-gift.png")}), radial-gradient(circle, ${accentColor} 0%, ${secondaryColor} 30%)`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'bottom right',
@@ -17,28 +17,28 @@ export const Root = styled(Box)({
 
 export const Title = styled(Typography)({
     textAlign: 'center',
-    fontSize: '6em',
+    fontSize: '8em',
     fontWeight: 700,
     color: primaryColor,
 });
 
 export const SubTitle = styled(Typography)({
     textAlign: 'center',
-    fontSize: '5em',
+    fontSize: '4em',
     fontWeight: 700,
     color: whiteColor,
 });
 
 export const Text = styled(Typography)({
     textAlign: 'center',
-    fontSize: '2em',
+    fontSize: '2.4em',
     fontWeight: 700,
     color: primaryColor,
 });
 
 export const SubText = styled(Typography)({
     textAlign: 'center',
-    fontSize: '1em',
+    fontSize: '1.4em',
     fontWeight: 700,
     color: primaryColor,
 });
