@@ -2,6 +2,7 @@ import React, { FC, useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Root } from './AuthStyles';
 import { StoreContext } from '../../index';
+import Loading from '../../components/Loading/Loading';
 import AuthForm from '../../components/AuthForm/AuthForm';
 import { observer } from 'mobx-react-lite';
 
@@ -19,7 +20,7 @@ const Auth: FC = () => {
     }, [store]);
 
     if (store.isLoading) {
-        return <div>Завантаження...</div>;
+        return <Loading />;
     }
 
     return (
