@@ -1,5 +1,4 @@
 import React, { FC, MouseEvent, useContext, useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { Root, Title, ToggleRegistration, Wrap } from './AuthStyles';
 import { StoreContext } from '../../index';
 import Loading from '../../components/Loading/Loading';
@@ -23,14 +22,6 @@ const Auth: FC = () => {
     };
 
     const { store } = useContext(StoreContext);
-    const navigate = useNavigate();
-    const location = useLocation();
-
-    const fromPage = location.state?.from?.pathname || '/';
-
-    const getUsers = async () => {
-        await store.getUsers();
-    };
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -46,6 +37,7 @@ const Auth: FC = () => {
         <Root>
             <Wrap>
                 <Title>Привіт! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}</Title>
+
                 {isRegistration && (
                     <FormControl
                         sx={{ width: '100%' }}
@@ -63,6 +55,7 @@ const Auth: FC = () => {
                         />
                     </FormControl>
                 )}
+
                 <FormControl
                     sx={{ width: '100%' }}
                     variant="outlined"
@@ -78,6 +71,7 @@ const Auth: FC = () => {
                         label="Email"
                     />
                 </FormControl>
+
                 <FormControl
                     sx={{ width: '100%' }}
                     variant="outlined"
@@ -106,6 +100,7 @@ const Auth: FC = () => {
                         }
                     />
                 </FormControl>
+
                 {isRegistration && (
                     <FormControl
                         sx={{ width: '100%' }}
@@ -140,7 +135,7 @@ const Auth: FC = () => {
                 </ToggleRegistration>
 
                 {isRegistration ? (
-                    <Button type="button" onClick={() => store.registration(email, password)}>Зареєструватися</Button>
+                    <Button type="button" onClick={() => store.registration(name, email, password)}>Зареєструватися</Button>
                 ) : (
                     <Button type="button" onClick={() => store.login(email, password)}>Увійти</Button>
                 )}

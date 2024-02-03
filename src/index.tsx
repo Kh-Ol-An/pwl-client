@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import './styles/reset.css';
 import './styles/fonts.css';
 import './styles/base.css';
@@ -27,7 +26,6 @@ root.render(
             <BrowserRouter>
                 <App />
             </BrowserRouter>
-            <ToastContainer theme="colored" bodyClassName={() => "toast-body"} />
         </StoreContext.Provider>
     </React.StrictMode>
 );

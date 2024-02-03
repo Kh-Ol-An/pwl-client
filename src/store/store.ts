@@ -31,10 +31,10 @@ export default class Store {
         this.isLoading = bool;
     }
 
-    async registration(email: string, password: string) {
+    async registration(name: string, email: string, password: string) {
         this.setLoading(true);
         try {
-            const response = await Auth.registration(email, password);
+            const response = await Auth.registration(name, email, password);
 
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
