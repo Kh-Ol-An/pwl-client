@@ -1,4 +1,5 @@
 import { styled, Box } from '@mui/material';
+import { whiteColor } from '../../styles/variables';
 
 export const Root = styled(Box)({
     display: 'flex',
@@ -9,4 +10,5 @@ export const Root = styled(Box)({
     width: '100%',
     height: '100svh',
     padding: '2em',
+    color: whiteColor,
 });

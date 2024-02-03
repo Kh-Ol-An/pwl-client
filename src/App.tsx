@@ -1,11 +1,11 @@
 import React, { FC, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { privateRoutes, publicRoutes, unauthenticatedRoutes } from './pages/routes';
-import PrivateRoutes from './components/Guards/PrivateRoutes';
-import UnauthenticatedRoutes from './components/Guards/UnauthentificatedRoutes';
-import { ToastContainer } from 'react-toastify';
-import Inactivated from './components/Inactivated/Inactivated';
 import { observer } from 'mobx-react-lite';
+import { ToastContainer } from 'react-toastify';
+import { privateRoutes, publicRoutes, unauthenticatedRoutes } from './pages/routes';
+import Guard from './components/Guard';
+import Inactivated from './components/Inactivated/Inactivated';
+import Loading from './components/Loading/Loading';
 import { StoreContext } from './index';
 
 const App: FC = () => {
@@ -13,7 +13,9 @@ const App: FC = () => {
 
     return (
         <>
-            {!store?.user?.isActivated && <Inactivated />}
+            {store?.user?.isActivated === false && <Inactivated />}
+
+            {store?.isLoading === true && <Loading />}
 
             <Routes>
                 {publicRoutes.map(({ path, component }) => (
@@ -25,9 +27,9 @@ const App: FC = () => {
                         key={path}
                         path={path}
                         element={
-                            <PrivateRoutes>
+                            <Guard type="private">
                                 {React.createElement(component)}
-                            </PrivateRoutes>
+                            </Guard>
                         }
                     />
                 ))}
@@ -37,9 +39,9 @@ const App: FC = () => {
                         key={path}
                         path={path}
                         element={
-                            <UnauthenticatedRoutes>
+                            <Guard type="unauthenticated">
                                 {React.createElement(component)}
-                            </UnauthenticatedRoutes>
+                            </Guard>
                         }
                     />
                 ))}

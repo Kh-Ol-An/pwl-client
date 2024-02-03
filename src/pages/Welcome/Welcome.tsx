@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
+import { Root } from './WelcomeStyles';
 
 const Welcome: FC = () => {
     return (
-        <div>
+        <Root>
             Welcome
-        </div>
+        </Root>
     );
 };
 

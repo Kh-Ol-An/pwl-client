@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import Auth from '../services/auth';
 import User from '../services/user';
 import { IUser } from '../models/IUser';
-//import { sleep } from '../utils/sleep';
 
 export default class Store {
     user = {} as IUser;
@@ -36,9 +35,10 @@ export default class Store {
         try {
             const response = await Auth.registration(name, email, password);
 
-            localStorage.setItem('token', response.data.accessToken);
-            this.setAuth(true);
-            this.setUser(response.data.user);
+            await localStorage.setItem('token', response.data.accessToken);
+            await this.setAuth(true);
+            await this.setUser(response.data.user);
+            window.location.href = '/';
         } catch (e: any) {
             toast(e.response?.data?.message || 'Не вдалось зареєструватися.', { type: 'error' });
         } finally {
@@ -48,13 +48,13 @@ export default class Store {
 
     async login(email: string, password: string) {
         this.setLoading(true);
-//        await sleep(1);
         try {
             const response = await Auth.login(email, password);
 
-            localStorage.setItem('token', response.data.accessToken);
-            this.setAuth(true);
-            this.setUser(response.data.user);
+            await localStorage.setItem('token', response.data.accessToken);
+            await this.setAuth(true);
+            await this.setUser(response.data.user);
+            window.location.href = '/';
         } catch (e: any) {
             toast(e.response?.data?.message || 'Не вдалось авторизуватись.', { type: 'error' });
         } finally {
@@ -66,9 +66,10 @@ export default class Store {
         this.setLoading(true);
         try {
             await Auth.logout();
-            localStorage.removeItem('token');
-            this.setAuth(false);
-            this.setUser({} as IUser);
+            await localStorage.removeItem('token');
+            await this.setAuth(false);
+            await this.setUser({} as IUser);
+            window.location.href = '/welcome';
         } catch (e: any) {
             toast(e.response?.data?.message || 'Не вдалось вийти.', { type: 'error' });
         } finally {
@@ -76,7 +77,9 @@ export default class Store {
         }
     }
 
-    async checkAuth() {
+    async checkAuth(withNotify = true) {
+        if (this.isLoading) return;
+
         this.setLoading(true);
         try {
             const response = await Auth.refresh();
@@ -85,7 +88,10 @@ export default class Store {
             this.setAuth(true);
             this.setUser(response.data.user);
         } catch (e: any) {
-            toast(e.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
+            localStorage.removeItem('token');
+            this.setAuth(false);
+            this.setUser({} as IUser);
+            withNotify && toast(e.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
         } finally {
             this.setLoading(false);
         }

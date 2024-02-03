@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
+import { Root } from './SettingsStyles';
 
 const Settings: FC = () => {
     return (
-        <div>
+        <Root>
             Settings
-        </div>
+        </Root>
     );
 };
 

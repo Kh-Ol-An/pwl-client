@@ -1,7 +1,6 @@
-import React, { FC, MouseEvent, useContext, useEffect, useState } from 'react';
+import React, { FC, MouseEvent, useContext, useState } from 'react';
 import { Root, Title, ToggleRegistration, Wrap } from './AuthStyles';
 import { StoreContext } from '../../index';
-import Loading from '../../components/Loading/Loading';
 import { observer } from 'mobx-react-lite';
 import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
@@ -22,16 +21,6 @@ const Auth: FC = () => {
     };
 
     const { store } = useContext(StoreContext);
-
-    useEffect(() => {
-        if (localStorage.getItem('token')) {
-            store.checkAuth();
-        }
-    }, [store]);
-
-    if (store.isLoading) {
-        return <Loading />;
-    }
 
     return (
         <Root>

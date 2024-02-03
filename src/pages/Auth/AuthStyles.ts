@@ -8,7 +8,6 @@ export const Root = styled(Box)({
     width: '100%',
     height: '100svh',
     padding: '2em',
-    backgroundColor: secondaryColor,
 });
 
 export const Wrap = styled(Box)({

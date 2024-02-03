@@ -7,6 +7,7 @@ export const Root = styled(Box)({
     right: 0,
     bottom: 0,
     left: 0,
+    zIndex: 9999,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
