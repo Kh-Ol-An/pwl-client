@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { StoreContext } from '../index';
 
 interface IProps {
-    type: 'private' | 'unauthenticated';
+    type: 'all' | 'private' | 'unauthenticated';
     children: ReactNode;
 }
 
@@ -25,7 +25,7 @@ const Guard: FC<IProps> = ({ type, children }) => {
         } else {
             checkAuthentication();
         }
-    }, [store]);
+    }, [store, type, location.pathname]);
 
     if (type === 'unauthenticated' && authChecked && localStorage.getItem('token')) {
         return <Navigate to="/" />;

@@ -1,0 +1,65 @@
+import React, { FC, useContext } from 'react';
+import { ThemeProvider, createTheme, ListItem, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
+import { StoreContext } from '../../index';
+import { Root } from './SidebarStyles';
+import { IUser } from '../../models/IUser';
+import { secondaryLightColor } from '../../styles/variables';
+
+interface IProps {
+    users: IUser[];
+}
+
+const theme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+})
+
+//const usersMock = [
+//    {
+//        id: 1,
+//        name: 'Ivan',
+//        avatar: 'https://material-ui.com/static/images/avatar/1.jpg',
+//    },
+//    {
+//        id: 2,
+//        name: 'Petro',
+//        avatar: 'https://material-ui.com/static/images/avaftar/2.jpg',
+//    },
+//    {
+//        id: 3,
+//        name: 'Stepan',
+//        avatar: 'https://material-ui.com/static/images/avatar/3.jpg',
+//    },
+//    {
+//        id: 4,
+//        name: 'Oleg',
+//        avatar: 'https://material-ui.com/static/images/avdatar/4.jpg',
+//    },
+//];
+
+const Sidebar: FC<IProps> = ({ users }) => {
+    const { store } = useContext(StoreContext);
+
+    return (
+        <ThemeProvider theme={theme}>
+            <Root>
+                {users.map((user) => (
+                    <ListItem key={user.id}>
+                        <ListItemAvatar>
+                            <Avatar alt={user.name} src={user.avatar} />
+                        </ListItemAvatar>
+
+                        <ListItemText
+                            primary={user.name}
+                            secondary={user.id}
+                            sx={{ color: secondaryLightColor }}
+                        />
+                    </ListItem>
+                ))}
+            </Root>
+        </ThemeProvider>
+    );
+};
+
+export default Sidebar;

@@ -78,7 +78,7 @@ export default class Store {
     }
 
     async checkAuth(withNotify = true) {
-        if (this.isLoading) return;
+        if (this.isLoading) return; // TODO: error
 
         this.setLoading(true);
         try {

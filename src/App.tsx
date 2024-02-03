@@ -19,7 +19,15 @@ const App: FC = () => {
 
             <Routes>
                 {publicRoutes.map(({ path, component }) => (
-                    <Route key={path} path={path} element={React.createElement(component)} />
+                    <Route
+                        key={path}
+                        path={path}
+                        element={
+                            <Guard type="all">
+                                {React.createElement(component)}
+                            </Guard>
+                        }
+                    />
                 ))}
 
                 {privateRoutes.map(({ path, component }) => (
