@@ -1,5 +1,5 @@
-import { styled, Box } from '@mui/material';
-import { secondaryColor, secondaryLightColor, lightShadow } from '../../styles/variables';
+import { styled, Box, Typography } from '@mui/material';
+import { secondaryColor, secondaryLightColor, lightShadow, primaryColor } from '../../styles/variables';
 
 export const Root = styled(Box)({
     display: 'flex',
@@ -22,4 +22,27 @@ export const Wrap = styled(Box)({
     borderRadius: 6,
     backgroundColor: secondaryLightColor,
     boxShadow: lightShadow,
+});
+
+export const Title = styled(Typography)({
+    fontSize: '1.8em',
+    color: secondaryColor,
+    textAlign: 'center',
+});
+
+export const ToggleRegistration = styled('button')({
+    margin: 0,
+    padding: 0,
+    display: 'inline',
+    backgroundColor: 'transparent',
+    border: 'none',
+    color: primaryColor,
+    fontSize: '1.6em',
+    textAlign: 'center',
+    outline: 'none',
+    cursor: 'pointer',
+
+    '&:focus': {
+        outline: 'none',
+    },
 });
