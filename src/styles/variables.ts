@@ -13,3 +13,6 @@ export const actionLightShadow = '0 4px 8px -2px rgba(0, 212, 255, 0.5)';
 export const primaryLinearGradient = 'linear-gradient(90deg, #1a61ed 0%, #11bae3 100%)';
 
 export const primaryFontFamily = 'Poppins, sans-serif';
+
+export const mainZIndex = 9999;
+export const highZIndex9 = 9000;

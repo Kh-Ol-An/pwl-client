@@ -1,11 +1,12 @@
 import { Box, styled } from '@mui/material';
-import { actionColor, whiteColor } from '../../styles/variables';
+import { actionColor, whiteColor, highZIndex9 } from '../../styles/variables';
 
 export const Root = styled(Box)({
     position: 'fixed',
-    top: 0,
     right: 0,
+    bottom: 0,
     left: 0,
+    zIndex: highZIndex9,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

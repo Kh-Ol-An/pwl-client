@@ -5,17 +5,21 @@ import User from '../services/user';
 import { IUser } from '../models/IUser';
 
 export default class Store {
-    user = {} as IUser;
+    myUser: IUser | null = null;
     users = [] as IUser[];
     isAuth = false;
-    isLoading = false;
+    waitRegistration = false;
+    waitLogin = false;
+    waitLogout = false;
+    waitCheckAuth = false;
+    waitUsers = false;
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    setUser(user: IUser) {
-        this.user = user;
+    setMyUser(user: IUser | null) {
+        this.myUser = user;
     }
 
     setUsers(users: IUser[]) {
@@ -26,79 +30,103 @@ export default class Store {
         this.isAuth = bool;
     }
 
-    setLoading(bool: boolean) {
-        this.isLoading = bool;
+    setWaitRegistration(bool: boolean) {
+        this.waitRegistration = bool;
+    }
+
+    setWaitLogin(bool: boolean) {
+        this.waitLogin = bool;
+    }
+
+    setWaitLogout(bool: boolean) {
+        this.waitLogout = bool;
+    }
+
+    setWaitCheckAuth(bool: boolean) {
+        this.waitCheckAuth = bool;
+    }
+
+    setWaitUsers(bool: boolean) {
+        this.waitUsers = bool;
     }
 
     async registration(name: string, email: string, password: string) {
-        this.setLoading(true);
+        if (this.waitRegistration) return;
+
+        this.setWaitRegistration(true);
         try {
             const response = await Auth.registration(name, email, password);
 
             await localStorage.setItem('token', response.data.accessToken);
             await this.setAuth(true);
-            await this.setUser(response.data.user);
+            await this.setMyUser(response.data.user);
             window.location.href = '/';
         } catch (e: any) {
             toast(e.response?.data?.message || 'Не вдалось зареєструватися.', { type: 'error' });
         } finally {
-            this.setLoading(false);
+            this.setWaitRegistration(false);
         }
     }
 
     async login(email: string, password: string) {
-        this.setLoading(true);
+        if (this.waitLogin) return;
+
+        this.setWaitLogin(true);
         try {
             const response = await Auth.login(email, password);
 
             await localStorage.setItem('token', response.data.accessToken);
             await this.setAuth(true);
-            await this.setUser(response.data.user);
+            await this.setMyUser(response.data.user);
             window.location.href = '/';
         } catch (e: any) {
             toast(e.response?.data?.message || 'Не вдалось авторизуватись.', { type: 'error' });
         } finally {
-            this.setLoading(false);
+            this.setWaitLogin(false);
         }
     }
 
     async logout() {
-        this.setLoading(true);
+        if (this.waitLogout) return;
+
+        this.setWaitLogout(true);
         try {
             await Auth.logout();
             await localStorage.removeItem('token');
             await this.setAuth(false);
-            await this.setUser({} as IUser);
+            await this.setMyUser({} as IUser);
             window.location.href = '/welcome';
         } catch (e: any) {
             toast(e.response?.data?.message || 'Не вдалось вийти.', { type: 'error' });
         } finally {
-            this.setLoading(false);
+            this.setWaitLogout(false);
         }
     }
 
     async checkAuth(withNotify = true) {
-        if (this.isLoading) return; // TODO: error
+        if (this.waitCheckAuth) return;
 
-        this.setLoading(true);
+        this.setWaitCheckAuth(true);
         try {
             const response = await Auth.refresh();
 
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
-            this.setUser(response.data.user);
+            this.setMyUser(response.data.user);
         } catch (e: any) {
             localStorage.removeItem('token');
             this.setAuth(false);
-            this.setUser({} as IUser);
+            this.setMyUser(null);
             withNotify && toast(e.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
         } finally {
-            this.setLoading(false);
+            this.setWaitCheckAuth(false);
         }
     }
 
     async getUsers() {
-        this.setLoading(true);
+        if (this.waitUsers) return;
+
+        this.setWaitUsers(true);
         try {
             const response = await User.fetchUsers();
 
@@ -106,7 +134,7 @@ export default class Store {
         } catch (e: any) {
             toast(e.response?.data?.message || 'Не вдалось отримати всіх юзерів.', { type: 'error' });
         } finally {
-            this.setLoading(false);
+            this.setWaitUsers(false);
         }
     }
 }

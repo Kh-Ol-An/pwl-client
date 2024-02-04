@@ -13,9 +13,11 @@ const App: FC = () => {
 
     return (
         <>
-            {store?.user?.isActivated === false && <Inactivated />}
+            {store?.myUser?.isActivated === false && <Inactivated />}
 
-            {store?.isLoading === true && <Loading />}
+            {(store?.waitRegistration === true || store?.waitLogin === true || store?.waitLogout === true || store?.waitCheckAuth === true || store?.waitUsers === true) && (
+                <Loading />
+            )}
 
             <Routes>
                 {publicRoutes.map(({ path, component }) => (

@@ -1,4 +1,5 @@
 import { styled, List } from '@mui/material';
+import { secondaryLightColor } from '../../styles/variables';
 
 export const Root = styled(List)({
     display: 'flex',
@@ -6,4 +7,5 @@ export const Root = styled(List)({
     width: '30%',
     height: '100svh',
     padding: '2em',
+    borderRight: `1px solid ${secondaryLightColor}`,
 });

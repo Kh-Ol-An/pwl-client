@@ -13,12 +13,12 @@ const Home: FC = () => {
 
     return (
         <Root>
-            {store?.users?.length > 0 && <Sidebar users={store.users} />}
+            {store?.users?.length > 0 && <Sidebar users={store.users} myUser={store.myUser} />}
 
             <Container>
                 <a href="/auth">auth</a>
-                <h1>{store?.user.isActivated ? 'Привіт' : 'Ти хто?'}</h1>
-                <p>{store?.user?.email}</p>
+                <h1>{store?.myUser?.isActivated ? 'Привіт' : 'Ти хто?'}</h1>
+                <p>{store?.myUser?.email}</p>
                 <button type="button" onClick={() => store.logout()}>Вийти</button>
             </Container>
         </Root>

@@ -1,12 +1,12 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { ThemeProvider, createTheme, ListItem, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
-import { StoreContext } from '../../index';
 import { Root } from './SidebarStyles';
 import { IUser } from '../../models/IUser';
 import { secondaryLightColor } from '../../styles/variables';
 
 interface IProps {
     users: IUser[];
+    myUser: IUser | null;
 }
 
 const theme = createTheme({
@@ -38,13 +38,19 @@ const theme = createTheme({
 //    },
 //];
 
-const Sidebar: FC<IProps> = ({ users }) => {
-    const { store } = useContext(StoreContext);
+const Sidebar: FC<IProps> = ({ users, myUser }) => {
+    const [usersWithoutMe, setUsersWithoutMe] = useState<IUser[]>([]);
+
+    useEffect(() => {
+        if (!myUser?.id) return;
+
+        setUsersWithoutMe(users.filter((user) => user.id !== myUser.id));
+    } , [users, myUser]);
 
     return (
         <ThemeProvider theme={theme}>
             <Root>
-                {users.map((user) => (
+                {usersWithoutMe.map((user) => (
                     <ListItem key={user.id}>
                         <ListItemAvatar>
                             <Avatar alt={user.name} src={user.avatar} />

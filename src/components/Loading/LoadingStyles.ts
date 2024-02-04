@@ -1,5 +1,5 @@
 import { styled, Box } from '@mui/material';
-import { secondaryColor, whiteColor } from '../../styles/variables';
+import { secondaryColor, whiteColor, mainZIndex } from '../../styles/variables';
 
 export const Root = styled(Box)({
     position: 'fixed',
@@ -7,7 +7,7 @@ export const Root = styled(Box)({
     right: 0,
     bottom: 0,
     left: 0,
-    zIndex: 9999,
+    zIndex: mainZIndex,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
