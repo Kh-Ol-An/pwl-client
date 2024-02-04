@@ -7,15 +7,26 @@ import Guard from './components/Guard';
 import Inactivated from './components/Inactivated/Inactivated';
 import Loading from './components/Loading/Loading';
 import { StoreContext } from './index';
+import { ThemeProvider, createTheme } from '@mui/material';
+
+const theme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+})
 
 const App: FC = () => {
     const { store } = useContext(StoreContext);
 
     return (
-        <>
+        <ThemeProvider theme={theme}>
             {store?.myUser?.isActivated === false && <Inactivated />}
 
-            {(store?.waitRegistration === true || store?.waitLogin === true || store?.waitLogout === true || store?.waitCheckAuth === true || store?.waitUsers === true) && (
+            {(store?.waitRegistration === true
+                || store?.waitLogin === true
+                || store?.waitLogout === true
+                || store?.waitCheckAuth === true
+                || store?.waitUsers === true) && (
                 <Loading />
             )}
 
@@ -58,7 +69,7 @@ const App: FC = () => {
             </Routes>
 
             <ToastContainer theme="colored" bodyClassName={() => "toast-body"} />
-        </>
+        </ThemeProvider>
     );
 };
 

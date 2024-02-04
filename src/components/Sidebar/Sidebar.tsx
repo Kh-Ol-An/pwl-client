@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
-import { ThemeProvider, createTheme, ListItem, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
+import { ListItem, ListItemAvatar, Avatar, ListItemText, ListItemButton } from '@mui/material';
 import { Root } from './SidebarStyles';
 import { IUser } from '../../models/IUser';
 import { secondaryLightColor } from '../../styles/variables';
@@ -8,35 +8,6 @@ interface IProps {
     users: IUser[];
     myUser: IUser | null;
 }
-
-const theme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-})
-
-//const usersMock = [
-//    {
-//        id: 1,
-//        name: 'Ivan',
-//        avatar: 'https://material-ui.com/static/images/avatar/1.jpg',
-//    },
-//    {
-//        id: 2,
-//        name: 'Petro',
-//        avatar: 'https://material-ui.com/static/images/avaftar/2.jpg',
-//    },
-//    {
-//        id: 3,
-//        name: 'Stepan',
-//        avatar: 'https://material-ui.com/static/images/avatar/3.jpg',
-//    },
-//    {
-//        id: 4,
-//        name: 'Oleg',
-//        avatar: 'https://material-ui.com/static/images/avdatar/4.jpg',
-//    },
-//];
 
 const Sidebar: FC<IProps> = ({ users, myUser }) => {
     const [usersWithoutMe, setUsersWithoutMe] = useState<IUser[]>([]);
@@ -48,23 +19,23 @@ const Sidebar: FC<IProps> = ({ users, myUser }) => {
     } , [users, myUser]);
 
     return (
-        <ThemeProvider theme={theme}>
-            <Root>
-                {usersWithoutMe.map((user) => (
-                    <ListItem key={user.id}>
+        <Root>
+            {usersWithoutMe.map((user) => (
+                <ListItem key={user.id} disablePadding>
+                    <ListItemButton>
                         <ListItemAvatar>
                             <Avatar alt={user.name} src={user.avatar} />
                         </ListItemAvatar>
 
                         <ListItemText
                             primary={user.name}
-                            secondary={user.id}
+                            secondary={user.email}
                             sx={{ color: secondaryLightColor }}
                         />
-                    </ListItem>
-                ))}
-            </Root>
-        </ThemeProvider>
+                    </ListItemButton>
+                </ListItem>
+            ))}
+        </Root>
     );
 };
 
