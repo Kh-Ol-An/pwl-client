@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import Auth from '../services/auth';
 import User from '../services/user';
 import { IUser } from '../models/IUser';
+import { Dayjs } from 'dayjs';
 
 export default class Store {
     myUser: IUser | null = null;
@@ -13,6 +14,7 @@ export default class Store {
     waitLogout = false;
     waitCheckAuth = false;
     waitUsers = false;
+    waitSendMyUser = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -48,6 +50,10 @@ export default class Store {
 
     setWaitUsers(bool: boolean) {
         this.waitUsers = bool;
+    }
+
+    setWaitSendMyUser(bool: boolean) {
+        this.waitSendMyUser = bool;
     }
 
     async registration(name: string, email: string, password: string) {
@@ -135,6 +141,22 @@ export default class Store {
             toast(e.response?.data?.message || 'Не вдалось отримати всіх юзерів.', { type: 'error' });
         } finally {
             this.setWaitUsers(false);
+        }
+    }
+
+    async updateUser(id: string, name: string, birthday: Dayjs) {
+        if (this.waitSendMyUser) return;
+
+        this.setWaitSendMyUser(true);
+        try {
+            const response = await User.saveMyUser(id, name, birthday);
+
+            await this.setMyUser(response.data);
+            window.location.href = '/';
+        } catch (e: any) {
+            toast(e.response?.data?.message || 'Не вдалось зберегти твої дані.', { type: 'error' });
+        } finally {
+            this.setWaitSendMyUser(false);
         }
     }
 }

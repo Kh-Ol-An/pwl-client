@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import './styles/reset.css';
 import './styles/fonts.css';
 import './styles/base.css';
@@ -24,7 +26,9 @@ root.render(
     <React.StrictMode>
         <StoreContext.Provider value={{ store }}>
             <BrowserRouter>
-                <App />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <App />
+                </LocalizationProvider>
             </BrowserRouter>
         </StoreContext.Provider>
     </React.StrictMode>

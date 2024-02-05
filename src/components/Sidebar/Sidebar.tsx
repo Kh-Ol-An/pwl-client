@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { ListItem, ListItemAvatar, Avatar, ListItemText, ListItemButton } from '@mui/material';
+import dayjs from 'dayjs';
 import { Root } from './SidebarStyles';
 import { IUser } from '../../models/IUser';
 import { secondaryLightColor } from '../../styles/variables';
@@ -20,21 +21,23 @@ const Sidebar: FC<IProps> = ({ users, myUser }) => {
 
     return (
         <Root>
-            {usersWithoutMe.map((user) => (
-                <ListItem key={user.id} disablePadding>
-                    <ListItemButton>
-                        <ListItemAvatar>
-                            <Avatar alt={user.name} src={user.avatar} />
-                        </ListItemAvatar>
+            {usersWithoutMe.map((user) => {
+                return (
+                    <ListItem key={user.id} disablePadding>
+                        <ListItemButton>
+                            <ListItemAvatar>
+                                <Avatar alt={user.name} src={user.avatar} />
+                            </ListItemAvatar>
 
-                        <ListItemText
-                            primary={user.name}
-                            secondary={user.email}
-                            sx={{ color: secondaryLightColor }}
-                        />
-                    </ListItemButton>
-                </ListItem>
-            ))}
+                            <ListItemText
+                                primary={user.name}
+                                secondary={user.birthday ? dayjs(user.birthday).format('DD.MM.YYYY') : user.email}
+                                sx={{ color: secondaryLightColor }}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                );
+            })}
         </Root>
     );
 };

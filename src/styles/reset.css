@@ -52,7 +52,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: inset 0 0 0 1000px #f0f0f0 !important; /* Цвет фона */
-    -webkit-text-fill-color: #000 !important; /* цвет текста */
+    -webkit-box-shadow: inset 0 0 0 1000px #020024 !important; /* Цвет фона */
+    -webkit-text-fill-color: #f0f0f0 !important; /* цвет текста */
     transition: background-color 600000s 0s, color 600000s 0s;
 }

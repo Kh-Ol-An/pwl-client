@@ -1,6 +1,7 @@
 import React, { FC, useContext, useEffect } from 'react';
 import { Avatar, IconButton } from '@mui/material';
 import { Settings } from '@mui/icons-material';
+import dayjs from 'dayjs';
 import { Container, Header, HeaderLink, Root } from './HomeStyles';
 import { observer } from 'mobx-react-lite';
 import { StoreContext } from '../../index';
@@ -19,7 +20,7 @@ const Home: FC = () => {
             <Header
                 sx={{ color: secondaryLightColor }}
                 title={store.myUser?.name}
-                subheader={store.myUser?.email}
+                subheader={store.myUser?.birthday ? dayjs(store.myUser?.birthday).format('DD.MM.YYYY') : store.myUser?.email}
                 avatar={
                     <Avatar alt={store.myUser?.name} src={store.myUser?.avatar} />
                 }

@@ -1,9 +1,9 @@
 import React, { FC, MouseEvent, useContext, useState } from 'react';
-import { Root, Title, ToggleRegistration, Wrap } from './AuthStyles';
-import { StoreContext } from '../../index';
 import { observer } from 'mobx-react-lite';
 import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
+import { Root, Title, ToggleRegistration, Wrap } from './AuthStyles';
+import { StoreContext } from '../../index';
 import Button from '../../components/Button/Button';
 
 const Auth: FC = () => {
@@ -55,9 +55,9 @@ const Auth: FC = () => {
                     <OutlinedInput
                         id="email"
                         type="text"
+                        label="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        label="Email"
                     />
                 </FormControl>
 

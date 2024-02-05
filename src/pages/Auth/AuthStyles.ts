@@ -19,7 +19,7 @@ export const Wrap = styled(Box)({
     width: '30em',
     padding: '1.6em 2em',
     borderRadius: 6,
-    backgroundColor: secondaryLightColor,
+    backgroundColor: secondaryColor,
     boxShadow: lightShadow,
 });
 
