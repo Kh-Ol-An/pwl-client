@@ -1,4 +1,4 @@
-import { styled, Box } from '@mui/material';
+import { styled, Box, Avatar } from '@mui/material';
 import { whiteColor } from '../../styles/variables';
 
 export const Root = styled(Box)({
@@ -11,4 +11,16 @@ export const Root = styled(Box)({
     height: '100svh',
     padding: '2em',
     color: whiteColor,
+});
+
+export const AvatarBox = styled(Box)({
+//    position: 'relative',
+});
+
+export const FileInput = styled('input')({
+    display: 'none',
+});
+
+export const AvatarImg = styled(Avatar)({
+    cursor: 'pointer',
 });

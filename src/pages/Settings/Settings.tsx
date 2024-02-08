@@ -1,24 +1,44 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useState, useEffect } from 'react';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { Dayjs } from 'dayjs';
-import { Root } from './SettingsStyles';
+import dayjs, { Dayjs } from 'dayjs';
+import { AvatarBox, AvatarImg, FileInput, Root } from './SettingsStyles';
 import Button from '../../components/Button/Button';
 import { StoreContext } from '../../index';
 
 const Settings: FC = () => {
-    const [name, setName] = useState('');
-    const [birthday, setBirthday] = useState<Dayjs | null>(null);
-
     const { store } = useContext(StoreContext);
 
+    const [name, setName] = useState<string>('');
+    const [visibleAvatar, setVisibleAvatar] = useState<string | null>('');
+    const [avatar, setAvatar] = useState<File | null>(null);
+    const [birthday, setBirthday] = useState<Dayjs | null>(null);
+
     const send = () => {
-        console.log(name, birthday);
         if (!store.myUser || !birthday) return;
 
-        store.updateUser(store.myUser.id, name, birthday);
+        store.updateUser(store.myUser.id, name, birthday, avatar);
     };
+
+    const removeAvatar = () => {
+        setVisibleAvatar(null);
+    };
+
+    const showAvatar = () => {
+        if (visibleAvatar === null) return;
+
+        return visibleAvatar || store.myUser?.avatar;
+    };
+
+    useEffect(() => {
+        if (!store.myUser) return;
+
+        setName(store.myUser.name);
+        setBirthday(dayjs(store.myUser.birthday));
+    }, [store.myUser]);
+
+    console.log('visibleAvatar', visibleAvatar);
 
     return (
         <Root>
@@ -37,6 +57,28 @@ const Settings: FC = () => {
                     label="Ім'я"
                 />
             </FormControl>
+
+            <AvatarBox>
+                <label htmlFor="avatar">
+                    <FileInput
+                        id="avatar"
+                        accept="image/*"
+                        type="file"
+                        onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+
+                            setVisibleAvatar(URL.createObjectURL(file));
+                            setAvatar(file);
+                        }}
+                    />
+                    <AvatarImg src={showAvatar()} alt={store.myUser?.name} />
+                </label>
+
+                <Button onClick={removeAvatar}>
+                    removeAvatar
+                </Button>
+            </AvatarBox>
 
             <div title="Коли твій день народженя?">
                 <DemoContainer components={['DatePicker']}>

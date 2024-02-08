@@ -37,6 +37,9 @@ const Home: FC = () => {
                 {store?.users?.length > 0 && <Sidebar users={store.users} myUser={store.myUser} />}
 
                 <Container>
+                    <p style={{ color: 'white' }}>Створити розклад який би ти бажав</p>
+                    <p style={{ color: 'white' }}>Вибір полу і якщо жінка то можливість обрати улюблені квіти</p>
+                    <p style={{ color: 'white' }}>Видалити сторінку налаштувань і створити модалку</p>
                     <a href="/auth">auth</a>
                     <h1>{store?.myUser?.isActivated ? 'Привіт' : 'Ти хто?'}</h1>
                     <p>{store?.myUser?.email}</p>
