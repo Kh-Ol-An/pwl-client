@@ -23,6 +23,7 @@ const Settings: FC = () => {
 
     const removeAvatar = () => {
         setVisibleAvatar(null);
+        setAvatar(null);
     };
 
     const showAvatar = () => {
@@ -37,8 +38,6 @@ const Settings: FC = () => {
         setName(store.myUser.name);
         setBirthday(dayjs(store.myUser.birthday));
     }, [store.myUser]);
-
-    console.log('visibleAvatar', visibleAvatar);
 
     return (
         <Root>
