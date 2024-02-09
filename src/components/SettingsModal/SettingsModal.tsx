@@ -3,11 +3,11 @@ import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
-import { AvatarBox, AvatarImg, FileInput, Root } from './SettingsStyles';
+import { AvatarBox, AvatarImg, FileInput, Root } from './SettingsModalStyles';
 import Button from '../../components/Button/Button';
 import { StoreContext } from '../../index';
 
-const Settings: FC = () => {
+const SettingsModal: FC = () => {
     const { store } = useContext(StoreContext);
 
     const [name, setName] = useState<string>('');
@@ -97,4 +97,4 @@ const Settings: FC = () => {
     );
 };
 
-export default Settings;
+export default SettingsModal;

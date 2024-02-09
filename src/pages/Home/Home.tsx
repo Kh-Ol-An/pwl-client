@@ -1,12 +1,9 @@
 import React, { FC, useContext, useEffect } from 'react';
-import { Avatar, IconButton } from '@mui/material';
-import { Settings } from '@mui/icons-material';
-import dayjs from 'dayjs';
-import { Container, Header, HeaderLink, Root } from './HomeStyles';
 import { observer } from 'mobx-react-lite';
+import { Container, Root } from './HomeStyles';
 import { StoreContext } from '../../index';
+import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import { secondaryLightColor } from '../../styles/variables';
 
 const Home: FC = () => {
     const { store } = useContext(StoreContext);
@@ -17,21 +14,7 @@ const Home: FC = () => {
 
     return (
         <>
-            <Header
-                sx={{ color: secondaryLightColor }}
-                title={store.myUser?.name}
-                subheader={store.myUser?.birthday ? dayjs(store.myUser?.birthday).format('DD.MM.YYYY') : store.myUser?.email}
-                avatar={
-                    <Avatar alt={store.myUser?.name} src={store.myUser?.avatar} />
-                }
-                action={
-                    <IconButton>
-                        <HeaderLink to="/settings">
-                            <Settings sx={{ color: secondaryLightColor }} />
-                        </HeaderLink>
-                    </IconButton>
-                }
-            />
+            <Header />
 
             <Root>
                 {store?.users?.length > 0 && <Sidebar users={store.users} myUser={store.myUser} />}
