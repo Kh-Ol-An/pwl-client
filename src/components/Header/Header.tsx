@@ -2,7 +2,7 @@ import React, { FC, useContext, useState } from 'react';
 import { secondaryLightColor } from '../../styles/variables';
 import dayjs from 'dayjs';
 import { Avatar, IconButton, Modal } from '@mui/material';
-import { HeaderBox } from './HeaderStyles';
+import { HeaderBox, ModalBox } from './HeaderStyles';
 import { Settings } from '@mui/icons-material';
 import { StoreContext } from '../../index';
 import SettingsModal from '../SettingsModal/SettingsModal';
@@ -42,7 +42,9 @@ const Header: FC = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <SettingsModal />
+                <ModalBox>
+                    <SettingsModal close={handleCloseSettings} />
+                </ModalBox>
             </Modal>
         </>
     );

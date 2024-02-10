@@ -144,7 +144,7 @@ export default class Store {
         }
     }
 
-    async updateUser(id: string, name: string, birthday: Dayjs, avatar: File | null) {
+    async updateUser(id: string, name: string, birthday: Dayjs, avatar: File | null | string) {
         if (this.waitSendMyUser) return;
 
         this.setWaitSendMyUser(true);
@@ -152,7 +152,6 @@ export default class Store {
             const response = await User.saveMyUser(id, name, birthday, avatar);
 
             await this.setMyUser(response.data);
-//            window.location.href = '/';
         } catch (e: any) {
             toast(e.response?.data?.message || 'Не вдалось зберегти твої дані.', { type: 'error' });
         } finally {

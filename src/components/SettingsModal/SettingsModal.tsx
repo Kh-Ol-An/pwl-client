@@ -3,44 +3,50 @@ import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
-import { AvatarBox, AvatarImg, FileInput, Root } from './SettingsModalStyles';
+import { AvatarBox, AvatarImg, FileInput } from './SettingsModalStyles';
 import Button from '../../components/Button/Button';
 import { StoreContext } from '../../index';
 
-const SettingsModal: FC = () => {
+interface IProps {
+    close: () => void;
+}
+
+const SettingsModal: FC<IProps> = ({ close }) => {
     const { store } = useContext(StoreContext);
 
     const [name, setName] = useState<string>('');
-    const [visibleAvatar, setVisibleAvatar] = useState<string | null>('');
-    const [avatar, setAvatar] = useState<File | null>(null);
+    const [avatar, setAvatar] = useState<File | null | string>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
 
-    const send = () => {
+    const send = async () => {
         if (!store.myUser || !birthday) return;
 
-        store.updateUser(store.myUser.id, name, birthday, avatar);
+        await store.updateUser(store.myUser.id, name, birthday, avatar);
+        close();
     };
 
     const removeAvatar = () => {
-        setVisibleAvatar(null);
         setAvatar(null);
     };
 
     const showAvatar = () => {
-        if (visibleAvatar === null) return;
+        if (avatar instanceof File) {
+            return URL.createObjectURL(avatar);
+        }
 
-        return visibleAvatar || store.myUser?.avatar;
+        return avatar || '';
     };
 
     useEffect(() => {
         if (!store.myUser) return;
 
         setName(store.myUser.name);
+        setAvatar(store.myUser.avatar || '');
         setBirthday(dayjs(store.myUser.birthday));
     }, [store.myUser]);
 
     return (
-        <Root>
+        <>
             <FormControl
                 sx={{ width: '100%' }}
                 variant="outlined"
@@ -67,7 +73,6 @@ const SettingsModal: FC = () => {
                             const file = e.target.files?.[0];
                             if (!file) return;
 
-                            setVisibleAvatar(URL.createObjectURL(file));
                             setAvatar(file);
                         }}
                     />
@@ -93,7 +98,7 @@ const SettingsModal: FC = () => {
             <Button onClick={send}>
                 Зберегти
             </Button>
-        </Root>
+        </>
     );
 };
 

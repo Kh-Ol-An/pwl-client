@@ -8,11 +8,12 @@ export default class User {
         return $api.get<IUser[]>('/users');
     }
 
-    static async saveMyUser(id: string, name: string, birthday: Dayjs, avatar: File | null): Promise<AxiosResponse<IUser>> {
+    static async saveMyUser(id: string, name: string, birthday: Dayjs, avatar: File | null | string): Promise<AxiosResponse<IUser>> {
         const formData = new FormData();
         formData.append('id', id);
         formData.append('name', name);
         formData.append('birthday', birthday.format('DD.MM.YYYY'));
+        formData.append('deleteAvatar', avatar === null ? 'true' : 'false');
         if (avatar) {
             formData.append('avatar', avatar);
         }

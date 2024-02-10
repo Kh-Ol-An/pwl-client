@@ -1,5 +1,5 @@
 import { styled, Box, Typography } from '@mui/material';
-import { secondaryColor, secondaryLightColor, lightShadow, primaryColor } from '../../styles/variables';
+import { secondaryColor, lightShadow, primaryColor } from '../../styles/variables';
 
 export const Root = styled(Box)({
     display: 'flex',

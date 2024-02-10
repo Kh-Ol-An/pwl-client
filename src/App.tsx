@@ -26,7 +26,8 @@ const App: FC = () => {
                 || store?.waitLogin === true
                 || store?.waitLogout === true
                 || store?.waitCheckAuth === true
-                || store?.waitUsers === true) && (
+                || store?.waitUsers === true
+                || store?.waitSendMyUser === true) && (
                 <Loading />
             )}
 
