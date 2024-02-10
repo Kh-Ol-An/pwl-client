@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import Auth from '../services/auth';
 import User from '../services/user';
 import { IUser } from '../models/IUser';
-import { Dayjs } from 'dayjs';
 
 export default class Store {
     myUser: IUser | null = null;
@@ -144,7 +143,7 @@ export default class Store {
         }
     }
 
-    async updateUser(id: string, name: string, birthday: Dayjs, avatar: File | null | string) {
+    async updateUser(id: string, name: string, birthday: string, avatar: File | null | string) {
         if (this.waitSendMyUser) return;
 
         this.setWaitSendMyUser(true);

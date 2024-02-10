@@ -21,7 +21,7 @@ const SettingsModal: FC<IProps> = ({ close }) => {
     const send = async () => {
         if (!store.myUser || !birthday) return;
 
-        await store.updateUser(store.myUser.id, name, birthday, avatar);
+        await store.updateUser(store.myUser.id, name, birthday.format(), avatar);
         close();
     };
 
