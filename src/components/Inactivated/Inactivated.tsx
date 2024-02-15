@@ -1,17 +1,16 @@
-import React, { FC, useContext } from 'react';
-import { observer } from 'mobx-react-lite';
+import React, { FC } from 'react';
 import { Root } from './InactivatedStyles';
-import { StoreContext } from '../../index';
+import {useAppSelector} from "../../store/hook";
 
 const Inactivated: FC = () => {
-    const { store } = useContext(StoreContext);
+    const myUser = useAppSelector((state) => state.myUser);
 
     return (
         <Root>
             Ми прагнемо, щоб всі користувачі були справжніми.
-            Перевірте свою пошту: {store?.myUser?.email} і активуйте свій акаунт.
+            Перевірте свою пошту: {myUser?.user?.email} і активуйте свій акаунт.
         </Root>
     );
 };
 
-export default observer(Inactivated);
+export default Inactivated;

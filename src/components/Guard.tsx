@@ -1,7 +1,7 @@
-import React, { FC, ReactNode, useContext, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
-import { StoreContext } from '../index';
+import { useAppSelector, useAppDispatch } from '../store/hook';
+import { checkAuth } from '../store/my-user/thunks';
 
 interface IProps {
     type: 'all' | 'private' | 'unauthenticated';
@@ -11,21 +11,24 @@ interface IProps {
 const Guard: FC<IProps> = ({ type, children }) => {
     const [authChecked, setAuthChecked] = useState(false);
 
-    const { store } = useContext(StoreContext);
+    const myUser = useAppSelector((state) => state.myUser);
+
+    const dispatch = useAppDispatch();
+
     const location = useLocation();
 
     useEffect(() => {
         const checkAuthentication = async () => {
-            await store.checkAuth(!(type === 'unauthenticated' && location.pathname === '/auth'));
-            setAuthChecked(store.isAuth);
+            await dispatch(checkAuth());
+            setAuthChecked(myUser.isAuth);
         };
 
-        if (store.isAuth && localStorage.getItem('token')) {
+        if (myUser.isAuth && localStorage.getItem('token')) {
             setAuthChecked(true);
         } else {
             checkAuthentication();
         }
-    }, [store, type, location.pathname]);
+    }, [myUser, type, location.pathname]);
 
     if (type === 'unauthenticated' && authChecked && localStorage.getItem('token')) {
         return <Navigate to="/" />;
@@ -42,4 +45,4 @@ const Guard: FC<IProps> = ({ type, children }) => {
     );
 };
 
-export default observer(Guard);
+export default Guard;

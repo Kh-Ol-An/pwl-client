@@ -1,14 +1,14 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { secondaryLightColor } from '../../styles/variables';
 import dayjs from 'dayjs';
 import { Avatar, IconButton, Modal } from '@mui/material';
 import { HeaderBox, ModalBox } from './HeaderStyles';
 import { Settings } from '@mui/icons-material';
-import { StoreContext } from '../../index';
 import SettingsModal from '../SettingsModal/SettingsModal';
+import {useAppSelector} from "../../store/hook";
 
 const Header: FC = () => {
-    const { store } = useContext(StoreContext);
+    const myUser = useAppSelector((state) => state.myUser);
 
     const [openSettings, setOpenSettings] = useState<boolean>(false);
 
@@ -24,10 +24,10 @@ const Header: FC = () => {
         <>
             <HeaderBox
                 sx={{ color: secondaryLightColor }}
-                title={store.myUser?.name}
-                subheader={store.myUser?.birthday ? dayjs(store.myUser?.birthday).format('DD.MM.YYYY') : store.myUser?.email}
+                title={myUser.user?.name}
+                subheader={myUser.user?.birthday ? dayjs(myUser.user?.birthday).format('DD.MM.YYYY') : myUser.user?.email}
                 avatar={
-                    <Avatar alt={store.myUser?.name} src={store.myUser?.avatar} />
+                    <Avatar alt={myUser.user?.name} src={myUser.user?.avatar} />
                 }
                 action={
                     <IconButton onClick={handleOpenSettings}>

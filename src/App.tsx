@@ -1,13 +1,12 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
 import { ToastContainer } from 'react-toastify';
 import { privateRoutes, publicRoutes, unauthenticatedRoutes } from './pages/routes';
 import Guard from './components/Guard';
 import Inactivated from './components/Inactivated/Inactivated';
 import Loading from './components/Loading/Loading';
-import { StoreContext } from './index';
 import { ThemeProvider, createTheme } from '@mui/material';
+import {useAppSelector} from "./store/hook";
 
 const theme = createTheme({
     palette: {
@@ -16,20 +15,13 @@ const theme = createTheme({
 })
 
 const App: FC = () => {
-    const { store } = useContext(StoreContext);
+    const state = useAppSelector((state) => state);
 
     return (
         <ThemeProvider theme={theme}>
-            {store?.myUser?.isActivated === false && <Inactivated />}
+            {state.myUser.user?.isActivated === false && <Inactivated />}
 
-            {(store?.waitRegistration === true
-                || store?.waitLogin === true
-                || store?.waitLogout === true
-                || store?.waitCheckAuth === true
-                || store?.waitUsers === true
-                || store?.waitSendMyUser === true) && (
-                <Loading />
-            )}
+            {(state.myUser.isLoading || state.users.isLoading) && <Loading />}
 
             <Routes>
                 {publicRoutes.map(({ path, component }) => (
@@ -74,4 +66,4 @@ const App: FC = () => {
     );
 };
 
-export default observer(App);
+export default App;

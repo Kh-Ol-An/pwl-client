@@ -5,23 +5,26 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { AvatarBox, AvatarImg, FileInput } from './SettingsModalStyles';
 import Button from '../../components/Button/Button';
-import { StoreContext } from '../../index';
+import {useAppDispatch, useAppSelector} from "../../store/hook";
+import { updateUser } from '../../store/my-user/thunks';
 
 interface IProps {
     close: () => void;
 }
 
 const SettingsModal: FC<IProps> = ({ close }) => {
-    const { store } = useContext(StoreContext);
-
     const [name, setName] = useState<string>('');
     const [avatar, setAvatar] = useState<File | null | string>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
 
-    const send = async () => {
-        if (!store.myUser || !birthday) return;
+    const myUser = useAppSelector((state) => state.myUser);
 
-        await store.updateUser(store.myUser.id, name, birthday.format(), avatar);
+    const dispatch = useAppDispatch();
+
+    const send = async () => {
+        if (!myUser.user || !birthday) return;
+
+        await dispatch(updateUser({ id: myUser.user.id, name, birthday: birthday.format(), avatar }));
         close();
     };
 
@@ -38,12 +41,12 @@ const SettingsModal: FC<IProps> = ({ close }) => {
     };
 
     useEffect(() => {
-        if (!store.myUser) return;
+        if (!myUser.user) return;
 
-        setName(store.myUser.name);
-        setAvatar(store.myUser.avatar || '');
-        setBirthday(dayjs(store.myUser.birthday));
-    }, [store.myUser]);
+        setName(myUser.user.name);
+        setAvatar(myUser.user.avatar || '');
+        setBirthday(dayjs(myUser.user.birthday));
+    }, [myUser]);
 
     return (
         <>
@@ -76,7 +79,7 @@ const SettingsModal: FC<IProps> = ({ close }) => {
                             setAvatar(file);
                         }}
                     />
-                    <AvatarImg src={showAvatar()} alt={store.myUser?.name} />
+                    <AvatarImg src={showAvatar()} alt={myUser.user?.name} />
                 </label>
 
                 <Button onClick={removeAvatar}>

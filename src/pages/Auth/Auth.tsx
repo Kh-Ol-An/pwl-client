@@ -1,10 +1,10 @@
-import React, { FC, MouseEvent, useContext, useState } from 'react';
-import { observer } from 'mobx-react-lite';
+import React, { FC, MouseEvent, useState } from 'react';
 import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { Root, Title, ToggleRegistration, Wrap } from './AuthStyles';
-import { StoreContext } from '../../index';
 import Button from '../../components/Button/Button';
+import {useAppDispatch, useAppSelector} from "../../store/hook";
+import {registration, login} from '../../store/my-user/thunks';
 
 const Auth: FC = () => {
     const [isRegistration, setIsRegistration] = useState(false);
@@ -20,7 +20,9 @@ const Auth: FC = () => {
         event.preventDefault();
     };
 
-    const { store } = useContext(StoreContext);
+    const myUser = useAppSelector((state) => state.myUser);
+
+    const dispatch = useAppDispatch();
 
     return (
         <Root>
@@ -124,13 +126,13 @@ const Auth: FC = () => {
                 </ToggleRegistration>
 
                 {isRegistration ? (
-                    <Button type="button" onClick={() => store.registration(name, email, password)}>Зареєструватися</Button>
+                    <Button type="button" onClick={() => dispatch(registration({name, email, password}))}>Зареєструватися</Button>
                 ) : (
-                    <Button type="button" onClick={() => store.login(email, password)}>Увійти</Button>
+                    <Button type="button" onClick={() => dispatch(login({email, password}))}>Увійти</Button>
                 )}
             </Wrap>
         </Root>
     );
 };
 
-export default observer(Auth);
+export default Auth;
