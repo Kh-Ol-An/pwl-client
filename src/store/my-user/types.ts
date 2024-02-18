@@ -7,7 +7,7 @@ export interface IRegistration extends ILogin {
     name: string;
 }
 
-export interface IUpdateUser {
+export interface IUpdateMyUser {
     id: string;
     name: string;
     birthday: string;

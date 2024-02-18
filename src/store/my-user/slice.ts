@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { IUser } from '../../models/IUser';
-import { registration, login, logout, checkAuth, updateUser } from './thunks';
+import { registration, login, logout, checkAuth, updateMyUser } from './thunks';
 import {IAuth} from "../../models/IAuth";
 
 interface IMyUserState {
@@ -31,7 +31,6 @@ const authRejected = (state: IMyUserState, action: any, typeAction: string) => {
     state.isAuth = false;
     state.isLoading = false;
     state.error = action.error.message || `Не вдалось ${typeAction}.`;
-    console.log('state.error: ', state.error);
     toast(action.error.message || `Не вдалось ${typeAction}.`, { type: 'error' });
     localStorage.removeItem('token');
 };
@@ -53,7 +52,6 @@ const usePending = (state: IMyUserState) => {
 const useRejected = (state: IMyUserState, action: any, typeAction: string) => {
     state.isLoading = false;
     state.error = action.error.message || `Не вдалось ${typeAction}.`;
-    console.log('rejected error: ', state.error);
     toast(action.error.message || `Не вдалось ${typeAction}.`, { type: 'error' });
 };
 
@@ -85,10 +83,10 @@ const myUserSlice = createSlice({
             .addCase(checkAuth.pending, authPending)
             .addCase(checkAuth.rejected, (state, action) => authRejected(state, action, 'оновити сесію'))
             .addCase(checkAuth.fulfilled, authFulfilled)
-            // updateUser
-            .addCase(updateUser.pending, usePending)
-            .addCase(updateUser.rejected, (state, action) => useRejected(state, action, 'зберегти твої дані'))
-            .addCase(updateUser.fulfilled, (state, action) => {
+            // updateMyUser
+            .addCase(updateMyUser.pending, usePending)
+            .addCase(updateMyUser.rejected, (state, action) => useRejected(state, action, 'зберегти твої дані'))
+            .addCase(updateMyUser.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.isLoading = false;
                 state.error = null;

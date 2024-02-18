@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -6,7 +6,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { AvatarBox, AvatarImg, FileInput } from './SettingsModalStyles';
 import Button from '../../components/Button/Button';
 import {useAppDispatch, useAppSelector} from "../../store/hook";
-import { updateUser } from '../../store/my-user/thunks';
+import { updateMyUser } from '../../store/my-user/thunks';
 
 interface IProps {
     close: () => void;
@@ -24,7 +24,7 @@ const SettingsModal: FC<IProps> = ({ close }) => {
     const send = async () => {
         if (!myUser.user || !birthday) return;
 
-        await dispatch(updateUser({ id: myUser.user.id, name, birthday: birthday.format(), avatar }));
+        await dispatch(updateMyUser({ id: myUser.user.id, name, birthday: birthday.format(), avatar }));
         close();
     };
 
