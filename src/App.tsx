@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Inactivated from './components/Inactivated/Inactivated';
@@ -19,30 +19,36 @@ const theme = createTheme({
 })
 
 const App: FC = () => {
+    const [ready, setReady] = useState(false);
+
     const state = useAppSelector((state) => state);
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(checkAuth());
+        dispatch(checkAuth())
+            .then(() => setReady(true))
+            .catch(() => setReady(false));
     }, [dispatch]);
-
-    if (state.myUser.isLoading || state.users.isLoading) {
-        return <Loading />;
-    }
 
     return (
         <ThemeProvider theme={theme}>
             {state.myUser.user?.isActivated === false && <Inactivated />}
 
-            <Routes>
-                <Route element={<RoutesGuard isAuth={state.myUser.isAuth} />}>
-                    <Route path="/" element={<Home />} />
-                </Route>
-                <Route path="/welcome" element={<Welcome />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/*" element={<NotFoundPage />} />
-            </Routes>
+            {(state.myUser.isLoading || state.users.isLoading) && <Loading />}
+
+            {ready && (
+                <Routes>
+                    <Route element={<RoutesGuard guard={state.myUser.user !== null} redirectPath="/auth" />}>
+                        <Route path="/" element={<Home />} />
+                    </Route>
+                    <Route element={<RoutesGuard guard={state.myUser.user === null} redirectPath="/" />}>
+                        <Route path="/auth" element={<Auth />} />
+                    </Route>
+                    <Route path="/welcome" element={<Welcome />} />
+                    <Route path="/*" element={<NotFoundPage />} />
+                </Routes>
+            )}
 
             <ToastContainer theme="colored" bodyClassName={() => "toast-body"} />
         </ThemeProvider>

@@ -22,8 +22,8 @@ api.interceptors.response.use(
                 const response = await myUserApi.refresh();
                 localStorage.setItem('token', response.data.accessToken);
                 return api.request(originalRequest);
-            } catch (e: any) {
-                toast(e.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
+            } catch (error: any) {
+                toast(error.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
             }
         }
         throw error;

@@ -2,11 +2,12 @@ import React, { FC } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 
 interface PrivateRouteProps {
-    isAuth: boolean;
+    guard: boolean;
+    redirectPath: string;
 }
 
-const RoutesGuard: FC<PrivateRouteProps> = ({ isAuth }) => {
-    return isAuth ? <Outlet /> : <Navigate to="/auth" replace />;
+const RoutesGuard: FC<PrivateRouteProps> = ({ guard, redirectPath }) => {
+    return guard ? <Outlet /> : <Navigate to={redirectPath} replace />;
 };
 
 export default RoutesGuard;
