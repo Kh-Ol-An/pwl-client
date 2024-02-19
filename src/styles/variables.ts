@@ -15,6 +15,8 @@ export const primaryLinearGradient = 'linear-gradient(90deg, #1a61ed 0%, #11bae3
 
 export const primaryFontFamily = 'Poppins, sans-serif';
 
+export const radius = '0.4em';
+
 export const mainZIndex = 9999;
 export const highZIndex9 = 9000;
 export const highZIndex1 = 1000;

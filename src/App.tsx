@@ -21,7 +21,8 @@ const theme = createTheme({
 const App: FC = () => {
     const [ready, setReady] = useState(false);
 
-    const state = useAppSelector((state) => state);
+    const users = useAppSelector((state) => state.users);
+    const myUser = useAppSelector((state) => state.myUser);
 
     const dispatch = useAppDispatch();
 
@@ -33,16 +34,16 @@ const App: FC = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            {state.myUser.user?.isActivated === false && <Inactivated />}
+            {myUser.user?.isActivated === false && <Inactivated />}
 
-            {(state.myUser.isLoading || state.users.isLoading) && <Loading />}
+            {(myUser.isLoading || users.isLoading) && <Loading />}
 
             {ready && (
                 <Routes>
-                    <Route element={<RoutesGuard guard={state.myUser.user !== null} redirectPath="/auth" />}>
+                    <Route element={<RoutesGuard guard={myUser.user !== null} redirectPath="/auth" />}>
                         <Route path="/" element={<Home />} />
                     </Route>
-                    <Route element={<RoutesGuard guard={state.myUser.user === null} redirectPath="/" />}>
+                    <Route element={<RoutesGuard guard={myUser.user === null} redirectPath="/" />}>
                         <Route path="/auth" element={<Auth />} />
                     </Route>
                     <Route path="/welcome" element={<Welcome />} />

@@ -3,13 +3,13 @@ import { IUser } from '../../models/IUser';
 import { getUsers } from './thunks';
 
 interface IUsersState {
-    users: IUser[]
+    list: IUser[]
     isLoading: boolean;
     error: string | null;
 }
 
 const initialState: IUsersState = {
-    users: [],
+    list: [],
     isLoading: false,
     error: null,
 };
@@ -29,7 +29,7 @@ const usersSlice = createSlice({
                 state.error = action.error.message || 'Не вдалось отримати всіх юзерів.';
             })
             .addCase(getUsers.fulfilled, (state, action) => {
-                state.users = action.payload;
+                state.list = action.payload;
                 state.isLoading = false;
                 state.error = null;
             });

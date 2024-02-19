@@ -126,9 +126,9 @@ const Auth: FC = () => {
                 </ToggleRegistration>
 
                 {isRegistration ? (
-                    <Button type="button" onClick={() => dispatch(registration({name, email, password}))}>Зареєструватися</Button>
+                    <Button onClick={() => dispatch(registration({name, email, password}))}>Зареєструватися</Button>
                 ) : (
-                    <Button type="button" onClick={() => dispatch(login({email, password}))}>Увійти</Button>
+                    <Button onClick={() => dispatch(login({email, password}))}>Увійти</Button>
                 )}
             </Wrap>
         </Root>

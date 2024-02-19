@@ -3,7 +3,7 @@ import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
-import { AvatarBox, AvatarImg, FileInput } from './SettingsModalStyles';
+import { AvatarBox, AvatarImg, FileInput } from './AccountSettingsStyles';
 import Button from '../../components/Button/Button';
 import {useAppDispatch, useAppSelector} from "../../store/hook";
 import { updateMyUser } from '../../store/my-user/thunks';
@@ -12,7 +12,7 @@ interface IProps {
     close: () => void;
 }
 
-const SettingsModal: FC<IProps> = ({ close }) => {
+const AccountSettings: FC<IProps> = ({ close }) => {
     const [name, setName] = useState<string>('');
     const [avatar, setAvatar] = useState<File | null | string>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
@@ -45,7 +45,7 @@ const SettingsModal: FC<IProps> = ({ close }) => {
 
         setName(myUser.user.name);
         setAvatar(myUser.user.avatar || '');
-        setBirthday(dayjs(myUser.user.birthday));
+        myUser.user.birthday && setBirthday(dayjs(myUser.user.birthday));
     }, [myUser]);
 
     return (
@@ -98,11 +98,11 @@ const SettingsModal: FC<IProps> = ({ close }) => {
                 </DemoContainer>
             </div>
 
-            <Button onClick={send}>
+            <Button disabled={!birthday} onClick={send}>
                 Зберегти
             </Button>
         </>
     );
 };
 
-export default SettingsModal;
+export default AccountSettings;

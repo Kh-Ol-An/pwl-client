@@ -13,6 +13,7 @@ export const Container = styled(Box)({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: '2em',
     width: '100%',
     height: '100svh',
     padding: '2em',
