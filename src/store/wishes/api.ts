@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import api from '../../utils/api';
-import { IUser, IWish } from '../../models/IUser';
+import { IUser } from '../../models/IUser';
+import { IWish } from '../../models/IWish';
 import { ICreateWish } from './types';
 
 const createWish = async ({ userId, name, price, description, images }: ICreateWish): Promise<AxiosResponse<IWish>> => {
@@ -35,9 +36,16 @@ const createWish = async ({ userId, name, price, description, images }: ICreateW
     }
 }
 
-const getWishList = async (userId: IUser['id']): Promise<AxiosResponse<IWish>> => {
+const getWishList = async (userId: IUser['id']): Promise<AxiosResponse<IWish[]>> => {
     try {
-        return await api.get('/wishes');
+        return await api.get(
+            '/wishes',
+            {
+                params: {
+                    userId
+                }
+            }
+        );
     } catch (error: any) {
         toast(error.response?.data?.message || 'Не вдалось отримати всі бажання.', { type: 'error' })
         throw error;

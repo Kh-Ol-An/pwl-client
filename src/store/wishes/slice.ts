@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IWish } from '../../models/IUser';
+import { IWish } from '../../models/IWish';
 import { createWish, getWishList } from './thunks';
 
 interface IState {
@@ -44,7 +44,7 @@ const wishesSlice = createSlice({
                 state.error = action.error.message || 'Не вдалось створити бажання.';
             })
             .addCase(getWishList.fulfilled, (state, action) => {
-//                state.list = action.payload;
+                state.list = action.payload;
                 state.isLoading = false;
                 state.error = null;
             });
