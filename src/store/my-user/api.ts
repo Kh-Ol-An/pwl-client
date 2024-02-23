@@ -43,7 +43,8 @@ const refresh = async (): Promise<AxiosResponse<IAuth>> => {
         await localStorage.setItem('token', response.data.accessToken);
         return response;
     } catch (error: any) {
-        toast(error.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
+//        toast(error.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
+        console.log('myUserApi refresh error: ', error.response?.data?.message || 'Не вдалось оновити сесію.');
         await localStorage.removeItem('token');
         throw error;
     }

@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../Button/Button';
 import { Modal } from '@mui/material';
 import { ModalBox } from './WishListStyles';
 import WishSettings from '../WishSettings/WishSettings';
+import { useAppDispatch } from '../../store/hook';
+import { getWishList } from '../../store/wishes/thunks';
 
 const WishList = () => {
     const [openSettings, setOpenSettings] = useState<boolean>(false);
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+//        dispatch(getWishList());
+    }, [dispatch])
 
     const handleOpenWishSettings = () => {
         setOpenSettings(true);

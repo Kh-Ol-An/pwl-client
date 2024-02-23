@@ -3,4 +3,5 @@ export interface ICreateWish {
     name: string;
     price: string;
     description: string;
+    images: File[] | null | string[];
 }

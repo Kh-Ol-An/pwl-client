@@ -16,7 +16,7 @@ export interface IWish {
     userId: string;
     title: string;
     description: string;
-    image: string;
+    images: string;
     link: boolean;
     createdAt: Dayjs;
     updatedAt: Dayjs;

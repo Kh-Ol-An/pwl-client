@@ -1,19 +1,23 @@
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import api from '../../utils/api';
-import { IWish } from '../../models/IUser';
+import { IUser, IWish } from '../../models/IUser';
 import { ICreateWish } from './types';
 
-const createWish = async ({ userId, name, price, description }: ICreateWish): Promise<AxiosResponse<IWish>> => {
+const createWish = async ({ userId, name, price, description, images }: ICreateWish): Promise<AxiosResponse<IWish>> => {
     const formData = new FormData();
     formData.append('userId', userId);
     formData.append('name', name);
     formData.append('price', price);
     formData.append('description', description);
-//    formData.append('deleteAvatar', avatar === null ? 'true' : 'false');
-//    if (avatar) {
-//        formData.append('avatar', avatar);
-//    }
+
+    if (images && Array.isArray(images)) {
+        images.forEach((image, index) => {
+            if (image instanceof File) {
+                formData.append(`image${index + 1}`, image);
+            }
+        });
+    }
 
     try {
         return await api.post(
@@ -31,8 +35,18 @@ const createWish = async ({ userId, name, price, description }: ICreateWish): Pr
     }
 }
 
+const getWishList = async (userId: IUser['id']): Promise<AxiosResponse<IWish>> => {
+    try {
+        return await api.get('/wishes');
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось отримати всі бажання.', { type: 'error' })
+        throw error;
+    }
+}
+
 const wishApi = {
     createWish,
+    getWishList,
 };
 
 export default wishApi;

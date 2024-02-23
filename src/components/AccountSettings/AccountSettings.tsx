@@ -7,6 +7,7 @@ import { AvatarBox, AvatarImg, FileInput } from './AccountSettingsStyles';
 import Button from '../../components/Button/Button';
 import {useAppDispatch, useAppSelector} from "../../store/hook";
 import { updateMyUser } from '../../store/my-user/thunks';
+import { ALLOWED_FILE_EXTENSIONS } from '../../utils/constants';
 
 interface IProps {
     close: () => void;
@@ -70,7 +71,7 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                 <label htmlFor="avatar">
                     <FileInput
                         id="avatar"
-                        accept="image/*"
+                        accept={Object.values(ALLOWED_FILE_EXTENSIONS).join(",")} // TODO: check
                         type="file"
                         onChange={(e) => {
                             const file = e.target.files?.[0];

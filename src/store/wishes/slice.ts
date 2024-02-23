@@ -1,41 +1,54 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IWish } from '../../models/IUser';
-import { createWish } from './thunks';
+import { createWish, getWishList } from './thunks';
 
 interface IState {
-    wish: IWish | null
+    list: IWish[]
     isLoading: boolean;
     error: string | null;
 }
 
 const initialState: IState = {
-    wish: null,
+    list: [],
     isLoading: false,
     error: null,
 };
 
-const wishListSlice = createSlice({
-    name: 'wishList',
+const wishesSlice = createSlice({
+    name: 'wishes',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(createWish.pending, (state) => {
-                state.wish = null;
                 state.isLoading = true;
                 state.error = null;
             })
             .addCase(createWish.rejected, (state, action) => {
-                state.wish = null;
                 state.isLoading = false;
                 state.error = action.error.message || 'Не вдалось створити бажання.';
             })
             .addCase(createWish.fulfilled, (state, action) => {
-                state.wish = action.payload;
+                state.list.push(action.payload);
+                state.isLoading = false;
+                state.error = null;
+            })
+            .addCase(getWishList.pending, (state) => {
+                state.list = [];
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(getWishList.rejected, (state, action) => {
+                state.list = [];
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось створити бажання.';
+            })
+            .addCase(getWishList.fulfilled, (state, action) => {
+//                state.list = action.payload;
                 state.isLoading = false;
                 state.error = null;
             });
     },
 });
 
-export default wishListSlice.reducer;
+export default wishesSlice.reducer;
