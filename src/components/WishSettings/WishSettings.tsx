@@ -1,9 +1,9 @@
 import React, { FC, useState, useCallback, useEffect } from 'react';
-import {useDropzone} from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { DnDList, DnDItem, DnDArea, Image, DnD } from './WishSettingsStyles';
 import Button from '../../components/Button/Button';
-import {useAppDispatch, useAppSelector} from "../../store/hook";
+import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { createWish } from '../../store/wishes/thunks';
 import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '../../utils/constants';
 
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const acceptTypes: { [key: string]: string[] } = {};
-Object.keys(ALLOWED_FILE_EXTENSIONS).forEach((ext: keyof typeof ALLOWED_FILE_EXTENSIONS) => {
+Object.keys(ALLOWED_FILE_EXTENSIONS).forEach((ext) => {
     const mimeType = ALLOWED_FILE_EXTENSIONS[ext];
     if (!acceptTypes[mimeType]) {
         acceptTypes[mimeType] = [];
@@ -24,14 +24,13 @@ const WishSettings: FC<IProps> = ({ close }) => {
     const [name, setName] = useState<string>('');
     const [price, setPrice] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-//    const [avatar, setAvatar] = useState<File | null | string>('');
-    const [myFiles, setMyFiles] = useState<File[]>([]);
+    const [images, setImages] = useState<File[]>([]);
 
-    const onDrop = useCallback((acceptedFiles: File[]) => {
-        setMyFiles([...myFiles, ...acceptedFiles])
-    }, [myFiles]);
+    const onDrop = useCallback((acceptedImages: File[]) => {
+        setImages([...images, ...acceptedImages]);
+    }, [images]);
 
-    const {getRootProps, getInputProps} = useDropzone({
+    const { getRootProps, getInputProps } = useDropzone({
         onDrop,
         accept: acceptTypes,
         maxSize: ALLOWED_MAX_FILE_SIZE_IN_MB * 1024 * 1024,
@@ -44,34 +43,19 @@ const WishSettings: FC<IProps> = ({ close }) => {
     const send = async () => {
         if (!myUser.user) return;
 
-        await dispatch(createWish({ userId: myUser.user.id, name, price, description, images: myFiles }));
+        await dispatch(createWish({ userId: myUser.user.id, name, price, description, images }));
         close();
     };
 
-    const removeFile = (file: File) => () => {
-        const newFiles = [...myFiles]
-        newFiles.splice(newFiles.indexOf(file), 1)
-        setMyFiles(newFiles)
-//        const newFiles = [...acceptedFiles];     // make a var for the new array
-//        newFiles.splice(file, 1);        // remove the file from the array
-//        setMyFiles(newFiles);
-    }
+    const removeImage = (image: File) => () => {
+        const newImages = [...images];
+        newImages.splice(newImages.indexOf(image), 1);
+        setImages(newImages);
+    };
 
     const removeAll = () => {
-        setMyFiles([])
-    }
-
-//    const removeAvatar = () => {
-//        setAvatar(null);
-//    };
-
-//    const showAvatar = () => {
-//        if (avatar instanceof File) {
-//            return URL.createObjectURL(avatar);
-//        }
-//
-//        return avatar || '';
-//    };
+        setImages([]);
+    };
 
 //    useEffect(() => {
 //        if (!myUser.user) return;
@@ -134,23 +118,23 @@ const WishSettings: FC<IProps> = ({ close }) => {
             </FormControl>
 
             <DnD>
-                <DnDArea {...getRootProps({className: 'dropzone'})}>
+                <DnDArea {...getRootProps({ className: 'dropzone' })}>
                     <input {...getInputProps()} />
-                    <p>Перетягніть кілька файлів сюди або клацніть, щоб вибрати файли</p>
+                    <p>Перетягніть кілька зображень сюди або клацніть, щоб вибрати зображення</p>
                 </DnDArea>
                 <DnDList>
-                    {myFiles.map((file, i) => (
-                        <DnDItem key={file.name + i}>
+                    {images.map((image, i) => (
+                        <DnDItem key={image.name + i}>
                             <Image
-                                src={URL.createObjectURL(file)}
-                                alt={file.name}
+                                src={URL.createObjectURL(image)}
+                                alt={image.name}
                                 loading="lazy"
                             />
-                            <button onClick={removeFile(file)}>Remove File</button>
+                            <button onClick={removeImage(image)}>Remove image</button>
                         </DnDItem>
                     ))}
                 </DnDList>
-                {myFiles.length > 0 && <button onClick={removeAll}>Remove All</button>}
+                {images.length > 0 && <button onClick={removeAll}>Remove All images</button>}
             </DnD>
 
             <Button onClick={send}>

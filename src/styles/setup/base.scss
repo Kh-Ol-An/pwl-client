@@ -4,11 +4,11 @@ html {
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: Poppins, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 10px;
-    background-color: #020024;
+    background-color: $background-color;
 }
 
 code {

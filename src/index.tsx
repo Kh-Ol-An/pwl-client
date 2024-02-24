@@ -6,10 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import store from './store';
 import App from './App';
-import './styles/reset.css';
-import './styles/fonts.css';
-import './styles/base.css';
-import './styles/toast.css';
+import './styles/index.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(

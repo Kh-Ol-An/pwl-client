@@ -1,16 +1,8 @@
 import { styled, Box, Typography } from '@mui/material';
 import { secondaryColor, lightShadow, primaryColor } from '../../styles/variables';
 
-export const Root = styled(Box)({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    height: '100svh',
-    padding: '2em',
-});
-
 export const Wrap = styled(Box)({
+    marginLeft: '2em',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

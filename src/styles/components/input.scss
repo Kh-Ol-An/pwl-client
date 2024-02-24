@@ -1,0 +1,51 @@
+.input {
+    position: relative;
+    width: 100%;
+
+    input {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        padding: 20px 10px 10px;
+        color: #23242a;
+        font-size: 1.6em;
+        letter-spacing: 0.1em;
+
+        &:focus,
+        &:valid {
+            & ~ span {
+                color: #45f3ff;
+                transform: translate(-10px, -34px);
+                font-size: 1.3em;
+            }
+
+            & ~ i {
+                height: 44px;
+            }
+        }
+    }
+
+    span {
+        position: absolute;
+        left: 0;
+        padding: 20px 10px 10px;
+        color: #8f8f8f;
+        font-size: 1.6em;
+        pointer-events: none;
+        letter-spacing: 0.1em;
+        transition: 0.5s;
+    }
+
+    i {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 9;
+        width: 100%;
+        height: 2px;
+        background: #45f3ff;
+        border-radius: 4px;
+        pointer-events: none;
+        transition: 0.5s;
+    }
+}

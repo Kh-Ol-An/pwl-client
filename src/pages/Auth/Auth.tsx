@@ -1,10 +1,11 @@
 import React, { FC, MouseEvent, useState } from 'react';
 import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
-import { Root, Title, ToggleRegistration, Wrap } from './AuthStyles';
+import { Title, ToggleRegistration, Wrap } from './AuthStyles';
 import Button from '../../components/Button/Button';
-import {useAppDispatch, useAppSelector} from "../../store/hook";
-import {registration, login} from '../../store/my-user/thunks';
+import { useAppDispatch } from "../../store/hook";
+import { registration, login } from '../../store/my-user/thunks';
+import Card from '../../components/Card';
 
 const Auth: FC = () => {
     const [isRegistration, setIsRegistration] = useState(false);
@@ -20,12 +21,35 @@ const Auth: FC = () => {
         event.preventDefault();
     };
 
-    const myUser = useAppSelector((state) => state.myUser);
-
     const dispatch = useAppDispatch();
 
     return (
-        <Root>
+        <div className="page">
+            <Card>
+                <h1 className="title">
+                    <i className="fa-solid fa-right-to-bracket"></i>
+                    Login
+                    <i className="fa-solid fa-heart"></i>
+                </h1>
+
+                <div className="input">
+                    <input type="text" required />
+                    <span>Username</span>
+                    <i></i>
+                </div>
+                <div className="input">
+                    <input type="password" required />
+                    <span>Password</span>
+                    <i></i>
+                </div>
+
+                <button type="submit">Submit</button>
+
+                <div className="group">
+                    <a href="#">Forgot Password</a>
+                    <a href="#">Create an account</a>
+                </div>
+            </Card>
             <Wrap>
                 <Title>Привіт! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}</Title>
 
@@ -126,12 +150,12 @@ const Auth: FC = () => {
                 </ToggleRegistration>
 
                 {isRegistration ? (
-                    <Button onClick={() => dispatch(registration({name, email, password}))}>Зареєструватися</Button>
+                    <Button onClick={() => dispatch(registration({ name, email, password }))}>Зареєструватися</Button>
                 ) : (
-                    <Button onClick={() => dispatch(login({email, password}))}>Увійти</Button>
+                    <Button onClick={() => dispatch(login({ email, password }))}>Увійти</Button>
                 )}
             </Wrap>
-        </Root>
+        </div>
     );
 };
 

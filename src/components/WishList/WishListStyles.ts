@@ -24,6 +24,7 @@ export const WishItem = styled('li')({
 
 export const ImgList = styled('ul')({
     display: 'flex',
+    flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
     gap: '1em',
