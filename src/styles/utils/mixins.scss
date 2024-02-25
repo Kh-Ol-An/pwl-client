@@ -9,21 +9,6 @@
     flex-direction: column;
 }
 
-@property --a {
-    syntax: '<angle>';
-    inherits: false;
-    initial-value: 0deg;
-}
-
-@keyframes rotating {
-    0% {
-        --a: 0deg;
-    }
-    100% {
-        --a: 360deg;
-    }
-}
-
 @mixin running-lights($color) {
     position: absolute;
     width: 100%;

@@ -1,5 +1,6 @@
 // utils
 @import './utils/variables.module';
+@import './utils/effects';
 @import './utils/mixins';
 
 // setup
@@ -8,14 +9,19 @@
 @import './setup/base';
 
 // layouts
+@import './layouts/toast';
 @import './layouts/page';
+@import './layouts/loading';
+@import './layouts/inactivated';
 
 // components
-@import './components/toast';
 @import './components/card';
 @import './components/title';
 @import './components/input';
 @import './components/button';
 
 // pages
+@import './pages/welcome';
 @import './pages/auth';
+@import './pages/home';
+@import './pages/not-found';

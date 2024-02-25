@@ -1,10 +1,9 @@
 import React from 'react';
-import { Root, Spinner } from './LoadingStyles';
 
 const Loading = () => {
     return (
-        <Root>
-            <Spinner>
+        <div className="loading">
+            <div className="spinner">
                 <div></div>
                 <div></div>
                 <div></div>
@@ -17,8 +16,8 @@ const Loading = () => {
                 <div></div>
                 <div></div>
                 <div></div>
-            </Spinner>
-        </Root>
+            </div>
+        </div>
     );
 };
 

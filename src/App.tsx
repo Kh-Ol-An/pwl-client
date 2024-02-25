@@ -2,13 +2,13 @@ import React, { FC, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ThemeProvider, createTheme } from '@mui/material';
-import Inactivated from './components/Inactivated/Inactivated';
-import Loading from './components/Loading/Loading';
+import Inactivated from './components/Inactivated';
+import Loading from './components/Loading';
 import { useAppDispatch, useAppSelector } from './store/hook';
-import Home from './pages/Home/Home';
-import Welcome from './pages/Welcome/Welcome';
+import Home from './pages/Home';
+import Welcome from './pages/Welcome';
 import Auth from './pages/Auth';
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import NotFound from './pages/NotFound';
 import { checkAuth } from './store/my-user/thunks';
 import RoutesGuard from './utils/RoutesGuard';
 
@@ -48,7 +48,7 @@ const App: FC = () => {
                         <Route path="/auth" element={<Auth />} />
                     </Route>
                     <Route path="/welcome" element={<Welcome />} />
-                    <Route path="/*" element={<NotFoundPage />} />
+                    <Route path="/*" element={<NotFound />} />
                 </Routes>
             )}
 

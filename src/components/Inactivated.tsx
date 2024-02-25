@@ -1,15 +1,14 @@
 import React, { FC } from 'react';
-import { Root } from './InactivatedStyles';
-import {useAppSelector} from '../../store/hook';
+import {useAppSelector} from '../store/hook';
 
 const Inactivated: FC = () => {
     const myUser = useAppSelector((state) => state.myUser);
 
     return (
-        <Root>
+        <div className="inactivated">
             Ми прагнемо, щоб всі користувачі були справжніми.
-            Перевірте свою пошту: {myUser?.user?.email} і активуйте свій акаунт.
-        </Root>
+            Перевірте свою пошту: <span>{myUser?.user?.email}</span> і активуйте свій акаунт.
+        </div>
     );
 };
 
