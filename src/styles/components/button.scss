@@ -1,18 +1,11 @@
 .button {
-    margin: 0;
-    padding: 0;
     width: auto;
     display: inline;
-    border: none;
-    outline: none;
-    background: transparent;
     color: $primary-color;
     font-size: 1.6em;
     line-height: 1.5;
     font-weight: 700;
     text-align: center;
-    cursor: pointer;
-    text-decoration: none;
     transition: $transition-fast;
 
     &:not(.text) {
@@ -30,10 +23,6 @@
         &:active {
             box-shadow: 0 0 5px $primary-color, 0 0 25px $primary-color;
         }
-    }
-
-    &:focus {
-        outline: none;
     }
 
     &:hover {

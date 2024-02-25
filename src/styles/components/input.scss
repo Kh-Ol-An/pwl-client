@@ -45,6 +45,14 @@
         }
     }
 
+    button {
+        position: absolute;
+        top: 50%;
+        right: 1em;
+        z-index: $z-index-xs-2;
+        transform: translateY(-50%);
+    }
+
     label {
         position: absolute;
         bottom: 0.4em;
