@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Root } from './InactivatedStyles';
-import {useAppSelector} from "../../store/hook";
+import {useAppSelector} from '../../store/hook';
 
 const Inactivated: FC = () => {
     const myUser = useAppSelector((state) => state.myUser);

@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { Container, Root } from './HomeStyles';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import {useAppDispatch, useAppSelector} from "../../store/hook";
+import {useAppDispatch, useAppSelector} from '../../store/hook';
 import { getUsers } from '../../store/users/thunks';
 import WishList from '../../components/WishList/WishList';
 

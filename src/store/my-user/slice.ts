@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from '../../models/IUser';
 import { registration, login, logout, checkAuth, updateMyUser } from './thunks';
-import {IAuth} from "../../models/IAuth";
+import { IAuth } from '../../models/IAuth';
 
 interface IMyUserState {
-    user: IUser | null
+    user: IUser | null;
     isLoading: boolean;
     error: string | null;
 }

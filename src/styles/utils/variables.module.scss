@@ -93,3 +93,9 @@ $z-index-huge: 9999999;
 $transition-fast: all 0.15s ease-in-out;
 $transition: all 0.3s ease-in-out;
 $transition-slow: all 0.5s ease-in-out;
+
+:export {
+    primaryColor: $primary-color;
+    accentColor: $accent-color;
+    actionColor: $action-color;
+}

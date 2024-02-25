@@ -3,7 +3,7 @@ import { IUser } from '../../models/IUser';
 import { getUsers } from './thunks';
 
 interface IUsersState {
-    list: IUser[]
+    list: IUser[];
     isLoading: boolean;
     error: string | null;
 }

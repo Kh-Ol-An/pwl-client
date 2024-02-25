@@ -5,7 +5,7 @@ import { Avatar, IconButton, Modal, Popover } from '@mui/material';
 import { CustomButton, HeaderBox, ModalBox, PopoverBox, PopoverWrap } from './HeaderStyles';
 import { Settings } from '@mui/icons-material';
 import AccountSettings from '../AccountSettings/AccountSettings';
-import { useAppDispatch, useAppSelector } from "../../store/hook";
+import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { logout } from '../../store/my-user/thunks';
 
 const Header: FC = () => {

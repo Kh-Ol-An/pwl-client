@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
+import stylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     id: string;
@@ -26,7 +27,9 @@ const Input: FC<IProps> = ({ id, type, label, title, value, onChange }) => {
             <input id={id} type={getTypes(type)} value={value} required onChange={onChange} />
             {type === 'password' && (
                 <button type="button" onClick={() => setShowPassword(prevState => !prevState)}>
-                    {showPassword ? <VisibilityOff sx={{ color: '#1f1f23' }} /> : <Visibility sx={{ color: '#1f1f23' }} />}
+                    {showPassword ?
+                        <VisibilityOff sx={{ color: stylesVariables.accentColor }} /> :
+                        <Visibility sx={{ color: stylesVariables.accentColor }} />}
                 </button>
             )}
             <label htmlFor={id}>{label}</label>

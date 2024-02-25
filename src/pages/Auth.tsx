@@ -5,6 +5,7 @@ import { useAppDispatch } from '../store/hook';
 import { registration, login } from '../store/my-user/thunks';
 import Card from '../components/Card';
 import Input from '../components/Input';
+import stylesVariables from '../styles/utils/variables.module.scss';
 
 const Auth: FC = () => {
     const [isRegistration, setIsRegistration] = useState(false);
@@ -22,9 +23,9 @@ const Auth: FC = () => {
                 classes="rolled-up"
                 title={
                     <h1 className="title">
-                        <Login className="login" sx={{ color: '#45f3ff' }} />
+                        <Login className="login" sx={{ color: stylesVariables.primaryColor }} />
                         Привіт! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}
-                        <Favorite className="favorite" sx={{ color: '#ff2770' }} />
+                        <Favorite className="favorite" sx={{ color: stylesVariables.actionColor }} />
                     </h1>
                 }
             >

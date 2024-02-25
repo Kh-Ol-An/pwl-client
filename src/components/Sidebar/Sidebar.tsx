@@ -17,7 +17,7 @@ const Sidebar: FC<IProps> = ({ users, myUser }) => {
         if (!myUser?.id) return;
 
         setUsersWithoutMe(users.filter((user) => user.id !== myUser.id));
-    } , [users, myUser]);
+    }, [users, myUser]);
 
     return (
         <Root>

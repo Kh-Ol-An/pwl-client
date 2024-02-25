@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { ThemeProvider, createTheme } from '@mui/material';
 import Inactivated from './components/Inactivated/Inactivated';
 import Loading from './components/Loading/Loading';
-import { ThemeProvider, createTheme } from '@mui/material';
-import { useAppDispatch, useAppSelector } from "./store/hook";
+import { useAppDispatch, useAppSelector } from './store/hook';
 import Home from './pages/Home/Home';
 import Welcome from './pages/Welcome/Welcome';
 import Auth from './pages/Auth';
@@ -16,7 +16,7 @@ const theme = createTheme({
     palette: {
         mode: 'dark',
     },
-})
+});
 
 const App: FC = () => {
     const [ready, setReady] = useState(false);

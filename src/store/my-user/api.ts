@@ -14,7 +14,7 @@ const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> 
         toast(error.response?.data?.message || 'Не вдалось зареєструватись.', { type: 'error' });
         throw error;
     }
-}
+};
 
 const login = async (data: ILogin): Promise<AxiosResponse<IAuth>> => {
     try {
@@ -25,7 +25,7 @@ const login = async (data: ILogin): Promise<AxiosResponse<IAuth>> => {
         toast(error.response?.data?.message || 'Не вдалось увійти на сайт.', { type: 'error' });
         throw error;
     }
-}
+};
 
 const logout = async (): Promise<void> => {
     try {
@@ -35,7 +35,7 @@ const logout = async (): Promise<void> => {
         toast(error.response?.data?.message || 'Не вдалось вийти з аккаунту.', { type: 'error' });
         throw error;
     }
-}
+};
 
 const refresh = async (): Promise<AxiosResponse<IAuth>> => {
     try {
@@ -48,7 +48,7 @@ const refresh = async (): Promise<AxiosResponse<IAuth>> => {
         await localStorage.removeItem('token');
         throw error;
     }
-}
+};
 
 const updateMyUser = async ({ id, name, birthday, avatar }: IUpdateMyUser): Promise<AxiosResponse<IUser>> => {
     const formData = new FormData();
@@ -74,7 +74,7 @@ const updateMyUser = async ({ id, name, birthday, avatar }: IUpdateMyUser): Prom
         toast(error.response?.data?.message || 'Не вдалось оновити користувача.', { type: 'error' });
         throw error;
     }
-}
+};
 
 const myUserApi = {
     registration,

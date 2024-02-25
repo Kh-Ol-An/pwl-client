@@ -34,7 +34,7 @@ const createWish = async ({ userId, name, price, description, images }: ICreateW
         toast(error.response?.data?.message || 'Не вдалось додати бажання.', { type: 'error' });
         throw error;
     }
-}
+};
 
 const getWishList = async (userId: IUser['id']): Promise<AxiosResponse<IWish[]>> => {
     try {
@@ -47,10 +47,10 @@ const getWishList = async (userId: IUser['id']): Promise<AxiosResponse<IWish[]>>
             }
         );
     } catch (error: any) {
-        toast(error.response?.data?.message || 'Не вдалось отримати всі бажання.', { type: 'error' })
+        toast(error.response?.data?.message || 'Не вдалось отримати всі бажання.', { type: 'error' });
         throw error;
     }
-}
+};
 
 const wishApi = {
     createWish,
