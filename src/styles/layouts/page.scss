@@ -1,5 +1,6 @@
 .page {
     @include flex-center;
+    gap: 4em;
     width: 100%;
     height: 100svh;
     padding: 2em;

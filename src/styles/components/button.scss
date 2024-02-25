@@ -1,0 +1,46 @@
+.button {
+    margin: 0;
+    padding: 0;
+    width: auto;
+    display: inline;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: $primary-color;
+    font-size: 1.6em;
+    line-height: 1.5;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: $transition-fast;
+
+    &:not(.text) {
+        padding: 0.4em 1.6em;
+        @include flex-center;
+        gap: 0.8em;
+        background: $primary-color;
+        color: $accent-color;
+        border-radius: $radius-sm;
+
+        &:hover {
+            box-shadow: 0 0 5px $primary-color, 0 0 25px $primary-color;
+        }
+
+        &:active {
+            box-shadow: 0 0 5px $primary-color, 0 0 25px $primary-color;
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        text-shadow: 0 0 5px $primary-color, 0 0 25px $primary-color;
+    }
+
+    &:active {
+        text-shadow: 0 0 5px $primary-color, 0 0 25px $primary-color;
+    }
+}

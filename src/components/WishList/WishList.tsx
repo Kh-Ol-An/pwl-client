@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { Modal } from '@mui/material';
-import Button from '../Button/Button';
+import Button from '../Button';
 import { ModalBox, WishListS, WishItem, ImgList, ImgItem, Image } from './WishListStyles';
 import WishSettings from '../WishSettings/WishSettings';
 import { useAppDispatch, useAppSelector } from '../../store/hook';

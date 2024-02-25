@@ -4,7 +4,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { AvatarBox, AvatarImg, FileInput } from './AccountSettingsStyles';
-import Button from '../../components/Button/Button';
+import Button from '../../components/Button';
 import {useAppDispatch, useAppSelector} from "../../store/hook";
 import { updateMyUser } from '../../store/my-user/thunks';
 import { ALLOWED_FILE_EXTENSIONS } from '../../utils/constants';

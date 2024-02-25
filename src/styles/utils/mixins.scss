@@ -2,13 +2,41 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1em;
 }
 
 @mixin flex-column {
-    display: flex;
+    @include flex-center;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
+}
+
+@property --a {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes rotating {
+    0% {
+        --a: 0deg;
+    }
+    100% {
+        --a: 360deg;
+    }
+}
+
+@mixin running-lights($color) {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-conic-gradient(
+                    from var(--a),
+                    $color 0%,
+                    $color 5%,
+                    transparent 5%,
+                    transparent 40%,
+                    $color 50%
+    );
+    filter: drop-shadow(0 15px 50px $black-color);
+    border-radius: $radius-big;
+    animation: rotating 4s ease-in-out infinite;
 }

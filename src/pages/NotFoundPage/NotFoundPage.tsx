@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Root, SubText, SubTitle, Text, Title } from './NotFoundPageStyles';
-import Button from '../../components/Button/Button';
+import Button from '../../components/Button';
 
 const NotFoundPage: FC = () => {
     return (

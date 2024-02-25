@@ -7,7 +7,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import { useAppDispatch, useAppSelector } from "./store/hook";
 import Home from './pages/Home/Home';
 import Welcome from './pages/Welcome/Welcome';
-import Auth from './pages/Auth/Auth';
+import Auth from './pages/Auth';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import { checkAuth } from './store/my-user/thunks';
 import RoutesGuard from './utils/RoutesGuard';

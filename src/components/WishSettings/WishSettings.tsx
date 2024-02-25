@@ -2,7 +2,7 @@ import React, { FC, useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { DnDList, DnDItem, DnDArea, Image, DnD } from './WishSettingsStyles';
-import Button from '../../components/Button/Button';
+import Button from '../../components/Button';
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { createWish } from '../../store/wishes/thunks';
 import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '../../utils/constants';
