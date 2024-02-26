@@ -1,0 +1,15 @@
+.title {
+    @include flex-center;
+    gap: 1em;
+    @include title;
+}
+
+.name {
+    color: $primary-color;
+    font-size: 1.6em;
+}
+
+.params {
+    color: $special-color;
+    font-size: 1.2em;
+}

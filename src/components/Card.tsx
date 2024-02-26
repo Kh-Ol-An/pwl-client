@@ -2,8 +2,8 @@ import React, { FC, ReactNode } from 'react';
 
 interface IProps {
     withLights?: boolean;
-    classes?: 'rolled-up';
-    title: ReactNode;
+    classes?: 'rolled-up' | 'thin-border';
+    title?: ReactNode;
     children: ReactNode;
 }
 
@@ -17,11 +17,15 @@ const Card: FC<IProps> = ({ withLights = false, classes, title, children }) => {
                 </>
             )}
 
-            <div className="box">
-                <div className="inner">
-                    <div className="content">
-                        {title}
-                        <div className="expander">
+            <div className="outer-border">
+                <div className="inner-border">
+                    <div className="card-content">
+                        {title && (
+                            <div className="card-title">
+                                {title}
+                            </div>
+                        )}
+                        <div className="card-expander">
                             {children}
                         </div>
                     </div>

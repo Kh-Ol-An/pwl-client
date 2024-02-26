@@ -13,10 +13,13 @@
 @import './layouts/page';
 @import './layouts/loading';
 @import './layouts/inactivated';
+@import './layouts/header';
+@import './layouts/modal';
+@import './layouts/popover';
 
 // components
 @import './components/card';
-@import './components/title';
+@import './components/texts';
 @import './components/input';
 @import './components/button';
 

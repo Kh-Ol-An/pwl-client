@@ -2,11 +2,15 @@
     gap: 4em;
     padding: 2em;
 
-    .login {
-        filter: drop-shadow(0 0 10px $primary-color);
+    .box {
+        width: 60%;
     }
 
-    .favorite {
-        filter: drop-shadow(0 0 10px $action-color);
+    .login-icon {
+        @include icon-shadow($primary-color);
+    }
+
+    .favorite-icon {
+        @include icon-shadow($action-color);
     }
 }

@@ -1,6 +1,7 @@
 .button {
     width: auto;
-    display: inline;
+    @include flex-center;
+    gap: 0.4em;
     color: $primary-color;
     font-size: 1.6em;
     line-height: 1.5;
@@ -15,21 +16,13 @@
         background: $primary-color;
         color: $accent-color;
         border-radius: $radius-sm;
-
-        &:hover {
-            box-shadow: 0 0 5px $primary-color, 0 0 25px $primary-color;
-        }
-
-        &:active {
-            box-shadow: 0 0 5px $primary-color, 0 0 25px $primary-color;
-        }
     }
 
     &:hover {
-        text-shadow: 0 0 5px $primary-color, 0 0 25px $primary-color;
+        @include icon-shadow($primary-color);
     }
 
     &:active {
-        text-shadow: 0 0 5px $primary-color, 0 0 25px $primary-color;
+        @include icon-shadow($primary-color);
     }
 }

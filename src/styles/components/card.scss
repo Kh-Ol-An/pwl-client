@@ -2,6 +2,7 @@
     position: relative;
     @include flex-center;
     padding: 2px;
+    width: 100%;
 
     .light-one {
         @include running-lights($action-color);
@@ -12,61 +13,76 @@
         animation-delay: -1s;
     }
 
-    .box {
+    .outer-border {
         @include flex-center;
         gap: 2em;
+        width: 100%;
         filter: drop-shadow(0 15px 50px $black-color);
         border-radius: $radius-big;
         border: 8px solid $accent-color;
         background: $secondary-color;
     }
 
-    .inner {
+    .inner-border {
+        width: 100%;
         border-radius: $radius-xl;
         border-width: 40px;
         border-style: solid;
         border-color: $secondary-color;
     }
 
-    .content {
+    .card-content {
         @include flex-column;
         box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.5);
         border-radius: $radius-xl;
         border-bottom: 2px solid rgba(255, 255, 255, 0.5);
         background: $accent-color;
-        padding: 2em 4em 0;
+        padding: 0 4em;
         transition: all 0.5s;
     }
 
-    .expander {
+    .card-title {
+        padding: 2.4em 0;
+
+        .card-expander {
+            padding: 0 0 2.4em;
+        }
+    }
+
+    .card-expander {
         @include flex-column;
         gap: 2em;
-        overflow: hidden;
+        padding: 2.4em 0;
         transition: all 0.5s;
+    }
+
+    &.thin-border {
+        .inner-border {
+            border-width: 20px;
+        }
     }
 
     &.rolled-up {
-        .content {
-            padding: 2em 4em;
-        }
-
-        .expander {
+        .card-expander {
             padding: 0;
             max-height: 0;
+            overflow: hidden;
         }
 
-        .inner {
+        .inner-border {
             border-width: 60px;
             transition: all 0.5s;
         }
 
-        &:hover .inner {
-            border-width: 40px;
-        }
+        &:hover {
+            .inner-border {
+                border-width: 40px;
+            }
 
-        &:hover .expander {
-            padding: 2.4em 0;
-            max-height: 500px;
+            .card-expander {
+                padding: 2.4em 0;
+                max-height: 500px;
+            }
         }
     }
 }

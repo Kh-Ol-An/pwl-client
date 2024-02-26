@@ -9,6 +9,24 @@
     flex-direction: column;
 }
 
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+@mixin title {
+    color: $white-color;
+    font-size: 2.4em;
+    font-weight: 700;
+    text-align: center;
+}
+
+@mixin icon-shadow($color) {
+    filter: drop-shadow(0 0 10px $color);
+}
+
 @mixin running-lights($color) {
     position: absolute;
     width: 100%;
