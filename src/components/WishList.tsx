@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { Modal } from '@mui/material';
 import Button from './Button';
-import WishSettings from './WishSettings/WishSettings';
+import WishSettings from './WishSettings';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { getWishList } from '../store/wishes/thunks';
 import Card from './Card';

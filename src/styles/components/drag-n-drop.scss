@@ -1,0 +1,31 @@
+.drag-n-drop {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .dropzone {
+        padding: 5em;
+        border: 2px dashed $special-color;
+        cursor: pointer;
+    }
+
+    .text {
+        font-size: 1.4em;
+        color: $special-color;
+        text-align: center;
+        letter-spacing: 0.05em;
+    }
+
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.6em;
+    }
+
+    .item {
+        position: relative;
+        width: 6em;
+        height: 6em;
+    }
+}

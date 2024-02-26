@@ -1,11 +1,10 @@
 import React, { FC, useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
-import { DnDList, DnDItem, DnDArea, Image, DnD } from './WishSettingsStyles';
-import Button from '../../components/Button';
-import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { createWish } from '../../store/wishes/thunks';
-import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '../../utils/constants';
+import Button from '../components/Button';
+import { useAppDispatch, useAppSelector } from '../store/hook';
+import { createWish } from '../store/wishes/thunks';
+import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '../utils/constants';
+import Input from './Input';
 
 interface IProps {
     close: () => void;
@@ -68,74 +67,52 @@ const WishSettings: FC<IProps> = ({ close }) => {
 
     return (
         <>
-            <FormControl
-                sx={{ width: '100%' }}
-                variant="outlined"
-                size="small"
+            <Input
+                id="name"
+                type="text"
+                label="Назва твого бажання"
                 title="Як ти назвеш своє бажання?" // TODO: const nameRegex = /^[a-zA-Zа-яА-Я0-9\s!"№#$%&'()*,-;=?@_]*$/;
-            >
-                <InputLabel htmlFor="name">Назва твого бажаня</InputLabel>
-                <OutlinedInput
-                    id="name"
-                    type="text"
-                    value={name}
-                    required
-                    onChange={(e) => setName(e.target.value)}
-                    label="Назва твого бажаня"
-                />
-            </FormControl>
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
 
-            <FormControl
-                sx={{ width: '100%' }}
-                variant="outlined"
-                size="small"
+            <Input
+                id="price"
+                type="text"
+                label="Ціна"
                 title="Приблизна або точна ціна"
-            >
-                <InputLabel htmlFor="name">Ціна</InputLabel>
-                <OutlinedInput
-                    id="price"
-                    type="text"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    label="Ціна"
-                />
-            </FormControl>
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+            />
 
-            <FormControl
-                sx={{ width: '100%' }}
-                variant="outlined"
-                size="small"
+            <Input
+                id="description"
+                type="text"
+                label="Опис бажання"
                 title="Опиши своє бажання?"
-            >
-                <InputLabel htmlFor="name">Опис бажаня</InputLabel>
-                <OutlinedInput
-                    id="description"
-                    type="text"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    label="Опис бажаня"
-                />
-            </FormControl>
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+            />
 
-            <DnD>
-                <DnDArea {...getRootProps({ className: 'dropzone' })}>
+            <div className="drag-n-drop">
+                <div {...getRootProps({ className: 'dropzone' })}>
                     <input {...getInputProps()} />
-                    <p>Перетягніть кілька зображень сюди або клацніть, щоб вибрати зображення</p>
-                </DnDArea>
-                <DnDList>
+                    <p className="text">Перетягніть кілька зображень сюди або клацніть, щоб вибрати зображення</p>
+                </div>
+                <ul className="list">
                     {images.map((image, i) => (
-                        <DnDItem key={image.name + i}>
-                            <Image
+                        <li className="item" key={image.name + i}>
+                            <img
                                 src={URL.createObjectURL(image)}
                                 alt={image.name}
                                 loading="lazy"
                             />
                             <button onClick={removeImage(image)}>Remove image</button>
-                        </DnDItem>
+                        </li>
                     ))}
-                </DnDList>
+                </ul>
                 {images.length > 0 && <button onClick={removeAll}>Remove All images</button>}
-            </DnD>
+            </div>
 
             <Button onClick={send}>
                 Зберегти
