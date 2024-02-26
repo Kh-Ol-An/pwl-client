@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 import { logout } from '../store/my-user/thunks';
 import Card from './Card';
 import Button from './Button';
-import AccountSettings from './AccountSettings/AccountSettings';
+import AccountSettings from './AccountSettings';
 import stylesVariables from '../styles/utils/variables.module.scss';
 
 const Header = () => {

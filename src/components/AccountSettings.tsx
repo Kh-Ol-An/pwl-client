@@ -1,13 +1,12 @@
 import React, { FC, useState, useEffect } from 'react';
-import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
+import { Avatar, FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
-import { AvatarBox, AvatarImg, FileInput } from './AccountSettingsStyles';
-import Button from '../../components/Button';
-import { useAppDispatch, useAppSelector } from '../../store/hook';
-import { updateMyUser } from '../../store/my-user/thunks';
-import { ALLOWED_FILE_EXTENSIONS } from '../../utils/constants';
+import Button from '../components/Button';
+import { useAppDispatch, useAppSelector } from '../store/hook';
+import { updateMyUser } from '../store/my-user/thunks';
+import { ALLOWED_FILE_EXTENSIONS } from '../utils/constants';
 
 interface IProps {
     close: () => void;
@@ -67,9 +66,10 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                 />
             </FormControl>
 
-            <AvatarBox>
+            <div>
                 <label htmlFor="avatar">
-                    <FileInput
+                    <input
+                        className="hidden"
                         id="avatar"
                         accept={Object.values(ALLOWED_FILE_EXTENSIONS).join(",")} // TODO: check
                         type="file"
@@ -80,13 +80,13 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                             setAvatar(file);
                         }}
                     />
-                    <AvatarImg src={showAvatar()} alt={myUser.user?.name} />
+                    <Avatar sx={{ cursor: 'pointer' }} src={showAvatar()} alt={myUser.user?.name} />
                 </label>
 
                 <Button onClick={removeAvatar}>
                     removeAvatar
                 </Button>
-            </AvatarBox>
+            </div>
 
             <div title="Коли твій день народженя?">
                 <DemoContainer components={['DatePicker']}>
