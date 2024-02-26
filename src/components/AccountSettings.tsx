@@ -17,14 +17,14 @@ const AccountSettings: FC<IProps> = ({ close }) => {
     const [avatar, setAvatar] = useState<File | null | string>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
 
-    const myUser = useAppSelector((state) => state.myUser);
+    const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
 
     const send = async () => {
-        if (!myUser.user || !birthday) return;
+        if (!myUser || !birthday) return;
 
-        await dispatch(updateMyUser({ id: myUser.user.id, name, birthday: birthday.format(), avatar }));
+        await dispatch(updateMyUser({ id: myUser.id, name, birthday: birthday.format(), avatar }));
         close();
     };
 
@@ -41,11 +41,11 @@ const AccountSettings: FC<IProps> = ({ close }) => {
     };
 
     useEffect(() => {
-        if (!myUser.user) return;
+        if (!myUser) return;
 
-        setName(myUser.user.name);
-        setAvatar(myUser.user.avatar || '');
-        myUser.user.birthday && setBirthday(dayjs(myUser.user.birthday));
+        setName(myUser.name);
+        setAvatar(myUser.avatar || '');
+        myUser.birthday && setBirthday(dayjs(myUser.birthday));
     }, [myUser]);
 
     return (
@@ -80,7 +80,7 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                             setAvatar(file);
                         }}
                     />
-                    <Avatar sx={{ cursor: 'pointer' }} src={showAvatar()} alt={myUser.user?.name} />
+                    <Avatar sx={{ cursor: 'pointer' }} src={showAvatar()} alt={myUser?.name} />
                 </label>
 
                 <Button onClick={removeAvatar}>

@@ -2,12 +2,12 @@ import React, { FC } from 'react';
 import {useAppSelector} from '../store/hook';
 
 const Inactivated: FC = () => {
-    const myUser = useAppSelector((state) => state.myUser);
+    const myUser = useAppSelector((state) => state.myUser.user);
 
     return (
         <div className="inactivated">
             Ми прагнемо, щоб всі користувачі були справжніми.
-            Перевірте свою пошту: <span>{myUser?.user?.email}</span> і активуйте свій акаунт.
+            Перевірте свою пошту: <span>{myUser?.email}</span> і активуйте свій акаунт.
         </div>
     );
 };

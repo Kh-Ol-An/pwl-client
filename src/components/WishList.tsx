@@ -5,22 +5,25 @@ import Button from './Button';
 import WishSettings from './WishSettings';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { getWishList } from '../store/wishes/thunks';
+import { IWish } from '../models/IWish';
 import Card from './Card';
 import DataWithLabel from './DataWithLabel';
 
 const WishList = () => {
     const [openSettings, setOpenSettings] = useState<boolean>(false);
+    const [idForEditing, setIdForEditing] = useState<IWish['id'] | null>(null);
 
-    const myUser = useAppSelector((state) => state.myUser);
+    const myUser = useAppSelector((state) => state.myUser.user);
     const wishList = useAppSelector((state) => state.wishes?.list);
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(getWishList(myUser.user?.id || ''));
-    }, [dispatch, myUser.user?.id])
+        dispatch(getWishList(myUser?.id || ''));
+    }, [dispatch, myUser?.id])
 
-    const handleOpenWishSettings = () => {
+    const handleOpenWishSettings = (id: IWish['id'] | null) => {
+        setIdForEditing(id);
         setOpenSettings(true);
     };
 
@@ -30,7 +33,7 @@ const WishList = () => {
 
     return (
         <div className="wish-list">
-            <Button onClick={handleOpenWishSettings}>
+            <Button onClick={() => handleOpenWishSettings(null)}>
                 Додати бажання
             </Button>
 
@@ -58,7 +61,7 @@ const WishList = () => {
                                     </ul>
                                 )}
 
-                                <Button onClick={handleOpenWishSettings}>
+                                <Button onClick={() => handleOpenWishSettings(wish.id)}>
                                     Редагувати бажання
                                 </Button>
                             </Card>
@@ -79,7 +82,7 @@ const WishList = () => {
             >
                 <div className="modal">
                     <Card>
-                        <WishSettings close={handleCloseWishSettings} />
+                        <WishSettings idForEditing={idForEditing} close={handleCloseWishSettings} />
                     </Card>
                 </div>
             </Modal>

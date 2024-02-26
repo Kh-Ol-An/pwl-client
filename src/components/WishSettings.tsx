@@ -5,8 +5,10 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 import { createWish } from '../store/wishes/thunks';
 import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '../utils/constants';
 import Input from './Input';
+import { IWish } from '../models/IWish';
 
 interface IProps {
+    idForEditing: IWish['id'] | null;
     close: () => void;
 }
 
@@ -19,7 +21,7 @@ Object.keys(ALLOWED_FILE_EXTENSIONS).forEach((ext) => {
     acceptTypes[mimeType].push(`.${ext}`);
 });
 
-const WishSettings: FC<IProps> = ({ close }) => {
+const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
     const [name, setName] = useState<string>('');
     const [price, setPrice] = useState<string>('');
     const [description, setDescription] = useState<string>('');
@@ -35,14 +37,15 @@ const WishSettings: FC<IProps> = ({ close }) => {
         maxSize: ALLOWED_MAX_FILE_SIZE_IN_MB * 1024 * 1024,
     });
 
-    const myUser = useAppSelector((state) => state.myUser);
+    const myUser = useAppSelector((state) => state.myUser.user);
+    const wishList = useAppSelector((state) => state.wishes.list);
 
     const dispatch = useAppDispatch();
 
     const send = async () => {
-        if (!myUser.user) return;
+        if (!myUser) return;
 
-        await dispatch(createWish({ userId: myUser.user.id, name, price, description, images }));
+        await dispatch(createWish({ userId: myUser.id, name, price, description, images }));
         close();
     };
 
@@ -56,14 +59,16 @@ const WishSettings: FC<IProps> = ({ close }) => {
         setImages([]);
     };
 
-//    useEffect(() => {
-//        if (!myUser.user) return;
-//
-//        setName(myUser.user.name);
-//        setPrice(myUser.user.name);
-//        setDescription(myUser.user.name);
-////        setAvatar(myUser.user.avatar || '');
-//    }, [myUser]);
+    useEffect(() => {
+        if (wishList.length === 0) return;
+
+        const myWish = wishList.find((wish) => wish.id === idForEditing);
+        if (!myWish) return;
+
+        setName(myWish.name);
+        setPrice(myWish.price);
+        setDescription(myWish.description);
+    }, [idForEditing, wishList]);
 
     return (
         <>

@@ -17,7 +17,7 @@ const Header = () => {
     const [anchorSetting, setAnchorSetting] = React.useState<HTMLButtonElement | null>(null);
     const [openSettings, setOpenSettings] = useState<boolean>(false);
 
-    const myUser = useAppSelector((state) => state.myUser);
+    const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
 
@@ -50,12 +50,16 @@ const Header = () => {
             <div className="inner">
                 <div className="content">
                     <div className="data">
-                        <Avatar alt={myUser.user?.name} src={myUser.user?.avatar} />
+                        <Avatar alt={myUser?.name} src={myUser?.avatar} />
 
                         <div className="box">
-                            <span className="name">{myUser.user?.name}</span>
+                            <span className="name">{myUser?.name}</span>
                             <span className="params">
-                                {myUser.user?.birthday ? dayjs(myUser.user?.birthday).format('DD.MM.YYYY') : myUser.user?.email}
+                                {
+                                    myUser?.birthday
+                                        ? dayjs(myUser?.birthday).format('DD.MM.YYYY')
+                                        : myUser?.email
+                                }
                             </span>
                         </div>
                     </div>

@@ -6,8 +6,8 @@ import { getUsers } from '../store/users/thunks';
 import WishList from '../components/WishList';
 
 const Home: FC = () => {
-    const users = useAppSelector((state) => state.users);
-    const myUser = useAppSelector((state) => state.myUser);
+    const userList = useAppSelector((state) => state.users.list);
+    const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
 
@@ -20,7 +20,7 @@ const Home: FC = () => {
             <Header />
 
             <div className="page home-page">
-                {users.list.length > 0 && <Sidebar users={users.list} myUser={myUser.user} />}
+                {userList.length > 0 && <Sidebar users={userList} myUser={myUser} />}
 
                 <div className="container">
                     <WishList />
