@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import Header from '../components/Header';
-import Sidebar from '../components/Sidebar/Sidebar';
+import Sidebar from '../components/Sidebar';
 import {useAppDispatch, useAppSelector} from '../store/hook';
 import { getUsers } from '../store/users/thunks';
 import WishList from '../components/WishList/WishList';
