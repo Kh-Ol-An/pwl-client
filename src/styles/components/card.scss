@@ -17,10 +17,13 @@
         @include flex-center;
         gap: 2em;
         width: 100%;
-        filter: drop-shadow(0 15px 50px $black-color);
         border-radius: $radius-big;
         border: 8px solid $accent-color;
         background: $secondary-color;
+    }
+
+    &:not(.without-shadow) .outer-border {
+        filter: drop-shadow(0 15px 50px $black-color);
     }
 
     .inner-border {
@@ -43,6 +46,7 @@
 
     .card-title {
         padding: 2.4em 0;
+        width: 100%;
 
         .card-expander {
             padding: 0 0 2.4em;
@@ -57,6 +61,10 @@
     }
 
     &.thin-border {
+        .card-content {
+            padding: 0 2em;
+        }
+
         .inner-border {
             border-width: 20px;
         }
@@ -72,6 +80,18 @@
         .inner-border {
             border-width: 60px;
             transition: all 0.5s;
+        }
+
+        &.thin-border {
+            .inner-border {
+                border-width: 40px;
+            }
+
+            &:hover {
+                .inner-border {
+                    border-width: 20px;
+                }
+            }
         }
 
         &:hover {

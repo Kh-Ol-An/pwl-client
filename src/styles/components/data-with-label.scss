@@ -1,0 +1,18 @@
+.data-with-label {
+    @include grid(2);
+    align-items: center;
+    width: 100%;
+    white-space: nowrap;
+
+    .label {
+        font-size: 1.6em;
+        color: $special-color;
+    }
+
+    .data {
+        font-size: 1.8em;
+        color: $primary-color;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}

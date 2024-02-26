@@ -2,14 +2,18 @@ import React, { FC, ReactNode } from 'react';
 
 interface IProps {
     withLights?: boolean;
-    classes?: 'rolled-up' | 'thin-border';
+    classes?: string;
     title?: ReactNode;
     children: ReactNode;
 }
 
 const Card: FC<IProps> = ({ withLights = false, classes, title, children }) => {
     return (
-        <div className={"card" + (classes ? ` ${classes}` : "")}>
+        <div
+            className={
+                "card" + (title ? ' rolled-up' : "") + (classes ? ` ${classes}` : "")
+            }
+        >
             {withLights && (
                 <>
                     <div className="light-one"></div>

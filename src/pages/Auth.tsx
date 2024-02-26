@@ -21,7 +21,6 @@ const Auth: FC = () => {
             <div className="box">
                 <Card
                     withLights
-                    classes="rolled-up"
                     title={
                         <h1 className="title">
                             <LoginIcon className="login-icon" sx={{ color: stylesVariables.primaryColor }} />

@@ -1,8 +1,8 @@
 import React, { FC, useState, useEffect } from 'react';
-import { ListItem, ListItemAvatar, Avatar, ListItemText, ListItemButton } from '@mui/material';
+import { ListItem, ListItemAvatar, Avatar, ListItemText, ListItemButton, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import { IUser } from '../models/IUser';
-import { secondaryLightColor } from '../styles/variables';
+import stylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     users: IUser[];
@@ -33,8 +33,14 @@ const Sidebar: FC<IProps> = ({ users, myUser }) => {
 
                                         <ListItemText
                                             primary={user.name}
-                                            secondary={user.birthday ? dayjs(user.birthday).format('DD.MM.YYYY') : user.email}
-                                            sx={{ color: secondaryLightColor }}
+                                            secondary={
+                                                <Typography variant="body2" className="params">
+                                                    {user.birthday
+                                                        ? dayjs(user.birthday).format('DD.MM.YYYY')
+                                                        : user.email}
+                                                </Typography>
+                                            }
+                                            sx={{ color: stylesVariables.whiteColor }}
                                         />
                                     </ListItemButton>
                                 </ListItem>

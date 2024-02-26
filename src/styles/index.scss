@@ -17,12 +17,14 @@
 @import './layouts/modal';
 @import './layouts/popover';
 @import './layouts/sidebar';
+@import './layouts/wish-list';
 
 // components
 @import './components/card';
 @import './components/texts';
 @import './components/input';
 @import './components/button';
+@import './components/data-with-label';
 
 // pages
 @import './pages/welcome';
