@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 import { createWish } from '../store/wishes/thunks';
 import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '../utils/constants';
 import Input from './Input';
-import { IWish } from '../models/IWish';
+import { IImage, IWish } from '../models/IWish';
 import StylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
@@ -27,7 +27,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
     const [name, setName] = useState<string>('');
     const [price, setPrice] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-    const [images, setImages] = useState<File[]>([]);
+    const [images, setImages] = useState<(File | null | IImage)[]>([]);
 
     const onDrop = useCallback((acceptedImages: File[]) => {
         setImages([...images, ...acceptedImages]);
@@ -51,7 +51,15 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         close();
     };
 
-    const removeImage = (image: File) => () => {
+    const showImage = (image: File | null | IImage) => {
+        if (image instanceof File) {
+            return URL.createObjectURL(image);
+        }
+
+        return image?.path || '';
+    };
+
+    const removeImage = (image: File | null | IImage) => () => {
         const newImages = [...images];
         newImages.splice(newImages.indexOf(image), 1);
         setImages(newImages);
@@ -70,6 +78,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         setName(myWish.name);
         setPrice(myWish.price);
         setDescription(myWish.description);
+        setImages(myWish.images);
     }, [idForEditing, wishList]);
 
     return (
@@ -107,18 +116,22 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                     <p className="text">Перетягніть кілька зображень сюди або клацніть, щоб вибрати зображення</p>
                 </div>
                 <ul className="list">
-                    {images.map((image, i) => (
-                        <li className="item" key={image.name + i}>
-                            <img
-                                src={URL.createObjectURL(image)}
-                                alt={image.name}
-                                loading="lazy"
-                            />
-                            <button className="remove" onClick={removeImage(image)}>
-                                <CancelIcon sx={{ color: StylesVariables.actionColor }} />
-                            </button>
-                        </li>
-                    ))}
+                    {images.map((image, i) => {
+                        if (!image) return null;
+
+                        return (
+                            <li className="item" key={`wish-image-${i}`}>
+                                <img
+                                    src={showImage(image)}
+                                    alt={`wish-image-${i}`}
+                                    loading="lazy"
+                                />
+                                <button className="remove" onClick={removeImage(image)}>
+                                    <CancelIcon sx={{ color: StylesVariables.actionColor }} />
+                                </button>
+                            </li>
+                        );
+                    })}
                 </ul>
                 {images.length > 0 && <button className="remove-all" onClick={removeAll}>Remove All images</button>}
             </div>

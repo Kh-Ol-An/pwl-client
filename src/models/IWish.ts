@@ -1,8 +1,9 @@
 import { Dayjs } from 'dayjs';
 
-interface IImage {
+export interface IImage {
     id: string;
     path: string;
+    name: string;
 
 }
 
