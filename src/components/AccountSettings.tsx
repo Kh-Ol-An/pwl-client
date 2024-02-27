@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 import { Avatar } from '@mui/material';
 import { Cancel as CancelIcon } from '@mui/icons-material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -20,6 +20,8 @@ const AccountSettings: FC<IProps> = ({ close }) => {
     const [avatar, setAvatar] = useState<File | null | string>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
 
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
@@ -33,6 +35,7 @@ const AccountSettings: FC<IProps> = ({ close }) => {
 
     const removeAvatar = () => {
         setAvatar(null);
+        inputRef.current && (inputRef.current.value = '');
     };
 
     const showAvatar = () => {
@@ -67,10 +70,10 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                     <input
                         className="hidden"
                         id="avatar"
+                        ref={inputRef}
                         accept={Object.values(ALLOWED_FILE_EXTENSIONS).join(",")} // TODO: check
                         type="file"
                         onChange={(e) => {
-//                            console.log(e);
                             const file = e.target.files?.[0];
                             if (!file) return;
 
