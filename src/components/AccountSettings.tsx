@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Avatar, FormControl, InputLabel, OutlinedInput } from '@mui/material';
+import { Avatar } from '@mui/material';
+import { Cancel as CancelIcon } from '@mui/icons-material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
@@ -7,6 +8,8 @@ import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { updateMyUser } from '../store/my-user/thunks';
 import { ALLOWED_FILE_EXTENSIONS } from '../utils/constants';
+import Input from './Input';
+import StylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     close: () => void;
@@ -50,23 +53,16 @@ const AccountSettings: FC<IProps> = ({ close }) => {
 
     return (
         <>
-            <FormControl
-                sx={{ width: '100%' }}
-                variant="outlined"
-                size="small"
+            <Input
+                id="name"
+                type="text"
+                label="Ім'я*"
                 title="Якє в тебе ім'я?"
-            >
-                <InputLabel htmlFor="name">Ім'я</InputLabel>
-                <OutlinedInput
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    label="Ім'я"
-                />
-            </FormControl>
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
 
-            <div>
+            <div className="avatar">
                 <label htmlFor="avatar">
                     <input
                         className="hidden"
@@ -74,18 +70,24 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                         accept={Object.values(ALLOWED_FILE_EXTENSIONS).join(",")} // TODO: check
                         type="file"
                         onChange={(e) => {
+//                            console.log(e);
                             const file = e.target.files?.[0];
                             if (!file) return;
 
                             setAvatar(file);
                         }}
                     />
-                    <Avatar sx={{ cursor: 'pointer' }} src={showAvatar()} alt={myUser?.name} />
+                    <Avatar
+                        sx={{ cursor: 'pointer', width: '100%', height: '100%' }}
+                        src={showAvatar()} alt={myUser?.name}
+                    />
                 </label>
 
-                <Button onClick={removeAvatar}>
-                    removeAvatar
-                </Button>
+                {avatar && (
+                    <button className="remove" onClick={removeAvatar}>
+                        <CancelIcon sx={{ color: StylesVariables.actionColor }} />
+                    </button>
+                )}
             </div>
 
             <div title="Коли твій день народженя?">

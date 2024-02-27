@@ -33,9 +33,12 @@ const WishList = () => {
 
     return (
         <div className="wish-list">
-            <Button onClick={() => handleOpenWishSettings(null)}>
-                Додати бажання
-            </Button>
+            <div className="head">
+                <h1 className="title">Особистий список бажань</h1>
+                <Button onClick={() => handleOpenWishSettings(null)}>
+                    Додати бажання
+                </Button>
+            </div>
 
             {wishList.length > 0 ? (
                 <ul className="list">
@@ -43,9 +46,9 @@ const WishList = () => {
                         <li key={wish.id}>
                             <Card
                                 classes="thin-border without-shadow"
-//                                title={<DataWithLabel label="Назва:" data={wish.name} />}
+                                title={<DataWithLabel label="Назва:" data={wish.name} />}
                             >
-                                <DataWithLabel label="Назва:" data={wish.name} />
+                                {/*<DataWithLabel label="Назва:" data={wish.name} />*/}
                                 <DataWithLabel label="Ціна:" data={wish.price} />
                                 <DataWithLabel label="Опис:" data={wish.description} />
                                 <DataWithLabel label="Створене:" data={dayjs(wish.createdAt).format('DD.MM.YYYY')} />
@@ -69,9 +72,11 @@ const WishList = () => {
                     ))}
                 </ul>
             ) : (
-                <p className="text">
-                    В тебе немає жодного бажання. Хіба ти нічого не бажаєш?
-                </p>
+                <div className="text-box">
+                    <p className="text">
+                        В тебе немає жодного бажання. Хіба ти нічого не бажаєш?
+                    </p>
+                </div>
             )}
 
             <Modal

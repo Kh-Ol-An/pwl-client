@@ -28,4 +28,15 @@
         width: 6em;
         height: 6em;
     }
+
+    .remove-all {
+        padding: 0.5em 2em;
+        margin: 0 auto;
+        width: max-content;
+        background: $action-color;
+        border-radius: $radius-sm;
+        font-weight: 700;
+        font-size: 1.4em;
+        color: $accent-color;
+    }
 }

@@ -1,0 +1,14 @@
+.remove {
+    position: absolute;
+    top: -0.6em;
+    right: -0.4em;
+    width: 1.6em;
+    height: 1.6em;
+    background: $accent-color;
+    border-radius: $radius-round;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}

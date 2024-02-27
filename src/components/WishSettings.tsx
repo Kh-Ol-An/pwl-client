@@ -1,11 +1,13 @@
 import React, { FC, useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { Cancel as CancelIcon } from '@mui/icons-material';
 import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { createWish } from '../store/wishes/thunks';
 import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '../utils/constants';
 import Input from './Input';
 import { IWish } from '../models/IWish';
+import StylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     idForEditing: IWish['id'] | null;
@@ -112,11 +114,13 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                                 alt={image.name}
                                 loading="lazy"
                             />
-                            <button onClick={removeImage(image)}>Remove image</button>
+                            <button className="remove" onClick={removeImage(image)}>
+                                <CancelIcon sx={{ color: StylesVariables.actionColor }} />
+                            </button>
                         </li>
                     ))}
                 </ul>
-                {images.length > 0 && <button onClick={removeAll}>Remove All images</button>}
+                {images.length > 0 && <button className="remove-all" onClick={removeAll}>Remove All images</button>}
             </div>
 
             <Button onClick={send}>

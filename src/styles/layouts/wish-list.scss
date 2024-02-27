@@ -1,7 +1,17 @@
 .wish-list {
-    @include flex-column;
+    display: flex;
+    flex-direction: column;
     gap: 2em;
+    width: 100%;
     height: 100%;
+
+    .head {
+        @include flex-between;
+
+        .title {
+            font-size: 3.4em;
+        }
+    }
 
     .list {
         @include grid(3);
@@ -18,9 +28,16 @@
         }
     }
 
+    .text-box {
+        @include flex-center;
+        width: 100%;
+        height: 100%;
+    }
+
     .text {
-        font-size: 1.6em;
+        font-size: 2em;
         color: $white-color;
+        text-align: center;
     }
 
     .image-list {
