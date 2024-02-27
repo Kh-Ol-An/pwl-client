@@ -55,7 +55,7 @@ const AccountSettings: FC<IProps> = ({ close }) => {
     }, [myUser]);
 
     return (
-        <>
+        <div className="account-settings">
             <Input
                 id="name"
                 type="text"
@@ -65,49 +65,51 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                 onChange={(e) => setName(e.target.value)}
             />
 
-            <div className="avatar">
-                <label htmlFor="avatar">
-                    <input
-                        className="hidden"
-                        id="avatar"
-                        ref={inputRef}
-                        accept={Object.values(ALLOWED_FILE_EXTENSIONS).join(",")} // TODO: check
-                        type="file"
-                        onChange={(e) => {
-                            const file = e.target.files?.[0];
-                            if (!file) return;
+            <div className="field">
+                <div className="avatar">
+                    <label htmlFor="avatar">
+                        <input
+                            className="hidden"
+                            id="avatar"
+                            ref={inputRef}
+                            accept={Object.values(ALLOWED_FILE_EXTENSIONS).join(",")} // TODO: check
+                            type="file"
+                            onChange={(e) => {
+                                const file = e.target.files?.[0];
+                                if (!file) return;
 
-                            setAvatar(file);
-                        }}
-                    />
-                    <Avatar
-                        sx={{ cursor: 'pointer', width: '100%', height: '100%' }}
-                        src={showAvatar()} alt={myUser?.name}
-                    />
-                </label>
+                                setAvatar(file);
+                            }}
+                        />
+                        <Avatar
+                            sx={{ cursor: 'pointer', width: '100%', height: '100%' }}
+                            src={showAvatar()} alt={myUser?.name}
+                        />
+                    </label>
 
-                {avatar && (
-                    <button className="remove" onClick={removeAvatar}>
-                        <CancelIcon sx={{ color: StylesVariables.actionColor }} />
-                    </button>
-                )}
-            </div>
+                    {avatar && (
+                        <button className="remove" onClick={removeAvatar}>
+                            <CancelIcon sx={{ color: StylesVariables.actionColor }} />
+                        </button>
+                    )}
+                </div>
 
-            <div title="Коли твій день народженя?">
-                <DemoContainer components={['DatePicker']}>
-                    <DatePicker
-                        label="День Народженя"
-                        format="DD.MM.YYYY"
-                        value={birthday}
-                        onChange={(value) => setBirthday(value)}
-                    />
-                </DemoContainer>
+                <div title="Коли твій день народженя?">
+                    <DemoContainer components={['DatePicker']}>
+                        <DatePicker
+                            label="День Народженя"
+                            format="DD.MM.YYYY"
+                            value={birthday}
+                            onChange={(value) => setBirthday(value)}
+                        />
+                    </DemoContainer>
+                </div>
             </div>
 
             <Button disabled={!birthday} onClick={send}>
                 Зберегти
             </Button>
-        </>
+        </div>
     );
 };
 
