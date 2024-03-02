@@ -3,10 +3,11 @@ import { Dayjs } from 'dayjs';
 export interface IImage {
     id: string;
     path: string;
-    name: string;
+    position: string;
+    delete?: boolean;
 }
 
-export type ICurrentImage = (File | 'delete' | IImage);
+export type ICurrentImage = (File | IImage);
 
 export interface IWish {
     id: string;

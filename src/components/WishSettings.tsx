@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 import { createWish, updateWish } from '../store/wishes/thunks';
 import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '../utils/constants';
 import Input from './Input';
-import { ICurrentImage, IWish } from '../models/IWish';
+import { ICurrentImage, IImage, IWish } from '../models/IWish';
 import StylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
@@ -56,25 +56,36 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
     };
 
     const showImage = (image: ICurrentImage) => {
-        if (!image || image === 'delete') {
-            return ''
-        }
         if (image instanceof File) {
             return URL.createObjectURL(image);
         }
 
-        return image.path;
+        return image.delete ? '' : image.path;
     };
 
-    const removeImage = (idx: number) => () => {
+    const removeImage = (image: ICurrentImage, idx: number) => () => {
         const newImages = [...images];
-//        newImages.splice(newImages.indexOf(image), 1);
-        newImages[idx] = 'delete';
+        if (newImages[idx] instanceof File) {
+            newImages.splice(newImages.indexOf(image), 1);
+        } else {
+            const updatedImage = { ...newImages[idx] as IImage };
+            updatedImage.delete = true;
+            newImages[idx] = updatedImage;
+        }
         setImages(newImages);
     };
 
     const removeAll = () => {
-        setImages((prevState) => prevState.map(() => 'delete'));
+        setImages(
+            (prevState) =>
+                prevState
+                    .filter((image) => !(image instanceof File))
+                    .map((image) => {
+                        const updatedImage = { ...image as IImage };
+                        updatedImage.delete = true;
+                        return updatedImage;
+                    })
+        );
     };
 
     useEffect(() => {
@@ -125,7 +136,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                 </div>
                 <ul className="list">
                     {images.map((image, idx) => {
-                        if (image === 'delete') return null;
+                        if (!(image instanceof File) && image.delete) return null;
 
                         return (
                             <li className="item" key={`wish-image-${idx}`}>
@@ -134,7 +145,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                                     alt={`wish-image-${idx}`}
                                     loading="lazy"
                                 />
-                                <button className="remove" onClick={removeImage(idx)}>
+                                <button className="remove" onClick={removeImage(image, idx)}>
                                     <CancelIcon sx={{ color: StylesVariables.actionColor }} />
                                 </button>
                             </li>

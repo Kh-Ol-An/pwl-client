@@ -10,7 +10,7 @@ import { updateMyUser } from '../store/my-user/thunks';
 import { ALLOWED_FILE_EXTENSIONS } from '../utils/constants';
 import Input from './Input';
 import StylesVariables from '../styles/utils/variables.module.scss';
-import { ICurrentAvatar } from '../store/my-user/types';
+import { ICurrentAvatar } from '../models/IUser';
 
 interface IProps {
     close: () => void;

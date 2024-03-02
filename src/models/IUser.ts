@@ -11,3 +11,5 @@ export interface IUser {
     createdAt: Dayjs;
     updatedAt: Dayjs;
 }
+
+export type ICurrentAvatar = (File | 'delete' | string);

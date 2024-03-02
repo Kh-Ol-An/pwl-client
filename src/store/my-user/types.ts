@@ -1,3 +1,5 @@
+import { ICurrentAvatar } from '../../models/IUser';
+
 export interface ILogin {
     email: string;
     password: string;
@@ -6,8 +8,6 @@ export interface ILogin {
 export interface IRegistration extends ILogin {
     name: string;
 }
-
-export type ICurrentAvatar = (File | 'delete' | string);
 
 export interface IUpdateMyUser {
     id: string;
