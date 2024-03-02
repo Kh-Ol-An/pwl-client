@@ -55,13 +55,10 @@ const updateMyUser = async ({ id, name, birthday, avatar }: IUpdateMyUser): Prom
     formData.append('id', id);
     formData.append('name', name);
     formData.append('birthday', birthday);
-    formData.append('deleteAvatar', avatar === null ? 'true' : 'false');
-    if (avatar) {
-        formData.append('avatar', avatar);
-    }
+    formData.append('avatar', avatar);
 
     try {
-        return await api.post(
+        return await api.put(
             '/user',
             formData,
             {

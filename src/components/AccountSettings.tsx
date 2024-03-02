@@ -10,6 +10,7 @@ import { updateMyUser } from '../store/my-user/thunks';
 import { ALLOWED_FILE_EXTENSIONS } from '../utils/constants';
 import Input from './Input';
 import StylesVariables from '../styles/utils/variables.module.scss';
+import { ICurrentAvatar } from '../store/my-user/types';
 
 interface IProps {
     close: () => void;
@@ -17,7 +18,7 @@ interface IProps {
 
 const AccountSettings: FC<IProps> = ({ close }) => {
     const [name, setName] = useState<string>('');
-    const [avatar, setAvatar] = useState<File | null | string>('');
+    const [avatar, setAvatar] = useState<ICurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -27,14 +28,14 @@ const AccountSettings: FC<IProps> = ({ close }) => {
     const dispatch = useAppDispatch();
 
     const send = async () => {
-        if (!myUser || !birthday) return;
+        if (!myUser || !birthday) return; // TODO: why cant delete without birthday
 
         await dispatch(updateMyUser({ id: myUser.id, name, birthday: birthday.format(), avatar }));
         close();
     };
 
     const removeAvatar = () => {
-        setAvatar(null);
+        setAvatar('delete');
         inputRef.current && (inputRef.current.value = '');
     };
 

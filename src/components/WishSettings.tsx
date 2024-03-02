@@ -3,10 +3,10 @@ import { useDropzone } from 'react-dropzone';
 import { Cancel as CancelIcon } from '@mui/icons-material';
 import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store/hook';
-import { createWish } from '../store/wishes/thunks';
+import { createWish, updateWish } from '../store/wishes/thunks';
 import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '../utils/constants';
 import Input from './Input';
-import { IImage, IWish } from '../models/IWish';
+import { ICurrentImage, IWish } from '../models/IWish';
 import StylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
@@ -27,7 +27,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
     const [name, setName] = useState<string>('');
     const [price, setPrice] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-    const [images, setImages] = useState<(File | null | IImage)[]>([]);
+    const [images, setImages] = useState<ICurrentImage[]>([]);
 
     const onDrop = useCallback((acceptedImages: File[]) => {
         setImages([...images, ...acceptedImages]);
@@ -47,26 +47,34 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
     const send = async () => {
         if (!myUser) return;
 
-        await dispatch(createWish({ userId: myUser.id, name, price, description, images }));
+        if (idForEditing) {
+             await dispatch(updateWish({ userId: myUser.id, id: idForEditing, name, price, description, images }));
+        } else {
+            await dispatch(createWish({ userId: myUser.id, name, price, description, images }));
+        }
         close();
     };
 
-    const showImage = (image: File | null | IImage) => {
+    const showImage = (image: ICurrentImage) => {
+        if (!image || image === 'delete') {
+            return ''
+        }
         if (image instanceof File) {
             return URL.createObjectURL(image);
         }
 
-        return image?.path || '';
+        return image.path;
     };
 
-    const removeImage = (image: File | null | IImage) => () => {
+    const removeImage = (idx: number) => () => {
         const newImages = [...images];
-        newImages.splice(newImages.indexOf(image), 1);
+//        newImages.splice(newImages.indexOf(image), 1);
+        newImages[idx] = 'delete';
         setImages(newImages);
     };
 
     const removeAll = () => {
-        setImages([]);
+        setImages((prevState) => prevState.map(() => 'delete'));
     };
 
     useEffect(() => {
@@ -116,17 +124,17 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                     <p className="text">Перетягніть кілька зображень сюди або клацніть, щоб вибрати зображення</p>
                 </div>
                 <ul className="list">
-                    {images.map((image, i) => {
-                        if (!image) return null;
+                    {images.map((image, idx) => {
+                        if (image === 'delete') return null;
 
                         return (
-                            <li className="item" key={`wish-image-${i}`}>
+                            <li className="item" key={`wish-image-${idx}`}>
                                 <img
                                     src={showImage(image)}
-                                    alt={`wish-image-${i}`}
+                                    alt={`wish-image-${idx}`}
                                     loading="lazy"
                                 />
-                                <button className="remove" onClick={removeImage(image)}>
+                                <button className="remove" onClick={removeImage(idx)}>
                                     <CancelIcon sx={{ color: StylesVariables.actionColor }} />
                                 </button>
                             </li>
@@ -137,7 +145,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             </div>
 
             <Button onClick={send}>
-                Зберегти
+                {idForEditing ? 'Оновити' : 'Додати'}
             </Button>
         </>
     );

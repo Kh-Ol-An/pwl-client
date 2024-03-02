@@ -9,6 +9,11 @@
     text-align: center;
     transition: $transition-fast;
 
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
     &:not(.text) {
         padding: 0.4em 1.6em;
         @include flex-center;

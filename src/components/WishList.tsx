@@ -48,7 +48,6 @@ const WishList = () => {
                                 classes="thin-border without-shadow"
                                 title={<DataWithLabel label="Назва:" data={wish.name} />}
                             >
-                                {/*<DataWithLabel label="Назва:" data={wish.name} />*/}
                                 <DataWithLabel label="Ціна:" data={wish.price} />
                                 <DataWithLabel label="Опис:" data={wish.description} />
                                 <DataWithLabel label="Створене:" data={dayjs(wish.createdAt).format('DD.MM.YYYY')} />
@@ -58,7 +57,7 @@ const WishList = () => {
                                     <ul className="image-list">
                                         {wish.images.map((image) => (
                                             <li className="image-item" key={image.path}>
-                                                <img src={image.path} alt={image.path} />
+                                                <img src={image.path} alt={image.name} />
                                             </li>
                                         ))}
                                     </ul>

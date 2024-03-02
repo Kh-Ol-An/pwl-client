@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IWish } from '../../models/IWish';
-import { createWish, getWishList } from './thunks';
+import { createWish, updateWish, getWishList } from './thunks';
 
 interface IState {
     list: IWish[]
@@ -30,6 +30,26 @@ const wishesSlice = createSlice({
             })
             .addCase(createWish.fulfilled, (state, action) => {
                 state.list.push(action.payload);
+                state.isLoading = false;
+                state.error = null;
+            })
+            .addCase(updateWish.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(updateWish.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось створити бажання.';
+            })
+            .addCase(updateWish.fulfilled, (state, action) => {
+                const { id } = action.payload;
+                // Знаходимо індекс бажання в списку за його ідентифікатором
+                const index = state.list.findIndex(wish => wish.id === id);
+                // Перевіряємо, чи було знайдено бажання
+                if (index !== -1) {
+                    // Оновлюємо дані бажання
+                    state.list[index] = { ...state.list[index], ...action.payload };
+                }
                 state.isLoading = false;
                 state.error = null;
             })

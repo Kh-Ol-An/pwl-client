@@ -1,9 +1,13 @@
-import { IImage } from '../../models/IWish';
+import { ICurrentImage } from '../../models/IWish';
 
 export interface ICreateWish {
     userId: string;
     name: string;
     price: string;
     description: string;
-    images: (File | null | IImage)[];
+    images: ICurrentImage[];
+}
+
+export interface IUpdateWish extends ICreateWish {
+    id: string;
 }

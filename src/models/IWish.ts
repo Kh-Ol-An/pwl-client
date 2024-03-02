@@ -4,8 +4,9 @@ export interface IImage {
     id: string;
     path: string;
     name: string;
-
 }
+
+export type ICurrentImage = (File | 'delete' | IImage);
 
 export interface IWish {
     id: string;

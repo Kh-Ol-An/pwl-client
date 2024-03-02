@@ -29,7 +29,7 @@ const Button: FC<IProps> = ({
     if (to) {
         return (
             <Link
-                className={"button" + (classes ? ` ${classes}` : "")}
+                className={"button" + (classes ? ` ${classes}` : "") + (disabled ? ' disabled' : "")}
                 to={to}
                 target={target}
                 rel="noopener noreferrer"
@@ -43,7 +43,7 @@ const Button: FC<IProps> = ({
 
     return (
         <button
-            className={"button" + (classes ? ` ${classes}` : "")}
+            className={"button" + (classes ? ` ${classes}` : "") + (disabled ? ' disabled' : "")}
             type={type}
             tabIndex={tabIndex}
             disabled={disabled}
