@@ -1,7 +1,6 @@
 .drag-n-drop {
     display: flex;
     flex-direction: column;
-    gap: 1em;
 
     .dropzone {
         padding: 5em;
@@ -16,22 +15,27 @@
         letter-spacing: 0.05em;
     }
 
-    .list {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 0.6em;
-    }
-
     .item {
         position: relative;
+        top: auto !important;
+        left: auto !important;
+        margin-top: 1em;
         width: 6em;
         height: 6em;
+        display: inline-block;
+
+        &:not(:first-child) {
+            margin-left: 1em;
+        }
+
+        img {
+            border-radius: $radius-sm;
+        }
     }
 
     .remove-all {
         padding: 0.5em 2em;
-        margin: 0 auto;
+        margin: 1em auto 0;
         width: max-content;
         background: $action-color;
         border-radius: $radius-sm;

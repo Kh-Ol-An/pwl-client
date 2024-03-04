@@ -57,7 +57,7 @@ const WishList = () => {
                                     <ul className="image-list">
                                         {wish.images.map((image) => (
                                             <li className="image-item" key={image.path}>
-                                                <img src={image.path} alt={image.position} />
+                                                <img src={image.path} alt={`wish-${image.position}`} />
                                             </li>
                                         ))}
                                     </ul>

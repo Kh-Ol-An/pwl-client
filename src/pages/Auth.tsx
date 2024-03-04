@@ -19,16 +19,12 @@ const Auth: FC = () => {
     return (
         <div className="page auth-page">
             <div className="box">
-                <Card
-                    withLights
-                    title={
-                        <h1 className="title">
-                            <LoginIcon className="login-icon" sx={{ color: stylesVariables.primaryColor }} />
-                            Привіт! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}
-                            <FavoriteIcon className="favorite-icon" sx={{ color: stylesVariables.actionColor }} />
-                        </h1>
-                    }
-                >
+                <Card withLights>
+                    <h1 className="title">
+                        <LoginIcon className="login-icon" sx={{ color: stylesVariables.primaryColor }} />
+                        Привіт! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}
+                        <FavoriteIcon className="favorite-icon" sx={{ color: stylesVariables.actionColor }} />
+                    </h1>
                     {isRegistration && (
                         <Input
                             id="name"

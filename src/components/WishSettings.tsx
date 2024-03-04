@@ -1,5 +1,6 @@
 import React, { FC, useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { Cancel as CancelIcon } from '@mui/icons-material';
 import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store/hook';
@@ -48,11 +49,23 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         if (!myUser) return;
 
         if (idForEditing) {
-             await dispatch(updateWish({ userId: myUser.id, id: idForEditing, name, price, description, images }));
+            await dispatch(updateWish({ userId: myUser.id, id: idForEditing, name, price, description, images }));
         } else {
             await dispatch(createWish({ userId: myUser.id, name, price, description, images }));
         }
         close();
+    };
+
+    const handleDragEnd = (result: DropResult) => {
+        if (!result.destination) {
+            return;
+        }
+
+        const updatedImages = [...images];
+        const [removed] = updatedImages.splice(result.source.index, 1);
+        updatedImages.splice(result.destination.index, 0, removed);
+
+        setImages(updatedImages);
     };
 
     const showImage = (image: ICurrentImage) => {
@@ -132,26 +145,52 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             <div className="drag-n-drop">
                 <div {...getRootProps({ className: 'dropzone' })}>
                     <input {...getInputProps()} />
-                    <p className="text">Перетягніть кілька зображень сюди або клацніть, щоб вибрати зображення</p>
+                    <p className="text">
+                        Перетягніть кілька зображень сюди або клацніть, щоб вибрати зображення.
+                        <br />
+                        Також ти можеш змінювати позицію зображень перетягуючи їх.
+                    </p>
                 </div>
-                <ul className="list">
-                    {images.map((image, idx) => {
-                        if (!(image instanceof File) && image.delete) return null;
 
-                        return (
-                            <li className="item" key={`wish-image-${idx}`}>
-                                <img
-                                    src={showImage(image)}
-                                    alt={`wish-image-${idx}`}
-                                    loading="lazy"
-                                />
-                                <button className="remove" onClick={removeImage(image, idx)}>
-                                    <CancelIcon sx={{ color: StylesVariables.actionColor }} />
-                                </button>
-                            </li>
-                        );
-                    })}
-                </ul>
+                <DragDropContext onDragEnd={handleDragEnd}>
+                    <Droppable droppableId="wish-image-list" direction="horizontal">
+                        {(provided) => (
+                            <ul ref={provided.innerRef} {...provided.droppableProps}>
+                                {images.map((image, idx) => {
+                                    if (!(image instanceof File) && image.delete) return null;
+
+                                    return (
+                                        <Draggable
+                                            key={`wish-image-${idx}`}
+                                            draggableId={`wish-image-${idx}`}
+                                            index={idx}
+                                        >
+                                            {(provided) => (
+                                                <li
+                                                    ref={provided.innerRef}
+                                                    {...provided.draggableProps}
+                                                    {...provided.dragHandleProps}
+                                                    className="item"
+                                                >
+                                                    <img
+                                                        src={showImage(image)}
+                                                        alt={`wish-${idx}`}
+                                                        loading="lazy"
+                                                    />
+                                                    <button className="remove" onClick={removeImage(image, idx)}>
+                                                        <CancelIcon sx={{ color: StylesVariables.actionColor }} />
+                                                    </button>
+                                                </li>
+                                            )}
+                                        </Draggable>
+                                    );
+                                })}
+                                {provided.placeholder}
+                            </ul>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+
                 {images.length > 0 && <button className="remove-all" onClick={removeAll}>Remove All images</button>}
             </div>
 

@@ -15,9 +15,9 @@ const createWish = async ({ userId, name, price, description, images }: ICreateW
     if (images && Array.isArray(images)) {
         images.forEach((image, idx) => {
             if (image instanceof File) {
-                formData.append(`image-${idx + 1}`, image);
+                formData.append(`image-${idx}`, image);
             } else if (image) {
-                formData.append(`image-${idx + 1}`, JSON.stringify(image));
+                formData.append(`image-${idx}`, JSON.stringify(image));
             }
         });
     }
@@ -49,9 +49,9 @@ const updateWish = async ({ userId, id, name, price, description, images }: IUpd
     if (images && Array.isArray(images)) {
         images.forEach((image, idx) => {
             if (image instanceof File) {
-                formData.append(`image-${idx + 1}`, image);
+                formData.append(`image-${idx}`, image);
             } else if (image) {
-                formData.append(`image-${idx + 1}`, JSON.stringify(image));
+                formData.append(`image-${idx}`, JSON.stringify(image));
             }
         });
     }

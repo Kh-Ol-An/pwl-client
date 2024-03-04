@@ -3,7 +3,7 @@ import { Dayjs } from 'dayjs';
 export interface IImage {
     id: string;
     path: string;
-    position: string;
+    position: number;
     delete?: boolean;
 }
 
