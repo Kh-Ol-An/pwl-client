@@ -48,6 +48,7 @@ const WishList = () => {
                                 classes="thin-border without-shadow"
                                 title={<DataWithLabel label="Назва:" data={wish.name} />}
                             >
+                                <DataWithLabel label="Назва:" data={wish.name} />
                                 <DataWithLabel label="Ціна:" data={wish.price} />
                                 <DataWithLabel label="Опис:" data={wish.description} />
                                 <DataWithLabel label="Створене:" data={dayjs(wish.createdAt).format('DD.MM.YYYY')} />

@@ -19,6 +19,7 @@
 @import './layouts/sidebar';
 @import './layouts/wish-list';
 @import './layouts/account-settings';
+@import './layouts/wish-settings';
 
 // components
 @import './components/card';
@@ -29,6 +30,7 @@
 @import './components/drag-n-drop';
 @import './components/remove';
 @import './components/avatar';
+@import './components/error';
 
 // pages
 @import './pages/welcome';

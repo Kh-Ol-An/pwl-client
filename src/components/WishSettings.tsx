@@ -1,4 +1,5 @@
 import React, { FC, useState, useCallback, useEffect } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useDropzone } from 'react-dropzone';
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { Cancel as CancelIcon } from '@mui/icons-material';
@@ -9,10 +10,17 @@ import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '../utils/c
 import Input from './Input';
 import { ICurrentImage, IImage, IWish } from '../models/IWish';
 import StylesVariables from '../styles/utils/variables.module.scss';
+import { allFieldsValidation, wishNameValidation, wishPriceValidation } from '../utils/validations';
 
 interface IProps {
     idForEditing: IWish['id'] | null;
     close: () => void;
+}
+
+type Inputs = {
+    name: string
+    price: string
+    description: string
 }
 
 const acceptTypes: { [key: string]: string[] } = {};
@@ -25,10 +33,15 @@ Object.keys(ALLOWED_FILE_EXTENSIONS).forEach((ext) => {
 });
 
 const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
-    const [name, setName] = useState<string>('');
-    const [price, setPrice] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
     const [images, setImages] = useState<ICurrentImage[]>([]);
+
+    const {
+        register,
+        setValue,
+        setError,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<Inputs>();
 
     const onDrop = useCallback((acceptedImages: File[]) => {
         setImages([...images, ...acceptedImages]);
@@ -45,13 +58,38 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
 
     const dispatch = useAppDispatch();
 
-    const send = async () => {
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        if (wishList.some((wish) => wish.name === data.name.trim())) {
+            setError(
+                'name',
+                {
+                    type: 'unique',
+                    message: 'В тебе вже є бажання з такою назвою. У бажання має бути хоча б одне унікальне поле.',
+                },
+                { shouldFocus: true },
+            );
+            return;
+        }
+
         if (!myUser) return;
 
         if (idForEditing) {
-            await dispatch(updateWish({ userId: myUser.id, id: idForEditing, name, price, description, images }));
+            await dispatch(updateWish({
+                userId: myUser.id,
+                id: idForEditing,
+                name: data.name.trim(),
+                price: data.price.trim(),
+                description: data.description.trim(),
+                images,
+            }));
         } else {
-            await dispatch(createWish({ userId: myUser.id, name, price, description, images }));
+            await dispatch(createWish({
+                userId: myUser.id,
+                name: data.name.trim(),
+                price: data.price.trim(),
+                description: data.description.trim(),
+                images,
+            }));
         }
         close();
     };
@@ -107,39 +145,39 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         const myWish = wishList.find((wish) => wish.id === idForEditing);
         if (!myWish) return;
 
-        setName(myWish.name);
-        setPrice(myWish.price);
-        setDescription(myWish.description);
+        setValue('name', myWish.name);
+        setValue('price', myWish.price);
+        setValue('description', myWish.description);
         setImages(myWish.images);
     }, [idForEditing, wishList]);
 
     return (
-        <>
+        <form className="wish-settings" onSubmit={handleSubmit(onSubmit)}>
             <Input
+                {...register("name", wishNameValidation)}
                 id="name"
                 type="text"
-                label="Назва твого бажання"
-                title="Як ти назвеш своє бажання?" // TODO: const nameRegex = /^[a-zA-Zа-яА-Я0-9\s!"№#$%&'()*,-;=?@_]*$/;
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                label="Назва твого бажання*"
+                title="Як називається твоє бажання?"
+                error={errors?.name?.message}
             />
 
             <Input
+                {...register("price", wishPriceValidation)}
                 id="price"
                 type="text"
-                label="Ціна"
+                label="Ціна*"
                 title="Приблизна або точна ціна"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                error={errors?.price?.message}
             />
 
             <Input
+                {...register("description", allFieldsValidation)}
                 id="description"
                 type="text"
                 label="Опис бажання"
                 title="Опиши своє бажання?"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                error={errors?.description?.message}
             />
 
             <div className="drag-n-drop">
@@ -194,10 +232,10 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                 {images.length > 0 && <button className="remove-all" onClick={removeAll}>Remove All images</button>}
             </div>
 
-            <Button onClick={send}>
+            <Button type="submit">
                 {idForEditing ? 'Оновити' : 'Додати'}
             </Button>
-        </>
+        </form>
     );
 };
 
