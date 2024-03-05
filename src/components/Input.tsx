@@ -55,7 +55,7 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement, IProps>(({
                 <div className="background"></div>
             </div>
 
-            <p className="error">{error}</p>
+            {error && <p className="error">{error}</p>}
         </div>
     );
 });

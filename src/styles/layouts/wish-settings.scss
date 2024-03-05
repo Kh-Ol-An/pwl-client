@@ -1,4 +1,6 @@
 .wish-settings {
+    width: 100%;
+    padding-top: 0.4em;
     @include flex-column;
-    gap: 1.6em;
+    gap: 2em;
 }

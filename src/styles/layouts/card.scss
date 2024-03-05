@@ -35,6 +35,7 @@
     }
 
     .card-content {
+        width: 100%;
         @include flex-column;
         box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.5);
         border-radius: $radius-xl;
@@ -54,6 +55,7 @@
     }
 
     .card-expander {
+        width: 100%;
         @include flex-column;
         gap: 2em;
         padding: 2.4em 0;

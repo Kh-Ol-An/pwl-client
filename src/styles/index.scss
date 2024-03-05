@@ -11,6 +11,7 @@
 // layouts
 @import './layouts/toast';
 @import './layouts/page';
+@import './layouts/card';
 @import './layouts/loading';
 @import './layouts/inactivated';
 @import './layouts/header';
@@ -22,7 +23,6 @@
 @import './layouts/wish-settings';
 
 // components
-@import './components/card';
 @import './components/texts';
 @import './components/input';
 @import './components/button';

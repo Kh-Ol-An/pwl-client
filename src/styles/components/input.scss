@@ -41,7 +41,7 @@
         &:-webkit-autofill:focus,
         &:-webkit-autofill:active {
             & ~ label {
-                transform: translate(-1em, -2.4em);
+                transform: translate(-1em, -2.2em);
                 color: $primary-color;
                 font-size: 1.4em;
             }
