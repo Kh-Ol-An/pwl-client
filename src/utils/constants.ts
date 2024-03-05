@@ -10,3 +10,5 @@ export const ALLOWED_MAX_FILE_SIZE_IN_MB = 5;
 export const WISH_NAME_MAX_LENGTH = 100;
 
 export const WISH_NAME_MIN_LENGTH = 2;
+
+export const MAX_NUMBER_OF_IMAGES_PER_WISH = 10;

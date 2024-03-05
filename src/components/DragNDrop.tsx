@@ -4,7 +4,12 @@ import { Cancel as CancelIcon } from '@mui/icons-material';
 import StylesVariables from '../styles/utils/variables.module.scss';
 import { ICurrentImage, IImage } from '../models/IWish';
 import { useDropzone } from 'react-dropzone';
-import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '../utils/constants';
+import {
+    ALLOWED_FILE_EXTENSIONS,
+    ALLOWED_MAX_FILE_SIZE_IN_MB,
+    MAX_NUMBER_OF_IMAGES_PER_WISH
+} from '../utils/constants';
+import ImagesValidation from './ImagesValidation';
 
 interface IProps {
     images: ICurrentImage[];
@@ -22,7 +27,6 @@ Object.keys(ALLOWED_FILE_EXTENSIONS).forEach((ext) => {
 });
 
 const DragNDrop: FC<IProps> = ({ images, setImages, removeAll }) => {
-
     const onDrop = useCallback((acceptedImages: File[]) => {
         setImages([...images, ...acceptedImages]);
     }, [images, setImages]);
@@ -70,9 +74,14 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAll }) => {
             <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
                 <p className="text">
-                    Перетягніть кілька зображень сюди або клацніть, щоб вибрати зображення.
+                    Перетягніть до {MAX_NUMBER_OF_IMAGES_PER_WISH} зображень розміром до {
+                        ALLOWED_MAX_FILE_SIZE_IN_MB
+                    } МБ та формату <strong>
+                        "{Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ')}"
+                    </strong> сюди або клацніть, щоб вибрати зображення.
                     <br />
-                    Також ти можеш змінювати позицію зображень перетягуючи їх.
+                    <br />
+                    Також ти можеш змінювати позицію зображень перетягуючи їх між собою.
                 </p>
             </div>
 
@@ -114,6 +123,8 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAll }) => {
                     )}
                 </Droppable>
             </DragDropContext>
+
+            <ImagesValidation images={images} />
 
             {images.length > 0 && <button className="remove-all" onClick={removeAll}>Remove All images</button>}
         </div>

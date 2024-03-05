@@ -14,20 +14,20 @@
         color: $special-color;
         text-align: center;
         letter-spacing: 0.05em;
+
+        strong {
+            font-weight: 700;
+        }
     }
 
     .item {
         position: relative;
         top: auto !important;
         left: auto !important;
-        margin-top: 1em;
+        margin: 1.6em 0.8em 0;
         width: 6em;
         height: 6em;
         display: inline-block;
-
-        &:not(:first-child) {
-            margin-left: 1em;
-        }
 
         img {
             border-radius: $radius-sm;
