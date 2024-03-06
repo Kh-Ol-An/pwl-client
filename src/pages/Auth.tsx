@@ -32,6 +32,7 @@ const Auth: FC = () => {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setClickedOnSubmit(true);
+
         data.password === repeatPassword ? setRepeatPasswordError('') : setRepeatPasswordError('Паролі не співпадають.');
         if (repeatPasswordError.length > 0) return;
 

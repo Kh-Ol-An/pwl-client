@@ -27,6 +27,7 @@ const AccountSettings: FC<IProps> = ({ close }) => {
     const [avatar, setAvatar] = useState<ICurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
     const [birthdayError, setBirthdayError] = useState<DateValidationError | null>(null);
+    const [clickedOnSubmit, setClickedOnSubmit] = useState(false);
 
     const {
         register,
@@ -42,20 +43,21 @@ const AccountSettings: FC<IProps> = ({ close }) => {
     const dispatch = useAppDispatch();
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        if (!myUser || birthdayErrorMessage.length > 0) return;
-        console.log('onSubmit birthday', birthday);
+        setClickedOnSubmit(true);
 
-//        await dispatch(updateMyUser({
-//            id: myUser.id,
-//            firstName: data.firstName,
-//            birthday: birthday.format(),
-//            avatar,
-//        }));
-//        close();
+        if (!myUser || !birthday) return;
+
+        console.log('onSubmit birthday', birthday);
+       // await dispatch(updateMyUser({
+       //     id: myUser.id,
+       //     firstName: data.firstName,
+       //     birthday: birthday.format(),
+       //     avatar,
+       // }));
+       // close();
     };
 
     const birthdayErrorMessage = useMemo(() => {
-        console.log('birthdayError', birthdayError);
         switch (birthdayError) {
             case 'invalidDate': {
                 return 'Ваша дата недійсна.';
@@ -134,7 +136,6 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                         format="DD.MM.YYYY"
                         value={birthday}
                         disableFuture
-//                        required
                         onError={(newError) => setBirthdayError(newError)}
                         slotProps={{
                             textField: {
@@ -144,6 +145,12 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                         onChange={(value) => setBirthday(value)}
                     />
                 </DemoContainer>
+
+                {!birthday && clickedOnSubmit && (
+                    <p className="error">
+                        День народження.
+                    </p>
+                )}
             </div>
 
             <Button type="submit">
