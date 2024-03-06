@@ -84,14 +84,16 @@ const Header = () => {
                         style={{ borderRadius: '20px' }}
                     >
                         <Card classes="thin-border">
-                            <Button classes="text" onClick={handleOpenAccountSettings}>
-                                <ManageAccountsIcon />
-                                Налаштування аккаунту
-                            </Button>
-                            <Button classes="text" onClick={handleLogout}>
-                                <LogoutIcon />
-                                Вийти з аккаунту
-                            </Button>
+                            <div className="header-popover">
+                                <Button classes="text" onClick={handleOpenAccountSettings}>
+                                    <ManageAccountsIcon />
+                                    Налаштування аккаунту
+                                </Button>
+                                <Button classes="text" onClick={handleLogout}>
+                                    <LogoutIcon />
+                                    Вийти з аккаунту
+                                </Button>
+                            </div>
                         </Card>
                     </Popover>
 

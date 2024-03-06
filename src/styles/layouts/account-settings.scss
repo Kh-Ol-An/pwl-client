@@ -1,9 +1,4 @@
 .account-settings {
     @include flex-column;
     gap: 2em;
-
-    .field {
-        @include flex-between;
-        gap: 2em;
-    }
 }

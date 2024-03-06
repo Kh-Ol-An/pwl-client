@@ -1,9 +1,10 @@
-import React, { FC, useState, useEffect, useRef } from 'react';
+import React, { FC, useState, useEffect, useRef, useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Avatar } from '@mui/material';
 import { Cancel as CancelIcon } from '@mui/icons-material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DateValidationError } from '@mui/x-date-pickers/models';
 import dayjs, { Dayjs } from 'dayjs';
 import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store/hook';
@@ -25,6 +26,7 @@ type Inputs = {
 const AccountSettings: FC<IProps> = ({ close }) => {
     const [avatar, setAvatar] = useState<ICurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
+    const [birthdayError, setBirthdayError] = useState<DateValidationError | null>(null);
 
     const {
         register,
@@ -40,16 +42,30 @@ const AccountSettings: FC<IProps> = ({ close }) => {
     const dispatch = useAppDispatch();
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        if (!myUser || !birthday) return; // TODO: why cant delete without birthday
+        if (!myUser || birthdayErrorMessage.length > 0) return;
+        console.log('onSubmit birthday', birthday);
 
-        await dispatch(updateMyUser({
-            id: myUser.id,
-            firstName: data.firstName,
-            birthday: birthday.format(),
-            avatar,
-        }));
-        close();
+//        await dispatch(updateMyUser({
+//            id: myUser.id,
+//            firstName: data.firstName,
+//            birthday: birthday.format(),
+//            avatar,
+//        }));
+//        close();
     };
+
+    const birthdayErrorMessage = useMemo(() => {
+        console.log('birthdayError', birthdayError);
+        switch (birthdayError) {
+            case 'invalidDate': {
+                return 'Ваша дата недійсна.';
+            }
+
+            default: {
+                return '';
+            }
+        }
+    }, [birthday, birthdayError]);
 
     const removeAvatar = () => {
         setAvatar('delete');
@@ -83,48 +99,54 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                 error={errors?.firstName?.message}
             />
 
-            <div className="field">
-                <div className="avatar">
-                    <label htmlFor="avatar">
-                        <input
-                            className="hidden"
-                            id="avatar"
-                            ref={inputRef}
-                            accept={Object.values(ALLOWED_FILE_EXTENSIONS).join(",")} // TODO: check
-                            type="file"
-                            onChange={(e) => {
-                                const file = e.target.files?.[0];
-                                if (!file) return;
+            <div className="avatar">
+                <label htmlFor="avatar">
+                    <input
+                        className="hidden"
+                        id="avatar"
+                        ref={inputRef}
+                        accept={Object.values(ALLOWED_FILE_EXTENSIONS).join(",")} // TODO: check
+                        type="file"
+                        onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
 
-                                setAvatar(file);
-                            }}
-                        />
-                        <Avatar
-                            sx={{ cursor: 'pointer', width: '100%', height: '100%' }}
-                            src={showAvatar()} alt={`${myUser?.firstName} ${myUser?.lastName}`}
-                        />
-                    </label>
+                            setAvatar(file);
+                        }}
+                    />
+                    <Avatar
+                        sx={{ cursor: 'pointer', width: '100%', height: '100%' }}
+                        src={showAvatar()} alt={`${myUser?.firstName} ${myUser?.lastName}`}
+                    />
+                </label>
 
-                    {avatar && (
-                        <button className="remove" onClick={removeAvatar}>
-                            <CancelIcon sx={{ color: StylesVariables.actionColor }} />
-                        </button>
-                    )}
-                </div>
-
-                <div title="Коли твій день народженя?">
-                    <DemoContainer components={['DatePicker']}>
-                        <DatePicker
-                            label="День Народженя"
-                            format="DD.MM.YYYY"
-                            value={birthday}
-                            onChange={(value) => setBirthday(value)}
-                        />
-                    </DemoContainer>
-                </div>
+                {avatar && (
+                    <button className="remove" onClick={removeAvatar}>
+                        <CancelIcon sx={{ color: StylesVariables.actionColor }} />
+                    </button>
+                )}
             </div>
 
-            <Button type="submit" disabled={!birthday}>
+            <div className="date-picker" title="Коли твій день народження?">
+                <DemoContainer components={['DatePicker']}>
+                    <DatePicker
+                        label="День Народження*"
+                        format="DD.MM.YYYY"
+                        value={birthday}
+                        disableFuture
+//                        required
+                        onError={(newError) => setBirthdayError(newError)}
+                        slotProps={{
+                            textField: {
+                                helperText: birthdayErrorMessage,
+                            },
+                        }}
+                        onChange={(value) => setBirthday(value)}
+                    />
+                </DemoContainer>
+            </div>
+
+            <Button type="submit">
                 Зберегти
             </Button>
         </form>

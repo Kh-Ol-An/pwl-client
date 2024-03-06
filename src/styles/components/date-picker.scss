@@ -1,0 +1,26 @@
+// wrap component DatePicker with a class date-picker
+.date-picker {
+    .MuiInputLabel-root.Mui-focused {
+        color: $primary-color;
+    }
+
+    .MuiInputLabel-root.Mui-error {
+        color: $action-color;
+    }
+
+    .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+        border-color: $primary-color;
+    }
+
+    .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
+        border-color: $action-color;
+    }
+
+    .MuiFormHelperText-root {
+        margin-left: 0;
+    }
+
+    .MuiFormHelperText-root.Mui-error {
+        color: $action-color;
+    }
+}
