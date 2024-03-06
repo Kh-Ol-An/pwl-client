@@ -6,6 +6,11 @@
         width: 60%;
     }
 
+    .form {
+        @include flex-column;
+        gap: 2em;
+    }
+
     .login-icon {
         @include icon-shadow($primary-color);
     }

@@ -28,11 +28,14 @@ const Sidebar: FC<IProps> = ({ users, myUser }) => {
                                 <ListItem key={user.id} disablePadding>
                                     <ListItemButton>
                                         <ListItemAvatar>
-                                            <Avatar alt={user.name} src={user.avatar} />
+                                            <Avatar
+                                                src={user.avatar}
+                                                alt={`${myUser?.firstName} ${myUser?.lastName}`}
+                                            />
                                         </ListItemAvatar>
 
                                         <ListItemText
-                                            primary={user.name}
+                                            primary={`${myUser?.firstName} ${myUser?.lastName}`}
                                             secondary={
                                                 <Typography variant="body2" className="params">
                                                     {user.birthday

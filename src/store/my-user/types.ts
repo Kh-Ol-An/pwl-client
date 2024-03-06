@@ -6,12 +6,12 @@ export interface ILogin {
 }
 
 export interface IRegistration extends ILogin {
-    name: string;
+    firstName: string;
 }
 
 export interface IUpdateMyUser {
     id: string;
-    name: string;
+    firstName: string;
     birthday: string;
     avatar: ICurrentAvatar;
 }

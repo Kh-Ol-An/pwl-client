@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect, useRef } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { Avatar } from '@mui/material';
 import { Cancel as CancelIcon } from '@mui/icons-material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -11,15 +12,26 @@ import { ALLOWED_FILE_EXTENSIONS } from '../utils/constants';
 import Input from './Input';
 import StylesVariables from '../styles/utils/variables.module.scss';
 import { ICurrentAvatar } from '../models/IUser';
+import { accountFirstNameValidation } from '../utils/validations';
 
 interface IProps {
     close: () => void;
 }
 
+type Inputs = {
+    firstName: string
+}
+
 const AccountSettings: FC<IProps> = ({ close }) => {
-    const [name, setName] = useState<string>('');
     const [avatar, setAvatar] = useState<ICurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
+
+    const {
+        register,
+        setValue,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<Inputs>();
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -27,10 +39,15 @@ const AccountSettings: FC<IProps> = ({ close }) => {
 
     const dispatch = useAppDispatch();
 
-    const send = async () => {
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
         if (!myUser || !birthday) return; // TODO: why cant delete without birthday
 
-        await dispatch(updateMyUser({ id: myUser.id, name, birthday: birthday.format(), avatar }));
+        await dispatch(updateMyUser({
+            id: myUser.id,
+            firstName: data.firstName,
+            birthday: birthday.format(),
+            avatar,
+        }));
         close();
     };
 
@@ -50,20 +67,20 @@ const AccountSettings: FC<IProps> = ({ close }) => {
     useEffect(() => {
         if (!myUser) return;
 
-        setName(myUser.name);
+        setValue('firstName', myUser.firstName);
         setAvatar(myUser.avatar || '');
         myUser.birthday && setBirthday(dayjs(myUser.birthday));
-    }, [myUser]);
+    }, [myUser, setValue]);
 
     return (
-        <div className="account-settings">
+        <form className="account-settings" onSubmit={handleSubmit(onSubmit)}>
             <Input
+                {...register("firstName", accountFirstNameValidation)}
                 id="name"
                 type="text"
                 label="Ім'я*"
                 title="Якє в тебе ім'я?"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                error={errors?.firstName?.message}
             />
 
             <div className="field">
@@ -84,7 +101,7 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                         />
                         <Avatar
                             sx={{ cursor: 'pointer', width: '100%', height: '100%' }}
-                            src={showAvatar()} alt={myUser?.name}
+                            src={showAvatar()} alt={`${myUser?.firstName} ${myUser?.lastName}`}
                         />
                     </label>
 
@@ -107,10 +124,10 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                 </div>
             </div>
 
-            <Button disabled={!birthday} onClick={send}>
+            <Button type="submit" disabled={!birthday}>
                 Зберегти
             </Button>
-        </div>
+        </form>
     );
 };
 

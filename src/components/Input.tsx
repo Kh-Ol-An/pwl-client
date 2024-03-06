@@ -36,6 +36,7 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement, IProps>(({
         <div className="input" title={title}>
             <div className="wrap">
                 <input
+                    className={type === 'password' ? 'with-icon' : ''}
                     ref={ref}
                     id={id}
                     type={getTypes(type)}

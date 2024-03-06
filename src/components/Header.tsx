@@ -50,10 +50,10 @@ const Header = () => {
             <div className="inner">
                 <div className="content">
                     <div className="data">
-                        <Avatar alt={myUser?.name} src={myUser?.avatar} />
+                        <Avatar alt={myUser?.firstName} src={myUser?.avatar} />
 
                         <div className="box">
-                            <span className="name">{myUser?.name}</span>
+                            <span className="name">{myUser?.firstName} {myUser?.lastName}</span>
                             <span className="params">
                                 {
                                     myUser?.birthday
