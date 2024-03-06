@@ -1,10 +1,6 @@
 import React, { FC } from 'react';
 import { ICurrentImage } from '../models/IWish';
-import {
-    ALLOWED_FILE_EXTENSIONS,
-    ALLOWED_MAX_FILE_SIZE_IN_MB,
-    MAX_NUMBER_OF_IMAGES_PER_WISH
-} from '../utils/constants';
+import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB, MAX_NUMBER_OF_IMAGES_PER_WISH } from './constants';
 
 interface IProps {
     images: ICurrentImage[];

@@ -8,6 +8,7 @@ import { getWishList } from '../store/wishes/thunks';
 import { IWish } from '../models/IWish';
 import Card from './Card';
 import DataWithLabel from './DataWithLabel';
+import { addingWhiteSpaces } from '../utils/formating-value';
 
 const WishList = () => {
     const [openSettings, setOpenSettings] = useState<boolean>(false);
@@ -49,7 +50,7 @@ const WishList = () => {
                                 title={<DataWithLabel label="Назва:" data={wish.name} />}
                             >
                                 <DataWithLabel label="Назва:" data={wish.name} />
-                                <DataWithLabel label="Ціна:" data={wish.price} />
+                                <DataWithLabel label="Ціна:" data={addingWhiteSpaces(wish.price)} />
                                 <DataWithLabel label="Опис:" data={wish.description} />
                                 <DataWithLabel label="Створене:" data={dayjs(wish.createdAt).format('DD.MM.YYYY')} />
                                 <DataWithLabel label="Оновлене:" data={dayjs(wish.updatedAt).format('DD.MM.YYYY')} />

@@ -9,7 +9,7 @@ import {
     ALLOWED_MAX_FILE_SIZE_IN_MB,
     MAX_NUMBER_OF_IMAGES_PER_WISH
 } from '../utils/constants';
-import ImagesValidation from './ImagesValidation';
+import ImagesValidation from '../utils/ImagesValidation';
 
 interface IProps {
     images: ICurrentImage[];

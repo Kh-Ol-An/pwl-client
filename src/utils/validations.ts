@@ -5,8 +5,10 @@ import {
     NAME_MIN_LENGTH,
     WISH_DESCRIPTION_MIN_LENGTH,
     WISH_DESCRIPTION_MAX_LENGTH,
+    WISH_PRICE_MAX_LENGTH,
 } from './constants';
 
+// Only whitespace
 export const onlyWhitespaceValidation = {
     validate: (value: string) => {
         const trimmedValue = value.trim();
@@ -17,6 +19,7 @@ export const onlyWhitespaceValidation = {
     },
 };
 
+// Wish name
 export const wishNameValidation = {
     ...onlyWhitespaceValidation,
     required: {
@@ -37,28 +40,26 @@ export const wishNameValidation = {
     }
 };
 
+// Wish price
 export const wishPriceValidation = {
     ...onlyWhitespaceValidation,
     required: {
         value: true,
         message: "Матеріальне бажання яке не має своєї ціни не може бути виконано твоїм всесвітом."
     },
-//    minLength: {
-//        value: WISH_DESCRIPTION_MIN_LENGTH,
-//        message: `Що це за такий короткий опис бажання? Придумай будь ласка опис який довший за ${WISH_DESCRIPTION_MIN_LENGTH - 1} символ.`
-//    },
-//    maxLength: {
-//        value: WISH_DESCRIPTION_MAX_LENGTH,
-//        message: `Твій опис бажання занадто довга. Давай намагатимемося вміститися в ${WISH_DESCRIPTION_MAX_LENGTH} символів.`
-//    }
+    pattern: {
+        value: /^[0-9\s]*$/,
+        message: "Ціна бажання має бути числом."
+    },
+    maxLength: {
+        value: WISH_PRICE_MAX_LENGTH,
+        message: `Дуже важко уявити що можна купити за ці гроші. Давай намагатимемося вміститися в ${WISH_PRICE_MAX_LENGTH} символів.`
+    }
 };
 
+// Wish description
 export const wishDescriptionValidation = {
     ...onlyWhitespaceValidation,
-    required: {
-        value: true,
-        message: "Матеріальне бажання яке не має своєї ціни не може бути виконано твоїм всесвітом."
-    },
     minLength: {
         value: WISH_DESCRIPTION_MIN_LENGTH,
         message: `Що це за такий короткий опис бажання? Придумай будь ласка опис який довший за ${WISH_DESCRIPTION_MIN_LENGTH - 1} символ.`
@@ -69,6 +70,7 @@ export const wishDescriptionValidation = {
     }
 };
 
+// Email
 export const emailValidation = {
     required: {
         value: true,
@@ -80,6 +82,7 @@ export const emailValidation = {
     },
 };
 
+// Password
 export const passwordValidation = {
     required: {
         value: true,
@@ -101,6 +104,7 @@ export const passwordValidation = {
     }
 };
 
+// Account first name
 export const accountFirstNameValidation = {
     ...onlyWhitespaceValidation,
     required: {
@@ -117,6 +121,7 @@ export const accountFirstNameValidation = {
     }
 };
 
+// Account last name
 export const accountLastNameValidation = {
     ...onlyWhitespaceValidation,
     minLength: {

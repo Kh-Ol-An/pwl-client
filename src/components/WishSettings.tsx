@@ -11,6 +11,7 @@ import {
     wishPriceValidation,
 } from '../utils/validations';
 import DragNDrop from './DragNDrop';
+import { addingWhiteSpaces, removingWhiteSpaces } from '../utils/formating-value';
 
 interface IProps {
     idForEditing: IWish['id'] | null;
@@ -59,7 +60,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                 userId: myUser.id,
                 id: idForEditing,
                 name: data.name.trim(),
-                price: data.price.trim(),
+                price: removingWhiteSpaces(data.price.trim()),
                 description: data.description.trim(),
                 images,
             }));
@@ -67,7 +68,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             await dispatch(createWish({
                 userId: myUser.id,
                 name: data.name.trim(),
-                price: data.price.trim(),
+                price: removingWhiteSpaces(data.price.trim()),
                 description: data.description.trim(),
                 images,
             }));
@@ -95,7 +96,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         if (!myWish) return;
 
         setValue('name', myWish.name);
-        setValue('price', myWish.price);
+        setValue('price', addingWhiteSpaces(myWish.price));
         setValue('description', myWish.description);
         setImages(myWish.images);
     }, [idForEditing, wishList, setValue]);
@@ -114,7 +115,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             <Input
                 {...register("price", wishPriceValidation)}
                 id="price"
-                type="text"
+                type="number"
                 label="Ціна*"
                 title="Приблизна або точна ціна"
                 error={errors?.price?.message}

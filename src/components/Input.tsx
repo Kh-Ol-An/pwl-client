@@ -1,6 +1,7 @@
 import React, { FC, forwardRef, useState } from 'react';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import stylesVariables from '../styles/utils/variables.module.scss';
+import { addingWhiteSpaces } from '../utils/formating-value';
 
 interface IProps {
     id: string;
@@ -25,11 +26,14 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement, IProps>(({
     const [showPassword, setShowPassword] = useState(false);
 
     const getTypes = (type: string) => {
-        if (type === 'password') {
-            return showPassword ? 'text' : 'password';
+        switch (type) {
+            case 'password':
+                return showPassword ? 'text' : 'password';
+            case 'number':
+                return 'text';
+            default:
+                return type;
         }
-
-        return type;
     };
 
     return (
@@ -40,9 +44,15 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement, IProps>(({
                     ref={ref}
                     id={id}
                     type={getTypes(type)}
+                    inputMode={type === 'number' ? 'numeric' : 'text'}
                     placeholder="hidden"
                     value={value}
-                    onChange={onChange}
+                    onChange={(e) => {
+                        if (type === 'number') {
+                            e.target.value = addingWhiteSpaces(e.target.value);
+                        }
+                        onChange && onChange(e);
+                    }}
                     {...props}
                 />
                 {type === 'password' && (

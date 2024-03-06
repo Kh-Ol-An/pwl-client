@@ -15,7 +15,7 @@ import StylesVariables from '../styles/utils/variables.module.scss';
 import { ICurrentAvatar } from '../models/IUser';
 import { accountFirstNameValidation, accountLastNameValidation } from '../utils/validations';
 import { IUpdateMyUser } from '../store/my-user/types';
-import AvatarValidation from './AvatarValidation';
+import AvatarValidation from '../utils/AvatarValidation';
 
 interface IProps {
     close: () => void;
@@ -53,7 +53,6 @@ const AccountSettings: FC<IProps> = ({ close }) => {
             case 'invalidDate': {
                 return 'Введена дата недійсна.';
             }
-
             default: {
                 return '';
             }
