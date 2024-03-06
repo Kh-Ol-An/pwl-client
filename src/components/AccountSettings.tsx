@@ -142,8 +142,8 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                         />
                     </label>
 
-                    {avatar && (
-                        <button className="remove" onClick={removeAvatar}>
+                    {(avatar instanceof File || (avatar.length > 0 && avatar !== 'delete')) && (
+                        <button className="remove" type="button" onClick={removeAvatar}>
                             <CancelIcon sx={{ color: StylesVariables.actionColor }} />
                         </button>
                     )}
