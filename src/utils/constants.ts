@@ -7,9 +7,9 @@ export const ALLOWED_FILE_EXTENSIONS: { [key: string]: string } = {
 
 export const ALLOWED_MAX_FILE_SIZE_IN_MB = 5;
 
-export const WISH_NAME_MIN_LENGTH = 2;
+export const NAME_MIN_LENGTH = 2;
 
-export const WISH_NAME_MAX_LENGTH = 120;
+export const NAME_MAX_LENGTH = 120;
 
 export const WISH_DESCRIPTION_MIN_LENGTH = 2;
 

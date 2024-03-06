@@ -5,7 +5,11 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 import { createWish, updateWish } from '../store/wishes/thunks';
 import Input from './Input';
 import { ICurrentImage, IImage, IWish } from '../models/IWish';
-import { onlyWhitespaceValidation, wishNameValidation, wishPriceValidation } from '../utils/validations';
+import {
+    wishDescriptionValidation,
+    wishNameValidation,
+    wishPriceValidation,
+} from '../utils/validations';
 import DragNDrop from './DragNDrop';
 
 interface IProps {
@@ -117,7 +121,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             />
 
             <Input
-                {...register("description", onlyWhitespaceValidation)}
+                {...register("description", wishDescriptionValidation)}
                 id="description"
                 type="text"
                 label="Опис бажання"

@@ -12,6 +12,7 @@ export interface IRegistration extends ILogin {
 export interface IUpdateMyUser {
     id: string;
     firstName: string;
-    birthday: string;
+    lastName: string;
+    birthday?: string;
     avatar: ICurrentAvatar;
 }

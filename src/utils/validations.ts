@@ -1,4 +1,11 @@
-import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH, WISH_NAME_MAX_LENGTH, WISH_NAME_MIN_LENGTH } from './constants';
+import {
+    PASSWORD_MAX_LENGTH,
+    PASSWORD_MIN_LENGTH,
+    NAME_MAX_LENGTH,
+    NAME_MIN_LENGTH,
+    WISH_DESCRIPTION_MIN_LENGTH,
+    WISH_DESCRIPTION_MAX_LENGTH,
+} from './constants';
 
 export const onlyWhitespaceValidation = {
     validate: (value: string) => {
@@ -21,12 +28,12 @@ export const wishNameValidation = {
         message: "Назва бажання містить недопустимі символи. Будь ласка, використовуй лише літери латинського або кириличного алфавітів, цифри, пробіли та наступні символи: -!\"№#$%&()*.,;=?@_"
     },
     minLength: {
-        value: WISH_NAME_MIN_LENGTH,
-        message: `Що це за така коротка назва бажання? Придумай будь ласка назву яка довша за ${WISH_NAME_MIN_LENGTH - 1} символ.`
+        value: NAME_MIN_LENGTH,
+        message: `Що це за така коротка назва бажання? Придумай будь ласка назву яка довша за ${NAME_MIN_LENGTH - 1} символ.`
     },
     maxLength: {
-        value: WISH_NAME_MAX_LENGTH,
-        message: `Назва твого бажання занадто довга. Давай намагатимемося вміститися в ${WISH_NAME_MAX_LENGTH} символів.`
+        value: NAME_MAX_LENGTH,
+        message: `Назва твого бажання занадто довга. Давай намагатимемося вміститися в ${NAME_MAX_LENGTH} символів.`
     }
 };
 
@@ -36,6 +43,30 @@ export const wishPriceValidation = {
         value: true,
         message: "Матеріальне бажання яке не має своєї ціни не може бути виконано твоїм всесвітом."
     },
+//    minLength: {
+//        value: WISH_DESCRIPTION_MIN_LENGTH,
+//        message: `Що це за такий короткий опис бажання? Придумай будь ласка опис який довший за ${WISH_DESCRIPTION_MIN_LENGTH - 1} символ.`
+//    },
+//    maxLength: {
+//        value: WISH_DESCRIPTION_MAX_LENGTH,
+//        message: `Твій опис бажання занадто довга. Давай намагатимемося вміститися в ${WISH_DESCRIPTION_MAX_LENGTH} символів.`
+//    }
+};
+
+export const wishDescriptionValidation = {
+    ...onlyWhitespaceValidation,
+    required: {
+        value: true,
+        message: "Матеріальне бажання яке не має своєї ціни не може бути виконано твоїм всесвітом."
+    },
+    minLength: {
+        value: WISH_DESCRIPTION_MIN_LENGTH,
+        message: `Що це за такий короткий опис бажання? Придумай будь ласка опис який довший за ${WISH_DESCRIPTION_MIN_LENGTH - 1} символ.`
+    },
+    maxLength: {
+        value: WISH_DESCRIPTION_MAX_LENGTH,
+        message: `Твій опис бажання занадто довга. Давай намагатимемося вміститися в ${WISH_DESCRIPTION_MAX_LENGTH} символів.`
+    }
 };
 
 export const emailValidation = {
@@ -76,4 +107,24 @@ export const accountFirstNameValidation = {
         value: true,
         message: "В тебе має бути ім'я. Не соромся)"
     },
+    minLength: {
+        value: NAME_MIN_LENGTH,
+        message: `Ні разу не чув такого короткого імені. Мінімальна довжина поля ${NAME_MIN_LENGTH} символи.`
+    },
+    maxLength: {
+        value: NAME_MAX_LENGTH,
+        message: `Здається ти щось вигадуєш. Максимальна довжина поля ${NAME_MAX_LENGTH} символів.`
+    }
+};
+
+export const accountLastNameValidation = {
+    ...onlyWhitespaceValidation,
+    minLength: {
+        value: NAME_MIN_LENGTH,
+        message: `Ні разу не чув такого короткого прізвища. Мінімальна довжина поля ${NAME_MIN_LENGTH} символи.`
+    },
+    maxLength: {
+        value: NAME_MAX_LENGTH,
+        message: `Здається ти щось вигадуєш. Максимальна довжина поля ${NAME_MAX_LENGTH} символів.`
+    }
 };

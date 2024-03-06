@@ -50,11 +50,18 @@ const refresh = async (): Promise<AxiosResponse<IAuth>> => {
     }
 };
 
-const updateMyUser = async ({ id, firstName, birthday, avatar }: IUpdateMyUser): Promise<AxiosResponse<IUser>> => {
+const updateMyUser = async ({
+    id,
+    firstName,
+    lastName,
+    birthday,
+    avatar,
+}: IUpdateMyUser): Promise<AxiosResponse<IUser>> => {
     const formData = new FormData();
     formData.append('id', id);
     formData.append('firstName', firstName);
-    formData.append('birthday', birthday);
+    formData.append('lastName', lastName);
+    birthday && formData.append('birthday', birthday);
     formData.append('avatar', avatar);
 
     try {

@@ -13,7 +13,8 @@ import { ALLOWED_FILE_EXTENSIONS } from '../utils/constants';
 import Input from './Input';
 import StylesVariables from '../styles/utils/variables.module.scss';
 import { ICurrentAvatar } from '../models/IUser';
-import { accountFirstNameValidation } from '../utils/validations';
+import { accountFirstNameValidation, accountLastNameValidation } from '../utils/validations';
+import { IUpdateMyUser } from '../store/my-user/types';
 
 interface IProps {
     close: () => void;
@@ -21,13 +22,14 @@ interface IProps {
 
 type Inputs = {
     firstName: string
+    lastName: string
 }
 
 const AccountSettings: FC<IProps> = ({ close }) => {
+    const [clickedOnSubmit, setClickedOnSubmit] = useState(false);
     const [avatar, setAvatar] = useState<ICurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
     const [birthdayError, setBirthdayError] = useState<DateValidationError | null>(null);
-    const [clickedOnSubmit, setClickedOnSubmit] = useState(false);
 
     const {
         register,
@@ -42,32 +44,38 @@ const AccountSettings: FC<IProps> = ({ close }) => {
 
     const dispatch = useAppDispatch();
 
-    const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        setClickedOnSubmit(true);
-
-        if (!myUser || !birthday) return;
-
-        console.log('onSubmit birthday', birthday);
-       // await dispatch(updateMyUser({
-       //     id: myUser.id,
-       //     firstName: data.firstName,
-       //     birthday: birthday.format(),
-       //     avatar,
-       // }));
-       // close();
-    };
-
     const birthdayErrorMessage = useMemo(() => {
+        if (!clickedOnSubmit) return;
+
         switch (birthdayError) {
+            case 'minDate':
             case 'invalidDate': {
-                return 'Ваша дата недійсна.';
+                return 'Введена дата недійсна.';
             }
 
             default: {
                 return '';
             }
         }
-    }, [birthday, birthdayError]);
+    }, [clickedOnSubmit, birthdayError]);
+
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        setClickedOnSubmit(true);
+
+        if (!myUser || (birthdayError && birthdayError.length > 0)) return;
+
+        const updateMyUserData: IUpdateMyUser = {
+            id: myUser.id,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            avatar,
+        };
+        if (birthday) {
+            updateMyUserData.birthday = birthday.format();
+        }
+        await dispatch(updateMyUser(updateMyUserData));
+        close();
+    };
 
     const removeAvatar = () => {
         setAvatar('delete');
@@ -86,6 +94,7 @@ const AccountSettings: FC<IProps> = ({ close }) => {
         if (!myUser) return;
 
         setValue('firstName', myUser.firstName);
+        setValue('lastName', myUser.lastName);
         setAvatar(myUser.avatar || '');
         myUser.birthday && setBirthday(dayjs(myUser.birthday));
     }, [myUser, setValue]);
@@ -94,11 +103,20 @@ const AccountSettings: FC<IProps> = ({ close }) => {
         <form className="account-settings" onSubmit={handleSubmit(onSubmit)}>
             <Input
                 {...register("firstName", accountFirstNameValidation)}
-                id="name"
+                id="firstName"
                 type="text"
                 label="Ім'я*"
                 title="Якє в тебе ім'я?"
                 error={errors?.firstName?.message}
+            />
+
+            <Input
+                {...register("lastName", accountLastNameValidation)}
+                id="lastName"
+                type="text"
+                label="Прізвище"
+                title="Якє в тебе прізвище?"
+                error={errors?.lastName?.message}
             />
 
             <div className="avatar">
@@ -129,7 +147,10 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                 )}
             </div>
 
-            <div className="date-picker" title="Коли твій день народження?">
+            <div
+                className={"date-picker" + (clickedOnSubmit ? " clicked-on-submit" : "")}
+                title="Коли твій день народження?"
+            >
                 <DemoContainer components={['DatePicker']}>
                     <DatePicker
                         label="День Народження*"
@@ -145,12 +166,6 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                         onChange={(value) => setBirthday(value)}
                     />
                 </DemoContainer>
-
-                {!birthday && clickedOnSubmit && (
-                    <p className="error">
-                        День народження.
-                    </p>
-                )}
             </div>
 
             <Button type="submit">
