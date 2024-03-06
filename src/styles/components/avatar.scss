@@ -1,7 +1,11 @@
-.avatar {
-    position: relative;
-    width: 10em;
-    height: 10em;
+.avatar-box {
+    width: 100%;
+
+    .avatar {
+        position: relative;
+        width: 10em;
+        height: 10em;
+    }
 
     .remove {
         top: 0.4em;

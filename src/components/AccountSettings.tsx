@@ -15,6 +15,7 @@ import StylesVariables from '../styles/utils/variables.module.scss';
 import { ICurrentAvatar } from '../models/IUser';
 import { accountFirstNameValidation, accountLastNameValidation } from '../utils/validations';
 import { IUpdateMyUser } from '../store/my-user/types';
+import AvatarValidation from './AvatarValidation';
 
 interface IProps {
     close: () => void;
@@ -119,32 +120,36 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                 error={errors?.lastName?.message}
             />
 
-            <div className="avatar">
-                <label htmlFor="avatar">
-                    <input
-                        className="hidden"
-                        id="avatar"
-                        ref={inputRef}
-                        accept={Object.values(ALLOWED_FILE_EXTENSIONS).join(",")} // TODO: check
-                        type="file"
-                        onChange={(e) => {
-                            const file = e.target.files?.[0];
-                            if (!file) return;
+            <div className="avatar-box">
+                <div className="avatar">
+                    <label htmlFor="avatar">
+                        <input
+                            className="hidden"
+                            id="avatar"
+                            ref={inputRef}
+                            accept={Object.values(ALLOWED_FILE_EXTENSIONS).join(",")}
+                            type="file"
+                            onChange={(e) => {
+                                const file = e.target.files?.[0];
+                                if (!file) return;
 
-                            setAvatar(file);
-                        }}
-                    />
-                    <Avatar
-                        sx={{ cursor: 'pointer', width: '100%', height: '100%' }}
-                        src={showAvatar()} alt={`${myUser?.firstName} ${myUser?.lastName}`}
-                    />
-                </label>
+                                setAvatar(file);
+                            }}
+                        />
+                        <Avatar
+                            sx={{ cursor: 'pointer', width: '100%', height: '100%' }}
+                            src={showAvatar()} alt={`${myUser?.firstName} ${myUser?.lastName}`}
+                        />
+                    </label>
 
-                {avatar && (
-                    <button className="remove" onClick={removeAvatar}>
-                        <CancelIcon sx={{ color: StylesVariables.actionColor }} />
-                    </button>
-                )}
+                    {avatar && (
+                        <button className="remove" onClick={removeAvatar}>
+                            <CancelIcon sx={{ color: StylesVariables.actionColor }} />
+                        </button>
+                    )}
+                </div>
+
+                <AvatarValidation avatar={avatar} />
             </div>
 
             <div
