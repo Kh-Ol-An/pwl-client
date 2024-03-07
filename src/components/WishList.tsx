@@ -51,6 +51,14 @@ const WishList = () => {
                             >
                                 <DataWithLabel label="Назва:" data={wish.name} />
                                 <DataWithLabel label="Ціна:" data={addingWhiteSpaces(wish.price)} />
+                                <DataWithLabel
+                                    label="Посилання:"
+                                    data={
+                                        <Button to={wish.link} classes="text">
+                                            {wish.link}
+                                        </Button>
+                                    }
+                                />
                                 <DataWithLabel label="Опис:" data={wish.description} />
                                 <DataWithLabel label="Створене:" data={dayjs(wish.createdAt).format('DD.MM.YYYY')} />
                                 <DataWithLabel label="Оновлене:" data={dayjs(wish.updatedAt).format('DD.MM.YYYY')} />

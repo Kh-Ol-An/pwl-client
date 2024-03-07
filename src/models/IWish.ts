@@ -13,9 +13,9 @@ export interface IWish {
     id: string;
     name: string;
     price: string;
+    link: string;
     description: string;
     images: IImage[];
-    link: boolean;
     createdAt: Dayjs;
     updatedAt: Dayjs;
 }

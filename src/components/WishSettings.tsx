@@ -7,6 +7,7 @@ import Input from './Input';
 import { ICurrentImage, IImage, IWish } from '../models/IWish';
 import {
     wishDescriptionValidation,
+    wishLinkValidation,
     wishNameValidation,
     wishPriceValidation,
 } from '../utils/validations';
@@ -21,6 +22,7 @@ interface IProps {
 type Inputs = {
     name: string
     price: string
+    link: string
     description: string
 }
 
@@ -61,6 +63,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                 id: idForEditing,
                 name: data.name.trim(),
                 price: removingWhiteSpaces(data.price.trim()),
+                link: data.link,
                 description: data.description.trim(),
                 images,
             }));
@@ -69,6 +72,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                 userId: myUser.id,
                 name: data.name.trim(),
                 price: removingWhiteSpaces(data.price.trim()),
+                link: data.link,
                 description: data.description.trim(),
                 images,
             }));
@@ -97,6 +101,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
 
         setValue('name', myWish.name);
         setValue('price', addingWhiteSpaces(myWish.price));
+        setValue('link', myWish.link);
         setValue('description', myWish.description);
         setImages(myWish.images);
     }, [idForEditing, wishList, setValue]);
@@ -119,6 +124,15 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                 label="Ціна*"
                 title="Приблизна або точна ціна"
                 error={errors?.price?.message}
+            />
+
+            <Input
+                {...register("link", wishLinkValidation)}
+                id="link"
+                type="text"
+                label="Посилання"
+                title="Посилання де можна придбати бажання"
+                error={errors?.link?.message}
             />
 
             <Input

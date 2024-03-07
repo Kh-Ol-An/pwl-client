@@ -5,11 +5,12 @@ import { IUser } from '../../models/IUser';
 import { IWish } from '../../models/IWish';
 import { ICreateWish, IUpdateWish } from './types';
 
-const createWish = async ({ userId, name, price, description, images }: ICreateWish): Promise<AxiosResponse<IWish>> => {
+const createWish = async ({ userId, name, price, link, description, images }: ICreateWish): Promise<AxiosResponse<IWish>> => {
     const formData = new FormData();
     formData.append('userId', userId);
     formData.append('name', name);
     formData.append('price', price);
+    formData.append('link', link);
     formData.append('description', description);
 
     if (images && Array.isArray(images)) {
@@ -37,13 +38,15 @@ const createWish = async ({ userId, name, price, description, images }: ICreateW
         throw error;
     }
 };
+// TODO: refactor to use FormData
 
-const updateWish = async ({ userId, id, name, price, description, images }: IUpdateWish): Promise<AxiosResponse<IWish>> => {
+const updateWish = async ({ userId, id, name, price, link, description, images }: IUpdateWish): Promise<AxiosResponse<IWish>> => {
     const formData = new FormData();
     formData.append('userId', userId);
     formData.append('id', id);
     formData.append('name', name);
     formData.append('price', price);
+    formData.append('link', link);
     formData.append('description', description);
 
     if (images && Array.isArray(images)) {
