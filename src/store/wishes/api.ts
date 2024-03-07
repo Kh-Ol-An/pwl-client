@@ -2,17 +2,16 @@ import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import api from '../../utils/api';
 import { IUser } from '../../models/IUser';
-import { IWish } from '../../models/IWish';
+import { ICurrentImage, IWish } from '../../models/IWish';
 import { ICreateWish, IUpdateWish } from './types';
 
-const createWish = async ({ userId, name, price, link, description, images }: ICreateWish): Promise<AxiosResponse<IWish>> => {
-    const formData = new FormData();
-    formData.append('userId', userId);
-    formData.append('name', name);
-    formData.append('price', price);
-    formData.append('link', link);
-    formData.append('description', description);
+const processCommonFields = (formData: FormData, commonFields: { [key: string]: string }) => {
+    for (const [key, value] of Object.entries(commonFields)) {
+        formData.append(key, value.toString());
+    }
+};
 
+const processImages = (formData: FormData, images: ICurrentImage[]) => {
     if (images && Array.isArray(images)) {
         images.forEach((image, idx) => {
             if (image instanceof File) {
@@ -22,6 +21,12 @@ const createWish = async ({ userId, name, price, link, description, images }: IC
             }
         });
     }
+};
+
+const createWish = async ({ userId, name, price, link, description, images }: ICreateWish): Promise<AxiosResponse<IWish>> => {
+    const formData = new FormData();
+    processCommonFields(formData, { userId, name, price, link, description });
+    processImages(formData, images);
 
     try {
         return await api.post(
@@ -38,26 +43,12 @@ const createWish = async ({ userId, name, price, link, description, images }: IC
         throw error;
     }
 };
-// TODO: refactor to use FormData
 
 const updateWish = async ({ userId, id, name, price, link, description, images }: IUpdateWish): Promise<AxiosResponse<IWish>> => {
     const formData = new FormData();
-    formData.append('userId', userId);
     formData.append('id', id);
-    formData.append('name', name);
-    formData.append('price', price);
-    formData.append('link', link);
-    formData.append('description', description);
-
-    if (images && Array.isArray(images)) {
-        images.forEach((image, idx) => {
-            if (image instanceof File) {
-                formData.append(`image-${idx}`, image);
-            } else if (image) {
-                formData.append(`image-${idx}`, JSON.stringify(image));
-            }
-        });
-    }
+    processCommonFields(formData, { userId, name, price, link, description });
+    processImages(formData, images);
 
     try {
         return await api.put(
