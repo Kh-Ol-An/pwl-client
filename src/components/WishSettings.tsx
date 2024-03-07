@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, ChangeEvent, useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store/hook';
@@ -13,6 +13,7 @@ import {
 } from '../utils/validations';
 import DragNDrop from './DragNDrop';
 import { addingWhiteSpaces, removingWhiteSpaces } from '../utils/formating-value';
+import Switch from './Switch';
 
 interface IProps {
     idForEditing: IWish['id'] | null;
@@ -27,6 +28,7 @@ type Inputs = {
 }
 
 const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
+    const [material, setMaterial] = useState<boolean>(true);
     const [images, setImages] = useState<ICurrentImage[]>([]);
 
     const {
@@ -57,25 +59,22 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
 
         if (!myUser) return;
 
+        const wishData = {
+            userId: myUser.id,
+            material,
+            name: data.name.trim(),
+            price: removingWhiteSpaces(data.price.trim()),
+            link: data.link,
+            description: data.description.trim(),
+            images,
+        };
         if (idForEditing) {
             await dispatch(updateWish({
-                userId: myUser.id,
+                ...wishData,
                 id: idForEditing,
-                name: data.name.trim(),
-                price: removingWhiteSpaces(data.price.trim()),
-                link: data.link,
-                description: data.description.trim(),
-                images,
             }));
         } else {
-            await dispatch(createWish({
-                userId: myUser.id,
-                name: data.name.trim(),
-                price: removingWhiteSpaces(data.price.trim()),
-                link: data.link,
-                description: data.description.trim(),
-                images,
-            }));
+            await dispatch(createWish(wishData));
         }
         close();
     };
@@ -99,6 +98,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         const myWish = wishList.find((wish) => wish.id === idForEditing);
         if (!myWish) return;
 
+        setMaterial(myWish.material);
         setValue('name', myWish.name);
         setValue('price', addingWhiteSpaces(myWish.price));
         setValue('link', myWish.link);
@@ -108,6 +108,16 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
 
     return (
         <form className="wish-settings" onSubmit={handleSubmit(onSubmit)}>
+            <div className="material">
+                <span className={material ? "primary-color" : ""}>Матеріальне бажання</span>
+                <Switch
+                    name="material"
+                    checked={material}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setMaterial(e.target.checked)}
+                />
+                <span className={material ? "" : "action-color"}>Не матеріальне бажання</span>
+            </div>
+
             <Input
                 {...register("name", wishNameValidation)}
                 id="name"
@@ -149,11 +159,19 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                 error={errors?.description?.message}
             />
 
-            <DragNDrop images={images} setImages={setImages} removeAll={removeAll} />
+            <DragNDrop images={images} setImages={setImages} />
 
-            <Button type="submit">
-                {idForEditing ? 'Оновити' : 'Додати'}
-            </Button>
+            <div className="actions">
+                {images.length > 0 && (
+                    <button className="remove-all" type="button" onClick={removeAll}>Remove All images</button>
+                )}
+
+                <div className="submit">
+                    <Button type="submit">
+                        {idForEditing ? 'Оновити' : 'Додати'}
+                    </Button>
+                </div>
+            </div>
         </form>
     );
 };

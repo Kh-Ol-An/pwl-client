@@ -33,15 +33,4 @@
             border-radius: $radius-sm;
         }
     }
-
-    .remove-all {
-        padding: 0.5em 2em;
-        margin: 1em auto 0;
-        width: max-content;
-        background: $action-color;
-        border-radius: $radius-sm;
-        font-weight: 700;
-        font-size: 1.4em;
-        color: $accent-color;
-    }
 }

@@ -3,4 +3,45 @@
     padding-top: 0.4em;
     @include flex-column;
     gap: 2em;
+
+    .material {
+        width: 100%;
+        @include flex-center;
+        gap: 2em;
+
+        span {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: $special-color;
+            transition: $transition-slow;
+
+            &.primary-color {
+                color: $primary-color;
+            }
+
+            &.action-color {
+                color: $action-color;
+            }
+        }
+    }
+
+    .actions {
+        width: 100%;
+        @include flex-between;
+        gap: 1em;
+    }
+
+    .remove-all {
+        padding: 0.5em 2em;
+        width: max-content;
+        background: $action-color;
+        border-radius: $radius-sm;
+        font-weight: 700;
+        font-size: 1.4em;
+        color: $accent-color;
+    }
+
+    .submit {
+        margin-left: auto;
+    }
 }

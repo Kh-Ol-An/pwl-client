@@ -5,7 +5,7 @@ import { IUser } from '../../models/IUser';
 import { ICurrentImage, IWish } from '../../models/IWish';
 import { ICreateWish, IUpdateWish } from './types';
 
-const processCommonFields = (formData: FormData, commonFields: { [key: string]: string }) => {
+const processCommonFields = (formData: FormData, commonFields: { [key: string]: string | boolean }) => {
     for (const [key, value] of Object.entries(commonFields)) {
         formData.append(key, value.toString());
     }
@@ -23,9 +23,9 @@ const processImages = (formData: FormData, images: ICurrentImage[]) => {
     }
 };
 
-const createWish = async ({ userId, name, price, link, description, images }: ICreateWish): Promise<AxiosResponse<IWish>> => {
+const createWish = async ({ userId, material, name, price, link, description, images }: ICreateWish): Promise<AxiosResponse<IWish>> => {
     const formData = new FormData();
-    processCommonFields(formData, { userId, name, price, link, description });
+    processCommonFields(formData, { userId, material, name, price, link, description });
     processImages(formData, images);
 
     try {

@@ -2,6 +2,7 @@ import { ICurrentImage } from '../../models/IWish';
 
 export interface ICreateWish {
     userId: string;
+    material: boolean;
     name: string;
     price: string;
     link: string;

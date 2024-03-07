@@ -56,10 +56,26 @@
 
     .card-expander {
         width: 100%;
+        max-height: calc(100svh - 12em);
+        overflow-y: auto;
         @include flex-column;
         gap: 2em;
-        padding: 2.4em 0;
+        padding: 2.4em 0.8em 2.4em 0;
         transition: all 0.5s;
+
+        &::-webkit-scrollbar {
+            width: 0.4em;
+            height: 0.4em;
+        }
+
+        &::-webkit-scrollbar-track {
+            margin: 2em 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $special-color;
+            border-radius: $radius-round;
+        }
     }
 
     &.thin-border {

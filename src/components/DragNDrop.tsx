@@ -14,7 +14,6 @@ import ImagesValidation from '../utils/ImagesValidation';
 interface IProps {
     images: ICurrentImage[];
     setImages: (images: ICurrentImage[]) => void;
-    removeAll: () => void;
 }
 
 const acceptTypes: { [key: string]: string[] } = {};
@@ -26,7 +25,7 @@ Object.keys(ALLOWED_FILE_EXTENSIONS).forEach((ext) => {
     acceptTypes[mimeType].push(`.${ext}`);
 });
 
-const DragNDrop: FC<IProps> = ({ images, setImages, removeAll }) => {
+const DragNDrop: FC<IProps> = ({ images, setImages }) => {
     const onDrop = useCallback((acceptedImages: File[]) => {
         setImages([...images, ...acceptedImages]);
     }, [images, setImages]);
@@ -125,8 +124,6 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAll }) => {
             </DragDropContext>
 
             <ImagesValidation images={images} />
-
-            {images.length > 0 && <button className="remove-all" onClick={removeAll}>Remove All images</button>}
         </div>
     );
 };

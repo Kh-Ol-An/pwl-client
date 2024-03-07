@@ -11,6 +11,7 @@ export type ICurrentImage = (File | IImage);
 
 export interface IWish {
     id: string;
+    material: boolean;
     name: string;
     price: string;
     link: string;
