@@ -104,6 +104,7 @@ const AccountSettings: FC<IProps> = ({ close }) => {
             <Input
                 {...register("firstName", accountFirstNameValidation)}
                 id="firstName"
+                name="firstName"
                 type="text"
                 label="Ім'я*"
                 title="Якє в тебе ім'я?"
@@ -113,6 +114,7 @@ const AccountSettings: FC<IProps> = ({ close }) => {
             <Input
                 {...register("lastName", accountLastNameValidation)}
                 id="lastName"
+                name="lastName"
                 type="text"
                 label="Прізвище"
                 title="Якє в тебе прізвище?"

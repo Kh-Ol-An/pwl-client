@@ -63,6 +63,7 @@ const Auth: FC = () => {
                             <Input
                                 {...register("firstName", accountFirstNameValidation)}
                                 id="firstName"
+                                name="firstName"
                                 type="text"
                                 label="Ім'я*"
                                 title="Якє в тебе ім'я?"
@@ -72,6 +73,7 @@ const Auth: FC = () => {
                         <Input
                             {...register("email", emailValidation)}
                             id="email"
+                            name="email"
                             type="text"
                             label="Email*"
                             title="Це поле потрібне щоб я міг ідентифікувати тебе."
@@ -80,6 +82,7 @@ const Auth: FC = () => {
                         <Input
                             {...register("password", passwordValidation)}
                             id="password"
+                            name="password"
                             type="password"
                             label="Пароль*"
                             title="Це поле потрібне щоб ніхто інший не зміг скористуватись твоїми даними."
@@ -88,6 +91,7 @@ const Auth: FC = () => {
                         {isRegistration && (
                             <Input
                                 id="repeat-password"
+                                name="repeat-password"
                                 type="password"
                                 label="Повтори пароль*"
                                 title="Це поле потрібне щоб ти не помилився при введені паролю."

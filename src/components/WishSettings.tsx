@@ -111,6 +111,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             <Input
                 {...register("name", wishNameValidation)}
                 id="name"
+                name="name"
                 type="text"
                 label="Назва твого бажання*"
                 title="Як називається твоє бажання?"
@@ -120,6 +121,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             <Input
                 {...register("price", wishPriceValidation)}
                 id="price"
+                name="price"
                 type="number"
                 label="Ціна*"
                 title="Приблизна або точна ціна"
@@ -129,6 +131,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             <Input
                 {...register("link", wishLinkValidation)}
                 id="link"
+                name="link"
                 type="text"
                 label="Посилання"
                 title="Посилання де можна придбати бажання"
@@ -138,9 +141,11 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             <Input
                 {...register("description", wishDescriptionValidation)}
                 id="description"
+                name="description"
                 type="text"
                 label="Опис бажання"
                 title="Опиши своє бажання?"
+                multiline
                 error={errors?.description?.message}
             />
 

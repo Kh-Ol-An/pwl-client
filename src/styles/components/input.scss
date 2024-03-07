@@ -4,9 +4,15 @@
 
     .wrap {
         position: relative;
+        padding-right: 0.4em;
+
+        &.with-bg {
+            background-color: $background-color;
+        }
     }
 
-    input {
+    input,
+    textarea {
         position: relative;
         z-index: $z-index-xs-2;
         padding: 0.5em 1em;
@@ -20,6 +26,7 @@
         border: none;
         background: transparent;
         outline: none;
+        transition: $transition-slow;
 
         &::placeholder {
             color: transparent;
@@ -47,7 +54,7 @@
             }
 
             & ~ .background {
-                height: 4.1em;
+                height: 100%;
             }
         }
 
@@ -56,18 +63,38 @@
         }
     }
 
+    textarea {
+        min-height: 8em;
+        resize: vertical;
+
+        &::-webkit-scrollbar {
+            width: 0.4em;
+            height: 0.4em;
+        }
+
+        &::-webkit-scrollbar-track {
+            margin: 0.4em 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $special-color;
+            border-radius: $radius-round;
+        }
+    }
+
     button {
         position: absolute;
         top: 50%;
         right: 1em;
-        z-index: $z-index-xs-2;
+        z-index: $z-index-xs-4;
         transform: translateY(-50%);
     }
 
     label {
         position: absolute;
-        bottom: 0.4em;
+        top: 0;
         left: 0;
+        z-index: $z-index-xs-3;
         padding: 0.5em 1em;
         color: $special-color;
         font-size: 1.6em;
