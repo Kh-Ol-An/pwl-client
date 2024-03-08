@@ -71,7 +71,9 @@
         color: $accent-color;
     }
 
-    .submit {
+    .sub-actions {
+        @include flex-center;
+        gap: 2em;
         margin-left: auto;
     }
 }

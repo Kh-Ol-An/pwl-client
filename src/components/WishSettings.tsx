@@ -97,6 +97,10 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         );
     };
 
+    const removeWish = () => {
+        console.log('removeWish');
+    };
+
     useEffect(() => {
         if (wishList.length === 0) return;
 
@@ -174,10 +178,16 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
 
             <div className="actions">
                 {images.length > 0 && (
-                    <button className="remove-all" type="button" onClick={removeAll}>Remove All images</button>
+                    <button className="remove-all" type="button" onClick={removeAll}>Видалити всі зображення</button>
                 )}
 
-                <div className="submit">
+                <div className="sub-actions">
+                    {idForEditing && (
+                        <Button color="action-color" type="button" onClick={removeWish}>
+                            Видалити бажання
+                        </Button>
+                    )}
+
                     <Button type="submit">
                         {idForEditing ? 'Оновити' : 'Додати'}
                     </Button>

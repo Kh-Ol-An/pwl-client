@@ -43,7 +43,7 @@
 }
 
 @mixin icon-shadow($color) {
-    filter: drop-shadow(0 0 10px $color);
+    filter: drop-shadow(0 0 6px $color);
 }
 
 @mixin action-box($width, $height) {

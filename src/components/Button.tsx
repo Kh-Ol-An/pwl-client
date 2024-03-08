@@ -6,6 +6,7 @@ interface IProps {
     target?: '_blank';
     tabIndex?: number;
     classes?: 'text';
+    color?: 'action-color';
     disabled?: boolean;
     type?: 'button' | 'submit' | 'reset';
     onClick?: (event: any) => void;
@@ -17,6 +18,7 @@ const Button: FC<IProps> = ({
     target,
     tabIndex = 0,
     classes,
+    color,
     disabled,
     type,
     onClick,
@@ -29,7 +31,12 @@ const Button: FC<IProps> = ({
     if (to) {
         return (
             <Link
-                className={"button" + (classes ? ` ${classes}` : "") + (disabled ? ' disabled' : "")}
+                className={
+                    "button"
+                    + (color ? ` ${color}` : "")
+                    + (classes ? ` ${classes}` : "")
+                    + (disabled ? ' disabled' : "")
+                }
                 to={to}
                 target={target}
                 rel="noopener noreferrer"
@@ -43,7 +50,12 @@ const Button: FC<IProps> = ({
 
     return (
         <button
-            className={"button" + (classes ? ` ${classes}` : "") + (disabled ? ' disabled' : "")}
+            className={
+                "button"
+                + (color ? ` ${color}` : "")
+                + (classes ? ` ${classes}` : "")
+                + (disabled ? ' disabled' : "")
+            }
             type={type}
             tabIndex={tabIndex}
             disabled={disabled}
