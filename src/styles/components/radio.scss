@@ -1,0 +1,42 @@
+.radio {
+    position: relative;
+
+    .radio-action {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        @include action-box(30px, 30px);
+    }
+
+    .radio-outer-border {
+        @include action-outer-border;
+    }
+
+    .radio-inner-border {
+        @include action-inner-border;
+    }
+
+    .radio-content {
+        @include action-content(none);
+        background: $background-color;
+
+        &.checked {
+            background: $primary-color;
+        }
+    }
+
+    label {
+        position: relative;
+        z-index: $z-index-xs-1;
+        padding-left: 2.2em;
+        font-size: 1.6em;
+        color: $special-color;
+        cursor: pointer;
+        transition: $transition-slow;
+
+        &.checked {
+            color: $primary-color;
+        }
+    }
+}

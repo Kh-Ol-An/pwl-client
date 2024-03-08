@@ -15,6 +15,8 @@ import DragNDrop from './DragNDrop';
 import { removingWhiteSpaces, addingWhiteSpaces } from '../utils/formating-value';
 import Switch from './Switch';
 import ConfirmModal from './ConfirmModal';
+import Radio from './Radio';
+import { ICreateWish } from '../store/wishes/types';
 
 interface IProps {
     idForEditing: IWish['id'] | null;
@@ -29,7 +31,8 @@ type Inputs = {
 }
 
 const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
-    const [material, setMaterial] = useState<boolean>(true);
+    const [material, setMaterial] = useState<ICreateWish['material']>(true);
+    const [show, setShow] = useState<ICreateWish['show']>('all');
     const [showConfirmRemoveWish, setShowConfirmRemoveWish] = useState<boolean>(false);
     const [images, setImages] = useState<ICurrentImage[]>([]);
     const [addClass, setAddClass] = useState(false);
@@ -65,6 +68,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         const wishData = {
             userId: myUser.id,
             material,
+            show,
             name: data.name.trim(),
             price: material ? removingWhiteSpaces(data.price.trim()) : '',
             link: material ? data.link : '',
@@ -84,6 +88,10 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
 
     const changeMaterial = (e: ChangeEvent<HTMLInputElement>) => {
         setMaterial(e.target.checked);
+    };
+
+    const changeShow = (e: ChangeEvent<HTMLInputElement>) => {
+        setShow(e.target.value as ICreateWish['show']);
     };
 
     const removeAll = () => {
@@ -113,6 +121,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         if (!myWish) return;
 
         setMaterial(myWish.material);
+        setShow(myWish.show);
         setValue('name', myWish.name);
         myWish.price && setValue('price', addingWhiteSpaces(myWish.price));
         myWish.link && setValue('link', myWish.link);
@@ -132,7 +141,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         <form className="wish-settings" onSubmit={handleSubmit(onSubmit)}>
             <div className="material">
                 <span className={material ? "primary-color" : ""}>Матеріальне бажання</span>
-                <Switch name="material" checked={material} onChange={changeMaterial} />
+                <Switch id="material" name="material" checked={material} onChange={changeMaterial} />
                 <span className={material ? "" : "action-color"}>Не матеріальне бажання</span>
             </div>
 
@@ -166,6 +175,38 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                     title="Посилання де можна придбати бажання"
                     error={errors?.link?.message}
                 />
+            </div>
+
+            <div className="show">
+                <span className="show-label">Хто може бачити твоє бажання*</span>
+
+                // TODO: прибрати переключення між радіокнопками
+                <div className="show-actions">
+                    <Radio
+                        label="Всі"
+                        id="show-all"
+                        name="show"
+                        checked={show === 'all'}
+                        value="all"
+                        onChange={changeShow}
+                    />
+                    <Radio
+                        label="Тільки друзі"
+                        id="show-friends"
+                        name="show"
+                        checked={show === 'friends'}
+                        value="friends"
+                        onChange={changeShow}
+                    />
+                    <Radio
+                        label="Ніхто"
+                        id="show-nobody"
+                        name="show"
+                        checked={show === 'nobody'}
+                        value="nobody"
+                        onChange={changeShow}
+                    />
+                </div>
             </div>
 
             <Input

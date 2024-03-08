@@ -12,6 +12,7 @@ export type ICurrentImage = (File | IImage);
 export interface IWish {
     id: string;
     material: boolean;
+    show: 'all' | 'friends' | 'nobody';
     name: string;
     price?: string;
     link?: string;

@@ -50,15 +50,32 @@
         }
     }
 
+    .show {
+        margin: 2em auto 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        .show-label {
+            font-size: 1.4em;
+            color: $primary-color;
+        }
+
+        .show-actions {
+            @include flex-center;
+            gap: 2em;
+        }
+    }
+
+    .drag-n-drop {
+        margin-top: 2em;
+    }
+
     .actions {
         margin-top: 2em;
         width: 100%;
         @include flex-between;
         gap: 1em;
-    }
-
-    .drag-n-drop {
-        margin-top: 2em;
     }
 
     .remove-all {
