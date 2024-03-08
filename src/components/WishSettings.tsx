@@ -14,6 +14,7 @@ import {
 import DragNDrop from './DragNDrop';
 import { removingWhiteSpaces, addingWhiteSpaces } from '../utils/formating-value';
 import Switch from './Switch';
+import ConfirmModal from './ConfirmModal';
 
 interface IProps {
     idForEditing: IWish['id'] | null;
@@ -29,6 +30,7 @@ type Inputs = {
 
 const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
     const [material, setMaterial] = useState<boolean>(true);
+    const [showConfirmRemoveWish, setShowConfirmRemoveWish] = useState<boolean>(false);
     const [images, setImages] = useState<ICurrentImage[]>([]);
     const [addClass, setAddClass] = useState(false);
 
@@ -186,9 +188,24 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
 
                 <div className="sub-actions">
                     {idForEditing && (
-                        <Button color="action-color" type="button" onClick={removeWish}>
-                            Видалити бажання
-                        </Button>
+                        <>
+                            <Button
+                                variant="text"
+                                color="action-color"
+                                type="button"
+                                onClick={() => setShowConfirmRemoveWish(true)}
+                            >
+                                Видалити бажання
+                            </Button>
+
+                            <ConfirmModal
+                                show={showConfirmRemoveWish}
+                                close={() => setShowConfirmRemoveWish(false)}
+                                confirm={removeWish}
+                            >
+                                <p className="title">Ви впевнені, що хочете видалити це бажання?</p>
+                            </ConfirmModal>
+                        </>
                     )}
 
                     <Button type="submit">

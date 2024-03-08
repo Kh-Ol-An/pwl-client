@@ -8,4 +8,10 @@
     width: 60%;
     padding: 2em;
     outline: none;
+
+    .modal-actions {
+        margin-left: auto;
+        @include flex-center;
+        gap: 3em;
+    }
 }

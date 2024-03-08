@@ -87,11 +87,11 @@ const Header = () => {
                     >
                         <Card classes="thin-border">
                             <div className="header-popover">
-                                <Button classes="text" onClick={handleOpenAccountSettings}>
+                                <Button variant="text" onClick={handleOpenAccountSettings}>
                                     <ManageAccountsIcon />
                                     Налаштування аккаунту
                                 </Button>
-                                <Button classes="text" onClick={handleLogout}>
+                                <Button variant="text" onClick={handleLogout}>
                                     <LogoutIcon />
                                     Вийти з аккаунту
                                 </Button>

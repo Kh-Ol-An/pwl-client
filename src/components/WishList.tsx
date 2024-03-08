@@ -58,7 +58,7 @@ const WishList = () => {
                                 <DataWithLabel
                                     label="Посилання:"
                                     data={
-                                        <Button to={wish.link} classes="text">
+                                        <Button to={wish.link} variant="text">
                                             {wish.link}
                                         </Button>
                                     }

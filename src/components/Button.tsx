@@ -5,7 +5,7 @@ interface IProps {
     to?: string;
     target?: '_blank';
     tabIndex?: number;
-    classes?: 'text';
+    variant?: 'text';
     color?: 'action-color';
     disabled?: boolean;
     type?: 'button' | 'submit' | 'reset';
@@ -17,7 +17,7 @@ const Button: FC<IProps> = ({
     to,
     target,
     tabIndex = 0,
-    classes,
+    variant,
     color,
     disabled,
     type,
@@ -34,7 +34,7 @@ const Button: FC<IProps> = ({
                 className={
                     "button"
                     + (color ? ` ${color}` : "")
-                    + (classes ? ` ${classes}` : "")
+                    + (variant ? ` ${variant}` : "")
                     + (disabled ? ' disabled' : "")
                 }
                 to={to}
@@ -53,7 +53,7 @@ const Button: FC<IProps> = ({
             className={
                 "button"
                 + (color ? ` ${color}` : "")
-                + (classes ? ` ${classes}` : "")
+                + (variant ? ` ${variant}` : "")
                 + (disabled ? ' disabled' : "")
             }
             type={type}

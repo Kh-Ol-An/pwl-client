@@ -101,7 +101,7 @@ const Auth: FC = () => {
                             />
                         )}
 
-                        <Button classes="text" type="button" onClick={() => setIsRegistration((state) => !state)}>
+                        <Button variant="text" type="button" onClick={() => setIsRegistration((state) => !state)}>
                             {isRegistration ? 'Ми вже знайомі.' : 'Ти мене ще не знаєш.'}
                         </Button>
 
