@@ -4,6 +4,7 @@ import {
     Settings as SettingsIcon,
     ManageAccounts as ManageAccountsIcon,
     Logout as LogoutIcon,
+    Close as CloseIcon,
 } from '@mui/icons-material';
 import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from '../store/hook';
@@ -12,6 +13,7 @@ import Card from './Card';
 import Button from './Button';
 import AccountSettings from './AccountSettings';
 import stylesVariables from '../styles/utils/variables.module.scss';
+import Action from './Action';
 
 const Header = () => {
     const [anchorSetting, setAnchorSetting] = React.useState<HTMLButtonElement | null>(null);
@@ -107,6 +109,10 @@ const Header = () => {
                             <Card>
                                 <AccountSettings close={handleCloseAccountSettings} />
                             </Card>
+
+                            <Action onClick={handleCloseAccountSettings}>
+                                <CloseIcon />
+                            </Action>
                         </div>
                     </Modal>
                 </div>

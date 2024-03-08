@@ -46,6 +46,41 @@
     filter: drop-shadow(0 0 10px $color);
 }
 
+@mixin action-box($width, $height) {
+    @include flex-center;
+    padding: 2px;
+    width: $width;
+    height: $height;
+    cursor: pointer;
+}
+
+@mixin action-outer-border {
+    @include flex-center;
+    gap: 2em;
+    width: 100%;
+    height: 100%;
+    border-radius: $radius-big;
+    border: 1px solid $black-color;
+    background: $secondary-color;
+}
+
+@mixin action-inner-border {
+    width: 100%;
+    height: 100%;
+    border-radius: $radius-xl;
+    border: 6px solid $secondary-color;
+}
+
+@mixin action-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    @include flex-column;
+    box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.5);
+    border-radius: $radius-xl;
+    transition: $transition-slow;
+}
+
 @mixin running-lights($color) {
     position: absolute;
     width: 100%;

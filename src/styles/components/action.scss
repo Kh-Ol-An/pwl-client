@@ -1,0 +1,36 @@
+.action {
+    @include action-box(35px, 35px);
+    position: absolute;
+    top: 1.2em;
+    right: 1.2em;
+
+    .action-outer-border {
+        @include action-outer-border;
+        transition: $transition;
+    }
+
+    .action-inner-border {
+        @include action-inner-border;
+    }
+
+    .action-content {
+        @include action-content;
+        background: $action-color;
+        transition: $transition;
+    }
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    &:hover {
+        .action-outer-border {
+            filter: drop-shadow(0 4px 8px $black-color);
+        }
+
+        .action-content {
+            box-shadow: none;
+        }
+    }
+}

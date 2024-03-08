@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { Modal } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import Button from './Button';
 import WishSettings from './WishSettings';
 import { useAppDispatch, useAppSelector } from '../store/hook';
@@ -9,6 +10,7 @@ import { IWish } from '../models/IWish';
 import Card from './Card';
 import DataWithLabel from './DataWithLabel';
 import { addingWhiteSpaces } from '../utils/formating-value';
+import Action from './Action';
 
 const WishList = () => {
     const [openSettings, setOpenSettings] = useState<boolean>(false);
@@ -100,6 +102,10 @@ const WishList = () => {
                     <Card>
                         <WishSettings idForEditing={idForEditing} close={handleCloseWishSettings} />
                     </Card>
+
+                    <Action onClick={handleCloseWishSettings}>
+                        <CloseIcon />
+                    </Action>
                 </div>
             </Modal>
         </div>
