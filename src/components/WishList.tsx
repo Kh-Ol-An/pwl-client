@@ -50,7 +50,9 @@ const WishList = () => {
                                 title={<DataWithLabel label="Назва:" data={wish.name} />}
                             >
                                 <DataWithLabel label="Назва:" data={wish.name} />
-                                <DataWithLabel label="Ціна:" data={addingWhiteSpaces(wish.price)} />
+                                {wish.price && (
+                                    <DataWithLabel label="Ціна:" data={addingWhiteSpaces(wish.price)} />
+                                )}
                                 <DataWithLabel
                                     label="Посилання:"
                                     data={

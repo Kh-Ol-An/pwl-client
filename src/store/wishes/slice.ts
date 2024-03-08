@@ -48,7 +48,7 @@ const wishesSlice = createSlice({
                 // Перевіряємо, чи було знайдено бажання
                 if (index !== -1) {
                     // Оновлюємо дані бажання
-                    state.list[index] = { ...state.list[index], ...action.payload };
+                    state.list[index] = action.payload;
                 }
                 state.isLoading = false;
                 state.error = null;

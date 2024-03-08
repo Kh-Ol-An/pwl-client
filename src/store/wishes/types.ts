@@ -4,8 +4,8 @@ export interface ICreateWish {
     userId: string;
     material: boolean;
     name: string;
-    price: string;
-    link: string;
+    price?: string;
+    link?: string;
     description: string;
     images: ICurrentImage[];
 }

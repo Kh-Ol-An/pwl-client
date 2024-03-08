@@ -12,7 +12,7 @@ import {
     wishPriceValidation,
 } from '../utils/validations';
 import DragNDrop from './DragNDrop';
-import { addingWhiteSpaces, removingWhiteSpaces } from '../utils/formating-value';
+import { removingWhiteSpaces, addingWhiteSpaces } from '../utils/formating-value';
 import Switch from './Switch';
 
 interface IProps {
@@ -30,6 +30,7 @@ type Inputs = {
 const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
     const [material, setMaterial] = useState<boolean>(true);
     const [images, setImages] = useState<ICurrentImage[]>([]);
+    const [addClass, setAddClass] = useState(false);
 
     const {
         register,
@@ -63,8 +64,8 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             userId: myUser.id,
             material,
             name: data.name.trim(),
-            price: removingWhiteSpaces(data.price.trim()),
-            link: data.link,
+            price: material ? removingWhiteSpaces(data.price.trim()) : '',
+            link: material ? data.link : '',
             description: data.description.trim(),
             images,
         };
@@ -77,6 +78,10 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             await dispatch(createWish(wishData));
         }
         close();
+    };
+
+    const changeMaterial = (e: ChangeEvent<HTMLInputElement>) => {
+        setMaterial(e.target.checked);
     };
 
     const removeAll = () => {
@@ -100,21 +105,25 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
 
         setMaterial(myWish.material);
         setValue('name', myWish.name);
-        setValue('price', addingWhiteSpaces(myWish.price));
-        setValue('link', myWish.link);
+        myWish.price && setValue('price', addingWhiteSpaces(myWish.price));
+        myWish.link && setValue('link', myWish.link);
         setValue('description', myWish.description);
         setImages(myWish.images);
     }, [idForEditing, wishList, setValue]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setAddClass(true);
+        }, 0);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <form className="wish-settings" onSubmit={handleSubmit(onSubmit)}>
             <div className="material">
                 <span className={material ? "primary-color" : ""}>Матеріальне бажання</span>
-                <Switch
-                    name="material"
-                    checked={material}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setMaterial(e.target.checked)}
-                />
+                <Switch name="material" checked={material} onChange={changeMaterial} />
                 <span className={material ? "" : "action-color"}>Не матеріальне бажання</span>
             </div>
 
@@ -128,25 +137,27 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                 error={errors?.name?.message}
             />
 
-            <Input
-                {...register("price", wishPriceValidation)}
-                id="price"
-                name="price"
-                type="number"
-                label="Ціна*"
-                title="Приблизна або точна ціна"
-                error={errors?.price?.message}
-            />
+            <div className={"expander" + (addClass ? " transition" : "") + (material ? " rolled-up" : "")}>
+                <Input
+                    {...(material && register("price", wishPriceValidation))}
+                    id="price"
+                    name="price"
+                    type="number"
+                    label="Ціна*"
+                    title="Приблизна або точна ціна"
+                    error={errors?.price?.message}
+                />
 
-            <Input
-                {...register("link", wishLinkValidation)}
-                id="link"
-                name="link"
-                type="text"
-                label="Посилання"
-                title="Посилання де можна придбати бажання"
-                error={errors?.link?.message}
-            />
+                <Input
+                    {...(material && register("link", wishLinkValidation))}
+                    id="link"
+                    name="link"
+                    type="text"
+                    label="Посилання"
+                    title="Посилання де можна придбати бажання"
+                    error={errors?.link?.message}
+                />
+            </div>
 
             <Input
                 {...register("description", wishDescriptionValidation)}
