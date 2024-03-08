@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IWish } from '../../models/IWish';
-import { createWish, updateWish, getWishList } from './thunks';
+import { createWish, updateWish, getWishList, deleteWish } from './thunks';
 
 interface IState {
     list: IWish[]
@@ -20,6 +20,7 @@ const wishesSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            // create
             .addCase(createWish.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
@@ -33,13 +34,14 @@ const wishesSlice = createSlice({
                 state.isLoading = false;
                 state.error = null;
             })
+            // update
             .addCase(updateWish.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
             })
             .addCase(updateWish.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось створити бажання.';
+                state.error = action.error.message || 'Не вдалось оновити бажання.';
             })
             .addCase(updateWish.fulfilled, (state, action) => {
                 const { id } = action.payload;
@@ -53,6 +55,7 @@ const wishesSlice = createSlice({
                 state.isLoading = false;
                 state.error = null;
             })
+            // getWishList
             .addCase(getWishList.pending, (state) => {
                 state.list = [];
                 state.isLoading = true;
@@ -61,10 +64,25 @@ const wishesSlice = createSlice({
             .addCase(getWishList.rejected, (state, action) => {
                 state.list = [];
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось створити бажання.';
+                state.error = action.error.message || 'Не вдалось отримати всі бажання.';
             })
             .addCase(getWishList.fulfilled, (state, action) => {
                 state.list = action.payload;
+                state.isLoading = false;
+                state.error = null;
+            })
+            // delete
+            .addCase(deleteWish.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(deleteWish.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось видалити бажання.';
+            })
+            .addCase(deleteWish.fulfilled, (state, action) => {
+                const deletedWishId = action.payload;
+                state.list = state.list.filter(wish => wish.id !== deletedWishId);
                 state.isLoading = false;
                 state.error = null;
             });

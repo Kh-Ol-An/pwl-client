@@ -86,10 +86,31 @@ const getWishList = async (userId: IUser['id']): Promise<AxiosResponse<IWish[]>>
     }
 };
 
+const deleteWish = async (userId: IUser['id'], wishId: IWish['id']): Promise<AxiosResponse<IWish['id']>> => {
+    try {
+        return await api.delete(
+            '/wish',
+            {
+                params: {
+                    userId,
+                    wishId,
+                }
+            }
+        );
+    } catch (error: any) {
+        toast(
+            error.response?.data?.message || `Бажання з ідентифікатором ${wishId} не вдалось видалити.`,
+            { type: 'error' },
+        );
+        throw error;
+    }
+};
+
 const wishApi = {
     createWish,
     updateWish,
     getWishList,
+    deleteWish,
 };
 
 export default wishApi;

@@ -30,3 +30,12 @@ export const getWishList = createAsyncThunk<IWish[], IUser['id']>(
         return result.data;
     },
 );
+
+export const deleteWish = createAsyncThunk<IWish['id'], [IUser['id'], IWish['id']]>(
+    'wishes/deleteWish',
+    async ([userId, wishId]) => {
+        const result = await api.deleteWish(userId, wishId);
+
+        return result.data;
+    },
+);

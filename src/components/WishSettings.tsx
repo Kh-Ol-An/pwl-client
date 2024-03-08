@@ -2,7 +2,7 @@ import React, { FC, ChangeEvent, useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store/hook';
-import { createWish, updateWish } from '../store/wishes/thunks';
+import { createWish, deleteWish, updateWish } from '../store/wishes/thunks';
 import Input from './Input';
 import { ICurrentImage, IImage, IWish } from '../models/IWish';
 import {
@@ -97,8 +97,11 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         );
     };
 
-    const removeWish = () => {
-        console.log('removeWish');
+    const removeWish = async () => {
+        if (!myUser || !idForEditing) return;
+
+        await dispatch(deleteWish([myUser.id, idForEditing]));
+        close();
     };
 
     useEffect(() => {
