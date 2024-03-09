@@ -19,7 +19,11 @@
 
     .radio-content {
         @include action-content(none);
-        background: $background-color;
+        background: $black-color;
+
+        &.transition {
+            transition: $transition-slow;
+        }
 
         &.checked {
             background: $primary-color;
@@ -33,7 +37,10 @@
         font-size: 1.6em;
         color: $special-color;
         cursor: pointer;
-        transition: $transition-slow;
+
+        &.transition {
+            transition: $transition-slow;
+        }
 
         &.checked {
             color: $primary-color;

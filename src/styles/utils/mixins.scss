@@ -78,7 +78,6 @@
     @include flex-column;
     box-shadow: $shadow;
     border-radius: $radius-xl;
-    transition: $transition-slow;
 }
 
 @mixin running-lights($color) {

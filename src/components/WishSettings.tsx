@@ -35,7 +35,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
     const [show, setShow] = useState<ICreateWish['show']>('all');
     const [showConfirmRemoveWish, setShowConfirmRemoveWish] = useState<boolean>(false);
     const [images, setImages] = useState<ICurrentImage[]>([]);
-    const [addClass, setAddClass] = useState(false);
+    const [addClass, setAddClass] = useState<boolean>(false);
 
     const {
         register,
@@ -180,7 +180,6 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             <div className="show">
                 <span className="show-label">Хто може бачити твоє бажання*</span>
 
-                // TODO: прибрати переключення між радіокнопками
                 <div className="show-actions">
                     <Radio
                         label="Всі"

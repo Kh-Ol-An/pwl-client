@@ -15,7 +15,7 @@
 
     .action-content {
         @include action-content;
-        background: $action-color;
+        background: $special-color;
         transition: $transition;
     }
 

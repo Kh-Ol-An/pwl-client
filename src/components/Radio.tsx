@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent } from 'react';
+import React, { FC, ChangeEvent, useEffect, useState } from 'react';
 
 interface IProps {
     label: string;
@@ -10,13 +10,24 @@ interface IProps {
 }
 
 const Radio: FC<IProps> = ({ label, id, name, checked, value, onChange }) => {
+    const [addClass, setAddClass] = useState<boolean>(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setAddClass(true);
+        }, 0);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <div className="radio">
             <div className="radio-action">
                 <div className="radio-outer-border">
                     <div className="radio-inner-border">
-                        <div className={"radio-content" + (checked ? " checked" : "")}>
-                        </div>
+                        <div
+                            className={"radio-content" + (checked ? " checked" : "") + (addClass ? " transition" : "")}
+                        ></div>
                     </div>
                 </div>
             </div>
@@ -30,7 +41,9 @@ const Radio: FC<IProps> = ({ label, id, name, checked, value, onChange }) => {
                 onChange={onChange}
             />
 
-            <label className={checked ? "checked" : ""} htmlFor={id}>{label}</label>
+            <label className={(checked ? " checked" : "") + (addClass ? " transition" : "")} htmlFor={id}>
+                {label}
+            </label>
         </div>
     );
 };
