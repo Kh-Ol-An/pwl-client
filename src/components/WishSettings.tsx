@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState, useEffect } from 'react';
+import React, { FC, ChangeEvent, useState, useLayoutEffect, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store/hook';
@@ -114,7 +114,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         close();
     };
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (wishList.length === 0) return;
 
         const myWish = wishList.find((wish) => wish.id === idForEditing);
