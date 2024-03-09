@@ -19,7 +19,7 @@ import Radio from './Radio';
 import { ICreateWish } from '../store/wishes/types';
 
 interface IProps {
-    idForEditing: IWish['id'] | null;
+    idOfSelectedWish: IWish['id'] | null;
     close: () => void;
 }
 
@@ -30,7 +30,7 @@ type Inputs = {
     description: string
 }
 
-const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
+const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const [material, setMaterial] = useState<ICreateWish['material']>(true);
     const [show, setShow] = useState<ICreateWish['show']>('all');
     const [showConfirmRemoveWish, setShowConfirmRemoveWish] = useState<boolean>(false);
@@ -51,7 +51,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
     const dispatch = useAppDispatch();
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        if (wishList.some((wish) => wish.name === data.name.trim() && wish.id !== idForEditing)) {
+        if (wishList.some((wish) => wish.name === data.name.trim() && wish.id !== idOfSelectedWish)) {
             setError(
                 'name',
                 {
@@ -75,10 +75,10 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
             description: data.description.trim(),
             images,
         };
-        if (idForEditing) {
+        if (idOfSelectedWish) {
             await dispatch(updateWish({
                 ...wishData,
-                id: idForEditing,
+                id: idOfSelectedWish,
             }));
         } else {
             await dispatch(createWish(wishData));
@@ -108,16 +108,16 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
     };
 
     const removeWish = async () => {
-        if (!myUser || !idForEditing) return;
+        if (!myUser || !idOfSelectedWish) return;
 
-        await dispatch(deleteWish([myUser.id, idForEditing]));
+        await dispatch(deleteWish([myUser.id, idOfSelectedWish]));
         close();
     };
 
     useLayoutEffect(() => {
         if (wishList.length === 0) return;
 
-        const myWish = wishList.find((wish) => wish.id === idForEditing);
+        const myWish = wishList.find((wish) => wish.id === idOfSelectedWish);
         if (!myWish) return;
 
         setMaterial(myWish.material);
@@ -127,7 +127,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
         myWish.link && setValue('link', myWish.link);
         setValue('description', myWish.description);
         setImages(myWish.images);
-    }, [idForEditing, wishList, setValue]);
+    }, [idOfSelectedWish, wishList, setValue]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -227,10 +227,9 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                 )}
 
                 <div className="sub-actions">
-                    {idForEditing && (
+                    {idOfSelectedWish && (
                         <>
                             <Button
-                                variant="text"
                                 color="action-color"
                                 type="button"
                                 onClick={() => setShowConfirmRemoveWish(true)}
@@ -249,7 +248,7 @@ const WishSettings: FC<IProps> = ({ idForEditing, close }) => {
                     )}
 
                     <Button type="submit">
-                        {idForEditing ? 'Оновити' : 'Додати'}
+                        {idOfSelectedWish ? 'Оновити' : 'Додати'}
                     </Button>
                 </div>
             </div>

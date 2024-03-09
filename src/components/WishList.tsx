@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import dayjs from 'dayjs';
 import { Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from './Button';
@@ -8,31 +7,41 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 import { getWishList } from '../store/wishes/thunks';
 import { IWish } from '../models/IWish';
 import Card from './Card';
-import DataWithLabel from './DataWithLabel';
-import { addingWhiteSpaces } from '../utils/formating-value';
 import Action from './Action';
+import WishCard from './WishCard';
+import DetailWish from './DetailWish';
 
 const WishList = () => {
-    const [openSettings, setOpenSettings] = useState<boolean>(false);
-    const [idForEditing, setIdForEditing] = useState<IWish['id'] | null>(null);
+    const [openWish, setOpenWish] = useState<boolean>(false);
+    const [openWishSettings, setOpenWishSettings] = useState<boolean>(false);
+    const [idOfSelectedWish, setIdOfSelectedWish] = useState<IWish['id'] | null>(null);
 
     const myUser = useAppSelector((state) => state.myUser.user);
     const wishList = useAppSelector((state) => state.wishes?.list);
 
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        dispatch(getWishList(myUser?.id || ''));
-    }, [dispatch, myUser?.id])
+    const handleOpenWish = (id: IWish['id'] | null) => {
+        setIdOfSelectedWish(id);
+        setOpenWish(true);
+    };
+
+    const handleCloseWish = () => {
+        setOpenWish(false);
+    };
 
     const handleOpenWishSettings = (id: IWish['id'] | null) => {
-        setIdForEditing(id);
-        setOpenSettings(true);
+        setIdOfSelectedWish(id);
+        setOpenWishSettings(true);
     };
 
     const handleCloseWishSettings = () => {
-        setOpenSettings(false);
+        setOpenWishSettings(false);
     };
+
+    useEffect(() => {
+        dispatch(getWishList(myUser?.id || ''));
+    }, [dispatch, myUser?.id])
 
     return (
         <div className="wish-list">
@@ -46,41 +55,12 @@ const WishList = () => {
             {wishList.length > 0 ? (
                 <ul className="list">
                     {wishList.map((wish) => (
-                        <li key={wish.id}>
-                            <Card
-                                classes="thin-border without-shadow"
-                                title={<DataWithLabel label="Назва:" data={wish.name} />}
-                            >
-                                <DataWithLabel label="Назва:" data={wish.name} />
-                                {wish.price && (
-                                    <DataWithLabel label="Ціна:" data={addingWhiteSpaces(wish.price)} />
-                                )}
-                                <DataWithLabel
-                                    label="Посилання:"
-                                    data={
-                                        <Button to={wish.link} variant="text">
-                                            {wish.link}
-                                        </Button>
-                                    }
-                                />
-                                <DataWithLabel label="Опис:" data={wish.description} />
-                                <DataWithLabel label="Створене:" data={dayjs(wish.createdAt).format('DD.MM.YYYY')} />
-                                <DataWithLabel label="Оновлене:" data={dayjs(wish.updatedAt).format('DD.MM.YYYY')} />
-
-                                {wish.images.length > 0 && (
-                                    <ul className="image-list">
-                                        {wish.images.map((image) => (
-                                            <li className="image-item" key={image.path}>
-                                                <img src={image.path} alt={`wish-${image.position}`} />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-
-                                <Button onClick={() => handleOpenWishSettings(wish.id)}>
-                                    Редагувати бажання
-                                </Button>
-                            </Card>
+                        <li className="item" key={wish.id}>
+                            <WishCard
+                                wish={wish}
+                                showWish={() => handleOpenWish(wish.id)}
+                                editWish={() => handleOpenWishSettings(wish.id)}
+                            />
                         </li>
                     ))}
                 </ul>
@@ -93,14 +73,29 @@ const WishList = () => {
             )}
 
             <Modal
-                open={openSettings}
+                open={openWish}
+                onClose={handleCloseWish}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <div className="modal modal-lg">
+                    <DetailWish wish={wishList.find(wish => wish.id === idOfSelectedWish)} />
+
+                    <Action onClick={handleCloseWish}>
+                        <CloseIcon />
+                    </Action>
+                </div>
+            </Modal>
+
+            <Modal
+                open={openWishSettings}
                 onClose={handleCloseWishSettings}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
                 <div className="modal">
                     <Card>
-                        <WishSettings idForEditing={idForEditing} close={handleCloseWishSettings} />
+                        <WishSettings idOfSelectedWish={idOfSelectedWish} close={handleCloseWishSettings} />
                     </Card>
 
                     <Action onClick={handleCloseWishSettings}>

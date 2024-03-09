@@ -1,7 +1,7 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, MouseEvent, ReactNode } from 'react';
 
 interface IProps {
-    onClick?: () => void;
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
     children: ReactNode;
 }
 

@@ -14,7 +14,11 @@
     }
 
     .list {
-        @include grid(3);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-rows: repeat(auto-fit, 160px);
+        gap: 1em;
+        height: 100%;
         overflow: auto;
 
         &::-webkit-scrollbar {
@@ -28,6 +32,11 @@
         }
     }
 
+    .item {
+        position: relative;
+        cursor: pointer;
+    }
+
     .text-box {
         @include flex-center;
         width: 100%;
@@ -38,14 +47,5 @@
         font-size: 2em;
         color: $white-color;
         text-align: center;
-    }
-
-    .image-list {
-        @include flex-wrap;
-    }
-
-    .image-item {
-        width: 8em;
-        height: 8em;
     }
 }

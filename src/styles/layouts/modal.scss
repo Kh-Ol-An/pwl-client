@@ -9,6 +9,10 @@
     padding: 2em;
     outline: none;
 
+    &.modal-lg {
+        width: 96%;
+    }
+
     .modal-actions {
         margin-left: auto;
         @include flex-center;

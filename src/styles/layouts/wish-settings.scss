@@ -79,13 +79,15 @@
     }
 
     .remove-all {
-        padding: 0.5em 2em;
         width: max-content;
-        background: $action-color;
-        border-radius: $radius-sm;
+        background: transparent;
         font-weight: 700;
         font-size: 1.4em;
-        color: $accent-color;
+        color: $action-color;
+
+        &:hover {
+            @include icon-shadow($action-color);
+        }
     }
 
     .sub-actions {

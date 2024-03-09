@@ -1,6 +1,5 @@
 .card {
     position: relative;
-    @include flex-center;
     padding: 2px;
     width: 100%;
 
@@ -14,8 +13,6 @@
     }
 
     .outer-border {
-        @include flex-center;
-        gap: 2em;
         width: 100%;
         border-radius: $radius-big;
         border: 8px solid $accent-color;
@@ -79,47 +76,32 @@
     }
 
     &.thin-border {
-        .card-content {
-            padding: 0 2em;
-        }
-
         .inner-border {
             border-width: 20px;
+        }
+
+        .card-content {
+            padding: 0 2em;
         }
     }
 
     &.rolled-up {
-        .card-expander {
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-        }
+        position: relative;
 
         .inner-border {
             border-width: 60px;
             transition: all 0.5s;
         }
 
+        .card-expander {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+        }
+
         &.thin-border {
             .inner-border {
                 border-width: 40px;
-            }
-
-            &:hover {
-                .inner-border {
-                    border-width: 20px;
-                }
-            }
-        }
-
-        &:hover {
-            .inner-border {
-                border-width: 40px;
-            }
-
-            .card-expander {
-                padding: 2.4em 0;
-                max-height: 500px;
             }
         }
     }

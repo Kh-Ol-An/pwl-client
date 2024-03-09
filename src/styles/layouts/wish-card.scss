@@ -1,0 +1,82 @@
+.wish-card {
+    position: absolute;
+    padding: 2px;
+    width: 100%;
+    height: 100%;
+
+    .wish-card-outer-border {
+        width: 100%;
+        border-radius: $radius-big;
+        border: 8px solid $accent-color;
+        background: $secondary-color;
+    }
+
+    .wish-card-inner-border {
+        width: 100%;
+        border-radius: $radius-xl;
+        border-width: 40px;
+        border-style: solid;
+        border-color: $secondary-color;
+        transition: $transition-slow;
+    }
+
+    .wish-card-content {
+        width: 100%;
+        height: 100%;
+        @include flex-column;
+        box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.5);
+        border-radius: $radius-xl;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+        background: $accent-color;
+        padding: 1.6em;
+        transition: all 0.5s;
+    }
+
+    .wish-card-name {
+        color: $primary-color;
+        font-size: 2em;
+        font-weight: 700;
+        text-align: center;
+        width: 100%;
+        height: 1.3em;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    .wish-card-img {
+        margin-top: 0;
+        width: 25em;
+        height: 0;
+        overflow: hidden;
+        border-radius: $radius-md;
+        transition: $transition-slow;
+    }
+
+    .action {
+        top: -0.2em;
+        right: -0.2em;
+
+        svg {
+            width: 90%;
+            height: 90%;
+        }
+    }
+
+    &.can-hover:hover {
+        .wish-card-inner-border {
+            border-width: 20px;
+        }
+
+        .wish-card-img {
+            margin-top: 2em;
+            height: 25em;
+        }
+    }
+
+    &.hovered {
+        z-index: $z-index-md-1;
+    }
+}
