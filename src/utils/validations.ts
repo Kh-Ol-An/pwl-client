@@ -40,7 +40,6 @@ export const wishNameValidation = {
     }
 };
 
-// TODO: якщо ввести одні нулі, то валідація пройде
 // Wish price
 export const wishPriceValidation = {
     ...onlyWhitespaceValidation,
@@ -49,8 +48,8 @@ export const wishPriceValidation = {
         message: "Матеріальне бажання яке не має своєї ціни не може бути виконано твоїм всесвітом."
     },
     pattern: {
-        value: /^[0-9\s]*$/,
-        message: "Ціна бажання має бути числом."
+        value: /^(?!0)\d+(\s\d+)*$/,
+        message: "Ціна має бути цілим, позитивним числом, та починатися не з \"0\"."
     },
     maxLength: {
         value: WISH_PRICE_MAX_LENGTH,

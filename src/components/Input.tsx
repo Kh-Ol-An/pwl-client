@@ -13,7 +13,7 @@ interface IProps {
     name: string;
     type: 'text' | 'password' | 'number' | 'multiline';
     label: string;
-    title?: string;
+    tooltip?: string;
     value?: string;
     error?: string;
     onChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
@@ -24,7 +24,7 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
     name,
     type,
     label,
-    title,
+    tooltip,
     value,
     error,
     onChange,
@@ -84,9 +84,11 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                 )}
                 <label htmlFor={id}>
                     {label}
-                    <Tooltip title={title} arrow placement="top">
-                        <InfoIcon sx={{ color: stylesVariables.specialColor }} />
-                    </Tooltip>
+                    {tooltip && tooltip.length > 0 && (
+                        <Tooltip title={tooltip} arrow placement="top">
+                            <InfoIcon sx={{ color: stylesVariables.specialColor }} />
+                        </Tooltip>
+                    )}
                 </label>
                 <div className="background"></div>
             </div>

@@ -66,7 +66,6 @@ const Auth: FC = () => {
                                 name="firstName"
                                 type="text"
                                 label="Ім'я*"
-                                title="Якє в тебе ім'я?"
                                 error={errors?.firstName?.message}
                             />
                         )}
@@ -76,7 +75,6 @@ const Auth: FC = () => {
                             name="email"
                             type="text"
                             label="Email*"
-                            title="Це поле потрібне щоб я міг ідентифікувати тебе."
                             error={errors?.email?.message}
                         />
                         <Input
@@ -85,7 +83,6 @@ const Auth: FC = () => {
                             name="password"
                             type="password"
                             label="Пароль*"
-                            title="Це поле потрібне щоб ніхто інший не зміг скористуватись твоїми даними."
                             error={errors?.password?.message}
                         />
                         {isRegistration && (
@@ -94,7 +91,6 @@ const Auth: FC = () => {
                                 name="repeat-password"
                                 type="password"
                                 label="Повтори пароль*"
-                                title="Це поле потрібне щоб ти не помилився при введені паролю."
                                 value={repeatPassword}
                                 error={repeatPasswordError}
                                 onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}

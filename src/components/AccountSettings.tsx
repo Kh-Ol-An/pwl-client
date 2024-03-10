@@ -107,7 +107,6 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                 name="firstName"
                 type="text"
                 label="Ім'я*"
-                title="Якє в тебе ім'я?"
                 error={errors?.firstName?.message}
             />
 
@@ -117,7 +116,6 @@ const AccountSettings: FC<IProps> = ({ close }) => {
                 name="lastName"
                 type="text"
                 label="Прізвище"
-                title="Якє в тебе прізвище?"
                 error={errors?.lastName?.message}
             />
 

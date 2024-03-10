@@ -151,7 +151,7 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 name="name"
                 type="text"
                 label="Назва твого бажання*"
-                title="Як називається твоє бажання?"
+                tooltip="Сподіваюсь що ти створиш багато бажань) І щоб їх було легко розрізняти, назва має бути не тільки обов'язковою, а ще і унікальною"
                 error={errors?.name?.message}
             />
 
@@ -162,7 +162,7 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     name="price"
                     type="number"
                     label="Ціна*"
-                    title="Приблизна або точна ціна"
+                    tooltip="Матеріальне бажання яке не має своєї ціни не може бути виконано твоїм всесвітом. Введи приблизну або точну ціну."
                     error={errors?.price?.message}
                 />
 
@@ -172,7 +172,7 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     name="address"
                     type="text"
                     label="Де можна придбати"
-                    title="Назва місця, а краще адреса, а ще краще посилання де можна придбати бажання"
+                    tooltip="Назва місця, а краще адреса, а ще краще посилання де можна придбати бажання."
                     error={errors?.address?.message}
                 />
             </div>
@@ -214,7 +214,6 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 name="description"
                 type="multiline"
                 label="Опис бажання"
-                title="Опиши своє бажання?"
                 error={errors?.description?.message}
             />
 
