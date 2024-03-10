@@ -29,12 +29,6 @@
     gap: 1em;
 }
 
-@mixin grid($columns) {
-    display: grid;
-    grid-template-columns: repeat($columns, 1fr);
-    gap: 1em;
-}
-
 @mixin title {
     color: $white-color;
     font-size: 2.4em;

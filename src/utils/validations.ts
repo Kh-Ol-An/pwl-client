@@ -40,6 +40,7 @@ export const wishNameValidation = {
     }
 };
 
+// TODO: якщо ввести одні нулі, то валідація пройде
 // Wish price
 export const wishPriceValidation = {
     ...onlyWhitespaceValidation,
@@ -82,7 +83,7 @@ export const wishDescriptionValidation = {
     },
     maxLength: {
         value: WISH_DESCRIPTION_MAX_LENGTH,
-        message: `Твій опис бажання занадто довга. Давай намагатимемося вміститися в ${WISH_DESCRIPTION_MAX_LENGTH} символів.`
+        message: `Твій опис бажання занадто довгий. Давай намагатимемося вміститися в ${WISH_DESCRIPTION_MAX_LENGTH} символів.`
     }
 };
 

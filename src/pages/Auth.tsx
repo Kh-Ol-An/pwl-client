@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Login as LoginIcon, Favorite as FavoriteIcon } from '@mui/icons-material';
 import Button from '../components/Button';
@@ -97,7 +97,7 @@ const Auth: FC = () => {
                                 title="Це поле потрібне щоб ти не помилився при введені паролю."
                                 value={repeatPassword}
                                 error={repeatPasswordError}
-                                onChange={repeatPasswordChange}
+                                onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}
                             />
                         )}
 

@@ -79,7 +79,11 @@ const WishList = () => {
                 aria-describedby="modal-modal-description"
             >
                 <div className="modal modal-lg">
-                    <DetailWish wish={wishList.find(wish => wish.id === idOfSelectedWish)} />
+                    <DetailWish
+                        wish={wishList.find(wish => wish.id === idOfSelectedWish)}
+                        editWish={() => handleOpenWishSettings(idOfSelectedWish)}
+                        close={handleCloseWish}
+                    />
 
                     <Action onClick={handleCloseWish}>
                         <CloseIcon />

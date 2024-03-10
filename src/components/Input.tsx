@@ -6,13 +6,12 @@ import { addingWhiteSpaces } from '../utils/formating-value';
 interface IProps {
     id: string;
     name: string;
-    type: string;
+    type: 'text' | 'password' | 'number' | 'multiline';
     label: string;
     title?: string;
     value?: string;
-    multiline?: boolean;
     error?: string;
-    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IProps>(({
@@ -22,7 +21,6 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
     label,
     title,
     value,
-    multiline = false,
     error,
     onChange,
     ...props
@@ -42,14 +40,16 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
 
     return (
         <div className="input" title={title}>
-            <div className={"wrap" + (multiline ? " with-bg" : "")}>
+            <div className={"wrap" + (type === 'multiline' ? " with-bg" : "")}>
                 {
-                    multiline
+                    type === 'multiline'
                         ? <textarea
                               ref={ref as Ref<HTMLTextAreaElement>}
                               id={id}
                               name={name}
                               placeholder="hidden"
+                              value={value}
+                              onChange={onChange}
                               {...props}
                           />
                         : <input

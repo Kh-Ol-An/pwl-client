@@ -212,10 +212,9 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 {...register("description", wishDescriptionValidation)}
                 id="description"
                 name="description"
-                type="text"
+                type="multiline"
                 label="Опис бажання"
                 title="Опиши своє бажання?"
-                multiline
                 error={errors?.description?.message}
             />
 
