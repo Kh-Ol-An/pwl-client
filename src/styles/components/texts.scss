@@ -4,6 +4,20 @@
     @include title;
 }
 
+.attention {
+    color: $action-color;
+}
+
+.text {
+    color: $light-color;
+    font-size: 1.6em;
+}
+
+.text-lg {
+    color: $light-color;
+    font-size: 2em;
+}
+
 .name {
     color: $primary-color;
     font-size: 1.6em;

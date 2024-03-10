@@ -6,8 +6,8 @@ import { createWish, deleteWish, updateWish } from '../store/wishes/thunks';
 import Input from './Input';
 import { ICurrentImage, IImage, IWish } from '../models/IWish';
 import {
+    onlyWhitespaceValidation,
     wishDescriptionValidation,
-    wishLinkValidation,
     wishNameValidation,
     wishPriceValidation,
 } from '../utils/validations';
@@ -26,7 +26,7 @@ interface IProps {
 type Inputs = {
     name: string
     price: string
-    link: string
+    address: string
     description: string
 }
 
@@ -71,7 +71,7 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
             show,
             name: data.name.trim(),
             price: material ? removingWhiteSpaces(data.price.trim()) : '',
-            link: material ? data.link : '',
+            address: material ? data.address : '',
             description: data.description.trim(),
             images,
         };
@@ -124,7 +124,7 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
         setShow(myWish.show);
         setValue('name', myWish.name);
         myWish.price && setValue('price', addingWhiteSpaces(myWish.price));
-        myWish.link && setValue('link', myWish.link);
+        myWish.address && setValue('address', myWish.address);
         setValue('description', myWish.description);
         setImages(myWish.images);
     }, [idOfSelectedWish, wishList, setValue]);
@@ -167,13 +167,13 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 />
 
                 <Input
-                    {...(material && register("link", wishLinkValidation))}
-                    id="link"
-                    name="link"
+                    {...(material && register("address", onlyWhitespaceValidation))}
+                    id="address"
+                    name="address"
                     type="text"
-                    label="Посилання"
-                    title="Посилання де можна придбати бажання"
-                    error={errors?.link?.message}
+                    label="Де можна придбати"
+                    title="Назва місця, а краще адреса, а ще краще посилання де можна придбати бажання"
+                    error={errors?.address?.message}
                 />
             </div>
 
@@ -238,10 +238,13 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
 
                             <ConfirmModal
                                 show={showConfirmRemoveWish}
+                                confirmText="Видалити"
+                                closeText="Залишити"
                                 close={() => setShowConfirmRemoveWish(false)}
                                 confirm={removeWish}
                             >
-                                <p className="title">Ви впевнені, що хочете видалити це бажання?</p>
+                                <h3 className="title attention">Увага!</h3>
+                                <p className="text-lg">Ви впевнені, що хочете видалити це бажання?</p>
                             </ConfirmModal>
                         </>
                     )}

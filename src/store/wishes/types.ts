@@ -6,7 +6,7 @@ export interface ICreateWish {
     show: 'all' | 'friends' | 'nobody';
     name: string;
     price?: string;
-    link?: string;
+    address?: string;
     description: string;
     images: ICurrentImage[];
 }

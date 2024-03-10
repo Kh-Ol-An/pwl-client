@@ -58,22 +58,6 @@ export const wishPriceValidation = {
     }
 };
 
-// Wish links
-export const wishLinkValidation = {
-    ...onlyWhitespaceValidation,
-    validate: (value: string) => {
-        if (value.length === 0) {
-            return true;
-        }
-        try {
-            new URL(value);
-            return true;
-        } catch {
-            return "Це не схоже на посилання. Будь ласка, введи правильне посилання. Раджу не вводити в ручну, краще скопіювати.";
-        }
-    }
-};
-
 // Wish description
 export const wishDescriptionValidation = {
     ...onlyWhitespaceValidation,

@@ -15,7 +15,7 @@ export interface IWish {
     show: 'all' | 'friends' | 'nobody';
     name: string;
     price?: string;
-    link?: string;
+    address?: string;
     description: string;
     images: IImage[];
     createdAt: Dayjs;
