@@ -51,6 +51,11 @@
                 transform: translate(-1em, -2.2em);
                 color: $primary-color;
                 font-size: 1.4em;
+
+                svg {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
             }
 
             & ~ .background {
@@ -95,11 +100,22 @@
         top: 0;
         left: 0;
         z-index: $z-index-xs-3;
-        padding: 0.5em 1em;
+        @include flex-center;
+        gap: 0.4em;
+        padding: 0.5em 0 0.5em 1em;
         color: $special-color;
         font-size: 1.6em;
-        pointer-events: none;
+        cursor: text;
         transition: $transition-slow;
+
+        svg {
+            opacity: 0;
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+            pointer-events: none;
+            transition: $transition-slow;
+        }
     }
 
     .background {

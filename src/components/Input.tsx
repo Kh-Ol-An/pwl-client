@@ -1,5 +1,10 @@
 import React, { FC, ChangeEvent, Ref, forwardRef, useState } from 'react';
-import { VisibilityOff, Visibility } from '@mui/icons-material';
+import { Tooltip } from '@mui/material';
+import {
+    VisibilityOff as VisibilityOffIcon,
+    Visibility as VisibilityIcon,
+    Info as InfoIcon,
+} from '@mui/icons-material';
 import stylesVariables from '../styles/utils/variables.module.scss';
 import { addingWhiteSpaces } from '../utils/formating-value';
 
@@ -39,7 +44,7 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
     };
 
     return (
-        <div className="input" title={title}>
+        <div className="input">
             <div className={"wrap" + (type === 'multiline' ? " with-bg" : "")}>
                 {
                     type === 'multiline'
@@ -73,11 +78,16 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                 {type === 'password' && (
                     <button type="button" onClick={() => setShowPassword(prevState => !prevState)}>
                         {showPassword ?
-                            <VisibilityOff sx={{ color: stylesVariables.accentColor }} /> :
-                            <Visibility sx={{ color: stylesVariables.accentColor }} />}
+                            <VisibilityOffIcon sx={{ color: stylesVariables.accentColor }} /> :
+                            <VisibilityIcon sx={{ color: stylesVariables.accentColor }} />}
                     </button>
                 )}
-                <label htmlFor={id}>{label}</label>
+                <label htmlFor={id}>
+                    {label}
+                    <Tooltip title={title} arrow placement="top">
+                        <InfoIcon sx={{ color: stylesVariables.specialColor }} />
+                    </Tooltip>
+                </label>
                 <div className="background"></div>
             </div>
 
