@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Avatar, Modal, Popover } from '@mui/material';
+import { Avatar, Modal } from '@mui/material';
 import {
     Settings as SettingsIcon,
     ManageAccounts as ManageAccountsIcon,
@@ -13,34 +13,24 @@ import { logout } from '../store/my-user/thunks';
 import Card from './Card';
 import Button from './Button';
 import AccountSettings from './AccountSettings';
-import stylesVariables from '../styles/utils/variables.module.scss';
 import Action from './Action';
+import Popup from "./Popup";
+import stylesVariables from '../styles/utils/variables.module.scss';
 
 const Header = () => {
-    const [anchorSetting, setAnchorSetting] = React.useState<HTMLButtonElement | null>(null);
+    const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
     const [openSettings, setOpenSettings] = useState<boolean>(false);
 
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
 
-    const open = Boolean(anchorSetting);
-    const id = open ? 'simple-popover' : undefined;
-
-    const handleOpenSettings = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorSetting(event.currentTarget);
+    const handleOpenSettings = () => {
+        setOpenSettings(true);
+        setAnchor(null);
     };
 
     const handleCloseSettings = () => {
-        setAnchorSetting(null);
-    };
-
-    const handleOpenAccountSettings = () => {
-        setOpenSettings(true);
-        setAnchorSetting(null);
-    };
-
-    const handleCloseAccountSettings = () => {
         setOpenSettings(false);
     };
 
@@ -67,51 +57,33 @@ const Header = () => {
                         </div>
                     </div>
 
-                    <button className="settings" type="button" onClick={handleOpenSettings}>
-                        <SettingsIcon sx={{ color: stylesVariables.specialColor }} />
-                    </button>
-
-                    <Popover
-                        id={id}
-                        open={open}
-                        anchorEl={anchorSetting}
-                        onClose={handleCloseSettings}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'right',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        style={{ borderRadius: '20px' }}
+                    <Popup
+                        anchor={anchor}
+                        setAnchor={setAnchor}
+                        actionIcon={<SettingsIcon sx={{ color: stylesVariables.specialColor }} />}
                     >
-                        <Card classes="thin-border">
-                            <div className="header-popover">
-                                <Button variant="text" onClick={handleOpenAccountSettings}>
-                                    <ManageAccountsIcon />
-                                    Налаштування аккаунту
-                                </Button>
-                                <Button variant="text" onClick={handleLogout}>
-                                    <LogoutIcon />
-                                    Вийти з аккаунту
-                                </Button>
-                            </div>
-                        </Card>
-                    </Popover>
+                        <Button variant="text" onClick={handleOpenSettings}>
+                            <ManageAccountsIcon />
+                            Налаштування аккаунту
+                        </Button>
+                        <Button variant="text" onClick={handleLogout}>
+                            <LogoutIcon />
+                            Вийти з аккаунту
+                        </Button>
+                    </Popup>
 
                     <Modal
                         open={openSettings}
-                        onClose={handleCloseAccountSettings}
+                        onClose={handleCloseSettings}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                     >
                         <div className="modal">
                             <Card>
-                                <AccountSettings close={handleCloseAccountSettings} />
+                                <AccountSettings close={handleCloseSettings} />
                             </Card>
 
-                            <Action onClick={handleCloseAccountSettings}>
+                            <Action onClick={handleCloseSettings}>
                                 <CloseIcon />
                             </Action>
                         </div>

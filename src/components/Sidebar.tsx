@@ -6,16 +6,15 @@ import {
     ListItemText,
     ListItemButton,
     Typography,
-    IconButton, Popover,
 } from '@mui/material';
 import { PeopleAlt as PeopleAltIcon } from '@mui/icons-material';
 import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
 import { IUser } from '../models/IUser';
-import stylesVariables from '../styles/utils/variables.module.scss';
-import Card from './Card';
+import Popup from './Popup';
 import Button from './Button';
 import { useAppDispatch } from '../store/hook';
+import stylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     users: IUser[];
@@ -23,19 +22,8 @@ interface IProps {
 }
 
 const Sidebar: FC<IProps> = ({ users, myUser }) => {
+    const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
     const [usersWithoutMe, setUsersWithoutMe] = useState<IUser[]>([]);
-    const [anchorSetting, setAnchorSetting] = React.useState<HTMLButtonElement | null>(null);
-
-    const open = Boolean(anchorSetting);
-    const id = open ? 'simple-popover' : undefined;
-
-    const handleOpenSettings = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorSetting(event.currentTarget);
-    };
-
-    const handleCloseSettings = () => {
-        setAnchorSetting(null);
-    };
 
     const dispatch = useAppDispatch();
 
@@ -60,38 +48,18 @@ const Sidebar: FC<IProps> = ({ users, myUser }) => {
                                     key={user.id}
                                     disablePadding
                                     secondaryAction={
-                                        <>
-                                            <IconButton edge="end" aria-label="comments" onClick={handleOpenSettings}>
-                                                <PeopleAltIcon />
-                                            </IconButton>
-
-                                            <Popover
-                                                id={id}
-                                                open={open}
-                                                anchorEl={anchorSetting}
-                                                onClose={handleCloseSettings}
-                                                anchorOrigin={{
-                                                    vertical: 'bottom',
-                                                    horizontal: 'right',
-                                                }}
-                                                transformOrigin={{
-                                                    vertical: 'top',
-                                                    horizontal: 'right',
-                                                }}
-                                                style={{ borderRadius: '20px' }}
-                                            >
-                                                <Card classes="thin-border">
-                                                    <div className="sidebar-popover">
-                                                        <Button variant="text" onClick={addFriend}>
-                                                            Додати друга
-                                                        </Button>
-                                                        <Button variant="text">
-                                                            Не знаю що тут писати
-                                                        </Button>
-                                                    </div>
-                                                </Card>
-                                            </Popover>
-                                        </>
+                                        <Popup
+                                            anchor={anchor}
+                                            setAnchor={setAnchor}
+                                            actionIcon={<PeopleAltIcon sx={{ color: stylesVariables.lightColor }} />}
+                                        >
+                                            <Button variant="text" onClick={addFriend}>
+                                                Додати друга
+                                            </Button>
+                                            <Button variant="text">
+                                                Не знаю що тут писати
+                                            </Button>
+                                        </Popup>
                                     }
                                 >
                                     <ListItemButton>
