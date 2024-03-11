@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import api from '../../utils/api';
 import { IAuth } from '../../models/IAuth';
 import { IUser } from '../../models/IUser';
-import { ILogin, IRegistration, IUpdateMyUser } from './types';
+import { IAddFriend, ILogin, IRegistration, IUpdateMyUser } from './types';
 
 const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> => {
     try {
@@ -80,12 +80,22 @@ const updateMyUser = async ({
     }
 };
 
+const addFriend = async (data: IAddFriend): Promise<AxiosResponse<IAddFriend>> => {
+    try {
+        return await api.post('/friend', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось додати друга.', { type: 'error' });
+        throw error;
+    }
+};
+
 const myUserApi = {
     registration,
     login,
     logout,
     refresh,
     updateMyUser,
+    addFriend,
 };
 
 export default myUserApi;

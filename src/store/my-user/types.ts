@@ -16,3 +16,8 @@ export interface IUpdateMyUser {
     birthday?: string;
     avatar: ICurrentAvatar;
 }
+
+export interface IAddFriend {
+    myId: string;
+    friendId: string;
+}

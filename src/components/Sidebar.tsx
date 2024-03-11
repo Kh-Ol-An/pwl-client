@@ -15,6 +15,7 @@ import Popup from './Popup';
 import Button from './Button';
 import { useAppDispatch } from '../store/hook';
 import stylesVariables from '../styles/utils/variables.module.scss';
+import { addFriend } from '../store/my-user/thunks';
 
 interface IProps {
     users: IUser[];
@@ -27,8 +28,8 @@ const Sidebar: FC<IProps> = ({ users, myUser }) => {
 
     const dispatch = useAppDispatch();
 
-    const addFriend = () => {
-        console.log('add friend');
+    const handleAddFriend = async () => {
+        await dispatch(addFriend({ myId: '1', friendId: '2' }));
     };
 
     useEffect(() => {
@@ -53,7 +54,7 @@ const Sidebar: FC<IProps> = ({ users, myUser }) => {
                                             setAnchor={setAnchor}
                                             actionIcon={<PeopleAltIcon sx={{ color: stylesVariables.lightColor }} />}
                                         >
-                                            <Button variant="text" onClick={addFriend}>
+                                            <Button variant="text" onClick={handleAddFriend}>
                                                 Додати друга
                                             </Button>
                                             <Button variant="text">
