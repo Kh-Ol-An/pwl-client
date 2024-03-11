@@ -7,6 +7,7 @@ import {
     Close as CloseIcon,
 } from '@mui/icons-material';
 import dayjs from 'dayjs';
+import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { logout } from '../store/my-user/thunks';
 import Card from './Card';
@@ -59,7 +60,7 @@ const Header = () => {
                             <span className="params">
                                 {
                                     myUser?.birthday
-                                        ? dayjs(myUser?.birthday).format('DD.MM.YYYY')
+                                        ? dayjs(myUser?.birthday).locale('uk').format('DD MMMM')
                                         : myUser?.email
                                 }
                             </span>

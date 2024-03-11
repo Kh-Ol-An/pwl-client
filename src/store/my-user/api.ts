@@ -60,7 +60,7 @@ const updateMyUser = async ({
     const formData = new FormData();
     formData.append('id', id);
     formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
+    lastName && formData.append('lastName', lastName);
     birthday && formData.append('birthday', birthday);
     formData.append('avatar', avatar);
 

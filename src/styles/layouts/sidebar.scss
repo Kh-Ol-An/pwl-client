@@ -44,3 +44,8 @@
         }
     }
 }
+
+.sidebar-popover {
+    @include flex-column-left;
+    gap: 1em;
+}

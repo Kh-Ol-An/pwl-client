@@ -3,7 +3,7 @@ import { Dayjs } from 'dayjs';
 export interface IUser {
     id: string;
     firstName: string;
-    lastName: string;
+    lastName?: string;
     email: string;
     birthday: Dayjs;
     avatar?: string;

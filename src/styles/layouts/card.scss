@@ -4,27 +4,29 @@
     padding: 2px;
     width: 100%;
 
-    .light-one {
+    .card-light-one {
         @include running-lights($action-color);
     }
 
-    .light-two {
+    .card-light-two {
         @include running-lights($primary-color);
         animation-delay: -1s;
     }
 
-    .outer-border {
+    .card-outer-border {
         width: 100%;
         border-radius: $radius-big;
-        border: 8px solid $accent-color;
+        border-width: 8px;
+        border-style: solid;
+        border-color: $accent-color;
         background: $secondary-color;
     }
 
-    &:not(.without-shadow) .outer-border {
+    &:not(.without-shadow) .card-outer-border {
         filter: drop-shadow(0 15px 50px $black-color);
     }
 
-    .inner-border {
+    .card-inner-border {
         width: 100%;
         border-radius: $radius-xl;
         border-width: 40px;
@@ -34,40 +36,24 @@
 
     .card-content {
         width: 100%;
-        @include flex-column;
         box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.5);
         border-radius: $radius-xl;
         border-bottom: 2px solid rgba(255, 255, 255, 0.5);
         background: $accent-color;
-        padding: 0 4em;
-        transition: all 0.5s;
+        padding: 2.4em 4em;
     }
 
-    .card-title {
-        padding: 2.4em 0;
+    .card-scroll {
         width: 100%;
-
-        .card-expander {
-            padding: 0 0 2.4em;
-        }
-    }
-
-    .card-expander {
-        width: 100%;
-        max-height: calc(100svh - 12em);
+        max-height: calc(100svh - 17em);
         overflow-y: auto;
         @include flex-column;
         gap: 2em;
-        padding: 2.4em 0.8em 2.4em 0;
-        transition: all 0.5s;
+        padding: 0 8px 0 10px;
 
         &::-webkit-scrollbar {
-            width: 0.4em;
-            height: 0.4em;
-        }
-
-        &::-webkit-scrollbar-track {
-            margin: 2em 0;
+            width: 4px;
+            height: 4px;
         }
 
         &::-webkit-scrollbar-thumb {
@@ -77,33 +63,16 @@
     }
 
     &.thin-border {
-        .inner-border {
-            border-width: 20px;
+        .card-outer-border {
+            border-width: 4px;
+        }
+
+        .card-inner-border {
+            border-width: 10px;
         }
 
         .card-content {
-            padding: 0 2em;
-        }
-    }
-
-    &.rolled-up {
-        position: relative;
-
-        .inner-border {
-            border-width: 60px;
-            transition: all 0.5s;
-        }
-
-        .card-expander {
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-        }
-
-        &.thin-border {
-            .inner-border {
-                border-width: 40px;
-            }
+            padding: 1em 2em;
         }
     }
 }

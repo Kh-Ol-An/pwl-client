@@ -11,6 +11,9 @@ import {
 // Only whitespace
 export const onlyWhitespaceValidation = {
     validate: (value: string) => {
+        if (!value) {
+            return true;
+        }
         const trimmedValue = value.trim();
         if (trimmedValue === '' && value.length > 0) {
             return "Введені дані не можуть містити тільки пробіли.";

@@ -66,10 +66,12 @@ const AccountSettings: FC<IProps> = ({ close }) => {
 
         const updateMyUserData: IUpdateMyUser = {
             id: myUser.id,
-            firstName: data.firstName,
-            lastName: data.lastName,
+            firstName: data.firstName.trim(),
             avatar,
         };
+        if (data.lastName) {
+            updateMyUserData.lastName = data.lastName.trim();
+        }
         if (birthday) {
             updateMyUserData.birthday = birthday.format();
         }
@@ -94,7 +96,7 @@ const AccountSettings: FC<IProps> = ({ close }) => {
         if (!myUser) return;
 
         setValue('firstName', myUser.firstName);
-        setValue('lastName', myUser.lastName);
+        myUser.lastName && setValue('lastName', myUser.lastName);
         setAvatar(myUser.avatar || '');
         myUser.birthday && setBirthday(dayjs(myUser.birthday));
     }, [myUser, setValue]);

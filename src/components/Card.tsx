@@ -3,33 +3,23 @@ import React, { FC, ReactNode } from 'react';
 interface IProps {
     withLights?: boolean;
     classes?: string;
-    title?: ReactNode;
     children: ReactNode;
 }
 
-const Card: FC<IProps> = ({ withLights = false, classes, title, children }) => {
+const Card: FC<IProps> = ({ withLights = false, classes, children }) => {
     return (
-        <div
-            className={
-                "card" + (title ? ' rolled-up' : "") + (classes ? ` ${classes}` : "")
-            }
-        >
+        <div className={"card" + (classes ? ` ${classes}` : "")}>
             {withLights && (
                 <>
-                    <div className="light-one"></div>
-                    <div className="light-two"></div>
+                    <div className="card-light-one"></div>
+                    <div className="card-light-two"></div>
                 </>
             )}
 
-            <div className="outer-border">
-                <div className="inner-border">
+            <div className="card-outer-border">
+                <div className="card-inner-border">
                     <div className="card-content">
-                        {title && (
-                            <div className="card-title">
-                                {title}
-                            </div>
-                        )}
-                        <div className="card-expander">
+                        <div className="card-scroll">
                             {children}
                         </div>
                     </div>
