@@ -28,19 +28,12 @@
     .data {
         @include flex-center;
         gap: 1em;
+        text-align: left;
     }
 
     .box {
         display: flex;
         flex-direction: column;
         gap: 0.6em;
-    }
-
-    .settings {
-        transition: $transition;
-
-        &:hover {
-            @include icon-shadow($special-color);
-        }
     }
 }

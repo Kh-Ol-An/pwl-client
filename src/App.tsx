@@ -22,8 +22,6 @@ const App: FC = () => {
     const [ready, setReady] = useState(false);
 
     const myUser = useAppSelector((state) => state.myUser);
-    const users = useAppSelector((state) => state.users);
-    const wishes = useAppSelector((state) => state.wishes);
 
     const dispatch = useAppDispatch();
 
@@ -37,7 +35,7 @@ const App: FC = () => {
         <ThemeProvider theme={theme}>
             {myUser.user?.isActivated === false && <Inactivated />}
 
-            {(myUser.isLoading || users.isLoading || wishes.isLoading) && <Loading />}
+            {myUser.isLoading && <Loading />}
 
             {ready && (
                 <Routes>

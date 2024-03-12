@@ -25,6 +25,17 @@
         background: $accent-color;
     }
 
+    .sidebar-head {
+        display: flex;
+        gap: 2em;
+    }
+
+    .sidebar-title {
+        padding: 0.8em;
+        color: $light-color;
+        font-size: 2em;
+    }
+
     .list {
         height: 100%;
         overflow-y: auto;

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from './Button';
 import WishSettings from './WishSettings';
-import { useAppDispatch, useAppSelector } from '../store/hook';
-import { getWishList } from '../store/wishes/thunks';
+import { useAppSelector } from '../store/hook';
 import { IWish } from '../models/IWish';
 import Card from './Card';
 import Action from './Action';
@@ -16,10 +15,7 @@ const WishList = () => {
     const [openWishSettings, setOpenWishSettings] = useState<boolean>(false);
     const [idOfSelectedWish, setIdOfSelectedWish] = useState<IWish['id'] | null>(null);
 
-    const myUser = useAppSelector((state) => state.myUser.user);
     const wishList = useAppSelector((state) => state.wishes?.list);
-
-    const dispatch = useAppDispatch();
 
     const handleOpenWish = (id: IWish['id'] | null) => {
         setIdOfSelectedWish(id);
@@ -38,10 +34,6 @@ const WishList = () => {
     const handleCloseWishSettings = () => {
         setOpenWishSettings(false);
     };
-
-    useEffect(() => {
-        dispatch(getWishList(myUser?.id || ''));
-    }, [dispatch, myUser?.id])
 
     return (
         <div className="wish-list">

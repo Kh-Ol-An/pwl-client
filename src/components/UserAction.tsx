@@ -13,11 +13,13 @@ import {
 import { PeopleAlt as PeopleAltIcon } from '@mui/icons-material';
 import Popup from './Popup';
 import Button from './Button';
-import { useAppDispatch } from '../store/hook';
+import { useAppDispatch, useAppSelector } from '../store/hook';
 import { addFriend, removeFriend } from '../store/my-user/thunks';
 import { IUser } from '../models/IUser';
 import stylesVariables from '../styles/utils/variables.module.scss';
 import { IRemoveFriend } from '../store/my-user/types';
+import { getWishList } from '../store/wishes/thunks';
+import { selectUserId } from '../store/selected-user/slice';
 
 interface IProps {
     user: IUser;
@@ -28,16 +30,13 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
     const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
+
     const dispatch = useAppDispatch();
 
-    const handleChooseWish = async () => {
-        if (!myUser) return;
-
-        setIsLoading(true);
-        console.log('handleChooseWish');
-//        await dispatch(addFriend({ myId: myUser.id, friendId: user.id }));
-        setIsLoading(false);
-        setAnchor(null);
+    const handleSelectWish = async () => {
+        await dispatch(getWishList(user.id));
+        await dispatch(selectUserId(user.id));
     };
 
     const handleAddFriend = async () => {
@@ -110,7 +109,7 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
                 </Popup>
             }
         >
-            <ListItemButton onClick={handleChooseWish}>
+            <ListItemButton selected={user.id === selectedUserId} onClick={handleSelectWish}>
                 <ListItemAvatar>
                     <Avatar
                         src={user.avatar}
@@ -119,7 +118,11 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
                 </ListItemAvatar>
 
                 <ListItemText
-                    primary={`${user?.firstName} ${user?.lastName ? user?.lastName : ''}`}
+                    primary={
+                        <span className={"name" + (user?.id === selectedUserId ? " selected" : "")}>
+                            {user?.firstName} {user?.lastName}
+                        </span>
+                    }
                     secondary={
                         <Typography variant="body2" className="params">
                             {user.birthday

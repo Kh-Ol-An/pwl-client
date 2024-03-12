@@ -16,14 +16,23 @@ import AccountSettings from './AccountSettings';
 import Action from './Action';
 import Popup from "./Popup";
 import stylesVariables from '../styles/utils/variables.module.scss';
+import { getWishList } from '../store/wishes/thunks';
+import { selectUserId } from '../store/selected-user/slice';
 
 const Header = () => {
     const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
     const [openSettings, setOpenSettings] = useState<boolean>(false);
 
     const myUser = useAppSelector((state) => state.myUser.user);
+    const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
+
+    const handleSelectWish = async () => {
+        if (!myUser) return;
+        await dispatch(getWishList(myUser.id));
+        await dispatch(selectUserId(myUser.id));
+    };
 
     const handleOpenSettings = () => {
         setOpenSettings(true);
@@ -42,11 +51,13 @@ const Header = () => {
         <div className="header">
             <div className="inner">
                 <div className="content">
-                    <div className="data">
+                    <button className="data" type="button" onClick={handleSelectWish}>
                         <Avatar alt={myUser?.firstName} src={myUser?.avatar} />
 
                         <div className="box">
-                            <span className="name">{myUser?.firstName} {myUser?.lastName}</span>
+                            <span className={"name" + (myUser?.id === selectedUserId ? " selected" : "")}>
+                                {myUser?.firstName} {myUser?.lastName}
+                            </span>
                             <span className="params">
                                 {
                                     myUser?.birthday
@@ -55,7 +66,7 @@ const Header = () => {
                                 }
                             </span>
                         </div>
-                    </div>
+                    </button>
 
                     <Popup
                         anchor={anchor}

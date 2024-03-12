@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const Loading = () => {
+interface IProps {
+    isLocal?: boolean;
+}
+
+const Loading: FC<IProps> = ({ isLocal }) => {
     return (
-        <div className="loading">
+        <div className={"loading" + (isLocal ? " local" : "")}>
             <div className="spinner">
                 <div></div>
                 <div></div>
