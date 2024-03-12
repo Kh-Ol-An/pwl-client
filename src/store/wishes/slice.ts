@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IWish } from '../../models/IWish';
-import { createWish, updateWish, getWishList, deleteWish } from './thunks';
+import { createWish, updateWish, deleteWish, getWishList } from './thunks';
 
 interface IState {
     list: IWish[]
@@ -55,6 +55,21 @@ const wishesSlice = createSlice({
                 state.isLoading = false;
                 state.error = null;
             })
+            // delete
+            .addCase(deleteWish.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(deleteWish.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось видалити бажання.';
+            })
+            .addCase(deleteWish.fulfilled, (state, action) => {
+                const deletedWishId = action.payload;
+                state.list = state.list.filter(wish => wish.id !== deletedWishId);
+                state.isLoading = false;
+                state.error = null;
+            })
             // getWishList
             .addCase(getWishList.pending, (state) => {
                 state.list = [];
@@ -68,21 +83,6 @@ const wishesSlice = createSlice({
             })
             .addCase(getWishList.fulfilled, (state, action) => {
                 state.list = action.payload;
-                state.isLoading = false;
-                state.error = null;
-            })
-            // delete
-            .addCase(deleteWish.pending, (state) => {
-                state.isLoading = true;
-                state.error = null;
-            })
-            .addCase(deleteWish.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось видалити бажання.';
-            })
-            .addCase(deleteWish.fulfilled, (state, action) => {
-                const deletedWishId = action.payload;
-                state.list = state.list.filter(wish => wish.id !== deletedWishId);
                 state.isLoading = false;
                 state.error = null;
             });

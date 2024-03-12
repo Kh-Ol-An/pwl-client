@@ -22,19 +22,19 @@ export const updateWish = createAsyncThunk<IWish, IUpdateWish>(
     },
 );
 
-export const getWishList = createAsyncThunk<IWish[], IUser['id']>(
-    'wishes/getWishList',
-    async (userId) => {
-        const result = await api.getWishList(userId);
+export const deleteWish = createAsyncThunk<IWish['id'], [IUser['id'], IWish['id']]>(
+    'wishes/deleteWish',
+    async ([userId, wishId]) => {
+        const result = await api.deleteWish(userId, wishId);
 
         return result.data;
     },
 );
 
-export const deleteWish = createAsyncThunk<IWish['id'], [IUser['id'], IWish['id']]>(
-    'wishes/deleteWish',
-    async ([userId, wishId]) => {
-        const result = await api.deleteWish(userId, wishId);
+export const getWishList = createAsyncThunk<IWish[], IUser['id']>(
+    'wishes/getWishList',
+    async (userId) => {
+        const result = await api.getWishList(userId);
 
         return result.data;
     },

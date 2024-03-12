@@ -70,22 +70,6 @@ const updateWish = async ({ id, userId, material, show, name, price, address, de
     }
 };
 
-const getWishList = async (userId: IUser['id']): Promise<AxiosResponse<IWish[]>> => {
-    try {
-        return await api.get(
-            '/wishes',
-            {
-                params: {
-                    userId
-                }
-            }
-        );
-    } catch (error: any) {
-        toast(error.response?.data?.message || 'Не вдалось отримати всі бажання.', { type: 'error' });
-        throw error;
-    }
-};
-
 const deleteWish = async (userId: IUser['id'], wishId: IWish['id']): Promise<AxiosResponse<IWish['id']>> => {
     try {
         return await api.delete(
@@ -106,11 +90,27 @@ const deleteWish = async (userId: IUser['id'], wishId: IWish['id']): Promise<Axi
     }
 };
 
+const getWishList = async (userId: IUser['id']): Promise<AxiosResponse<IWish[]>> => {
+    try {
+        return await api.get(
+            '/wishes',
+            {
+                params: {
+                    userId
+                }
+            }
+        );
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось отримати всі бажання.', { type: 'error' });
+        throw error;
+    }
+};
+
 const wishApi = {
     createWish,
     updateWish,
-    getWishList,
     deleteWish,
+    getWishList,
 };
 
 export default wishApi;
