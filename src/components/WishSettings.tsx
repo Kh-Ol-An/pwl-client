@@ -35,7 +35,7 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const [show, setShow] = useState<ICreateWish['show']>('all');
     const [showConfirmRemoveWish, setShowConfirmRemoveWish] = useState<boolean>(false);
     const [images, setImages] = useState<ICurrentImage[]>([]);
-    const [addClass, setAddClass] = useState<boolean>(false);
+    const [isTransition, setIsTransition] = useState<boolean>(false);
 
     const {
         register,
@@ -131,7 +131,7 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setAddClass(true);
+            setIsTransition(true);
         }, 0);
 
         return () => clearTimeout(timer);
@@ -155,7 +155,7 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 error={errors?.name?.message}
             />
 
-            <div className={"expander" + (addClass ? " transition" : "") + (material ? " rolled-up" : "")}>
+            <div className={"expander" + (isTransition ? " transition" : "") + (material ? " rolled-up" : "")}>
                 <Input
                     {...(material && register("price", wishPriceValidation))}
                     id="price"

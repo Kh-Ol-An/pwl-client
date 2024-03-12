@@ -12,7 +12,7 @@
     .switch-content {
         @include action-content;
         border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-        background: $action-color;
+        background: $secondary-color;
         transition: $transition-slow;
 
         &::before {
@@ -31,13 +31,17 @@
             transition: $transition-slow;
         }
 
-        &.checked {
-            background: $primary-color;
+        &:not(.hidden-choice) {
+            background: $action-color;
 
-            &::before {
-                left: 0;
-                transform: translate(-0.1em, -50%);
+            &.checked {
+                background: $primary-color;
             }
+        }
+
+        &.checked::before {
+            left: 0;
+            transform: translate(-0.1em, -50%);
         }
     }
 }

@@ -26,14 +26,31 @@
     }
 
     .sidebar-head {
+        padding: 1.6em 2em;
         display: flex;
         gap: 2em;
     }
 
     .sidebar-title {
-        padding: 0.8em;
         color: $light-color;
         font-size: 2em;
+        line-height: 30px;
+    }
+
+    .users-type {
+        @include flex-center;
+        gap: 1em;
+
+        span {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: $special-color;
+            transition: $transition-slow;
+
+            &.primary-color {
+                color: $primary-color;
+            }
+        }
     }
 
     .list {

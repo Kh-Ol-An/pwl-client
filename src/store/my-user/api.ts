@@ -30,7 +30,7 @@ const login = async (data: ILogin): Promise<AxiosResponse<IAuth>> => {
 const logout = async (): Promise<void> => {
     try {
         await api.post('/logout');
-        await localStorage.removeItem('token');
+        await localStorage.clear();
     } catch (error: any) {
         toast(error.response?.data?.message || 'Не вдалось вийти з аккаунту.', { type: 'error' });
         throw error;
