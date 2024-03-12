@@ -29,11 +29,11 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
 
     const dispatch = useAppDispatch();
 
-    const handleAddFriend = async (friendId: IUser['id']) => {
+    const handleAddFriend = async () => {
         if (!myUser) return;
 
         setIsLoading(true);
-        await dispatch(addFriend({ myId: myUser.id, friendId }));
+        await dispatch(addFriend({ myId: myUser.id, friendId: user.id }));
         setIsLoading(false);
         setAnchor(null);
     };
@@ -55,7 +55,8 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
 
     let iconColor = stylesVariables.lightColor;
     myUser?.followTo.includes(user.id) && (iconColor = stylesVariables.specialColor);
-    (myUser?.followFrom.includes(user.id) || myUser?.friends.includes(user.id)) && (iconColor = stylesVariables.primaryColor);
+    (myUser?.followFrom.includes(user.id) || myUser?.friends.includes(user.id))
+        && (iconColor = stylesVariables.primaryColor);
 
     let addFriendText = '';
     !myUser?.followTo.includes(user.id) && (addFriendText = 'Додати друга');
@@ -88,7 +89,7 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
                     }
                 >
                     {addFriendText.length > 0 && (
-                        <Button variant="text" onClick={() => handleAddFriend(user.id)}>
+                        <Button variant="text" onClick={handleAddFriend}>
                             {addFriendText}
                         </Button>
                     )}

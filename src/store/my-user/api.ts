@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import api from '../../utils/api';
 import { IAuth } from '../../models/IAuth';
 import { IUser } from '../../models/IUser';
-import { IAddFriend, ILogin, IRegistration, IUpdateMyUser } from './types';
+import { IAddFriend, ILogin, IRegistration, IRemoveFriend, IUpdateMyUser } from './types';
 
 const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> => {
     try {
@@ -89,6 +89,15 @@ const addFriend = async (data: IAddFriend): Promise<AxiosResponse<IUser>> => {
     }
 };
 
+const removeFriend = async (data: IRemoveFriend): Promise<AxiosResponse<IUser>> => {
+    try {
+        return await api.delete('/friend', { data });
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось видалити друга.', { type: 'error' });
+        throw error;
+    }
+};
+
 const myUserApi = {
     registration,
     login,
@@ -96,6 +105,7 @@ const myUserApi = {
     refresh,
     updateMyUser,
     addFriend,
+    removeFriend,
 };
 
 export default myUserApi;

@@ -1,18 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from '../../models/IUser';
-import { registration, login, logout, checkAuth, updateMyUser, addFriend } from './thunks';
+import { registration, login, logout, checkAuth, updateMyUser, addFriend, removeFriend } from './thunks';
 
 interface IMyUserState {
     user: IUser | null;
     isLoading: boolean;
-    isLocalLoading: boolean;
     error: string | null;
 }
 
 const initialState: IMyUserState = {
     user: null,
     isLoading: false,
-    isLocalLoading: false,
     error: null,
 };
 
@@ -100,16 +98,24 @@ const myUserSlice = createSlice({
             })
             // addFriend
             .addCase(addFriend.pending, (state) => {
-                state.isLocalLoading = true;
                 state.error = null;
             })
             .addCase(addFriend.rejected, (state, action) => {
-                state.isLocalLoading = false;
                 state.error = action.error.message || 'Не вдалось додати друга.';
             })
             .addCase(addFriend.fulfilled, (state, action) => {
                 state.user = action.payload;
-                state.isLocalLoading = false;
+                state.error = null;
+            })
+            // removeFriend
+            .addCase(removeFriend.pending, (state) => {
+                state.error = null;
+            })
+            .addCase(removeFriend.rejected, (state, action) => {
+                state.error = action.error.message || 'Не вдалось додати друга.';
+            })
+            .addCase(removeFriend.fulfilled, (state, action) => {
+                state.user = action.payload;
                 state.error = null;
             });
     },

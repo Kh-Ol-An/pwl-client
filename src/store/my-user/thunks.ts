@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from './api';
 import { IAuth } from '../../models/IAuth';
 import { IUser } from '../../models/IUser';
-import { IAddFriend, ILogin, IRegistration, IUpdateMyUser } from './types';
+import { IAddFriend, ILogin, IRegistration, IRemoveFriend, IUpdateMyUser } from './types';
 
 export const registration = createAsyncThunk<IAuth, IRegistration>(
     'myUser/registration',
@@ -51,6 +51,15 @@ export const addFriend = createAsyncThunk<IUser, IAddFriend>(
     'myUser/addFriend',
     async (data: IAddFriend) => {
         const result = await api.addFriend(data);
+
+        return result.data;
+    },
+);
+
+export const removeFriend = createAsyncThunk<IUser, IRemoveFriend>(
+    'myUser/removeFriend',
+    async (data: IRemoveFriend) => {
+        const result = await api.removeFriend(data);
 
         return result.data;
     },

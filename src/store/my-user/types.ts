@@ -21,3 +21,7 @@ export interface IAddFriend {
     myId: string;
     friendId: string;
 }
+
+export interface IRemoveFriend extends IAddFriend {
+    whereRemove: 'friends' | 'followFrom' | 'followTo';
+}
