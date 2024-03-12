@@ -37,6 +37,7 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
     const handleSelectWish = async () => {
         await dispatch(getWishList(user.id));
         await dispatch(selectUserId(user.id));
+        localStorage.setItem('selectedUserId', user.id);
     };
 
     const handleAddFriend = async () => {

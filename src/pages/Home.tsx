@@ -19,8 +19,14 @@ const Home: FC = () => {
 
         if (!myUser) return;
 
-        dispatch(getWishList(myUser.id));
-        dispatch(selectUserId(myUser.id));
+        const selectedUserId = localStorage.getItem('selectedUserId');
+        if (selectedUserId) {
+            dispatch(getWishList(selectedUserId));
+            dispatch(selectUserId(selectedUserId));
+        } else {
+            dispatch(getWishList(myUser.id));
+            dispatch(selectUserId(myUser.id));
+        }
     }, [dispatch, myUser]);
 
     return (

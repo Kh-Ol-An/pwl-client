@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Avatar, Modal } from '@mui/material';
 import {
     Settings as SettingsIcon,
@@ -19,7 +19,7 @@ import stylesVariables from '../styles/utils/variables.module.scss';
 import { getWishList } from '../store/wishes/thunks';
 import { selectUserId } from '../store/selected-user/slice';
 
-const Header = () => {
+const Header: FC = () => {
     const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
     const [openSettings, setOpenSettings] = useState<boolean>(false);
 
@@ -32,6 +32,7 @@ const Header = () => {
         if (!myUser) return;
         await dispatch(getWishList(myUser.id));
         await dispatch(selectUserId(myUser.id));
+        localStorage.setItem('selectedUserId', myUser.id);
     };
 
     const handleOpenSettings = () => {
