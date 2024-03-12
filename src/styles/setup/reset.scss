@@ -52,6 +52,7 @@ a,
 button {
     margin: 0;
     padding: 0;
+    @include flex-center;
     border: none;
     outline: none;
     background: transparent;

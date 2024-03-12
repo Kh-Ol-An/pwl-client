@@ -1,52 +1,19 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from '../../models/IUser';
-import { registration, login, logout, checkAuth, updateMyUser } from './thunks';
-import { IAuth } from '../../models/IAuth';
+import { registration, login, logout, checkAuth, updateMyUser, addFriend } from './thunks';
 
 interface IMyUserState {
     user: IUser | null;
     isLoading: boolean;
+    isLocalLoading: boolean;
     error: string | null;
 }
 
 const initialState: IMyUserState = {
     user: null,
     isLoading: false,
+    isLocalLoading: false,
     error: null,
-};
-
-const authPending = (state: IMyUserState) => {
-    state.user = null;
-    state.isLoading = true;
-    state.error = null;
-};
-
-const authRejected = (state: IMyUserState, action: any, typeAction: string) => {
-    state.user = null;
-    state.isLoading = false;
-    state.error = action.error.message || `Не вдалось ${typeAction}.`;
-};
-
-const authFulfilled = (state: IMyUserState, action: PayloadAction<IAuth>) => {
-    state.user = action.payload.user;
-    state.isLoading = false;
-    state.error = null;
-};
-
-const usePending = (state: IMyUserState) => {
-    state.isLoading = true;
-    state.error = null;
-};
-
-const useRejected = (state: IMyUserState, action: any, typeAction: string) => {
-    state.isLoading = false;
-    state.error = action.error.message || `Не вдалось ${typeAction}.`;
-};
-
-const useFulfilled = (state: IMyUserState, user: IUser | null) => {
-    state.user = user;
-    state.isLoading = false;
-    state.error = null;
 };
 
 const myUserSlice = createSlice({
@@ -56,25 +23,95 @@ const myUserSlice = createSlice({
     extraReducers: (builder) => {
         builder
             // registration
-            .addCase(registration.pending, authPending)
-            .addCase(registration.rejected, (state, action) => authRejected(state, action, 'зареєструватись'))
-            .addCase(registration.fulfilled, authFulfilled)
+            .addCase(registration.pending, (state) => {
+                state.user = null;
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(registration.rejected, (state, action) => {
+                state.user = null;
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось зареєструватись.';
+            })
+            .addCase(registration.fulfilled, (state, action) => {
+                state.user = action.payload.user;
+                state.isLoading = false;
+                state.error = null;
+            })
             // login
-            .addCase(login.pending, authPending)
-            .addCase(login.rejected, (state, action) => authRejected(state, action, 'увійти на сайт'))
-            .addCase(login.fulfilled, authFulfilled)
+            .addCase(login.pending, (state) => {
+                state.user = null;
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(login.rejected, (state, action) => {
+                state.user = null;
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось увійти на сайт.';
+            })
+            .addCase(login.fulfilled, (state, action) => {
+                state.user = action.payload.user;
+                state.isLoading = false;
+                state.error = null;
+            })
             // logout
-            .addCase(logout.pending, usePending)
-            .addCase(logout.rejected, (state, action) => useRejected(state, action, 'вийти з аккаунту'))
-            .addCase(logout.fulfilled, (state) => useFulfilled(state, null))
+            .addCase(logout.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(logout.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось вийти з аккаунту.';
+            })
+            .addCase(logout.fulfilled, (state) => {
+                state.user = null;
+                state.isLoading = false;
+                state.error = null;
+            })
             // checkAuth
-            .addCase(checkAuth.pending, authPending)
-            .addCase(checkAuth.rejected, (state, action) => authRejected(state, action, 'оновити сесію'))
-            .addCase(checkAuth.fulfilled, authFulfilled)
+            .addCase(checkAuth.pending, (state) => {
+                state.user = null;
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(checkAuth.rejected, (state, action) => {
+                state.user = null;
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось оновити сесію.';
+            })
+            .addCase(checkAuth.fulfilled, (state, action) => {
+                state.user = action.payload.user;
+                state.isLoading = false;
+                state.error = null;
+            })
             // updateMyUser
-            .addCase(updateMyUser.pending, usePending)
-            .addCase(updateMyUser.rejected, (state, action) => useRejected(state, action, 'оновити користувача'))
-            .addCase(updateMyUser.fulfilled, (state, action) => useFulfilled(state, action.payload));
+            .addCase(updateMyUser.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(updateMyUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось оновити користувача.';
+            })
+            .addCase(updateMyUser.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.isLoading = false;
+                state.error = null;
+            })
+            // addFriend
+            .addCase(addFriend.pending, (state) => {
+                state.isLocalLoading = true;
+                state.error = null;
+            })
+            .addCase(addFriend.rejected, (state, action) => {
+                state.isLocalLoading = false;
+                state.error = action.error.message || 'Не вдалось додати друга.';
+            })
+            .addCase(addFriend.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.isLocalLoading = false;
+                state.error = null;
+            });
     },
 });
 

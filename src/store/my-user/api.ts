@@ -80,7 +80,7 @@ const updateMyUser = async ({
     }
 };
 
-const addFriend = async (data: IAddFriend): Promise<AxiosResponse<IAddFriend>> => {
+const addFriend = async (data: IAddFriend): Promise<AxiosResponse<IUser>> => {
     try {
         return await api.post('/friend', data);
     } catch (error: any) {

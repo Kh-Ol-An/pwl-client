@@ -8,6 +8,9 @@ export interface IUser {
     birthday: Dayjs;
     avatar?: string;
     wishList: string[];
+    friends: string[];
+    followFrom: string[];
+    followTo: string[];
     isActivated: boolean;
     createdAt: Dayjs;
     updatedAt: Dayjs;

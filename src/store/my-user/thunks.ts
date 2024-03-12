@@ -47,7 +47,7 @@ export const updateMyUser = createAsyncThunk<IUser, IUpdateMyUser>(
     },
 );
 
-export const addFriend = createAsyncThunk<IAddFriend, IAddFriend>(
+export const addFriend = createAsyncThunk<IUser, IAddFriend>(
     'myUser/addFriend',
     async (data: IAddFriend) => {
         const result = await api.addFriend(data);
