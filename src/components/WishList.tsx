@@ -15,7 +15,13 @@ const WishList = () => {
     const [openWishSettings, setOpenWishSettings] = useState<boolean>(false);
     const [idOfSelectedWish, setIdOfSelectedWish] = useState<IWish['id'] | null>(null);
 
+    const myUser = useAppSelector((state) => state.myUser.user);
     const wishList = useAppSelector((state) => state.wishes?.list);
+    const userList = useAppSelector((state) => state.users.list);
+    const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
+
+    const selectedUser = userList.find(user => user.id === selectedUserId);
+    const lastName = selectedUser?.lastName ? selectedUser.lastName : "";
 
     const handleOpenWish = (id: IWish['id'] | null) => {
         setIdOfSelectedWish(id);
@@ -38,7 +44,14 @@ const WishList = () => {
     return (
         <div className="wish-list">
             <div className="head">
-                <h1 className="title">Особистий список бажань</h1>
+                <h1 className="title">
+                    {
+                        myUser?.id === selectedUserId
+                            ? "Особистий список бажань"
+                            : `Список бажань користувача ${selectedUser?.firstName} ${lastName}`
+                    }
+                </h1>
+
                 <Button onClick={() => handleOpenWishSettings(null)}>
                     Додати бажання
                 </Button>

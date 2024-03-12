@@ -109,7 +109,7 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
                 </Popup>
             }
         >
-            <ListItemButton selected={user.id === selectedUserId} onClick={handleSelectWish}>
+            <ListItemButton onClick={handleSelectWish}>
                 <ListItemAvatar>
                     <Avatar
                         src={user.avatar}
