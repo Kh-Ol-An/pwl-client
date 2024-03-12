@@ -37,6 +37,10 @@
     .item {
         position: relative;
         cursor: pointer;
+
+        &.alone {
+            max-width: 400px;
+        }
     }
 
     .text-box {

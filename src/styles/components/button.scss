@@ -6,12 +6,17 @@
     font-size: 1.6em;
     line-height: 1.5;
     font-weight: 700;
-    text-align: center;
+    text-align: left;
     transition: $transition-fast;
 
     &.disabled {
         pointer-events: none;
         opacity: 0.5;
+    }
+
+    &.small {
+        font-size: 1.4em;
+        line-height: 1.2;
     }
 
     &.action-color {

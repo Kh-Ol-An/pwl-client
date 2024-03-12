@@ -7,6 +7,7 @@ interface IProps {
     tabIndex?: number;
     variant?: 'text';
     color?: 'action-color';
+    fontSize?: 'small';
     disabled?: boolean;
     type?: 'button' | 'submit' | 'reset';
     onClick?: (event: any) => void;
@@ -19,6 +20,7 @@ const Button: FC<IProps> = ({
     tabIndex = 0,
     variant,
     color,
+    fontSize,
     disabled,
     type,
     onClick,
@@ -28,20 +30,19 @@ const Button: FC<IProps> = ({
         disabled && event.preventDefault();
     };
 
+    const tagProps: Record<string, any> = {
+        className: `button${color ? ` ${color}` : ''}${variant ? ` ${variant}` : ''}${fontSize ? ` ${fontSize}` : ''}${disabled ? ' disabled' : ''}`,
+        tabIndex,
+        onClick: onClick || handleClick,
+    };
+
     if (to) {
         return (
             <Link
-                className={
-                    "button"
-                    + (color ? ` ${color}` : "")
-                    + (variant ? ` ${variant}` : "")
-                    + (disabled ? ' disabled' : "")
-                }
                 to={to}
                 target={target}
                 rel="noopener noreferrer"
-                tabIndex={tabIndex}
-                onClick={onClick || handleClick}
+                {...tagProps}
             >
                 {children}
             </Link>
@@ -50,16 +51,9 @@ const Button: FC<IProps> = ({
 
     return (
         <button
-            className={
-                "button"
-                + (color ? ` ${color}` : "")
-                + (variant ? ` ${variant}` : "")
-                + (disabled ? ' disabled' : "")
-            }
             type={type}
-            tabIndex={tabIndex}
             disabled={disabled}
-            onClick={onClick}
+            {...tagProps}
         >
             {children}
         </button>

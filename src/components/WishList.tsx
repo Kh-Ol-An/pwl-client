@@ -55,7 +55,7 @@ const WishList = () => {
             {wishList.length > 0 ? (
                 <ul className="list">
                     {wishList.map((wish) => (
-                        <li className="item" key={wish.id}>
+                        <li className={"item" + (wishList.length < 2 ? " alone" : "")} key={wish.id}>
                             <WishCard
                                 wish={wish}
                                 showWish={() => handleOpenWish(wish.id)}

@@ -30,6 +30,16 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
 
     const dispatch = useAppDispatch();
 
+    const handleChooseWish = async () => {
+        if (!myUser) return;
+
+        setIsLoading(true);
+        console.log('handleChooseWish');
+//        await dispatch(addFriend({ myId: myUser.id, friendId: user.id }));
+        setIsLoading(false);
+        setAnchor(null);
+    };
+
     const handleAddFriend = async () => {
         if (!myUser) return;
 
@@ -78,29 +88,29 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
                     }
                 >
                     {showAddFriend && (
-                        <Button variant="text" onClick={handleAddFriend}>
+                        <Button variant="text" fontSize="small" onClick={handleAddFriend}>
                             {myUser?.followFrom.includes(user.id) ? "Підтвердити дружбу" : "Додати друга"}
                         </Button>
                     )}
                     {(myUser?.friends.includes(user.id) || myUser?.followTo.includes(user.id)) && (
-                        <Button variant="text" onClick={() => handleRemoveFriend('followTo')}>
-                            Видалити свій запит на дружбу
+                        <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('followTo')}>
+                            Видалити свій запит <br/> на дружбу
                         </Button>
                     )}
                     {(myUser?.friends.includes(user.id) || myUser?.followFrom.includes(user.id)) && (
-                        <Button variant="text" onClick={() => handleRemoveFriend('followFrom')}>
-                            Видалити запит користувача на дружбу
+                        <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('followFrom')}>
+                            Видалити запит користувача <br/> на дружбу
                         </Button>
                     )}
                     {myUser?.friends.includes(user.id) && (
-                        <Button variant="text" onClick={() => handleRemoveFriend('friends')}>
+                        <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('friends')}>
                             Видалити друга
                         </Button>
                     )}
                 </Popup>
             }
         >
-            <ListItemButton>
+            <ListItemButton onClick={handleChooseWish}>
                 <ListItemAvatar>
                     <Avatar
                         src={user.avatar}

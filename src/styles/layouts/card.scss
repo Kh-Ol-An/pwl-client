@@ -72,7 +72,11 @@
         }
 
         .card-content {
-            padding: 1em 2em;
+            padding: 1em;
+        }
+
+        .card-scroll {
+            overflow: visible;
         }
     }
 }
