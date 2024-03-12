@@ -14,9 +14,10 @@ import { PeopleAlt as PeopleAltIcon } from '@mui/icons-material';
 import Popup from './Popup';
 import Button from './Button';
 import { useAppDispatch } from '../store/hook';
-import { addFriend } from '../store/my-user/thunks';
+import { addFriend, removeFriend } from '../store/my-user/thunks';
 import { IUser } from '../models/IUser';
 import stylesVariables from '../styles/utils/variables.module.scss';
+import { IRemoveFriend } from '../store/my-user/types';
 
 interface IProps {
     user: IUser;
@@ -38,34 +39,22 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
         setAnchor(null);
     };
 
-    // білий - не друзі
-    //// Додати друга
+    const handleRemoveFriend = async (whereRemove: IRemoveFriend['whereRemove']) => {
+        if (!myUser) return;
 
-    // сірий - запит від мене
-    //// Видалити свій запит на дружбу
-
-    // синій - запит від користувача
-    //// Підтвердити дружбу
-    //// Видалити запит користувача на дружбу
-
-    // яркий - друзі
-    //// Видалити свій запит на дружбу
-    //// Видалити запит користувача на дружбу
-    //// Видалити друга
+        setIsLoading(true);
+        await dispatch(removeFriend({ myId: myUser.id, friendId: user.id, whereRemove }));
+        setIsLoading(false);
+        setAnchor(null);
+    };
 
     let iconColor = stylesVariables.lightColor;
     myUser?.followTo.includes(user.id) && (iconColor = stylesVariables.specialColor);
     (myUser?.followFrom.includes(user.id) || myUser?.friends.includes(user.id))
         && (iconColor = stylesVariables.primaryColor);
 
-    let addFriendText = '';
-    !myUser?.followTo.includes(user.id) && (addFriendText = 'Додати друга');
-    myUser?.followFrom.includes(user.id) && (addFriendText = 'Підтвердити дружбу');
-
-    let removeFriendText = '';
-    myUser?.friends.includes(user.id) && (removeFriendText = 'Видалити друга');
-    myUser?.followTo.includes(user.id) && (removeFriendText = 'Видалити свій запит на дружбу');
-    myUser?.followFrom.includes(user.id) && (removeFriendText = 'Видалити запит користувача на дружбу');
+    const showAddFriend = myUser?.followFrom.includes(user.id)
+        || (!myUser?.friends.includes(user.id) && !myUser?.followTo.includes(user.id));
 
     return (
         <ListItem
@@ -88,14 +77,24 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
                               />
                     }
                 >
-                    {addFriendText.length > 0 && (
+                    {showAddFriend && (
                         <Button variant="text" onClick={handleAddFriend}>
-                            {addFriendText}
+                            {myUser?.followFrom.includes(user.id) ? "Підтвердити дружбу" : "Додати друга"}
                         </Button>
                     )}
-                    {removeFriendText.length > 0 && (
-                        <Button variant="text">
-                            {removeFriendText}
+                    {(myUser?.friends.includes(user.id) || myUser?.followTo.includes(user.id)) && (
+                        <Button variant="text" onClick={() => handleRemoveFriend('followTo')}>
+                            Видалити свій запит на дружбу
+                        </Button>
+                    )}
+                    {(myUser?.friends.includes(user.id) || myUser?.followFrom.includes(user.id)) && (
+                        <Button variant="text" onClick={() => handleRemoveFriend('followFrom')}>
+                            Видалити запит користувача на дружбу
+                        </Button>
+                    )}
+                    {myUser?.friends.includes(user.id) && (
+                        <Button variant="text" onClick={() => handleRemoveFriend('friends')}>
+                            Видалити друга
                         </Button>
                     )}
                 </Popup>
