@@ -20,10 +20,24 @@ const Sidebar: FC<IProps> = ({ myUser }) => {
 
     const dispatch = useAppDispatch();
 
-    const changeUsersType = (e: ChangeEvent<HTMLInputElement>) => {
+    const changeUsersType = async (e: ChangeEvent<HTMLInputElement>) => {
+        if (!myUser?.id) return;
+
+        // показувати всіх користувачів або тільки друзів під час перемикання типу користувачів
         const checked = e.target.checked;
+        const currentVisibleUsers
+            = users.list.filter((user) => checked ? user.id !== myUser.id : user.friends.includes(myUser.id));
+        setVisibleUsers(currentVisibleUsers);
+
+        // зберігати в локальному сховищі вибір типу користувачів
         setIsAll(checked);
         localStorage.setItem('users-type-is-all', checked.toString());
+
+        // при перемиканні типу користувачів скидати обраного користувача якщо його немає в списку
+        if (checked || currentVisibleUsers.some(user => user.id === selectedUserId)) return;
+        await dispatch(getWishList(myUser.id));
+        await dispatch(selectUserId(myUser.id));
+        localStorage.setItem('selectedUserId', myUser.id);
     };
 
     useEffect(() => {
@@ -35,20 +49,9 @@ const Sidebar: FC<IProps> = ({ myUser }) => {
     useEffect(() => {
         if (!myUser?.id) return;
 
+        // показувати всіх користувачів або тільки друзів під час завантаження сторінки
         setVisibleUsers(users.list.filter((user) => isAll ? user.id !== myUser.id : user.friends.includes(myUser.id)));
     }, [myUser, users.list, isAll]);
-
-    useEffect(() => {
-        if (!myUser?.id) return;
-        if (visibleUsers.some(user => user.id === selectedUserId)) return;
-
-        const selectMyUser = async () => {
-            await dispatch(getWishList(myUser.id));
-            await dispatch(selectUserId(myUser.id));
-            localStorage.setItem('selectedUserId', myUser.id);
-        };
-        selectMyUser();
-    }, [myUser, visibleUsers, selectedUserId, dispatch]);
 
     return (
         <div className="sidebar">
