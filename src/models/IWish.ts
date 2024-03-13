@@ -11,6 +11,7 @@ export type ICurrentImage = (File | IImage);
 
 export interface IWish {
     id: string;
+    user: string;
     material: boolean;
     show: 'all' | 'friends' | 'nobody';
     name: string;

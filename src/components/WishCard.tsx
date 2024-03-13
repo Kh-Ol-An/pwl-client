@@ -3,14 +3,16 @@ import Action from './Action';
 import EditIcon from '@mui/icons-material/Edit';
 import { IWish } from '../models/IWish';
 import { addingWhiteSpaces } from '../utils/formating-value';
+import { IUser } from '../models/IUser';
 
 interface IProps {
     wish: IWish;
+    myUser: IUser | null;
     showWish: () => void;
     editWish: () => void;
 }
 
-const WishCard: FC<IProps> = ({ wish, showWish, editWish }) => {
+const WishCard: FC<IProps> = ({ wish, myUser, showWish, editWish }) => {
     const handleEditWish = (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         editWish();
@@ -43,9 +45,11 @@ const WishCard: FC<IProps> = ({ wish, showWish, editWish }) => {
                 </div>
             </div>
 
-            <Action onClick={handleEditWish}>
-                <EditIcon />
-            </Action>
+            {myUser?.id === wish.user && (
+                <Action onClick={handleEditWish}>
+                    <EditIcon />
+                </Action>
+            )}
         </div>
     );
 };

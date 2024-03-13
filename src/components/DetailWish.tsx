@@ -11,14 +11,16 @@ import Button from './Button';
 import { IWish } from '../models/IWish';
 import { addingWhiteSpaces } from '../utils/formating-value';
 import stylesVariables from '../styles/utils/variables.module.scss';
+import { IUser } from '../models/IUser';
 
 interface IProps {
     wish?: IWish;
+    myUser: IUser | null;
     editWish: () => void;
     close: () => void;
 }
 
-const WishCard: FC<IProps> = ({ wish, editWish, close }) => {
+const WishCard: FC<IProps> = ({ wish, myUser, editWish, close }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     let show = (
@@ -122,7 +124,9 @@ const WishCard: FC<IProps> = ({ wish, editWish, close }) => {
                                     </div>
                                 )}
 
-                                <p className="detail-wish-label">{show}</p>
+                                {myUser?.id === wish?.user && (
+                                    <p className="detail-wish-label">{show}</p>
+                                )}
                             </div>
 
                             {wish?.description && (
@@ -132,11 +136,13 @@ const WishCard: FC<IProps> = ({ wish, editWish, close }) => {
                                 </p>
                             )}
 
-                            <div className="detail-wish-action">
-                                <Button type="button" onClick={handleEditWish}>
-                                    Редагувати бажання
-                                </Button>
-                            </div>
+                            {myUser?.id === wish?.user && (
+                                <div className="detail-wish-action">
+                                    <Button type="button" onClick={handleEditWish}>
+                                        Редагувати бажання
+                                    </Button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

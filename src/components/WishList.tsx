@@ -54,9 +54,11 @@ const WishList = () => {
                     }
                 </h1>
 
-                <Button onClick={() => handleOpenWishSettings(null)}>
-                    Додати бажання
-                </Button>
+                {myUser?.id === selectedUserId && (
+                    <Button onClick={() => handleOpenWishSettings(null)}>
+                        Додати бажання
+                    </Button>
+                )}
             </div>
 
             {wishList.length > 0 ? (
@@ -65,6 +67,7 @@ const WishList = () => {
                         <li className={"item" + (wishList.length < 2 ? " alone" : "")} key={wish.id}>
                             <WishCard
                                 wish={wish}
+                                myUser={myUser}
                                 showWish={() => handleOpenWish(wish.id)}
                                 editWish={() => handleOpenWishSettings(wish.id)}
                             />
@@ -89,6 +92,7 @@ const WishList = () => {
                     <div className="modal modal-lg">
                         <DetailWish
                             wish={detailWish}
+                            myUser={myUser}
                             editWish={() => handleOpenWishSettings(idOfSelectedWish)}
                             close={handleCloseWish}
                         />
