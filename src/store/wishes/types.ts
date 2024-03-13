@@ -14,3 +14,8 @@ export interface ICreateWish {
 export interface IUpdateWish extends ICreateWish {
     id: string;
 }
+
+export interface IGetWish {
+    myId: string;
+    userId: string;
+}

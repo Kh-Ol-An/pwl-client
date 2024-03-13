@@ -35,7 +35,9 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
     const dispatch = useAppDispatch();
 
     const handleSelectWish = async () => {
-        await dispatch(getWishList(user.id));
+        if (!myUser) return;
+
+        await dispatch(getWishList({ myId: myUser.id, userId: user.id }));
         await dispatch(selectUserId(user.id));
         localStorage.setItem('selectedUserId', user.id);
     };

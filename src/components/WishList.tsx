@@ -23,6 +23,8 @@ const WishList = () => {
     const selectedUser = userList.find(user => user.id === selectedUserId);
     const lastName = selectedUser?.lastName ? selectedUser.lastName : "";
 
+    const detailWish = wishList && wishList.find(wish => wish.id === idOfSelectedWish);
+
     const handleOpenWish = (id: IWish['id'] | null) => {
         setIdOfSelectedWish(id);
         setOpenWish(true);
@@ -77,24 +79,26 @@ const WishList = () => {
                 </div>
             )}
 
-            <Modal
-                open={openWish}
-                onClose={handleCloseWish}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <div className="modal modal-lg">
-                    <DetailWish
-                        wish={wishList.find(wish => wish.id === idOfSelectedWish)}
-                        editWish={() => handleOpenWishSettings(idOfSelectedWish)}
-                        close={handleCloseWish}
-                    />
+            {detailWish && (
+                <Modal
+                    open={openWish}
+                    onClose={handleCloseWish}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div className="modal modal-lg">
+                        <DetailWish
+                            wish={detailWish}
+                            editWish={() => handleOpenWishSettings(idOfSelectedWish)}
+                            close={handleCloseWish}
+                        />
 
-                    <Action onClick={handleCloseWish}>
-                        <CloseIcon />
-                    </Action>
-                </div>
-            </Modal>
+                        <Action onClick={handleCloseWish}>
+                            <CloseIcon />
+                        </Action>
+                    </div>
+                </Modal>
+            )}
 
             <Modal
                 open={openWishSettings}

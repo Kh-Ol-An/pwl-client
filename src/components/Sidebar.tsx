@@ -21,7 +21,7 @@ const Sidebar: FC<IProps> = ({ myUser }) => {
     const dispatch = useAppDispatch();
 
     const changeUsersType = async (e: ChangeEvent<HTMLInputElement>) => {
-        if (!myUser?.id) return;
+        if (!myUser) return;
 
         // показувати всіх користувачів або тільки друзів під час перемикання типу користувачів
         const checked = e.target.checked;
@@ -35,7 +35,7 @@ const Sidebar: FC<IProps> = ({ myUser }) => {
 
         // при перемиканні типу користувачів скидати обраного користувача якщо його немає в списку
         if (checked || currentVisibleUsers.some(user => user.id === selectedUserId)) return;
-        await dispatch(getWishList(myUser.id));
+        await dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
         await dispatch(selectUserId(myUser.id));
         localStorage.setItem('selectedUserId', myUser.id);
     };

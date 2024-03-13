@@ -30,7 +30,8 @@ const Header: FC = () => {
 
     const handleSelectWish = async () => {
         if (!myUser) return;
-        await dispatch(getWishList(myUser.id));
+
+        await dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
         await dispatch(selectUserId(myUser.id));
         localStorage.setItem('selectedUserId', myUser.id);
     };

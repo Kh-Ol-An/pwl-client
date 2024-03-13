@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from './api';
 import { IUser } from '../../models/IUser';
 import { IWish } from '../../models/IWish';
-import { ICreateWish, IUpdateWish } from './types';
+import { ICreateWish, IGetWish, IUpdateWish } from './types';
 
 export const createWish = createAsyncThunk<IWish, ICreateWish>(
     'wishes/createWish',
@@ -31,10 +31,10 @@ export const deleteWish = createAsyncThunk<IWish['id'], [IUser['id'], IWish['id'
     },
 );
 
-export const getWishList = createAsyncThunk<IWish[], IUser['id']>(
+export const getWishList = createAsyncThunk<IWish[], IGetWish>(
     'wishes/getWishList',
-    async (userId) => {
-        const result = await api.getWishList(userId);
+    async (params) => {
+        const result = await api.getWishList(params);
 
         return result.data;
     },

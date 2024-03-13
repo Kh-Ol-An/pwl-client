@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import api from '../../utils/api';
 import { IUser } from '../../models/IUser';
 import { ICurrentImage, IWish } from '../../models/IWish';
-import { ICreateWish, IUpdateWish } from './types';
+import { ICreateWish, IGetWish, IUpdateWish } from './types';
 
 const processCommonFields = (formData: FormData, commonFields: { [key: string]: string | boolean }) => {
     for (const [key, value] of Object.entries(commonFields)) {
@@ -90,16 +90,9 @@ const deleteWish = async (userId: IUser['id'], wishId: IWish['id']): Promise<Axi
     }
 };
 
-const getWishList = async (userId: IUser['id']): Promise<AxiosResponse<IWish[]>> => {
+const getWishList = async (params: IGetWish): Promise<AxiosResponse<IWish[]>> => {
     try {
-        return await api.get(
-            '/wishes',
-            {
-                params: {
-                    userId
-                }
-            }
-        );
+        return await api.get('/wishes', { params });
     } catch (error: any) {
         toast(error.response?.data?.message || 'Не вдалось отримати всі бажання.', { type: 'error' });
         throw error;
