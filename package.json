@@ -1,5 +1,6 @@
 {
     "name": "pwl-client",
+    "homepage": "https://wish-hub.net/",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
