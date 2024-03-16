@@ -32,7 +32,7 @@ const Home: FC = () => {
 
     return (
         <>
-            {myUser?.isActivated === false && <Inactivated />}
+            {!myUser?.isActivated && <Inactivated />}
 
             <Header />
 
