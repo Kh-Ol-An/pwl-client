@@ -71,7 +71,7 @@
     height: 100%;
     @include flex-column;
     box-shadow: $shadow;
-    border-radius: $radius-xl;
+    border-radius: $radius-lg;
 }
 
 @mixin running-lights($color) {
