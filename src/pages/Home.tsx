@@ -7,6 +7,7 @@ import WishList from '../components/WishList';
 import Loading from '../components/Loading';
 import { getWishList } from '../store/wishes/thunks';
 import { selectUserId } from '../store/selected-user/slice';
+import Inactivated from '../components/Inactivated';
 
 const Home: FC = () => {
     const myUser = useAppSelector((state) => state.myUser.user);
@@ -31,6 +32,8 @@ const Home: FC = () => {
 
     return (
         <>
+            {myUser?.isActivated === false && <Inactivated />}
+
             <Header />
 
             <div className="page home-page">
@@ -47,6 +50,7 @@ const Home: FC = () => {
                     {/* TODO: додати кнопку "Забув пароль" */}
                     {/* TODO: додати можливість змінювати пароль */}
                     {/* TODO: privacy policy */}
+                    {/* TODO: Видаляти посилання активації через добу якщо вона не була застосована і надавати можливість користувачеві запитувати ще раз це посилання */}
                     {/* TODO: видалення акаунта. перше - написати фразу "Я видаляю свій акаунт" */}
                     {/* TODO: видалення акаунта. друге - "Це останнє підтвердження перед видаленням акаунта. Нам просто не хочеться щоб Ви уходили. Нашому суму не має меж...". Для підтвердження треба ввести логін та пароль */}
                 </div>

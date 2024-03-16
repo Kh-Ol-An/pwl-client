@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ThemeProvider, createTheme } from '@mui/material';
-import Inactivated from './components/Inactivated';
 import Loading from './components/Loading';
 import { useAppDispatch, useAppSelector } from './store/hook';
 import Home from './pages/Home';
@@ -11,6 +10,7 @@ import Auth from './pages/Auth';
 import NotFound from './pages/NotFound';
 import { checkAuth } from './store/my-user/thunks';
 import RoutesGuard from './utils/RoutesGuard';
+import ActivationLinkExpired from './pages/ActivationLinkExpired';
 
 const theme = createTheme({
     palette: {
@@ -33,8 +33,6 @@ const App: FC = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            {myUser.user?.isActivated === false && <Inactivated />}
-
             {myUser.isLoading && <Loading />}
 
             {ready && (
@@ -46,6 +44,7 @@ const App: FC = () => {
                         <Route path="/auth" element={<Auth />} />
                     </Route>
                     <Route path="/welcome" element={<Welcome />} />
+                    <Route path="/activation-link-expired" element={<ActivationLinkExpired />} />
                     <Route path="/*" element={<NotFound />} />
                 </Routes>
             )}

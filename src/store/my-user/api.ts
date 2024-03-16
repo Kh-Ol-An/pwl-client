@@ -39,7 +39,14 @@ const logout = async (): Promise<void> => {
 
 const refresh = async (): Promise<AxiosResponse<IAuth>> => {
     try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/refresh`, { withCredentials: true });
+        const response = await axios.get(
+            `${
+                process.env.NODE_ENV === 'development'
+                    ? process.env.REACT_APP_DEV_API_URL
+                    : process.env.REACT_APP_API_URL
+            }/refresh`,
+            { withCredentials: true },
+        );
         await localStorage.setItem('token', response.data.accessToken);
         return response;
     } catch (error: any) {
