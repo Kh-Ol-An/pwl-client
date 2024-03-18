@@ -19,7 +19,7 @@
     }
 
     &.small {
-        font-size: 1.4em;
+        font-size: 14px;
         line-height: 1.2;
     }
 
@@ -36,9 +36,9 @@
     }
 
     &:not(.text) {
-        padding: 0.4em 1.6em;
+        padding: 4px 16px;
         @include flex-center;
-        gap: 0.8em;
+        gap: 8px;
         background: $primary-color;
         color: $accent-color;
         border-radius: $radius;

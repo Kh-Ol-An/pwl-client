@@ -35,16 +35,16 @@
         border-radius: $radius-lg;
         border-bottom: 2px solid rgba(255, 255, 255, 0.5);
         background: $accent-color;
-        padding: 1.4em 1.6em;
+        padding: 14px 16px;
     }
 
     .wish-card-name {
         color: $light-color;
-        font-size: 2em;
+        font-size: 20px;
         font-weight: 700;
         text-align: center;
         width: 100%;
-        height: 1.3em;
+        height: 13px;
         text-overflow: ellipsis;
         overflow: hidden;
         display: -webkit-box;
@@ -54,7 +54,7 @@
 
     .wish-card-data {
         @include flex-center;
-        gap: 2em;
+        gap: 20px;
         margin-top: 0;
         height: 0;
         overflow: hidden;
@@ -63,20 +63,20 @@
 
     .wish-card-img {
         margin-top: 0;
-        width: 9em;
-        height: 9em;
+        width: 90px;
+        height: 90px;
         border-radius: $radius-md;
     }
 
     .wish-card-price {
         color: $light-color;
-        font-size: 1.6em;
+        font-size: 16px;
         text-align: center;
     }
 
     .action {
-        top: -0.2em;
-        right: -0.2em;
+        top: -2px;
+        right: -2px;
 
         svg {
             width: 90%;
@@ -94,8 +94,8 @@
         }
 
         .wish-card-data {
-            margin-top: 1em;
-            height: 9em;
+            margin-top: 10px;
+            height: 90px;
         }
     }
 }

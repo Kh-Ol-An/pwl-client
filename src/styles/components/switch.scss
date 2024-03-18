@@ -20,9 +20,9 @@
             position: absolute;
             top: 50%;
             left: 100%;
-            transform: translate(calc(-100% + 0.1em), -50%);
-            width: 1.9em;
-            height: 1.9em;
+            transform: translate(calc(-100% + 1px), -50%);
+            width: 19px;
+            height: 19px;
             border-radius: $radius-round;
             background: linear-gradient(to bottom, $special-color, $secondary-color);
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5),
@@ -41,7 +41,7 @@
 
         &.checked::before {
             left: 0;
-            transform: translate(-0.1em, -50%);
+            transform: translate(-1px, -50%);
         }
     }
 }

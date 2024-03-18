@@ -1,8 +1,8 @@
 .action {
     @include action-box(35px, 35px);
     position: absolute;
-    top: 1.2em;
-    right: 1.2em;
+    top: 12px;
+    right: 12px;
 
     .action-outer-border {
         @include action-outer-border;

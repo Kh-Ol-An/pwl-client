@@ -4,16 +4,16 @@
     flex-direction: column;
 
     .dropzone {
-        padding: 5em;
+        padding: 50px;
         border: 2px dashed $special-color;
         cursor: pointer;
     }
 
     .text {
-        font-size: 1.4em;
+        font-size: 14px;
         color: $special-color;
         text-align: center;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.5px;
 
         strong {
             font-weight: 700;
@@ -24,9 +24,9 @@
         position: relative;
         top: auto !important;
         left: auto !important;
-        margin: 1.6em 0.8em 0;
-        width: 6em;
-        height: 6em;
+        margin: 16px 8px 0;
+        width: 60px;
+        height: 60px;
         display: inline-block;
 
         img {

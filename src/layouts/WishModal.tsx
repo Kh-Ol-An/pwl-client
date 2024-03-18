@@ -30,7 +30,7 @@ type Inputs = {
     description: string
 }
 
-const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
+const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const [material, setMaterial] = useState<ICreateWish['material']>(true);
     const [show, setShow] = useState<ICreateWish['show']>('all');
     const [showConfirmRemoveWish, setShowConfirmRemoveWish] = useState<boolean>(false);
@@ -257,4 +257,4 @@ const WishSettings: FC<IProps> = ({ idOfSelectedWish, close }) => {
     );
 };
 
-export default WishSettings;
+export default WishModal;

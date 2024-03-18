@@ -2,7 +2,7 @@
     @include flex-center;
     width: 100%;
     height: 100%;
-    padding: 2em;
+    padding: 20px;
 
     &:not(.local) {
         position: fixed;
@@ -18,13 +18,13 @@
     .spinner {
         position: relative;
         display: inline-block;
-        width: 8em;
-        height: 8em;
+        width: 80px;
+        height: 80px;
 
         div {
             position: absolute;
-            width: 0.6em;
-            height: 0.6em;
+            width: 6px;
+            height: 6px;
             background-color: $primary-color;
             border-radius: $radius-round;
             animation: spinner 1.2s infinite ease-in-out;
@@ -32,74 +32,74 @@
 
         div:nth-of-type(1) {
             animation-delay: 0s;
-            top: 3.7em;
-            left: 6.6em;
+            top: 37px;
+            left: 66px;
         }
 
         div:nth-of-type(2) {
             animation-delay: -0.1s;
-            top: 2.2em;
-            left: 6.2em;
+            top: 22px;
+            left: 62px;
         }
 
         div:nth-of-type(3) {
             animation-delay: -0.2s;
-            top: 1.1em;
-            left: 5.2em;
+            top: 11px;
+            left: 52px;
         }
 
         div:nth-of-type(4) {
             animation-delay: -0.3s;
-            top: 0.7em;
-            left: 3.7em;
+            top: 7px;
+            left: 37px;
         }
 
         div:nth-of-type(5) {
             animation-delay: -0.4s;
-            top: 1.1em;
-            left: 2.2em;
+            top: 11px;
+            left: 22px;
         }
 
         div:nth-of-type(6) {
             animation-delay: -0.5s;
-            top: 2.2em;
-            left: 1.1em;
+            top: 22px;
+            left: 11px;
         }
 
         div:nth-of-type(7) {
             animation-delay: -0.6s;
-            top: 3.7em;
-            left: 0.7em;
+            top: 37px;
+            left: 7px;
         }
 
         div:nth-of-type(8) {
             animation-delay: -0.7s;
-            top: 5.2em;
-            left: 1.1em;
+            top: 52px;
+            left: 11px;
         }
 
         div:nth-of-type(9) {
             animation-delay: -0.8s;
-            top: 6.2em;
-            left: 2.2em;
+            top: 62px;
+            left: 22px;
         }
 
         div:nth-of-type(10) {
             animation-delay: -0.9s;
-            top: 6.6em;
-            left: 3.7em;
+            top: 66px;
+            left: 37px;
         }
 
         div:nth-of-type(11) {
             animation-delay: -1s;
-            top: 6.2em;
-            left: 5.2em;
+            top: 62px;
+            left: 52px;
         }
 
         div:nth-of-type(12) {
             animation-delay: -1.1s;
-            top: 5.2em;
-            left: 6.2em;
+            top: 52px;
+            left: 62px;
         }
     }
 }

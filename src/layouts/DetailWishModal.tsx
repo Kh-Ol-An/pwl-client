@@ -20,7 +20,7 @@ interface IProps {
     close: () => void;
 }
 
-const WishCard: FC<IProps> = ({ wish, myUser, editWish, close }) => {
+const DetailWishModal: FC<IProps> = ({ wish, myUser, editWish, close }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     let show = (
@@ -151,4 +151,4 @@ const WishCard: FC<IProps> = ({ wish, myUser, editWish, close }) => {
     );
 };
 
-export default WishCard;
+export default DetailWishModal;

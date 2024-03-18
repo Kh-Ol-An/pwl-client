@@ -1,15 +1,15 @@
 .wish-settings {
     width: 100%;
-    padding-top: 0.4em;
+    padding-top: 4px;
     @include flex-column;
 
     .material {
         width: 100%;
         @include flex-center;
-        gap: 2em;
+        gap: 20px;
 
         span {
-            font-size: 1.6em;
+            font-size: 16px;
             font-weight: 700;
             color: $special-color;
             transition: $transition-slow;
@@ -25,11 +25,11 @@
     }
 
     .input {
-        margin-top: 2.2em;
+        margin-top: 22px;
     }
 
     & > .input {
-        margin-top: 4em;
+        margin-top: 40px;
     }
 
     .expander {
@@ -38,51 +38,51 @@
         max-height: 0;
         overflow: hidden;
         @include flex-column;
-        gap: 2em;
+        gap: 20px;
 
         &.transition {
             transition: $transition-slow;
         }
 
         &.rolled-up {
-            margin-top: 2em;
-            max-height: 20em;
+            margin-top: 20px;
+            max-height: 200px;
         }
     }
 
     .show {
-        margin: 2em auto 0 0;
+        margin: 20px auto 0 0;
         display: flex;
         flex-direction: column;
-        gap: 1em;
+        gap: 10px;
 
         .show-label {
-            font-size: 1.4em;
+            font-size: 14px;
             color: $primary-color;
         }
 
         .show-actions {
             @include flex-center;
-            gap: 2em;
+            gap: 20px;
         }
     }
 
     .drag-n-drop {
-        margin-top: 2em;
+        margin-top: 20px;
     }
 
     .actions {
-        margin-top: 2em;
+        margin-top: 20px;
         width: 100%;
         @include flex-between;
-        gap: 1em;
+        gap: 10px;
     }
 
     .remove-all {
         width: max-content;
         background: transparent;
         font-weight: 700;
-        font-size: 1.4em;
+        font-size: 14px;
         color: $action-color;
 
         &:hover {
@@ -92,7 +92,7 @@
 
     .sub-actions {
         @include flex-center;
-        gap: 2em;
+        gap: 20px;
         margin-left: auto;
     }
 }

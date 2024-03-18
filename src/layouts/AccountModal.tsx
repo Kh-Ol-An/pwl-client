@@ -26,7 +26,7 @@ type Inputs = {
     lastName: string
 }
 
-const AccountSettings: FC<IProps> = ({ close }) => {
+const AccountModal: FC<IProps> = ({ close }) => {
     const [clickedOnSubmit, setClickedOnSubmit] = useState(false);
     const [avatar, setAvatar] = useState<ICurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
@@ -181,4 +181,4 @@ const AccountSettings: FC<IProps> = ({ close }) => {
     );
 };
 
-export default AccountSettings;
+export default AccountModal;

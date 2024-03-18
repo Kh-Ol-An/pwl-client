@@ -13,7 +13,7 @@ import { getWishList } from '../store/wishes/thunks';
 import { logout } from '../store/my-user/thunks';
 import { selectUserId } from '../store/selected-user/slice';
 import Card from './Card';
-import AccountSettings from './AccountSettings';
+import AccountModal from './AccountModal';
 import Button from '../components/Button';
 import Action from '../components/Action';
 import Popup from "../components/Popup";
@@ -93,7 +93,7 @@ const Header: FC = () => {
                     >
                         <div className="modal">
                             <Card>
-                                <AccountSettings close={handleCloseSettings} />
+                                <AccountModal close={handleCloseSettings} />
                             </Card>
 
                             <Action onClick={handleCloseSettings}>

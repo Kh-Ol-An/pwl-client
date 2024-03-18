@@ -4,9 +4,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     @include flex-column;
-    gap: 1em;
+    gap: 10px;
     width: 60%;
-    padding: 2em;
+    padding: 20px;
     outline: none;
 
     &.modal-lg {
@@ -16,6 +16,6 @@
     .modal-actions {
         margin-left: auto;
         @include flex-center;
-        gap: 3em;
+        gap: 30px;
     }
 }

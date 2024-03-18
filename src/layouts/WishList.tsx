@@ -3,10 +3,10 @@ import { Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useAppSelector } from '../store/hook';
 import { IWish } from '../models/IWish';
-import WishSettings from './WishSettings';
+import WishModal from './WishModal';
 import Card from './Card';
 import WishCard from './WishCard';
-import DetailWish from './DetailWish';
+import DetailWishModal from './DetailWishModal';
 import Action from '../components/Action';
 import Button from '../components/Button';
 
@@ -90,7 +90,7 @@ const WishList = () => {
                     aria-describedby="modal-modal-description"
                 >
                     <div className="modal modal-lg">
-                        <DetailWish
+                        <DetailWishModal
                             wish={detailWish}
                             myUser={myUser}
                             editWish={() => handleOpenWishSettings(idOfSelectedWish)}
@@ -112,7 +112,7 @@ const WishList = () => {
             >
                 <div className="modal">
                     <Card>
-                        <WishSettings idOfSelectedWish={idOfSelectedWish} close={handleCloseWishSettings} />
+                        <WishModal idOfSelectedWish={idOfSelectedWish} close={handleCloseWishSettings} />
                     </Card>
 
                     <Action onClick={handleCloseWishSettings}>

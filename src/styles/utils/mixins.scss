@@ -20,13 +20,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1em;
+    gap: 10px;
 }
 
 @mixin flex-wrap {
     @include flex-center;
     flex-wrap: wrap;
-    gap: 1em;
+    gap: 10px;
 }
 
 @mixin icon-shadow($color) {
@@ -43,7 +43,7 @@
 
 @mixin action-outer-border {
     @include flex-center;
-    gap: 2em;
+    gap: 20px;
     width: 100%;
     height: 100%;
     border-radius: $radius-big;
