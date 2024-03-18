@@ -1,13 +1,12 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Login as LoginIcon, Favorite as FavoriteIcon } from '@mui/icons-material';
 import Button from '../components/Button';
 import { useAppDispatch } from '../store/hook';
 import { registration, login } from '../store/my-user/thunks';
 import Card from '../components/Card';
 import Input from '../components/Input';
-import stylesVariables from '../styles/utils/variables.module.scss';
 import { accountFirstNameValidation, emailValidation, passwordValidation } from '../utils/validations';
+import LogoIcon from '../assets/images/logo.svg';
 
 type Inputs = {
     firstName: string
@@ -55,9 +54,9 @@ const Auth: FC = () => {
                 <Card withLights>
                     <form className="form" onSubmit={handleSubmit(onSubmit)}>
                         <h1 className="title">
-                            <LoginIcon className="login-icon" sx={{ color: stylesVariables.primaryColor }} />
+                            <img className="logo" src={LogoIcon} alt="logo" />
                             Привіт! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}
-                            <FavoriteIcon className="favorite-icon" sx={{ color: stylesVariables.actionColor }} />
+                            <img className="logo" src={LogoIcon} alt="logo" />
                         </h1>
                         {isRegistration && (
                             <Input

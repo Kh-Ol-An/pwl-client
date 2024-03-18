@@ -11,11 +11,7 @@
         gap: 2em;
     }
 
-    .login-icon {
-        @include icon-shadow($primary-color);
-    }
-
-    .favorite-icon {
-        @include icon-shadow($action-color);
+    .logo {
+        width: 30px;
     }
 }

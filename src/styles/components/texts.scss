@@ -1,6 +1,6 @@
 .title {
     @include flex-center;
-    gap: 1em;
+    gap: 10px;
     @include title;
 }
 
