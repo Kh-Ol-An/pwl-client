@@ -1,17 +1,17 @@
 import React, { FC, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCube, FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import { EffectCube, FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import Button from './Button';
 import { IWish } from '../models/IWish';
-import { addingWhiteSpaces } from '../utils/formating-value';
-import stylesVariables from '../styles/utils/variables.module.scss';
 import { IUser } from '../models/IUser';
+import { addingWhiteSpaces } from '../utils/formating-value';
+import Button from '../components/Button';
+import stylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     wish?: IWish;

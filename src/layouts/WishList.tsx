@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import Button from './Button';
-import WishSettings from './WishSettings';
 import { useAppSelector } from '../store/hook';
 import { IWish } from '../models/IWish';
+import WishSettings from './WishSettings';
 import Card from './Card';
-import Action from './Action';
 import WishCard from './WishCard';
 import DetailWish from './DetailWish';
+import Action from '../components/Action';
+import Button from '../components/Button';
 
 const WishList = () => {
     const [openWish, setOpenWish] = useState<boolean>(false);

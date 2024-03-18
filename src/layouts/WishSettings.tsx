@@ -1,9 +1,8 @@
 import React, { FC, ChangeEvent, useState, useLayoutEffect, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { createWish, deleteWish, updateWish } from '../store/wishes/thunks';
-import Input from './Input';
+import { ICreateWish } from '../store/wishes/types';
 import { ICurrentImage, IImage, IWish } from '../models/IWish';
 import {
     onlyWhitespaceValidation,
@@ -11,12 +10,13 @@ import {
     wishNameValidation,
     wishPriceValidation,
 } from '../utils/validations';
-import DragNDrop from './DragNDrop';
 import { removingWhiteSpaces, addingWhiteSpaces } from '../utils/formating-value';
-import Switch from './Switch';
 import ConfirmModal from './ConfirmModal';
-import Radio from './Radio';
-import { ICreateWish } from '../store/wishes/types';
+import Button from '../components/Button';
+import Input from '../components/Input';
+import DragNDrop from '../components/DragNDrop';
+import Switch from '../components/Switch';
+import Radio from '../components/Radio';
 
 interface IProps {
     idOfSelectedWish: IWish['id'] | null;

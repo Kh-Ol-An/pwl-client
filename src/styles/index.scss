@@ -9,14 +9,12 @@
 @import './setup/base';
 
 // layouts
-@import './layouts/toast';
 @import './layouts/page';
 @import './layouts/card';
 @import './layouts/loading';
 @import './layouts/inactivated';
 @import './layouts/header';
 @import './layouts/modal';
-@import './layouts/popover';
 @import './layouts/sidebar';
 @import './layouts/wish-list';
 @import './layouts/account-settings';
@@ -37,6 +35,8 @@
 @import './components/radio';
 @import './components/popup';
 @import './components/date-picker';
+@import './components/popover';
+@import './components/toast';
 
 // pages
 @import './pages/welcome';

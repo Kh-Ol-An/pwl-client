@@ -1,11 +1,11 @@
 import React, { FC, ChangeEvent, useState, useEffect } from 'react';
-import { IUser } from '../models/IUser';
 import { useAppDispatch, useAppSelector } from '../store/hook';
-import Loading from './Loading';
-import Switch from './Switch';
-import UserAction from './UserAction';
 import { getWishList } from '../store/wishes/thunks';
 import { selectUserId } from '../store/selected-user/slice';
+import { IUser } from '../models/IUser';
+import Loading from './Loading';
+import Switch from '../components/Switch';
+import UserAction from '../components/UserAction';
 
 interface IProps {
     myUser: IUser | null;

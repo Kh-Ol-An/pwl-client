@@ -6,8 +6,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import store from './store';
 import App from './App';
-import './styles/index.scss';
 import 'react-toastify/dist/ReactToastify.css';
+import './styles/index.scss';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

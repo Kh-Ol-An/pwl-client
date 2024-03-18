@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { Modal } from '@mui/material';
 import Card from './Card';
-import Button from './Button';
+import Button from '../components/Button';
 
 interface IProps {
     show: boolean;

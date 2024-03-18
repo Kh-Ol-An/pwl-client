@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import {useAppSelector} from '../store/hook';
-import Button from './Button';
+import Button from '../components/Button';
 
 const Inactivated: FC = () => {
     const myUser = useAppSelector((state) => state.myUser.user);

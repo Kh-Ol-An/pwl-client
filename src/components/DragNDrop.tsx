@@ -1,15 +1,15 @@
 import React, { FC, useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { Cancel as CancelIcon } from '@mui/icons-material';
-import StylesVariables from '../styles/utils/variables.module.scss';
 import { ICurrentImage, IImage } from '../models/IWish';
-import { useDropzone } from 'react-dropzone';
+import ImagesValidation from '../utils/ImagesValidation';
 import {
     ALLOWED_FILE_EXTENSIONS,
     ALLOWED_MAX_FILE_SIZE_IN_MB,
     MAX_NUMBER_OF_IMAGES_PER_WISH
 } from '../utils/constants';
-import ImagesValidation from '../utils/ImagesValidation';
+import StylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     images: ICurrentImage[];

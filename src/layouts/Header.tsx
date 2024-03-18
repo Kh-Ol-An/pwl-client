@@ -9,15 +9,15 @@ import {
 import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '../store/hook';
-import { logout } from '../store/my-user/thunks';
-import Card from './Card';
-import Button from './Button';
-import AccountSettings from './AccountSettings';
-import Action from './Action';
-import Popup from "./Popup";
-import stylesVariables from '../styles/utils/variables.module.scss';
 import { getWishList } from '../store/wishes/thunks';
+import { logout } from '../store/my-user/thunks';
 import { selectUserId } from '../store/selected-user/slice';
+import Card from './Card';
+import AccountSettings from './AccountSettings';
+import Button from '../components/Button';
+import Action from '../components/Action';
+import Popup from "../components/Popup";
+import stylesVariables from '../styles/utils/variables.module.scss';
 
 const Header: FC = () => {
     const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);

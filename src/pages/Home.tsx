@@ -1,13 +1,13 @@
 import React, { FC, useEffect } from 'react';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
 import {useAppDispatch, useAppSelector} from '../store/hook';
 import { getUsers } from '../store/users/thunks';
-import WishList from '../components/WishList';
-import Loading from '../components/Loading';
 import { getWishList } from '../store/wishes/thunks';
 import { selectUserId } from '../store/selected-user/slice';
-import Inactivated from '../components/Inactivated';
+import Loading from '../layouts/Loading';
+import Inactivated from '../layouts/Inactivated';
+import Header from '../layouts/Header';
+import Sidebar from '../layouts/Sidebar';
+import WishList from '../layouts/WishList';
 
 const Home: FC = () => {
     const myUser = useAppSelector((state) => state.myUser.user);

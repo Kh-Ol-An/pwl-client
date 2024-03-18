@@ -1,9 +1,9 @@
 import React, { FC, MouseEvent } from 'react';
-import Action from './Action';
 import EditIcon from '@mui/icons-material/Edit';
 import { IWish } from '../models/IWish';
-import { addingWhiteSpaces } from '../utils/formating-value';
 import { IUser } from '../models/IUser';
+import { addingWhiteSpaces } from '../utils/formating-value';
+import Action from '../components/Action';
 
 interface IProps {
     wish: IWish;

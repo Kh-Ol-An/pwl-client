@@ -6,16 +6,16 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateValidationError } from '@mui/x-date-pickers/models';
 import dayjs, { Dayjs } from 'dayjs';
-import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { updateMyUser } from '../store/my-user/thunks';
-import { ALLOWED_FILE_EXTENSIONS } from '../utils/constants';
-import Input from './Input';
-import StylesVariables from '../styles/utils/variables.module.scss';
+import { IUpdateMyUser } from '../store/my-user/types';
 import { ICurrentAvatar } from '../models/IUser';
 import { accountFirstNameValidation, accountLastNameValidation } from '../utils/validations';
-import { IUpdateMyUser } from '../store/my-user/types';
 import AvatarValidation from '../utils/AvatarValidation';
+import { ALLOWED_FILE_EXTENSIONS } from '../utils/constants';
+import Input from '../components/Input';
+import Button from '../components/Button';
+import StylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     close: () => void;

@@ -1,6 +1,4 @@
 import React, { FC, useState } from 'react';
-import dayjs from 'dayjs';
-import 'dayjs/locale/uk';
 import {
     Avatar,
     ListItem,
@@ -11,15 +9,17 @@ import {
     CircularProgress,
 } from '@mui/material';
 import { PeopleAlt as PeopleAltIcon } from '@mui/icons-material';
-import Popup from './Popup';
-import Button from './Button';
+import dayjs from 'dayjs';
+import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { addFriend, removeFriend } from '../store/my-user/thunks';
-import { IUser } from '../models/IUser';
-import stylesVariables from '../styles/utils/variables.module.scss';
-import { IRemoveFriend } from '../store/my-user/types';
 import { getWishList } from '../store/wishes/thunks';
 import { selectUserId } from '../store/selected-user/slice';
+import { IRemoveFriend } from '../store/my-user/types';
+import { IUser } from '../models/IUser';
+import Popup from './Popup';
+import Button from './Button';
+import stylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     user: IUser;

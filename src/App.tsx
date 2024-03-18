@@ -2,15 +2,15 @@ import React, { FC, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ThemeProvider, createTheme } from '@mui/material';
-import Loading from './components/Loading';
 import { useAppDispatch, useAppSelector } from './store/hook';
+import { checkAuth } from './store/my-user/thunks';
+import RoutesGuard from './utils/RoutesGuard';
 import Home from './pages/Home';
 import Welcome from './pages/Welcome';
 import Auth from './pages/Auth';
 import NotFound from './pages/NotFound';
-import { checkAuth } from './store/my-user/thunks';
-import RoutesGuard from './utils/RoutesGuard';
 import ActivationLinkExpired from './pages/ActivationLinkExpired';
+import Loading from './layouts/Loading';
 
 const theme = createTheme({
     palette: {
