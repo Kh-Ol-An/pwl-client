@@ -16,10 +16,14 @@
     .card-outer-border {
         width: 100%;
         border-radius: $radius-big;
-        border-width: 8px;
+        border-width: 4px;
         border-style: solid;
         border-color: $accent-color;
         background: $secondary-color;
+
+        @media only screen and (min-width: 768px) {
+            border-width: 8px;
+        }
     }
 
     &:not(.without-shadow) .card-outer-border {
@@ -29,9 +33,13 @@
     .card-inner-border {
         width: 100%;
         border-radius: $radius-xl;
-        border-width: 40px;
+        border-width: 20px;
         border-style: solid;
         border-color: $secondary-color;
+
+        @media only screen and (min-width: 768px) {
+            border-width: 40px;
+        }
     }
 
     .card-content {
@@ -40,16 +48,26 @@
         border-radius: $radius-lg;
         border-bottom: 2px solid rgba(255, 255, 255, 0.5);
         background: $accent-color;
-        padding: 2.4em 4em;
+        padding: 10px;
+
+        @media only screen and (min-width: 768px) {
+            padding: 24px 40px;
+        }
     }
 
     .card-scroll {
         width: 100%;
-        max-height: calc(100svh - 17em);
+        height: calc(100svh - 74px);
         overflow-y: auto;
         @include flex-column;
-        gap: 2em;
+        justify-content: center;
+        gap: 20px;
         padding: 0 8px 0 10px;
+
+        @media only screen and (min-width: 768px) {
+            height: auto;
+            max-height: calc(100svh - 170px);
+        }
 
         &::-webkit-scrollbar {
             width: 4px;
@@ -72,7 +90,7 @@
         }
 
         .card-content {
-            padding: 1em;
+            padding: 10px;
         }
 
         .card-scroll {

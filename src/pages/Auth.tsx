@@ -53,11 +53,16 @@ const Auth: FC = () => {
             <div className="box">
                 <Card withLights>
                     <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                        <img className="logo only-mobile" src={LogoIcon} alt="logo" />
+
                         <h1 className="title">
                             <img className="logo" src={LogoIcon} alt="logo" />
+
                             Привіт! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}
+
                             <img className="logo" src={LogoIcon} alt="logo" />
                         </h1>
+
                         {isRegistration && (
                             <Input
                                 {...register("firstName", accountFirstNameValidation)}
@@ -68,6 +73,7 @@ const Auth: FC = () => {
                                 error={errors?.firstName?.message}
                             />
                         )}
+
                         <Input
                             {...register("email", emailValidation)}
                             id="email"
@@ -76,6 +82,7 @@ const Auth: FC = () => {
                             label="Email*"
                             error={errors?.email?.message}
                         />
+
                         <Input
                             {...register("password", passwordValidation)}
                             id="password"
@@ -84,6 +91,7 @@ const Auth: FC = () => {
                             label="Пароль*"
                             error={errors?.password?.message}
                         />
+
                         {isRegistration && (
                             <Input
                                 id="repeat-password"
@@ -103,6 +111,8 @@ const Auth: FC = () => {
                         <Button type="submit">
                             {isRegistration ? 'Зареєструватися' : 'Увійти'}
                         </Button>
+
+                        <img className="logo only-mobile" src={LogoIcon} alt="logo" />
                     </form>
                 </Card>
             </div>

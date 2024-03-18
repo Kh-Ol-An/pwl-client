@@ -1,7 +1,14 @@
 .title {
     @include flex-center;
     gap: 10px;
-    @include title;
+    color: $light-color;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 24px;
+    }
 }
 
 .attention {

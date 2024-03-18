@@ -1,17 +1,58 @@
 .auth-page {
-    gap: 4em;
-    padding: 2em;
+    padding: 0;
+
+    @media only screen and (min-width: 768px) {
+        padding: 20px;
+    }
 
     .box {
-        width: 60%;
+        width: 100%;
+
+        @media only screen and (min-width: 768px) {
+            width: 90%;
+        }
+
+        @media only screen and (min-width: 1024px) {
+            width: 80%;
+        }
+
+        @media only screen and (min-width: 1366px) {
+            width: 70%;
+        }
+
+        @media only screen and (min-width: 1440px) {
+            width: 60%;
+        }
     }
 
     .form {
         @include flex-column;
-        gap: 2em;
+        gap: 20px;
     }
 
     .logo {
-        width: 30px;
+        min-width: 80px;
+        width: 80px;
+
+        @media only screen and (min-width: 768px) {
+            min-width: 40px;
+            width: 40px;
+        }
+
+        &.only-mobile {
+            display: block;
+
+            @media only screen and (min-width: 768px) {
+                display: none;
+            }
+        }
+
+        &:not(.only-mobile) {
+            display: none;
+
+            @media only screen and (min-width: 768px) {
+                display: block;
+            }
+        }
     }
 }
