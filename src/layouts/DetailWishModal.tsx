@@ -7,21 +7,22 @@ import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+import { useAppSelector } from '../store/hook';
 import { IWish } from '../models/IWish';
-import { IUser } from '../models/IUser';
 import { addingWhiteSpaces } from '../utils/formating-value';
 import Button from '../components/Button';
 import stylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     wish?: IWish;
-    myUser: IUser | null;
     editWish: () => void;
     close: () => void;
 }
 
-const DetailWishModal: FC<IProps> = ({ wish, myUser, editWish, close }) => {
+const DetailWishModal: FC<IProps> = ({ wish, editWish, close }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+    const myUser = useAppSelector((state) => state.myUser.user);
 
     let show = (
         <>

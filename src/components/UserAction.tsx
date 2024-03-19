@@ -23,13 +23,14 @@ import stylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     user: IUser;
-    myUser: IUser | null;
+    close?: () => void;
 }
 
-const UserAction: FC<IProps> = ({ user, myUser }) => {
+const UserAction: FC<IProps> = ({ user, close }) => {
     const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    const myUser = useAppSelector((state) => state.myUser.user);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
@@ -40,6 +41,7 @@ const UserAction: FC<IProps> = ({ user, myUser }) => {
         await dispatch(getWishList({ myId: myUser.id, userId: user.id }));
         await dispatch(selectUserId(user.id));
         localStorage.setItem('selectedUserId', user.id);
+        close && close();
     };
 
     const handleAddFriend = async () => {

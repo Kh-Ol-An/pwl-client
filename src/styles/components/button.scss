@@ -8,6 +8,7 @@
     font-weight: 700;
     text-align: left;
     transition: $transition-fast;
+    white-space: nowrap;
 
     @media only screen and (min-width: 1920px) {
         font-size: 20px;

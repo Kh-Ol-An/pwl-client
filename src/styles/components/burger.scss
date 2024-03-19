@@ -1,0 +1,111 @@
+.burger {
+    position: absolute;
+    top: 17px;
+    left: 16px;
+    z-index: $z-index-9;
+    width: 30px;
+    height: 30px;
+    transition: $transition;
+
+    @media only screen and (min-width: 1024px) {
+        display: none;
+    }
+
+    .icon-left {
+        position: absolute;
+        top: 13px;
+        left: 0;
+        width: 15px;
+        height: 4px;
+        border-radius: 9999px 0 0 9999px;
+        background-color: $special-color;
+        transition: $transition;
+
+        &:before{
+            content: "";
+            position: absolute;
+            top: -13px;
+            left: 0;
+            width: 15px;
+            height: 4px;
+            border-radius: 9999px 0 0 9999px;
+            background-color: $special-color;
+            transition: $transition;
+        }
+
+        &:after{
+            content: "";
+            position: absolute;
+            top: 13px;
+            left: 0;
+            width: 15px;
+            height: 4px;
+            border-radius: 9999px 0 0 9999px;
+            background-color: $special-color;
+            transition: $transition;
+        }
+    }
+
+    .icon-right {
+        position: absolute;
+        top: 13px;
+        left: 15px;
+        width: 15px;
+        height: 4px;
+        border-radius: 0 9999px 9999px 0;
+        background-color: $special-color;
+        transition: $transition;
+
+        &:before{
+            content: "";
+            position: absolute;
+            top: -13px;
+            left: 0;
+            width: 15px;
+            height: 4px;
+            border-radius: 0 9999px 9999px 0;
+            background-color: $special-color;
+            transition: $transition;
+        }
+
+        &:after{
+            content: "";
+            position: absolute;
+            top: 13px;
+            left: 0;
+            width: 15px;
+            height: 4px;
+            border-radius: 0 9999px 9999px 0;
+            background-color: $special-color;
+            transition: $transition;
+        }
+    }
+
+    &.open {
+        .icon-left {
+            background-color: transparent;
+            transition: $transition;
+
+            &:before{
+                transform: rotateZ(45deg) scaleX(1.4) translate(4px, 4px);
+            }
+
+            &:after{
+                transform: rotateZ(-45deg) scaleX(1.4) translate(4px, -4px);
+            }
+        }
+
+        .icon-right {
+            background-color: transparent;
+            transition: $transition;
+
+            &:before{
+                transform: rotateZ(-45deg) scaleX(1.4) translate(-4px, 4px);
+            }
+
+            &:after{
+                transform: rotateZ(45deg) scaleX(1.4) translate(-4px, -4px);
+            }
+        }
+    }
+}

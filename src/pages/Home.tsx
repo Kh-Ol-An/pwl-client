@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import {useAppDispatch, useAppSelector} from '../store/hook';
 import { getUsers } from '../store/users/thunks';
 import { getWishList } from '../store/wishes/thunks';
@@ -10,6 +10,8 @@ import Sidebar from '../layouts/Sidebar';
 import WishList from '../layouts/WishList';
 
 const Home: FC = () => {
+    const [open, setOpen] = useState<boolean>(false);
+
     const myUser = useAppSelector((state) => state.myUser.user);
     const wishes = useAppSelector((state) => state.wishes);
 
@@ -37,7 +39,16 @@ const Home: FC = () => {
             <Header />
 
             <div className="page home-page">
-                <Sidebar myUser={myUser} />
+                <button
+                    className={"burger" + (open ? " open" : "")}
+                    type="button"
+                    onClick={() => setOpen(prevState => !prevState)}
+                >
+                    <div className="icon-left"></div>
+                    <div className="icon-right"></div>
+                </button>
+
+                <Sidebar open={open} close={() => setOpen(false)} />
 
                 <div className="container">
                     {wishes.isLoading ? <Loading isLocal /> : <WishList />}

@@ -23,7 +23,7 @@ const WishList = () => {
     const selectedUser = userList.find(user => user.id === selectedUserId);
     const lastName = selectedUser?.lastName ? selectedUser.lastName : "";
 
-    const detailWish = wishList && wishList.find(wish => wish.id === idOfSelectedWish);
+    const detailWish = wishList.find(wish => wish.id === idOfSelectedWish);
 
     const handleOpenWish = (id: IWish['id'] | null) => {
         setIdOfSelectedWish(id);
@@ -46,6 +46,12 @@ const WishList = () => {
     return (
         <div className="wish-list">
             <div className="head">
+                {myUser?.id === selectedUserId && (
+                    <Button onClick={() => handleOpenWishSettings(null)}>
+                        Додати бажання
+                    </Button>
+                )}
+
                 <h1 className="title">
                     {
                         myUser?.id === selectedUserId
@@ -53,12 +59,6 @@ const WishList = () => {
                             : `Список бажань користувача ${selectedUser?.firstName} ${lastName}`
                     }
                 </h1>
-
-                {myUser?.id === selectedUserId && (
-                    <Button onClick={() => handleOpenWishSettings(null)}>
-                        Додати бажання
-                    </Button>
-                )}
             </div>
 
             {wishList.length > 0 ? (
@@ -67,7 +67,6 @@ const WishList = () => {
                         <li className={"item" + (wishList.length < 2 ? " alone" : "")} key={wish.id}>
                             <WishCard
                                 wish={wish}
-                                myUser={myUser}
                                 showWish={() => handleOpenWish(wish.id)}
                                 editWish={() => handleOpenWishSettings(wish.id)}
                             />
@@ -92,7 +91,6 @@ const WishList = () => {
                     <div className="modal modal-lg">
                         <DetailWishModal
                             wish={detailWish}
-                            myUser={myUser}
                             editWish={() => handleOpenWishSettings(idOfSelectedWish)}
                             close={handleCloseWish}
                         />

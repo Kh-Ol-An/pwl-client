@@ -1,0 +1,11 @@
+.my-user-action {
+    @include flex-center;
+    gap: 10px;
+    text-align: left;
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+}

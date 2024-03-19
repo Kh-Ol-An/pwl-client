@@ -6,15 +6,18 @@ import { IUser } from '../models/IUser';
 import Loading from './Loading';
 import Switch from '../components/Switch';
 import UserAction from '../components/UserAction';
+import MyUserAction from '../components/MyUserAction';
 
 interface IProps {
-    myUser: IUser | null;
+    open: boolean;
+    close?: () => void;
 }
 
-const Sidebar: FC<IProps> = ({ myUser }) => {
+const Sidebar: FC<IProps> = ({ open, close }) => {
     const [isAll, setIsAll] = useState<boolean>(true);
     const [visibleUsers, setVisibleUsers] = useState<IUser[]>([]);
 
+    const myUser = useAppSelector((state) => state.myUser.user);
     const users = useAppSelector((state) => state.users);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
@@ -54,13 +57,15 @@ const Sidebar: FC<IProps> = ({ myUser }) => {
     }, [myUser, users.list, isAll]);
 
     return (
-        <div className="sidebar">
-            <div className="inner">
-                <div className="content">
+        <div className={"sidebar" + (open ? " open" : "")}>
+            <div className="sidebar-inner">
+                <div className="sidebar-content">
                     {users.isLoading ? (
                         <Loading isLocal />
                     ) : (
                         <>
+                            <MyUserAction close={close} />
+
                             <div className="sidebar-head">
                                 <h2 className="sidebar-title">Користувачі</h2>
 
@@ -80,7 +85,7 @@ const Sidebar: FC<IProps> = ({ myUser }) => {
                             <ul className="list">
                                 {visibleUsers.map((user) => {
                                     return (
-                                        <UserAction key={user.id} user={user} myUser={myUser} />
+                                        <UserAction key={user.id} user={user} close={close} />
                                     );
                                 })}
                             </ul>

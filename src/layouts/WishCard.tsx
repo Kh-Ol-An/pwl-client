@@ -1,18 +1,19 @@
 import React, { FC, MouseEvent } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
+import { useAppSelector } from '../store/hook';
 import { IWish } from '../models/IWish';
-import { IUser } from '../models/IUser';
 import { addingWhiteSpaces } from '../utils/formating-value';
 import Action from '../components/Action';
 
 interface IProps {
     wish: IWish;
-    myUser: IUser | null;
     showWish: () => void;
     editWish: () => void;
 }
 
-const WishCard: FC<IProps> = ({ wish, myUser, showWish, editWish }) => {
+const WishCard: FC<IProps> = ({ wish, showWish, editWish }) => {
+    const myUser = useAppSelector((state) => state.myUser.user);
+
     const handleEditWish = (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         editWish();

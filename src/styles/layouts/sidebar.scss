@@ -1,34 +1,72 @@
 .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $z-index-1;
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 0;
     height: 100svh;
-    border-radius: 0 $radius-big $radius-big 0;
-    border-top: 4px solid $accent-color;
-    border-right: 4px solid $accent-color;
-    border-bottom: 4px solid $accent-color;
+    overflow: hidden;
+    background-color: $accent-color;
+    transition: $transition;
 
-    .inner {
-        height: 100%;
+    @media only screen and (min-width: 1024px) {
+        width: 30%;
+        overflow: unset;
         border-radius: 0 $radius-big $radius-big 0;
-        border-top: 10px solid $secondary-color;
-        border-right: 10px solid $secondary-color;
-        border-bottom: 10px solid $secondary-color;
+        border-top: 4px solid $accent-color;
+        border-right: 4px solid $accent-color;
+        border-bottom: 4px solid $accent-color;
     }
 
-    .content {
+    &.open {
+        width: 100%;
+    }
+
+    .sidebar-inner {
         height: 100%;
-        padding: 62px 4px 10px 0;
-        box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.5);
-        border-radius: 0 0 $radius-xl $radius-xl;
-        border-right: 1px solid rgba(255, 255, 255, 0.5);
-        background: $accent-color;
+
+        @media only screen and (min-width: 1024px) {
+            border-radius: 0 $radius-big $radius-big 0;
+            border-top: 10px solid $secondary-color;
+            border-right: 10px solid $secondary-color;
+            border-bottom: 10px solid $secondary-color;
+        }
+    }
+
+    .sidebar-content {
+        height: 100%;
+        padding: 16px 4px 10px 0;
+
+        @media only screen and (min-width: 1024px) {
+            padding: 62px 4px 10px 0;
+            box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.5);
+            border-radius: 0 0 $radius-xl $radius-xl;
+            border-right: 1px solid rgba(255, 255, 255, 0.5);
+            background: $accent-color;
+        }
+    }
+
+    .my-user-action {
+        margin: 0 auto;
+
+        @media only screen and (min-width: 1024px) {
+            display: none;
+        }
     }
 
     .sidebar-head {
-        padding: 16px 20px;
+        padding: 16px;
         display: flex;
-        gap: 20px;
+        justify-content: space-between;
+        gap: 16px;
+
+        @media only screen and (min-width: 1024px) {
+            padding: 16px 20px;
+            gap: 20px;
+        }
     }
 
     .sidebar-title {
