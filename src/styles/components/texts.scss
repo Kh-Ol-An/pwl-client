@@ -39,5 +39,9 @@
 
 body .params {
     color: $special-color;
+    width: 196px;
     font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
 }

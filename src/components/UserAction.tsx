@@ -5,7 +5,6 @@ import {
     ListItemAvatar,
     ListItemButton,
     ListItemText,
-    Typography,
     CircularProgress,
 } from '@mui/material';
 import { PeopleAlt as PeopleAltIcon } from '@mui/icons-material';
@@ -129,11 +128,11 @@ const UserAction: FC<IProps> = ({ user, close }) => {
                         </span>
                     }
                     secondary={
-                        <Typography variant="body2" className="params">
+                        <span className="params">
                             {user.birthday
                                 ? dayjs(user.birthday).locale('uk').format('DD MMMM')
                                 : user.email}
-                        </Typography>
+                        </span>
                     }
                     sx={{ color: stylesVariables.whiteColor }}
                 />

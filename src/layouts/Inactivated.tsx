@@ -1,9 +1,13 @@
 import React, { FC } from 'react';
-import {useAppSelector} from '../store/hook';
+import { Logout as LogoutIcon } from '@mui/icons-material';
+import { useAppDispatch, useAppSelector } from '../store/hook';
 import Button from '../components/Button';
+import { logout } from '../store/my-user/thunks';
 
 const Inactivated: FC = () => {
     const myUser = useAppSelector((state) => state.myUser.user);
+
+    const dispatch = useAppDispatch();
 
     const getActivationLink
         = `${
@@ -12,6 +16,13 @@ const Inactivated: FC = () => {
 
     return (
         <div className="inactivated">
+            <div className="logout">
+                <Button variant="text" onClick={() => dispatch(logout())}>
+                    <LogoutIcon />
+                    Вийти з аккаунту
+                </Button>
+            </div>
+
             <p>
                 Ми прагнемо, щоб всі користувачі були справжніми. <br/>
                 Перевірте свою пошту: <span className="bold">{myUser?.email}</span> і активуйте свій акаунт. <br/>

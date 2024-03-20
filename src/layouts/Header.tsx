@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Avatar, Modal } from '@mui/material';
+import { Modal } from '@mui/material';
 import {
     Settings as SettingsIcon,
     ManageAccounts as ManageAccountsIcon,
