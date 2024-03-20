@@ -94,6 +94,8 @@
         }
 
         .card-scroll {
+            height: auto;
+            max-height: calc(100svh - 74px);
             overflow: visible;
         }
     }
