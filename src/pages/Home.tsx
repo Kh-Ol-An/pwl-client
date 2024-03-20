@@ -36,7 +36,7 @@ const Home: FC = () => {
         <>
             {!myUser?.isActivated && <Inactivated />}
 
-            <Header />
+            <Header open={open} close={() => setOpen(false)} />
 
             <div className="page home-page">
                 <button

@@ -6,7 +6,6 @@ import { IUser } from '../models/IUser';
 import Loading from './Loading';
 import Switch from '../components/Switch';
 import UserAction from '../components/UserAction';
-import MyUserAction from '../components/MyUserAction';
 
 interface IProps {
     open: boolean;
@@ -64,8 +63,6 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
                         <Loading isLocal />
                     ) : (
                         <>
-                            <MyUserAction close={close} />
-
                             <div className="sidebar-head">
                                 <h2 className="sidebar-title">Користувачі</h2>
 

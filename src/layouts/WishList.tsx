@@ -76,7 +76,11 @@ const WishList = () => {
             ) : (
                 <div className="text-box">
                     <p className="text">
-                        В тебе немає жодного бажання. Хіба ти нічого не бажаєш?
+                        {
+                            myUser?.id === selectedUserId
+                                ? "В тебе немає жодного бажання. Хіба ти нічого не бажаєш?"
+                                : `В користувача ${selectedUser?.firstName} ${lastName} немає жодного бажання.`
+                        }
                     </p>
                 </div>
             )}
