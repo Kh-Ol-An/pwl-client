@@ -6,7 +6,8 @@
         top: 50%;
         left: 0;
         transform: translateY(-50%);
-        @include action-box(30px, 30px);
+        @include action-box(24px, 24px);
+        padding: 0;
     }
 
     .radio-outer-border {
@@ -33,10 +34,14 @@
     label {
         position: relative;
         z-index: $z-index-xs-1;
-        padding-left: 22px;
-        font-size: 16px;
+        padding-left: 30px;
+        font-size: 14px;
         color: $special-color;
         cursor: pointer;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 16px;
+        }
 
         &.transition {
             transition: $transition-slow;

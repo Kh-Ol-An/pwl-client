@@ -17,6 +17,9 @@ import Input from '../components/Input';
 import DragNDrop from '../components/DragNDrop';
 import Switch from '../components/Switch';
 import Radio from '../components/Radio';
+import { Info as InfoIcon } from '@mui/icons-material';
+import stylesVariables from '../styles/utils/variables.module.scss';
+import { Tooltip } from '@mui/material';
 
 interface IProps {
     idOfSelectedWish: IWish['id'] | null;
@@ -140,9 +143,9 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
     return (
         <form className="wish-modal" onSubmit={handleSubmit(onSubmit)}>
             <div className="material">
-                <span className={material ? "primary-color" : ""}>Матеріальне бажання</span>
+                <span className={"yes" + (material ? " primary-color" : "")}>Матеріальне бажання</span>
                 <Switch id="material" name="material" checked={material} onChange={changeMaterial} />
-                <span className={material ? "" : "action-color"}>Не матеріальне бажання</span>
+                <span className={"no" + (material ? "" : " action-color")}>Не матеріальне бажання</span>
             </div>
 
             <Input
@@ -189,14 +192,24 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                         value="all"
                         onChange={changeShow}
                     />
-                    <Radio
-                        label="Тільки друзі"
-                        id="show-friends"
-                        name="show"
-                        checked={show === 'friends'}
-                        value="friends"
-                        onChange={changeShow}
-                    />
+                    <div className="show-item">
+                        <Radio
+                            label="Тільки друзі"
+                            id="show-friends"
+                            name="show"
+                            checked={show === 'friends'}
+                            value="friends"
+                            onChange={changeShow}
+                        />
+
+                        <Tooltip
+                            title="Бажання побачать тільки ті користувачі яких Ви додали до друзів та вони додали Вас до друзів"
+                            arrow
+                            placement="top"
+                        >
+                            <InfoIcon sx={{ color: stylesVariables.specialColor }} />
+                        </Tooltip>
+                    </div>
                     <Radio
                         label="Ніхто"
                         id="show-nobody"

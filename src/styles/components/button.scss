@@ -24,6 +24,10 @@
         line-height: 1.2;
     }
 
+    &.text {
+        color: $primary-color;
+    }
+
     &.action-color {
         color: $action-color;
 

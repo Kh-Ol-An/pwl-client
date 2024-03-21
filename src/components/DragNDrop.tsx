@@ -73,14 +73,20 @@ const DragNDrop: FC<IProps> = ({ images, setImages }) => {
             <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
                 <p className="text">
-                    Перетягніть до {MAX_NUMBER_OF_IMAGES_PER_WISH} зображень розміром до {
-                        ALLOWED_MAX_FILE_SIZE_IN_MB
-                    } МБ та формату <strong>
-                        "{Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ')}"
-                    </strong> сюди або клацніть, щоб вибрати зображення.
+                    <span className="mouse">Натисніть або перетягніть сюди зображення, щоб додати їх до бажання.</span>
+                    <span className="touch">Натисніть сюди, щоб додати зображення до бажання.</span>
                     <br />
                     <br />
-                    Також ти можеш змінювати позицію зображень перетягуючи їх між собою.
+                    Також Ви можете змінювати позицію зображень перетягуючи їх між собою.
+                    <br />
+                    <br />
+                    <span className="rules">
+                        Максимальний розмір файлу: {ALLOWED_MAX_FILE_SIZE_IN_MB} МБ.
+                        <br />
+                        Дозволені формати: {Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ')}.
+                        <br />
+                        Максимальна кількість файлів: {MAX_NUMBER_OF_IMAGES_PER_WISH} шт.
+                    </span>
                 </p>
             </div>
 
