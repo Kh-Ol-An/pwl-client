@@ -22,3 +22,5 @@ export const MAX_NUMBER_OF_IMAGES_PER_WISH = 10;
 export const PASSWORD_MIN_LENGTH = 4;
 
 export const PASSWORD_MAX_LENGTH = 128;
+
+export const WAITING_TIME = 300;
