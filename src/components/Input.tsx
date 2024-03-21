@@ -30,7 +30,8 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
     onChange,
     ...props
 }, ref) => {
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [openTooltip, setOpenTooltip] = useState<boolean>(false);
 
     const getTypes = (type: string) => {
         switch (type) {
@@ -41,6 +42,14 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
             default:
                 return type;
         }
+    };
+
+    const handleTooltipClose = () => {
+        setOpenTooltip(false);
+    };
+
+    const handleTooltipOpen = () => {
+        setOpenTooltip(true);
     };
 
     return (
@@ -85,8 +94,19 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                 <label htmlFor={id}>
                     {label}
                     {tooltip && tooltip.length > 0 && (
-                        <Tooltip title={tooltip} arrow placement="top">
-                            <InfoIcon sx={{ color: stylesVariables.specialColor }} />
+                        <Tooltip
+                            PopperProps={{
+                                disablePortal: true,
+                            }}
+                            onClose={handleTooltipClose}
+                            open={openTooltip}
+                            title={tooltip}
+                            arrow
+                            placement="top"
+                        >
+                            <button type="button" onClick={handleTooltipOpen}>
+                                <InfoIcon sx={{ color: stylesVariables.specialColor }} />
+                            </button>
                         </Tooltip>
                     )}
                 </label>
