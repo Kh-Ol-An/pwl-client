@@ -20,7 +20,7 @@ import { selectUserId } from '../store/selected-user/slice';
 
 interface IProps {
     open: boolean;
-    close?: () => void;
+    close: () => void;
 }
 
 const Header: FC<IProps> = ({ open, close }) => {
@@ -38,12 +38,13 @@ const Header: FC<IProps> = ({ open, close }) => {
         await dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
         await dispatch(selectUserId(myUser.id));
         localStorage.setItem('selectedUserId', myUser.id);
-        close && close();
+        close();
     };
 
     const handleOpenSettings = () => {
         setOpenSettings(true);
         setAnchor(null);
+        close();
     };
 
     const handleCloseSettings = () => {

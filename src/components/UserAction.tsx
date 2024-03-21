@@ -22,7 +22,7 @@ import stylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     user: IUser;
-    close?: () => void;
+    close: () => void;
 }
 
 const UserAction: FC<IProps> = ({ user, close }) => {
@@ -40,7 +40,7 @@ const UserAction: FC<IProps> = ({ user, close }) => {
         await dispatch(getWishList({ myId: myUser.id, userId: user.id }));
         await dispatch(selectUserId(user.id));
         localStorage.setItem('selectedUserId', user.id);
-        close && close();
+        close();
     };
 
     const handleAddFriend = async () => {

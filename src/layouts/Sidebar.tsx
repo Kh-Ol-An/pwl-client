@@ -9,7 +9,7 @@ import UserAction from '../components/UserAction';
 
 interface IProps {
     open: boolean;
-    close?: () => void;
+    close: () => void;
 }
 
 const Sidebar: FC<IProps> = ({ open, close }) => {
