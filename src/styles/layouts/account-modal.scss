@@ -1,5 +1,6 @@
-.account-settings {
+.account-modal {
     @include flex-column;
+    justify-content: center;
     gap: 20px;
-    width: 348px;
+    height: 100%;
 }

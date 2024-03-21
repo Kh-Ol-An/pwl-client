@@ -15,10 +15,14 @@
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
+
+            button {
+                order: 1;
+            }
         }
 
         .title {
-            padding: 0 0 0 40px;
+            margin: 0 auto;
             font-size: 24px;
             height: 60px;
             text-overflow: ellipsis;
@@ -28,6 +32,7 @@
             -webkit-box-orient: vertical;
 
             @media only screen and (min-width: 768px) {
+                margin: 0;
                 padding: 0;
                 height: auto;
             }
@@ -35,10 +40,14 @@
             @media only screen and (min-width: 1024px) {
                 font-size: 34px;
             }
-        }
 
-        button {
-            order: 1;
+            &.other-user {
+                padding: 0 0 0 40px;
+
+                @media only screen and (min-width: 768px) {
+                    padding: 0;
+                }
+            }
         }
     }
 

@@ -1,20 +1,29 @@
 .action {
-    @include action-box(35px, 35px);
+    @include action-box(60px, 60px);
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 6px;
+    right: 6px;
+
+    @media only screen and (min-width: 768px) {
+        @include action-box(40px, 40px);
+        top: 12px;
+        right: 12px;
+    }
 
     .action-outer-border {
         @include action-outer-border;
+        border-radius: $radius-round;
         transition: $transition;
     }
 
     .action-inner-border {
         @include action-inner-border;
+        border-radius: $radius-round;
     }
 
     .action-content {
         @include action-content;
+        border-radius: $radius-round;
         background: $special-color;
         transition: $transition;
     }

@@ -138,7 +138,7 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
     }, []);
 
     return (
-        <form className="wish-settings" onSubmit={handleSubmit(onSubmit)}>
+        <form className="wish-modal" onSubmit={handleSubmit(onSubmit)}>
             <div className="material">
                 <span className={material ? "primary-color" : ""}>Матеріальне бажання</span>
                 <Switch id="material" name="material" checked={material} onChange={changeMaterial} />

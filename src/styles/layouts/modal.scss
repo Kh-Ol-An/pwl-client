@@ -5,9 +5,18 @@
     transform: translate(-50%, -50%);
     @include flex-column;
     gap: 10px;
-    width: 60%;
-    padding: 20px;
+    width: 100%;
+    padding: 0;
     outline: none;
+
+    @media only screen and (min-width: 768px) {
+        width: 80%;
+        padding: 20px;
+    }
+
+    @media only screen and (min-width: 1024px) {
+        width: 60%;
+    }
 
     &.modal-lg {
         width: 96%;

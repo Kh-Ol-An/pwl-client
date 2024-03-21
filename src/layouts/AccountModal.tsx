@@ -102,7 +102,7 @@ const AccountModal: FC<IProps> = ({ close }) => {
     }, [myUser, setValue]);
 
     return (
-        <form className="account-settings" onSubmit={handleSubmit(onSubmit)}>
+        <form className="account-modal" onSubmit={handleSubmit(onSubmit)}>
             <Input
                 {...register("firstName", accountFirstNameValidation)}
                 id="firstName"

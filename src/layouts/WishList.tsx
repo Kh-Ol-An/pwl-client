@@ -52,7 +52,7 @@ const WishList = () => {
                     </Button>
                 )}
 
-                <h1 className="title">
+                <h1 className={"title" + (myUser?.id !== selectedUserId ? " other-user" : "")}>
                     {
                         myUser?.id === selectedUserId
                             ? "Особистий список бажань"
