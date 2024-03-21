@@ -1,5 +1,6 @@
 import React, { FC, ChangeEvent, useState, useLayoutEffect, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { Tooltip } from 'react-tooltip';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { createWish, deleteWish, updateWish } from '../store/wishes/thunks';
 import { ICreateWish } from '../store/wishes/types';
@@ -19,7 +20,6 @@ import Switch from '../components/Switch';
 import Radio from '../components/Radio';
 import { Info as InfoIcon } from '@mui/icons-material';
 import stylesVariables from '../styles/utils/variables.module.scss';
-import { Tooltip } from '@mui/material';
 
 interface IProps {
     idOfSelectedWish: IWish['id'] | null;
@@ -39,6 +39,7 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const [showConfirmRemoveWish, setShowConfirmRemoveWish] = useState<boolean>(false);
     const [images, setImages] = useState<ICurrentImage[]>([]);
     const [isTransition, setIsTransition] = useState<boolean>(false);
+    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
     const {
         register,
@@ -137,7 +138,16 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
             setIsTransition(true);
         }, 0);
 
-        return () => clearTimeout(timer);
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
     return (
@@ -202,13 +212,24 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             onChange={changeShow}
                         />
 
-                        <Tooltip
-                            title="Бажання побачать тільки ті користувачі яких Ви додали до друзів та вони додали Вас до друзів"
-                            arrow
-                            placement="top"
+                        <span
+                            className="tooltip"
+                            data-tooltip-id="show-friends"
+                            data-tooltip-content="Бажання побачать тільки ті користувачі яких Ви додали до друзів та вони додали Вас до друзів"
                         >
                             <InfoIcon sx={{ color: stylesVariables.specialColor }} />
-                        </Tooltip>
+                        </span>
+                        <Tooltip
+                            id="show-friends"
+                            opacity={1}
+                            style={{
+                                backgroundColor: stylesVariables.blackColor,
+                                color: stylesVariables.lightColor,
+                                width: screenWidth > 411 ? '300px' : '200px',
+                                fontSize: '100%',
+                                zIndex: 9,
+                            }}
+                        />
                     </div>
                     <Radio
                         label="Ніхто"

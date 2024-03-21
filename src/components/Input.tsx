@@ -1,5 +1,5 @@
-import React, { FC, ChangeEvent, Ref, forwardRef, useState } from 'react';
-import { Tooltip } from '@mui/material';
+import React, { FC, ChangeEvent, Ref, forwardRef, useState, useEffect } from 'react';
+import { Tooltip } from 'react-tooltip';
 import {
     VisibilityOff as VisibilityOffIcon,
     Visibility as VisibilityIcon,
@@ -31,7 +31,7 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
     ...props
 }, ref) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [openTooltip, setOpenTooltip] = useState<boolean>(false);
+    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
     const getTypes = (type: string) => {
         switch (type) {
@@ -44,13 +44,17 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
         }
     };
 
-    const handleTooltipClose = () => {
-        setOpenTooltip(false);
-    };
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
 
-    const handleTooltipOpen = () => {
-        setOpenTooltip(true);
-    };
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     return (
         <div className="input">
@@ -94,20 +98,25 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                 <label htmlFor={id}>
                     {label}
                     {tooltip && tooltip.length > 0 && (
-                        <Tooltip
-                            PopperProps={{
-                                disablePortal: true,
-                            }}
-                            onClose={handleTooltipClose}
-                            open={openTooltip}
-                            title={tooltip}
-                            arrow
-                            placement="top"
-                        >
-                            <button type="button" onClick={handleTooltipOpen}>
+                        <>
+                            <span
+                                className="tooltip"
+                                data-tooltip-id={id}
+                                data-tooltip-content={tooltip}
+                            >
                                 <InfoIcon sx={{ color: stylesVariables.specialColor }} />
-                            </button>
-                        </Tooltip>
+                            </span>
+                            <Tooltip
+                                id={id}
+                                style={{
+                                    backgroundColor: stylesVariables.blackColor,
+                                    color: stylesVariables.lightColor,
+                                    width: screenWidth > 411 ? '300px' : '200px',
+                                    fontSize: '100%',
+                                    zIndex: 9,
+                                }}
+                            />
+                        </>
                     )}
                 </label>
                 <div className="background"></div>
