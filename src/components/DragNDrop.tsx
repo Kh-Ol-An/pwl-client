@@ -14,6 +14,7 @@ import StylesVariables from '../styles/utils/variables.module.scss';
 interface IProps {
     images: ICurrentImage[];
     setImages: (images: ICurrentImage[]) => void;
+    removeAllImages: () => void;
 }
 
 const acceptTypes: { [key: string]: string[] } = {};
@@ -25,7 +26,7 @@ Object.keys(ALLOWED_FILE_EXTENSIONS).forEach((ext) => {
     acceptTypes[mimeType].push(`.${ext}`);
 });
 
-const DragNDrop: FC<IProps> = ({ images, setImages }) => {
+const DragNDrop: FC<IProps> = ({ images, setImages, removeAllImages }) => {
     const onDrop = useCallback((acceptedImages: File[]) => {
         setImages([...images, ...acceptedImages]);
     }, [images, setImages]);
@@ -130,6 +131,10 @@ const DragNDrop: FC<IProps> = ({ images, setImages }) => {
             </DragDropContext>
 
             <ImagesValidation images={images} />
+
+            {images.length > 0 && (
+                <button className="remove-all" type="button" onClick={removeAllImages}>Видалити всі зображення</button>
+            )}
         </div>
     );
 };

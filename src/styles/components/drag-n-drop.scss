@@ -52,4 +52,17 @@
             border-radius: $radius-sm;
         }
     }
+
+    .remove-all {
+        margin-top: 10px;
+        width: max-content;
+        background: transparent;
+        font-weight: 700;
+        font-size: 14px;
+        color: $action-color;
+
+        &:hover {
+            @include icon-shadow($action-color);
+        }
+    }
 }

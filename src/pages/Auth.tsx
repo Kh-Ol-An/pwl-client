@@ -57,9 +57,8 @@ const Auth: FC = () => {
 
                         <h1 className="title">
                             <img className="logo" src={LogoIcon} alt="logo" />
-
-                            Привіт! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}
-
+                            {/*Вітаю! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}*/}
+                            {isRegistration ? 'Реєстрація.' : 'Вхід'}
                             <img className="logo" src={LogoIcon} alt="logo" />
                         </h1>
 

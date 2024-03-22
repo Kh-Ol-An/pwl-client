@@ -98,7 +98,7 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
         setShow(e.target.value as ICreateWish['show']);
     };
 
-    const removeAll = () => {
+    const removeAllImages = () => {
         setImages(
             (prevState) =>
                 prevState
@@ -152,12 +152,14 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
 
     return (
         <form className="wish-modal" onSubmit={handleSubmit(onSubmit)}>
+            {/* material */}
             <div className="material">
                 <span className={"yes" + (material ? " primary-color" : "")}>Матеріальне бажання</span>
                 <Switch id="material" name="material" checked={material} onChange={changeMaterial} />
                 <span className={"no" + (material ? "" : " action-color")}>Не матеріальне бажання</span>
             </div>
 
+            {/* name */}
             <Input
                 {...register("name", wishNameValidation)}
                 id="name"
@@ -178,6 +180,10 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 }}
             />
 
+            {/* DragNDrop */}
+            <DragNDrop images={images} setImages={setImages} removeAllImages={removeAllImages} />
+
+            {/* price */}
             <div className={"expander" + (isTransition ? " transition" : "") + (material ? " rolled-up" : "")}>
                 <Input
                     {...(material && register("price", wishPriceValidation))}
@@ -199,6 +205,7 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     }}
                 />
 
+                {/* address */}
                 <Input
                     {...(material && register("address", onlyWhitespaceValidation))}
                     id="address"
@@ -220,6 +227,7 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 />
             </div>
 
+            {/* show */}
             <div className="show">
                 <span className="show-label">Хто може бачити твоє бажання*</span>
 
@@ -272,6 +280,7 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 </div>
             </div>
 
+            {/* description */}
             <Input
                 {...register("description", wishDescriptionValidation)}
                 id="description"
@@ -281,41 +290,34 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 error={errors?.description?.message}
             />
 
-            <DragNDrop images={images} setImages={setImages} />
-
+            {/* actions */}
             <div className="actions">
-                {images.length > 0 && (
-                    <button className="remove-all" type="button" onClick={removeAll}>Видалити всі зображення</button>
+                {idOfSelectedWish && (
+                    <>
+                        <Button
+                            color="action-color"
+                            type="button"
+                            onClick={() => setShowConfirmRemoveWish(true)}
+                        >
+                            Видалити бажання
+                        </Button>
+
+                        <ConfirmModal
+                            show={showConfirmRemoveWish}
+                            confirmText="Видалити"
+                            closeText="Залишити"
+                            close={() => setShowConfirmRemoveWish(false)}
+                            confirm={removeWish}
+                        >
+                            <h3 className="title attention">Увага!</h3>
+                            <p className="text-lg">Ви впевнені, що хочете видалити це бажання?</p>
+                        </ConfirmModal>
+                    </>
                 )}
 
-                <div className="sub-actions">
-                    {idOfSelectedWish && (
-                        <>
-                            <Button
-                                color="action-color"
-                                type="button"
-                                onClick={() => setShowConfirmRemoveWish(true)}
-                            >
-                                Видалити бажання
-                            </Button>
-
-                            <ConfirmModal
-                                show={showConfirmRemoveWish}
-                                confirmText="Видалити"
-                                closeText="Залишити"
-                                close={() => setShowConfirmRemoveWish(false)}
-                                confirm={removeWish}
-                            >
-                                <h3 className="title attention">Увага!</h3>
-                                <p className="text-lg">Ви впевнені, що хочете видалити це бажання?</p>
-                            </ConfirmModal>
-                        </>
-                    )}
-
-                    <Button type="submit">
-                        {idOfSelectedWish ? 'Оновити' : 'Додати'}
-                    </Button>
-                </div>
+                <Button type="submit">
+                    {idOfSelectedWish ? 'Оновити' : 'Створити'}
+                </Button>
             </div>
         </form>
     );

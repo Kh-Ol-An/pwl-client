@@ -185,25 +185,16 @@
     .actions {
         margin-top: 20px;
         width: 100%;
-        @include flex-between;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         gap: 10px;
-    }
 
-    .remove-all {
-        width: max-content;
-        background: transparent;
-        font-weight: 700;
-        font-size: 14px;
-        color: $action-color;
-
-        &:hover {
-            @include icon-shadow($action-color);
+        @media only screen and (min-width: 412px) {
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 20px;
         }
-    }
-
-    .sub-actions {
-        @include flex-center;
-        gap: 20px;
-        margin-left: auto;
     }
 }

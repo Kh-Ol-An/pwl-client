@@ -28,20 +28,22 @@ const WishCard: FC<IProps> = ({ wish, showWish, editWish }) => {
                             {wish.name}
                         </div>
 
-                        <div className="wish-card-data">
-                            {wish.images.length > 0 && (
-                                <img
-                                    className="wish-card-img"
-                                    src={wish.images[0].path}
-                                    alt={`wish-${wish.images[0].position}`}
-                                />
-                            )}
-                            {wish.price && (
-                                <div className="wish-card-price">
-                                    {addingWhiteSpaces(wish.price)} грн.
-                                </div>
-                            )}
-                        </div>
+                        {(wish.images.length > 0 || wish.price) && (
+                            <div className="wish-card-data">
+                                {wish.images.length > 0 && (
+                                    <img
+                                        className="wish-card-img"
+                                        src={wish.images[0].path}
+                                        alt={`wish-${wish.images[0].position}`}
+                                    />
+                                )}
+                                {wish.price && (
+                                    <div className="wish-card-price">
+                                        {addingWhiteSpaces(wish.price)} грн.
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
