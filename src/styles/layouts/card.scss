@@ -26,10 +26,6 @@
         }
     }
 
-    &:not(.without-shadow) .card-outer-border {
-        filter: drop-shadow(0 15px 50px $black-color);
-    }
-
     .card-inner-border {
         width: 100%;
         border-radius: $radius-xl;
@@ -85,6 +81,15 @@
         &::-webkit-scrollbar-thumb {
             background: $special-color;
             border-radius: $radius-round;
+        }
+    }
+
+    &.not-full-screen .card-scroll {
+        height: auto;
+        max-height: calc(100svh - 54px);
+
+        @media only screen and (min-width: 768px) {
+            max-height: calc(100svh - 170px);
         }
     }
 

@@ -27,7 +27,7 @@ const ConfirmModal: FC<IProps> = ({
             aria-describedby="modal-modal-description"
         >
             <div className="modal">
-                <Card>
+                <Card classes="not-full-screen">
                     {children}
 
                     <div className="modal-actions">
