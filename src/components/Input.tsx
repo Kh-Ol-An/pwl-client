@@ -1,5 +1,4 @@
-import React, { FC, ChangeEvent, Ref, forwardRef, useState, useEffect } from 'react';
-import { Tooltip } from 'react-tooltip';
+import React, { FC, ChangeEvent, Ref, forwardRef, useState } from 'react';
 import {
     VisibilityOff as VisibilityOffIcon,
     Visibility as VisibilityIcon,
@@ -31,7 +30,6 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
     ...props
 }, ref) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
     const getTypes = (type: string) => {
         switch (type) {
@@ -43,18 +41,6 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                 return type;
         }
     };
-
-    useEffect(() => {
-        const handleResize = () => {
-            setScreenWidth(window.innerWidth);
-        };
-
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
 
     return (
         <div className="input">
@@ -98,25 +84,13 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                 <label htmlFor={id}>
                     {label}
                     {tooltip && tooltip.length > 0 && (
-                        <>
-                            <span
-                                className="tooltip"
-                                data-tooltip-id={id}
-                                data-tooltip-content={tooltip}
-                            >
-                                <InfoIcon sx={{ color: stylesVariables.specialColor }} />
-                            </span>
-                            <Tooltip
-                                id={id}
-                                style={{
-                                    backgroundColor: stylesVariables.blackColor,
-                                    color: stylesVariables.lightColor,
-                                    width: screenWidth > 411 ? '300px' : '200px',
-                                    fontSize: '100%',
-                                    zIndex: 9,
-                                }}
-                            />
-                        </>
+                        <span
+                            className="tooltip"
+                            data-tooltip-id={id}
+                            data-tooltip-content={tooltip}
+                        >
+                            <InfoIcon sx={{ color: stylesVariables.specialColor }} />
+                        </span>
                     )}
                 </label>
                 <div className="background"></div>

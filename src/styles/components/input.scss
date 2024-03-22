@@ -61,8 +61,7 @@
                 }
 
                 .tooltip {
-                    opacity: 1;
-                    pointer-events: unset;
+                    height: 16px;
                 }
             }
 
@@ -122,9 +121,9 @@
 
         .tooltip {
             @include flex-center;
-            opacity: 0;
+            height: 0;
+            overflow: hidden;
             cursor: pointer;
-            pointer-events: none;
             transition: $transition-slow;
         }
 

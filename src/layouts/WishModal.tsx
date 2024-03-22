@@ -167,6 +167,16 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 tooltip="Сподіваюсь що ти створиш багато бажань) І щоб їх було легко розрізняти, назва має бути не тільки обов'язковою, а ще і унікальною"
                 error={errors?.name?.message}
             />
+            <Tooltip
+                id="name"
+                style={{
+                    backgroundColor: stylesVariables.blackColor,
+                    color: stylesVariables.lightColor,
+                    width: screenWidth > 411 ? '300px' : '200px',
+                    fontSize: '14px',
+                    zIndex: 9,
+                }}
+            />
 
             <div className={"expander" + (isTransition ? " transition" : "") + (material ? " rolled-up" : "")}>
                 <Input
@@ -178,6 +188,16 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     tooltip="Матеріальне бажання яке не має своєї ціни не може бути виконано твоїм всесвітом. Введи приблизну або точну ціну."
                     error={errors?.price?.message}
                 />
+                <Tooltip
+                    id="price"
+                    style={{
+                        backgroundColor: stylesVariables.blackColor,
+                        color: stylesVariables.lightColor,
+                        width: screenWidth > 411 ? '300px' : '200px',
+                        fontSize: '14px',
+                        zIndex: 9,
+                    }}
+                />
 
                 <Input
                     {...(material && register("address", onlyWhitespaceValidation))}
@@ -187,6 +207,16 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     label="Де можна придбати"
                     tooltip="Назва місця, а краще адреса, а ще краще посилання де можна придбати бажання."
                     error={errors?.address?.message}
+                />
+                <Tooltip
+                    id="address"
+                    style={{
+                        backgroundColor: stylesVariables.blackColor,
+                        color: stylesVariables.lightColor,
+                        width: screenWidth > 411 ? '300px' : '200px',
+                        fontSize: '14px',
+                        zIndex: 9,
+                    }}
                 />
             </div>
 
@@ -226,7 +256,7 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                                 backgroundColor: stylesVariables.blackColor,
                                 color: stylesVariables.lightColor,
                                 width: screenWidth > 411 ? '300px' : '200px',
-                                fontSize: '100%',
+                                fontSize: '14px',
                                 zIndex: 9,
                             }}
                         />
