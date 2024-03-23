@@ -7,7 +7,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateValidationError } from '@mui/x-date-pickers/models';
 import dayjs, { Dayjs } from 'dayjs';
 import { useAppDispatch, useAppSelector } from '../store/hook';
-import { updateMyUser } from '../store/my-user/thunks';
+import { updateMyUser, deleteMyUser } from '../store/my-user/thunks';
 import { IUpdateMyUser } from '../store/my-user/types';
 import { ICurrentAvatar } from '../models/IUser';
 import { accountFirstNameValidation, accountLastNameValidation } from '../utils/validations';
@@ -92,6 +92,11 @@ const AccountModal: FC<IProps> = ({ close }) => {
         return avatar || '';
     };
 
+    const handleDeleteMyUser = async () => {
+        if (!myUser) return;
+        await dispatch(deleteMyUser(myUser.id));
+    };
+
     useEffect(() => {
         if (!myUser) return;
 
@@ -174,9 +179,15 @@ const AccountModal: FC<IProps> = ({ close }) => {
                 </DemoContainer>
             </div>
 
-            <Button type="submit">
-                Зберегти
-            </Button>
+            <div className="actions">
+                <Button type="button" variant="text" color="action-color" onClick={handleDeleteMyUser}>
+                    Видалити акаунт
+                </Button>
+
+                <Button type="submit">
+                    Зберегти
+                </Button>
+            </div>
         </form>
     );
 };

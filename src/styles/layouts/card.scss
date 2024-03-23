@@ -20,6 +20,7 @@
         border-style: solid;
         border-color: $accent-color;
         background: $secondary-color;
+        filter: drop-shadow(0 15px 50px $black-color);
 
         @media only screen and (min-width: 768px) {
             border-width: 8px;

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from '../../models/IUser';
-import { registration, login, logout, checkAuth, updateMyUser, addFriend, removeFriend } from './thunks';
+import { registration, login, logout, checkAuth, updateMyUser, deleteMyUser, addFriend, removeFriend } from './thunks';
 
 interface IMyUserState {
     user: IUser | null;
@@ -95,6 +95,24 @@ const myUserSlice = createSlice({
                 state.user = action.payload;
                 state.isLoading = false;
                 state.error = null;
+            })
+            // deleteMyUser
+            .addCase(deleteMyUser.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(deleteMyUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось видалити користувача.';
+            })
+            .addCase(deleteMyUser.fulfilled, (state, action) => {
+                if (state.user?.id === action.payload) {
+                    state.user = null;
+                    state.error = null;
+                } else {
+                    state.error = 'Не вдалось видалити користувача.';
+                }
+                state.isLoading = false;
             })
             // addFriend
             .addCase(addFriend.pending, (state) => {

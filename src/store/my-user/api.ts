@@ -87,6 +87,27 @@ const updateMyUser = async ({
     }
 };
 
+const deleteMyUser = async (userId: IUser['id']): Promise<AxiosResponse<IUser['id']>> => {
+    try {
+        const response = await api.delete(
+            '/user',
+            {
+                params: {
+                    userId,
+                }
+            }
+        );
+        await localStorage.clear();
+        return response;
+    } catch (error: any) {
+        toast(
+            error.response?.data?.message || `Користувача з ідентифікатором ${userId} не вдалось видалити.`,
+            { type: 'error' },
+        );
+        throw error;
+    }
+};
+
 const addFriend = async (data: IAddFriend): Promise<AxiosResponse<IUser>> => {
     try {
         return await api.post('/friend', data);
@@ -111,6 +132,7 @@ const myUserApi = {
     logout,
     refresh,
     updateMyUser,
+    deleteMyUser,
     addFriend,
     removeFriend,
 };

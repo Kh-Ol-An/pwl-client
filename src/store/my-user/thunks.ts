@@ -47,6 +47,15 @@ export const updateMyUser = createAsyncThunk<IUser, IUpdateMyUser>(
     },
 );
 
+export const deleteMyUser = createAsyncThunk<IUser['id'], IUser['id']>(
+    'myUser/deleteMyUser',
+    async (data: IUser['id']) => {
+        const result = await api.deleteMyUser(data);
+
+        return result.data;
+    },
+);
+
 export const addFriend = createAsyncThunk<IUser, IAddFriend>(
     'myUser/addFriend',
     async (data: IAddFriend) => {

@@ -58,7 +58,7 @@ const Auth: FC = () => {
                         <h1 className="title">
                             <img className="logo" src={LogoIcon} alt="logo" />
                             {/*Вітаю! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}*/}
-                            {isRegistration ? 'Реєстрація.' : 'Вхід'}
+                            {isRegistration ? 'Реєстрація' : 'Вхід'}
                             <img className="logo" src={LogoIcon} alt="logo" />
                         </h1>
 
@@ -104,7 +104,8 @@ const Auth: FC = () => {
                         )}
 
                         <Button variant="text" type="button" onClick={() => setIsRegistration((state) => !state)}>
-                            {isRegistration ? 'Ми вже знайомі.' : 'Ти мене ще не знаєш.'}
+                            {/*{isRegistration ? 'Ми вже знайомі.' : 'Ти мене ще не знаєш.'}*/}
+                            {isRegistration ? 'Увійти' : 'Зареєструватись'}
                         </Button>
 
                         <Button type="submit">
