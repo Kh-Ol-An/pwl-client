@@ -63,6 +63,7 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                               name={name}
                               type={getTypes(type)}
                               inputMode={type === 'number' ? 'numeric' : 'text'}
+                              autoComplete={type}
                               placeholder="hidden"
                               value={value}
                               onChange={(e) => {

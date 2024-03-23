@@ -48,7 +48,7 @@ const WishList = () => {
             <div className="head">
                 {myUser?.id === selectedUserId && (
                     <Button onClick={() => handleOpenWishSettings(null)}>
-                        Додати бажання
+                        Створити бажання
                     </Button>
                 )}
 

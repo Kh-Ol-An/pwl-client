@@ -7,7 +7,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateValidationError } from '@mui/x-date-pickers/models';
 import dayjs, { Dayjs } from 'dayjs';
 import { useAppDispatch, useAppSelector } from '../store/hook';
-import { updateMyUser, deleteMyUser } from '../store/my-user/thunks';
+import { updateMyUser } from '../store/my-user/thunks';
 import { IUpdateMyUser } from '../store/my-user/types';
 import { ICurrentAvatar } from '../models/IUser';
 import { accountFirstNameValidation, accountLastNameValidation } from '../utils/validations';
@@ -19,6 +19,7 @@ import StylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     close: () => void;
+    openConfirmDeleteMyUser: () => void;
 }
 
 type Inputs = {
@@ -26,7 +27,7 @@ type Inputs = {
     lastName: string
 }
 
-const AccountModal: FC<IProps> = ({ close }) => {
+const AccountModal: FC<IProps> = ({ close, openConfirmDeleteMyUser }) => {
     const [clickedOnSubmit, setClickedOnSubmit] = useState(false);
     const [avatar, setAvatar] = useState<ICurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
@@ -90,11 +91,6 @@ const AccountModal: FC<IProps> = ({ close }) => {
         }
 
         return avatar || '';
-    };
-
-    const handleDeleteMyUser = async () => {
-        if (!myUser) return;
-        await dispatch(deleteMyUser(myUser.id));
     };
 
     useEffect(() => {
@@ -180,13 +176,11 @@ const AccountModal: FC<IProps> = ({ close }) => {
             </div>
 
             <div className="actions">
-                <Button type="button" variant="text" color="action-color" onClick={handleDeleteMyUser}>
-                    Видалити акаунт
+                <Button type="button" variant="text" color="action-color" onClick={openConfirmDeleteMyUser}>
+                    Видалити свій акаунт
                 </Button>
 
-                <Button type="submit">
-                    Зберегти
-                </Button>
+                <Button type="submit">Оновити</Button>
             </div>
         </form>
     );

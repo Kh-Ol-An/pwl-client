@@ -36,7 +36,7 @@ type Inputs = {
 const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const [material, setMaterial] = useState<ICreateWish['material']>(true);
     const [show, setShow] = useState<ICreateWish['show']>('all');
-    const [showConfirmRemoveWish, setShowConfirmRemoveWish] = useState<boolean>(false);
+    const [showConfirmDeleteWish, setShowConfirmDeleteWish] = useState<boolean>(false);
     const [images, setImages] = useState<ICurrentImage[]>([]);
     const [isTransition, setIsTransition] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
@@ -111,7 +111,7 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
         );
     };
 
-    const removeWish = async () => {
+    const handleDeleteWish = async () => {
         if (!myUser || !idOfSelectedWish) return;
 
         await dispatch(deleteWish([myUser.id, idOfSelectedWish]));
@@ -297,17 +297,17 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                         <Button
                             color="action-color"
                             type="button"
-                            onClick={() => setShowConfirmRemoveWish(true)}
+                            onClick={() => setShowConfirmDeleteWish(true)}
                         >
                             Видалити бажання
                         </Button>
 
                         <ConfirmModal
-                            show={showConfirmRemoveWish}
+                            show={showConfirmDeleteWish}
                             confirmText="Видалити"
                             closeText="Залишити"
-                            close={() => setShowConfirmRemoveWish(false)}
-                            confirm={removeWish}
+                            close={() => setShowConfirmDeleteWish(false)}
+                            confirm={handleDeleteWish}
                         >
                             <h3 className="title attention">Увага!</h3>
                             <p className="text-lg">Ви впевнені, що хочете видалити це бажання?</p>
