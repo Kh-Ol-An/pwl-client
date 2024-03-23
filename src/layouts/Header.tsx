@@ -145,7 +145,7 @@ const Header: FC<IProps> = ({ open, close }) => {
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                     >
-                        <form className="modal" onSubmit={handleSubmit(onSubmit)}>
+                        <form className="modal confirm" onSubmit={handleSubmit(onSubmit)}>
                             <Card classes="not-full-screen">
                                 <h3 className="title attention">Увага!</h3>
 

@@ -296,6 +296,7 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     <>
                         <Button
                             color="action-color"
+                            variant="text"
                             type="button"
                             onClick={() => setShowConfirmDeleteWish(true)}
                         >
