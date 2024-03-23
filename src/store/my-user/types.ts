@@ -17,6 +17,10 @@ export interface IUpdateMyUser {
     avatar: ICurrentAvatar;
 }
 
+export interface IDeleteMyUser extends ILogin {
+    id: string;
+}
+
 export interface IAddFriend {
     myId: string;
     friendId: string;

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import api from '../../utils/api';
 import { IAuth } from '../../models/IAuth';
 import { IUser } from '../../models/IUser';
-import { IAddFriend, ILogin, IRegistration, IRemoveFriend, IUpdateMyUser } from './types';
+import { IAddFriend, IDeleteMyUser, ILogin, IRegistration, IRemoveFriend, IUpdateMyUser } from './types';
 
 const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> => {
     try {
@@ -87,21 +87,14 @@ const updateMyUser = async ({
     }
 };
 
-const deleteMyUser = async (userId: IUser['id']): Promise<AxiosResponse<IUser['id']>> => {
+const deleteMyUser = async (data: IDeleteMyUser): Promise<AxiosResponse<IUser['id']>> => {
     try {
-        const response = await api.delete(
-            '/user',
-            {
-                params: {
-                    userId,
-                }
-            }
-        );
+        const response = await api.post('/user/delete', data);
         await localStorage.clear();
         return response;
     } catch (error: any) {
         toast(
-            error.response?.data?.message || `Користувача з ідентифікатором ${userId} не вдалось видалити.`,
+            error.response?.data?.message || `Користувача з ідентифікатором ${data.id} не вдалось видалити.`,
             { type: 'error' },
         );
         throw error;

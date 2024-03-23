@@ -10,7 +10,7 @@ import {
 import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '../store/hook';
-import { logout } from '../store/my-user/thunks';
+import { logout, deleteMyUser } from '../store/my-user/thunks';
 import { getWishList } from '../store/wishes/thunks';
 import { selectUserId } from '../store/selected-user/slice';
 import { emailValidation, passwordValidation } from "../utils/validations";
@@ -51,8 +51,7 @@ const Header: FC<IProps> = ({ open, close }) => {
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         if (!myUser) return;
 
-        console.log('onSubmit', data)
-        // await dispatch(deleteMyUser(myUser.id));
+        await dispatch(deleteMyUser({ ...data, id: myUser.id }));
         close();
     };
 
@@ -150,7 +149,7 @@ const Header: FC<IProps> = ({ open, close }) => {
                             <Card classes="not-full-screen">
                                 <h3 className="title attention">Увага!</h3>
 
-                                <p className="text-lg">
+                                <p className="text">
                                     Нашому суму не має меж... Ми сподіваємось що Ви дасте нам ще один шанс та залишитись.
                                     Якщо Ви рішуче вирішили покинути нас, то підтвердьте свій намір ввівши відповідні дані.
                                 </p>

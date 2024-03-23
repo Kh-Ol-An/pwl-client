@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from './api';
 import { IAuth } from '../../models/IAuth';
 import { IUser } from '../../models/IUser';
-import { IAddFriend, ILogin, IRegistration, IRemoveFriend, IUpdateMyUser } from './types';
+import { IAddFriend, IDeleteMyUser, ILogin, IRegistration, IRemoveFriend, IUpdateMyUser } from './types';
 
 export const registration = createAsyncThunk<IAuth, IRegistration>(
     'myUser/registration',
@@ -47,9 +47,9 @@ export const updateMyUser = createAsyncThunk<IUser, IUpdateMyUser>(
     },
 );
 
-export const deleteMyUser = createAsyncThunk<IUser['id'], IUser['id']>(
+export const deleteMyUser = createAsyncThunk<IUser['id'], IDeleteMyUser>(
     'myUser/deleteMyUser',
-    async (data: IUser['id']) => {
+    async (data: IDeleteMyUser) => {
         const result = await api.deleteMyUser(data);
 
         return result.data;
