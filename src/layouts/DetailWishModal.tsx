@@ -140,7 +140,9 @@ const DetailWishModal: FC<IProps> = ({ wish, editWish, close }) => {
                                     {wish?.price && (
                                         <div className="detail-wish-box">
                                             <span className="detail-wish-label">Ціна:</span>
-                                            <span className="detail-wish-data">{addingWhiteSpaces(wish?.price)} грн.</span>
+                                            <span className="detail-wish-data">
+                                                {addingWhiteSpaces(wish?.price)} грн.
+                                            </span>
                                         </div>
                                     )}
                                 </div>

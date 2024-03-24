@@ -30,6 +30,7 @@
     }
 
     .header-content {
+        position: relative;
         @include flex-between;
         padding: 10px 20px;
         background: $accent-color;
@@ -74,5 +75,12 @@
                 width: 196px;
             }
         }
+    }
+
+    .logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }

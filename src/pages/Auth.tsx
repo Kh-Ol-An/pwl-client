@@ -6,7 +6,7 @@ import { accountFirstNameValidation, emailValidation, passwordValidation } from 
 import Card from '../layouts/Card';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import LogoIcon from '../assets/images/logo.svg';
+import Logo from '../components/Logo';
 
 type Inputs = {
     firstName: string
@@ -49,17 +49,21 @@ const Auth: FC = () => {
     };
 
     return (
-        <div className="page auth-page">
+        <div className="auth-page">
+            <div className="auth-title">
+                <Logo to="/welcome" />
+            </div>
+
             <div className="box">
                 <Card withLights>
-                    <form className="form" onSubmit={handleSubmit(onSubmit)}>
-                        <img className="logo only-mobile" src={LogoIcon} alt="logo" />
+                    <div className="auth-title only-mobile">
+                        <Logo to="/welcome" />
+                    </div>
 
+                    <form className="form" onSubmit={handleSubmit(onSubmit)}>
                         <h1 className="title">
-                            <img className="logo" src={LogoIcon} alt="logo" />
                             {/*Вітаю! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}*/}
                             {isRegistration ? 'Реєстрація' : 'Вхід'}
-                            <img className="logo" src={LogoIcon} alt="logo" />
                         </h1>
 
                         {isRegistration && (
@@ -111,8 +115,6 @@ const Auth: FC = () => {
                         <Button type="submit">
                             {isRegistration ? 'Зареєструватися' : 'Увійти'}
                         </Button>
-
-                        <img className="logo only-mobile" src={LogoIcon} alt="logo" />
                     </form>
                 </Card>
             </div>

@@ -1,5 +1,12 @@
 .welcome-page {
-    flex-direction: column;
-    gap: 20px;
     padding: 20px;
+
+    .welcome-page-header {
+        @include flex-between;
+    }
+
+    .actions {
+        @include flex-center;
+        gap: 10px;
+    }
 }

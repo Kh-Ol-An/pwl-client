@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../store/hook';
 import Button from '../components/Button';
 import { logout } from '../store/my-user/thunks';
 import { WAITING_TIME } from '../utils/constants';
+import Logo from '../components/Logo';
 
 const Inactivated: FC = () => {
     const [timeLeft, setTimeLeft] = useState<number | null>(null);
@@ -60,14 +61,18 @@ const Inactivated: FC = () => {
 
     return (
         <div className="inactivated">
-            <div className="logout">
-                <Button variant="text" onClick={() => dispatch(logout())}>
-                    <LogoutIcon />
-                    Вийти з аккаунту
-                </Button>
+            <div className="inactivated-header">
+                <Logo to="/welcome" />
+
+                <div className="logout">
+                    <Button variant="text" onClick={() => dispatch(logout())}>
+                        <LogoutIcon />
+                        <span>Вийти з аккаунту</span>
+                    </Button>
+                </div>
             </div>
 
-            <p>
+            <p className="content">
                 Ми прагнемо, щоб всі користувачі були справжніми. <br/>
                 Перевірте свою пошту: <span className="bold">{myUser?.email}</span> і активуйте свій акаунт. <br/>
                 Якщо листа немає, перевірте папку "Спам". <br/>

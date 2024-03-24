@@ -20,6 +20,7 @@ import Button from '../components/Button';
 import Action from '../components/Action';
 import Popup from "../components/Popup";
 import Input from "../components/Input";
+import Logo from '../components/Logo';
 import stylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
@@ -104,6 +105,8 @@ const Header: FC<IProps> = ({ open, close }) => {
                             </span>
                         </div>
                     </button>
+
+                    <Logo to="/welcome" withoutIcon />
 
                     <Popup
                         anchor={anchor}
