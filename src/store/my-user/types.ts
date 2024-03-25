@@ -1,4 +1,4 @@
-import { ICurrentAvatar } from '../../models/IUser';
+import { ICurrentAvatar, IUser } from '../../models/IUser';
 
 export interface ILogin {
     email: string;
@@ -10,7 +10,7 @@ export interface IRegistration extends ILogin {
 }
 
 export interface IUpdateMyUser {
-    id: string;
+    id: IUser['id'];
     firstName: string;
     lastName?: string;
     birthday?: string;
@@ -18,12 +18,12 @@ export interface IUpdateMyUser {
 }
 
 export interface IDeleteMyUser extends ILogin {
-    id: string;
+    id: IUser['id'];
 }
 
 export interface IAddFriend {
-    myId: string;
-    friendId: string;
+    myId: IUser['id'];
+    friendId: IUser['id'];
 }
 
 export interface IRemoveFriend extends IAddFriend {

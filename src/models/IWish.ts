@@ -18,7 +18,7 @@ export interface IBooking {
 
 export interface IWish {
     id: string;
-    userId: string;
+    userId: IUser['id'];
     material: boolean;
     show: 'all' | 'friends' | 'nobody';
     name: string;
