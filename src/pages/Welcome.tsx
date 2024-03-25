@@ -13,7 +13,7 @@ const Welcome: FC = () => {
                     <Button to="/auth">Зареєструватись</Button>
                 </div>
             </div>
-            <h1 className="title">Welcome</h1>
+            <h1 className="title">Welcome test</h1>
         </div>
     );
 };
