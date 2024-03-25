@@ -2,6 +2,10 @@
 .date-picker {
     width: 100%;
 
+    .MuiFormControl-root {
+        width: 100%;
+    }
+
     .MuiFormHelperText-root {
         margin-left: 0;
     }

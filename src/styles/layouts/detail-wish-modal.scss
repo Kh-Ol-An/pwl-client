@@ -74,7 +74,7 @@
         min-width: 240px;
         width: 240px;
         height: 240px;
-        margin: 0 auto;
+        margin: 0 auto 10px;
 
         @media only screen and (min-width: 360px) {
             min-width: 280px;
@@ -191,18 +191,13 @@
         flex-direction: column;
         gap: 10px;
         width: 100%;
-        padding-right: 8px;
-        margin-top: 10px;
 
         @media only screen and (min-width: 1366px) {
             min-height: 100%;
             max-height: calc(100svh - 180px);
             overflow-y: auto;
             overflow-x: hidden;
-        }
-
-        @media only screen and (min-width: 1366px) {
-            margin-top: 0;
+            padding-right: 8px;
         }
 
         &.with-top {
@@ -312,7 +307,9 @@
         }
     }
 
-    .detail-wish-action {
+    .detail-wish-actions {
         margin: auto 0 0 auto;
+        @include flex-center;
+        gap: 20px;
     }
 }

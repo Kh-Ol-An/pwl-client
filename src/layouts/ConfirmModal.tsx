@@ -28,6 +28,8 @@ const ConfirmModal: FC<IProps> = ({
         >
             <div className="modal confirm">
                 <Card classes="not-full-screen">
+                    <h3 className="title attention">Увага!</h3>
+
                     {children}
 
                     <div className="modal-actions">

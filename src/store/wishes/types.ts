@@ -1,7 +1,8 @@
-import { ICurrentImage } from '../../models/IWish';
+import { ICurrentImage, IWish } from '../../models/IWish';
+import { IUser } from '../../models/IUser';
 
 export interface ICreateWish {
-    userId: string;
+    userId: IUser['id'];
     material: boolean;
     show: 'all' | 'friends' | 'nobody';
     name: string;
@@ -12,10 +13,16 @@ export interface ICreateWish {
 }
 
 export interface IUpdateWish extends ICreateWish {
-    id: string;
+    id: IWish['id'];
 }
 
 export interface IGetWish {
-    myId: string;
-    userId: string;
+    myId: IUser['id'];
+    userId: IUser['id'];
+}
+
+export interface IBookWish {
+    userId: IUser['id'];
+    wishId: IWish['id'];
+    end: string;
 }

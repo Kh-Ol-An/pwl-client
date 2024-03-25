@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import api from '../../utils/api';
 import { IUser } from '../../models/IUser';
 import { ICurrentImage, IWish } from '../../models/IWish';
-import { ICreateWish, IGetWish, IUpdateWish } from './types';
+import { IBookWish, ICreateWish, IGetWish, IUpdateWish } from './types';
 
 const processCommonFields = (formData: FormData, commonFields: { [key: string]: string | boolean }) => {
     for (const [key, value] of Object.entries(commonFields)) {
@@ -99,11 +99,21 @@ const getWishList = async (params: IGetWish): Promise<AxiosResponse<IWish[]>> =>
     }
 };
 
+const bookWish = async (data: IBookWish): Promise<AxiosResponse<IWish>> => {
+    try {
+        return await api.post('/wish', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось забронювати бажання.', { type: 'error' });
+        throw error;
+    }
+};
+
 const wishApi = {
     createWish,
     updateWish,
     deleteWish,
     getWishList,
+    bookWish,
 };
 
 export default wishApi;

@@ -310,7 +310,6 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             close={() => setShowConfirmDeleteWish(false)}
                             confirm={handleDeleteWish}
                         >
-                            <h3 className="title attention">Увага!</h3>
                             <p className="text-lg">Ви впевнені, що хочете видалити це бажання?</p>
                         </ConfirmModal>
                     </>

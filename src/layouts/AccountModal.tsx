@@ -28,7 +28,7 @@ type Inputs = {
 }
 
 const AccountModal: FC<IProps> = ({ close, openConfirmDeleteMyUser }) => {
-    const [clickedOnSubmit, setClickedOnSubmit] = useState(false);
+    const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
     const [avatar, setAvatar] = useState<ICurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
     const [birthdayError, setBirthdayError] = useState<DateValidationError | null>(null);
@@ -50,7 +50,12 @@ const AccountModal: FC<IProps> = ({ close, openConfirmDeleteMyUser }) => {
         if (!clickedOnSubmit) return;
 
         switch (birthdayError) {
-            case 'minDate':
+            case 'minDate': {
+                return 'В нас є сумніви що Вам більше 120 років.';
+            }
+            case 'disableFuture': {
+                return 'Неможливо народитись в майбутньому.';
+            }
             case 'invalidDate': {
                 return 'Введена дата недійсна.';
             }
@@ -163,6 +168,7 @@ const AccountModal: FC<IProps> = ({ close, openConfirmDeleteMyUser }) => {
                         label="День Народження*"
                         format="DD.MM.YYYY"
                         value={birthday}
+                        minDate={dayjs().subtract(120, 'years')} // Дозволити вибір дати до 120 років в минулому
                         disableFuture
                         onError={(newError) => setBirthdayError(newError)}
                         slotProps={{
