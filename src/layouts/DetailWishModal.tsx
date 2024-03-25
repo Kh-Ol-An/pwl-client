@@ -12,6 +12,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateValidationError } from '@mui/x-date-pickers/models';
 import dayjs, { Dayjs } from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import { Tooltip } from 'react-tooltip';
+import { Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../store/hook';
 import { bookWish } from '../store/wishes/thunks';
 import { IWish } from '../models/IWish';
@@ -285,18 +287,38 @@ const DetailWishModal: FC<IProps> = ({ wish, editWish, close }) => {
                                                         Після того як Ви підтвердите свій намір,
                                                         ніхто з користувачів не зможе забронювати це бажання.
                                                         У Вас буде можливість скасувати свій намір виконати бажання впродовж доби.
-                                                        Пи.Си. Декларуючи свій намір виконати бажання,
-                                                        Ви берете на себе відповідальність за його виконання.
-                                                        Всесвіт покладається на Вас :)
-                                                        Постійна зміна рішень може погіршити Ваші відносини зі Всесвітом.
-                                                        Кожне невиконане бажання буде позначене відповідним кольором на вашій аватарці.
-                                                        Червона рамка та напівпрозора аватарка - три невиконаних бажання.
-                                                        Червона рамка - два невиконаних бажання.
-                                                        Жовта рамка - одне невиконане бажання.
-                                                        Сіра рамка - жодного наміру виконати бажання.
-                                                        Синя рамка - одне виконане бажання.
-                                                        Зелена рамка - два і більше виконаних бажання.
+                                                        <span
+                                                            className="tooltip detail-wish-book-tooltip"
+                                                            data-tooltip-id="book-wish"
+                                                            data-tooltip-content="
+                                                                Декларуючи свій намір виконати бажання,
+                                                                Ви берете на себе відповідальність за його виконання.
+                                                                Всесвіт покладається на Вас :)
+                                                                Постійна зміна рішень може погіршити Ваші відносини зі Всесвітом.
+                                                                Кожне невиконане бажання буде позначене відповідним кольором на вашій аватарці.
+                                                                Червона рамка та напівпрозора аватарка - три невиконаних бажання.
+                                                                Червона рамка - два невиконаних бажання.
+                                                                Жовта рамка - одне невиконане бажання.
+                                                                Сіра рамка - жодного наміру виконати бажання.
+                                                                Синя рамка - одне виконане бажання.
+                                                                Зелена рамка - два і більше виконаних бажання.
+                                                            "
+                                                        >
+                                                            <InfoIcon sx={{ color: stylesVariables.specialColor }} />
+                                                        </span>
                                                     </p>
+
+                                                    <Tooltip
+                                                        id="book-wish"
+                                                        opacity={1}
+                                                        style={{
+                                                            backgroundColor: stylesVariables.blackColor,
+                                                            color: stylesVariables.lightColor,
+                                                            width: screenWidth > 411 ? '300px' : '200px',
+                                                            fontSize: '14px',
+                                                            zIndex: 9,
+                                                        }}
+                                                    />
                                                 </ConfirmModal>
                                             </>
                                         )}

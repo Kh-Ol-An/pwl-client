@@ -165,16 +165,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-
-            .tooltip {
-                @include flex-center;
-                cursor: pointer;
-            }
-
-            svg {
-                width: 16px;
-                height: 16px;
-            }
         }
     }
 

@@ -120,16 +120,9 @@
         }
 
         .tooltip {
-            @include flex-center;
             height: 0;
             overflow: hidden;
-            cursor: pointer;
             transition: $transition-slow;
-        }
-
-        svg {
-            width: 16px;
-            height: 16px;
         }
     }
 
