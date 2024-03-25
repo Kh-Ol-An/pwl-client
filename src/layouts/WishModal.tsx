@@ -227,6 +227,16 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 />
             </div>
 
+            {/* description */}
+            <Input
+                {...register("description", wishDescriptionValidation)}
+                id="description"
+                name="description"
+                type="multiline"
+                label="Опис бажання"
+                error={errors?.description?.message}
+            />
+
             {/* show */}
             <div className="show">
                 <span className="show-label">Хто може бачити твоє бажання*</span>
@@ -279,16 +289,6 @@ const WishModal: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     />
                 </div>
             </div>
-
-            {/* description */}
-            <Input
-                {...register("description", wishDescriptionValidation)}
-                id="description"
-                name="description"
-                type="multiline"
-                label="Опис бажання"
-                error={errors?.description?.message}
-            />
 
             {/* actions */}
             <div className="actions">
