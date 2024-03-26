@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from './api';
-import { IAuth } from '../../models/IAuth';
-import { IUser } from '../../models/IUser';
-import { IAddFriend, IDeleteMyUser, ILogin, IRegistration, IRemoveFriend, IUpdateMyUser } from './types';
+import api from '@/store/my-user/api';
+import { IAddFriend, IDeleteMyUser, ILogin, IRegistration, IRemoveFriend, IUpdateMyUser } from '@/store/my-user/types';
+import { IAuth } from '@/models/IAuth';
+import { IUser } from '@/models/IUser';
 
 export const registration = createAsyncThunk<IAuth, IRegistration>(
     'myUser/registration',

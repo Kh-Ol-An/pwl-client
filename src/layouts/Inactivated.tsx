@@ -1,10 +1,10 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Logout as LogoutIcon } from '@mui/icons-material';
-import { useAppDispatch, useAppSelector } from '../store/hook';
-import Button from '../components/Button';
-import { logout } from '../store/my-user/thunks';
-import { WAITING_TIME } from '../utils/constants';
-import Logo from '../components/Logo';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import Button from '@/components/Button';
+import { logout } from '@/store/my-user/thunks';
+import { WAITING_TIME } from '@/utils/constants';
+import Logo from '@/components/Logo';
 
 const Inactivated: FC = () => {
     const [timeLeft, setTimeLeft] = useState<number | null>(null);

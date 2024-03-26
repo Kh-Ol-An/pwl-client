@@ -36,9 +36,9 @@
         "web-vitals": "^2.1.4"
     },
     "scripts": {
-        "dev": "cross-env BROWSER=none react-scripts start",
-        "build": "react-scripts build",
-        "eject": "react-scripts eject"
+        "dev": "cross-env BROWSER=none craco start",
+        "build": "craco build",
+        "eject": "craco eject"
     },
     "eslintConfig": {
         "extends": [
@@ -59,6 +59,7 @@
         ]
     },
     "devDependencies": {
+        "@craco/craco": "^7.1.0",
         "cross-env": "^7.0.3"
     }
 }

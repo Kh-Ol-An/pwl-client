@@ -1,6 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUser } from '../../models/IUser';
-import { registration, login, logout, checkAuth, updateMyUser, deleteMyUser, addFriend, removeFriend } from './thunks';
+import {
+    registration,
+    login,
+    logout,
+    checkAuth,
+    updateMyUser,
+    deleteMyUser,
+    addFriend,
+    removeFriend,
+} from '@/store/my-user/thunks';
+import { IUser } from '@/models/IUser';
 
 interface IMyUserState {
     user: IUser | null;

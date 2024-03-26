@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
-import api from '../../utils/api';
-import { IUser } from '../../models/IUser';
+import api from '@/utils/api';
+import { IUser } from '@/models/IUser';
 
 const getUsers = async (): Promise<AxiosResponse<IUser>> => {
     try {

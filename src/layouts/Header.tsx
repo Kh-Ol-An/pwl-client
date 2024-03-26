@@ -9,19 +9,19 @@ import {
 } from '@mui/icons-material';
 import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
-import { useAppDispatch, useAppSelector } from '../store/hook';
-import { logout, deleteMyUser } from '../store/my-user/thunks';
-import { getWishList } from '../store/wishes/thunks';
-import { selectUserId } from '../store/selected-user/slice';
-import { emailValidation, passwordValidation } from "../utils/validations";
-import Card from './Card';
-import EditAccount from './EditAccount';
-import Button from '../components/Button';
-import Action from '../components/Action';
-import Popup from "../components/Popup";
-import Input from "../components/Input";
-import Logo from '../components/Logo';
-import stylesVariables from '../styles/utils/variables.module.scss';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { logout, deleteMyUser } from '@/store/my-user/thunks';
+import { getWishList } from '@/store/wishes/thunks';
+import { selectUserId } from '@/store/selected-user/slice';
+import { emailValidation, passwordValidation } from "@/utils/validations";
+import Card from '@/layouts/Card';
+import EditAccount from '@/layouts/EditAccount';
+import Button from '@/components/Button';
+import Action from '@/components/Action';
+import Popup from "@/components/Popup";
+import Input from "@/components/Input";
+import Logo from '@/components/Logo';
+import stylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     open: boolean;

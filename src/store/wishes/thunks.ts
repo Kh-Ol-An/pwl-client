@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from './api';
-import { IUser } from '../../models/IUser';
-import { IWish } from '../../models/IWish';
-import { IBookWish, ICreateWish, IGetWish, IUpdateWish } from './types';
+import api from '@/store/wishes/api';
+import { IBookWish, ICreateWish, IGetWish, IUpdateWish } from '@/store/wishes/types';
+import { IUser } from '@/models/IUser';
+import { IWish } from '@/models/IWish';
 
 export const createWish = createAsyncThunk<IWish, ICreateWish>(
     'wishes/createWish',

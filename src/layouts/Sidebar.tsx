@@ -1,11 +1,11 @@
 import React, { FC, ChangeEvent, useState, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../store/hook';
-import { getWishList } from '../store/wishes/thunks';
-import { selectUserId } from '../store/selected-user/slice';
-import { IUser } from '../models/IUser';
-import Loading from './Loading';
-import Switch from '../components/Switch';
-import UserAction from '../components/UserAction';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { getWishList } from '@/store/wishes/thunks';
+import { selectUserId } from '@/store/selected-user/slice';
+import { IUser } from '@/models/IUser';
+import Loading from '@/layouts/Loading';
+import Switch from '@/components/Switch';
+import UserAction from '@/components/UserAction';
 
 interface IProps {
     open: boolean;

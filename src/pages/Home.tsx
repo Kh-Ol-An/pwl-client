@@ -1,13 +1,13 @@
 import React, { FC, useState, useEffect } from 'react';
-import {useAppDispatch, useAppSelector} from '../store/hook';
-import { getUsers } from '../store/users/thunks';
-import { getWishList } from '../store/wishes/thunks';
-import { selectUserId } from '../store/selected-user/slice';
-import Loading from '../layouts/Loading';
-import Inactivated from '../layouts/Inactivated';
-import Header from '../layouts/Header';
-import Sidebar from '../layouts/Sidebar';
-import WishList from '../layouts/Wish/WishList';
+import {useAppDispatch, useAppSelector} from '@/store/hook';
+import { getUsers } from '@/store/users/thunks';
+import { getWishList } from '@/store/wishes/thunks';
+import { selectUserId } from '@/store/selected-user/slice';
+import Loading from '@/layouts/Loading';
+import Inactivated from '@/layouts/Inactivated';
+import Header from '@/layouts/Header';
+import Sidebar from '@/layouts/Sidebar';
+import WishList from '@/layouts/Wish/WishList';
 
 const Home: FC = () => {
     const [open, setOpen] = useState<boolean>(false);

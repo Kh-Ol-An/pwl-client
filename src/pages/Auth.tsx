@@ -1,12 +1,12 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useAppDispatch } from '../store/hook';
-import { registration, login } from '../store/my-user/thunks';
-import { accountFirstNameValidation, emailValidation, passwordValidation } from '../utils/validations';
-import Card from '../layouts/Card';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import Logo from '../components/Logo';
+import { useAppDispatch } from '@/store/hook';
+import { registration, login } from '@/store/my-user/thunks';
+import { accountFirstNameValidation, emailValidation, passwordValidation } from '@/utils/validations';
+import Card from '@/layouts/Card';
+import Input from '@/components/Input';
+import Button from '@/components/Button';
+import Logo from '@/components/Logo';
 
 type Inputs = {
     firstName: string

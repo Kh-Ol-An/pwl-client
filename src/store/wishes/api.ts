@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
-import api from '../../utils/api';
-import { IUser } from '../../models/IUser';
-import { ICurrentImage, IWish } from '../../models/IWish';
-import { IBookWish, ICreateWish, IGetWish, IUpdateWish } from './types';
+import api from '@/utils/api';
+import { IBookWish, ICreateWish, IGetWish, IUpdateWish } from '@/store/wishes/types';
+import { IUser } from '@/models/IUser';
+import { ICurrentImage, IWish } from '@/models/IWish';
 
 const processCommonFields = (formData: FormData, commonFields: { [key: string]: string | boolean }) => {
     for (const [key, value] of Object.entries(commonFields)) {

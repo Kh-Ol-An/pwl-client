@@ -6,7 +6,7 @@ import {
     WISH_DESCRIPTION_MIN_LENGTH,
     WISH_DESCRIPTION_MAX_LENGTH,
     WISH_PRICE_MAX_LENGTH,
-} from './constants';
+} from '@/utils/constants';
 
 // Only whitespace
 export const onlyWhitespaceValidation = {

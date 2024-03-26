@@ -1,4 +1,4 @@
-import { ICurrentAvatar, IUser } from '../../models/IUser';
+import { ICurrentAvatar, IUser } from '@/models/IUser';
 
 export interface ILogin {
     email: string;

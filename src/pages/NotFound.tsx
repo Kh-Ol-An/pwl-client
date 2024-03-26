@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import Logo from '../components/Logo';
-import Button from '../components/Button';
+import Logo from '@/components/Logo';
+import Button from '@/components/Button';
 
 const NotFound: FC = () => {
     return (

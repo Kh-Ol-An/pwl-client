@@ -7,8 +7,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import { IWish } from '../../models/IWish';
-import stylesVariables from '../../styles/utils/variables.module.scss';
+import { IWish } from '@/models/IWish';
+import stylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     wish: IWish;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Logout as LogoutIcon } from '@mui/icons-material';
-import { useAppDispatch } from '../store/hook';
-import { logout } from '../store/my-user/thunks';
-import Logo from '../components/Logo';
-import Button from '../components/Button';
+import { useAppDispatch } from '@/store/hook';
+import { logout } from '@/store/my-user/thunks';
+import Logo from '@/components/Logo';
+import Button from '@/components/Button';
 
 const ActivationLinkExpired = () => {
     const dispatch = useAppDispatch();

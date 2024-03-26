@@ -4,8 +4,8 @@ import {
     Visibility as VisibilityIcon,
     Info as InfoIcon,
 } from '@mui/icons-material';
-import { addingWhiteSpaces } from '../utils/formating-value';
-import stylesVariables from '../styles/utils/variables.module.scss';
+import { addingWhiteSpaces } from '@/utils/formating-value';
+import stylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     id: string;

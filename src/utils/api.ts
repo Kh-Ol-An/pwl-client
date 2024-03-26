@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import myUserApi from '../store/my-user/api';
+import myUserApi from '@/store/my-user/api';
 
 const api = axios.create({
     withCredentials: true,

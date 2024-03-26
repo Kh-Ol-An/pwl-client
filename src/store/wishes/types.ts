@@ -1,5 +1,5 @@
-import { ICurrentImage, IWish } from '../../models/IWish';
-import { IUser } from '../../models/IUser';
+import { ICurrentImage, IWish } from '@/models/IWish';
+import { IUser } from '@/models/IUser';
 
 export interface ICreateWish {
     userId: IUser['id'];

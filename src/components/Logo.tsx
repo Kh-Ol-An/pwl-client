@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import LogoIcon from '../assets/images/logo.svg';
-import WishHub from '../assets/images/wish-hub.png';
+import LogoIcon from '@/assets/images/logo.svg';
+import WishHub from '@/assets/images/wish-hub.png';
 
 interface IProps {
     to?: string;

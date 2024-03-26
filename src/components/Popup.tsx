@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { Popover } from '@mui/material';
-import Card from "../layouts/Card";
+import Card from "@/layouts/Card";
 
 interface IProps {
     anchor: HTMLButtonElement | null;

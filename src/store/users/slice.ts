@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUser } from '../../models/IUser';
-import { getUsers } from './thunks';
+import { getUsers } from '@/store/users/thunks';
+import { IUser } from '@/models/IUser';
 
 interface IUsersState {
     list: IUser[];

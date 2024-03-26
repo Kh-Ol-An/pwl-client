@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import Button from '../components/Button';
-import Logo from '../components/Logo';
+import Button from '@/components/Button';
+import Logo from '@/components/Logo';
 
 const Welcome: FC = () => {
     return (

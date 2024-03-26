@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IWish } from '../../models/IWish';
-import { createWish, updateWish, deleteWish, getWishList } from './thunks';
+import { createWish, updateWish, deleteWish, getWishList } from '@/store/wishes/thunks';
+import { IWish } from '@/models/IWish';
 
 interface IState {
     list: IWish[]

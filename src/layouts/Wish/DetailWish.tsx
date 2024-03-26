@@ -6,14 +6,14 @@ import dayjs, { Dayjs } from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { Tooltip } from 'react-tooltip';
 import { Info as InfoIcon } from '@mui/icons-material';
-import { useAppDispatch, useAppSelector } from '../../store/hook';
-import { bookWish } from '../../store/wishes/thunks';
-import { IWish } from '../../models/IWish';
-import { addingWhiteSpaces } from '../../utils/formating-value';
-import WishSwiper from './WishSwiper';
-import ConfirmModal from '../ConfirmModal';
-import Button from '../../components/Button';
-import stylesVariables from '../../styles/utils/variables.module.scss';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { bookWish } from '@/store/wishes/thunks';
+import { IWish } from '@/models/IWish';
+import { addingWhiteSpaces } from '@/utils/formating-value';
+import WishSwiper from '@/layouts/Wish/WishSwiper';
+import ConfirmModal from '@/layouts/ConfirmModal';
+import Button from '@/components/Button';
+import stylesVariables from '@/styles/utils/variables.module.scss';
 
 dayjs.extend(isSameOrBefore);
 
