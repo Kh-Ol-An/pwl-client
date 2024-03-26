@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.f3167828.css",
-    "main.js": "/static/js/main.c4d38e70.js",
+    "main.js": "/static/js/main.b7a91bbf.js",
     "static/media/logo.svg": "/static/media/logo.21be91a6ab25421b98d4539d53f5be70.svg",
     "static/media/invisible-gift.png": "/static/media/invisible-gift.fe94cb9059572503ab0e.png",
     "static/media/wish-hub.png": "/static/media/wish-hub.dc56ace47ad098e25c48.png",
@@ -10,10 +10,10 @@
     "static/media/poppins-v20-latin-700.woff2": "/static/media/poppins-v20-latin-700.d86662fe776dae29ea78.woff2",
     "index.html": "/index.html",
     "main.f3167828.css.map": "/static/css/main.f3167828.css.map",
-    "main.c4d38e70.js.map": "/static/js/main.c4d38e70.js.map"
+    "main.b7a91bbf.js.map": "/static/js/main.b7a91bbf.js.map"
   },
   "entrypoints": [
     "static/css/main.f3167828.css",
-    "static/js/main.c4d38e70.js"
+    "static/js/main.b7a91bbf.js"
   ]
 }
