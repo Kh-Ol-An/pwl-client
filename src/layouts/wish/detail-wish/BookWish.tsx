@@ -51,7 +51,6 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
         setClickedOnBookWish(true);
         if (!myUser || !bookEnd || (bookEndError && bookEndError.length > 0)) return;
 
-        console.log('handleSubmit', bookEnd);
         await dispatch(bookWish({ userId: myUser.id, wishId: wish.id, end: bookEnd.format() }));
         close();
     };
@@ -75,7 +74,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 variant="text"
                 onClick={() => setShow(true)}
             >
-                Виконати бажання
+                Я виконаю бажання
             </Button>
 
             <ConfirmModal
@@ -115,7 +114,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 <p className="text">
                     Після того як Ви підтвердите свій намір,
                     ніхто з користувачів не зможе забронювати це бажання.
-                    У Вас буде можливість скасувати свій намір виконати бажання впродовж доби.
+                    У Вас буде можливість скасувати свій намір виконати бажання впродовж трьох діб.
                     <span
                         className="tooltip detail-wish-book-tooltip"
                         data-tooltip-id="book-wish"

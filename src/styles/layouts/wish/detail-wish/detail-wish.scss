@@ -31,10 +31,6 @@
         border-bottom: 2px solid rgba(255, 255, 255, 0.5);
         background: $accent-color;
         padding: 16px 10px 16px 16px;
-
-        @media only screen and (min-width: 768px) {
-            flex-direction: row;
-        }
     }
 
     .detail-wish-scroll {

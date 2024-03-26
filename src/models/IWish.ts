@@ -25,6 +25,7 @@ export interface IWish {
     price?: string;
     address?: string;
     description: string;
+    executed: boolean;
     images: IImage[];
     booking?: IBooking;
     createdAt: Dayjs;

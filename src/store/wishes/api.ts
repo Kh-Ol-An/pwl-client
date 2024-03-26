@@ -101,7 +101,7 @@ const getWishList = async (params: IGetWish): Promise<AxiosResponse<IWish[]>> =>
 
 const bookWish = async (data: IBookWish): Promise<AxiosResponse<IWish>> => {
     try {
-        return await api.post('/wish', data);
+        return await api.post('/wish/book', data);
     } catch (error: any) {
         toast(error.response?.data?.message || 'Не вдалось забронювати бажання.', { type: 'error' });
         throw error;

@@ -23,7 +23,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
 
     let showCancelExecution = wish.booking
         && myUser?.id === wish.booking.userId
-        && dayjs(wish.booking.start).isSameOrBefore(dayjs().add(1, 'day'));
+        && dayjs(wish.booking.start).isSameOrBefore(dayjs().add(3, 'days'));
 
     let showConfirmExecution = myUser?.id === wish.userId && wish.booking?.end;
 
@@ -54,11 +54,13 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                         {/* Book */}
                                         {!wish.booking?.end && <BookWish wish={wish} close={close} />}
 
-                                        {/* Cancel */}
+                                        {/* Cancel Book */}
                                         {showCancelExecution && <CancelBookWish wishName={wish.name} close={close} />}
 
-                                        {/* Confirm */}
+                                        {/* Confirm Book */}
                                         {showConfirmExecution && <ConfirmBookWish wishName={wish.name} close={close} />}
+
+                                        {/* Поскаржитись на невиконання */}
 
                                         {/* Edit */}
                                         {myUser?.id === wish.userId && (
