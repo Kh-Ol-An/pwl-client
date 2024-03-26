@@ -1,12 +1,4 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCube, FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/effect-cube';
-import 'swiper/css/pagination';
-import 'swiper/css/free-mode';
-import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DateValidationError } from '@mui/x-date-pickers/models';
@@ -19,6 +11,7 @@ import { bookWish } from '../store/wishes/thunks';
 import { IWish } from '../models/IWish';
 import { addingWhiteSpaces } from '../utils/formating-value';
 import ConfirmModal from './ConfirmModal';
+import WishSwiper from '../components/WishSwiper';
 import Button from '../components/Button';
 import stylesVariables from '../styles/utils/variables.module.scss';
 
@@ -31,7 +24,6 @@ interface IProps {
 }
 
 const DetailWishModal: FC<IProps> = ({ wish, editWish, close }) => {
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
     const [showBookModal, setShowBookModal] = useState<boolean>(false);
     const [showCancelBookModal, setShowCancelBookModal] = useState<boolean>(false);
@@ -63,10 +55,6 @@ const DetailWishModal: FC<IProps> = ({ wish, editWish, close }) => {
             </>
         )
     );
-
-    let slidesPerView = 3;
-    screenWidth >= 390 && (slidesPerView = 4);
-    screenWidth >= 600 && (slidesPerView = 5);
 
     let showRow = false;
     myUser?.id === wish.userId && (showRow = true);
@@ -144,63 +132,10 @@ const DetailWishModal: FC<IProps> = ({ wish, editWish, close }) => {
             <div className="detail-wish-outer-border">
                 <div className="detail-wish-inner-border">
                     <div className="detail-wish-content">
-                        <div className={"detail-wish-scroll" + (wish && wish.images.length > 1 ? " min-height" : "")}>
-                            {wish && wish.images.length > 0 && (
-                                <div className="detail-wish-swiper">
-                                    <Swiper
-                                        className="swiper-cube"
-                                        style={{
-                                            '--swiper-navigation-color': stylesVariables.primaryColor,
-                                        }}
-                                        effect={wish.images.length > 1 && 'cube'}
-                                        grabCursor={true}
-                                        cubeEffect={{
-                                            shadow: screenWidth >= 768,
-                                            slideShadows: true,
-                                            shadowOffset: 20,
-                                            shadowScale: 0.94,
-                                        }}
-                                        thumbs={{ swiper: thumbsSwiper }}
-                                        navigation={wish.images.length > 1}
-                                        modules={[EffectCube, FreeMode, Navigation, Thumbs]}
-                                    >
-                                        {wish.images.map((image) => (
-                                            <SwiperSlide key={image.id}>
-                                                <img
-                                                    src={image.path}
-                                                    alt={`wish-${image.position}`}
-                                                />
-                                            </SwiperSlide>
-                                        ))}
-                                    </Swiper>
+                        <div className={"detail-wish-scroll" + (wish.images.length > 1 ? " min-height" : "")}>
+                            {wish.images.length > 0 && <WishSwiper wish={wish} />}
 
-                                    {wish.images.length > 1 && (
-                                        <Swiper
-                                            className="swiper-nav"
-                                            style={{
-                                                '--swiper-navigation-color': stylesVariables.primaryColor,
-                                            }}
-                                            spaceBetween={8}
-                                            slidesPerView={slidesPerView}
-                                            watchSlidesProgress={true}
-                                            navigation={true}
-                                            modules={[FreeMode, Navigation, Thumbs]}
-                                            onSwiper={setThumbsSwiper}
-                                        >
-                                            {wish.images.map((image) => (
-                                                <SwiperSlide key={image.id}>
-                                                    <img
-                                                        src={image.path}
-                                                        alt={`wish-${image.position}`}
-                                                    />
-                                                </SwiperSlide>
-                                            ))}
-                                        </Swiper>
-                                    )}
-                                </div>
-                            )}
-
-                            <div className={"detail-wish-wrap" + (wish && wish.images.length > 1 ? " with-top" : "")}>
+                            <div className={"detail-wish-wrap" + (wish.images.length > 1 ? " with-top" : "")}>
                                 <div className="detail-wish-name">
                                     {wish.name}
                                 </div>
@@ -295,13 +230,8 @@ const DetailWishModal: FC<IProps> = ({ wish, editWish, close }) => {
                                                                 Ви берете на себе відповідальність за його виконання.
                                                                 Всесвіт покладається на Вас :)
                                                                 Постійна зміна рішень може погіршити Ваші відносини зі Всесвітом.
-                                                                Кожне невиконане бажання буде позначене відповідним кольором на вашій аватарці.
-                                                                Червона рамка та напівпрозора аватарка - три невиконаних бажання.
-                                                                Червона рамка - два невиконаних бажання.
-                                                                Жовта рамка - одне невиконане бажання.
-                                                                Сіра рамка - жодного наміру виконати бажання.
-                                                                Синя рамка - одне виконане бажання.
-                                                                Зелена рамка - два і більше виконаних бажання.
+                                                                Виконання бажань впливає на Ваш рейтинг в системі.
+                                                                Більш детально про це можна дізнатися в розділі 'Інструкція'.
                                                             "
                                                         >
                                                             <InfoIcon sx={{ color: stylesVariables.specialColor }} />
