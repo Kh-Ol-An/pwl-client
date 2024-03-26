@@ -76,7 +76,7 @@ const Header: FC<IProps> = ({ open, close }) => {
         setShowEditAccount(false);
     };
 
-    const handleHidEditAccount = () => {
+    const handleHideEditAccount = () => {
         setShowEditAccount(false);
     };
 
@@ -125,19 +125,19 @@ const Header: FC<IProps> = ({ open, close }) => {
 
                     <Modal
                         open={showEditAccount}
-                        onClose={handleHidEditAccount}
+                        onClose={handleHideEditAccount}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                     >
                         <div className="modal">
                             <Card>
                                 <EditAccount
-                                    close={handleHidEditAccount}
+                                    close={handleHideEditAccount}
                                     handleShowConfirmDeleteMyUser={handleShowConfirmDeleteMyUser}
                                 />
                             </Card>
 
-                            <Action onClick={handleHidEditAccount}>
+                            <Action onClick={handleHideEditAccount}>
                                 <CloseIcon />
                             </Action>
                         </div>

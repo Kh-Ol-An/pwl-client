@@ -8,7 +8,7 @@ interface IProps {
     close: () => void;
 }
 
-const ConfirmBookWish: FC<IProps> = ({ wishName, close }) => {
+const ConfirmExecutionWish: FC<IProps> = ({ wishName, close }) => {
     const [show, setShow] = useState<boolean>(false);
 
     const handleSubmit = () => {
@@ -40,4 +40,4 @@ const ConfirmBookWish: FC<IProps> = ({ wishName, close }) => {
     );
 };
 
-export default ConfirmBookWish;
+export default ConfirmExecutionWish;

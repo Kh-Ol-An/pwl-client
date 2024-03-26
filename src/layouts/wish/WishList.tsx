@@ -30,7 +30,7 @@ const WishList = () => {
         setShowWish(true);
     };
 
-    const handleHidWish = () => {
+    const handleHideWish = () => {
         setShowWish(false);
     };
 
@@ -39,7 +39,7 @@ const WishList = () => {
         setShowEditWish(true);
     };
 
-    const handleHidEditWish = () => {
+    const handleHideEditWish = () => {
         setShowEditWish(false);
     };
 
@@ -64,7 +64,12 @@ const WishList = () => {
             {wishList.length > 0 ? (
                 <ul className="list">
                     {wishList.map((wish) => (
-                        <li className={"item" + (wishList.length < 2 ? " alone" : "")} key={wish.id}>
+                        <li
+                            className={
+                                "item" + (wishList.length < 2 ? " alone" : "") + (wish.booking?.end ? " booked" : "")
+                            }
+                            key={wish.id}
+                        >
                             <WishItem
                                 wish={wish}
                                 showWish={() => handleShowWish(wish.id)}
@@ -88,7 +93,7 @@ const WishList = () => {
             {detailWish && (
                 <Modal
                     open={showWish}
-                    onClose={handleHidWish}
+                    onClose={handleHideWish}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
@@ -96,10 +101,10 @@ const WishList = () => {
                         <DetailWish
                             wish={detailWish}
                             editWish={() => handleShowEditWish(idOfSelectedWish)}
-                            close={handleHidWish}
+                            close={handleHideWish}
                         />
 
-                        <Action onClick={handleHidWish}>
+                        <Action onClick={handleHideWish}>
                             <CloseIcon />
                         </Action>
                     </div>
@@ -108,16 +113,16 @@ const WishList = () => {
 
             <Modal
                 open={showEditWish}
-                onClose={handleHidEditWish}
+                onClose={handleHideEditWish}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
                 <div className="modal">
                     <Card>
-                        <EditWish idOfSelectedWish={idOfSelectedWish} close={handleHidEditWish} />
+                        <EditWish idOfSelectedWish={idOfSelectedWish} close={handleHideEditWish} />
                     </Card>
 
-                    <Action onClick={handleHidEditWish}>
+                    <Action onClick={handleHideEditWish}>
                         <CloseIcon />
                     </Action>
                 </div>

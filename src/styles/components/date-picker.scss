@@ -39,4 +39,18 @@
             color: $action-color;
         }
     }
+
+    &.clicked-on-submit.error {
+        .MuiInputLabel-root {
+            color: $action-color;
+        }
+
+        .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+            border-color: $action-color;
+        }
+
+        .MuiFormHelperText-root {
+            color: $action-color;
+        }
+    }
 }

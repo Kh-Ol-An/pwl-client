@@ -31,6 +31,11 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
     const birthdayErrorMessage = useMemo(() => {
         if (!clickedOnBookWish) return;
 
+        if (bookEnd === null && clickedOnBookWish) {
+            setBookEndError('invalidDate');
+            return 'Це поле обов\'язкове для заповнення.';
+        }
+
         switch (bookEndError) {
             case 'disablePast': {
                 return 'Неможливо виконати завдання в минулому.';
@@ -49,10 +54,18 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
 
     const handleSubmit = async () => {
         setClickedOnBookWish(true);
+
         if (!myUser || !bookEnd || (bookEndError && bookEndError.length > 0)) return;
 
         await dispatch(bookWish({ userId: myUser.id, wishId: wish.id, end: bookEnd.format() }));
         close();
+    };
+
+    const handleHide = () => {
+        setBookEnd(null);
+        setBookEndError(null);
+        setClickedOnBookWish(false);
+        setShow(false);
     };
 
     useEffect(() => {
@@ -80,7 +93,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
             <ConfirmModal
                 show={show}
                 confirmText="Підтвердити намір"
-                close={() => setShow(false)}
+                close={handleHide}
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
@@ -91,22 +104,23 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                     className={
                         "date-picker"
                         + (clickedOnBookWish ? " clicked-on-submit" : "")
+                        + (bookEnd === null ? " error" : "")
                     }
                 >
                     <DemoContainer components={['DatePicker']}>
                         <DatePicker
                             label="включно*"
                             format="DD.MM.YYYY"
-                            value={bookEnd}
                             disablePast
                             maxDate={dayjs().add(1, 'year')} // Дозволити вибір дати тільки на рік вперед
+                            value={bookEnd}
+                            onChange={(value) => setBookEnd(value)}
                             onError={(newError) => setBookEndError(newError)}
                             slotProps={{
                                 textField: {
                                     helperText: birthdayErrorMessage,
                                 },
                             }}
-                            onChange={(value) => setBookEnd(value)}
                         />
                     </DemoContainer>
                 </div>

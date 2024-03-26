@@ -83,6 +83,10 @@
         &.alone {
             max-width: 400px;
         }
+
+        &.booked {
+            opacity: 0.5;
+        }
     }
 
     .text-box {

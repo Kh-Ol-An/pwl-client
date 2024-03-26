@@ -167,16 +167,16 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
                     <DatePicker
                         label="День Народження*"
                         format="DD.MM.YYYY"
-                        value={birthday}
                         minDate={dayjs().subtract(120, 'years')} // Дозволити вибір дати до 120 років в минулому
                         disableFuture
+                        value={birthday}
+                        onChange={(value) => setBirthday(value)}
                         onError={(newError) => setBirthdayError(newError)}
                         slotProps={{
                             textField: {
                                 helperText: birthdayErrorMessage,
                             },
                         }}
-                        onChange={(value) => setBirthday(value)}
                     />
                 </DemoContainer>
             </div>

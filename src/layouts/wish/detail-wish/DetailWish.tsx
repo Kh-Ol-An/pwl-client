@@ -8,7 +8,7 @@ import Button from '@/components/Button';
 import WishContent from '@/layouts/wish/detail-wish/WishContent';
 import BookWish from '@/layouts/wish/detail-wish/BookWish';
 import CancelBookWish from '@/layouts/wish/detail-wish/CancelBookWish';
-import ConfirmBookWish from '@/layouts/wish/detail-wish/ConfirmBookWish';
+import ConfirmExecutionWish from '@/layouts/wish/detail-wish/ConfirmExecutionWish';
 
 dayjs.extend(isSameOrBefore);
 
@@ -21,16 +21,16 @@ interface IProps {
 const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
     const myUser = useAppSelector((state) => state.myUser.user);
 
-    let showCancelExecution = wish.booking
+    let showCancelBookWish = wish.booking
         && myUser?.id === wish.booking.userId
         && dayjs(wish.booking.start).isSameOrBefore(dayjs().add(3, 'days'));
 
-    let showConfirmExecution = myUser?.id === wish.userId && wish.booking?.end;
+    let showConfirmExecutionWish = myUser?.id === wish.userId && wish.booking?.end;
 
     let showActions = false;
     !wish.booking?.end && (showActions = true);
-    showCancelExecution && (showActions = true);
-    showConfirmExecution && (showActions = true);
+    showCancelBookWish && (showActions = true);
+    showConfirmExecutionWish && (showActions = true);
     myUser?.id === wish.userId && (showActions = true);
 
     const handleEditWish = () => {
@@ -55,10 +55,12 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                         {!wish.booking?.end && <BookWish wish={wish} close={close} />}
 
                                         {/* Cancel Book */}
-                                        {showCancelExecution && <CancelBookWish wishName={wish.name} close={close} />}
+                                        {showCancelBookWish && <CancelBookWish wishName={wish.name} close={close} />}
 
                                         {/* Confirm Book */}
-                                        {showConfirmExecution && <ConfirmBookWish wishName={wish.name} close={close} />}
+                                        {showConfirmExecutionWish && (
+                                            <ConfirmExecutionWish wishName={wish.name} close={close} />
+                                        )}
 
                                         {/* Поскаржитись на невиконання */}
 
