@@ -31,11 +31,12 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
                         {(wish.images.length > 0 || wish.price) && (
                             <div className="wish-item-data">
                                 {wish.images.length > 0 && (
-                                    <img
-                                        className="wish-item-img"
-                                        src={wish.images[0].path}
-                                        alt={`wish-${wish.images[0].position}`}
-                                    />
+                                    <div className="wish-item-img">
+                                        <img
+                                            src={wish.images[0].path}
+                                            alt={`wish-${wish.images[0].position}`}
+                                        />
+                                    </div>
                                 )}
                                 {wish.price && (
                                     <div className="wish-item-price">
