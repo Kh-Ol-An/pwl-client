@@ -8,11 +8,11 @@ interface IProps {
     close: () => void;
 }
 
-const CancelBookWish: FC<IProps> = ({ wishName, close }) => {
+const DoneWish: FC<IProps> = ({ wishName, close }) => {
     const [show, setShow] = useState<boolean>(false);
 
     const handleSubmit = () => {
-        console.log('CancelBookWish handleSubmit');
+        console.log('DoneWish handleSubmit');
         close();
     };
 
@@ -21,24 +21,23 @@ const CancelBookWish: FC<IProps> = ({ wishName, close }) => {
             <Button
                 type="button"
                 variant="text"
-                color="action-color"
                 onClick={() => setShow(true)}
             >
-                Скасувати виконання
+                Підтвердити виконання
             </Button>
 
             <ConfirmModal
                 show={show}
-                confirmText="Скасувати мій намір"
+                confirmText="Бажання виконано"
                 close={() => setShow(false)}
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    Ви впевнені, що хочете скасувати свій намір виконати бажання "{wishName}"?
+                    Ви впевнені, що бажання "{wishName}" виконано?
                 </p>
             </ConfirmModal>
         </>
     );
 };
 
-export default CancelBookWish;
+export default DoneWish;

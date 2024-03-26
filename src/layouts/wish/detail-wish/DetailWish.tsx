@@ -8,7 +8,8 @@ import Button from '@/components/Button';
 import WishContent from '@/layouts/wish/detail-wish/WishContent';
 import BookWish from '@/layouts/wish/detail-wish/BookWish';
 import CancelBookWish from '@/layouts/wish/detail-wish/CancelBookWish';
-import ConfirmExecutionWish from '@/layouts/wish/detail-wish/ConfirmExecutionWish';
+import DoneWish from '@/layouts/wish/detail-wish/DoneWish';
+import NotDoneWish from '@/layouts/wish/detail-wish/NotDoneWish';
 
 dayjs.extend(isSameOrBefore);
 
@@ -25,12 +26,17 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
         && myUser?.id === wish.booking.userId
         && dayjs(wish.booking.start).isSameOrBefore(dayjs().add(3, 'days'));
 
-    let showConfirmExecutionWish = myUser?.id === wish.userId && wish.booking?.end;
+    let showDoneWish = myUser?.id === wish.userId && wish.booking?.end;
+
+    let showNotDoneWish = wish.booking
+        && myUser?.id === wish.booking.userId
+        && dayjs(wish.booking.end).isSameOrBefore(dayjs());
 
     let showActions = false;
     !wish.booking?.end && (showActions = true);
     showCancelBookWish && (showActions = true);
-    showConfirmExecutionWish && (showActions = true);
+    showDoneWish && (showActions = true);
+    showNotDoneWish && (showActions = true);
     myUser?.id === wish.userId && (showActions = true);
 
     const handleEditWish = () => {
@@ -57,15 +63,16 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                         {/* Cancel Book */}
                                         {showCancelBookWish && <CancelBookWish wishName={wish.name} close={close} />}
 
-                                        {/* Confirm Book */}
-                                        {showConfirmExecutionWish && (
-                                            <ConfirmExecutionWish wishName={wish.name} close={close} />
+                                        {/* Done */}
+                                        {showDoneWish && (
+                                            <DoneWish wishName={wish.name} close={close} />
                                         )}
 
-                                        {/* Поскаржитись на невиконання */}
+                                        {/* Not Done */}
+                                        {showNotDoneWish && <NotDoneWish wishName={wish.name} close={close} />}
 
                                         {/* Edit */}
-                                        {myUser?.id === wish.userId && (
+                                        {myUser?.id === wish.userId && !wish.booking?.end && (
                                             <Button type="button" onClick={handleEditWish}>
                                                 Редагувати бажання
                                             </Button>
