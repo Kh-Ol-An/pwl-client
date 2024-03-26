@@ -9,11 +9,11 @@
 @import './setup/base';
 
 // layouts
-@import './layouts/wish/detail-wish';
+@import './layouts/wish/detail-wish/detail-wish';
+@import './layouts/wish/detail-wish/wish-swiper';
 @import './layouts/wish/edit-wish';
 @import './layouts/wish/wish-item';
 @import './layouts/wish/wish-list';
-@import './layouts/wish/wish-swiper';
 @import './layouts/card';
 @import './layouts/edit-account';
 @import './layouts/header';

@@ -1,0 +1,151 @@
+import React, { FC, useEffect, useMemo, useState } from 'react';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DateValidationError } from '@mui/x-date-pickers/models';
+import dayjs, { Dayjs } from 'dayjs';
+import { Tooltip } from 'react-tooltip';
+import { Info as InfoIcon } from '@mui/icons-material';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { bookWish } from '@/store/wishes/thunks';
+import ConfirmModal from '@/layouts/ConfirmModal';
+import Button from '@/components/Button';
+import { IWish } from '@/models/IWish';
+import stylesVariables from '@/styles/utils/variables.module.scss';
+
+interface IProps {
+    wish: IWish;
+    close: () => void;
+}
+
+const BookWish: FC<IProps> = ({ wish, close }) => {
+    const [bookEnd, setBookEnd] = useState<Dayjs | null>(null);
+    const [bookEndError, setBookEndError] = useState<DateValidationError | null>(null);
+    const [show, setShow] = useState<boolean>(false);
+    const [clickedOnBookWish, setClickedOnBookWish] = useState<boolean>(false);
+    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+
+    const myUser = useAppSelector((state) => state.myUser.user);
+
+    const dispatch = useAppDispatch();
+
+    const birthdayErrorMessage = useMemo(() => {
+        if (!clickedOnBookWish) return;
+
+        switch (bookEndError) {
+            case 'disablePast': {
+                return 'Неможливо виконати завдання в минулому.';
+            }
+            case 'maxDate': {
+                return 'Вважаєте розумним обіцяти виконати бажання більш ніж через рік.';
+            }
+            case 'invalidDate': {
+                return 'Введена дата недійсна.';
+            }
+            default: {
+                return '';
+            }
+        }
+    }, [clickedOnBookWish, bookEndError]);
+
+    const handleSubmit = async () => {
+        setClickedOnBookWish(true);
+        if (!myUser || !bookEnd || (bookEndError && bookEndError.length > 0)) return;
+
+        console.log('handleSubmit', bookEnd);
+        await dispatch(bookWish({ userId: myUser.id, wishId: wish.id, end: bookEnd.format() }));
+        close();
+    };
+
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+    return (
+        <>
+            <Button
+                type="button"
+                variant="text"
+                onClick={() => setShow(true)}
+            >
+                Виконати бажання
+            </Button>
+
+            <ConfirmModal
+                show={show}
+                confirmText="Підтвердити намір"
+                close={() => setShow(false)}
+                confirm={handleSubmit}
+            >
+                <p className="text-lg">
+                    Я маю намір виконати бажання "{wish.name}" до:
+                </p>
+
+                <div
+                    className={
+                        "date-picker"
+                        + (clickedOnBookWish ? " clicked-on-submit" : "")
+                    }
+                >
+                    <DemoContainer components={['DatePicker']}>
+                        <DatePicker
+                            label="включно*"
+                            format="DD.MM.YYYY"
+                            value={bookEnd}
+                            disablePast
+                            maxDate={dayjs().add(1, 'year')} // Дозволити вибір дати тільки на рік вперед
+                            onError={(newError) => setBookEndError(newError)}
+                            slotProps={{
+                                textField: {
+                                    helperText: birthdayErrorMessage,
+                                },
+                            }}
+                            onChange={(value) => setBookEnd(value)}
+                        />
+                    </DemoContainer>
+                </div>
+
+                <p className="text">
+                    Після того як Ви підтвердите свій намір,
+                    ніхто з користувачів не зможе забронювати це бажання.
+                    У Вас буде можливість скасувати свій намір виконати бажання впродовж доби.
+                    <span
+                        className="tooltip detail-wish-book-tooltip"
+                        data-tooltip-id="book-wish"
+                        data-tooltip-content="
+                            Декларуючи свій намір виконати бажання,
+                            Ви берете на себе відповідальність за його виконання.
+                            Всесвіт покладається на Вас :)
+                            Постійна зміна рішень може погіршити Ваші відносини зі Всесвітом.
+                            Виконання бажань впливає на Ваш рейтинг в системі.
+                            Більш детально про це можна дізнатися в розділі 'Інструкція'.
+                        "
+                    >
+                        <InfoIcon sx={{ color: stylesVariables.specialColor }} />
+                    </span>
+                </p>
+
+                <Tooltip
+                    id="book-wish"
+                    opacity={1}
+                    style={{
+                        backgroundColor: stylesVariables.blackColor,
+                        color: stylesVariables.lightColor,
+                        width: screenWidth > 411 ? '300px' : '200px',
+                        fontSize: '14px',
+                        zIndex: 9,
+                    }}
+                />
+            </ConfirmModal>
+        </>
+    );
+};
+
+export default BookWish;

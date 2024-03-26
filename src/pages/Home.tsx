@@ -7,7 +7,7 @@ import Loading from '@/layouts/Loading';
 import Inactivated from '@/layouts/Inactivated';
 import Header from '@/layouts/Header';
 import Sidebar from '@/layouts/Sidebar';
-import WishList from '@/layouts/Wish/WishList';
+import WishList from '@/layouts/wish/WishList';
 
 const Home: FC = () => {
     const [open, setOpen] = useState<boolean>(false);
