@@ -1,25 +1,25 @@
 import React, { FC, ChangeEvent, useState, useLayoutEffect, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Tooltip } from 'react-tooltip';
-import { useAppDispatch, useAppSelector } from '../store/hook';
-import { createWish, deleteWish, updateWish } from '../store/wishes/thunks';
-import { ICreateWish } from '../store/wishes/types';
-import { ICurrentImage, IImage, IWish } from '../models/IWish';
+import { Info as InfoIcon } from '@mui/icons-material';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
+import { createWish, deleteWish, updateWish } from '../../store/wishes/thunks';
+import { ICreateWish } from '../../store/wishes/types';
+import { ICurrentImage, IImage, IWish } from '../../models/IWish';
 import {
     onlyWhitespaceValidation,
     wishDescriptionValidation,
     wishNameValidation,
     wishPriceValidation,
-} from '../utils/validations';
-import { removingWhiteSpaces, addingWhiteSpaces } from '../utils/formating-value';
-import ConfirmModal from './ConfirmModal';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import DragNDrop from '../components/DragNDrop';
-import Switch from '../components/Switch';
-import Radio from '../components/Radio';
-import { Info as InfoIcon } from '@mui/icons-material';
-import stylesVariables from '../styles/utils/variables.module.scss';
+} from '../../utils/validations';
+import { removingWhiteSpaces, addingWhiteSpaces } from '../../utils/formating-value';
+import ConfirmModal from '../ConfirmModal';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import DragNDrop from '../../components/DragNDrop';
+import Switch from '../../components/Switch';
+import Radio from '../../components/Radio';
+import stylesVariables from '../../styles/utils/variables.module.scss';
 
 interface IProps {
     idOfSelectedWish: IWish['id'] | null;
@@ -151,7 +151,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
     }, []);
 
     return (
-        <form className="wish-modal" onSubmit={handleSubmit(onSubmit)}>
+        <form className="edit-wish" onSubmit={handleSubmit(onSubmit)}>
             {/* material */}
             <div className="material">
                 <span className={"yes" + (material ? " primary-color" : "")}>Матеріальне бажання</span>

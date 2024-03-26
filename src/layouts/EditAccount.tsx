@@ -108,7 +108,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
     }, [myUser, setValue]);
 
     return (
-        <form className="account-modal" onSubmit={handleSubmit(onSubmit)}>
+        <form className="edit-account" onSubmit={handleSubmit(onSubmit)}>
             <Input
                 {...register("firstName", accountFirstNameValidation)}
                 id="firstName"

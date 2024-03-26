@@ -1,9 +1,9 @@
 import React, { FC, MouseEvent } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
-import { useAppSelector } from '../store/hook';
-import { IWish } from '../models/IWish';
-import { addingWhiteSpaces } from '../utils/formating-value';
-import Action from '../components/Action';
+import { useAppSelector } from '../../store/hook';
+import { IWish } from '../../models/IWish';
+import { addingWhiteSpaces } from '../../utils/formating-value';
+import Action from '../../components/Action';
 
 interface IProps {
     wish: IWish;
@@ -11,7 +11,7 @@ interface IProps {
     editWish: () => void;
 }
 
-const WishCard: FC<IProps> = ({ wish, showWish, editWish }) => {
+const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const handleEditWish = (e: MouseEvent<HTMLButtonElement>) => {
@@ -20,25 +20,25 @@ const WishCard: FC<IProps> = ({ wish, showWish, editWish }) => {
     };
 
     return (
-        <div className={"wish-card" + (wish.images.length > 0 ? " can-hover" : "")} onClick={showWish}>
-            <div className="wish-card-outer-border">
-                <div className="wish-card-inner-border">
-                    <div className="wish-card-content">
-                        <div className="wish-card-name">
+        <div className={"wish-item" + (wish.images.length > 0 ? " can-hover" : "")} onClick={showWish}>
+            <div className="wish-item-outer-border">
+                <div className="wish-item-inner-border">
+                    <div className="wish-item-content">
+                        <div className="wish-item-name">
                             {wish.name}
                         </div>
 
                         {(wish.images.length > 0 || wish.price) && (
-                            <div className="wish-card-data">
+                            <div className="wish-item-data">
                                 {wish.images.length > 0 && (
                                     <img
-                                        className="wish-card-img"
+                                        className="wish-item-img"
                                         src={wish.images[0].path}
                                         alt={`wish-${wish.images[0].position}`}
                                     />
                                 )}
                                 {wish.price && (
-                                    <div className="wish-card-price">
+                                    <div className="wish-item-price">
                                         {addingWhiteSpaces(wish.price)} грн.
                                     </div>
                                 )}
@@ -57,4 +57,4 @@ const WishCard: FC<IProps> = ({ wish, showWish, editWish }) => {
     );
 };
 
-export default WishCard;
+export default WishItem;

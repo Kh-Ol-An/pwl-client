@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useAppSelector } from '../store/hook';
-import { IWish } from '../models/IWish';
+import { useAppSelector } from '../../store/hook';
+import { IWish } from '../../models/IWish';
 import EditWish from './EditWish';
-import Card from './Card';
-import WishCard from './WishCard';
-import DetailWishModal from './DetailWishModal';
-import Action from '../components/Action';
-import Button from '../components/Button';
+import Card from '../Card';
+import WishItem from './WishItem';
+import DetailWish from './DetailWish';
+import Action from '../../components/Action';
+import Button from '../../components/Button';
 
 const WishList = () => {
     const [showWish, setShowWish] = useState<boolean>(false);
@@ -65,7 +65,7 @@ const WishList = () => {
                 <ul className="list">
                     {wishList.map((wish) => (
                         <li className={"item" + (wishList.length < 2 ? " alone" : "")} key={wish.id}>
-                            <WishCard
+                            <WishItem
                                 wish={wish}
                                 showWish={() => handleShowWish(wish.id)}
                                 editWish={() => handleShowEditWish(wish.id)}
@@ -93,7 +93,7 @@ const WishList = () => {
                     aria-describedby="modal-modal-description"
                 >
                     <div className="modal modal-lg">
-                        <DetailWishModal
+                        <DetailWish
                             wish={detailWish}
                             editWish={() => handleShowEditWish(idOfSelectedWish)}
                             close={handleHidWish}

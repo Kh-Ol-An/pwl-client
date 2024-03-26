@@ -9,18 +9,19 @@
 @import './setup/base';
 
 // layouts
-@import './layouts/account-modal';
+@import './layouts/wish/detail-wish';
+@import './layouts/wish/edit-wish';
+@import './layouts/wish/wish-item';
+@import './layouts/wish/wish-list';
+@import './layouts/wish/wish-swiper';
 @import './layouts/card';
-@import './layouts/detail-wish-modal';
+@import './layouts/edit-account';
 @import './layouts/header';
 @import './layouts/inactivated';
 @import './layouts/loading';
 @import './layouts/modal';
 @import './layouts/page';
 @import './layouts/sidebar';
-@import './layouts/wish-card';
-@import './layouts/wish-list';
-@import './layouts/wish-modal';
 
 // components
 @import './components/action';
@@ -39,7 +40,6 @@
 @import './components/texts';
 @import './components/toast';
 @import './components/tooltip';
-@import './components/wish-swiper';
 
 // pages
 @import './pages/auth';

@@ -6,14 +6,14 @@ import dayjs, { Dayjs } from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { Tooltip } from 'react-tooltip';
 import { Info as InfoIcon } from '@mui/icons-material';
-import { useAppDispatch, useAppSelector } from '../store/hook';
-import { bookWish } from '../store/wishes/thunks';
-import { IWish } from '../models/IWish';
-import { addingWhiteSpaces } from '../utils/formating-value';
-import ConfirmModal from './ConfirmModal';
-import WishSwiper from '../components/WishSwiper';
-import Button from '../components/Button';
-import stylesVariables from '../styles/utils/variables.module.scss';
+import { useAppDispatch, useAppSelector } from '../../store/hook';
+import { bookWish } from '../../store/wishes/thunks';
+import { IWish } from '../../models/IWish';
+import { addingWhiteSpaces } from '../../utils/formating-value';
+import WishSwiper from './WishSwiper';
+import ConfirmModal from '../ConfirmModal';
+import Button from '../../components/Button';
+import stylesVariables from '../../styles/utils/variables.module.scss';
 
 dayjs.extend(isSameOrBefore);
 
@@ -23,7 +23,7 @@ interface IProps {
     close: () => void;
 }
 
-const DetailWishModal: FC<IProps> = ({ wish, editWish, close }) => {
+const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
     const [showBookModal, setShowBookModal] = useState<boolean>(false);
     const [showCancelBookModal, setShowCancelBookModal] = useState<boolean>(false);
@@ -128,7 +128,7 @@ const DetailWishModal: FC<IProps> = ({ wish, editWish, close }) => {
     }, []);
 
     return (
-        <div className="detail-wish-modal">
+        <div className="detail-wish">
             <div className="detail-wish-outer-border">
                 <div className="detail-wish-inner-border">
                     <div className="detail-wish-content">
@@ -319,4 +319,4 @@ const DetailWishModal: FC<IProps> = ({ wish, editWish, close }) => {
     );
 };
 
-export default DetailWishModal;
+export default DetailWish;
