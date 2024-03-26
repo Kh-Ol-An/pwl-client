@@ -15,7 +15,7 @@ import { getWishList } from '../store/wishes/thunks';
 import { selectUserId } from '../store/selected-user/slice';
 import { emailValidation, passwordValidation } from "../utils/validations";
 import Card from './Card';
-import AccountModal from './AccountModal';
+import EditAccount from './EditAccount';
 import Button from '../components/Button';
 import Action from '../components/Action';
 import Popup from "../components/Popup";
@@ -35,7 +35,7 @@ type Inputs = {
 
 const Header: FC<IProps> = ({ open, close }) => {
     const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
-    const [openSettings, setOpenSettings] = useState<boolean>(false);
+    const [showEditAccount, setShowEditAccount] = useState<boolean>(false);
     const [openConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
 
     const myUser = useAppSelector((state) => state.myUser.user);
@@ -65,19 +65,19 @@ const Header: FC<IProps> = ({ open, close }) => {
         close();
     };
 
-    const handleOpenSettings = () => {
-        setOpenSettings(true);
+    const handleShowEditAccount = () => {
+        setShowEditAccount(true);
         setAnchor(null);
         close();
     };
 
-    const handleOpenConfirmDeleteMyUser = () => {
+    const handleShowConfirmDeleteMyUser = () => {
         setShowConfirmDeleteMyUser(true);
-        setOpenSettings(false);
+        setShowEditAccount(false);
     };
 
-    const handleCloseSettings = () => {
-        setOpenSettings(false);
+    const handleHidEditAccount = () => {
+        setShowEditAccount(false);
     };
 
     const handleLogout = () => {
@@ -113,7 +113,7 @@ const Header: FC<IProps> = ({ open, close }) => {
                         setAnchor={setAnchor}
                         actionIcon={<SettingsIcon sx={{ color: stylesVariables.specialColor }} />}
                     >
-                        <Button variant="text" onClick={handleOpenSettings}>
+                        <Button variant="text" onClick={handleShowEditAccount}>
                             <ManageAccountsIcon />
                             Налаштування аккаунту
                         </Button>
@@ -124,20 +124,20 @@ const Header: FC<IProps> = ({ open, close }) => {
                     </Popup>
 
                     <Modal
-                        open={openSettings}
-                        onClose={handleCloseSettings}
+                        open={showEditAccount}
+                        onClose={handleHidEditAccount}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                     >
                         <div className="modal">
                             <Card>
-                                <AccountModal
-                                    close={handleCloseSettings}
-                                    openConfirmDeleteMyUser={handleOpenConfirmDeleteMyUser}
+                                <EditAccount
+                                    close={handleHidEditAccount}
+                                    handleShowConfirmDeleteMyUser={handleShowConfirmDeleteMyUser}
                                 />
                             </Card>
 
-                            <Action onClick={handleCloseSettings}>
+                            <Action onClick={handleHidEditAccount}>
                                 <CloseIcon />
                             </Action>
                         </div>

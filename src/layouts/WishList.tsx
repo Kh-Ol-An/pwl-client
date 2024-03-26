@@ -3,7 +3,7 @@ import { Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useAppSelector } from '../store/hook';
 import { IWish } from '../models/IWish';
-import WishModal from './WishModal';
+import EditWish from './EditWish';
 import Card from './Card';
 import WishCard from './WishCard';
 import DetailWishModal from './DetailWishModal';
@@ -11,8 +11,8 @@ import Action from '../components/Action';
 import Button from '../components/Button';
 
 const WishList = () => {
-    const [openWish, setOpenWish] = useState<boolean>(false);
-    const [openWishSettings, setOpenWishSettings] = useState<boolean>(false);
+    const [showWish, setShowWish] = useState<boolean>(false);
+    const [showEditWish, setShowEditWish] = useState<boolean>(false);
     const [idOfSelectedWish, setIdOfSelectedWish] = useState<IWish['id'] | null>(null);
 
     const myUser = useAppSelector((state) => state.myUser.user);
@@ -25,29 +25,29 @@ const WishList = () => {
 
     const detailWish = wishList.find(wish => wish.id === idOfSelectedWish);
 
-    const handleOpenWish = (id: IWish['id'] | null) => {
+    const handleShowWish = (id: IWish['id'] | null) => {
         setIdOfSelectedWish(id);
-        setOpenWish(true);
+        setShowWish(true);
     };
 
-    const handleCloseWish = () => {
-        setOpenWish(false);
+    const handleHidWish = () => {
+        setShowWish(false);
     };
 
-    const handleOpenWishSettings = (id: IWish['id'] | null) => {
+    const handleShowEditWish = (id: IWish['id'] | null) => {
         setIdOfSelectedWish(id);
-        setOpenWishSettings(true);
+        setShowEditWish(true);
     };
 
-    const handleCloseWishSettings = () => {
-        setOpenWishSettings(false);
+    const handleHidEditWish = () => {
+        setShowEditWish(false);
     };
 
     return (
         <div className="wish-list">
             <div className="head">
                 {myUser?.id === selectedUserId && (
-                    <Button onClick={() => handleOpenWishSettings(null)}>
+                    <Button onClick={() => handleShowEditWish(null)}>
                         Створити бажання
                     </Button>
                 )}
@@ -67,8 +67,8 @@ const WishList = () => {
                         <li className={"item" + (wishList.length < 2 ? " alone" : "")} key={wish.id}>
                             <WishCard
                                 wish={wish}
-                                showWish={() => handleOpenWish(wish.id)}
-                                editWish={() => handleOpenWishSettings(wish.id)}
+                                showWish={() => handleShowWish(wish.id)}
+                                editWish={() => handleShowEditWish(wish.id)}
                             />
                         </li>
                     ))}
@@ -87,19 +87,19 @@ const WishList = () => {
 
             {detailWish && (
                 <Modal
-                    open={openWish}
-                    onClose={handleCloseWish}
+                    open={showWish}
+                    onClose={handleHidWish}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
                     <div className="modal modal-lg">
                         <DetailWishModal
                             wish={detailWish}
-                            editWish={() => handleOpenWishSettings(idOfSelectedWish)}
-                            close={handleCloseWish}
+                            editWish={() => handleShowEditWish(idOfSelectedWish)}
+                            close={handleHidWish}
                         />
 
-                        <Action onClick={handleCloseWish}>
+                        <Action onClick={handleHidWish}>
                             <CloseIcon />
                         </Action>
                     </div>
@@ -107,17 +107,17 @@ const WishList = () => {
             )}
 
             <Modal
-                open={openWishSettings}
-                onClose={handleCloseWishSettings}
+                open={showEditWish}
+                onClose={handleHidEditWish}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
                 <div className="modal">
                     <Card>
-                        <WishModal idOfSelectedWish={idOfSelectedWish} close={handleCloseWishSettings} />
+                        <EditWish idOfSelectedWish={idOfSelectedWish} close={handleHidEditWish} />
                     </Card>
 
-                    <Action onClick={handleCloseWishSettings}>
+                    <Action onClick={handleHidEditWish}>
                         <CloseIcon />
                     </Action>
                 </div>

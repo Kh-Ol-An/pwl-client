@@ -19,7 +19,7 @@ import StylesVariables from '../styles/utils/variables.module.scss';
 
 interface IProps {
     close: () => void;
-    openConfirmDeleteMyUser: () => void;
+    handleShowConfirmDeleteMyUser: () => void;
 }
 
 type Inputs = {
@@ -27,7 +27,7 @@ type Inputs = {
     lastName: string
 }
 
-const AccountModal: FC<IProps> = ({ close, openConfirmDeleteMyUser }) => {
+const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
     const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
     const [avatar, setAvatar] = useState<ICurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
@@ -182,7 +182,7 @@ const AccountModal: FC<IProps> = ({ close, openConfirmDeleteMyUser }) => {
             </div>
 
             <div className="actions">
-                <Button type="button" variant="text" color="action-color" onClick={openConfirmDeleteMyUser}>
+                <Button type="button" variant="text" color="action-color" onClick={handleShowConfirmDeleteMyUser}>
                     Видалити свій акаунт
                 </Button>
 
@@ -192,4 +192,4 @@ const AccountModal: FC<IProps> = ({ close, openConfirmDeleteMyUser }) => {
     );
 };
 
-export default AccountModal;
+export default EditAccount;
