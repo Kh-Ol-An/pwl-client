@@ -89,7 +89,20 @@ const Header: FC<IProps> = ({ open, close }) => {
             <div className="header-inner">
                 <div className="header-content">
                     <button className="my-user" type="button" onClick={handleSelectWish}>
-                        <Avatar alt={myUser?.firstName} src={myUser?.avatar} />
+                        <div className="avatar-box">
+                            <Avatar alt={myUser?.firstName} src={myUser?.avatar} />
+
+                            {myUser && myUser.successfulWishes > 0 && (
+                                <span className="success wish-count">
+                                    {myUser?.successfulWishes}
+                                </span>
+                            )}
+                            {myUser && myUser.unsuccessfulWishes > 0 && (
+                                <span className="unsuccess wish-count">
+                                    {myUser?.unsuccessfulWishes}
+                                </span>
+                            )}
+                        </div>
 
                         <div className="content">
                             <span className={"name" + (myUser?.id === selectedUserId ? " selected" : "")}>

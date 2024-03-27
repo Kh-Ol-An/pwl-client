@@ -9,6 +9,7 @@ import {
     addFriend,
     removeFriend,
 } from '@/store/my-user/thunks';
+import { doneWish } from '@/store/wishes/thunks';
 import { IUser } from '@/models/IUser';
 
 interface IMyUserState {
@@ -143,6 +144,24 @@ const myUserSlice = createSlice({
             })
             .addCase(removeFriend.fulfilled, (state, action) => {
                 state.user = action.payload;
+                state.error = null;
+            })
+            // doneWish
+            .addCase(doneWish.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(doneWish.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось позначити бажання виконаним.';
+            })
+            .addCase(doneWish.fulfilled, (state, action) => {
+                const { executorUser } = action.payload;
+
+                if (state.user?.id === executorUser.id) {
+                    state.user = executorUser;
+                }
+                state.isLoading = false;
                 state.error = null;
             });
     },

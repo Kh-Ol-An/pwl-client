@@ -62,7 +62,7 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
                 </div>
             </div>
 
-            {myUser?.id === wish.userId && !wish.booking?.userId && (
+            {myUser?.id === wish.userId && !wish.booking?.userId && !wish.executed && (
                 <Action onClick={handleEditWish}>
                     <EditIcon />
                 </Action>

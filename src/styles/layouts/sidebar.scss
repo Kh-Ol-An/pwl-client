@@ -110,4 +110,8 @@
             border-radius: $radius-round;
         }
     }
+    
+    .MuiListItemAvatar-root {
+        position: relative;
+    }
 }

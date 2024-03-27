@@ -21,6 +21,30 @@
             }
         }
 
+        .title-box {
+            @include flex-center;
+            gap: 10px;
+        }
+
+        .wishes-type {
+            @include flex-center;
+            gap: 10px;
+
+            span {
+                font-size: 24px;
+                font-weight: 700;
+                color: $special-color;
+                white-space: nowrap;
+                opacity: 0.3;
+                transition: $transition-slow;
+
+                &.primary-color {
+                    color: $primary-color;
+                    opacity: 1;
+                }
+            }
+        }
+
         .title {
             margin: 0 auto;
             font-size: 24px;
@@ -36,10 +60,6 @@
                 padding: 0;
                 height: auto;
                 text-align: left;
-            }
-
-            @media only screen and (min-width: 1024px) {
-                font-size: 34px;
             }
 
             &.other-user {

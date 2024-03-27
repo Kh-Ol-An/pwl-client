@@ -27,14 +27,15 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
         && dayjs(wish.booking?.start).isSameOrBefore(dayjs().add(3, 'days')) // бажання можна скасувати за 3 дні до початку
         && !dayjs(wish.booking?.end).isSameOrBefore(dayjs()); // термін виконання ще не минув
 
-    let showDoneWish = myUser?.id === wish.userId && wish.booking?.end; // належить користувачу та вже виконано
+    let showDoneWish = myUser?.id === wish.userId && wish.booking?.userId; // належить користувачу та заброньовано
 
     let showActions = false;
     !wish.booking?.end && (showActions = true);
     showCancelBookWish && (showActions = true);
     showDoneWish && (showActions = true);
     showBookingExpired(wish, myUser?.id) && (showActions = true);
-    myUser?.id === wish.userId && (showActions = true);
+    myUser?.id === wish.userId && !wish.booking?.end && (showActions = true);
+    wish.executed && (showActions = false);
 
     const handleEditWish = () => {
         editWish();
@@ -64,7 +65,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
 
                                         {/* Done */}
                                         {showDoneWish && (
-                                            <DoneWish wishName={wish.name} close={close} />
+                                            <DoneWish wish={wish} userId={myUser?.id} close={close} />
                                         )}
 
                                         {/* Undone */}

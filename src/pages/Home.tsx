@@ -6,7 +6,7 @@ import { selectUserId } from '@/store/selected-user/slice';
 import Loading from '@/layouts/Loading';
 import Inactivated from '@/layouts/Inactivated';
 import Header from '@/layouts/Header';
-import Sidebar from '@/layouts/Sidebar';
+import Sidebar from '@/layouts/sidebar/Sidebar';
 import WishList from '@/layouts/wish/WishList';
 
 const Home: FC = () => {

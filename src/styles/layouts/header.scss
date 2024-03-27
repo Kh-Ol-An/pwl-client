@@ -76,6 +76,18 @@
             }
         }
     }
+    
+    .avatar-box {
+        position: relative;
+
+        .success {
+            right: -4px;
+        }
+
+        .unsuccess {
+            right: 4px;
+        }
+    }
 
     .logo {
         position: absolute;

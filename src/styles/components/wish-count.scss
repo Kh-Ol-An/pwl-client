@@ -1,0 +1,24 @@
+.wish-count {
+    position: absolute;
+    padding-top: 4px;
+    width: 16px;
+    height: 16px;
+    @include flex-center;
+    border-radius: $radius-round;
+    border: 1px solid $background-color;
+    color: $background-color;
+    font-size: 8px;
+    font-weight: 700;
+
+    &.success {
+        right: 12px;
+        bottom: 6px;
+        background-color: lawngreen;
+    }
+
+    &.unsuccess {
+        right: 20px;
+        bottom: -4px;
+        background-color: $action-color;
+    }
+}

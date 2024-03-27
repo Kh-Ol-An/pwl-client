@@ -1,18 +1,26 @@
 import React, { FC, useState } from 'react';
+import { useAppDispatch } from '@/store/hook';
+import { doneWish } from '@/store/wishes/thunks';
 import ConfirmModal from '@/layouts/ConfirmModal';
 import Button from '@/components/Button';
 import { IWish } from '@/models/IWish';
+import { IUser } from '@/models/IUser';
 
 interface IProps {
-    wishName: IWish['name'];
+    wish: IWish;
+    userId?: IUser['id'];
     close: () => void;
 }
 
-const DoneWish: FC<IProps> = ({ wishName, close }) => {
+const DoneWish: FC<IProps> = ({ wish, userId, close }) => {
     const [show, setShow] = useState<boolean>(false);
 
-    const handleSubmit = () => {
-        console.log('DoneWish handleSubmit');
+    const dispatch = useAppDispatch();
+
+    const handleSubmit = async () => {
+        if (!userId) return;
+
+        await dispatch(doneWish({ userId, wishId: wish.id }));
         close();
     };
 
@@ -33,7 +41,7 @@ const DoneWish: FC<IProps> = ({ wishName, close }) => {
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    Ви впевнені, що бажання "{wishName}" виконано?
+                    Ви впевнені, що бажання "{wish.name}" виконано?
                 </p>
             </ConfirmModal>
         </>

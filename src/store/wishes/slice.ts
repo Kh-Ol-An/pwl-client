@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createWish, updateWish, deleteWish, getWishList, bookWish, cancelBookWish } from '@/store/wishes/thunks';
+import {
+    createWish,
+    updateWish,
+    deleteWish,
+    getWishList,
+    bookWish,
+    cancelBookWish,
+    doneWish,
+} from '@/store/wishes/thunks';
 import { IWish } from '@/models/IWish';
 
 interface IState {
@@ -89,7 +97,7 @@ const wishesSlice = createSlice({
             })
             .addCase(bookWish.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось отримати всі бажання.';
+                state.error = action.error.message || 'Не вдалось забронювати бажання.';
             })
             .addCase(bookWish.fulfilled, (state, action) => {
                 // Змінити бажання та покласти його там де було
@@ -111,7 +119,7 @@ const wishesSlice = createSlice({
             })
             .addCase(cancelBookWish.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось отримати всі бажання.';
+                state.error = action.error.message || 'Не вдалось скасувати бронювання бажання.';
             })
             .addCase(cancelBookWish.fulfilled, (state, action) => {
                 // Змінити бажання та покласти його там де було
@@ -122,6 +130,28 @@ const wishesSlice = createSlice({
                 if (index !== -1) {
                     // Оновлюємо дані бажання
                     state.list[index] = action.payload;
+                }
+                state.isLoading = false;
+                state.error = null;
+            })
+            // doneWish
+            .addCase(doneWish.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(doneWish.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось позначити бажання виконаним.';
+            })
+            .addCase(doneWish.fulfilled, (state, action) => {
+                // Змінити бажання та покласти його там де було
+                const { bookedWish } = action.payload;
+                // Знаходимо індекс бажання в списку за його ідентифікатором
+                const index = state.list.findIndex(wish => wish.id === bookedWish.id);
+                // Перевіряємо, чи було знайдено бажання
+                if (index !== -1) {
+                    // Оновлюємо дані бажання
+                    state.list[index] = bookedWish;
                 }
                 state.isLoading = false;
                 state.error = null;

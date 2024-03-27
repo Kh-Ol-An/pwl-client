@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import api from '@/utils/api';
-import { IBookWish, ICancelBookWish, ICreateWish, IGetWish, IUpdateWish } from '@/store/wishes/types';
+import { IBookWish, IActionWish, ICreateWish, IGetWish, IUpdateWish } from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
 import { ICurrentImage, IWish } from '@/models/IWish';
 
@@ -108,11 +108,20 @@ const bookWish = async (data: IBookWish): Promise<AxiosResponse<IWish>> => {
     }
 };
 
-const cancelBookWish = async (data: ICancelBookWish): Promise<AxiosResponse<IWish>> => {
+const cancelBookWish = async (data: IActionWish): Promise<AxiosResponse<IWish>> => {
     try {
         return await api.post('/wish/cancel-book', data);
     } catch (error: any) {
         toast(error.response?.data?.message || 'Не вдалось скасувати бронювання бажання.', { type: 'error' });
+        throw error;
+    }
+};
+
+const doneWish = async (data: IActionWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
+    try {
+        return await api.post('/wish/done', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось позначити бажання виконаним.', { type: 'error' });
         throw error;
     }
 };
@@ -124,6 +133,7 @@ const wishApi = {
     getWishList,
     bookWish,
     cancelBookWish,
+    doneWish,
 };
 
 export default wishApi;
