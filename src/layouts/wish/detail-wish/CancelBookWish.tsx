@@ -1,18 +1,25 @@
 import React, { FC, useState } from 'react';
+import { useAppDispatch } from '@/store/hook';
+import { cancelBookWish } from '@/store/wishes/thunks';
 import ConfirmModal from '@/layouts/ConfirmModal';
 import Button from '@/components/Button';
 import { IWish } from '@/models/IWish';
+import { IUser } from '@/models/IUser';
 
 interface IProps {
-    wishName: IWish['name'];
+    wish: IWish;
+    userId?: IUser['id'];
     close: () => void;
 }
 
-const CancelBookWish: FC<IProps> = ({ wishName, close }) => {
+const CancelBookWish: FC<IProps> = ({ wish, userId, close }) => {
     const [show, setShow] = useState<boolean>(false);
 
-    const handleSubmit = () => {
-        console.log('CancelBookWish handleSubmit');
+    const dispatch = useAppDispatch();
+
+    const handleSubmit = async () => {
+        if (!userId) return;
+        await dispatch(cancelBookWish({ userId, wishId: wish.id }));
         close();
     };
 
@@ -34,7 +41,7 @@ const CancelBookWish: FC<IProps> = ({ wishName, close }) => {
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    Ви впевнені, що хочете скасувати свій намір виконати бажання "{wishName}"?
+                    Ви впевнені, що хочете скасувати свій намір виконати бажання "{wish.name}"?
                 </p>
             </ConfirmModal>
         </>

@@ -21,8 +21,11 @@ export interface IGetWish {
     userId: IUser['id'];
 }
 
-export interface IBookWish {
+export interface ICancelBookWish {
     userId: IUser['id'];
     wishId: IWish['id'];
+}
+
+export interface IBookWish extends ICancelBookWish {
     end: string;
 }

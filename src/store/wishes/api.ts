@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import api from '@/utils/api';
-import { IBookWish, ICreateWish, IGetWish, IUpdateWish } from '@/store/wishes/types';
+import { IBookWish, ICancelBookWish, ICreateWish, IGetWish, IUpdateWish } from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
 import { ICurrentImage, IWish } from '@/models/IWish';
 
@@ -108,12 +108,22 @@ const bookWish = async (data: IBookWish): Promise<AxiosResponse<IWish>> => {
     }
 };
 
+const cancelBookWish = async (data: ICancelBookWish): Promise<AxiosResponse<IWish>> => {
+    try {
+        return await api.post('/wish/cancel-book', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось скасувати бронювання бажання.', { type: 'error' });
+        throw error;
+    }
+};
+
 const wishApi = {
     createWish,
     updateWish,
     deleteWish,
     getWishList,
     bookWish,
+    cancelBookWish,
 };
 
 export default wishApi;

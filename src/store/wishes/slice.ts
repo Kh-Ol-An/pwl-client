@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createWish, updateWish, deleteWish, getWishList, bookWish } from '@/store/wishes/thunks';
+import { createWish, updateWish, deleteWish, getWishList, bookWish, cancelBookWish } from '@/store/wishes/thunks';
 import { IWish } from '@/models/IWish';
 
 interface IState {
@@ -92,6 +92,28 @@ const wishesSlice = createSlice({
                 state.error = action.error.message || 'Не вдалось отримати всі бажання.';
             })
             .addCase(bookWish.fulfilled, (state, action) => {
+                // Змінити бажання та покласти його там де було
+                const { id } = action.payload;
+                // Знаходимо індекс бажання в списку за його ідентифікатором
+                const index = state.list.findIndex(wish => wish.id === id);
+                // Перевіряємо, чи було знайдено бажання
+                if (index !== -1) {
+                    // Оновлюємо дані бажання
+                    state.list[index] = action.payload;
+                }
+                state.isLoading = false;
+                state.error = null;
+            })
+            // cancelBookWish
+            .addCase(cancelBookWish.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(cancelBookWish.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось отримати всі бажання.';
+            })
+            .addCase(cancelBookWish.fulfilled, (state, action) => {
                 // Змінити бажання та покласти його там де було
                 const { id } = action.payload;
                 // Знаходимо індекс бажання в списку за його ідентифікатором
