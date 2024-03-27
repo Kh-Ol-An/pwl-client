@@ -9,7 +9,7 @@ import WishContent from '@/layouts/wish/detail-wish/WishContent';
 import BookWish from '@/layouts/wish/detail-wish/BookWish';
 import CancelBookWish from '@/layouts/wish/detail-wish/CancelBookWish';
 import DoneWish from '@/layouts/wish/detail-wish/DoneWish';
-import NotDoneWish from '@/layouts/wish/detail-wish/NotDoneWish';
+import BookingExpired from '@/layouts/wish/detail-wish/BookingExpired';
 
 dayjs.extend(isSameOrBefore);
 
@@ -22,21 +22,20 @@ interface IProps {
 const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
     const myUser = useAppSelector((state) => state.myUser.user);
 
-    let showCancelBookWish = wish.booking
-        && myUser?.id === wish.booking.userId
-        && dayjs(wish.booking.start).isSameOrBefore(dayjs().add(3, 'days'));
+    let showCancelBookWish = myUser?.id === wish.booking?.userId // бажання належить тому хто створював його
+        && dayjs(wish.booking?.start).isSameOrBefore(dayjs().add(3, 'days')) // бажання можна скасувати за 3 дні до початку
+        && !dayjs(wish.booking?.end).isSameOrBefore(dayjs()); // термін виконання ще не минув
 
-    let showDoneWish = myUser?.id === wish.userId && wish.booking?.end;
+    let showDoneWish = myUser?.id === wish.userId && wish.booking?.end; // належить користувачу та вже виконано
 
-    let showNotDoneWish = wish.booking
-        && myUser?.id === wish.booking.userId
-        && dayjs(wish.booking.end).isSameOrBefore(dayjs());
+    let showBookingExpired = myUser?.id === wish.userId // належить користувачу
+        && dayjs(wish.booking?.end).isSameOrBefore(dayjs()); // не виконано
 
     let showActions = false;
     !wish.booking?.end && (showActions = true);
     showCancelBookWish && (showActions = true);
     showDoneWish && (showActions = true);
-    showNotDoneWish && (showActions = true);
+    showBookingExpired && (showActions = true);
     myUser?.id === wish.userId && (showActions = true);
 
     const handleEditWish = () => {
@@ -68,8 +67,8 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                             <DoneWish wishName={wish.name} close={close} />
                                         )}
 
-                                        {/* Not Done */}
-                                        {showNotDoneWish && <NotDoneWish wishName={wish.name} close={close} />}
+                                        {/* Booking Expired */}
+                                        {showBookingExpired && <BookingExpired wishName={wish.name} close={close} />}
 
                                         {/* Edit */}
                                         {myUser?.id === wish.userId && !wish.booking?.end && (

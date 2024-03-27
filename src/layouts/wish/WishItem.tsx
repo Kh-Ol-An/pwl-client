@@ -1,9 +1,13 @@
 import React, { FC, MouseEvent } from 'react';
+import dayjs from 'dayjs';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import EditIcon from '@mui/icons-material/Edit';
 import { useAppSelector } from '@/store/hook';
 import { IWish } from '@/models/IWish';
 import { addingWhiteSpaces } from '@/utils/formating-value';
 import Action from '@/components/Action';
+
+dayjs.extend(isSameOrBefore);
 
 interface IProps {
     wish: IWish;
@@ -20,7 +24,15 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
     };
 
     return (
-        <div className={"wish-item" + (wish.images.length > 0 ? " can-hover" : "")} onClick={showWish}>
+        <div
+            className={
+                "wish-item"
+                + (wish.images.length > 0 ? " can-hover" : "")
+                + (myUser?.id === wish.booking?.userId ? " i-m-booked" : "")
+                + (myUser?.id === wish.userId && dayjs(wish.booking?.end).isSameOrBefore(dayjs()) ? " booking-expired" : "")
+            }
+            onClick={showWish}
+        >
             <div className="wish-item-outer-border">
                 <div className="wish-item-inner-border">
                     <div className="wish-item-content">
@@ -49,7 +61,7 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
                 </div>
             </div>
 
-            {myUser?.id === wish.userId && (
+            {myUser?.id === wish.userId && !wish.booking?.userId && (
                 <Action onClick={handleEditWish}>
                     <EditIcon />
                 </Action>

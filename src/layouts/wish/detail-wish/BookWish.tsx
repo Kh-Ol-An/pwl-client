@@ -57,7 +57,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
 
         if (!myUser || !bookEnd || (bookEndError && bookEndError.length > 0)) return;
 
-        await dispatch(bookWish({ userId: myUser.id, wishId: wish.id, end: bookEnd.format() }));
+        await dispatch(bookWish({ userId: myUser.id, wishId: wish.id, end: bookEnd.add(1, 'day').format() }));
         close();
     };
 
