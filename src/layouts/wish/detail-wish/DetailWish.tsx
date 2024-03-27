@@ -10,6 +10,7 @@ import BookWish from '@/layouts/wish/detail-wish/BookWish';
 import CancelBookWish from '@/layouts/wish/detail-wish/CancelBookWish';
 import DoneWish from '@/layouts/wish/detail-wish/DoneWish';
 import BookingExpired from '@/layouts/wish/detail-wish/BookingExpired';
+import showBookingExpired from '@/utils/show-booking-expired';
 
 dayjs.extend(isSameOrBefore);
 
@@ -28,14 +29,11 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
 
     let showDoneWish = myUser?.id === wish.userId && wish.booking?.end; // належить користувачу та вже виконано
 
-    let showBookingExpired = myUser?.id === wish.userId // належить користувачу
-        && dayjs(wish.booking?.end).isSameOrBefore(dayjs()); // не виконано
-
     let showActions = false;
     !wish.booking?.end && (showActions = true);
     showCancelBookWish && (showActions = true);
     showDoneWish && (showActions = true);
-    showBookingExpired && (showActions = true);
+    showBookingExpired(wish, myUser?.id) && (showActions = true);
     myUser?.id === wish.userId && (showActions = true);
 
     const handleEditWish = () => {
@@ -67,10 +65,12 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                             <DoneWish wishName={wish.name} close={close} />
                                         )}
 
-                                        {/* Booking Expired */}
-                                        {showBookingExpired && <BookingExpired wishName={wish.name} close={close} />}
+                                        {/* Undone */}
+                                        {showBookingExpired(wish, myUser?.id) && (
+                                            <BookingExpired wishName={wish.name} close={close} />
+                                        )}
 
-                                        {/* Edit */}
+                                        {/* Booking Expired */}
                                         {myUser?.id === wish.userId && !wish.booking?.end && (
                                             <Button type="button" onClick={handleEditWish}>
                                                 Редагувати бажання

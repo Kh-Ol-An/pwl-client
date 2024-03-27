@@ -6,6 +6,7 @@ import { useAppSelector } from '@/store/hook';
 import { IWish } from '@/models/IWish';
 import { addingWhiteSpaces } from '@/utils/formating-value';
 import Action from '@/components/Action';
+import showBookingExpired from '@/utils/show-booking-expired';
 
 dayjs.extend(isSameOrBefore);
 
@@ -29,7 +30,7 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
                 "wish-item"
                 + (wish.images.length > 0 ? " can-hover" : "")
                 + (myUser?.id === wish.booking?.userId ? " i-m-booked" : "")
-                + (myUser?.id === wish.userId && dayjs(wish.booking?.end).isSameOrBefore(dayjs()) ? " booking-expired" : "")
+                + (showBookingExpired(wish, myUser?.id) ? " booking-expired" : "")
             }
             onClick={showWish}
         >
