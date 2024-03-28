@@ -11,25 +11,9 @@ interface IProps {
 }
 
 const WishContent: FC<IProps> = ({ wish, myUserId }) => {
-    let show = (
-        <>
-            Ваше бажання бачать <span className="accent">всі</span> користувачі.
-        </>
-    );
-    wish.show === 'friends' && (
-        show = (
-            <>
-                Ваше бажання бачать тільки <span className="accent">друзі</span>.
-            </>
-        )
-    );
-    wish.show === 'nobody' && (
-        show = (
-            <>
-                Ваше бажання <span className="accent">ніхто</span> не баче.
-            </>
-        )
-    );
+    let show = <>Ваше бажання бачать <span className="accent">всі</span> користувачі.</>;
+    wish.show === 'friends' && (show = <>Ваше бажання бачать тільки <span className="accent">друзі</span>.</>);
+    wish.show === 'nobody' && (show = <>Ваше бажання <span className="accent">ніхто</span> не баче.</>);
 
     let showRow = false;
     myUserId === wish.userId && (showRow = true);

@@ -9,7 +9,7 @@ export const ALLOWED_MAX_FILE_SIZE_IN_MB = 5;
 
 export const NAME_MIN_LENGTH = 2;
 
-export const NAME_MAX_LENGTH = 120;
+export const NAME_MAX_LENGTH = 80;
 
 export const WISH_PRICE_MAX_LENGTH = 19;
 

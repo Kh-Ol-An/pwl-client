@@ -25,8 +25,16 @@ const WishList = () => {
 
     const selectedUser = userList.find(user => user.id === selectedUserId);
     const lastName = selectedUser?.lastName ? selectedUser.lastName : "";
-
     const detailWish = wishList.find(wish => wish.id === idOfSelectedWish);
+
+    let emptyText = <>В тебе немає жодного бажання. Хіба ти нічого не бажаєш?</>;
+    myUser?.id !== selectedUserId && (emptyText = (
+        <>В користувача <span>{selectedUser?.firstName} {lastName}</span> немає жодного бажання.</>
+    ));
+    !isUndone && (emptyText = <>В тебе поки що немає жодного виконаного бажання.</>);
+    !isUndone && myUser?.id !== selectedUserId && (emptyText = (
+        <>В користувача <span>{selectedUser?.firstName} {lastName}</span> немає жодного виконаного бажання.</>
+    ));
 
     const changeWishesType = (e: ChangeEvent<HTMLInputElement>) => {
         const checked = e.target.checked;
@@ -82,8 +90,8 @@ const WishList = () => {
                     <h1 className={"title" + (myUser?.id !== selectedUserId ? " other-user" : "")}>
                         {
                             myUser?.id === selectedUserId
-                                ? "особисті бажання"
-                                : `бажання користувача ${selectedUser?.firstName} ${lastName}`
+                                ? <>особисті бажання</>
+                                : <>бажання користувача <span>{selectedUser?.firstName} {lastName}</span></>
                         }
                     </h1>
                 </div>
@@ -108,13 +116,7 @@ const WishList = () => {
                 </ul>
             ) : (
                 <div className="text-box">
-                    <p className="text">
-                        {
-                            myUser?.id === selectedUserId
-                                ? "В тебе немає жодного бажання. Хіба ти нічого не бажаєш?"
-                                : `В користувача ${selectedUser?.firstName} ${lastName} немає жодного бажання.`
-                        }
-                    </p>
+                    <p className="text">{emptyText}</p>
                 </div>
             )}
 
