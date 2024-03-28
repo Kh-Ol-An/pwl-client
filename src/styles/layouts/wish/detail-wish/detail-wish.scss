@@ -187,10 +187,20 @@
     }
 
     .detail-wish-actions {
-        margin: auto 0 0 auto;
-        @include flex-center;
-        gap: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        @media only screen and (min-width: 768px) {
+            margin: auto 0 0 auto;
+            flex-direction: row;
+            gap: 20px;
+        }
     }
+}
+
+.modal .modal-actions.detail-wish-expired-actions {
+    gap: 10px;
 }
 
 .detail-wish-book-tooltip {
