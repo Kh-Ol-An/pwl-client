@@ -11,7 +11,7 @@
         align-items: flex-end;
         gap: 16px;
 
-        @media only screen and (min-width: 768px) {
+        @media only screen and (min-width: 1024px) {
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
@@ -23,8 +23,23 @@
 
         .title-box {
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
+            flex-direction: column;
+            align-self: center;
+            gap: 4px;
+
+            @media only screen and (min-width: 1024px) {
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            &.other-user {
+                margin-top: 34px;
+
+                @media only screen and (min-width: 768px) {
+                    margin: 0;
+                }
+            }
         }
 
         .wishes-type {
@@ -32,7 +47,7 @@
             gap: 10px;
 
             span {
-                font-size: 24px;
+                font-size: 20px;
                 font-weight: 700;
                 color: $special-color;
                 white-space: nowrap;
@@ -43,12 +58,16 @@
                     color: $primary-color;
                     opacity: 1;
                 }
+
+                @media only screen and (min-width: 1024px) {
+                    font-size: 24px;
+                }
             }
         }
 
         .title {
             margin: 0 auto;
-            font-size: 24px;
+            font-size: 20px;
             line-height: 35px;
             max-height: 70px;
             text-overflow: ellipsis;
@@ -59,17 +78,12 @@
 
             @media only screen and (min-width: 768px) {
                 margin: 0;
-                padding: 0;
                 height: auto;
-                text-align: left;
             }
 
-            &.other-user {
-                padding: 0 0 0 40px;
-
-                @media only screen and (min-width: 768px) {
-                    padding: 0;
-                }
+            @media only screen and (min-width: 1024px) {
+                font-size: 24px;
+                text-align: left;
             }
 
             span {

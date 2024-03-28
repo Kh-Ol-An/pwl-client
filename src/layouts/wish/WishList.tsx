@@ -74,7 +74,7 @@ const WishList = () => {
                     </Button>
                 )}
 
-                <div className="title-box">
+                <div className={"title-box" + (myUser?.id !== selectedUserId ? " other-user" : "")}>
                     <div className="wishes-type">
                         <span className={isUndone ? "primary-color" : ""}>Не виконані</span>
                         <Switch
@@ -87,7 +87,7 @@ const WishList = () => {
                         <span className={isUndone ? "" : "primary-color"}>Виконані</span>
                     </div>
 
-                    <h1 className={"title" + (myUser?.id !== selectedUserId ? " other-user" : "")}>
+                    <h1 className="title">
                         {
                             myUser?.id === selectedUserId
                                 ? <>особисті бажання</>
