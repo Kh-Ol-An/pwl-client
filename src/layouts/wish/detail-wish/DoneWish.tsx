@@ -13,9 +13,9 @@ interface IProps {
 }
 
 const DoneWish: FC<IProps> = ({ wish, userId, close }) => {
-    const [show, setShow] = useState<boolean>(false);
-
     const dispatch = useAppDispatch();
+
+    const [show, setShow] = useState<boolean>(false);
 
     const handleSubmit = async () => {
         if (!userId) return;

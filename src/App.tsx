@@ -19,11 +19,11 @@ const theme = createTheme({
 });
 
 const App: FC = () => {
-    const [ready, setReady] = useState(false);
-
     const myUser = useAppSelector((state) => state.myUser);
 
     const dispatch = useAppDispatch();
+
+    const [ready, setReady] = useState(false);
 
     useEffect(() => {
         dispatch(checkAuth())

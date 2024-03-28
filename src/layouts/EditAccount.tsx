@@ -28,10 +28,9 @@ type Inputs = {
 }
 
 const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
-    const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
-    const [avatar, setAvatar] = useState<ICurrentAvatar>('');
-    const [birthday, setBirthday] = useState<Dayjs | null>(null);
-    const [birthdayError, setBirthdayError] = useState<DateValidationError | null>(null);
+    const myUser = useAppSelector((state) => state.myUser.user);
+
+    const dispatch = useAppDispatch();
 
     const {
         register,
@@ -42,9 +41,10 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const myUser = useAppSelector((state) => state.myUser.user);
-
-    const dispatch = useAppDispatch();
+    const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
+    const [avatar, setAvatar] = useState<ICurrentAvatar>('');
+    const [birthday, setBirthday] = useState<Dayjs | null>(null);
+    const [birthdayError, setBirthdayError] = useState<DateValidationError | null>(null);
 
     const birthdayErrorMessage = useMemo(() => {
         if (!clickedOnSubmit) return;

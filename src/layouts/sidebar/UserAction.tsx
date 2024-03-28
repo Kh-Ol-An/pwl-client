@@ -26,13 +26,13 @@ interface IProps {
 }
 
 const UserAction: FC<IProps> = ({ user, close }) => {
-    const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-
     const myUser = useAppSelector((state) => state.myUser.user);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
+
+    const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleSelectWish = async () => {
         if (!myUser) return;

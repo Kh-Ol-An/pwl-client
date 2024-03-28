@@ -18,15 +18,15 @@ interface IProps {
 }
 
 const BookWish: FC<IProps> = ({ wish, close }) => {
+    const myUser = useAppSelector((state) => state.myUser.user);
+
+    const dispatch = useAppDispatch();
+
     const [bookEnd, setBookEnd] = useState<Dayjs | null>(null);
     const [bookEndError, setBookEndError] = useState<DateValidationError | null>(null);
     const [show, setShow] = useState<boolean>(false);
     const [clickedOnBookWish, setClickedOnBookWish] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-
-    const myUser = useAppSelector((state) => state.myUser.user);
-
-    const dispatch = useAppDispatch();
 
     const birthdayErrorMessage = useMemo(() => {
         if (!clickedOnBookWish) return;

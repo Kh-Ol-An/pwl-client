@@ -34,10 +34,6 @@ type Inputs = {
 }
 
 const Header: FC<IProps> = ({ open, close }) => {
-    const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
-    const [showEditAccount, setShowEditAccount] = useState<boolean>(false);
-    const [openConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
-
     const myUser = useAppSelector((state) => state.myUser.user);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
@@ -48,6 +44,10 @@ const Header: FC<IProps> = ({ open, close }) => {
         handleSubmit,
         formState: { errors },
     } = useForm<Inputs>();
+
+    const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
+    const [showEditAccount, setShowEditAccount] = useState<boolean>(false);
+    const [openConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         if (!myUser) return;

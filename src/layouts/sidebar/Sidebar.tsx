@@ -13,14 +13,14 @@ interface IProps {
 }
 
 const Sidebar: FC<IProps> = ({ open, close }) => {
-    const [isAll, setIsAll] = useState<boolean>(true);
-    const [visibleUsers, setVisibleUsers] = useState<IUser[]>([]);
-
     const myUser = useAppSelector((state) => state.myUser.user);
     const users = useAppSelector((state) => state.users);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
+
+    const [isAll, setIsAll] = useState<boolean>(true);
+    const [visibleUsers, setVisibleUsers] = useState<IUser[]>([]);
 
     const changeUsersType = async (e: ChangeEvent<HTMLInputElement>) => {
         if (!myUser) return;

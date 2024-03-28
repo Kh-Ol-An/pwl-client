@@ -34,12 +34,10 @@ type Inputs = {
 }
 
 const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
-    const [material, setMaterial] = useState<ICreateWish['material']>(true);
-    const [show, setShow] = useState<ICreateWish['show']>('all');
-    const [showConfirmDeleteWish, setShowConfirmDeleteWish] = useState<boolean>(false);
-    const [images, setImages] = useState<ICurrentImage[]>([]);
-    const [isTransition, setIsTransition] = useState<boolean>(false);
-    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+    const myUser = useAppSelector((state) => state.myUser.user);
+    const wishList = useAppSelector((state) => state.wishes.list);
+
+    const dispatch = useAppDispatch();
 
     const {
         register,
@@ -49,10 +47,12 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const myUser = useAppSelector((state) => state.myUser.user);
-    const wishList = useAppSelector((state) => state.wishes.list);
-
-    const dispatch = useAppDispatch();
+    const [material, setMaterial] = useState<ICreateWish['material']>(true);
+    const [show, setShow] = useState<ICreateWish['show']>('all');
+    const [showConfirmDeleteWish, setShowConfirmDeleteWish] = useState<boolean>(false);
+    const [images, setImages] = useState<ICurrentImage[]>([]);
+    const [isTransition, setIsTransition] = useState<boolean>(false);
+    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         if (wishList.some((wish) => wish.name === data.name.trim() && wish.id !== idOfSelectedWish)) {

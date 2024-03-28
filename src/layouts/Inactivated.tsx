@@ -7,11 +7,11 @@ import { WAITING_TIME } from '@/utils/constants';
 import Logo from '@/components/Logo';
 
 const Inactivated: FC = () => {
-    const [timeLeft, setTimeLeft] = useState<number | null>(null);
-
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
+
+    const [timeLeft, setTimeLeft] = useState<number | null>(null);
 
     const getActivationLink
         = `${

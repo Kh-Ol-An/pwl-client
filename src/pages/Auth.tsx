@@ -15,11 +15,6 @@ type Inputs = {
 }
 
 const Auth: FC = () => {
-    const [isRegistration, setIsRegistration] = useState(false);
-    const [clickedOnSubmit, setClickedOnSubmit] = useState(false);
-    const [repeatPassword, setRepeatPassword] = useState('');
-    const [repeatPasswordError, setRepeatPasswordError] = useState('');
-
     const dispatch = useAppDispatch();
 
     const {
@@ -28,6 +23,11 @@ const Auth: FC = () => {
         handleSubmit,
         formState: { errors },
     } = useForm<Inputs>();
+
+    const [isRegistration, setIsRegistration] = useState(false);
+    const [clickedOnSubmit, setClickedOnSubmit] = useState(false);
+    const [repeatPassword, setRepeatPassword] = useState('');
+    const [repeatPasswordError, setRepeatPasswordError] = useState('');
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setClickedOnSubmit(true);

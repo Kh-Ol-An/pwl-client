@@ -10,12 +10,12 @@ import Sidebar from '@/layouts/sidebar/Sidebar';
 import WishList from '@/layouts/wish/WishList';
 
 const Home: FC = () => {
-    const [open, setOpen] = useState<boolean>(false);
-
     const myUser = useAppSelector((state) => state.myUser.user);
     const wishes = useAppSelector((state) => state.wishes);
 
     const dispatch = useAppDispatch();
+
+    const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(getUsers());
