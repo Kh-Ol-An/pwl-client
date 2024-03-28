@@ -15,6 +15,7 @@ import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import { emailValidation, passwordValidation } from "@/utils/validations";
 import Card from '@/layouts/Card';
+import DetailAccount from '@/layouts/DetailAccount';
 import EditAccount from '@/layouts/EditAccount';
 import Button from '@/components/Button';
 import Action from '@/components/Action';
@@ -46,8 +47,9 @@ const Header: FC<IProps> = ({ open, close }) => {
     } = useForm<Inputs>();
 
     const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
+    const [showDetailAccount, setShowDetailAccount] = useState<boolean>(false);
     const [showEditAccount, setShowEditAccount] = useState<boolean>(false);
-    const [openConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
+    const [showConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         if (!myUser) return;
@@ -65,18 +67,27 @@ const Header: FC<IProps> = ({ open, close }) => {
         close();
     };
 
+    const handleShowDetailAccount = () => {
+        setShowDetailAccount(true);
+        close();
+    };
+
+    const handleHideDetailAccount = () => {
+        setShowDetailAccount(false);
+    };
+
     const handleShowEditAccount = () => {
         setShowEditAccount(true);
         setAnchor(null);
         close();
     };
 
-    const handleShowConfirmDeleteMyUser = () => {
-        setShowConfirmDeleteMyUser(true);
+    const handleHideEditAccount = () => {
         setShowEditAccount(false);
     };
 
-    const handleHideEditAccount = () => {
+    const handleShowConfirmDeleteMyUser = () => {
+        setShowConfirmDeleteMyUser(true);
         setShowEditAccount(false);
     };
 
@@ -88,8 +99,8 @@ const Header: FC<IProps> = ({ open, close }) => {
         <div className={"header" + (open ? " open" : "")}>
             <div className="header-inner">
                 <div className="header-content">
-                    <button className="my-user" type="button" onClick={handleSelectWish}>
-                        <div className="avatar-box">
+                    <div className="my-user">
+                        <button className="avatar-box" type="button" onClick={handleShowDetailAccount}>
                             <Avatar alt={myUser?.firstName} src={myUser?.avatar} />
 
                             {myUser && myUser.successfulWishes > 0 && (
@@ -102,9 +113,9 @@ const Header: FC<IProps> = ({ open, close }) => {
                                     {myUser?.unsuccessfulWishes}
                                 </span>
                             )}
-                        </div>
+                        </button>
 
-                        <div className="content">
+                        <button className="content" type="button" onClick={handleSelectWish}>
                             <span className={"name" + (myUser?.id === selectedUserId ? " selected" : "")}>
                                 {myUser?.firstName} {myUser?.lastName}
                             </span>
@@ -112,15 +123,16 @@ const Header: FC<IProps> = ({ open, close }) => {
                             <span className="params">
                                 {
                                     myUser?.birthday
-                                        ? dayjs(myUser?.birthday).locale('uk').format('DD MMMM')
+                                        ? `Д.н. ${dayjs(myUser?.birthday).locale('uk').format('DD MMMM')}`
                                         : myUser?.email
                                 }
                             </span>
-                        </div>
-                    </button>
+                        </button>
+                    </div>
 
                     <Logo to="/welcome" withoutIcon />
 
+                    {/* Settings */}
                     <Popup
                         anchor={anchor}
                         setAnchor={setAnchor}
@@ -136,6 +148,27 @@ const Header: FC<IProps> = ({ open, close }) => {
                         </Button>
                     </Popup>
 
+                    {/* Detail Account */}
+                    {myUser && (
+                        <Modal
+                            open={showDetailAccount}
+                            onClose={handleHideDetailAccount}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <div className="modal modal-md">
+                                <Card>
+                                    <DetailAccount user={myUser} />
+                                </Card>
+
+                                <Action onClick={handleHideDetailAccount}>
+                                    <CloseIcon />
+                                </Action>
+                            </div>
+                        </Modal>
+                    )}
+
+                    {/* Edit Account */}
                     <Modal
                         open={showEditAccount}
                         onClose={handleHideEditAccount}
@@ -156,8 +189,9 @@ const Header: FC<IProps> = ({ open, close }) => {
                         </div>
                     </Modal>
 
+                    {/* Confirm Delete My User */}
                     <Modal
-                        open={openConfirmDeleteMyUser}
+                        open={showConfirmDeleteMyUser}
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                     >

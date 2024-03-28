@@ -6,8 +6,9 @@ import {
     ListItemButton,
     ListItemText,
     CircularProgress,
+    Modal,
 } from '@mui/material';
-import { PeopleAlt as PeopleAltIcon } from '@mui/icons-material';
+import { Close as CloseIcon, PeopleAlt as PeopleAltIcon } from '@mui/icons-material';
 import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
@@ -16,8 +17,11 @@ import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import { IRemoveFriend } from '@/store/my-user/types';
 import { IUser } from '@/models/IUser';
+import Card from '@/layouts/Card';
+import DetailAccount from '@/layouts/DetailAccount';
 import Popup from '@/components/Popup';
 import Button from '@/components/Button';
+import Action from '@/components/Action';
 import stylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
@@ -33,6 +37,24 @@ const UserAction: FC<IProps> = ({ user, close }) => {
 
     const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [showDetailAccount, setShowDetailAccount] = useState<boolean>(false);
+
+    let iconColor = stylesVariables.lightColor;
+    myUser?.followTo.includes(user.id) && (iconColor = stylesVariables.specialColor);
+    (myUser?.followFrom.includes(user.id) || myUser?.friends.includes(user.id))
+    && (iconColor = stylesVariables.primaryColor);
+
+    const showAddFriend = myUser?.followFrom.includes(user.id)
+        || (!myUser?.friends.includes(user.id) && !myUser?.followTo.includes(user.id));
+
+    const handleShowDetailAccount = () => {
+        setShowDetailAccount(true);
+        close();
+    };
+
+    const handleHideDetailAccount = () => {
+        setShowDetailAccount(false);
+    };
 
     const handleSelectWish = async () => {
         if (!myUser) return;
@@ -60,14 +82,6 @@ const UserAction: FC<IProps> = ({ user, close }) => {
         setIsLoading(false);
         setAnchor(null);
     };
-
-    let iconColor = stylesVariables.lightColor;
-    myUser?.followTo.includes(user.id) && (iconColor = stylesVariables.specialColor);
-    (myUser?.followFrom.includes(user.id) || myUser?.friends.includes(user.id))
-        && (iconColor = stylesVariables.primaryColor);
-
-    const showAddFriend = myUser?.followFrom.includes(user.id)
-        || (!myUser?.friends.includes(user.id) && !myUser?.followTo.includes(user.id));
 
     return (
         <ListItem
@@ -113,25 +127,43 @@ const UserAction: FC<IProps> = ({ user, close }) => {
                 </Popup>
             }
         >
+            <ListItemAvatar>
+                <Avatar
+                    src={user.avatar}
+                    alt={`${user.firstName} ${user.lastName ? user.lastName : ''}`}
+                    onClick={handleShowDetailAccount}
+                />
+
+                {user.successfulWishes > 0 && (
+                    <span className="success wish-count">
+                        {user.successfulWishes}
+                    </span>
+                )}
+                {user.unsuccessfulWishes > 0 && (
+                    <span className="unsuccess wish-count">
+                        {user.unsuccessfulWishes}
+                    </span>
+                )}
+
+                <Modal
+                    open={showDetailAccount}
+                    onClose={handleHideDetailAccount}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div className="modal modal-md">
+                        <Card>
+                            <DetailAccount user={user} />
+                        </Card>
+
+                        <Action onClick={handleHideDetailAccount}>
+                            <CloseIcon />
+                        </Action>
+                    </div>
+                </Modal>
+            </ListItemAvatar>
+
             <ListItemButton onClick={handleSelectWish}>
-                <ListItemAvatar>
-                    <Avatar
-                        src={user.avatar}
-                        alt={`${user.firstName} ${user.lastName ? user.lastName : ''}`}
-                    />
-
-                    {user.successfulWishes > 0 && (
-                        <span className="success wish-count">
-                            {user.successfulWishes}
-                        </span>
-                    )}
-                    {user.unsuccessfulWishes > 0 && (
-                        <span className="unsuccess wish-count">
-                            {user.unsuccessfulWishes}
-                        </span>
-                    )}
-                </ListItemAvatar>
-
                 <ListItemText
                     primary={
                         <span className={"name" + (user.id === selectedUserId ? " selected" : "")}>
@@ -141,7 +173,7 @@ const UserAction: FC<IProps> = ({ user, close }) => {
                     secondary={
                         <span className="params">
                             {user.birthday
-                                ? dayjs(user.birthday).locale('uk').format('DD MMMM')
+                                ? `Д.н. ${dayjs(myUser?.birthday).locale('uk').format('DD MMMM')}`
                                 : user.email}
                         </span>
                     }

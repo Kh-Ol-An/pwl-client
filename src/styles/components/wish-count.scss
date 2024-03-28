@@ -11,13 +11,13 @@
     font-weight: 700;
 
     &.success {
-        right: 12px;
+        right: 4px;
         bottom: 6px;
-        background-color: lawngreen;
+        background-color: $success-color;
     }
 
     &.unsuccess {
-        right: 20px;
+        right: 12px;
         bottom: -4px;
         background-color: $action-color;
     }

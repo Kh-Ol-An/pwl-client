@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Avatar } from '@mui/material';
 import { Cancel as CancelIcon } from '@mui/icons-material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { DateValidationError } from '@mui/x-date-pickers/models';
 import dayjs, { Dayjs } from 'dayjs';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
@@ -163,10 +163,11 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
                 className={"date-picker" + (clickedOnSubmit ? " clicked-on-submit" : "")}
                 title="Коли твій день народження?"
             >
-                <DemoContainer components={['DatePicker']}>
-                    <DatePicker
+                <DemoContainer components={['DesktopDatePicker']}>
+                    <DesktopDatePicker
                         label="День Народження*"
                         format="DD.MM.YYYY"
+                        dayOfWeekFormatter={(weekday) => weekday}
                         minDate={dayjs().subtract(120, 'years')} // Дозволити вибір дати до 120 років в минулому
                         disableFuture
                         value={birthday}

@@ -113,5 +113,12 @@
     
     .MuiListItemAvatar-root {
         position: relative;
+        min-width: auto;
+        padding: 0 8px 0 16px;
+        cursor: pointer;
+    }
+
+    .MuiListItemButton-root {
+        padding-left: 8px;
     }
 }

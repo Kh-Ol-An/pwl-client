@@ -5,7 +5,7 @@ export interface IUser {
     firstName: string;
     lastName?: string;
     email: string;
-    birthday: Dayjs;
+    birthday?: Dayjs;
     avatar?: string;
     wishList: string[];
     successfulWishes: number;

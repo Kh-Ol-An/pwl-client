@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { DateValidationError } from '@mui/x-date-pickers/models';
 import dayjs, { Dayjs } from 'dayjs';
 import { Tooltip } from 'react-tooltip';
@@ -107,10 +107,11 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                         + (bookEnd === null ? " error" : "")
                     }
                 >
-                    <DemoContainer components={['DatePicker']}>
-                        <DatePicker
+                    <DemoContainer components={['DesktopDatePicker']}>
+                        <DesktopDatePicker
                             label="включно*"
                             format="DD.MM.YYYY"
+                            dayOfWeekFormatter={(weekday) => weekday}
                             disablePast
                             maxDate={dayjs().add(1, 'year')} // Дозволити вибір дати тільки на рік вперед
                             value={bookEnd}
