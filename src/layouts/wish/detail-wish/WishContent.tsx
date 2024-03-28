@@ -2,8 +2,6 @@ import React, { FC } from 'react';
 import { addingWhiteSpaces } from '@/utils/formating-value';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
-//import dayjs from 'dayjs';
-//import { useAppSelector } from '@/store/hook';
 
 interface IProps {
     wish: IWish;
@@ -19,26 +17,11 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
     myUserId === wish.userId && (showRow = true);
     wish.price && (showRow = true);
 
-//    const myUser = useAppSelector((state) => state.users.list.find((user) => user.id === wish.booking?.userId));
-
     return (
         <>
             <div className="detail-wish-name">
                 {wish.name}
             </div>
-            {/*{wish.booking?.userId && (*/}
-            {/*    <>*/}
-            {/*        <div className="detail-wish-name">*/}
-            {/*            {myUser?.firstName}*/}
-            {/*        </div>*/}
-            {/*        <div className="detail-wish-name">*/}
-            {/*            {dayjs(wish.booking?.start).format()}*/}
-            {/*        </div>*/}
-            {/*        <div className="detail-wish-name">*/}
-            {/*            {dayjs(wish.booking?.end).format()}*/}
-            {/*        </div>*/}
-            {/*    </>*/}
-            {/*)}*/}
 
             {showRow && (
                 <div className="detail-wish-row">

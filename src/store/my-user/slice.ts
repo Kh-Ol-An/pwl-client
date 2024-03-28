@@ -9,7 +9,7 @@ import {
     addFriend,
     removeFriend,
 } from '@/store/my-user/thunks';
-import { doneWish } from '@/store/wishes/thunks';
+import { doneWish, undoneWish } from '@/store/wishes/thunks';
 import { IUser } from '@/models/IUser';
 
 interface IMyUserState {
@@ -156,6 +156,24 @@ const myUserSlice = createSlice({
                 state.error = action.error.message || 'Не вдалось позначити бажання виконаним.';
             })
             .addCase(doneWish.fulfilled, (state, action) => {
+                const { executorUser } = action.payload;
+
+                if (state.user?.id === executorUser.id) {
+                    state.user = executorUser;
+                }
+                state.isLoading = false;
+                state.error = null;
+            })
+            // undoneWish
+            .addCase(undoneWish.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(undoneWish.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось позначити бажання не виконаним.';
+            })
+            .addCase(undoneWish.fulfilled, (state, action) => {
                 const { executorUser } = action.payload;
 
                 if (state.user?.id === executorUser.id) {

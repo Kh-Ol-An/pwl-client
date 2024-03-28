@@ -70,7 +70,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
 
                                         {/* Undone */}
                                         {showBookingExpired(wish, myUser?.id) && (
-                                            <BookingExpired wishName={wish.name} close={close} />
+                                            <BookingExpired wish={wish} userId={myUser?.id} close={close} />
                                         )}
 
                                         {/* Booking Expired */}

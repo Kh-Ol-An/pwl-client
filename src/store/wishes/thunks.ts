@@ -66,3 +66,12 @@ export const doneWish = createAsyncThunk<{ executorUser: IUser, bookedWish: IWis
         return result.data;
     },
 );
+
+export const undoneWish = createAsyncThunk<{ executorUser: IUser, bookedWish: IWish }, IActionWish>(
+    'wishes/undoneWish',
+    async (data) => {
+        const result = await api.undoneWish(data);
+
+        return result.data;
+    },
+);

@@ -1,22 +1,32 @@
 import React, { FC } from 'react';
-import { IWish } from '@/models/IWish';
+import { Modal } from '@mui/material';
+import { useAppDispatch } from '@/store/hook';
+import { undoneWish, doneWish } from '@/store/wishes/thunks';
 import Card from '@/layouts/Card';
 import Button from '@/components/Button';
-import { Modal } from '@mui/material';
+import { IWish } from '@/models/IWish';
+import { IUser } from '@/models/IUser';
 
 interface IProps {
-    wishName: IWish['name'];
+    wish: IWish;
+    userId?: IUser['id'];
     close: () => void;
 }
 
-const BookingExpired: FC<IProps> = ({ wishName, close }) => {
-    const handleUndone = () => {
-        console.log('handleUndone');
+const BookingExpired: FC<IProps> = ({ wish, userId, close }) => {
+    const dispatch = useAppDispatch();
+
+    const handleUndone = async () => {
+        if (!userId) return;
+
+        await dispatch(undoneWish({ userId, wishId: wish.id }));
         close();
     };
 
-    const handleDone = () => {
-        console.log('handleDone');
+    const handleDone = async () => {
+        if (!userId) return;
+
+        await dispatch(doneWish({ userId, wishId: wish.id }));
         close();
     };
 
@@ -31,7 +41,7 @@ const BookingExpired: FC<IProps> = ({ wishName, close }) => {
                     <h3 className="title attention">Увага!</h3>
 
                     <p className="text-lg">
-                        Термін який визначив виконавець на реалізацію бажання "{wishName}" вичерпано.
+                        Термін який визначив виконавець на реалізацію бажання "{wish.name}" вичерпано.
                         <br />
                         <br />
                         Ваше бажання виконано?

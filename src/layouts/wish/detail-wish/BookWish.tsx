@@ -50,7 +50,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 return '';
             }
         }
-    }, [clickedOnBookWish, bookEndError]);
+    }, [clickedOnBookWish, bookEnd, bookEndError]);
 
     const handleSubmit = async () => {
         setClickedOnBookWish(true);

@@ -7,6 +7,7 @@ import {
     bookWish,
     cancelBookWish,
     doneWish,
+    undoneWish,
 } from '@/store/wishes/thunks';
 import { IWish } from '@/models/IWish';
 
@@ -144,6 +145,28 @@ const wishesSlice = createSlice({
                 state.error = action.error.message || 'Не вдалось позначити бажання виконаним.';
             })
             .addCase(doneWish.fulfilled, (state, action) => {
+                // Змінити бажання та покласти його там де було
+                const { bookedWish } = action.payload;
+                // Знаходимо індекс бажання в списку за його ідентифікатором
+                const index = state.list.findIndex(wish => wish.id === bookedWish.id);
+                // Перевіряємо, чи було знайдено бажання
+                if (index !== -1) {
+                    // Оновлюємо дані бажання
+                    state.list[index] = bookedWish;
+                }
+                state.isLoading = false;
+                state.error = null;
+            })
+            // undoneWish
+            .addCase(undoneWish.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(undoneWish.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось позначити бажання не виконаним.';
+            })
+            .addCase(undoneWish.fulfilled, (state, action) => {
                 // Змінити бажання та покласти його там де було
                 const { bookedWish } = action.payload;
                 // Знаходимо індекс бажання в списку за його ідентифікатором

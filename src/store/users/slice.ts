@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getUsers } from '@/store/users/thunks';
-import { doneWish } from '@/store/wishes/thunks';
+import { doneWish, undoneWish } from '@/store/wishes/thunks';
 import { IUser } from '@/models/IUser';
 
 interface IUsersState {
@@ -45,6 +45,27 @@ const usersSlice = createSlice({
                 state.error = action.error.message || 'Не вдалось позначити бажання виконаним.';
             })
             .addCase(doneWish.fulfilled, (state, action) => {
+                // Змінити користувача та покласти його там де був
+                const { executorUser } = action.payload;
+
+                const index = state.list.findIndex(user => user.id === executorUser.id);
+
+                if (index !== -1) {
+                    state.list[index] = executorUser;
+                }
+                state.isLoading = false;
+                state.error = null;
+            })
+            // undoneWish
+            .addCase(undoneWish.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(undoneWish.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось позначити бажання не виконаним.';
+            })
+            .addCase(undoneWish.fulfilled, (state, action) => {
                 // Змінити користувача та покласти його там де був
                 const { executorUser } = action.payload;
 

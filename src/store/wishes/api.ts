@@ -126,6 +126,15 @@ const doneWish = async (data: IActionWish): Promise<AxiosResponse<{ executorUser
     }
 };
 
+const undoneWish = async (data: IActionWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
+    try {
+        return await api.post('/wish/undone', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось позначити бажання не виконаним.', { type: 'error' });
+        throw error;
+    }
+};
+
 const wishApi = {
     createWish,
     updateWish,
@@ -134,6 +143,7 @@ const wishApi = {
     bookWish,
     cancelBookWish,
     doneWish,
+    undoneWish,
 };
 
 export default wishApi;
