@@ -10,10 +10,33 @@ const Welcome: FC = () => {
 
                 <div className="actions">
                     <Button to="/auth" variant="text">Увійти</Button>
-                    <Button to="/auth">Зареєструватись</Button>
+                    <Button to="/auth?register">Зареєструватись</Button>
                 </div>
             </div>
-            <h1 className="title">Welcome test</h1>
+
+            <div className="cover">
+                <div className="cover-content">
+                    <p className="cover-text">
+                        Вітаю! Моє ім’я Олег. Цей застосунок створено для тебе.
+                    </p>
+                    <p className="cover-text">
+                        <span>У тебе є бажання?</span>
+                        <span>Про що ти мрієш?</span>
+                        <span>Брендовий одяг?</span>
+                        <span>Дорога та потужна техніка?</span>
+                        <span>Люксові автівки?</span>
+                        <span>Подорожі в різні кутки планети?</span>
+                    </p>
+                </div>
+
+                <div className="cover-img">
+                    <div className="linear-gradient top"></div>
+                    <div className="linear-gradient right"></div>
+                    <div className="linear-gradient bottom"></div>
+                    <div className="linear-gradient left"></div>
+                    <div className="image"></div>
+                </div>
+            </div>
         </div>
     );
 };

@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch } from '@/store/hook';
 import { registration, login } from '@/store/my-user/thunks';
@@ -24,7 +25,9 @@ const Auth: FC = () => {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const [isRegistration, setIsRegistration] = useState(false);
+    const location = useLocation();
+
+    const [isRegistration, setIsRegistration] = useState(location.search === '?register');
     const [clickedOnSubmit, setClickedOnSubmit] = useState(false);
     const [repeatPassword, setRepeatPassword] = useState('');
     const [repeatPasswordError, setRepeatPasswordError] = useState('');
