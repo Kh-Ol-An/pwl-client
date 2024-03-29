@@ -14,7 +14,7 @@ const Welcome: FC = () => {
                 </div>
             </div>
 
-            <div className="cover">
+            <section className="cover">
                 <div className="cover-content">
                     <p className="cover-text">
                         Вітаю! Моє ім’я Олег. Цей застосунок створено для тебе.
@@ -36,7 +36,15 @@ const Welcome: FC = () => {
                     <div className="linear-gradient left"></div>
                     <div className="image"></div>
                 </div>
-            </div>
+            </section>
+
+            <section className="info">
+                <p className="info-text">
+                    Напевно, ні для кого не секрет, що головною рушійною силою виконання бажань є думки.
+                    А задокументоване бажання виконується в кілька раз швидше. Цей застосунок допоможе тобі в цьому.
+                    Він цілком присвячений твоїм бажанням.
+                </p>
+            </section>
         </div>
     );
 };

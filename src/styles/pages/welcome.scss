@@ -97,4 +97,19 @@
             background-size: cover;
         }
     }
+
+    .info {
+        width: 100%;
+        padding: 120px 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .info-text {
+        width: 100%;
+        font-size: 22px;
+        color: $special-color;
+        text-align: center;
+    }
 }
