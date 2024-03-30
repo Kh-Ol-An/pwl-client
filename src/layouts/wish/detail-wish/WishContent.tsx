@@ -53,7 +53,13 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
                 <p className="detail-wish-description">
                     <span className="label">Де можна придбати:</span>
                     {isURL(wish.address) ? (
-                        <a className="link" href={wish.address} target="_blank" rel="noopener noreferrer">
+                        <a
+                            className="link"
+                            href={wish.address}
+                            title={wish.address}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             {wish.address}
                         </a>
                     ) : (<>{wish.address}</>)}
