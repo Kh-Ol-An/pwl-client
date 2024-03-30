@@ -39,12 +39,12 @@ const App: FC = () => {
                 <Routes>
                     <Route element={<RoutesGuard guard={myUser.user !== null} redirectPath="/auth" />}>
                         <Route path="/" element={<Home />} />
+                        <Route path="/activation-link-expired" element={<ActivationLinkExpired />} />
                     </Route>
                     <Route element={<RoutesGuard guard={myUser.user === null} redirectPath="/" />}>
                         <Route path="/auth" element={<Auth />} />
                     </Route>
                     <Route path="/welcome" element={<Welcome />} />
-                    <Route path="/activation-link-expired" element={<ActivationLinkExpired />} />
                     <Route path="/*" element={<NotFound />} />
                 </Routes>
             )}
