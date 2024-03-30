@@ -173,7 +173,7 @@ const UserAction: FC<IProps> = ({ user, close }) => {
                     secondary={
                         <span className="params">
                             {user.birthday
-                                ? `Д.н. ${dayjs(myUser?.birthday).locale('uk').format('DD MMMM')}`
+                                ? `Д.н. ${dayjs(user.birthday).locale('uk').format('DD MMMM')}`
                                 : user.email}
                         </span>
                     }

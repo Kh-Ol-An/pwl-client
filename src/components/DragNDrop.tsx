@@ -116,7 +116,7 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAllImages }) => {
                                                     alt={`wish-${idx}`}
                                                     loading="lazy"
                                                 />
-                                                <button className="remove" onClick={removeImage(image, idx)}>
+                                                <button className="remove" type="button" onClick={removeImage(image, idx)}>
                                                     <CancelIcon sx={{ color: StylesVariables.actionColor }} />
                                                 </button>
                                             </li>

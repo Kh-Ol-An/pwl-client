@@ -17,6 +17,15 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
     myUserId === wish.userId && (showRow = true);
     wish.price && (showRow = true);
 
+    const isURL = (str: string) => {
+        try {
+            new URL(str);
+            return true;
+        } catch {
+            return false;
+        }
+    };
+
     return (
         <>
             <div className="detail-wish-name">
@@ -43,7 +52,11 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
             {wish.address && (
                 <p className="detail-wish-description">
                     <span className="label">Де можна придбати:</span>
-                    {wish.address}
+                    {isURL(wish.address) ? (
+                        <a className="link" href={wish.address} target="_blank" rel="noopener noreferrer">
+                            {wish.address}
+                        </a>
+                    ) : (<>{wish.address}</>)}
                 </p>
             )}
 
