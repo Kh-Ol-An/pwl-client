@@ -36,8 +36,15 @@ const Auth: FC = () => {
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setClickedOnSubmit(true);
 
-        data.password === repeatPassword ? setRepeatPasswordError('') : setRepeatPasswordError('Паролі не співпадають.');
-        if (repeatPasswordError.length > 0) return;
+        if (isRegistration) {
+            if (data.password === repeatPassword) {
+                setRepeatPasswordError('');
+            } else {
+                return setRepeatPasswordError('Паролі не співпадають.');
+            }
+
+            if (repeatPasswordError.length > 0) return;
+        }
 
         isRegistration ? dispatch(registration(data)) : dispatch(login(data));
     };
@@ -104,7 +111,7 @@ const Auth: FC = () => {
                                 id="repeat-password"
                                 name="repeat-password"
                                 type="password"
-                                label="Повтори пароль*"
+                                label="Повторіть пароль*"
                                 value={repeatPassword}
                                 error={repeatPasswordError}
                                 onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}

@@ -3,6 +3,7 @@ import {
     registration,
     login,
     logout,
+    changePassword,
     checkAuth,
     updateMyUser,
     deleteMyUser,
@@ -72,6 +73,20 @@ const myUserSlice = createSlice({
                 state.error = action.error.message || 'Не вдалось вийти з аккаунту.';
             })
             .addCase(logout.fulfilled, (state) => {
+                state.user = null;
+                state.isLoading = false;
+                state.error = null;
+            })
+            // changePassword
+            .addCase(changePassword.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(changePassword.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось вийти з аккаунту.';
+            })
+            .addCase(changePassword.fulfilled, (state) => {
                 state.user = null;
                 state.isLoading = false;
                 state.error = null;

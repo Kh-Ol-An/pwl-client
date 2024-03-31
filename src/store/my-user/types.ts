@@ -1,18 +1,24 @@
 import { ICurrentAvatar, IUser } from '@/models/IUser';
 
 export interface ILogin {
-    email: string;
+    email: IUser['email'];
     password: string;
 }
 
 export interface IRegistration extends ILogin {
-    firstName: string;
+    firstName: IUser['firstName'];
+}
+
+export interface IChangePassword {
+    userId: IUser['id'];
+    oldPassword: string;
+    newPassword: string;
 }
 
 export interface IUpdateMyUser {
     id: IUser['id'];
-    firstName: string;
-    lastName?: string;
+    firstName: IUser['firstName']
+    lastName?: IUser['lastName'];
     birthday?: string;
     avatar: ICurrentAvatar;
 }

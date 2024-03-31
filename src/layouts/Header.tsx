@@ -206,7 +206,7 @@ const Header: FC<IProps> = ({ open, close }) => {
                                     </div>
 
                                     <div className={"header-change-password" + (isEditAccount ? "" : " show")}>
-                                        <ChangePassword />
+                                        <ChangePassword userId={myUser?.id} close={handleHideEditAccount} />
                                     </div>
                                 </div>
                             </Card>

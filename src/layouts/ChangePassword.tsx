@@ -1,16 +1,23 @@
-import React, { ChangeEvent, useState } from 'react';
-import { useAppDispatch } from '@/store/hook';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useAppDispatch } from '@/store/hook';
+import { changePassword } from '@/store/my-user/thunks';
+import { IUser } from '@/models/IUser';
 import { passwordValidation } from '@/utils/validations';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
+
+interface IProps {
+    userId?: IUser['id'];
+    close: () => void;
+}
 
 type Inputs = {
     oldPassword: string
     newPassword: string
 }
 
-const ChangePassword = () => {
+const ChangePassword: FC<IProps> = ({ userId, close }) => {
     const dispatch = useAppDispatch();
 
     const {
@@ -26,7 +33,16 @@ const ChangePassword = () => {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setClickedOnSubmit(true);
-        console.log('onSubmit');
+
+        if (data.newPassword === repeatPassword) {
+            setRepeatPasswordError('');
+        } else {
+            return setRepeatPasswordError('Нові паролі не співпадають.');
+        }
+
+        if (!userId || repeatPasswordError.length > 0) return;
+        await dispatch(changePassword({ userId, ...data }))
+        close();
     };
 
     const repeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,23 +52,23 @@ const ChangePassword = () => {
         if (!clickedOnSubmit) return;
 
         const password = getValues('newPassword');
-        password === value ? setRepeatPasswordError('') : setRepeatPasswordError('Паролі не співпадають.');
+        password === value ? setRepeatPasswordError('') : setRepeatPasswordError('Нові паролі не співпадають.');
     };
 
     return (
         <form className="edit-account" onSubmit={handleSubmit(onSubmit)}>
             <Input
                 {...register("oldPassword", passwordValidation)}
-                id="old-password"
-                name="old-password"
+                id="oldPassword"
+                name="oldPassword"
                 type="password"
                 label="Старий пароль*"
                 error={errors?.oldPassword?.message}
             />
             <Input
                 {...register("newPassword", passwordValidation)}
-                id="new-password"
-                name="new-password"
+                id="newPassword"
+                name="newPassword"
                 type="password"
                 label="Новий пароль*"
                 error={errors?.newPassword?.message}
@@ -61,7 +77,7 @@ const ChangePassword = () => {
                 id="repeat-new-password"
                 name="repeat-new-password"
                 type="password"
-                label="Повтори пароль*"
+                label="Повторіть новий пароль*"
                 value={repeatPassword}
                 error={repeatPasswordError}
                 onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}

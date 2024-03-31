@@ -1,7 +1,15 @@
 import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import api from '@/utils/api';
-import { IAddFriend, IDeleteMyUser, ILogin, IRegistration, IRemoveFriend, IUpdateMyUser } from '@/store/my-user/types';
+import {
+    IAddFriend,
+    IChangePassword,
+    IDeleteMyUser,
+    ILogin,
+    IRegistration,
+    IRemoveFriend,
+    IUpdateMyUser,
+} from '@/store/my-user/types';
 import { IAuth } from '@/models/IAuth';
 import { IUser } from '@/models/IUser';
 
@@ -53,6 +61,20 @@ const refresh = async (): Promise<AxiosResponse<IAuth>> => {
 //        toast(error.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
         console.log('myUserApi refresh error: ', error.response?.data?.message || 'Не вдалось оновити сесію.');
         await localStorage.removeItem('token');
+        throw error;
+    }
+};
+
+const changePassword = async (data: IChangePassword): Promise<void> => {
+    try {
+        await api.put('/change-password', data);
+        await localStorage.removeItem('token');
+        toast(
+            'Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.',
+            { type: 'success' },
+        );
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось змінити пароль.', { type: 'error' });
         throw error;
     }
 };
@@ -124,6 +146,7 @@ const myUserApi = {
     login,
     logout,
     refresh,
+    changePassword,
     updateMyUser,
     deleteMyUser,
     addFriend,

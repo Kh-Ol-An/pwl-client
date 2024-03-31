@@ -1,6 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '@/store/my-user/api';
-import { IAddFriend, IDeleteMyUser, ILogin, IRegistration, IRemoveFriend, IUpdateMyUser } from '@/store/my-user/types';
+import {
+    IAddFriend,
+    IDeleteMyUser,
+    ILogin,
+    IRegistration,
+    IRemoveFriend,
+    IUpdateMyUser,
+    IChangePassword,
+} from '@/store/my-user/types';
 import { IAuth } from '@/models/IAuth';
 import { IUser } from '@/models/IUser';
 
@@ -44,6 +52,13 @@ export const updateMyUser = createAsyncThunk<IUser, IUpdateMyUser>(
         const result = await api.updateMyUser(data);
 
         return result.data;
+    },
+);
+
+export const changePassword = createAsyncThunk<any, IChangePassword>(
+    'myUser/changePassword',
+    async (data: IChangePassword) => {
+        return await api.changePassword(data);
     },
 );
 
