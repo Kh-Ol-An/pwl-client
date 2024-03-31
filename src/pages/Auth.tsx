@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch } from '@/store/hook';
-import { registration, login } from '@/store/my-user/thunks';
+import { registration, login, forgotPassword } from '@/store/my-user/thunks';
 import { IUser } from '@/models/IUser';
 import { accountFirstNameValidation, emailValidation, passwordValidation } from '@/utils/validations';
 import Card from '@/layouts/Card';
@@ -29,9 +29,18 @@ const Auth: FC = () => {
     const location = useLocation();
 
     const [isRegistration, setIsRegistration] = useState<boolean>(location.search === '?register');
+    const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
     const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
     const [repeatPassword, setRepeatPassword] = useState<string>('');
     const [repeatPasswordError, setRepeatPasswordError] = useState<string>('');
+
+    let title = 'Вхід';
+    isRegistration && (title = 'Реєстрація');
+    isForgotPassword && (title = 'Забули пароль?');
+
+    let submit = 'Увійти';
+    isRegistration && (submit = 'Зареєструватися');
+    isForgotPassword && (submit = 'Відновити');
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setClickedOnSubmit(true);
@@ -46,7 +55,15 @@ const Auth: FC = () => {
             if (repeatPasswordError.length > 0) return;
         }
 
-        isRegistration ? dispatch(registration(data)) : dispatch(login(data));
+        if (isRegistration) {
+            return dispatch(registration(data));
+        }
+
+        if (isForgotPassword) {
+            return dispatch(forgotPassword(data));
+        }
+
+        return dispatch(login(data));
     };
 
     const repeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,10 +91,10 @@ const Auth: FC = () => {
                     <form className="form" onSubmit={handleSubmit(onSubmit)}>
                         <h1 className="title">
                             {/*Вітаю! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}*/}
-                            {isRegistration ? 'Реєстрація' : 'Вхід'}
+                            {title}
                         </h1>
 
-                        {isRegistration && (
+                        {isRegistration && !isForgotPassword && (
                             <Input
                                 {...register("firstName", accountFirstNameValidation)}
                                 id="firstName"
@@ -97,16 +114,18 @@ const Auth: FC = () => {
                             error={errors?.email?.message}
                         />
 
-                        <Input
-                            {...register("password", passwordValidation)}
-                            id="password"
-                            name="password"
-                            type="password"
-                            label="Пароль*"
-                            error={errors?.password?.message}
-                        />
+                        {!isForgotPassword && (
+                            <Input
+                                {...register("password", passwordValidation)}
+                                id="password"
+                                name="password"
+                                type="password"
+                                label="Пароль*"
+                                error={errors?.password?.message}
+                            />
+                        )}
 
-                        {isRegistration && (
+                        {isRegistration && !isForgotPassword && (
                             <Input
                                 id="repeat-password"
                                 name="repeat-password"
@@ -118,14 +137,33 @@ const Auth: FC = () => {
                             />
                         )}
 
-                        <Button variant="text" type="button" onClick={() => setIsRegistration((state) => !state)}>
-                            {/*{isRegistration ? 'Ми вже знайомі.' : 'Ти мене ще не знаєш.'}*/}
-                            {isRegistration ? 'Увійти' : 'Зареєструватись'}
-                        </Button>
+                        <div className="actions">
+                            {!isForgotPassword && (
+                                <Button
+                                    type="button"
+                                    variant="text"
+                                    onClick={() => setIsRegistration((state) => !state)}
+                                >
+                                    {/*{isRegistration ? 'Ми вже знайомі.' : 'Ти мене ще не знаєш.'}*/}
+                                    {isRegistration ? 'Увійти' : 'Зареєструватись'}
+                                </Button>
+                            )}
 
-                        <Button type="submit">
-                            {isRegistration ? 'Зареєструватися' : 'Увійти'}
-                        </Button>
+                            {!isRegistration && (
+                                <div className="forgot-password">
+                                    <Button
+                                        type="button"
+                                        variant="text"
+                                        color="action-color"
+                                        onClick={() => setIsForgotPassword((state) => !state)}
+                                    >
+                                        {isForgotPassword ? 'Пароль згадано!' : 'Не пам\'ятаю пароль'}
+                                    </Button>
+                                </div>
+                            )}
+                        </div>
+
+                        <Button type="submit">{submit}</Button>
                     </form>
                 </Card>
             </div>

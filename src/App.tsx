@@ -10,6 +10,7 @@ import Welcome from '@/pages/Welcome';
 import Auth from '@/pages/Auth';
 import NotFound from '@/pages/NotFound';
 import ActivationLinkExpired from '@/pages/ActivationLinkExpired';
+import ChangeForgottenPassword from '@/pages/ChangeForgottenPassword';
 import Loading from '@/layouts/Loading';
 
 const theme = createTheme({
@@ -43,6 +44,10 @@ const App: FC = () => {
                     </Route>
                     <Route element={<RoutesGuard guard={myUser.user === null} redirectPath="/" />}>
                         <Route path="/auth" element={<Auth />} />
+                        <Route
+                            path="/change-forgotten-password/:passwordResetLink"
+                            element={<ChangeForgottenPassword />}
+                        />
                     </Route>
                     <Route path="/welcome" element={<Welcome />} />
                     <Route path="/*" element={<NotFound />} />

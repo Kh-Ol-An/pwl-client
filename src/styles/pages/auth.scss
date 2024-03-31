@@ -58,4 +58,15 @@
         height: 100%;
         gap: 20px;
     }
+
+    .actions {
+        margin-top: -10px;
+        width: 100%;
+        @include flex-between;
+        gap: 20px;
+
+        .forgot-password {
+            margin-left: auto;
+        }
+    }
 }

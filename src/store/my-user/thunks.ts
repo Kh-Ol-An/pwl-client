@@ -8,6 +8,8 @@ import {
     IRemoveFriend,
     IUpdateMyUser,
     IChangePassword,
+    IChangeForgottenPassword,
+    IForgotPassword,
 } from '@/store/my-user/types';
 import { IAuth } from '@/models/IAuth';
 import { IUser } from '@/models/IUser';
@@ -52,6 +54,20 @@ export const updateMyUser = createAsyncThunk<IUser, IUpdateMyUser>(
         const result = await api.updateMyUser(data);
 
         return result.data;
+    },
+);
+
+export const changeForgottenPassword = createAsyncThunk<any, IChangeForgottenPassword>(
+    'myUser/changeForgottenPassword',
+    async (data: IChangeForgottenPassword) => {
+        return await api.changeForgottenPassword(data);
+    },
+);
+
+export const forgotPassword = createAsyncThunk<any, IForgotPassword>(
+    'myUser/forgotPassword',
+    async (data: IForgotPassword) => {
+        return await api.forgotPassword(data);
     },
 );
 

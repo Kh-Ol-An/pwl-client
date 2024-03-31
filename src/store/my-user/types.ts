@@ -1,7 +1,15 @@
 import { ICurrentAvatar, IUser } from '@/models/IUser';
 
-export interface ILogin {
+export interface IForgotPassword {
     email: IUser['email'];
+}
+
+export interface IChangeForgottenPassword {
+    passwordResetLink: string;
+    newPassword: string;
+}
+
+export interface ILogin extends IForgotPassword {
     password: string;
 }
 

@@ -3,8 +3,10 @@ import { toast } from 'react-toastify';
 import api from '@/utils/api';
 import {
     IAddFriend,
+    IChangeForgottenPassword,
     IChangePassword,
     IDeleteMyUser,
+    IForgotPassword,
     ILogin,
     IRegistration,
     IRemoveFriend,
@@ -61,6 +63,36 @@ const refresh = async (): Promise<AxiosResponse<IAuth>> => {
 //        toast(error.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
         console.log('myUserApi refresh error: ', error.response?.data?.message || 'Не вдалось оновити сесію.');
         await localStorage.removeItem('token');
+        throw error;
+    }
+};
+
+const changeForgottenPassword = async (data: IChangeForgottenPassword): Promise<void> => {
+    try {
+        await api.put('/change-forgotten-password', data);
+        toast(
+            'Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.',
+            { type: 'success' },
+        );
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось змінити пароль.', { type: 'error' });
+        throw error;
+    }
+};
+
+const forgotPassword = async (data: IForgotPassword): Promise<void> => {
+    try {
+        await api.put('/forgot-password', data);
+        toast(
+            `Лист з інструкцією для зміни пароля успішно відправлено на пошту: ${data.email}. Будь ласка, увійдіть за допомогою нового паролю.`,
+            { type: 'success' },
+        );
+    } catch (error: any) {
+        toast(
+            error.response?.data?.message
+                || `Не вдалось відправити лист з інструкцією для зміни пароля на пошту: ${data.email}.`,
+            { type: 'error' },
+        );
         throw error;
     }
 };
@@ -146,6 +178,8 @@ const myUserApi = {
     login,
     logout,
     refresh,
+    changeForgottenPassword,
+    forgotPassword,
     changePassword,
     updateMyUser,
     deleteMyUser,
