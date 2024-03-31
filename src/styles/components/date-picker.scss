@@ -1,6 +1,7 @@
 // wrap component DatePicker with a class date-picker
 .date-picker {
     width: 100%;
+    max-height: 64px;
 
     .MuiFormControl-root {
         width: 100%;

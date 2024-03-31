@@ -9,7 +9,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { updateMyUser } from '@/store/my-user/thunks';
 import { IUpdateMyUser } from '@/store/my-user/types';
-import { ICurrentAvatar } from '@/models/IUser';
+import { ICurrentAvatar, IUser } from '@/models/IUser';
 import { accountFirstNameValidation, accountLastNameValidation } from '@/utils/validations';
 import AvatarValidation from '@/utils/AvatarValidation';
 import { ALLOWED_FILE_EXTENSIONS } from '@/utils/constants';
@@ -23,8 +23,8 @@ interface IProps {
 }
 
 type Inputs = {
-    firstName: string
-    lastName: string
+    firstName: IUser['firstName']
+    lastName: IUser['lastName']
 }
 
 const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {

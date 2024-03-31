@@ -27,10 +27,10 @@ interface IProps {
 }
 
 type Inputs = {
-    name: string
-    price: string
-    address: string
-    description: string
+    name: IWish['name']
+    price: IWish['price']
+    address: IWish['address']
+    description: IWish['description']
 }
 
 const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
@@ -74,7 +74,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             material,
             show,
             name: data.name.trim(),
-            price: material ? removingWhiteSpaces(data.price.trim()) : '',
+            price: material && data.price ? removingWhiteSpaces(data.price.trim()) : '',
             address: material ? data.address : '',
             description: data.description.trim(),
             images,
@@ -88,10 +88,6 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             await dispatch(createWish(wishData));
         }
         close();
-    };
-
-    const changeMaterial = (e: ChangeEvent<HTMLInputElement>) => {
-        setMaterial(e.target.checked);
     };
 
     const changeShow = (e: ChangeEvent<HTMLInputElement>) => {
@@ -155,7 +151,12 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             {/* material */}
             <div className="material">
                 <span className={"yes" + (material ? " primary-color" : "")}>Матеріальне бажання</span>
-                <Switch id="material" name="material" checked={material} onChange={changeMaterial} />
+                <Switch
+                    id="material"
+                    name="material"
+                    checked={material}
+                    onChange={(e) => setMaterial(e.target.checked)}
+                />
                 <span className={"no" + (material ? "" : " action-color")}>Не матеріальне бажання</span>
             </div>
 

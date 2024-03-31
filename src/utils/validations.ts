@@ -10,7 +10,7 @@ import {
 
 // Only whitespace
 export const onlyWhitespaceValidation = {
-    validate: (value: string) => {
+    validate: (value?: string) => {
         if (!value) {
             return true;
         }

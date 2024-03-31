@@ -13,11 +13,14 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { logout, deleteMyUser } from '@/store/my-user/thunks';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
+import { IUser } from '@/models/IUser';
 import { emailValidation, passwordValidation } from "@/utils/validations";
 import Card from '@/layouts/Card';
 import DetailAccount from '@/layouts/DetailAccount';
 import EditAccount from '@/layouts/EditAccount';
+import ChangePassword from '@/layouts/ChangePassword';
 import Button from '@/components/Button';
+import Switch from '@/components/Switch';
 import Action from '@/components/Action';
 import Popup from "@/components/Popup";
 import Input from "@/components/Input";
@@ -30,7 +33,7 @@ interface IProps {
 }
 
 type Inputs = {
-    email: string
+    email: IUser['email']
     password: string
 }
 
@@ -48,6 +51,7 @@ const Header: FC<IProps> = ({ open, close }) => {
 
     const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
     const [showDetailAccount, setShowDetailAccount] = useState<boolean>(false);
+    const [isEditAccount, setIsEditAccount] = useState<boolean>(true);
     const [showEditAccount, setShowEditAccount] = useState<boolean>(false);
     const [showConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
 
@@ -58,6 +62,7 @@ const Header: FC<IProps> = ({ open, close }) => {
         close();
     };
 
+    // SelectWish
     const handleSelectWish = async () => {
         if (!myUser) return;
 
@@ -67,6 +72,7 @@ const Header: FC<IProps> = ({ open, close }) => {
         close();
     };
 
+    // DetailAccount
     const handleShowDetailAccount = () => {
         setShowDetailAccount(true);
         close();
@@ -76,6 +82,7 @@ const Header: FC<IProps> = ({ open, close }) => {
         setShowDetailAccount(false);
     };
 
+    // EditAccount
     const handleShowEditAccount = () => {
         setShowEditAccount(true);
         setAnchor(null);
@@ -86,11 +93,13 @@ const Header: FC<IProps> = ({ open, close }) => {
         setShowEditAccount(false);
     };
 
+    // ConfirmDeleteMyUser
     const handleShowConfirmDeleteMyUser = () => {
         setShowConfirmDeleteMyUser(true);
         setShowEditAccount(false);
     };
 
+    // Logout
     const handleLogout = () => {
         dispatch(logout());
     };
@@ -138,11 +147,11 @@ const Header: FC<IProps> = ({ open, close }) => {
                         setAnchor={setAnchor}
                         actionIcon={<SettingsIcon sx={{ color: stylesVariables.specialColor }} />}
                     >
-                        <Button variant="text" onClick={handleShowEditAccount}>
+                        <Button variant="text" type="button" onClick={handleShowEditAccount}>
                             <ManageAccountsIcon />
                             Налаштування аккаунту
                         </Button>
-                        <Button variant="text" onClick={handleLogout}>
+                        <Button variant="text" type="button" onClick={handleLogout}>
                             <LogoutIcon />
                             Вийти з аккаунту
                         </Button>
@@ -177,10 +186,29 @@ const Header: FC<IProps> = ({ open, close }) => {
                     >
                         <div className="modal">
                             <Card>
-                                <EditAccount
-                                    close={handleHideEditAccount}
-                                    handleShowConfirmDeleteMyUser={handleShowConfirmDeleteMyUser}
-                                />
+                                <div className="change-edit-account">
+                                    <span className={isEditAccount ? "primary-color" : ""}>Редагувати акаунт</span>
+                                    <Switch
+                                        id="change-edit-account"
+                                        name="change-edit-account"
+                                        checked={isEditAccount}
+                                        onChange={(e) => setIsEditAccount(e.target.checked)}
+                                    />
+                                    <span className={isEditAccount ? "" : "action-color"}>Змінити пароль</span>
+                                </div>
+
+                                <div className="header-actions-account">
+                                    <div className={"header-edit-account" + (isEditAccount ? " show" : "")}>
+                                        <EditAccount
+                                            close={handleHideEditAccount}
+                                            handleShowConfirmDeleteMyUser={handleShowConfirmDeleteMyUser}
+                                        />
+                                    </div>
+
+                                    <div className={"header-change-password" + (isEditAccount ? "" : " show")}>
+                                        <ChangePassword />
+                                    </div>
+                                </div>
                             </Card>
 
                             <Action onClick={handleHideEditAccount}>

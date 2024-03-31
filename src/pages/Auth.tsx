@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch } from '@/store/hook';
 import { registration, login } from '@/store/my-user/thunks';
+import { IUser } from '@/models/IUser';
 import { accountFirstNameValidation, emailValidation, passwordValidation } from '@/utils/validations';
 import Card from '@/layouts/Card';
 import Input from '@/components/Input';
@@ -10,8 +11,8 @@ import Button from '@/components/Button';
 import Logo from '@/components/Logo';
 
 type Inputs = {
-    firstName: string
-    email: string
+    firstName: IUser['firstName']
+    email: IUser['email']
     password: string
 }
 
@@ -27,10 +28,10 @@ const Auth: FC = () => {
 
     const location = useLocation();
 
-    const [isRegistration, setIsRegistration] = useState(location.search === '?register');
-    const [clickedOnSubmit, setClickedOnSubmit] = useState(false);
-    const [repeatPassword, setRepeatPassword] = useState('');
-    const [repeatPasswordError, setRepeatPasswordError] = useState('');
+    const [isRegistration, setIsRegistration] = useState<boolean>(location.search === '?register');
+    const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
+    const [repeatPassword, setRepeatPassword] = useState<string>('');
+    const [repeatPasswordError, setRepeatPasswordError] = useState<string>('');
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setClickedOnSubmit(true);

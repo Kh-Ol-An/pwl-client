@@ -110,3 +110,50 @@
         }
     }
 }
+
+.change-edit-account {
+    @include flex-center;
+    gap: 20px;
+
+    span {
+        font-size: 16px;
+        font-weight: 700;
+        color: $special-color;
+    }
+
+    .primary-color {
+        color: $primary-color;
+    }
+
+    .action-color {
+        color: $action-color;
+    }
+}
+
+.header-actions-account {
+    display: flex;
+}
+
+.header-edit-account {
+    max-width: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: $transition;
+
+    &.show {
+        transform: scaleX(1);
+        max-width: 400px;
+    }
+}
+
+.header-change-password {
+    max-width: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: $transition;
+
+    &.show {
+        transform: scaleX(1);
+        max-width: 400px;
+    }
+}
