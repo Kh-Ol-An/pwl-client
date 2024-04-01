@@ -1,5 +1,5 @@
 import React, { FC, ChangeEvent, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch } from '@/store/hook';
 import { changeForgottenPassword } from '@/store/my-user/thunks';
@@ -24,12 +24,13 @@ const ChangeForgottenPassword: FC = () => {
     } = useForm<Inputs>();
 
     const { passwordResetLink } = useParams<{ passwordResetLink: string }>();
+    const navigate = useNavigate();
 
     const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
     const [repeatPassword, setRepeatPassword] = useState<string>('');
     const [repeatPasswordError, setRepeatPasswordError] = useState<string>('');
 
-    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
         setClickedOnSubmit(true);
 
         if (!passwordResetLink) return;
@@ -40,7 +41,7 @@ const ChangeForgottenPassword: FC = () => {
             return setRepeatPasswordError('Паролі не співпадають.');
         }
 
-        return dispatch(changeForgottenPassword({ passwordResetLink, ...data }));
+        dispatch(changeForgottenPassword({ passwordResetLink, ...data })).then(() => navigate('/auth'));
     };
 
     const repeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
