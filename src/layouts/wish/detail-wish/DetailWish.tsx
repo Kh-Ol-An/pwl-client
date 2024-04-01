@@ -23,6 +23,10 @@ interface IProps {
 const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
     const myUser = useAppSelector((state) => state.myUser.user);
 
+    let showDoneMyWish = myUser?.id === wish.userId && !showBookingExpired(wish, myUser?.id); // бажання належить користувачу
+
+    let showBookWish = !wish.booking?.end && myUser?.id !== wish.userId; // бажання не заброньовано і не належить користувачу
+
     let showCancelBookWish = myUser?.id === wish.booking?.userId // бажання належить тому хто створював його
         && dayjs(wish.booking?.start).isSameOrBefore(dayjs().add(3, 'days')) // бажання можна скасувати за 3 дні до початку
         && !dayjs(wish.booking?.end).isSameOrBefore(dayjs()); // термін виконання вже минув
@@ -33,14 +37,24 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
 
     let showBookedEnd = myUser?.id === wish.booking?.userId // бажання належить тому хто забронював
 
+    let showEditWish = myUser?.id === wish.userId && !wish.booking?.end // бажання належить користувачу і не заброньовано
+
     let showActions = false;
-    !wish.booking?.end && (showActions = true);
+    showDoneMyWish && (showActions = true);
+    showBookWish && (showActions = true);
     showCancelBookWish && (showActions = true);
     showDoneWish && (showActions = true);
     showBookingExpired(wish, myUser?.id) && (showActions = true);
-    myUser?.id === wish.userId && !wish.booking?.end && (showActions = true);
+    showEditWish && (showActions = true);
     showBookedEnd && (showActions = true);
     wish.executed && (showActions = false);
+
+    // МОЖЛИВІ КЕЙСИ
+    // Моє бажання / не моє
+    //// виконане / не виконане
+    //// заброньоване / не заброньоване
+    ////// перші 3 дні минули / не минули
+    ////// термін виконання минув / не минув
 
     const handleEditWish = () => {
         editWish();
@@ -60,8 +74,18 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
 
                                 {showActions && (
                                     <div className="detail-wish-actions">
+                                        {/* Done my wish */}
+                                        {showDoneMyWish && (
+                                            <DoneWish
+                                                wish={wish}
+                                                userId={myUser?.id}
+                                                actionText="Бажання виконано"
+                                                close={close}
+                                            />
+                                        )}
+
                                         {/* Book */}
-                                        {!wish.booking?.end && <BookWish wish={wish} close={close} />}
+                                        {showBookWish && <BookWish wish={wish} close={close} />}
 
                                         {/* Cancel Book */}
                                         {showCancelBookWish && (
@@ -71,6 +95,18 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                         {/* Done */}
                                         {showDoneWish && (
                                             <DoneWish wish={wish} userId={myUser?.id} close={close} />
+                                        )}
+
+                                        {/* Booking Expired */}
+                                        {showBookingExpired(wish, myUser?.id) && (
+                                            <BookingExpired wish={wish} userId={myUser?.id} close={close} />
+                                        )}
+
+                                        {/* Edit Wish */}
+                                        {showEditWish && (
+                                            <Button type="button" onClick={handleEditWish}>
+                                                Редагувати бажання
+                                            </Button>
                                         )}
 
                                         {/* showBookedEnd */}
@@ -85,18 +121,6 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                                     }
                                                 </span>
                                             </p>
-                                        )}
-
-                                        {/* Undone */}
-                                        {showBookingExpired(wish, myUser?.id) && (
-                                            <BookingExpired wish={wish} userId={myUser?.id} close={close} />
-                                        )}
-
-                                        {/* Booking Expired */}
-                                        {myUser?.id === wish.userId && !wish.booking?.end && (
-                                            <Button type="button" onClick={handleEditWish}>
-                                                Редагувати бажання
-                                            </Button>
                                         )}
                                     </div>
                                 )}

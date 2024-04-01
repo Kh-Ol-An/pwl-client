@@ -9,10 +9,11 @@ import { IUser } from '@/models/IUser';
 interface IProps {
     wish: IWish;
     userId?: IUser['id'];
+    actionText?: string;
     close: () => void;
 }
 
-const DoneWish: FC<IProps> = ({ wish, userId, close }) => {
+const DoneWish: FC<IProps> = ({ wish, userId, actionText, close }) => {
     const dispatch = useAppDispatch();
 
     const [show, setShow] = useState<boolean>(false);
@@ -31,7 +32,7 @@ const DoneWish: FC<IProps> = ({ wish, userId, close }) => {
                 variant="text"
                 onClick={() => setShow(true)}
             >
-                Підтвердити виконання
+                {actionText || 'Підтвердити виконання'}
             </Button>
 
             <ConfirmModal
