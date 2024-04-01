@@ -83,7 +83,7 @@ const Auth: FC = () => {
             </div>
 
             <div className="box">
-                <Card withLights>
+                <Card>
                     <div className="auth-title only-mobile">
                         <Logo to="/welcome" />
                     </div>
