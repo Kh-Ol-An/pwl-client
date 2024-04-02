@@ -4,6 +4,7 @@ export interface IUser {
     id: string;
     firstName: string;
     lastName?: string;
+    hasPassword: boolean;
     email: string;
     birthday?: Dayjs;
     avatar?: string;

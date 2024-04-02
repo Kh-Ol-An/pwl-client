@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import dayjs from 'dayjs';
+import { useAppSelector } from '@/store/hook';
 import { IUser } from '@/models/IUser';
 
 interface IProps {
@@ -7,6 +8,8 @@ interface IProps {
 }
 
 const DetailAccount: FC<IProps> = ({ user }) => {
+    const myUser = useAppSelector((state) => state.myUser.user);
+
     return (
         <div className="detail-account">
             {user.avatar && (
@@ -19,6 +22,15 @@ const DetailAccount: FC<IProps> = ({ user }) => {
                 <h2 className="detail-account-title">
                     {user.firstName} {user.lastName}
                 </h2>
+
+                {myUser?.id === user.id && (
+                    <div className="detail-account-field">
+                        <div className="detail-account-label">Ваша пошта:</div>
+                        <div className="detail-account-value" title={user.email}>
+                            {user.email}
+                        </div>
+                    </div>
+                )}
 
                 {user.birthday && (
                     <div className="detail-account-field">

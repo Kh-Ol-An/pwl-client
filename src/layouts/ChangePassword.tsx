@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useAppDispatch } from '@/store/hook';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { changePassword } from '@/store/my-user/thunks';
 import { IUser } from '@/models/IUser';
 import { passwordValidation } from '@/utils/validations';
@@ -18,6 +18,8 @@ type Inputs = {
 }
 
 const ChangePassword: FC<IProps> = ({ userId, close }) => {
+    const myUser = useAppSelector((state) => state.myUser.user);
+
     const dispatch = useAppDispatch();
 
     const {
@@ -57,14 +59,16 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
 
     return (
         <form className="edit-account" onSubmit={handleSubmit(onSubmit)}>
-            <Input
-                {...register("oldPassword", passwordValidation)}
-                id="oldPassword"
-                name="oldPassword"
-                type="password"
-                label="Старий пароль*"
-                error={errors?.oldPassword?.message}
-            />
+            {myUser?.hasPassword && (
+                <Input
+                    {...register("oldPassword", passwordValidation)}
+                    id="oldPassword"
+                    name="oldPassword"
+                    type="password"
+                    label="Старий пароль*"
+                    error={errors?.oldPassword?.message}
+                />
+            )}
             <Input
                 {...register("newPassword", passwordValidation)}
                 id="newPassword"

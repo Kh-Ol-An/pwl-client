@@ -93,10 +93,13 @@
     .detail-account-value {
         color: $light-color;
         font-size: 16px;
+        text-overflow: ellipsis;
+        overflow: hidden;
         white-space: nowrap;
 
         @media only screen and (min-width: 768px) {
             font-size: 22px;
+            max-width: 230px; // TODO: All screen sizes
         }
 
         &.success {
