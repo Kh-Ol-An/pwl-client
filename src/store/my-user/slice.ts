@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+    googleAuthorization,
     registration,
     login,
     logout,
@@ -43,6 +44,22 @@ const myUserSlice = createSlice({
                 state.error = action.error.message || 'Не вдалось зареєструватись.';
             })
             .addCase(registration.fulfilled, (state, action) => {
+                state.user = action.payload.user;
+                state.isLoading = false;
+                state.error = null;
+            })
+            // googleAuthorization
+            .addCase(googleAuthorization.pending, (state) => {
+                state.user = null;
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(googleAuthorization.rejected, (state, action) => {
+                state.user = null;
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось увійти за допомогою Google.';
+            })
+            .addCase(googleAuthorization.fulfilled, (state, action) => {
                 state.user = action.payload.user;
                 state.isLoading = false;
                 state.error = null;

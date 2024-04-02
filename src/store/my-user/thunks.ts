@@ -10,6 +10,7 @@ import {
     IChangePassword,
     IChangeForgottenPassword,
     IForgotPassword,
+    IGoogleAuth,
 } from '@/store/my-user/types';
 import { IAuth } from '@/models/IAuth';
 import { IUser } from '@/models/IUser';
@@ -18,6 +19,15 @@ export const registration = createAsyncThunk<IAuth, IRegistration>(
     'myUser/registration',
     async (data) => {
         const result = await api.registration(data);
+
+        return result.data;
+    },
+);
+
+export const googleAuthorization = createAsyncThunk<IAuth, IGoogleAuth>(
+    'myUser/googleAuthorization',
+    async (data) => {
+        const result = await api.googleAuthorization(data);
 
         return result.data;
     },

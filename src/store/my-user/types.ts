@@ -13,6 +13,14 @@ export interface ILogin extends IForgotPassword {
     password: string;
 }
 
+export interface IGoogleAuth extends IForgotPassword {
+    email: IUser['email'];
+    isActivated: IUser['isActivated'];
+    firstName: IUser['firstName'];
+    lastName: IUser['lastName'];
+    avatar: IUser['avatar'];
+}
+
 export interface IRegistration extends ILogin {
     firstName: IUser['firstName'];
 }

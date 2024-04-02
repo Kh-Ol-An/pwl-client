@@ -1,8 +1,11 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
+import { toast } from 'react-toastify';
 import { useAppDispatch } from '@/store/hook';
-import { registration, login, forgotPassword } from '@/store/my-user/thunks';
+import { registration, login, forgotPassword, googleAuthorization } from '@/store/my-user/thunks';
 import { IUser } from '@/models/IUser';
 import { accountFirstNameValidation, emailValidation, passwordValidation } from '@/utils/validations';
 import Card from '@/layouts/Card';
@@ -10,6 +13,14 @@ import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Logo from '@/components/Logo';
 import Checkbox from '@/components/Checkbox';
+
+interface IGoogleAuthCredentialResponse {
+    email: IUser['email'];
+    email_verified: IUser['isActivated'];
+    given_name: IUser['firstName'];
+    family_name: IUser['lastName'];
+    picture: IUser['avatar'];
+}
 
 type Inputs = {
     firstName: IUser['firstName']
@@ -46,6 +57,21 @@ const Auth: FC = () => {
     let submit = 'Увійти';
     isRegistration && (submit = 'Зареєструватися');
     isForgotPassword && (submit = 'Відновити');
+
+    const handleGoogleLogin = async (response: CredentialResponse) => {
+        if (!response.credential) return;
+
+        const decodedUserData: IGoogleAuthCredentialResponse = jwtDecode(response.credential);
+        console.log(decodedUserData);
+
+        await dispatch(googleAuthorization({
+            email: decodedUserData.email,
+            isActivated: decodedUserData.email_verified,
+            firstName: decodedUserData.given_name,
+            lastName: decodedUserData.family_name,
+            avatar: decodedUserData.picture,
+        }));
+    };
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setClickedOnSubmit(true);
@@ -116,7 +142,17 @@ const Auth: FC = () => {
                             {title}
                         </h1>
 
-                        {isRegistration && !isForgotPassword && (
+                        {!isForgotPassword && (
+                            <GoogleLogin
+                                onSuccess={handleGoogleLogin}
+                                onError={() => {
+                                    console.log('Google OAuth Login Failed');
+                                    toast('Не вдалось увійти за допомогою Google.', { type: 'error' });
+                                }}
+                            />
+                        )}
+
+                        {isRegistration && (
                             <Input
                                 {...register("firstName", accountFirstNameValidation)}
                                 id="firstName"
@@ -147,7 +183,7 @@ const Auth: FC = () => {
                             />
                         )}
 
-                        {isRegistration && !isForgotPassword && (
+                        {isRegistration && (
                             <Input
                                 id="repeat-password"
                                 name="repeat-password"

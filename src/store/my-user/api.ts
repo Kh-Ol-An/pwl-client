@@ -7,6 +7,7 @@ import {
     IChangePassword,
     IDeleteMyUser,
     IForgotPassword,
+    IGoogleAuth,
     ILogin,
     IRegistration,
     IRemoveFriend,
@@ -22,6 +23,17 @@ const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> 
         return response;
     } catch (error: any) {
         toast(error.response?.data?.message || 'Не вдалось зареєструватись.', { type: 'error' });
+        throw error;
+    }
+};
+
+const googleAuthorization = async (data: IGoogleAuth): Promise<AxiosResponse<IAuth>> => {
+    try {
+        const response = await api.post('/google-auth', data);
+        await localStorage.setItem('token', response.data.accessToken);
+        return response;
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось увійти за допомогою Google.', { type: 'error' });
         throw error;
     }
 };
@@ -175,6 +187,7 @@ const removeFriend = async (data: IRemoveFriend): Promise<AxiosResponse<IUser>> 
 
 const myUserApi = {
     registration,
+    googleAuthorization,
     login,
     logout,
     refresh,

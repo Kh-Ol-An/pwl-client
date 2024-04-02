@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
@@ -24,7 +25,13 @@ root.render(
     <Provider store={store}>
         <BrowserRouter>
             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'uk'}>
-                <App />
+                <GoogleOAuthProvider
+                    clientId={
+                        process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID ? process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID : ''
+                    }
+                >
+                    <App />
+                </GoogleOAuthProvider>
             </LocalizationProvider>
         </BrowserRouter>
     </Provider>
