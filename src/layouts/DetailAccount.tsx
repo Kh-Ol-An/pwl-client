@@ -19,13 +19,13 @@ const DetailAccount: FC<IProps> = ({ user }) => {
             )}
 
             <div className="detail-account-info">
-                <h2 className="detail-account-title">
+                <h2 className="detail-account-title" title={`${user.firstName} ${user.lastName}`}>
                     {user.firstName} {user.lastName}
                 </h2>
 
                 {myUser?.id === user.id && (
                     <div className="detail-account-field">
-                        <div className="detail-account-label">Ваша пошта:</div>
+                        <div className="detail-account-label">Пошта:</div>
                         <div className="detail-account-value" title={user.email}>
                             {user.email}
                         </div>
