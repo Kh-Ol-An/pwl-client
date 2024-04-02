@@ -6,7 +6,7 @@ interface IProps {
     target?: '_blank';
     tabIndex?: number;
     variant?: 'text';
-    color?: 'action-color';
+    color?: 'primary-color' | 'action-color';
     fontSize?: 'small';
     disabled?: boolean;
     type?: 'button' | 'submit' | 'reset';
@@ -22,7 +22,7 @@ const Button: FC<IProps> = ({
     color,
     fontSize,
     disabled,
-    type,
+    type = 'button',
     onClick,
     children,
 }) => {
@@ -36,25 +36,25 @@ const Button: FC<IProps> = ({
         onClick: onClick || handleClick,
     };
 
+    const linkTagProps: Record<string, any> = {
+        ...tagProps,
+    };
+
+    if (target === '_blank') {
+        linkTagProps.target = target;
+        linkTagProps.rel = "noopener noreferrer external nofollow";
+    }
+
     if (to) {
         return (
-            <Link
-                to={to}
-                target={target}
-                rel="noopener noreferrer"
-                {...tagProps}
-            >
+            <Link to={to} {...linkTagProps}>
                 {children}
             </Link>
         );
     }
 
     return (
-        <button
-            type={type}
-            disabled={disabled}
-            {...tagProps}
-        >
+        <button type={type} disabled={disabled} {...tagProps}>
             {children}
         </button>
     );

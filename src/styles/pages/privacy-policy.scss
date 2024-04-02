@@ -1,0 +1,56 @@
+.privacy-policy {
+    padding: 20px 20px 40px;
+    color: $light-color;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    h1 {
+        font-size: 36px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    h2 {
+        margin-top: 24px;
+        font-size: 32px;
+    }
+
+    h3 {
+        margin-top: 18px;
+        font-size: 28px;
+    }
+
+    h4 {
+        margin-top: 10px;
+        font-size: 22px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    a {
+        margin: 0 4px;
+        display: inline-block;
+        color: $primary-color;
+        transition: $transition;
+
+        &:hover {
+            text-shadow: $primary-color 0 0 2px;
+        }
+    }
+
+    ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+
+    .agree {
+        width: max-content;
+        margin-left: auto;
+    }
+}

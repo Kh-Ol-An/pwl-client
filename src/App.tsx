@@ -6,11 +6,12 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { checkAuth } from '@/store/my-user/thunks';
 import RoutesGuard from '@/utils/RoutesGuard';
 import Home from '@/pages/Home';
-import Welcome from '@/pages/Welcome';
-import Auth from '@/pages/Auth';
-import NotFound from '@/pages/NotFound';
 import ActivationLinkExpired from '@/pages/ActivationLinkExpired';
+import Auth from '@/pages/Auth';
 import ChangeForgottenPassword from '@/pages/ChangeForgottenPassword';
+import PrivacyPolicy from '@/pages/PrivacyPolicy';
+import Welcome from '@/pages/Welcome';
+import NotFound from '@/pages/NotFound';
 import Loading from '@/layouts/Loading';
 
 const theme = createTheme({
@@ -50,6 +51,7 @@ const App: FC = () => {
                         />
                     </Route>
                     <Route path="/welcome" element={<Welcome />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="/*" element={<NotFound />} />
                 </Routes>
             )}

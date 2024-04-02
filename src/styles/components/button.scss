@@ -28,6 +28,18 @@
         color: $primary-color;
     }
 
+    &.primary-color {
+        color: $primary-color;
+
+        &:hover {
+            @include icon-shadow($primary-color);
+        }
+
+        &:active {
+            @include icon-shadow($primary-color);
+        }
+    }
+
     &.action-color {
         color: $action-color;
 

@@ -9,6 +9,7 @@ import Card from '@/layouts/Card';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Logo from '@/components/Logo';
+import Checkbox from '@/components/Checkbox';
 
 type Inputs = {
     firstName: IUser['firstName']
@@ -28,11 +29,15 @@ const Auth: FC = () => {
 
     const location = useLocation();
 
-    const [isRegistration, setIsRegistration] = useState<boolean>(location.search === '?register');
+    const [isRegistration, setIsRegistration] = useState<boolean>(
+        location.search === '?register' || location.search === '?agree'
+    );
     const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
     const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
     const [repeatPassword, setRepeatPassword] = useState<string>('');
     const [repeatPasswordError, setRepeatPasswordError] = useState<string>('');
+    const [checkedPrivacyPolicy, setCheckedPrivacyPolicy] = useState<boolean>(location.search === '?agree');
+    const [checkedPrivacyPolicyError, setCheckedPrivacyPolicyError] = useState<string>('');
 
     let title = 'Вхід';
     isRegistration && (title = 'Реєстрація');
@@ -52,10 +57,16 @@ const Auth: FC = () => {
                 return setRepeatPasswordError('Паролі не співпадають.');
             }
 
-            if (repeatPasswordError.length > 0) return;
+            if (checkedPrivacyPolicy) {
+                setCheckedPrivacyPolicyError('');
+            } else {
+                return setCheckedPrivacyPolicyError('Ми не можемо Вас зареєструвати, поки Ви не погодитись на наші умови.');
+            }
+
+            if (repeatPasswordError.length > 0 || checkedPrivacyPolicyError.length > 0) return;
         }
 
-        if (isRegistration) {
+        if (isRegistration && checkedPrivacyPolicy) {
             return dispatch(registration(data));
         }
 
@@ -74,6 +85,17 @@ const Auth: FC = () => {
 
         const password = getValues('password');
         password === value ? setRepeatPasswordError('') : setRepeatPasswordError('Паролі не співпадають.');
+    };
+
+    const handleTogglePrivacyPolicy = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.checked;
+        setCheckedPrivacyPolicy(value);
+
+        if (!clickedOnSubmit) return;
+
+        value
+            ? setCheckedPrivacyPolicyError('')
+            : setCheckedPrivacyPolicyError('Ми не можемо Вас зареєструвати, поки Ви не погодитись на наші умови.');
     };
 
     return (
@@ -162,6 +184,28 @@ const Auth: FC = () => {
                                 </div>
                             )}
                         </div>
+
+                        {isRegistration && (
+                            <div>
+                                <Checkbox
+                                    id="privacy-policy"
+                                    name="privacy-policy"
+                                    value="privacy-policy"
+                                    checked={checkedPrivacyPolicy}
+                                    onChange={handleTogglePrivacyPolicy}
+                                >
+                                    Я погоджуюсь з{' '}
+                                    <Button to="/privacy-policy" variant="text" color="primary-color">
+                                        політикою конфіденційності
+                                    </Button>
+                                    сайту Wish Hub.
+                                </Checkbox>
+
+                                {checkedPrivacyPolicyError.length > 0 && (
+                                    <p className="error">{checkedPrivacyPolicyError}</p>
+                                )}
+                            </div>
+                        )}
 
                         <Button type="submit">{submit}</Button>
                     </form>
