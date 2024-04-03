@@ -50,7 +50,7 @@ const Home: FC = () => {
 
                 <Sidebar open={open} close={() => setOpen(false)} />
 
-                <div className="container">
+                <div className="home-page-container">
                     {wishes.isLoading ? <Loading isLocal /> : <WishList />}
 
                     {/* TODO: Вибір полу і якщо жінка то можливість обрати улюблені квіти */}

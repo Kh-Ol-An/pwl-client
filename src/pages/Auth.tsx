@@ -59,10 +59,15 @@ const Auth: FC = () => {
     isForgotPassword && (submit = 'Відновити');
 
     const handleGoogleLogin = async (response: CredentialResponse) => {
-        if (!response.credential) return;
+        if (checkedPrivacyPolicy) {
+            setCheckedPrivacyPolicyError('');
+        } else {
+            return setCheckedPrivacyPolicyError('Ми не можемо Вас зареєструвати, поки Ви не погодитись на наші умови.');
+        }
+
+        if (!response.credential || checkedPrivacyPolicyError.length > 0) return;
 
         const decodedUserData: IGoogleAuthCredentialResponse = jwtDecode(response.credential);
-        console.log(decodedUserData);
 
         await dispatch(googleAuthorization({
             email: decodedUserData.email,
@@ -152,6 +157,8 @@ const Auth: FC = () => {
                             />
                         )}
 
+                        <span className="auth-page-divider">або</span>
+
                         {isRegistration && (
                             <Input
                                 {...register("firstName", accountFirstNameValidation)}
@@ -221,7 +228,7 @@ const Auth: FC = () => {
                             )}
                         </div>
 
-                        {isRegistration && (
+                        {!isForgotPassword && (
                             <div>
                                 <Checkbox
                                     id="privacy-policy"
