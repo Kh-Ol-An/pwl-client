@@ -59,6 +59,8 @@ const Auth: FC = () => {
     isForgotPassword && (submit = 'Відновити');
 
     const handleGoogleLogin = async (response: CredentialResponse) => {
+        setClickedOnSubmit(true);
+
         if (checkedPrivacyPolicy) {
             setCheckedPrivacyPolicyError('');
         } else {
@@ -81,31 +83,33 @@ const Auth: FC = () => {
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setClickedOnSubmit(true);
 
+        if (isForgotPassword) {
+            return dispatch(forgotPassword(data));
+        }
+
         if (isRegistration) {
             if (data.password === repeatPassword) {
                 setRepeatPasswordError('');
             } else {
                 return setRepeatPasswordError('Паролі не співпадають.');
             }
-
-            if (checkedPrivacyPolicy) {
-                setCheckedPrivacyPolicyError('');
-            } else {
-                return setCheckedPrivacyPolicyError('Ми не можемо Вас зареєструвати, поки Ви не погодитись на наші умови.');
-            }
-
-            if (repeatPasswordError.length > 0 || checkedPrivacyPolicyError.length > 0) return;
         }
+
+        if (checkedPrivacyPolicy) {
+            setCheckedPrivacyPolicyError('');
+        } else {
+            return setCheckedPrivacyPolicyError('Ми не можемо Вас зареєструвати, поки Ви не погодитись на наші умови.');
+        }
+
+        if (repeatPasswordError.length > 0 || checkedPrivacyPolicyError.length > 0) return;
 
         if (isRegistration && checkedPrivacyPolicy) {
             return dispatch(registration(data));
         }
 
-        if (isForgotPassword) {
-            return dispatch(forgotPassword(data));
+        if (checkedPrivacyPolicy) {
+            return dispatch(login(data));
         }
-
-        return dispatch(login(data));
     };
 
     const repeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
