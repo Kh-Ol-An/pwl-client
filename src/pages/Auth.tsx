@@ -62,7 +62,7 @@ const Auth: FC = () => {
         if (checkedPrivacyPolicy) {
             setCheckedPrivacyPolicyError('');
         } else {
-            return setCheckedPrivacyPolicyError('Ми не можемо Вас зареєструвати, поки Ви не погодитись на наші умови.');
+            return setCheckedPrivacyPolicyError('Ми не можемо Вас авторизувати, поки Ви не погодитись на наші умови.');
         }
 
         if (!response.credential || checkedPrivacyPolicyError.length > 0) return;
