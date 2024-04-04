@@ -31,11 +31,7 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAllImages }) => {
         setImages([...images, ...acceptedImages]);
     }, [images, setImages]);
 
-    const { getRootProps, getInputProps } = useDropzone({
-        onDrop,
-        accept: acceptTypes,
-        maxSize: ALLOWED_MAX_FILE_SIZE_IN_MB * 1024 * 1024,
-    });
+    const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
     const handleDragEnd = (result: DropResult) => {
         if (!result.destination) {
