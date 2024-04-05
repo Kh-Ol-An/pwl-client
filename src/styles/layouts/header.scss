@@ -113,12 +113,25 @@
 
 .change-edit-account {
     @include flex-center;
-    gap: 20px;
+    gap: 4px;
+
+    @media only screen and (min-width: 430px) {
+        gap: 10px;
+    }
+
+    @media only screen and (min-width: 768px) {
+        gap: 20px;
+    }
 
     span {
-        font-size: 16px;
+        font-size: 12px;
         font-weight: 700;
         color: $special-color;
+        text-align: center;
+
+        @media only screen and (min-width: 412px) {
+            font-size: 16px;
+        }
     }
 
     .primary-color {

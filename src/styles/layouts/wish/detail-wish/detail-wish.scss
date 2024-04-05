@@ -193,6 +193,10 @@
             white-space: nowrap;
             display: block;
         }
+
+        .value {
+            white-space: pre-wrap;
+        }
     }
 
     .detail-wish-actions {

@@ -74,7 +74,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
             {wish.description && (
                 <p className="detail-wish-description">
                     <span className="label">Опис:</span>
-                    {wish.description}
+                    <span className="value">{wish.description}</span>
                 </p>
             )}
         </>
