@@ -4,7 +4,6 @@ import {
     NAME_MAX_LENGTH,
     NAME_MIN_LENGTH,
     WISH_DESCRIPTION_MIN_LENGTH,
-    WISH_DESCRIPTION_MAX_LENGTH,
     WISH_PRICE_MAX_LENGTH,
 } from '@/utils/constants';
 
@@ -67,10 +66,6 @@ export const wishDescriptionValidation = {
         value: WISH_DESCRIPTION_MIN_LENGTH,
         message: `Що це за такий короткий опис бажання? Придумай будь ласка опис який довший за ${WISH_DESCRIPTION_MIN_LENGTH - 1} символ.`
     },
-    maxLength: {
-        value: WISH_DESCRIPTION_MAX_LENGTH,
-        message: `Твій опис бажання занадто довгий. Давай намагатимемося вміститися в ${WISH_DESCRIPTION_MAX_LENGTH} символів.`
-    }
 };
 
 // Email

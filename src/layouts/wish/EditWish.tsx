@@ -12,6 +12,7 @@ import {
     wishNameValidation,
     wishPriceValidation,
 } from '@/utils/validations';
+import { WISH_DESCRIPTION_MAX_LENGTH } from '@/utils/constants';
 import { removingWhiteSpaces, addingWhiteSpaces } from '@/utils/formating-value';
 import ConfirmModal from '@/layouts/ConfirmModal';
 import Button from '@/components/Button';
@@ -42,6 +43,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const {
         register,
         setValue,
+        watch,
         setError,
         handleSubmit,
         formState: { errors },
@@ -230,7 +232,22 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
 
             {/* description */}
             <Input
-                {...register("description", wishDescriptionValidation)}
+                {
+                    ...register(
+                        "description",
+                        {
+                            ...wishDescriptionValidation,
+                            maxLength: {
+                                value: WISH_DESCRIPTION_MAX_LENGTH,
+                                message: `Назва твого бажання містить: ${
+                                    watch('description')?.length
+                                } символів. Давай намагатимемося вміститися в ${
+                                    WISH_DESCRIPTION_MAX_LENGTH
+                                } символів.`,
+                            }
+                        },
+                    )
+                }
                 id="description"
                 name="description"
                 type="multiline"
