@@ -51,10 +51,14 @@
         position: relative;
         z-index: $z-index-xs-1;
         padding-left: 30px;
-        font-size: 14px;
+        font-size: 12px;
         line-height: 26px;
         color: $light-color;
         cursor: pointer;
+
+        @media only screen and (min-width: 430px) {
+            font-size: 14px;
+        }
 
         @media only screen and (min-width: 1024px) {
             font-size: 16px;
@@ -64,6 +68,17 @@
         a {
             margin: 0 4px;
             display: inline-block;
+            font-size: 12px;
+            line-height: 26px;
+
+            @media only screen and (min-width: 430px) {
+                font-size: 14px;
+            }
+
+            @media only screen and (min-width: 1024px) {
+                font-size: 16px;
+                line-height: 20px;
+            }
         }
     }
 }
