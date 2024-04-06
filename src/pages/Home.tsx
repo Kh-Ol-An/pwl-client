@@ -18,7 +18,7 @@ const Home: FC = () => {
     const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        dispatch(getUsers());
+        dispatch(getUsers({ page: 4, limit: 20 }));
 
         if (!myUser) return;
 
