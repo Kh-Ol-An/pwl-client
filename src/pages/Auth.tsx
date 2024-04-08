@@ -112,7 +112,7 @@ const Auth: FC = () => {
         }
     };
 
-    const repeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const repeatPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setRepeatPassword(value);
 
@@ -122,7 +122,7 @@ const Auth: FC = () => {
         password === value ? setRepeatPasswordError('') : setRepeatPasswordError('Паролі не співпадають.');
     };
 
-    const handleTogglePrivacyPolicy = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleTogglePrivacyPolicy = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.checked;
         setCheckedPrivacyPolicy(value);
 

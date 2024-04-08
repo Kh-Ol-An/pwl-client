@@ -27,13 +27,15 @@ const DoneWish: FC<IProps> = ({ wish, userId, actionText, close }) => {
 
     return (
         <>
-            <Button
-                type="button"
-                variant="text"
-                onClick={() => setShow(true)}
-            >
-                {actionText || 'Підтвердити виконання'}
-            </Button>
+            {actionText && (
+                <Button
+                    type="button"
+                    variant="text"
+                    onClick={() => setShow(true)}
+                >
+                    {actionText}
+                </Button>
+            )}
 
             <ConfirmModal
                 show={show}

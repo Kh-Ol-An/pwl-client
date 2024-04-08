@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
 import {useAppDispatch, useAppSelector} from '@/store/hook';
-import { getUsers } from '@/store/users/thunks';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import Loading from '@/layouts/Loading';
@@ -18,8 +17,6 @@ const Home: FC = () => {
     const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        dispatch(getUsers({ page: 4, limit: 20 }));
-
         if (!myUser) return;
 
         const selectedUserId = localStorage.getItem('selectedUserId');

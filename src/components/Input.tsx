@@ -3,6 +3,7 @@ import {
     VisibilityOff as VisibilityOffIcon,
     Visibility as VisibilityIcon,
     Info as InfoIcon,
+    Search as SearchIcon,
 } from '@mui/icons-material';
 import { addingWhiteSpaces } from '@/utils/formating-value';
 import stylesVariables from '@/styles/utils/variables.module.scss';
@@ -10,11 +11,12 @@ import stylesVariables from '@/styles/utils/variables.module.scss';
 interface IProps {
     id: string;
     name: string;
-    type: 'text' | 'password' | 'number' | 'multiline';
+    type: 'text' | 'password' | 'number' | 'search' | 'multiline';
     label: string;
     tooltip?: string;
     value?: string;
     error?: string;
+    clear?: () => void;
     onChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
@@ -26,6 +28,7 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
     tooltip,
     value,
     error,
+    clear,
     onChange,
     ...props
 }, ref) => {
@@ -75,6 +78,7 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                               {...props}
                           />
                 }
+
                 {type === 'password' && (
                     <button type="button" onClick={() => setShowPassword(prevState => !prevState)}>
                         {showPassword ?
@@ -82,6 +86,27 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                             <VisibilityIcon sx={{ color: stylesVariables.accentColor }} />}
                     </button>
                 )}
+
+                {type === 'search' && (
+                    <>
+                        {value && value.length > 0 ? (
+                            <button className="clear" type="button" onClick={clear}>
+                                +
+                            </button>
+                        ) : (
+                            <>
+                                <div className="search-icon default">
+                                    <SearchIcon sx={{ color: stylesVariables.primaryColor }} />
+                                </div>
+
+                                <div className="search-icon hovered">
+                                    <SearchIcon sx={{ color: stylesVariables.accentColor }} />
+                                </div>
+                            </>
+                        )}
+                    </>
+                )}
+
                 <label htmlFor={id}>
                     {label}
                     {tooltip && tooltip.length > 0 && (
@@ -94,6 +119,7 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                         </span>
                     )}
                 </label>
+
                 <div className="background"></div>
             </div>
 

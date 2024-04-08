@@ -1,11 +1,13 @@
 import React, { FC, ChangeEvent, useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { getWishList } from '@/store/wishes/thunks';
+import { getUsers } from '@/store/users/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import { IUser } from '@/models/IUser';
 import Loading from '@/layouts/Loading';
 import UserAction from '@/layouts/sidebar/UserAction';
 import Switch from '@/components/Switch';
+import Search from '@/components/Search';
 
 interface IProps {
     open: boolean;
@@ -42,6 +44,12 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
         localStorage.setItem('selectedUserId', myUser.id);
     };
 
+    const changeSearchBar = (value: string) => {
+        if (!myUser) return;
+
+        dispatch(getUsers({ page: 1, limit: 200, myUserId: myUser.id, userType: 'all', search: value }));
+    };
+
     useEffect(() => {
         const usersTypeIsAll = localStorage.getItem('users-type-is-all');
         if (!usersTypeIsAll) return;
@@ -55,38 +63,46 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
         setVisibleUsers(users.list.filter((user) => isAll ? user.id !== myUser.id : user.friends.includes(myUser.id)));
     }, [myUser, users.list, isAll]);
 
+    useEffect(() => {
+        if (!myUser) return;
+
+        dispatch(getUsers({ page: 1, limit: 200, myUserId: myUser.id, userType: 'all', search: '' })); // TODO
+    }, [dispatch, myUser]);
+
     return (
         <div className={"sidebar" + (open ? " open" : "")}>
             <div className="sidebar-inner">
                 <div className="sidebar-content">
+                    <div className="sidebar-head">
+                        <h2 className="sidebar-title">Користувачі</h2>
+
+                        <div className="users-type">
+                            <span className={isAll ? "primary-color" : ""}>Всі</span>
+                            <Switch
+                                id="users-type"
+                                name="users-type"
+                                hiddenChoice
+                                checked={isAll}
+                                onChange={changeUsersType}
+                            />
+                            <span className={isAll ? "" : "primary-color"}>Друзі</span>
+                        </div>
+                    </div>
+
+                    <div className="sidebar-search">
+                        <Search id="search" changeSearchBar={changeSearchBar} />
+                    </div>
+
                     {users.isLoading ? (
                         <Loading isLocal />
                     ) : (
-                        <>
-                            <div className="sidebar-head">
-                                <h2 className="sidebar-title">Користувачі</h2>
-
-                                <div className="users-type">
-                                    <span className={isAll ? "primary-color" : ""}>Всі</span>
-                                    <Switch
-                                        id="users-type"
-                                        name="users-type"
-                                        hiddenChoice
-                                        checked={isAll}
-                                        onChange={changeUsersType}
-                                    />
-                                    <span className={isAll ? "" : "primary-color"}>Друзі</span>
-                                </div>
-                            </div>
-
-                            <ul className="list">
-                                {visibleUsers.map((user) => {
-                                    return (
-                                        <UserAction key={user.id} user={user} close={close} />
-                                    );
-                                })}
-                            </ul>
-                        </>
+                        <ul className="list">
+                            {visibleUsers.map((user) => {
+                                return (
+                                    <UserAction key={user.id} user={user} close={close} />
+                                );
+                            })}
+                        </ul>
                     )}
                 </div>
             </div>

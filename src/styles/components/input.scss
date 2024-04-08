@@ -36,6 +36,14 @@
             color: transparent;
         }
 
+        &::-ms-clear {
+            display: none;
+        }
+
+        &::-webkit-search-cancel-button {
+            -webkit-appearance: none;
+        }
+
         &:-webkit-autofill,
         &:-webkit-autofill:hover,
         &:-webkit-autofill:focus,
@@ -51,6 +59,14 @@
         &:-webkit-autofill:hover,
         &:-webkit-autofill:focus,
         &:-webkit-autofill:active {
+            & ~ .default {
+                opacity: 0;
+            }
+
+            & ~ .hovered {
+                opacity: 1;
+            }
+
             & ~ label {
                 transform: translate(-10px, -24px);
                 color: $primary-color;
@@ -100,6 +116,25 @@
         right: 10px;
         z-index: $z-index-xs-4;
         transform: translateY(-50%);
+    }
+
+    .search-icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        z-index: $z-index-xs-4;
+        transform: translateY(-50%);
+        @include flex-center;
+        transition: $transition-slow;
+
+        &.hovered {
+            opacity: 0;
+        }
+    }
+
+    .clear {
+        transform: translateY(-50%) rotate(45deg);
+        font-size: 26px;
     }
 
     label {
