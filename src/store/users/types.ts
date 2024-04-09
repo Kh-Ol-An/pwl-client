@@ -1,9 +1,11 @@
 import { IUser } from '@/models/IUser';
 
+export type userType = 'all' | 'friends' | 'followFrom' | 'followTo';
+
 export interface IGetUser {
     page: number;
     limit: number;
     myUserId: IUser['id'];
-    userType: 'all' | 'friends' | 'followFrom' | 'followTo';
+    userType: userType;
     search: string;
 }

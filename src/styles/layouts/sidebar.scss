@@ -97,7 +97,7 @@
     }
 
     .list {
-        height: calc(100svh - 171px);
+        height: calc(100svh - 230px); // TODO
         overflow-y: auto;
 
         &::-webkit-scrollbar {
