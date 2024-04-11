@@ -1,16 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getUsers } from '@/store/users/thunks';
+import { getUsers, addUsers } from '@/store/users/thunks';
 import { doneWish, undoneWish } from '@/store/wishes/thunks';
 import { IUser } from '@/models/IUser';
+import { PAGINATION_LIMIT } from '@/utils/constants';
 
 interface IUsersState {
     list: IUser[];
+    page: number;
+    stopRequests: boolean;
     isLoading: boolean;
     error: string | null;
 }
 
 const initialState: IUsersState = {
     list: [],
+    page: 1,
+    stopRequests: false,
     isLoading: false,
     error: null,
 };
@@ -24,14 +29,36 @@ const usersSlice = createSlice({
             // getUsers
             .addCase(getUsers.pending, (state) => {
                 state.isLoading = true;
+                state.stopRequests = true;
                 state.error = null;
             })
             .addCase(getUsers.rejected, (state, action) => {
                 state.isLoading = false;
+                state.stopRequests = false;
                 state.error = action.error.message || 'Не вдалось отримати всіх юзерів.';
             })
             .addCase(getUsers.fulfilled, (state, action) => {
                 state.list = action.payload;
+                state.page = 2;
+                action.payload.length === PAGINATION_LIMIT && (state.stopRequests = false);
+                state.isLoading = false;
+                state.error = null;
+            })
+            // addUsers
+            .addCase(addUsers.pending, (state) => {
+                state.isLoading = true;
+                state.stopRequests = true;
+                state.error = null;
+            })
+            .addCase(addUsers.rejected, (state, action) => {
+                state.isLoading = false;
+                state.stopRequests = false;
+                state.error = action.error.message || 'Не вдалось отримати всіх юзерів.';
+            })
+            .addCase(addUsers.fulfilled, (state, action) => {
+                state.list.push(...action.payload);
+                state.page += 1;
+                action.payload.length === PAGINATION_LIMIT && (state.stopRequests = false);
                 state.isLoading = false;
                 state.error = null;
             })

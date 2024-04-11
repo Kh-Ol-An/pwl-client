@@ -1,0 +1,23 @@
+.custom-select {
+    .MuiInputBase-root {
+        &:hover:not(.Mui-disabled, .Mui-error) {
+            &::before,
+            &::after {
+                border-color: $primary-color;
+            }
+        }
+
+        &::before,
+        &::after {
+            border-color: $primary-color;
+        }
+    }
+
+    .MuiSelect-select:focus {
+        background-color: transparent;
+    }
+
+    .MuiSvgIcon-root {
+        color: $primary-color;
+    }
+}

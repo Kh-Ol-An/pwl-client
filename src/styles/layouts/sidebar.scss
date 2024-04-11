@@ -47,7 +47,7 @@
 
     .sidebar-content {
         height: 100%;
-        padding: 46px 4px 10px 0;
+        padding: 70px 4px 20px 0;
 
         @media only screen and (min-width: 768px) {
             padding: 66px 4px 10px 0;
@@ -58,47 +58,41 @@
         }
     }
 
-    .sidebar-head {
-        padding: 16px;
-        display: flex;
-        justify-content: space-between;
-        gap: 16px;
-
-        @media only screen and (min-width: 768px) {
-            padding: 16px 20px;
-            gap: 20px;
-        }
-    }
-
     .sidebar-title {
+        padding: 4px 16px 8px;
         color: $light-color;
+        font-weight: 700;
         font-size: 20px;
         line-height: 30px;
+
+            @media only screen and (min-width: 768px) {
+                padding: 10px 20px 8px;
+            }
     }
 
-    .users-type {
-        @include flex-center;
-        gap: 10px;
+    .custom-select {
+        padding: 8px 16px 4px;
 
-        span {
-            font-size: 16px;
-            font-weight: 700;
-            color: $special-color;
-            transition: $transition-slow;
-
-            &.primary-color {
-                color: $primary-color;
-            }
+        @media only screen and (min-width: 768px) {
+            padding: 8px 20px 4px;
         }
     }
 
     .sidebar-search {
-        padding: 0 16px 16px;
+        padding: 16px;
+    }
+
+    .user-list {
+        position: relative;
     }
 
     .list {
-        height: calc(100svh - 230px); // TODO
+        height: calc(100svh - 246px);
         overflow-y: auto;
+
+        @media only screen and (min-width: 768px) {
+            height: calc(100svh - 268px);
+        }
 
         &::-webkit-scrollbar {
             width: 6px;

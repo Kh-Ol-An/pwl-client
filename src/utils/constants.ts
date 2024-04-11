@@ -25,3 +25,5 @@ export const PASSWORD_MIN_LENGTH = 4;
 export const PASSWORD_MAX_LENGTH = 128;
 
 export const WAITING_TIME = 300;
+
+export const PAGINATION_LIMIT = 20;

@@ -2,7 +2,6 @@ import React, { FC, useState, useEffect } from 'react';
 import {useAppDispatch, useAppSelector} from '@/store/hook';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
-import Loading from '@/layouts/Loading';
 import Inactivated from '@/layouts/Inactivated';
 import Header from '@/layouts/Header';
 import Sidebar from '@/layouts/sidebar/Sidebar';
@@ -10,7 +9,6 @@ import WishList from '@/layouts/wish/WishList';
 
 const Home: FC = () => {
     const myUser = useAppSelector((state) => state.myUser.user);
-    const wishes = useAppSelector((state) => state.wishes);
 
     const dispatch = useAppDispatch();
 
@@ -48,8 +46,9 @@ const Home: FC = () => {
                 <Sidebar open={open} close={() => setOpen(false)} />
 
                 <div className="home-page-container">
-                    {wishes.isLoading ? <Loading isLocal /> : <WishList />}
+                    <WishList />
 
+                    {/* TODO: trim() пошту при вході */}
                     {/* TODO: Вибір полу і якщо жінка то можливість обрати улюблені квіти */}
                     {/* TODO: Створити розклад який би ти бажав */}
                     {/* TODO: README.md які технології та який функціонал додатка */}

@@ -11,3 +11,12 @@ export const getUsers = createAsyncThunk<IUser[], IGetUser>(
         return result.data;
     },
 );
+
+export const addUsers = createAsyncThunk<IUser[], IGetUser>(
+    'users/addUsers',
+    async (params) => {
+        const result = await api.getUsers(params);
+
+        return result.data;
+    },
+);

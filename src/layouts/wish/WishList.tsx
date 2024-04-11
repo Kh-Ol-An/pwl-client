@@ -10,10 +10,11 @@ import Card from '@/layouts/Card';
 import Action from '@/components/Action';
 import Button from '@/components/Button';
 import Switch from '@/components/Switch';
+import Loading from '@/layouts/Loading';
 
 const WishList = () => {
     const myUser = useAppSelector((state) => state.myUser.user);
-    const wishList = useAppSelector((state) => state.wishes?.list);
+    const wishes = useAppSelector((state) => state.wishes);
     const userList = useAppSelector((state) => state.users.list);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
@@ -21,11 +22,11 @@ const WishList = () => {
     const [showWish, setShowWish] = useState<boolean>(false);
     const [showEditWish, setShowEditWish] = useState<boolean>(false);
     const [idOfSelectedWish, setIdOfSelectedWish] = useState<IWish['id'] | null>(null);
-    const [selectedWishList, setSelectedWishList] = useState<IWish[]>(wishList.filter(wish => !wish.executed));
+    const [selectedWishList, setSelectedWishList] = useState<IWish[]>(wishes.list.filter(wish => !wish.executed));
 
     const selectedUser = userList.find(user => user.id === selectedUserId);
     const lastName = selectedUser?.lastName ? selectedUser.lastName : "";
-    const detailWish = wishList.find(wish => wish.id === idOfSelectedWish);
+    const detailWish = wishes.list.find(wish => wish.id === idOfSelectedWish);
 
     let emptyText = <>В тебе немає жодного бажання. Хіба ти нічого не бажаєш?</>;
     myUser?.id !== selectedUserId && (emptyText = (
@@ -41,9 +42,9 @@ const WishList = () => {
         setIsUndone(checked);
 
         if (checked) {
-            setSelectedWishList(wishList.filter(wish => !wish.executed));
+            setSelectedWishList(wishes.list.filter(wish => !wish.executed));
         } else {
-            setSelectedWishList(wishList.filter(wish => wish.executed));
+            setSelectedWishList(wishes.list.filter(wish => wish.executed));
         }
     };
 
@@ -119,6 +120,8 @@ const WishList = () => {
                     <p className="text">{emptyText}</p>
                 </div>
             )}
+
+            {wishes.isLoading && <Loading isLocal />}
 
             {detailWish && (
                 <Modal
