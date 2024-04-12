@@ -74,9 +74,21 @@ export const emailValidation = {
         value: true,
         message: "Це поле потрібне щоб я міг ідентифікувати тебе."
     },
-    pattern: {
-        value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-        message: "Це не схоже на електронну адресу. Будь ласка, введи правильну адресу.",
+    validate: (value?: string) => {
+        if (!value) {
+            return true;
+        }
+
+        const trimmedValue = value.trim();
+        if (trimmedValue === '' && value.length > 0) {
+            return "Електронна адреса не може містити тільки пробіли.";
+        }
+
+        if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(trimmedValue)) {
+            return "Це не схоже на електронну адресу. Будь ласка, введи правильну адресу.";
+        }
+
+        return true;
     },
 };
 

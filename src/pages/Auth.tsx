@@ -84,7 +84,7 @@ const Auth: FC = () => {
         setClickedOnSubmit(true);
 
         if (isForgotPassword) {
-            return dispatch(forgotPassword(data));
+            return dispatch(forgotPassword({ email: data.email.trim() }));
         }
 
         if (isRegistration) {
@@ -104,11 +104,11 @@ const Auth: FC = () => {
         if (repeatPasswordError.length > 0 || checkedPrivacyPolicyError.length > 0) return;
 
         if (isRegistration && checkedPrivacyPolicy) {
-            return dispatch(registration(data));
+            return dispatch(registration({ ...data, email: data.email.trim() }));
         }
 
         if (checkedPrivacyPolicy) {
-            return dispatch(login(data));
+            return dispatch(login({ ...data, email: data.email.trim() }));
         }
     };
 
