@@ -1,11 +1,10 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { addUsers, getUsers } from '@/store/users/thunks';
 import { userType } from '@/store/users/types';
-import { IUser } from '@/models/IUser';
 import Loading from '@/layouts/Loading';
 import UserAction from '@/layouts/sidebar/UserAction';
 import Search from '@/components/Search';
@@ -29,53 +28,45 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
 
     const [userType, setUserType] = useState<userType>('all');
     const [search, setSearch] = useState<string>('');
-//    const [page, setPage] = useState<number>(1);
-    const [visibleUsers, setVisibleUsers] = useState<IUser[]>([]);
+
+    const userListRef = useRef<HTMLDivElement | null>(null);
 
     const handleChangeUserType = (event: SelectChangeEvent) => {
         const value = event.target.value as userType;
         setUserType(value);
 
-        if (!myUser) return;
+        if (!myUser || !userListRef.current) return;
 
-//        console.log('get');
-//        setPage(1);
+        userListRef.current.scrollTo(0, 0);
+
         dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType: value, search }));
     };
 
     const changeSearchBar = (value: string) => {
         setSearch(value);
-        if (!myUser) return;
 
-//        setPage(1);
+        if (!myUser || !userListRef.current) return;
+
+        userListRef.current.scrollTo(0, 0);
+
         dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search: value }));
     };
 
     useEffect(() => {
-        if (!myUser?.id) return;
+        if (!inView || !myUser || users.stopRequests) return;
 
-        // показувати всіх користувачів без мене під час завантаження сторінки
-        setVisibleUsers(users.list.filter((user) => user.id !== myUser.id));
-    }, [myUser, users.list]);
-
-    useEffect(() => {
-        if (!inView || !myUser) return;
-
-//        console.log('useEffect');
-        !users.stopRequests
-            && dispatch(addUsers({ page: users.page, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
+        dispatch(addUsers({ page: users.page, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
     }, [inView]);
 
     return (
         <div className={"sidebar" + (open ? " open" : "")}>
             <div className="sidebar-inner">
                 <div className="sidebar-content">
-                    <h2 className="sidebar-title">Користувачі: {inView}</h2>
+                    <h2 className="sidebar-title">Користувачі</h2>
 
                     <div className="custom-select">
                         <Select
                             id="sidebar-user-type"
-                            label="Всі"
                             variant="standard"
                             sx={{ padding: '0 10px', color: StylesVariables.primaryColor }}
                             value={userType}
@@ -92,22 +83,16 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
                         <Search id="search" changeSearchBar={changeSearchBar} />
                     </div>
 
-                    <div className="user-list">
+                    <div className="user-list" ref={userListRef}>
                         <ul className="list">
-                            {visibleUsers.map((user) => {
-                                return (
-                                    <UserAction key={user.id} user={user} close={close} />
-                                );
-                            })}
-
-                            {/*{!users.stopRequests && <div className="observable-element" ref={ref}></div>}*/}
-                            {/*<div className="observable-element" ref={ref}></div>*/}
-                            <div
-                                className="observable-element"
-                                style={{ display: users.stopRequests ? 'none' : 'block' }}
-                                ref={ref}
-                            ></div>
+                            {users.list.map(user => <UserAction key={user.id} user={user} close={close} />)}
                         </ul>
+
+                        <div
+                            className="observable-element"
+                            style={{ display: users.stopRequests ? 'none' : 'block' }}
+                            ref={ref}
+                        ></div>
 
                         {users.isLoading && <Loading isLocal />}
                     </div>

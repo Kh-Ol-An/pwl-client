@@ -84,9 +84,6 @@
 
     .user-list {
         position: relative;
-    }
-
-    .list {
         height: calc(100svh - 246px);
         overflow-y: auto;
 
@@ -104,7 +101,7 @@
             border-radius: $radius-round;
         }
     }
-    
+
     .MuiListItemAvatar-root {
         position: relative;
         min-width: auto;
