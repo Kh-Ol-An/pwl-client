@@ -3,6 +3,8 @@ import { useInView } from 'react-intersection-observer';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { getWishList } from '@/store/wishes/thunks';
+import { selectUserId } from '@/store/selected-user/slice';
 import { addUsers, getUsers } from '@/store/users/thunks';
 import { userType } from '@/store/users/types';
 import Loading from '@/layouts/Loading';
@@ -23,6 +25,7 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
 
     const myUser = useAppSelector((state) => state.myUser.user);
     const users = useAppSelector((state) => state.users);
+    const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
 
@@ -42,7 +45,7 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
         dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType: value, search }));
     };
 
-    const changeSearchBar = (value: string) => {
+    const handleChangeSearchBar = (value: string) => {
         setSearch(value);
 
         if (!myUser || !userListRef.current) return;
@@ -57,6 +60,12 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
 
         dispatch(addUsers({ page: users.page, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
     }, [inView]);
+
+    useEffect(() => {
+        if (!myUser || users.list.some(user => user.id === selectedUserId)) return;
+        dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
+        dispatch(selectUserId(myUser.id));
+    }, [users.list]);
 
     return (
         <div className={"sidebar" + (open ? " open" : "")}>
@@ -80,7 +89,7 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
                     </div>
 
                     <div className="sidebar-search">
-                        <Search id="search" changeSearchBar={changeSearchBar} />
+                        <Search id="search" changeSearchBar={handleChangeSearchBar} />
                     </div>
 
                     <div className="user-list" ref={userListRef}>
