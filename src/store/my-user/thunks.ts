@@ -67,6 +67,15 @@ export const updateMyUser = createAsyncThunk<IUser, IUpdateMyUser>(
     },
 );
 
+export const sendActivationLink = createAsyncThunk<IUser['email'], IUser['id']>(
+    'myUser/sendActivationLink',
+    async (data: IUser['id']) => {
+        const result = await api.sendActivationLink(data);
+
+        return result.data;
+    },
+);
+
 export const changeForgottenPassword = createAsyncThunk<any, IChangeForgottenPassword>(
     'myUser/changeForgottenPassword',
     async (data: IChangeForgottenPassword) => {

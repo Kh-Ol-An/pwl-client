@@ -79,6 +79,15 @@ const refresh = async (): Promise<AxiosResponse<IAuth>> => {
     }
 };
 
+const sendActivationLink = async (userId: IUser['id']): Promise<AxiosResponse<IUser['email']>> => {
+    try {
+        return await api.get(`/get-activation-link/${userId}`);
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось надіслати посилання активації.', { type: 'error' })
+        throw error;
+    }
+}
+
 const changeForgottenPassword = async (data: IChangeForgottenPassword): Promise<void> => {
     try {
         await api.put('/change-forgotten-password', data);
@@ -191,6 +200,7 @@ const myUserApi = {
     login,
     logout,
     refresh,
+    sendActivationLink,
     changeForgottenPassword,
     forgotPassword,
     changePassword,
