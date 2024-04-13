@@ -1,4 +1,9 @@
 .custom-select {
+    .select-box {
+        position: relative;
+        width: fit-content;
+    }
+
     .MuiInputBase-root {
         &:hover:not(.Mui-disabled, .Mui-error) {
             &::before,
@@ -15,11 +20,36 @@
         }
     }
 
-    .MuiSelect-select:focus {
-        background-color: transparent;
+    .MuiSelect-select {
+        &:focus {
+            background-color: transparent;
+        }
+
+        .count {
+            display: none;
+        }
     }
 
     .MuiSvgIcon-root {
         color: $primary-color;
+    }
+
+    .count {
+        top: -6px;
+        left: 100%;
+        transform: translateX(-50%);
+        background-color: $primary-color;
+    }
+}
+
+.sidebar-user-type-item {
+    position: relative;
+
+    .count {
+        padding-top: 2px;
+        top: -6px;
+        left: 100%;
+        background-color: $primary-color;
+        font-size: 9px;
     }
 }

@@ -1,10 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import api from '@/utils/api';
-import { IUser } from '@/models/IUser';
-import { IGetUser } from '@/store/users/types';
+import { IGetUsers, ISendUsersParams } from '@/store/users/types';
 
-const getUsers = async (params: IGetUser): Promise<AxiosResponse<IUser[]>> => {
+const getUsers = async (params: ISendUsersParams): Promise<AxiosResponse<IGetUsers>> => {
     try {
         return await api.get('/users', { params });
     } catch (error: any) {

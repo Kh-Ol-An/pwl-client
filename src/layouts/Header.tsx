@@ -128,12 +128,12 @@ const Header: FC<IProps> = ({ open, close }) => {
                             <Avatar alt={myUser?.firstName} src={myUser?.avatar} />
 
                             {myUser && myUser.successfulWishes > 0 && (
-                                <span className="success wish-count">
+                                <span className="count success">
                                     {myUser?.successfulWishes}
                                 </span>
                             )}
                             {myUser && myUser.unsuccessfulWishes > 0 && (
-                                <span className="unsuccess wish-count">
+                                <span className="count unsuccess">
                                     {myUser?.unsuccessfulWishes}
                                 </span>
                             )}

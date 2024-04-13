@@ -1,9 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '@/store/users/api';
-import { IUser } from '@/models/IUser';
-import { IGetUser } from '@/store/users/types';
+import { ISendUsersParams, IGetUsers } from '@/store/users/types';
 
-export const getUsers = createAsyncThunk<IUser[], IGetUser>(
+export const getUsers = createAsyncThunk<IGetUsers, ISendUsersParams>(
     'users/getUsers',
     async (params) => {
         const result = await api.getUsers(params);
@@ -12,7 +11,7 @@ export const getUsers = createAsyncThunk<IUser[], IGetUser>(
     },
 );
 
-export const addUsers = createAsyncThunk<IUser[], IGetUser>(
+export const addUsers = createAsyncThunk<IGetUsers, ISendUsersParams>(
     'users/addUsers',
     async (params) => {
         const result = await api.getUsers(params);

@@ -135,12 +135,12 @@ const UserAction: FC<IProps> = ({ user, close }) => {
                 />
 
                 {user.successfulWishes > 0 && (
-                    <span className="success wish-count">
+                    <span className="count success">
                         {user.successfulWishes}
                     </span>
                 )}
                 {user.unsuccessfulWishes > 0 && (
-                    <span className="unsuccess wish-count">
+                    <span className="count unsuccess">
                         {user.unsuccessfulWishes}
                     </span>
                 )}

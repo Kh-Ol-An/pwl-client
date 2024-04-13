@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import { addUsers, getUsers } from '@/store/users/thunks';
-import { IGetUser } from '@/store/users/types';
+import { ISendUsersParams } from '@/store/users/types';
 import Loading from '@/layouts/Loading';
 import UserAction from '@/layouts/sidebar/UserAction';
 import Search from '@/components/Search';
@@ -30,13 +30,13 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
     const dispatch = useAppDispatch();
 
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
-    const [userType, setUserType] = useState<IGetUser['userType']>('all');
+    const [userType, setUserType] = useState<ISendUsersParams['userType']>('all');
     const [search, setSearch] = useState<string>('');
 
     const userListRef = useRef<HTMLDivElement | null>(null);
 
     const handleChangeUserType = (event: SelectChangeEvent) => {
-        const value = event.target.value as IGetUser['userType'];
+        const value = event.target.value as ISendUsersParams['userType'];
         setUserType(value);
 
         if (!myUser || !userListRef.current) return;
@@ -91,18 +91,27 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
                     <h2 className="sidebar-title">Користувачі</h2>
 
                     <div className="custom-select">
-                        <Select
-                            id="sidebar-user-type"
-                            variant="standard"
-                            sx={{ padding: '0 10px', color: StylesVariables.primaryColor }}
-                            value={userType}
-                            onChange={handleChangeUserType}
-                        >
-                            <MenuItem value="all">Всі</MenuItem>
-                            <MenuItem value="friends">Друзі</MenuItem>
-                            <MenuItem value="followFrom">Запити на дружбу</MenuItem>
-                            <MenuItem value="followTo">Надіслані запити на дружбу</MenuItem>
-                        </Select>
+                        <div className="select-box">
+                            <Select
+                                id="sidebar-user-type"
+                                variant="standard"
+                                sx={{ padding: '0 10px', color: StylesVariables.primaryColor }}
+                                value={userType}
+                                onChange={handleChangeUserType}
+                            >
+                                <MenuItem value="all">Всі</MenuItem>
+                                <MenuItem value="friends">Друзі</MenuItem>
+                                <MenuItem value="followFrom">
+                                    <span className="sidebar-user-type-item">
+                                        Запити на дружбу
+                                        <span className="count">{users.followFromCount}</span>
+                                    </span>
+                                </MenuItem>
+                                <MenuItem value="followTo">Надіслані запити на дружбу</MenuItem>
+                            </Select>
+
+                            <span className="count">{users.followFromCount}</span>
+                        </div>
                     </div>
 
                     <div className="sidebar-search">

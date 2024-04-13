@@ -6,6 +6,7 @@ import { PAGINATION_LIMIT } from '@/utils/constants';
 
 interface IUsersState {
     list: IUser[];
+    followFromCount: number;
     page: number;
     stopRequests: boolean;
     isLoading: boolean;
@@ -14,6 +15,7 @@ interface IUsersState {
 
 const initialState: IUsersState = {
     list: [],
+    followFromCount: 0,
     page: 1,
     stopRequests: false,
     isLoading: false,
@@ -38,9 +40,10 @@ const usersSlice = createSlice({
                 state.error = action.error.message || 'Не вдалось отримати всіх юзерів.';
             })
             .addCase(getUsers.fulfilled, (state, action) => {
-                state.list = action.payload;
+                state.list = action.payload.users;
+                state.followFromCount = action.payload.followFromCount;
                 state.page = 2;
-                action.payload.length === PAGINATION_LIMIT && (state.stopRequests = false);
+                action.payload.users.length === PAGINATION_LIMIT && (state.stopRequests = false);
                 state.isLoading = false;
                 state.error = null;
             })
@@ -56,9 +59,10 @@ const usersSlice = createSlice({
                 state.error = action.error.message || 'Не вдалось отримати всіх юзерів.';
             })
             .addCase(addUsers.fulfilled, (state, action) => {
-                state.list.push(...action.payload);
+                state.list.push(...action.payload.users);
+                state.followFromCount = action.payload.followFromCount;
                 state.page += 1;
-                action.payload.length === PAGINATION_LIMIT && (state.stopRequests = false);
+                action.payload.users.length === PAGINATION_LIMIT && (state.stopRequests = false);
                 state.isLoading = false;
                 state.error = null;
             })
