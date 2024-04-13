@@ -21,6 +21,7 @@ export interface IWish {
     userId: IUser['id'];
     material: boolean;
     show: 'all' | 'friends' | 'nobody';
+    currency: 'UAH' | 'USD' | 'EUR';
     name: string;
     price?: string;
     address?: string;

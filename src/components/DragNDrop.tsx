@@ -7,7 +7,7 @@ import ImagesValidation from '@/utils/ImagesValidation';
 import {
     ALLOWED_FILE_EXTENSIONS,
     ALLOWED_MAX_FILE_SIZE_IN_MB,
-    MAX_NUMBER_OF_IMAGES_PER_WISH
+    MAX_NUMBER_OF_IMAGES_PER_WISH,
 } from '@/utils/constants';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 

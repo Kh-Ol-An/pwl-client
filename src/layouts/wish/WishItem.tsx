@@ -53,7 +53,7 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
                                 )}
                                 {wish.price && (
                                     <div className="wish-item-price">
-                                        {addingWhiteSpaces(wish.price)} грн.
+                                        {addingWhiteSpaces(wish.price)} {wish.currency || 'UAH'}
                                     </div>
                                 )}
                             </div>

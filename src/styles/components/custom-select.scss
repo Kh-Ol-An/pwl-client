@@ -3,12 +3,14 @@
         &:hover:not(.Mui-disabled, .Mui-error) {
             &::before,
             &::after {
+                border-width: 2px;
                 border-color: $primary-color;
             }
         }
 
         &::before,
         &::after {
+            border-width: 2px;
             border-color: $primary-color;
         }
     }

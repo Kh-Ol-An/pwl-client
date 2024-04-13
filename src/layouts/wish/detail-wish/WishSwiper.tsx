@@ -8,7 +8,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { IWish } from '@/models/IWish';
-import stylesVariables from '@/styles/utils/variables.module.scss';
+import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     wish: IWish;
@@ -39,7 +39,7 @@ const WishSwiper: FC<IProps> = ({ wish }) => {
             <Swiper
                 className="swiper-cube"
                 style={{
-                    '--swiper-navigation-color': stylesVariables.primaryColor,
+                    '--swiper-navigation-color': StylesVariables.primaryColor,
                 }}
                 effect={wish.images.length > 1 && 'cube'}
                 grabCursor={true}
@@ -67,7 +67,7 @@ const WishSwiper: FC<IProps> = ({ wish }) => {
                 <Swiper
                     className="swiper-nav"
                     style={{
-                        '--swiper-navigation-color': stylesVariables.primaryColor,
+                        '--swiper-navigation-color': StylesVariables.primaryColor,
                     }}
                     spaceBetween={8}
                     slidesPerView={slidesPerView}

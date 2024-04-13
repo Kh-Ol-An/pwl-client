@@ -22,7 +22,7 @@ import DetailAccount from '@/layouts/DetailAccount';
 import Popup from '@/components/Popup';
 import Button from '@/components/Button';
 import Action from '@/components/Action';
-import stylesVariables from '@/styles/utils/variables.module.scss';
+import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     user: IUser;
@@ -39,10 +39,10 @@ const UserAction: FC<IProps> = ({ user, close }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [showDetailAccount, setShowDetailAccount] = useState<boolean>(false);
 
-    let iconColor = stylesVariables.lightColor;
-    myUser?.followTo.includes(user.id) && (iconColor = stylesVariables.specialColor);
+    let iconColor = StylesVariables.lightColor;
+    myUser?.followTo.includes(user.id) && (iconColor = StylesVariables.specialColor);
     (myUser?.followFrom.includes(user.id) || myUser?.friends.includes(user.id))
-    && (iconColor = stylesVariables.primaryColor);
+    && (iconColor = StylesVariables.primaryColor);
 
     const showAddFriend = myUser?.followFrom.includes(user.id)
         || (!myUser?.friends.includes(user.id) && !myUser?.followTo.includes(user.id));
@@ -96,7 +96,7 @@ const UserAction: FC<IProps> = ({ user, close }) => {
                                   sx={{
                                       maxWidth: 24,
                                       maxHeight: 24,
-                                      color: stylesVariables.primaryColor,
+                                      color: StylesVariables.primaryColor,
                                   }}
                               />
                             : <PeopleAltIcon
@@ -177,7 +177,7 @@ const UserAction: FC<IProps> = ({ user, close }) => {
                                 : user.email}
                         </span>
                     }
-                    sx={{ color: stylesVariables.whiteColor }}
+                    sx={{ color: StylesVariables.whiteColor }}
                 />
             </ListItemButton>
         </ListItem>

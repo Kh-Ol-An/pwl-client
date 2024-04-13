@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import { addUsers, getUsers } from '@/store/users/thunks';
-import { userType } from '@/store/users/types';
+import { IGetUser } from '@/store/users/types';
 import Loading from '@/layouts/Loading';
 import UserAction from '@/layouts/sidebar/UserAction';
 import Search from '@/components/Search';
@@ -25,17 +25,16 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
 
     const myUser = useAppSelector((state) => state.myUser.user);
     const users = useAppSelector((state) => state.users);
-    const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
 
-    const [userType, setUserType] = useState<userType>('all');
+    const [userType, setUserType] = useState<IGetUser['userType']>('all');
     const [search, setSearch] = useState<string>('');
 
     const userListRef = useRef<HTMLDivElement | null>(null);
 
     const handleChangeUserType = (event: SelectChangeEvent) => {
-        const value = event.target.value as userType;
+        const value = event.target.value as IGetUser['userType'];
         setUserType(value);
 
         if (!myUser || !userListRef.current) return;
@@ -66,14 +65,14 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
     useEffect(() => {
         if (!myUser) return;
 
-        const localSelectedUserId = localStorage.getItem('selectedUserId');
-        const selectedUserIdExists = users.list.some(user => user.id === localSelectedUserId);
+        const selectedUserId = localStorage.getItem('selectedUserId');
+        const selectedUserIdExists = users.list.some(user => user.id === selectedUserId);
 
-        if (localSelectedUserId && selectedUserIdExists) {
-            dispatch(getWishList({ myId: myUser.id, userId: localSelectedUserId }));
-            dispatch(selectUserId(localSelectedUserId));
+        if (selectedUserId && selectedUserIdExists) {
+            dispatch(getWishList({ myId: myUser.id, userId: selectedUserId }));
+            dispatch(selectUserId(selectedUserId));
         } else {
-            !localSelectedUserId && localStorage.setItem('selectedUserId', myUser.id)
+            !selectedUserId && localStorage.setItem('selectedUserId', myUser.id)
             dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
             dispatch(selectUserId(myUser.id));
         }

@@ -6,7 +6,7 @@ import {
     Search as SearchIcon,
 } from '@mui/icons-material';
 import { addingWhiteSpaces } from '@/utils/formating-value';
-import stylesVariables from '@/styles/utils/variables.module.scss';
+import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     id: string;
@@ -82,8 +82,8 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                 {type === 'password' && (
                     <button type="button" onClick={() => setShowPassword(prevState => !prevState)}>
                         {showPassword ?
-                            <VisibilityOffIcon sx={{ color: stylesVariables.accentColor }} /> :
-                            <VisibilityIcon sx={{ color: stylesVariables.accentColor }} />}
+                            <VisibilityOffIcon sx={{ color: StylesVariables.accentColor }} /> :
+                            <VisibilityIcon sx={{ color: StylesVariables.accentColor }} />}
                     </button>
                 )}
 
@@ -96,11 +96,11 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                         ) : (
                             <>
                                 <div className="search-icon default">
-                                    <SearchIcon sx={{ color: stylesVariables.primaryColor }} />
+                                    <SearchIcon sx={{ color: StylesVariables.primaryColor }} />
                                 </div>
 
                                 <div className="search-icon hovered">
-                                    <SearchIcon sx={{ color: stylesVariables.accentColor }} />
+                                    <SearchIcon sx={{ color: StylesVariables.accentColor }} />
                                 </div>
                             </>
                         )}
@@ -115,7 +115,7 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                             data-tooltip-id={id}
                             data-tooltip-content={tooltip}
                         >
-                            <InfoIcon sx={{ color: stylesVariables.specialColor }} />
+                            <InfoIcon sx={{ color: StylesVariables.specialColor }} />
                         </span>
                     )}
                 </label>

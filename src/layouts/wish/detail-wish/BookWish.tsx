@@ -10,7 +10,7 @@ import { bookWish } from '@/store/wishes/thunks';
 import ConfirmModal from '@/layouts/ConfirmModal';
 import Button from '@/components/Button';
 import { IWish } from '@/models/IWish';
-import stylesVariables from '@/styles/utils/variables.module.scss';
+import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     wish: IWish;
@@ -142,7 +142,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                             Більш детально про це можна дізнатися в розділі 'Інструкція'.
                         "
                     >
-                        <InfoIcon sx={{ color: stylesVariables.specialColor }} />
+                        <InfoIcon sx={{ color: StylesVariables.specialColor }} />
                     </span>
                 </p>
 
@@ -150,8 +150,8 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                     id="book-wish"
                     opacity={1}
                     style={{
-                        backgroundColor: stylesVariables.blackColor,
-                        color: stylesVariables.lightColor,
+                        backgroundColor: StylesVariables.blackColor,
+                        color: StylesVariables.lightColor,
                         width: screenWidth > 411 ? '300px' : '200px',
                         fontSize: '14px',
                         zIndex: 9,

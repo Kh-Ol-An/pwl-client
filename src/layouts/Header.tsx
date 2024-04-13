@@ -28,7 +28,7 @@ import Popup from "@/components/Popup";
 import Input from "@/components/Input";
 import LogoIcon from '@/assets/images/logo.svg';
 import WishHub from '@/assets/images/wish-hub.png';
-import stylesVariables from '@/styles/utils/variables.module.scss';
+import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     open: boolean;
@@ -162,7 +162,7 @@ const Header: FC<IProps> = ({ open, close }) => {
                     <Popup
                         anchor={anchor}
                         setAnchor={setAnchor}
-                        actionIcon={<SettingsIcon sx={{ color: stylesVariables.specialColor }} />}
+                        actionIcon={<SettingsIcon sx={{ color: StylesVariables.specialColor }} />}
                     >
                         <Button variant="text" type="button" onClick={handleShowEditAccount}>
                             <ManageAccountsIcon />

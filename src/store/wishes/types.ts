@@ -3,12 +3,13 @@ import { IUser } from '@/models/IUser';
 
 export interface ICreateWish {
     userId: IUser['id'];
-    material: boolean;
-    show: 'all' | 'friends' | 'nobody';
-    name: string;
-    price?: string;
-    address?: string;
-    description: string;
+    material: IWish['material'];
+    show: IWish['show'];
+    currency: IWish['currency'];
+    name: IWish['name'];
+    price?: IWish['price'];
+    address?: IWish['address'];
+    description: IWish['description'];
     images: ICurrentImage[];
 }
 

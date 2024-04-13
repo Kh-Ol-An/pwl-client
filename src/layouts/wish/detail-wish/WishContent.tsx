@@ -47,7 +47,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
                         <div className="detail-wish-box">
                             <span className="detail-wish-label">Ціна:</span>
                             <span className="detail-wish-data">
-                                {addingWhiteSpaces(wish.price)} грн.
+                                {addingWhiteSpaces(wish.price)} {wish.currency || 'UAH'}
                             </span>
                         </div>
                     )}

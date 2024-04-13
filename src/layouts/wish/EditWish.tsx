@@ -1,6 +1,8 @@
 import React, { FC, ChangeEvent, useState, useLayoutEffect, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Tooltip } from 'react-tooltip';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import { Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { createWish, deleteWish, updateWish } from '@/store/wishes/thunks';
@@ -20,7 +22,7 @@ import Input from '@/components/Input';
 import DragNDrop from '@/components/DragNDrop';
 import Switch from '@/components/Switch';
 import Radio from '@/components/Radio';
-import stylesVariables from '@/styles/utils/variables.module.scss';
+import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     idOfSelectedWish: IWish['id'] | null;
@@ -30,6 +32,7 @@ interface IProps {
 type Inputs = {
     name: IWish['name']
     price: IWish['price']
+    currency: IWish['currency']
     address: IWish['address']
     description: IWish['description']
 }
@@ -53,6 +56,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const [show, setShow] = useState<ICreateWish['show']>('all');
     const [showConfirmDeleteWish, setShowConfirmDeleteWish] = useState<boolean>(false);
     const [images, setImages] = useState<ICurrentImage[]>([]);
+    const [currency, setCurrency] = useState<IWish['currency']>('UAH');
     const [isTransition, setIsTransition] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
@@ -77,6 +81,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             show,
             name: data.name.trim(),
             price: material && data.price ? removingWhiteSpaces(data.price.trim()) : '',
+            currency: material ? data.currency : 'UAH',
             address: material ? data.address : '',
             description: data.description.trim(),
             images,
@@ -175,8 +180,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             <Tooltip
                 id="name"
                 style={{
-                    backgroundColor: stylesVariables.blackColor,
-                    color: stylesVariables.lightColor,
+                    backgroundColor: StylesVariables.blackColor,
+                    color: StylesVariables.lightColor,
                     width: screenWidth > 411 ? '300px' : '200px',
                     fontSize: '14px',
                     zIndex: 9,
@@ -186,22 +191,38 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             {/* DragNDrop */}
             <DragNDrop images={images} setImages={setImages} removeAllImages={removeAllImages} />
 
-            {/* price */}
             <div className={"expander" + (isTransition ? " transition" : "") + (material ? " rolled-up" : "")}>
-                <Input
-                    {...(material && register("price", wishPriceValidation))}
-                    id="price"
-                    name="price"
-                    type="number"
-                    label="Ціна*"
-                    tooltip="Матеріальне бажання яке не має своєї ціни не може бути виконано твоїм всесвітом. Введи приблизну або точну ціну."
-                    error={errors?.price?.message}
-                />
+                {/* price */}
+                <div className="price">
+                    <Input
+                        {...(material && register("price", wishPriceValidation))}
+                        id="price"
+                        name="price"
+                        type="number"
+                        label="Ціна*"
+                        tooltip="Матеріальне бажання яке не має своєї ціни не може бути виконано твоїм всесвітом. Введи приблизну або точну ціну."
+                        error={errors?.price?.message}
+                    />
+                    <div className="custom-select">
+                        <Select
+                            {...register("currency")}
+                            id="currency"
+                            variant="standard"
+                            sx={{ padding: '0 10px', color: StylesVariables.primaryColor }}
+                            value={currency}
+                            onChange={e => setCurrency(e.target.value as IWish['currency'])}
+                        >
+                            <MenuItem value="UAH">UAH</MenuItem>
+                            <MenuItem value="USD">USD</MenuItem>
+                            <MenuItem value="EUR">EUR</MenuItem>
+                        </Select>
+                    </div>
+                </div>
                 <Tooltip
                     id="price"
                     style={{
-                        backgroundColor: stylesVariables.blackColor,
-                        color: stylesVariables.lightColor,
+                        backgroundColor: StylesVariables.blackColor,
+                        color: StylesVariables.lightColor,
                         width: screenWidth > 411 ? '300px' : '200px',
                         fontSize: '14px',
                         zIndex: 9,
@@ -221,8 +242,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 <Tooltip
                     id="address"
                     style={{
-                        backgroundColor: stylesVariables.blackColor,
-                        color: stylesVariables.lightColor,
+                        backgroundColor: StylesVariables.blackColor,
+                        color: StylesVariables.lightColor,
                         width: screenWidth > 411 ? '300px' : '200px',
                         fontSize: '14px',
                         zIndex: 9,
@@ -283,14 +304,14 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             data-tooltip-id="show-friends"
                             data-tooltip-content="Бажання побачать тільки ті користувачі яких Ви додали до друзів та вони додали Вас до друзів"
                         >
-                            <InfoIcon sx={{ color: stylesVariables.specialColor }} />
+                            <InfoIcon sx={{ color: StylesVariables.specialColor }} />
                         </span>
                         <Tooltip
                             id="show-friends"
                             opacity={1}
                             style={{
-                                backgroundColor: stylesVariables.blackColor,
-                                color: stylesVariables.lightColor,
+                                backgroundColor: StylesVariables.blackColor,
+                                color: StylesVariables.lightColor,
                                 width: screenWidth > 411 ? '300px' : '200px',
                                 fontSize: '14px',
                                 zIndex: 9,
