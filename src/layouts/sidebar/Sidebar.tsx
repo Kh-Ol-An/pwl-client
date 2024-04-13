@@ -25,9 +25,11 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
 
     const myUser = useAppSelector((state) => state.myUser.user);
     const users = useAppSelector((state) => state.users);
+    const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
 
+    const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const [userType, setUserType] = useState<IGetUser['userType']>('all');
     const [search, setSearch] = useState<string>('');
 
@@ -57,25 +59,29 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
     };
 
     useEffect(() => {
-        if (!inView || !myUser || users.stopRequests) return;
+        if (!myUser) return;
+        dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
+    }, []);
 
+    useEffect(() => {
+        if (firstLoad) {
+            setFirstLoad(false);
+            return;
+        }
+
+        if (!inView || !myUser || users.stopRequests) return;
         dispatch(addUsers({ page: users.page, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
     }, [inView]);
 
     useEffect(() => {
-        if (!myUser) return;
-
-        const selectedUserId = localStorage.getItem('selectedUserId');
-        const selectedUserIdExists = users.list.some(user => user.id === selectedUserId);
-
-        if (selectedUserId && selectedUserIdExists) {
-            dispatch(getWishList({ myId: myUser.id, userId: selectedUserId }));
-            dispatch(selectUserId(selectedUserId));
-        } else {
-            !selectedUserId && localStorage.setItem('selectedUserId', myUser.id)
-            dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
-            dispatch(selectUserId(myUser.id));
+        if (firstLoad) {
+            setFirstLoad(false);
+            return;
         }
+
+        if (!myUser || myUser.id === selectedUserId || users.list.some(user => user.id === selectedUserId)) return;
+        dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
+        dispatch(selectUserId(myUser.id));
     }, [users.list]);
 
     return (
