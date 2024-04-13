@@ -81,7 +81,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             show,
             name: data.name.trim(),
             price: material && data.price ? removingWhiteSpaces(data.price.trim()) : '',
-            currency: material ? data.currency : 'UAH',
+            currency,
             address: material ? data.address : '',
             description: data.description.trim(),
             images,
@@ -131,6 +131,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         setShow(myWish.show);
         setValue('name', myWish.name);
         myWish.price && setValue('price', addingWhiteSpaces(myWish.price));
+        myWish.currency && setCurrency(myWish.currency);
         myWish.address && setValue('address', myWish.address);
         setValue('description', myWish.description);
         setImages(myWish.images);

@@ -23,10 +23,11 @@ const processImages = (formData: FormData, images: ICurrentImage[]) => {
     }
 };
 
-const createWish = async ({ userId, material, show, name, price, address, description, images }: ICreateWish): Promise<AxiosResponse<IWish>> => {
+const createWish = async ({ userId, material, show, name, price, currency, address, description, images }: ICreateWish): Promise<AxiosResponse<IWish>> => {
     const formData = new FormData();
     processCommonFields(formData, { userId, material, show, name, description });
     price && processCommonFields(formData, { price });
+    currency && processCommonFields(formData, { currency });
     address && processCommonFields(formData, { address });
     processImages(formData, images);
 
@@ -46,11 +47,12 @@ const createWish = async ({ userId, material, show, name, price, address, descri
     }
 };
 
-const updateWish = async ({ id, userId, material, show, name, price, address, description, images }: IUpdateWish): Promise<AxiosResponse<IWish>> => {
+const updateWish = async ({ id, userId, material, show, name, price, currency, address, description, images }: IUpdateWish): Promise<AxiosResponse<IWish>> => {
     const formData = new FormData();
     formData.append('id', id);
     processCommonFields(formData, { userId, material, show, name, description });
     price && processCommonFields(formData, { price });
+    currency && processCommonFields(formData, { currency });
     address && processCommonFields(formData, { address });
     processImages(formData, images);
 
