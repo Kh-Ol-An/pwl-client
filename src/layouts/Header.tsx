@@ -26,7 +26,6 @@ import Switch from '@/components/Switch';
 import Action from '@/components/Action';
 import Popup from "@/components/Popup";
 import Input from "@/components/Input";
-import Logo from '@/components/Logo';
 import LogoIcon from '@/assets/images/logo.svg';
 import WishHub from '@/assets/images/wish-hub.png';
 import stylesVariables from '@/styles/utils/variables.module.scss';
@@ -155,7 +154,9 @@ const Header: FC<IProps> = ({ open, close }) => {
                         </button>
                     </div>
 
-                    <Logo to="/welcome" withoutIcon />
+                    <button className="logo" type="button" onClick={handleSelectWish}>
+                        <img className="name" src={WishHub} alt="Wish Hub" />
+                    </button>
 
                     {/* Settings */}
                     <Popup
@@ -169,9 +170,9 @@ const Header: FC<IProps> = ({ open, close }) => {
                         </Button>
 
                         <Button variant="text" type="button" onClick={handleShowAbout}>
-                            <img className="wish-hub-icon" src={LogoIcon} alt="wish-hub-icon" />
+                            <img className="wish-hub-icon" src={LogoIcon} alt="Wish Hub icon" />
                             Про
-                            <img className="wish-hub-text" src={WishHub} alt="wish-hub" />
+                            <img className="wish-hub-text" src={WishHub} alt="Wish Hub" />
                         </Button>
 
                         {/*<Button variant="text" type="button" onClick={handleLogout}>*/}

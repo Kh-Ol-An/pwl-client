@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useAppSelector } from '@/store/hook';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { selectUserId } from '@/store/selected-user/slice';
+import { getWishList } from '@/store/wishes/thunks';
 import { IWish } from '@/models/IWish';
 import EditWish from '@/layouts/wish/EditWish';
 import WishItem from '@/layouts/wish/WishItem';
 import DetailWish from '@/layouts/wish/detail-wish/DetailWish';
 import Card from '@/layouts/Card';
+import Loading from '@/layouts/Loading';
 import Action from '@/components/Action';
 import Button from '@/components/Button';
 import Switch from '@/components/Switch';
-import Loading from '@/layouts/Loading';
+import WishHub from '@/assets/images/wish-hub.png';
 
 const WishList = () => {
     const myUser = useAppSelector((state) => state.myUser.user);
     const wishes = useAppSelector((state) => state.wishes);
     const userList = useAppSelector((state) => state.users.list);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
+
+    const dispatch = useAppDispatch();
 
     const [isUndone, setIsUndone] = useState<boolean>(true);
     const [showWish, setShowWish] = useState<boolean>(false);
@@ -36,6 +41,14 @@ const WishList = () => {
     !isUndone && myUser?.id !== selectedUserId && (emptyText = (
         <>В користувача <span>{selectedUser?.firstName} {lastName}</span> немає жодного виконаного бажання.</>
     ));
+
+    const handleSelectWish = async () => {
+        if (!myUser) return;
+
+        await dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
+        await dispatch(selectUserId(myUser.id));
+        localStorage.setItem('selectedUserId', myUser.id);
+    };
 
     const handleShowWish = (id: IWish['id'] | null) => {
         setIdOfSelectedWish(id);
@@ -66,13 +79,17 @@ const WishList = () => {
     return (
         <div className="wish-list">
             <div className="head">
-                {myUser?.id === selectedUserId && (
+                {myUser?.id === selectedUserId ? (
                     <Button onClick={() => handleShowEditWish(null)}>
                         Створити бажання
                     </Button>
+                ) : (
+                    <button className="wish-hub" type="button" onClick={handleSelectWish}>
+                        <img src={WishHub} alt="Wish Hub" />
+                    </button>
                 )}
 
-                <div className={"title-box" + (myUser?.id !== selectedUserId ? " other-user" : "")}>
+                <div className="title-box">
                     <div className="wishes-type">
                         <span className={isUndone ? "primary-color" : ""}>Не виконані</span>
                         <Switch

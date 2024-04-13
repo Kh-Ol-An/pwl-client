@@ -22,6 +22,15 @@
             }
         }
 
+        .wish-hub {
+            height: 32px;
+            padding: 6px 0;
+
+            @media only screen and (min-width: 768px) {
+                display: none;
+            }
+        }
+
         .title-box {
             width: 100%;
             display: flex;
@@ -33,14 +42,6 @@
                 flex-direction: row;
                 align-items: flex-start;
                 gap: 10px;
-            }
-
-            &.other-user {
-                margin-top: 34px;
-
-                @media only screen and (min-width: 768px) {
-                    margin: 0;
-                }
             }
         }
 
