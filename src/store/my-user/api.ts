@@ -19,7 +19,7 @@ import { IUser } from '@/models/IUser';
 const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> => {
     try {
         const response = await api.post('/registration', data);
-        await localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('token', response.data.accessToken);
         return response;
     } catch (error: any) {
         toast(error.response?.data?.message || 'Не вдалось зареєструватись.', { type: 'error' });
@@ -30,7 +30,7 @@ const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> 
 const googleAuthorization = async (data: IGoogleAuth): Promise<AxiosResponse<IAuth>> => {
     try {
         const response = await api.post('/google-auth', data);
-        await localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('token', response.data.accessToken);
         return response;
     } catch (error: any) {
         toast(error.response?.data?.message || 'Не вдалось увійти за допомогою Google.', { type: 'error' });
@@ -41,7 +41,7 @@ const googleAuthorization = async (data: IGoogleAuth): Promise<AxiosResponse<IAu
 const login = async (data: ILogin): Promise<AxiosResponse<IAuth>> => {
     try {
         const response = await api.post('/login', data);
-        await localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('token', response.data.accessToken);
         return response;
     } catch (error: any) {
         toast(error.response?.data?.message || 'Не вдалось увійти на сайт.', { type: 'error' });
@@ -52,7 +52,7 @@ const login = async (data: ILogin): Promise<AxiosResponse<IAuth>> => {
 const logout = async (): Promise<void> => {
     try {
         await api.post('/logout');
-        await localStorage.clear();
+        localStorage.clear();
     } catch (error: any) {
         toast(error.response?.data?.message || 'Не вдалось вийти з аккаунту.', { type: 'error' });
         throw error;
@@ -69,12 +69,12 @@ const refresh = async (): Promise<AxiosResponse<IAuth>> => {
             }/refresh`,
             { withCredentials: true },
         );
-        await localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('token', response.data.accessToken);
         return response;
     } catch (error: any) {
 //        toast(error.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
         console.log('myUserApi refresh error: ', error.response?.data?.message || 'Не вдалось оновити сесію.');
-        await localStorage.removeItem('token');
+        localStorage.removeItem('token');
         throw error;
     }
 };
@@ -121,7 +121,7 @@ const forgotPassword = async (data: IForgotPassword): Promise<void> => {
 const changePassword = async (data: IChangePassword): Promise<void> => {
     try {
         await api.put('/change-password', data);
-        await localStorage.removeItem('token');
+        localStorage.removeItem('token');
         toast(
             'Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.',
             { type: 'success' },
@@ -165,7 +165,7 @@ const updateMyUser = async ({
 const deleteMyUser = async (data: IDeleteMyUser): Promise<AxiosResponse<IUser['id']>> => {
     try {
         const response = await api.post('/user/delete', data);
-        await localStorage.clear();
+        localStorage.clear();
         return response;
     } catch (error: any) {
         toast(

@@ -111,6 +111,17 @@
     }
 }
 
+.wish-hub-icon {
+    margin: 0 1px 0 -1px;
+    width: 24px;
+    height: 24px;
+}
+
+.wish-hub-text {
+    margin-bottom: 2px;
+    height: 12px;
+}
+
 .change-edit-account {
     @include flex-center;
     gap: 4px;

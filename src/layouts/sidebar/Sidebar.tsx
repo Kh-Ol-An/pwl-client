@@ -42,6 +42,7 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
 
         userListRef.current.scrollTo(0, 0);
 
+        localStorage.setItem('selectedUserId', myUser.id);
         dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType: value, search }));
     };
 
@@ -52,6 +53,7 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
 
         userListRef.current.scrollTo(0, 0);
 
+        localStorage.setItem('selectedUserId', myUser.id);
         dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search: value }));
     };
 
@@ -62,9 +64,19 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
     }, [inView]);
 
     useEffect(() => {
-        if (!myUser || users.list.some(user => user.id === selectedUserId)) return;
-        dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
-        dispatch(selectUserId(myUser.id));
+        if (!myUser) return;
+
+        const localSelectedUserId = localStorage.getItem('selectedUserId');
+        const selectedUserIdExists = users.list.some(user => user.id === localSelectedUserId);
+
+        if (localSelectedUserId && selectedUserIdExists) {
+            dispatch(getWishList({ myId: myUser.id, userId: localSelectedUserId }));
+            dispatch(selectUserId(localSelectedUserId));
+        } else {
+            !localSelectedUserId && localStorage.setItem('selectedUserId', myUser.id)
+            dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
+            dispatch(selectUserId(myUser.id));
+        }
     }, [users.list]);
 
     return (

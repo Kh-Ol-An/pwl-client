@@ -4,6 +4,7 @@ import { Avatar, Modal } from '@mui/material';
 import {
     Settings as SettingsIcon,
     ManageAccounts as ManageAccountsIcon,
+//    Info as InfoIcon,
     Logout as LogoutIcon,
     Close as CloseIcon,
 } from '@mui/icons-material';
@@ -19,12 +20,15 @@ import Card from '@/layouts/Card';
 import DetailAccount from '@/layouts/DetailAccount';
 import EditAccount from '@/layouts/EditAccount';
 import ChangePassword from '@/layouts/ChangePassword';
+import About from '@/layouts/About';
 import Button from '@/components/Button';
 import Switch from '@/components/Switch';
 import Action from '@/components/Action';
 import Popup from "@/components/Popup";
 import Input from "@/components/Input";
 import Logo from '@/components/Logo';
+import LogoIcon from '@/assets/images/logo.svg';
+import WishHub from '@/assets/images/wish-hub.png';
 import stylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
@@ -53,6 +57,7 @@ const Header: FC<IProps> = ({ open, close }) => {
     const [showDetailAccount, setShowDetailAccount] = useState<boolean>(false);
     const [isEditAccount, setIsEditAccount] = useState<boolean>(true);
     const [showEditAccount, setShowEditAccount] = useState<boolean>(false);
+    const [showAbout, setShowAbout] = useState<boolean>(false);
     const [showConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -91,6 +96,17 @@ const Header: FC<IProps> = ({ open, close }) => {
 
     const handleHideEditAccount = () => {
         setShowEditAccount(false);
+    };
+
+    // About
+    const handleShowAbout = () => {
+        setShowAbout(true);
+        setAnchor(null);
+        close();
+    };
+
+    const handleHideAbout = () => {
+        setShowAbout(false);
     };
 
     // ConfirmDeleteMyUser
@@ -151,6 +167,18 @@ const Header: FC<IProps> = ({ open, close }) => {
                             <ManageAccountsIcon />
                             Налаштування аккаунту
                         </Button>
+
+                        <Button variant="text" type="button" onClick={handleShowAbout}>
+                            <img className="wish-hub-icon" src={LogoIcon} alt="wish-hub-icon" />
+                            Про
+                            <img className="wish-hub-text" src={WishHub} alt="wish-hub" />
+                        </Button>
+
+                        {/*<Button variant="text" type="button" onClick={handleLogout}>*/}
+                        {/*    <InfoIcon />*/}
+                        {/*    Інструкція*/}
+                        {/*</Button>*/}
+
                         <Button variant="text" type="button" onClick={handleLogout}>
                             <LogoutIcon />
                             Вийти з аккаунту
@@ -212,6 +240,24 @@ const Header: FC<IProps> = ({ open, close }) => {
                             </Card>
 
                             <Action onClick={handleHideEditAccount}>
+                                <CloseIcon />
+                            </Action>
+                        </div>
+                    </Modal>
+
+                    {/* About */}
+                    <Modal
+                        open={showAbout}
+                        onClose={handleHideAbout}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <div className="modal">
+                            <Card>
+                                <About />
+                            </Card>
+
+                            <Action onClick={handleHideAbout}>
                                 <CloseIcon />
                             </Action>
                         </div>

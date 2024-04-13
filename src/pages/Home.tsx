@@ -1,7 +1,5 @@
-import React, { FC, useState, useEffect } from 'react';
-import {useAppDispatch, useAppSelector} from '@/store/hook';
-import { getWishList } from '@/store/wishes/thunks';
-import { selectUserId } from '@/store/selected-user/slice';
+import React, { FC, useState } from 'react';
+import { useAppSelector } from '@/store/hook';
 import Inactivated from '@/layouts/Inactivated';
 import Header from '@/layouts/Header';
 import Sidebar from '@/layouts/sidebar/Sidebar';
@@ -10,22 +8,7 @@ import WishList from '@/layouts/wish/WishList';
 const Home: FC = () => {
     const myUser = useAppSelector((state) => state.myUser.user);
 
-    const dispatch = useAppDispatch();
-
     const [open, setOpen] = useState<boolean>(false);
-
-    useEffect(() => {
-        if (!myUser) return;
-
-        const selectedUserId = localStorage.getItem('selectedUserId');
-        if (selectedUserId) {
-            dispatch(getWishList({ myId: myUser.id, userId: selectedUserId }));
-            dispatch(selectUserId(selectedUserId));
-        } else {
-            dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
-            dispatch(selectUserId(myUser.id));
-        }
-    }, [dispatch, myUser]);
 
     return (
         <>
