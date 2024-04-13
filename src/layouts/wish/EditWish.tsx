@@ -32,7 +32,6 @@ interface IProps {
 type Inputs = {
     name: IWish['name']
     price: IWish['price']
-    currency: IWish['currency']
     address: IWish['address']
     description: IWish['description']
 }
@@ -206,7 +205,6 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     />
                     <div className="custom-select">
                         <Select
-                            {...register("currency")}
                             id="currency"
                             variant="standard"
                             sx={{ padding: '0 10px', color: StylesVariables.primaryColor }}
