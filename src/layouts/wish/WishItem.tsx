@@ -7,6 +7,7 @@ import { IWish } from '@/models/IWish';
 import { addingWhiteSpaces } from '@/utils/formating-value';
 import Action from '@/components/Action';
 import showBookingExpired from '@/utils/show-booking-expired';
+import StylesVariables from '@/styles/utils/variables.module.scss';
 
 dayjs.extend(isSameOrBefore);
 
@@ -64,7 +65,7 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
 
             {myUser?.id === wish.userId && !wish.booking?.userId && !wish.executed && (
                 <Action onClick={handleEditWish}>
-                    <EditIcon />
+                    <EditIcon sx={{ color: StylesVariables.blackColor }} />
                 </Action>
             )}
         </div>

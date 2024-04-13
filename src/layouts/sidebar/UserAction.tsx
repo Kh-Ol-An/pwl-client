@@ -157,7 +157,7 @@ const UserAction: FC<IProps> = ({ user, close }) => {
                         </Card>
 
                         <Action onClick={handleHideDetailAccount}>
-                            <CloseIcon />
+                            <CloseIcon sx={{ color: StylesVariables.blackColor }} />
                         </Action>
                     </div>
                 </Modal>

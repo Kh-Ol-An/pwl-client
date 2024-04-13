@@ -14,6 +14,7 @@ import Action from '@/components/Action';
 import Button from '@/components/Button';
 import Switch from '@/components/Switch';
 import WishHub from '@/assets/images/wish-hub.png';
+import StylesVariables from '@/styles/utils/variables.module.scss';
 
 const WishList = () => {
     const myUser = useAppSelector((state) => state.myUser.user);
@@ -152,7 +153,7 @@ const WishList = () => {
                         />
 
                         <Action onClick={handleHideWish}>
-                            <CloseIcon />
+                            <CloseIcon sx={{ color: StylesVariables.blackColor }} />
                         </Action>
                     </div>
                 </Modal>
@@ -170,7 +171,7 @@ const WishList = () => {
                     </Card>
 
                     <Action onClick={handleHideEditWish}>
-                        <CloseIcon />
+                        <CloseIcon sx={{ color: StylesVariables.blackColor }} />
                     </Action>
                 </div>
             </Modal>

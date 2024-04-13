@@ -200,7 +200,7 @@ const Header: FC<IProps> = ({ open, close }) => {
                                 </Card>
 
                                 <Action onClick={handleHideDetailAccount}>
-                                    <CloseIcon />
+                                    <CloseIcon sx={{ color: StylesVariables.blackColor }} />
                                 </Action>
                             </div>
                         </Modal>
@@ -241,7 +241,7 @@ const Header: FC<IProps> = ({ open, close }) => {
                             </Card>
 
                             <Action onClick={handleHideEditAccount}>
-                                <CloseIcon />
+                                <CloseIcon sx={{ color: StylesVariables.blackColor }} />
                             </Action>
                         </div>
                     </Modal>
@@ -259,7 +259,7 @@ const Header: FC<IProps> = ({ open, close }) => {
                             </Card>
 
                             <Action onClick={handleHideAbout}>
-                                <CloseIcon />
+                                <CloseIcon sx={{ color: StylesVariables.blackColor }} />
                             </Action>
                         </div>
                     </Modal>

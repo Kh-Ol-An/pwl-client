@@ -8,6 +8,7 @@ import Button from '@/components/Button';
 import Action from '@/components/Action';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
+import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     wish: IWish;
@@ -74,7 +75,7 @@ const BookingExpired: FC<IProps> = ({ wish, userId, close }) => {
                     </Card>
 
                     <Action onClick={() => setShow(false)}>
-                        <CloseIcon />
+                        <CloseIcon sx={{ color: StylesVariables.blackColor }} />
                     </Action>
                 </div>
             </Modal>
