@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useAppSelector } from '@/store/hook';
@@ -37,17 +37,6 @@ const WishList = () => {
         <>В користувача <span>{selectedUser?.firstName} {lastName}</span> немає жодного виконаного бажання.</>
     ));
 
-    const changeWishesType = (e: ChangeEvent<HTMLInputElement>) => {
-        const checked = e.target.checked;
-        setIsUndone(checked);
-
-        if (checked) {
-            setSelectedWishList(wishes.list.filter(wish => !wish.executed));
-        } else {
-            setSelectedWishList(wishes.list.filter(wish => wish.executed));
-        }
-    };
-
     const handleShowWish = (id: IWish['id'] | null) => {
         setIdOfSelectedWish(id);
         setShowWish(true);
@@ -66,6 +55,14 @@ const WishList = () => {
         setShowEditWish(false);
     };
 
+    useEffect(() => {
+        if (isUndone) {
+            setSelectedWishList(wishes.list.filter(wish => !wish.executed));
+        } else {
+            setSelectedWishList(wishes.list.filter(wish => wish.executed));
+        }
+    }, [isUndone, wishes.list]);
+
     return (
         <div className="wish-list">
             <div className="head">
@@ -83,7 +80,7 @@ const WishList = () => {
                             name="wishes-type"
                             hiddenChoice
                             checked={isUndone}
-                            onChange={changeWishesType}
+                            onChange={(e) => setIsUndone(e.target.checked)}
                         />
                         <span className={isUndone ? "" : "primary-color"}>Виконані</span>
                     </div>

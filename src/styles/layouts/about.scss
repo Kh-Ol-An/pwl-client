@@ -1,7 +1,14 @@
 .about {
-    @include flex-column;
+    display: flex;
+    flex-direction: column;
     gap: 16px;
     color: $special-color;
+
+    h2 {
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+    }
 
     p {
         font-size: 16px;
