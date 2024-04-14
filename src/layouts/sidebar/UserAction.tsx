@@ -26,10 +26,11 @@ import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     user: IUser;
+    updateUsers: () => void;
     close: () => void;
 }
 
-const UserAction: FC<IProps> = ({ user, close }) => {
+const UserAction: FC<IProps> = ({ user, updateUsers, close }) => {
     const myUser = useAppSelector((state) => state.myUser.user);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
@@ -72,6 +73,7 @@ const UserAction: FC<IProps> = ({ user, close }) => {
         await dispatch(addFriend({ myId: myUser.id, friendId: user.id }));
         setIsLoading(false);
         setAnchor(null);
+        updateUsers();
     };
 
     const handleRemoveFriend = async (whereRemove: IRemoveFriend['whereRemove']) => {
@@ -81,6 +83,7 @@ const UserAction: FC<IProps> = ({ user, close }) => {
         await dispatch(removeFriend({ myId: myUser.id, friendId: user.id, whereRemove }));
         setIsLoading(false);
         setAnchor(null);
+        updateUsers();
     };
 
     return (

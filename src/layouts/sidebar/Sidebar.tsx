@@ -43,7 +43,6 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
 
         userListRef.current.scrollTo(0, 0);
 
-        localStorage.setItem('selectedUserId', myUser.id);
         dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType: value, search }));
     };
 
@@ -54,8 +53,15 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
 
         userListRef.current.scrollTo(0, 0);
 
-        localStorage.setItem('selectedUserId', myUser.id);
         dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search: value }));
+    };
+
+    const updateUsers = () => {
+        if (!myUser || !userListRef.current) return;
+
+        userListRef.current.scrollTo(0, 0);
+
+        dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
     };
 
     useEffect(() => {
@@ -120,7 +126,9 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
 
                     <div className="user-list" ref={userListRef}>
                         <ul className="list">
-                            {users.list.map(user => <UserAction key={user.id} user={user} close={close} />)}
+                            {users.list.map(user => (
+                                <UserAction key={user.id} user={user} updateUsers={updateUsers} close={close} />
+                            ))}
                         </ul>
 
                         <div
