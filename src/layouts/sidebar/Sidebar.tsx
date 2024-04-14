@@ -98,7 +98,7 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
                     <div className="sidebar-head">
                         <h2 className="sidebar-title">Користувачі</h2>
 
-                        <ShareButton />
+                        <ShareButton link="welcome" />
                     </div>
 
                     <div className="custom-select">

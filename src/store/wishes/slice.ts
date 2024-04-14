@@ -12,7 +12,7 @@ import {
 import { IWish } from '@/models/IWish';
 
 interface IState {
-    list: IWish[]
+    list: IWish[];
     isLoading: boolean;
     error: string | null;
 }

@@ -1,6 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '@/store/wishes/api';
-import { IBookWish, IActionWish, ICreateWish, IGetWish, IUpdateWish } from '@/store/wishes/types';
+import {
+    IBookWish,
+    IActionWish,
+    ICreateWish,
+    ISendWishList,
+    IUpdateWish,
+    IGetWish,
+    ISendWish,
+} from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
 import { IWish } from '@/models/IWish';
 
@@ -31,10 +39,19 @@ export const deleteWish = createAsyncThunk<IWish['id'], [IUser['id'], IWish['id'
     },
 );
 
-export const getWishList = createAsyncThunk<IWish[], IGetWish>(
+export const getWishList = createAsyncThunk<IWish[], ISendWishList>(
     'wishes/getWishList',
     async (params) => {
         const result = await api.getWishList(params);
+
+        return result.data;
+    },
+);
+
+export const getWish = createAsyncThunk<IGetWish, ISendWish>(
+    'wishes/getWish',
+    async (params) => {
+        const result = await api.getWish(params);
 
         return result.data;
     },

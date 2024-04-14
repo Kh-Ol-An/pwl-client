@@ -1,7 +1,15 @@
 import { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import api from '@/utils/api';
-import { IBookWish, IActionWish, ICreateWish, IGetWish, IUpdateWish } from '@/store/wishes/types';
+import {
+    IBookWish,
+    IActionWish,
+    ICreateWish,
+    ISendWishList,
+    IUpdateWish,
+    IGetWish,
+    ISendWish
+} from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
 import { ICurrentImage, IWish } from '@/models/IWish';
 
@@ -92,11 +100,20 @@ const deleteWish = async (userId: IUser['id'], wishId: IWish['id']): Promise<Axi
     }
 };
 
-const getWishList = async (params: IGetWish): Promise<AxiosResponse<IWish[]>> => {
+const getWishList = async (params: ISendWishList): Promise<AxiosResponse<IWish[]>> => {
     try {
         return await api.get('/wishes', { params });
     } catch (error: any) {
         toast(error.response?.data?.message || 'Не вдалось отримати всі бажання.', { type: 'error' });
+        throw error;
+    }
+};
+
+const getWish = async (params: ISendWish): Promise<AxiosResponse<IGetWish>> => {
+    try {
+        return await api.get('/wish', { params });
+    } catch (error: any) {
+        toast(error.response?.data?.message || 'Не вдалось отримати бажання.', { type: 'error' });
         throw error;
     }
 };
@@ -142,6 +159,7 @@ const wishApi = {
     updateWish,
     deleteWish,
     getWishList,
+    getWish,
     bookWish,
     cancelBookWish,
     doneWish,

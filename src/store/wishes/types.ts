@@ -17,9 +17,20 @@ export interface IUpdateWish extends ICreateWish {
     id: IWish['id'];
 }
 
-export interface IGetWish {
+export interface ISendWish {
+    wishId: IWish['id'];
+}
+
+export interface ISendWishList {
     myId: IUser['id'];
     userId: IUser['id'];
+}
+
+export interface IGetWish {
+    userFirstName: IUser['firstName'];
+    userLastName: IUser['lastName'];
+    userAvatar: IUser['avatar'],
+    wish: IWish;
 }
 
 export interface IActionWish {

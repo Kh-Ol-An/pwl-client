@@ -9,8 +9,9 @@ import Home from '@/pages/Home';
 import ActivationLinkExpired from '@/pages/ActivationLinkExpired';
 import Auth from '@/pages/Auth';
 import ChangeForgottenPassword from '@/pages/ChangeForgottenPassword';
-import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import Welcome from '@/pages/Welcome';
+import Wish from '@/pages/Wish';
+import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import NotFound from '@/pages/NotFound';
 import Loading from '@/layouts/Loading';
 
@@ -31,7 +32,7 @@ const App: FC = () => {
         dispatch(checkAuth())
             .then(() => setReady(true))
             .catch(() => setReady(false));
-    }, [dispatch]);
+    }, []);
 
     return (
         <ThemeProvider theme={theme}>
@@ -51,6 +52,7 @@ const App: FC = () => {
                         />
                     </Route>
                     <Route path="/welcome" element={<Welcome />} />
+                    <Route path="/wish/:wishId" element={<Wish />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="/*" element={<NotFound />} />
                 </Routes>
