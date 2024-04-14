@@ -10,6 +10,7 @@ import { ISendUsersParams } from '@/store/users/types';
 import Loading from '@/layouts/Loading';
 import UserAction from '@/layouts/sidebar/UserAction';
 import Search from '@/components/Search';
+import ShareButton from '@/components/ShareButton';
 import { PAGINATION_LIMIT } from '@/utils/constants';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
@@ -94,7 +95,11 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
         <div className={"sidebar" + (open ? " open" : "")}>
             <div className="sidebar-inner">
                 <div className="sidebar-content">
-                    <h2 className="sidebar-title">Користувачі</h2>
+                    <div className="sidebar-head">
+                        <h2 className="sidebar-title">Користувачі</h2>
+
+                        <ShareButton />
+                    </div>
 
                     <div className="custom-select">
                         <div className="select-box">

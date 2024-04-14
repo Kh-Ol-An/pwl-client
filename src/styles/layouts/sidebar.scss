@@ -58,16 +58,21 @@
         }
     }
 
-    .sidebar-title {
+    .sidebar-head {
         padding: 4px 16px 8px;
+        @include flex-between;
+        gap: 10px;
+
+        @media only screen and (min-width: 768px) {
+            padding: 10px 20px 8px;
+        }
+    }
+
+    .sidebar-title {
         color: $light-color;
         font-weight: 700;
         font-size: 20px;
         line-height: 30px;
-
-            @media only screen and (min-width: 768px) {
-                padding: 10px 20px 8px;
-            }
     }
 
     .custom-select {
