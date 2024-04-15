@@ -34,7 +34,7 @@ const ShareButton: FC<IProps> = ({ link = '', wishShow }) => {
     };
 
     const handleClick = () => {
-        wishShow !== 'all' ? setShow(true) : shareContent();
+        wishShow === 'friends' || wishShow === 'nobody' ? setShow(true) : shareContent();
     };
 
     return (
