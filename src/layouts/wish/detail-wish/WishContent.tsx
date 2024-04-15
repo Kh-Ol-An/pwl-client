@@ -34,7 +34,9 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
                     {wish.name}
                 </h3>
 
-                <ShareButton link={`wish/${wish.id}`} wishShow={wish.show} />
+                {myUserId === wish.userId && (
+                    <ShareButton link={`wish/${wish.id}`} wishShow={wish.show} />
+                )}
             </div>
 
             {showRow && (
