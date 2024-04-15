@@ -6,10 +6,10 @@ import ConfirmModal from '@/layouts/ConfirmModal';
 
 interface IProps {
     link?: string;
-    withConfirm?: boolean;
+    wishShow?: 'all' | 'friends' | 'nobody';
 }
 
-const ShareButton: FC<IProps> = ({ link = '', withConfirm = false }) => {
+const ShareButton: FC<IProps> = ({ link = '', wishShow }) => {
     const [show, setShow] = useState<boolean>(false);
 
     const shareContent = () => {
@@ -34,7 +34,7 @@ const ShareButton: FC<IProps> = ({ link = '', withConfirm = false }) => {
     };
 
     const handleClick = () => {
-        withConfirm ? setShow(true) : shareContent();
+        wishShow !== 'all' ? setShow(true) : shareContent();
     };
 
     return (
@@ -50,7 +50,8 @@ const ShareButton: FC<IProps> = ({ link = '', withConfirm = false }) => {
                 confirm={shareContent}
             >
                 <p className="text-lg">
-                    Ви впевнені що хочете поділитись бажанням, яке відкрите тільки для друзів?
+                    Ви впевнені що хочете поділитись бажанням,
+                    яке {wishShow === 'nobody' ? 'приховане від усіх' : 'відкрите тільки для друзів'}?
                 </p>
             </ConfirmModal>
         </>
