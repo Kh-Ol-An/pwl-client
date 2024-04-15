@@ -115,13 +115,17 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
                                 <MenuItem value="followFrom">
                                     <span className="sidebar-user-type-item">
                                         Запити на дружбу
-                                        <span className="count">{users.followFromCount}</span>
+                                        {users.followFromCount > 0 && (
+                                            <span className="count">{users.followFromCount}</span>
+                                        )}
                                     </span>
                                 </MenuItem>
                                 <MenuItem value="followTo">Надіслані запити на дружбу</MenuItem>
                             </Select>
 
-                            <span className="count">{users.followFromCount}</span>
+                            {users.followFromCount > 0 && (
+                                <span className="count">{users.followFromCount}</span>
+                            )}
                         </div>
                     </div>
 
