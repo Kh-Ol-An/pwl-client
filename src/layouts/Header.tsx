@@ -5,6 +5,7 @@ import {
     Settings as SettingsIcon,
     ManageAccounts as ManageAccountsIcon,
 //    Info as InfoIcon,
+    Forum as ForumIcon,
     Logout as LogoutIcon,
     Close as CloseIcon,
 } from '@mui/icons-material';
@@ -21,6 +22,7 @@ import DetailAccount from '@/layouts/DetailAccount';
 import EditAccount from '@/layouts/EditAccount';
 import ChangePassword from '@/layouts/ChangePassword';
 import About from '@/layouts/About';
+import Contacts from '@/layouts/Contacts';
 import Button from '@/components/Button';
 import Switch from '@/components/Switch';
 import Action from '@/components/Action';
@@ -57,6 +59,7 @@ const Header: FC<IProps> = ({ open, close }) => {
     const [isEditAccount, setIsEditAccount] = useState<boolean>(true);
     const [showEditAccount, setShowEditAccount] = useState<boolean>(false);
     const [showAbout, setShowAbout] = useState<boolean>(false);
+    const [showContacts, setShowContacts] = useState<boolean>(false);
     const [showConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -106,6 +109,17 @@ const Header: FC<IProps> = ({ open, close }) => {
 
     const handleHideAbout = () => {
         setShowAbout(false);
+    };
+
+    // Contacts
+    const handleShowContacts = () => {
+        setShowContacts(true);
+        setAnchor(null);
+        close();
+    };
+
+    const handleHideContacts = () => {
+        setShowContacts(false);
     };
 
     // ConfirmDeleteMyUser
@@ -179,6 +193,11 @@ const Header: FC<IProps> = ({ open, close }) => {
                         {/*    <InfoIcon />*/}
                         {/*    Інструкція*/}
                         {/*</Button>*/}
+
+                        <Button variant="text" type="button" onClick={handleShowContacts}>
+                            <ForumIcon />
+                            Контакти
+                        </Button>
 
                         <Button variant="text" type="button" onClick={handleLogout}>
                             <LogoutIcon />
@@ -259,6 +278,24 @@ const Header: FC<IProps> = ({ open, close }) => {
                             </Card>
 
                             <Action onClick={handleHideAbout}>
+                                <CloseIcon sx={{ color: StylesVariables.blackColor }} />
+                            </Action>
+                        </div>
+                    </Modal>
+
+                    {/* Contacts */}
+                    <Modal
+                        open={showContacts}
+                        onClose={handleHideContacts}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <div className="modal">
+                            <Card>
+                                <Contacts />
+                            </Card>
+
+                            <Action onClick={handleHideContacts}>
                                 <CloseIcon sx={{ color: StylesVariables.blackColor }} />
                             </Action>
                         </div>
