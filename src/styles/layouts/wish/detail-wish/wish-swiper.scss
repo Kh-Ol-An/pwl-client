@@ -2,42 +2,49 @@
     position: relative;
     min-width: 240px;
     width: 240px;
+    min-height: 240px;
     height: 240px;
     margin: 0 auto 10px;
 
     @media only screen and (min-width: 360px) {
         min-width: 280px;
         width: 280px;
+        min-height: 280px;
         height: 280px;
     }
 
     @media only screen and (min-width: 390px) {
         min-width: 310px;
         width: 310px;
+        min-height: 310px;
         height: 310px;
     }
 
     @media only screen and (min-width: 412px) {
         min-width: 332px;
         width: 332px;
+        min-height: 332px;
         height: 332px;
     }
 
     @media only screen and (min-width: 430px) {
         min-width: 350px;
         width: 350px;
+        min-height: 350px;
         height: 350px;
     }
 
     @media only screen and (min-width: 520px) {
         min-width: 440px;
         width: 440px;
+        min-height: 440px;
         height: 440px;
     }
 
     @media only screen and (min-width: 600px) {
         min-width: 520px;
         width: 520px;
+        min-height: 520px;
         height: 520px;
     }
 
@@ -45,6 +52,7 @@
         margin: 0 auto;
         min-width: 410px;
         width: 410px;
+        min-height: 410px;
         height: 410px;
     }
 

@@ -29,6 +29,8 @@ const ShareButton: FC<IProps> = ({ link = '', withConfirm = false }) => {
                 .then(() => toast.success(`Посилання на ${link === 'welcome' ? 'Wish Hub' : 'Ваше бажання'} було скопійовано в буфер обміну.`))
                 .catch(() => toast.error('Під час спроби скопіювати посилання виникла помилка.'));
         }
+
+        setShow(false);
     };
 
     const handleClick = () => {
