@@ -31,6 +31,8 @@ const Wish: FC = () => {
     useEffect(() => {
         dispatch(getWish({ wishId: location.pathname.split('/')[2] }))
             .then((response: any) => {
+                if (!response.payload) return;
+
                 setWish(response.payload.wish);
                 setUserFullName(`${response.payload.userFirstName} ${response.payload.userLastName}`);
                 setUserAvatar(response.payload.userAvatar);
@@ -48,16 +50,16 @@ const Wish: FC = () => {
                 </div>
             </div>
 
-            <div className="wish-head">
-                Бажання створено користувачем:
-                <div className="wish-head-user">
-                    <Avatar alt={userFullName} src={userAvatar} sx={{ width: 56, height: 56 }} />
-                    <span className="wish-head-user-name">{userFullName}</span>
-                </div>
-            </div>
-
-            {wish && (
+            {wish ? (
                 <>
+                    <div className="wish-head">
+                        Бажання створено користувачем:
+                        <div className="wish-head-user">
+                            <Avatar alt={userFullName} src={userAvatar} sx={{ width: 56, height: 56 }} />
+                            <span className="wish-head-user-name">{userFullName}</span>
+                        </div>
+                    </div>
+
                     <h1 className="wish-title">{wish.name}</h1>
 
                     <div className="wish-content">
@@ -99,6 +101,10 @@ const Wish: FC = () => {
                         </div>
                     </div>
                 </>
+            ) : (
+                <p className="wish-empty">
+                    Цього бажання не існує. Можливо, воно було видалено користувачем.
+                </p>
             )}
         </div>
     );
