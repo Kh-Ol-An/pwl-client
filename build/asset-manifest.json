@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.f2ece6d2.css",
+    "main.css": "/static/css/main.47a99962.css",
     "main.js": "/static/js/main.efad284f.js",
     "static/media/logo.svg": "/static/media/logo.21be91a6ab25421b98d4539d53f5be70.svg",
     "static/media/invisible-gift.png": "/static/media/invisible-gift.fe94cb9059572503ab0e.png",
@@ -9,11 +9,11 @@
     "static/media/poppins-v20-latin-300.woff2": "/static/media/poppins-v20-latin-300.39576fe9df8a22cc1bcc.woff2",
     "static/media/poppins-v20-latin-700.woff2": "/static/media/poppins-v20-latin-700.d86662fe776dae29ea78.woff2",
     "index.html": "/index.html",
-    "main.f2ece6d2.css.map": "/static/css/main.f2ece6d2.css.map",
+    "main.47a99962.css.map": "/static/css/main.47a99962.css.map",
     "main.efad284f.js.map": "/static/js/main.efad284f.js.map"
   },
   "entrypoints": [
-    "static/css/main.f2ece6d2.css",
+    "static/css/main.47a99962.css",
     "static/js/main.efad284f.js"
   ]
 }
