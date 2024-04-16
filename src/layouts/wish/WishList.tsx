@@ -136,7 +136,9 @@ const WishList = () => {
                 </div>
             )}
 
-            {wishes.isLoading && <Loading isLocal />}
+            {wishes.isLoading && <Loading />}
+
+            {wishes.isLocalLoading && <Loading isLocal />}
 
             {detailWish && (
                 <Modal
