@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
+import CryptoJS from 'crypto-js';
 import api from '@/utils/api';
 import {
     IAddFriend,
@@ -18,7 +19,12 @@ import { IUser } from '@/models/IUser';
 
 const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> => {
     try {
-        const response = await api.post('/registration', data);
+        if (!process.env.REACT_APP_CRYPTO_JS_SECRET) {
+            return Promise.reject('REACT_APP_CRYPTO_JS_SECRET is not defined.');
+        }
+
+        const encryptedPassword = CryptoJS.AES.encrypt(data.password, process.env.REACT_APP_CRYPTO_JS_SECRET).toString();
+        const response = await api.post('/registration', { ...data, password: encryptedPassword });
         localStorage.setItem('token', response.data.accessToken);
         return response;
     } catch (error: any) {
@@ -40,7 +46,12 @@ const googleAuthorization = async (data: IGoogleAuth): Promise<AxiosResponse<IAu
 
 const login = async (data: ILogin): Promise<AxiosResponse<IAuth>> => {
     try {
-        const response = await api.post('/login', data);
+        if (!process.env.REACT_APP_CRYPTO_JS_SECRET) {
+            return Promise.reject('REACT_APP_CRYPTO_JS_SECRET is not defined.');
+        }
+
+        const encryptedPassword = CryptoJS.AES.encrypt(data.password, process.env.REACT_APP_CRYPTO_JS_SECRET).toString();
+        const response = await api.post('/login', { ...data, password: encryptedPassword });
         localStorage.setItem('token', response.data.accessToken);
         return response;
     } catch (error: any) {
@@ -90,7 +101,15 @@ const sendActivationLink = async (userId: IUser['id']): Promise<AxiosResponse<IU
 
 const changeForgottenPassword = async (data: IChangeForgottenPassword): Promise<void> => {
     try {
-        await api.put('/change-forgotten-password', data);
+        if (!process.env.REACT_APP_CRYPTO_JS_SECRET) {
+            return Promise.reject('REACT_APP_CRYPTO_JS_SECRET is not defined.');
+        }
+
+        const encryptedNewPassword = CryptoJS
+            .AES
+            .encrypt(data.newPassword, process.env.REACT_APP_CRYPTO_JS_SECRET)
+            .toString();
+        await api.put('/change-forgotten-password', { ...data, newPassword: encryptedNewPassword });
         toast(
             'Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.',
             { type: 'success' },
@@ -120,7 +139,23 @@ const forgotPassword = async (data: IForgotPassword): Promise<void> => {
 
 const changePassword = async (data: IChangePassword): Promise<void> => {
     try {
-        await api.put('/change-password', data);
+        if (!process.env.REACT_APP_CRYPTO_JS_SECRET) {
+            return Promise.reject('REACT_APP_CRYPTO_JS_SECRET is not defined.');
+        }
+
+        const encryptedOldPassword = CryptoJS
+            .AES
+            .encrypt(data.oldPassword, process.env.REACT_APP_CRYPTO_JS_SECRET)
+            .toString();
+        const encryptedNewPassword = CryptoJS
+            .AES
+            .encrypt(data.newPassword, process.env.REACT_APP_CRYPTO_JS_SECRET)
+            .toString();
+        await api.put('/change-password', {
+            ...data,
+            oldPassword: encryptedOldPassword,
+            newPassword: encryptedNewPassword,
+        });
         localStorage.removeItem('token');
         toast(
             'Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.',
@@ -164,7 +199,15 @@ const updateMyUser = async ({
 
 const deleteMyUser = async (data: IDeleteMyUser): Promise<AxiosResponse<IUser['id']>> => {
     try {
-        const response = await api.post('/user/delete', data);
+        if (!process.env.REACT_APP_CRYPTO_JS_SECRET) {
+            return Promise.reject('REACT_APP_CRYPTO_JS_SECRET is not defined.');
+        }
+
+        const encryptedPassword = CryptoJS
+            .AES
+            .encrypt(data.password, process.env.REACT_APP_CRYPTO_JS_SECRET)
+            .toString();
+        const response = await api.post('/user/delete', { ...data, password: encryptedPassword });
         localStorage.clear();
         return response;
     } catch (error: any) {
