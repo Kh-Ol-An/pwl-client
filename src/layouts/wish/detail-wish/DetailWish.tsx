@@ -35,19 +35,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
         && wish.booking?.userId // бажання заброньовано
         && !dayjs(wish.booking?.end).isSameOrBefore(dayjs()); // термін виконання вже минув
 
-    let showBookedEnd = myUser?.id === wish.booking?.userId // бажання належить тому хто забронював
-
     let showEditWish = myUser?.id === wish.userId && !wish.booking?.end // бажання належить користувачу і не заброньовано
-
-    let showActions = false;
-    showDoneMyWish && (showActions = true);
-    showBookWish && (showActions = true);
-    showCancelBookWish && (showActions = true);
-    showDoneWish && (showActions = true);
-    showBookingExpired(wish, myUser?.id) && (showActions = true);
-    showEditWish && (showActions = true);
-    showBookedEnd && (showActions = true);
-    wish.executed && (showActions = false);
 
     // МОЖЛИВІ КЕЙСИ
     // Моє бажання / не моє
@@ -72,58 +60,63 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                             <div className={"detail-wish-wrap" + (wish.images.length > 1 ? " with-top" : "")}>
                                 <WishContent wish={wish} myUserId={myUser?.id} />
 
-                                {showActions && (
-                                    <div className="detail-wish-actions">
-                                        {/* Done my wish */}
-                                        {showDoneMyWish && (
-                                            <DoneWish
-                                                wish={wish}
-                                                userId={myUser?.id}
-                                                actionText="Бажання виконано"
-                                                close={close}
-                                            />
-                                        )}
-
-                                        {/* Book */}
-                                        {showBookWish && <BookWish wish={wish} close={close} />}
-
-                                        {/* Cancel Book */}
-                                        {showCancelBookWish && (
-                                            <CancelBookWish wish={wish} userId={myUser?.id} close={close} />
-                                        )}
-
-                                        {/* Done */}
-                                        {showDoneWish && (
-                                            <DoneWish wish={wish} userId={myUser?.id} close={close} />
-                                        )}
-
-                                        {/* Booking Expired */}
-                                        {showBookingExpired(wish, myUser?.id) && (
-                                            <BookingExpired wish={wish} userId={myUser?.id} close={close} />
-                                        )}
-
-                                        {/* Edit Wish */}
-                                        {showEditWish && (
-                                            <Button type="button" onClick={handleEditWish}>
-                                                Редагувати бажання
-                                            </Button>
-                                        )}
-
-                                        {/* showBookedEnd */}
-                                        {showBookedEnd && (
-                                            <p className="detail-wish-actions-booked">
-                                                Ви забронювали бажання до:
-                                                <span>
+                                <div className="detail-wish-actions">
+                                    {wish.booking?.end && (
+                                        <p className="detail-wish-actions-booked">
+                                            {(myUser?.id === wish.booking?.userId || myUser?.id === wish.userId) ? (
+                                                <>
                                                     {
-                                                        dayjs(wish.booking?.end)
-                                                            .locale('uk')
-                                                            .format('DD MMMM YYYY')
+                                                        myUser?.id === wish.booking?.userId
+                                                            ? 'Ви маєте виконати це бажання до:'
+                                                            : 'Бажання має бути виконане до:'
                                                     }
-                                                </span>
-                                            </p>
-                                        )}
-                                    </div>
-                                )}
+                                                    <span>
+                                                        {
+                                                            dayjs(wish.booking?.end)
+                                                                .locale('uk')
+                                                                .format('DD MMMM YYYY')
+                                                        }
+                                                    </span>
+                                                </>
+                                            ) : (<>Бажання вже виконується</>)}
+                                        </p>
+                                    )}
+
+                                    {/* Done my wish */}
+                                    {showDoneMyWish && (
+                                        <DoneWish
+                                            wish={wish}
+                                            userId={myUser?.id}
+                                            actionText="Бажання виконано"
+                                            close={close}
+                                        />
+                                    )}
+
+                                    {/* Book */}
+                                    {showBookWish && <BookWish wish={wish} close={close} />}
+
+                                    {/* Cancel Book */}
+                                    {showCancelBookWish && (
+                                        <CancelBookWish wish={wish} userId={myUser?.id} close={close} />
+                                    )}
+
+                                    {/* Done */}
+                                    {showDoneWish && (
+                                        <DoneWish wish={wish} userId={myUser?.id} close={close} />
+                                    )}
+
+                                    {/* Booking Expired */}
+                                    {showBookingExpired(wish, myUser?.id) && (
+                                        <BookingExpired wish={wish} userId={myUser?.id} close={close} />
+                                    )}
+
+                                    {/* Edit Wish */}
+                                    {showEditWish && (
+                                        <Button type="button" onClick={handleEditWish}>
+                                            Редагувати бажання
+                                        </Button>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>

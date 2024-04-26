@@ -229,6 +229,14 @@
     }
 }
 
+.modal .book-wish-text {
+    font-size: 14px;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 16px;
+    }
+}
+
 .modal .modal-actions.detail-wish-expired-actions {
     gap: 10px;
 }

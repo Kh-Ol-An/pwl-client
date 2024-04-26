@@ -126,7 +126,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                     </DemoContainer>
                 </div>
 
-                <p className="text">
+                <p className="text book-wish-text">
                     Після того як Ви підтвердите свій намір,
                     ніхто з користувачів не зможе забронювати це бажання.
                     У Вас буде можливість скасувати свій намір виконати бажання впродовж трьох діб.
