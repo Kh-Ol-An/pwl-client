@@ -1,4 +1,4 @@
-import { ICurrentAvatar, IUser } from '@/models/IUser';
+import { TCurrentAvatar, IUser } from '@/models/IUser';
 
 export interface IForgotPassword {
     email: IUser['email'];
@@ -36,7 +36,7 @@ export interface IUpdateMyUser {
     firstName: IUser['firstName']
     lastName?: IUser['lastName'];
     birthday?: string;
-    avatar: ICurrentAvatar;
+    avatar: TCurrentAvatar;
 }
 
 export interface IDeleteMyUser extends ILogin {

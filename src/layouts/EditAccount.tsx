@@ -9,7 +9,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { updateMyUser } from '@/store/my-user/thunks';
 import { IUpdateMyUser } from '@/store/my-user/types';
-import { ICurrentAvatar, IUser } from '@/models/IUser';
+import { TCurrentAvatar, IUser } from '@/models/IUser';
 import { accountFirstNameValidation, accountLastNameValidation } from '@/utils/validations';
 import AvatarValidation from '@/utils/AvatarValidation';
 import { ALLOWED_FILE_EXTENSIONS } from '@/utils/constants';
@@ -42,7 +42,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
-    const [avatar, setAvatar] = useState<ICurrentAvatar>('');
+    const [avatar, setAvatar] = useState<TCurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
     const [birthdayError, setBirthdayError] = useState<DateValidationError | null>(null);
 

@@ -19,4 +19,4 @@ export interface IUser {
     updatedAt: Dayjs;
 }
 
-export type ICurrentAvatar = (File | 'delete' | string);
+export type TCurrentAvatar = (File | 'delete' | string);

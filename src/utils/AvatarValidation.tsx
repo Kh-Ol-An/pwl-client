@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { ICurrentAvatar } from '@/models/IUser';
+import { TCurrentAvatar } from '@/models/IUser';
 import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB } from '@/utils/constants';
 
 interface IProps {
-    avatar: ICurrentAvatar;
+    avatar: TCurrentAvatar;
 }
 
 const AvatarValidation: FC<IProps> = ({ avatar }) => {
