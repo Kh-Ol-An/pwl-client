@@ -2,7 +2,7 @@ import React, { FC, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { Cancel as CancelIcon } from '@mui/icons-material';
-import { ICurrentImage, IImage } from '@/models/IWish';
+import { TCurrentImage, IImage } from '@/models/IWish';
 import ImagesValidation from '@/utils/ImagesValidation';
 import {
     ALLOWED_FILE_EXTENSIONS,
@@ -12,8 +12,8 @@ import {
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
-    images: ICurrentImage[];
-    setImages: (images: ICurrentImage[]) => void;
+    images: TCurrentImage[];
+    setImages: (images: TCurrentImage[]) => void;
     removeAllImages: () => void;
 }
 
@@ -45,7 +45,7 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAllImages }) => {
         setImages(updatedImages);
     };
 
-    const showImage = (image: ICurrentImage) => {
+    const showImage = (image: TCurrentImage) => {
         if (image instanceof File) {
             return URL.createObjectURL(image);
         }
@@ -53,7 +53,7 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAllImages }) => {
         return image.delete ? '' : image.path;
     };
 
-    const removeImage = (image: ICurrentImage, idx: number) => () => {
+    const removeImage = (image: TCurrentImage, idx: number) => () => {
         const newImages = [...images];
         if (newImages[idx] instanceof File) {
             newImages.splice(newImages.indexOf(image), 1);

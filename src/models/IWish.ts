@@ -8,7 +8,7 @@ export interface IImage {
     delete?: boolean;
 }
 
-export type ICurrentImage = (File | IImage);
+export type TCurrentImage = (File | IImage);
 
 export interface IBooking {
     userId: IUser['id'];

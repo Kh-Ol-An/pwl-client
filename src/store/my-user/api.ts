@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
-import CryptoJS from 'crypto-js';
 import api from '@/utils/api';
 import {
     IAddFriend,
@@ -16,6 +15,7 @@ import {
 } from '@/store/my-user/types';
 import { IAuth } from '@/models/IAuth';
 import { IUser } from '@/models/IUser';
+import { encryptedData } from '@/utils/encryption-data';
 
 const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> => {
     try {
@@ -23,7 +23,7 @@ const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> 
             return Promise.reject('REACT_APP_CRYPTO_JS_SECRET is not defined.');
         }
 
-        const encryptedPassword = CryptoJS.AES.encrypt(data.password, process.env.REACT_APP_CRYPTO_JS_SECRET).toString();
+        const encryptedPassword = encryptedData(data.password, process.env.REACT_APP_CRYPTO_JS_SECRET);
         const response = await api.post('/registration', { ...data, password: encryptedPassword });
         localStorage.setItem('token', response.data.accessToken);
         return response;
@@ -50,7 +50,7 @@ const login = async (data: ILogin): Promise<AxiosResponse<IAuth>> => {
             return Promise.reject('REACT_APP_CRYPTO_JS_SECRET is not defined.');
         }
 
-        const encryptedPassword = CryptoJS.AES.encrypt(data.password, process.env.REACT_APP_CRYPTO_JS_SECRET).toString();
+        const encryptedPassword = encryptedData(data.password, process.env.REACT_APP_CRYPTO_JS_SECRET);
         const response = await api.post('/login', { ...data, password: encryptedPassword });
         localStorage.setItem('token', response.data.accessToken);
         return response;
@@ -105,10 +105,7 @@ const changeForgottenPassword = async (data: IChangeForgottenPassword): Promise<
             return Promise.reject('REACT_APP_CRYPTO_JS_SECRET is not defined.');
         }
 
-        const encryptedNewPassword = CryptoJS
-            .AES
-            .encrypt(data.newPassword, process.env.REACT_APP_CRYPTO_JS_SECRET)
-            .toString();
+        const encryptedNewPassword = encryptedData(data.newPassword, process.env.REACT_APP_CRYPTO_JS_SECRET);
         await api.put('/change-forgotten-password', { ...data, newPassword: encryptedNewPassword });
         toast(
             'Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.',
@@ -143,14 +140,8 @@ const changePassword = async (data: IChangePassword): Promise<void> => {
             return Promise.reject('REACT_APP_CRYPTO_JS_SECRET is not defined.');
         }
 
-        const encryptedOldPassword = CryptoJS
-            .AES
-            .encrypt(data.oldPassword, process.env.REACT_APP_CRYPTO_JS_SECRET)
-            .toString();
-        const encryptedNewPassword = CryptoJS
-            .AES
-            .encrypt(data.newPassword, process.env.REACT_APP_CRYPTO_JS_SECRET)
-            .toString();
+        const encryptedOldPassword = encryptedData(data.oldPassword, process.env.REACT_APP_CRYPTO_JS_SECRET);
+        const encryptedNewPassword = encryptedData(data.newPassword, process.env.REACT_APP_CRYPTO_JS_SECRET);
         await api.put('/change-password', {
             ...data,
             oldPassword: encryptedOldPassword,
@@ -203,10 +194,7 @@ const deleteMyUser = async (data: IDeleteMyUser): Promise<AxiosResponse<IUser['i
             return Promise.reject('REACT_APP_CRYPTO_JS_SECRET is not defined.');
         }
 
-        const encryptedPassword = CryptoJS
-            .AES
-            .encrypt(data.password, process.env.REACT_APP_CRYPTO_JS_SECRET)
-            .toString();
+        const encryptedPassword = encryptedData(data.password, process.env.REACT_APP_CRYPTO_JS_SECRET);
         const response = await api.post('/user/delete', { ...data, password: encryptedPassword });
         localStorage.clear();
         return response;

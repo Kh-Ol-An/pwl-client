@@ -11,7 +11,7 @@ import {
     ISendWish
 } from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
-import { ICurrentImage, IWish } from '@/models/IWish';
+import { TCurrentImage, IWish } from '@/models/IWish';
 
 const processCommonFields = (formData: FormData, commonFields: { [key: string]: string | boolean }) => {
     for (const [key, value] of Object.entries(commonFields)) {
@@ -19,7 +19,7 @@ const processCommonFields = (formData: FormData, commonFields: { [key: string]: 
     }
 };
 
-const processImages = (formData: FormData, images: ICurrentImage[]) => {
+const processImages = (formData: FormData, images: TCurrentImage[]) => {
     if (images && Array.isArray(images)) {
         images.forEach((image, idx) => {
             if (image instanceof File) {

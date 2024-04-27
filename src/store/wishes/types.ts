@@ -1,16 +1,16 @@
-import { ICurrentImage, IWish } from '@/models/IWish';
+import { TCurrentImage, IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
 
 export interface ICreateWish {
     userId: IUser['id'];
     material: IWish['material'];
     show: IWish['show'];
-    currency: IWish['currency'];
+    currency?: IWish['currency'] | string;
     name: IWish['name'];
     price?: IWish['price'];
     address?: IWish['address'];
     description: IWish['description'];
-    images: ICurrentImage[];
+    images: TCurrentImage[];
 }
 
 export interface IUpdateWish extends ICreateWish {

@@ -7,7 +7,7 @@ import { Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { createWish, deleteWish, updateWish } from '@/store/wishes/thunks';
 import { ICreateWish } from '@/store/wishes/types';
-import { ICurrentImage, IImage, IWish } from '@/models/IWish';
+import { TCurrentImage, IImage, IWish } from '@/models/IWish';
 import {
     onlyWhitespaceValidation,
     wishDescriptionValidation,
@@ -16,6 +16,7 @@ import {
 } from '@/utils/validations';
 import { WISH_DESCRIPTION_MAX_LENGTH } from '@/utils/constants';
 import { removingWhiteSpaces, addingWhiteSpaces } from '@/utils/formating-value';
+import { decryptedData, encryptedData } from '@/utils/encryption-data';
 import ConfirmModal from '@/layouts/ConfirmModal';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -54,7 +55,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const [material, setMaterial] = useState<ICreateWish['material']>(true);
     const [show, setShow] = useState<ICreateWish['show']>('all');
     const [showConfirmDeleteWish, setShowConfirmDeleteWish] = useState<boolean>(false);
-    const [images, setImages] = useState<ICurrentImage[]>([]);
+    const [images, setImages] = useState<TCurrentImage[]>([]);
     const [currency, setCurrency] = useState<IWish['currency']>('UAH');
     const [isTransition, setIsTransition] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
@@ -72,17 +73,32 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             return;
         }
 
-        if (!myUser) return;
+        if (!myUser || !process.env.REACT_APP_CRYPTO_JS_SECRET) return;
+
+        const encryptedName = encryptedData(data.name.trim(), process.env.REACT_APP_CRYPTO_JS_SECRET);
+
+        const priceWithoutWhiteSpaces = data.price ? removingWhiteSpaces(data.price.trim()) : '';
+        const encryptedPrice = encryptedData(priceWithoutWhiteSpaces, process.env.REACT_APP_CRYPTO_JS_SECRET);
+        const sendingPrice = show === 'all' ? priceWithoutWhiteSpaces : encryptedPrice;
+
+        const encryptedCurrency = encryptedData(currency, process.env.REACT_APP_CRYPTO_JS_SECRET);
+        const sendingCurrency = show === 'all' ? currency : encryptedCurrency;
+
+        const dataAddress = data.address ? data.address.trim() : '';
+        const encryptedAddress = encryptedData(dataAddress, process.env.REACT_APP_CRYPTO_JS_SECRET);
+        const sendingAddress = show === 'all' ? dataAddress : encryptedAddress;
+
+        const encryptedDescription = encryptedData(data.description.trim(), process.env.REACT_APP_CRYPTO_JS_SECRET);
 
         const wishData = {
             userId: myUser.id,
             material,
             show,
-            name: data.name.trim(),
-            price: material && data.price ? removingWhiteSpaces(data.price.trim()) : '',
-            currency,
-            address: material ? data.address : '',
-            description: data.description.trim(),
+            name: show === 'all' ? data.name.trim() : encryptedName,
+            price: material ? sendingPrice : undefined,
+            currency: material ? sendingCurrency : undefined,
+            address: material ? sendingAddress : undefined,
+            description: show === 'all' ? data.description.trim() : encryptedDescription,
             images,
         };
         if (idOfSelectedWish) {
@@ -124,15 +140,42 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         if (wishList.length === 0) return;
 
         const myWish = wishList.find((wish) => wish.id === idOfSelectedWish);
-        if (!myWish) return;
+
+        if (!myWish || !process.env.REACT_APP_CRYPTO_JS_SECRET) return;
 
         setMaterial(myWish.material);
         setShow(myWish.show);
-        setValue('name', myWish.name);
-        myWish.price && setValue('price', addingWhiteSpaces(myWish.price));
-        myWish.currency && setCurrency(myWish.currency);
-        myWish.address && setValue('address', myWish.address);
-        setValue('description', myWish.description);
+        setValue(
+            'name',
+            myWish.show === 'all'
+                ? myWish.name
+                : decryptedData(myWish.name, process.env.REACT_APP_CRYPTO_JS_SECRET),
+        );
+        myWish.price && setValue(
+            'price',
+            addingWhiteSpaces(
+                myWish.show === 'all'
+                    ? myWish.price
+                    : decryptedData(myWish.price, process.env.REACT_APP_CRYPTO_JS_SECRET)
+            ),
+        );
+        myWish.currency && setCurrency(
+            myWish.show === 'all'
+                ? myWish.currency
+                : decryptedData(myWish.currency, process.env.REACT_APP_CRYPTO_JS_SECRET) as IWish['currency']
+        );
+        myWish.address && setValue(
+            'address',
+            myWish.show === 'all'
+                ? myWish.address
+                : decryptedData(myWish.address, process.env.REACT_APP_CRYPTO_JS_SECRET),
+        );
+        setValue(
+            'description',
+            myWish.show === 'all'
+                ? myWish.description
+                : decryptedData(myWish.description, process.env.REACT_APP_CRYPTO_JS_SECRET)
+        );
         setImages(myWish.images);
     }, [idOfSelectedWish, wishList, setValue]);
 

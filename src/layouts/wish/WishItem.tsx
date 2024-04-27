@@ -5,8 +5,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useAppSelector } from '@/store/hook';
 import { IWish } from '@/models/IWish';
 import { addingWhiteSpaces } from '@/utils/formating-value';
-import Action from '@/components/Action';
+import { unencryptedData } from '@/utils/encryption-data';
 import showBookingExpired from '@/utils/show-booking-expired';
+import Action from '@/components/Action';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 dayjs.extend(isSameOrBefore);
@@ -39,7 +40,7 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
                 <div className="wish-item-inner-border">
                     <div className="wish-item-content">
                         <div className="wish-item-name">
-                            {wish.name}
+                            {unencryptedData(wish.name, wish.show)}
                         </div>
 
                         {(wish.images.length > 0 || wish.price) && (
@@ -54,7 +55,11 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
                                 )}
                                 {wish.price && (
                                     <div className="wish-item-price">
-                                        {addingWhiteSpaces(wish.price)} {wish.currency || 'UAH'}
+                                        {
+                                            addingWhiteSpaces(unencryptedData(wish.price, wish.show))
+                                        } {
+                                            unencryptedData(wish.currency, wish.show) || 'UAH'
+                                        }
                                     </div>
                                 )}
                             </div>

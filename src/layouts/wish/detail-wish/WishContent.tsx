@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { addingWhiteSpaces } from '@/utils/formating-value';
+import { unencryptedData } from '@/utils/encryption-data';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
 import ShareButton from '@/components/ShareButton';
@@ -18,6 +19,8 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
     myUserId === wish.userId && (showRow = true);
     wish.price && (showRow = true);
 
+    const unencryptedAddress = wish.address ? unencryptedData(wish.address, wish.show) : '';
+
     const isURL = (str: string) => {
         try {
             new URL(str);
@@ -31,7 +34,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
         <>
             <div className="detail-wish-title">
                 <h3 className="detail-wish-name">
-                    {wish.name}
+                    {unencryptedData(wish.name, wish.show)}
                 </h3>
 
                 {myUserId === wish.userId && (
@@ -49,7 +52,11 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
                         <div className="detail-wish-box">
                             <span className="detail-wish-label">Ціна:</span>
                             <span className="detail-wish-data">
-                                {addingWhiteSpaces(wish.price)} {wish.currency || 'UAH'}
+                                {
+                                    addingWhiteSpaces(unencryptedData(wish.price, wish.show))
+                                } {
+                                    unencryptedData(wish.currency, wish.show) || 'UAH'
+                                }
                             </span>
                         </div>
                     )}
@@ -59,24 +66,24 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
             {wish.address && (
                 <p className="detail-wish-description">
                     <span className="label">Де можна придбати:</span>
-                    {isURL(wish.address) ? (
+                    {isURL(unencryptedAddress) ? (
                         <a
                             className="link"
-                            href={wish.address}
-                            title={wish.address}
+                            href={unencryptedAddress}
+                            title={unencryptedAddress}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            {wish.address}
+                            {unencryptedAddress}
                         </a>
-                    ) : (<>{wish.address}</>)}
+                    ) : (<>{unencryptedAddress}</>)}
                 </p>
             )}
 
             {wish.description && (
                 <p className="detail-wish-description">
                     <span className="label">Опис:</span>
-                    <span className="value">{wish.description}</span>
+                    <span className="value">{unencryptedData(wish.description, wish.show)}</span>
                 </p>
             )}
         </>
