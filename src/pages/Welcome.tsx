@@ -1,18 +1,10 @@
 import React, { FC } from 'react';
-import Button from '@/components/Button';
-import Logo from '@/components/Logo';
+import PageHeader from '@/layouts/PageHeader';
 
 const Welcome: FC = () => {
     return (
         <div className="welcome-page">
-            <div className="welcome-page-header">
-                <Logo />
-
-                <div className="actions">
-                    <Button to="/auth" variant="text">Увійти</Button>
-                    <Button to="/auth?register">Зареєструватись</Button>
-                </div>
-            </div>
+            <PageHeader />
 
             <section className="section">
                 <p className="section-text">

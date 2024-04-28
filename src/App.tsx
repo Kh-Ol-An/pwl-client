@@ -1,19 +1,12 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, createElement, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { checkAuth } from '@/store/my-user/thunks';
 import RoutesGuard from '@/utils/RoutesGuard';
-import Home from '@/pages/Home';
-import ActivationLinkExpired from '@/pages/ActivationLinkExpired';
-import Auth from '@/pages/Auth';
-import ChangeForgottenPassword from '@/pages/ChangeForgottenPassword';
-import Welcome from '@/pages/Welcome';
-import Wish from '@/pages/Wish';
-import PrivacyPolicy from '@/pages/PrivacyPolicy';
-import NotFound from '@/pages/NotFound';
 import Loading from '@/layouts/Loading';
+import { privateRoutes, publicRoutes, unauthenticatedRoutes } from '@/pages/routes';
 
 const theme = createTheme({
     palette: {
@@ -41,20 +34,19 @@ const App: FC = () => {
             {ready && (
                 <Routes>
                     <Route element={<RoutesGuard guard={myUser.user !== null} redirectPath="/auth" />}>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/activation-link-expired" element={<ActivationLinkExpired />} />
+                        {privateRoutes.map(({ path, component }) => (
+                            <Route key={path} path={path} element={createElement(component)} />
+                        ))}
                     </Route>
                     <Route element={<RoutesGuard guard={myUser.user === null} redirectPath="/" />}>
-                        <Route path="/auth" element={<Auth />} />
-                        <Route
-                            path="/change-forgotten-password/:passwordResetLink"
-                            element={<ChangeForgottenPassword />}
-                        />
+                        {unauthenticatedRoutes.map(({ path, component }) => (
+                            <Route key={path} path={path} element={createElement(component)} />
+                        ))}
                     </Route>
-                    <Route path="/welcome" element={<Welcome />} />
-                    <Route path="/wish/:wishId" element={<Wish />} />
-                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                    <Route path="/*" element={<NotFound />} />
+
+                    {publicRoutes.map(({ path, component }) => (
+                        <Route key={path} path={path} element={createElement(component)} />
+                    ))}
                 </Routes>
             )}
 
