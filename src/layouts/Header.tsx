@@ -4,7 +4,7 @@ import { Avatar, Modal } from '@mui/material';
 import {
     Settings as SettingsIcon,
     ManageAccounts as ManageAccountsIcon,
-//    Info as InfoIcon,
+    Info as InfoIcon,
     Forum as ForumIcon,
     Logout as LogoutIcon,
     Close as CloseIcon,
@@ -189,10 +189,10 @@ const Header: FC<IProps> = ({ open, close }) => {
                             <img className="wish-hub-text" src={WishHub} alt="Wish Hub" />
                         </Button>
 
-                        {/*<Button variant="text" type="button" onClick={handleLogout}>*/}
-                        {/*    <InfoIcon />*/}
-                        {/*    Інструкція*/}
-                        {/*</Button>*/}
+                        <Button to="/instruction" variant="text">
+                            <InfoIcon />
+                            Інструкція
+                        </Button>
 
                         <Button variant="text" type="button" onClick={handleShowContacts}>
                             <ForumIcon />

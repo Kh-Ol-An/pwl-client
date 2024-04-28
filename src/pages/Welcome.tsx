@@ -28,4 +28,3 @@ const Welcome: FC = () => {
 };
 
 export default Welcome;
-
