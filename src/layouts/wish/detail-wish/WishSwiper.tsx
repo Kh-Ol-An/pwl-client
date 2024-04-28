@@ -8,6 +8,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { IWish } from '@/models/IWish';
+import { unencryptedData } from '@/utils/encryption-data';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
@@ -56,7 +57,7 @@ const WishSwiper: FC<IProps> = ({ wish }) => {
                 {wish.images.map((image) => (
                     <SwiperSlide key={image.id}>
                         <img
-                            src={image.path}
+                            src={unencryptedData(image.path, wish.show)}
                             alt={`wish-${image.position}`}
                         />
                     </SwiperSlide>
@@ -79,7 +80,7 @@ const WishSwiper: FC<IProps> = ({ wish }) => {
                     {wish.images.map((image) => (
                         <SwiperSlide key={image.id}>
                             <img
-                                src={image.path}
+                                src={unencryptedData(image.path, wish.show)}
                                 alt={`wish-${image.position}`}
                             />
                         </SwiperSlide>

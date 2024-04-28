@@ -4,17 +4,15 @@ import { IWish } from '@/models/IWish';
 export const encryptedData = (data: string, secret: string): string => CryptoJS.AES.encrypt(data, secret).toString();
 
 export const decryptedData = (data: string, secret: string): string => {
-//    try {
-//        const decrypted = CryptoJS.AES.decrypt(data, secret).toString(CryptoJS.enc.Utf8);
-//        if (!decrypted) {
-//            throw new Error('Decryption failed');
-//        }
-//        return decrypted;
-//    } catch (error) {
-//        return data;
-//    }
-//    *******************************************************
-    return CryptoJS.AES.decrypt(data, secret).toString(CryptoJS.enc.Utf8) || data;
+    try {
+        const decrypted = CryptoJS.AES.decrypt(data, secret).toString(CryptoJS.enc.Utf8);
+        if (!decrypted) {
+            throw new Error('Не вдалося розшифрувати');
+        }
+        return decrypted;
+    } catch (error) {
+        return data;
+    }
 };
 
 export const unencryptedData = (data: string, show: IWish['show']): string => {

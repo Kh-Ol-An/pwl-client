@@ -89,6 +89,15 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         const sendingAddress = show === 'all' ? dataAddress : encryptedAddress;
 
         const encryptedDescription = encryptedData(data.description.trim(), process.env.REACT_APP_CRYPTO_JS_SECRET);
+        const sendingDescription = show === 'all' ? data.description.trim() : encryptedDescription;
+
+        const encryptedImages = images.map(image => {
+            if (image instanceof File || !process.env.REACT_APP_CRYPTO_JS_SECRET) return image;
+
+            const encryptedImage = { ...image };
+            encryptedImage.path = encryptedData(image.path, process.env.REACT_APP_CRYPTO_JS_SECRET);
+            return encryptedImage;
+        });
 
         const wishData = {
             userId: myUser.id,
@@ -98,8 +107,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             price: material ? sendingPrice : undefined,
             currency: material ? sendingCurrency : undefined,
             address: material ? sendingAddress : undefined,
-            description: show === 'all' ? data.description.trim() : encryptedDescription,
-            images,
+            description: data.description.trim().length > 0 ? sendingDescription : undefined,
+            images: show === 'all' ? encryptedImages : images,
         };
         if (idOfSelectedWish) {
             await dispatch(updateWish({
@@ -176,7 +185,15 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 ? myWish.description
                 : decryptedData(myWish.description, process.env.REACT_APP_CRYPTO_JS_SECRET)
         );
-        setImages(myWish.images);
+
+        const decryptedImages = myWish.images.map(image => {
+            if (!process.env.REACT_APP_CRYPTO_JS_SECRET) return image;
+
+            const decryptedImage = { ...image };
+            decryptedImage.path = decryptedData(image.path, process.env.REACT_APP_CRYPTO_JS_SECRET);
+            return decryptedImage;
+        });
+        setImages(myWish.show === 'all' ? myWish.images : decryptedImages);
     }, [idOfSelectedWish, wishList, setValue]);
 
     useEffect(() => {

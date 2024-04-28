@@ -9,7 +9,7 @@ export interface ICreateWish {
     name: IWish['name'];
     price?: IWish['price'];
     address?: IWish['address'];
-    description: IWish['description'];
+    description?: IWish['description'];
     images: TCurrentImage[];
 }
 
