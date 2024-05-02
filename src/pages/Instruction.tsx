@@ -5,6 +5,8 @@ import ChooseGoogleAccountImg from '@/assets/images/choose-google-account.png';
 import EnterYourAccountNameImg from '@/assets/images/enter-your-account-name.png';
 import EnterYourPasswordImg from '@/assets/images/enter-your-password.png';
 import EnteredToWishHubImg from '@/assets/images/entered-to-wish-hub.png';
+import SingUpImg from '@/assets/images/sing-up.png';
+import ActivationAccountImg from '@/assets/images/activation-account.png';
 
 const Instruction: FC = () => {
     return (
@@ -86,7 +88,7 @@ const Instruction: FC = () => {
                                 </p>
 
                                 <div className="image">
-                                    <img src={LoginWithGoogleImg} alt="Вхід за допомогою Google сервісу" />
+                                    <img src={SingUpImg} alt="Реєстрація" />
                                 </div>
                             </li>
 
@@ -96,37 +98,13 @@ const Instruction: FC = () => {
                                     перевірте папку спам. Ми не використовуємо безконтрольну розсилку.
                                     Просто роботи кожного поштового сервісу по різному налаштовані й наш лист
                                     випадково може потрапити до папки спам.
-                                </p>
-
-                                <div className="image">
-                                    <img src={ChooseGoogleAccountImg} alt="Вибір Google аккаунту" />
-                                </div>
-                            </li>
-
-                            {/*<li className="image-item">*/}
-                            {/*    <p className="image-item-text">*/}
-                            {/*        Якщо Ви ще не авторизовані в пошті gmail на своєму пристрої,*/}
-                            {/*        введіть свої дані у відповідні поля.*/}
-                            {/*    </p>*/}
-
-                            {/*    <div className="image-box">*/}
-                            {/*        <div className="image first">*/}
-                            {/*            <img src={EnterYourAccountNameImg} alt="Введіть свій аккаунт" />*/}
-                            {/*        </div>*/}
-                            {/*        <div className="image second">*/}
-                            {/*            <img src={EnterYourPasswordImg} alt="Введіть свій пароль" />*/}
-                            {/*        </div>*/}
-                            {/*    </div>*/}
-                            {/*</li>*/}
-
-                            <li className="image-item">
-                                <p className="image-item-text">
+                                    <br />
                                     В листі натискаєте на відповідну кнопку, або ж скопіюйте посилання,
                                     та вставте в адресну строфу браузера.
                                 </p>
 
                                 <div className="image">
-                                    <img src={EnteredToWishHubImg} alt="Увійшов до Wish Hub" />
+                                    <img src={ActivationAccountImg} alt="Активація акаунта" />
                                 </div>
                             </li>
                         </ul>
