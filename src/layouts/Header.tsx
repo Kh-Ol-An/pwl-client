@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useGoogleLogin } from '@react-oauth/google';
 import { Avatar, Modal } from '@mui/material';
 import {
     Settings as SettingsIcon,
@@ -61,12 +62,46 @@ const Header: FC<IProps> = ({ open, close }) => {
     const [showAbout, setShowAbout] = useState<boolean>(false);
     const [showContacts, setShowContacts] = useState<boolean>(false);
     const [showConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
+    const [confirmDeleteMyUserError, setConfirmDeleteMyUserError] = useState<string>('');
+
+    const getDataFromGoogle = useGoogleLogin({
+        onSuccess: async (tokenResponse) => {
+            if (!myUser) return;
+
+            const token = tokenResponse.access_token;
+
+            const response = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const data = await response.json();
+            if (myUser.email !== data.email) {
+                setConfirmDeleteMyUserError('Цей email не співпадає з email акаунта який Ви намагаєтесь видалити');
+                return;
+            }
+            await dispatch(deleteMyUser({ email: data.email, password: '', id: myUser.id }));
+            close();
+        },
+    });
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         if (!myUser) return;
 
-        await dispatch(deleteMyUser({ ...data, id: myUser.id }));
-        close();
+        if (myUser.hasPassword) {
+            if (myUser.email !== data.email) {
+                setConfirmDeleteMyUserError('Цей email не співпадає з email акаунта який Ви намагаєтесь видалити');
+                return;
+            } else {
+                setConfirmDeleteMyUserError('');
+            }
+
+            await dispatch(deleteMyUser({ ...data, id: myUser.id }));
+            close();
+        } else {
+            await getDataFromGoogle();
+        }
     };
 
     // SelectWish
@@ -312,27 +347,41 @@ const Header: FC<IProps> = ({ open, close }) => {
                                 <h3 className="title attention">Увага!</h3>
 
                                 <p className="text">
-                                    Нашому суму не має меж... Ми сподіваємось що Ви дасте нам ще один шанс та залишитись.
-                                    Якщо Ви рішуче вирішили покинути нас, то підтвердьте свій намір ввівши відповідні дані.
+                                    Нашому суму не має меж... Ми сподіваємось що Ви дасте нам ще один шанс та
+                                    залишитись. Якщо Ви рішуче вирішили покинути нас, то підтвердьте свій намір
+                                    ввівши відповідні дані.
                                 </p>
 
-                                <Input
-                                    {...register("email", emailValidation)}
-                                    id="email"
-                                    name="email"
-                                    type="text"
-                                    label="Email*"
-                                    error={errors?.email?.message}
-                                />
+                                {!myUser?.hasPassword && confirmDeleteMyUserError.length > 0 && (
+                                    <p className="error">{confirmDeleteMyUserError}</p>
+                                )}
 
-                                <Input
-                                    {...register("password", passwordValidation)}
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    label="Пароль*"
-                                    error={errors?.password?.message}
-                                />
+                                {myUser?.hasPassword && (
+                                    <>
+                                        <div className="email-box">
+                                            <Input
+                                                {...register("email", emailValidation)}
+                                                id="email"
+                                                name="email"
+                                                type="text"
+                                                label="Email*"
+                                                error={errors?.email?.message}
+                                            />
+                                            {confirmDeleteMyUserError.length > 0 && (
+                                                <p className="error">{confirmDeleteMyUserError}</p>
+                                            )}
+                                        </div>
+
+                                        <Input
+                                            {...register("password", passwordValidation)}
+                                            id="password"
+                                            name="password"
+                                            type="password"
+                                            label="Пароль*"
+                                            error={errors?.password?.message}
+                                        />
+                                    </>
+                                )}
 
                                 <div className="modal-actions">
                                     <Button variant="text" color="action-color" type="submit">

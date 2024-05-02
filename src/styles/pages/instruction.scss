@@ -25,21 +25,22 @@
         font-size: 16px;
     }
 
-    ol {
+    .numbered-list {
         list-style-type: decimal;
         padding-left: 20px;
         display: flex;
         flex-direction: column;
         gap: 20px;
 
-        li {
+        .numbered-item {
             counter-increment: li-counter;
             padding-left: 6px;
         }
 
-        li::marker {
+        .numbered-item::marker {
             content: counter(li-counter) ". ";
             font-weight: 700;
+            font-size: 24px;
             color: $primary-color;
         }
     }
@@ -49,5 +50,49 @@
         width: 100%;
         height: 1px;
         background-color: $light-color;
+    }
+
+    .image-list {
+        @include flex-column;
+        gap: 20px;
+    }
+
+    .image-item {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        height: 340px;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .image-item-text {
+        font-size: 20px;
+    }
+
+    .image {
+        border: 2px solid $special-color;
+        border-radius: $radius-md;
+        overflow: hidden;
+    }
+
+    .image-box {
+        position: relative;
+        height: 100%;
+
+        .image {
+            position: absolute;
+            height: 340px;
+        }
+
+        .first {
+            top: -10px;
+            left: -20px;
+            z-index: $z-index-xs-1;
+        }
+
+        .second {
+            bottom: -20px;
+            right: -20px;
+        }
     }
 }

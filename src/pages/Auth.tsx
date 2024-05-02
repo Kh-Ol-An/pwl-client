@@ -153,6 +153,7 @@ const Auth: FC = () => {
 
                         {!isForgotPassword && (
                             <GoogleLogin
+                                text={isRegistration ? 'signup_with' : 'signin_with'}
                                 onSuccess={handleGoogleLogin}
                                 onError={() => {
                                     console.log('Google OAuth Login Failed');
