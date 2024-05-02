@@ -1,19 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.4106580c.css",
-    "main.js": "/static/js/main.f0773e41.js",
+    "main.css": "/static/css/main.323c8f4f.css",
+    "main.js": "/static/js/main.d4a9bb03.js",
     "static/media/logo.svg": "/static/media/logo.21be91a6ab25421b98d4539d53f5be70.svg",
     "static/media/invisible-gift.png": "/static/media/invisible-gift.fe94cb9059572503ab0e.png",
+    "static/media/choose-google-account.png": "/static/media/choose-google-account.7bfdac45d0c323bcd550.png",
+    "static/media/entered-to-wish-hub.png": "/static/media/entered-to-wish-hub.dd1faa1fc053dfe4fb17.png",
+    "static/media/enter-your-account-name.png": "/static/media/enter-your-account-name.855f05996a6fde2466c2.png",
+    "static/media/login-with-google.png": "/static/media/login-with-google.96a7006a0ae62ddf1ee2.png",
+    "static/media/enter-your-password.png": "/static/media/enter-your-password.56c83510ecb357cf6b3f.png",
     "static/media/wish-hub.png": "/static/media/wish-hub.dc56ace47ad098e25c48.png",
     "static/media/poppins-v20-latin-regular.woff2": "/static/media/poppins-v20-latin-regular.405055dd680fa1dcdfa2.woff2",
     "static/media/poppins-v20-latin-300.woff2": "/static/media/poppins-v20-latin-300.39576fe9df8a22cc1bcc.woff2",
     "static/media/poppins-v20-latin-700.woff2": "/static/media/poppins-v20-latin-700.d86662fe776dae29ea78.woff2",
     "index.html": "/index.html",
-    "main.4106580c.css.map": "/static/css/main.4106580c.css.map",
-    "main.f0773e41.js.map": "/static/js/main.f0773e41.js.map"
+    "main.323c8f4f.css.map": "/static/css/main.323c8f4f.css.map",
+    "main.d4a9bb03.js.map": "/static/js/main.d4a9bb03.js.map"
   },
   "entrypoints": [
-    "static/css/main.4106580c.css",
-    "static/js/main.f0773e41.js"
+    "static/css/main.323c8f4f.css",
+    "static/js/main.d4a9bb03.js"
   ]
 }
