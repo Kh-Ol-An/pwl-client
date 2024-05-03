@@ -12,22 +12,22 @@ const PageHeader = () => {
             <Logo />
 
             <div className="actions">
-                <div className="actions">
-                    <Button
-                        variant="text"
-                        disabled={i18next.language === 'uk'}
-                        onClick={() => i18next.changeLanguage('uk')}
-                    >
-                        Українська
-                    </Button>
-                    <Button
-                        variant="text"
-                        disabled={i18next.language === 'en'}
-                        onClick={() => i18next.changeLanguage('en')}
-                    >
-                        English
-                    </Button>
-                </div>
+                {/*<div className="actions">*/}
+                {/*    <Button*/}
+                {/*        variant="text"*/}
+                {/*        disabled={i18next.language === 'uk'}*/}
+                {/*        onClick={() => i18next.changeLanguage('uk')}*/}
+                {/*    >*/}
+                {/*        Українська*/}
+                {/*    </Button>*/}
+                {/*    <Button*/}
+                {/*        variant="text"*/}
+                {/*        disabled={i18next.language === 'en'}*/}
+                {/*        onClick={() => i18next.changeLanguage('en')}*/}
+                {/*    >*/}
+                {/*        English*/}
+                {/*    </Button>*/}
+                {/*</div>*/}
 
                 {myUser.user === null && (
                     <div className="actions">

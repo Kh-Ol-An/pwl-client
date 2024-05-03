@@ -38,9 +38,11 @@ const Instruction: FC = () => {
             <PageHeader />
 
             <section className="container">
-                <h1>{t('instruction.title')}</h1>
+                {/*<h1>{t('instruction.title')}</h1>*/}
+                <h1>Інструкція</h1>
 
-                <h2>{t('instruction.login')}</h2>
+                {/*<h2>{t('instruction.login')}</h2>*/}
+                <h2>Вхід</h2>
 
                 <p>Є кілька способів увійти або зареєструватись:</p>
 
