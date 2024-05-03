@@ -3,11 +3,19 @@
     min-height: 100svh;
 
     section {
-        padding: 60px 20px 40px;
+        padding: 100px 16px 30px;
         display: flex;
         flex-direction: column;
         gap: 20px;
         color: $light-color;
+
+        @media only screen and (min-width: 412px) {
+            padding: 60px 16px 30px;
+        }
+
+        @media only screen and (min-width: 768px) {
+            padding: 60px 20px 40px;
+        }
     }
 
     h1 {
@@ -26,22 +34,46 @@
     }
 
     .numbered-list {
-        list-style-type: decimal;
-        padding-left: 20px;
         display: flex;
         flex-direction: column;
         gap: 20px;
+    }
 
-        .numbered-item {
-            counter-increment: li-counter;
+    .numbered-item {
+        position: relative;
+
+        @media only screen and (min-width: 768px) {
             padding-left: 6px;
         }
 
-        .numbered-item::marker {
-            content: counter(li-counter) ". ";
+        .marker {
+            float: left;
+            margin-right: 6px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid $primary-color;
+            border-radius: $radius-round;
             font-weight: 700;
-            font-size: 24px;
+            font-size: 18px;
+            line-height: 20px;
             color: $primary-color;
+
+            @media only screen and (min-width: 412px) {
+                width: 24px;
+                height: 24px;
+                font-size: 20px;
+                line-height: 24px;
+            }
+
+            @media only screen and (min-width: 768px) {
+                width: 32px;
+                height: 32px;
+                font-size: 24px;
+                line-height: 32px;
+            }
         }
     }
 
@@ -59,14 +91,41 @@
 
     .image-item {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        height: 340px;
+        grid-template-columns: 2fr 3fr;
+        width: 100%;
         align-items: center;
-        gap: 20px;
+        gap: 10px;
+
+        @media only screen and (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            min-height: 340px;
+        }
+
+        &.double {
+            align-items: flex-start;
+            min-height: 460px;
+
+            @media only screen and (min-width: 768px) {
+                align-items: center;
+            }
+        }
     }
 
     .image-item-text {
-        font-size: 20px;
+        font-size: 14px;
+
+        @media only screen and (min-width: 390px) {
+            font-size: 16px;
+        }
+
+        @media only screen and (min-width: 430px) {
+            font-size: 18px;
+        }
+
+        @media only screen and (min-width: 768px) {
+            font-size: 20px;
+        }
     }
 
     .image {
@@ -85,14 +144,35 @@
         }
 
         .first {
-            top: -10px;
-            left: -20px;
-            z-index: $z-index-xs-1;
+            top: -12px;
+            right: 0;
+
+            @media only screen and (min-width: 768px) {
+                top: -10px;
+                right: unset;
+                left: -20px;
+                z-index: $z-index-xs-2;
+            }
         }
 
         .second {
-            bottom: -20px;
-            right: -20px;
+            bottom: -12px;
+            left: -66px;
+            z-index: $z-index-xs-1;
+
+            @media only screen and (min-width: 390px) {
+                left: -30px;
+            }
+
+            @media only screen and (min-width: 412px) {
+                left: -20px;
+            }
+
+            @media only screen and (min-width: 768px) {
+                right: -20px;
+                bottom: -10px;
+                left: unset;
+            }
         }
     }
 }

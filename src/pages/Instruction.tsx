@@ -1,14 +1,35 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import PageHeader from '@/layouts/PageHeader';
-import LoginWithGoogleImg from '@/assets/images/login-with-google.png';
-import ChooseGoogleAccountImg from '@/assets/images/choose-google-account.png';
-import EnterYourAccountNameImg from '@/assets/images/enter-your-account-name.png';
-import EnterYourPasswordImg from '@/assets/images/enter-your-password.png';
-import EnteredToWishHubImg from '@/assets/images/entered-to-wish-hub.png';
-import SingUpImg from '@/assets/images/sing-up.png';
-import ActivationAccountImg from '@/assets/images/activation-account.png';
+import LoginWithGoogleMobileImg from '@/assets/images/instruction/login-with-google-mobile.jpg';
+import LoginWithGoogleImg from '@/assets/images/instruction/login-with-google.png';
+import ChooseGoogleAccountMobileImg from '@/assets/images/instruction/choose-google-account-mobile.jpg';
+import ChooseGoogleAccountImg from '@/assets/images/instruction/choose-google-account.png';
+import EnterYourAccountNameMobileImg from '@/assets/images/instruction/enter-your-account-name-mobile.jpg';
+import EnterYourAccountNameImg from '@/assets/images/instruction/enter-your-account-name.png';
+import EnterYourPasswordMobileImg from '@/assets/images/instruction/enter-your-password-mobile.jpg';
+import EnterYourPasswordImg from '@/assets/images/instruction/enter-your-password.png';
+import EnteredToWishHubMobileImg from '@/assets/images/instruction/entered-to-wish-hub-mobile.jpg';
+import EnteredToWishHubImg from '@/assets/images/instruction/entered-to-wish-hub.png';
+import SingUpMobileImg from '@/assets/images/instruction/sing-up-mobile.jpg';
+import SingUpImg from '@/assets/images/instruction/sing-up.png';
+import ActivationAccountMobileImg from '@/assets/images/instruction/activation-account-mobile.jpg';
+import ActivationAccountImg from '@/assets/images/instruction/activation-account.png';
 
 const Instruction: FC = () => {
+    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     return (
         <div className="instruction-page">
             <PageHeader />
@@ -25,6 +46,7 @@ const Instruction: FC = () => {
                         <ul className="image-list">
                             <li className="image-item">
                                 <p className="image-item-text">
+                                    <span className="marker">1</span>
                                     Найпростіший за допомогою Google сервісу.
                                     <br />
                                     Спочатку потрібно погодитись з умовами.
@@ -33,7 +55,10 @@ const Instruction: FC = () => {
                                 </p>
 
                                 <div className="image">
-                                    <img src={LoginWithGoogleImg} alt="Вхід за допомогою Google сервісу" />
+                                    <img
+                                        src={screenWidth < 768 ? LoginWithGoogleMobileImg : LoginWithGoogleImg}
+                                        alt="Вхід за допомогою Google сервісу"
+                                    />
                                 </div>
                             </li>
 
@@ -44,11 +69,14 @@ const Instruction: FC = () => {
                                 </p>
 
                                 <div className="image">
-                                    <img src={ChooseGoogleAccountImg} alt="Вибір Google аккаунту" />
+                                    <img
+                                        src={screenWidth < 768 ? ChooseGoogleAccountMobileImg : ChooseGoogleAccountImg}
+                                        alt="Вибір Google аккаунту"
+                                    />
                                 </div>
                             </li>
 
-                            <li className="image-item">
+                            <li className="image-item double">
                                 <p className="image-item-text">
                                     Якщо Ви ще не авторизовані в пошті gmail на своєму пристрої,
                                     введіть свої дані у відповідні поля.
@@ -56,10 +84,20 @@ const Instruction: FC = () => {
 
                                 <div className="image-box">
                                     <div className="image first">
-                                        <img src={EnterYourAccountNameImg} alt="Введіть свій аккаунт" />
+                                        <img
+                                            src={
+                                                screenWidth < 768
+                                                    ? EnterYourAccountNameMobileImg
+                                                    : EnterYourAccountNameImg
+                                            }
+                                            alt="Введіть свій аккаунт"
+                                        />
                                     </div>
                                     <div className="image second">
-                                        <img src={EnterYourPasswordImg} alt="Введіть свій пароль" />
+                                        <img
+                                            src={screenWidth < 768 ? EnterYourPasswordMobileImg : EnterYourPasswordImg}
+                                            alt="Введіть свій пароль"
+                                        />
                                     </div>
                                 </div>
                             </li>
@@ -71,7 +109,10 @@ const Instruction: FC = () => {
                                 </p>
 
                                 <div className="image">
-                                    <img src={EnteredToWishHubImg} alt="Увійшов до Wish Hub" />
+                                    <img
+                                        src={screenWidth < 768 ? EnteredToWishHubMobileImg : EnteredToWishHubImg}
+                                        alt="Увійшов до Wish Hub"
+                                    />
                                 </div>
                             </li>
                         </ul>
@@ -81,6 +122,7 @@ const Instruction: FC = () => {
                         <ul className="image-list">
                             <li className="image-item">
                                 <p className="image-item-text">
+                                    <span className="marker">2</span>
                                     Якщо Ви не бажаєте використовувати Google аккаунт або у Вас його немає,
                                     потрібно буде пройти верифікацію у веб додатку Wish Hub.
                                     <br />
@@ -88,7 +130,10 @@ const Instruction: FC = () => {
                                 </p>
 
                                 <div className="image">
-                                    <img src={SingUpImg} alt="Реєстрація" />
+                                    <img
+                                        src={screenWidth < 768 ? SingUpMobileImg : SingUpImg}
+                                        alt="Реєстрація"
+                                    />
                                 </div>
                             </li>
 
@@ -104,7 +149,10 @@ const Instruction: FC = () => {
                                 </p>
 
                                 <div className="image">
-                                    <img src={ActivationAccountImg} alt="Активація акаунта" />
+                                    <img
+                                        src={screenWidth < 768 ? ActivationAccountMobileImg : ActivationAccountImg}
+                                        alt="Активація акаунта"
+                                    />
                                 </div>
                             </li>
                         </ul>
