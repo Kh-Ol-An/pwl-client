@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import PageHeader from '@/layouts/PageHeader';
 import LoginWithGoogleMobileImg from '@/assets/images/instruction/login-with-google-mobile.jpg';
 import LoginWithGoogleImg from '@/assets/images/instruction/login-with-google.png';
@@ -18,6 +19,8 @@ import ActivationAccountImg from '@/assets/images/instruction/activation-account
 const Instruction: FC = () => {
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
+    const { t } = useTranslation();
+
     useEffect(() => {
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
@@ -35,9 +38,9 @@ const Instruction: FC = () => {
             <PageHeader />
 
             <section className="container">
-                <h1>Інструкція</h1>
+                <h1>{t('instruction.title')}</h1>
 
-                <h2>Вхід</h2>
+                <h2>{t('instruction.login')}</h2>
 
                 <p>Є кілька способів увійти або зареєструватись:</p>
 
