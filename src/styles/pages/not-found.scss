@@ -28,6 +28,11 @@
             background-size: 500px;
         }
     }
+
+    .not-found-page-header {
+        @include flex-between;
+        gap: 10px;
+    }
     
     .content {
         position: absolute;

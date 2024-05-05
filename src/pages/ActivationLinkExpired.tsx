@@ -3,6 +3,7 @@ import { Logout as LogoutIcon } from '@mui/icons-material';
 import { useAppDispatch } from '@/store/hook';
 import { logout } from '@/store/my-user/thunks';
 import Logo from '@/components/Logo';
+import LanguageSelection from "@/components/LanguageSelection";
 import Button from '@/components/Button';
 
 const ActivationLinkExpired = () => {
@@ -12,6 +13,8 @@ const ActivationLinkExpired = () => {
         <div className="inactivated">
             <div className="inactivated-header">
                 <Logo to="/welcome" />
+
+                <LanguageSelection />
 
                 <div className="logout">
                     <Button variant="text" onClick={() => dispatch(logout())}>

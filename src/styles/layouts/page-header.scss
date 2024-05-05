@@ -12,7 +12,7 @@
     gap: 10px;
     background: linear-gradient(0, transparent 0%, #25252b 60%);
 
-    @media only screen and (min-width: 412px) {
+    @media only screen and (min-width: 500px) {
         flex-direction: row;
         justify-content: space-between;
     }
@@ -21,11 +21,17 @@
         padding: 20px;
     }
 
+    .actions {
+        @include flex-between;
+        gap: 10px;
+        width: 100%;
+    }
+
     .logo {
         margin: 0;
     }
 
-    .actions {
+    .auth-actions {
         @include flex-center;
         gap: 10px;
     }

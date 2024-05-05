@@ -1,0 +1,18 @@
+.language-selection {
+    @include flex-center;
+    gap: 10px;
+
+    button:disabled {
+        cursor: not-allowed;
+        opacity: 0.3;
+    }
+
+    .flag-icon {
+        width: 30px;
+
+        svg {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

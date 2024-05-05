@@ -1,12 +1,17 @@
 import React, { FC } from 'react';
 import Logo from '@/components/Logo';
 import Button from '@/components/Button';
+import LanguageSelection from "@/components/LanguageSelection";
 
 const NotFound: FC = () => {
     return (
         <div className="page not-found-page">
             <div className="bg-img">
-                <Logo />
+                <div className="not-found-page-header">
+                    <Logo />
+
+                    <LanguageSelection />
+                </div>
 
                 <div className="content">
                     <h1 className="title">Сторінку не знайдено</h1>

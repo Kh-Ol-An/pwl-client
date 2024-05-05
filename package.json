@@ -22,6 +22,7 @@
         "@types/react-beautiful-dnd": "^13.1.8",
         "@types/react-dom": "^18.2.18",
         "axios": "^1.6.7",
+        "country-flag-icons": "^1.5.11",
         "crypto-js": "^4.2.0",
         "dayjs": "^1.11.10",
         "i18next": "^23.11.3",

@@ -1,11 +1,16 @@
 import React, { FC } from 'react';
 import Button from '@/components/Button';
 import Logo from '@/components/Logo';
+import LanguageSelection from "@/components/LanguageSelection";
 
 const PrivacyPolicy: FC = () => {
     return (
         <div className="privacy-policy">
-            <Logo to="/auth" />
+            <div className="privacy-policy-header">
+                <Logo to="/auth" />
+
+                <LanguageSelection />
+            </div>
 
             <div className="container">
                 <h1>Privacy Policy</h1>

@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from "@/store/hook";
 import PageHeader from '@/layouts/PageHeader';
 import LoginWithGoogleMobileImg from '@/assets/images/instruction/login-with-google-mobile.jpg';
 import LoginWithGoogleImg from '@/assets/images/instruction/login-with-google.png';
@@ -17,6 +18,8 @@ import ActivationAccountMobileImg from '@/assets/images/instruction/activation-a
 import ActivationAccountImg from '@/assets/images/instruction/activation-account.png';
 
 const Instruction: FC = () => {
+    const myUser = useAppSelector((state) => state.myUser);
+
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
     const { t } = useTranslation();
@@ -37,7 +40,7 @@ const Instruction: FC = () => {
         <div className="instruction-page">
             <PageHeader />
 
-            <section className="container">
+            <section className={"container" + (myUser.user === null ? " logged-out" : "")}>
                 {/*<h1>{t('instruction.title')}</h1>*/}
                 <h1>Інструкція</h1>
 

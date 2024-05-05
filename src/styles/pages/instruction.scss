@@ -3,18 +3,26 @@
     min-height: 100svh;
 
     section {
-        padding: 100px 16px 30px;
+        padding: 60px 16px 30px;
         display: flex;
         flex-direction: column;
         gap: 20px;
         color: $light-color;
 
-        @media only screen and (min-width: 412px) {
-            padding: 60px 16px 30px;
-        }
-
         @media only screen and (min-width: 768px) {
             padding: 60px 20px 40px;
+        }
+
+        &.logged-out {
+            padding: 100px 16px 30px;
+
+            @media only screen and (min-width: 500px) {
+                padding: 60px 16px 30px;
+            }
+
+            @media only screen and (min-width: 768px) {
+                padding: 60px 20px 40px;
+            }
         }
     }
 

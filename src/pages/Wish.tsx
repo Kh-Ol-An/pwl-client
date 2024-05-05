@@ -1,16 +1,18 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Avatar } from '@mui/material';
-import { useAppDispatch } from '@/store/hook';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { getWish } from '@/store/wishes/thunks';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
-import WishSwiper from '@/layouts/wish/detail-wish/WishSwiper';
-import Button from '@/components/Button';
-import Logo from '@/components/Logo';
+import { unencryptedData } from "@/utils/encryption-data";
 import { addingWhiteSpaces } from '@/utils/formating-value';
+import WishSwiper from '@/layouts/wish/detail-wish/WishSwiper';
+import PageHeader from "@/layouts/PageHeader";
 
 const Wish: FC = () => {
+    const myUser = useAppSelector((state) => state.myUser);
+
     const location = useLocation();
 
     const dispatch = useAppDispatch();
@@ -18,6 +20,8 @@ const Wish: FC = () => {
     const [wish, setWish] = useState<IWish | null>(null);
     const [userFullName, setUserFullName] = useState<string>('');
     const [userAvatar, setUserAvatar] = useState<IUser['avatar']>('');
+
+    const unencryptedAddress = wish?.address ? unencryptedData(wish.address, wish.show) : '';
 
     const isURL = (str: string) => {
         try {
@@ -40,15 +44,8 @@ const Wish: FC = () => {
     }, []);
 
     return (
-        <div className="wish">
-            <div className="wish-header">
-                <Logo />
-
-                <div className="actions">
-                    <Button to="/auth" variant="text">Увійти</Button>
-                    <Button to="/auth?register">Зареєструватись</Button>
-                </div>
-            </div>
+        <div className={"wish" + (myUser.user === null ? " logged-out" : "")}>
+            <PageHeader />
 
             {wish ? (
                 <>
@@ -60,7 +57,7 @@ const Wish: FC = () => {
                         </div>
                     </div>
 
-                    <h1 className="wish-title">{wish.name}</h1>
+                    <h1 className="wish-title">{unencryptedData(wish.name, wish.show)}</h1>
 
                     <div className="wish-content">
                         {wish.images.length > 0 && <WishSwiper wish={wish} />}
@@ -70,7 +67,11 @@ const Wish: FC = () => {
                                 <div className="wish-box">
                                     <span className="wish-label">Ціна:</span>
                                     <span className="wish-data">
-                                        {addingWhiteSpaces(wish.price)} {wish.currency || 'UAH'}
+                                        {
+                                            addingWhiteSpaces(unencryptedData(wish.price, wish.show))
+                                        } {
+                                            unencryptedData(wish.currency, wish.show) || 'UAH'
+                                        }
                                     </span>
                                 </div>
                             )}
@@ -78,24 +79,24 @@ const Wish: FC = () => {
                             {wish.address && (
                                 <p className="wish-description">
                                     <span className="label">Де можна придбати:</span>
-                                    {isURL(wish.address) ? (
+                                    {isURL(unencryptedAddress) ? (
                                         <a
                                             className="link"
-                                            href={wish.address}
-                                            title={wish.address}
+                                            href={unencryptedAddress}
+                                            title={unencryptedAddress}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            {wish.address}
+                                            {unencryptedAddress}
                                         </a>
-                                    ) : (<>{wish.address}</>)}
+                                    ) : (<>{unencryptedAddress}</>)}
                                 </p>
                             )}
 
                             {wish.description && (
                                 <p className="wish-description">
                                     <span className="label">Опис:</span>
-                                    <span className="value">{wish.description}</span>
+                                    <span className="value">{unencryptedData(wish.description, wish.show)}</span>
                                 </p>
                             )}
                         </div>
