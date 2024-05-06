@@ -18,11 +18,11 @@ import ActivationAccountMobileImg from '@/assets/images/instruction/activation-a
 import ActivationAccountImg from '@/assets/images/instruction/activation-account.png';
 
 const Instruction: FC = () => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser);
 
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-
-    const { t } = useTranslation();
 
     useEffect(() => {
         const handleResize = () => {
