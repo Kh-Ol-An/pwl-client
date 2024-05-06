@@ -1,4 +1,6 @@
 {
+    "sing-in": "Sing In",
+    "sing-up": "Sing Up",
     "instruction": {
         "title": "Instruction",
         "auth": {
@@ -38,5 +40,18 @@
             "title": "Continued",
             "text": "To be continued..."
         }
+    },
+    "welcome": {
+        "intro": "Hello!",
+        "statement": "I'm your personal wish-fulfillment assistant!",
+        "question": "What's your dream?",
+        "text": "You probably know that thoughts become things. And written wishes tend to come true much faster. Write down all your big dreams and small desires here. You can share them with your friends or keep them just for yourself :) The best part is that when you're heading to a party, you won't have to stress about gifts - you'll be able to find a list of what your friend really wants right here."
+    },
+    "wish": {
+        "created-by": "Wish created by user:",
+        "price": "Price:",
+        "address": "Where to buy:",
+        "description": "Description:",
+        "empty": "This wish does not exist. It may have been deleted by the user."
     }
 }

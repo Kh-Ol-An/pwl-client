@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Avatar } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { getWish } from '@/store/wishes/thunks';
@@ -11,6 +12,8 @@ import WishSwiper from '@/layouts/wish/detail-wish/WishSwiper';
 import PageHeader from "@/layouts/PageHeader";
 
 const Wish: FC = () => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser);
 
     const location = useLocation();
@@ -50,7 +53,7 @@ const Wish: FC = () => {
             {wish ? (
                 <>
                     <div className="wish-head">
-                        Бажання створено користувачем:
+                        {t('wish.created-by')}
                         <div className="wish-head-user">
                             <Avatar alt={userFullName} src={userAvatar} sx={{ width: 56, height: 56 }} />
                             <span className="wish-head-user-name">{userFullName}</span>
@@ -65,7 +68,7 @@ const Wish: FC = () => {
                         <div className={"wish-wrap" + (wish.images.length > 1 ? " with-top" : "")}>
                             {wish.price && (
                                 <div className="wish-box">
-                                    <span className="wish-label">Ціна:</span>
+                                    <span className="wish-label">{t('wish.price')}</span>
                                     <span className="wish-data">
                                         {
                                             addingWhiteSpaces(unencryptedData(wish.price, wish.show))
@@ -78,7 +81,7 @@ const Wish: FC = () => {
 
                             {wish.address && (
                                 <p className="wish-description">
-                                    <span className="label">Де можна придбати:</span>
+                                    <span className="label">{t('wish.address')}</span>
                                     {isURL(unencryptedAddress) ? (
                                         <a
                                             className="link"
@@ -95,7 +98,7 @@ const Wish: FC = () => {
 
                             {wish.description && (
                                 <p className="wish-description">
-                                    <span className="label">Опис:</span>
+                                    <span className="label">{t('wish.description')}</span>
                                     <span className="value">{unencryptedData(wish.description, wish.show)}</span>
                                 </p>
                             )}
@@ -103,9 +106,7 @@ const Wish: FC = () => {
                     </div>
                 </>
             ) : (
-                <p className="wish-empty">
-                    Цього бажання не існує. Можливо, воно було видалено користувачем.
-                </p>
+                <p className="wish-empty">{t('wish.empty')}</p>
             )}
         </div>
     );
