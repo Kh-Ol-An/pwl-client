@@ -10,8 +10,8 @@ import EnterYourAccountNameMobileImg from '@/assets/images/instruction/enter-you
 import EnterYourAccountNameImg from '@/assets/images/instruction/enter-your-account-name.png';
 import EnterYourPasswordMobileImg from '@/assets/images/instruction/enter-your-password-mobile.jpg';
 import EnterYourPasswordImg from '@/assets/images/instruction/enter-your-password.png';
-import EnteredToWishHubMobileImg from '@/assets/images/instruction/entered-to-wish-hub-mobile.jpg';
-import EnteredToWishHubImg from '@/assets/images/instruction/entered-to-wish-hub.png';
+import LoggedToWishHubMobileImg from '@/assets/images/instruction/logged-to-wish-hub-mobile.jpg';
+import LoggedToWishHubImg from '@/assets/images/instruction/logged-to-wish-hub.png';
 import SingUpMobileImg from '@/assets/images/instruction/sing-up-mobile.jpg';
 import SingUpImg from '@/assets/images/instruction/sing-up.png';
 import ActivationAccountMobileImg from '@/assets/images/instruction/activation-account-mobile.jpg';
@@ -41,13 +41,11 @@ const Instruction: FC = () => {
             <PageHeader />
 
             <section className={"container" + (myUser.user === null ? " logged-out" : "")}>
-                {/*<h1>{t('instruction.title')}</h1>*/}
-                <h1>Інструкція</h1>
+                <h1>{t('instruction.title')}</h1>
 
-                {/*<h2>{t('instruction.login')}</h2>*/}
-                <h2>Вхід</h2>
+                <h2>{t('instruction.auth.title')}</h2>
 
-                <p>Є кілька способів увійти або зареєструватись:</p>
+                <p>{t('instruction.auth.intro')}</p>
 
                 <ol className="numbered-list">
                     <li className="numbered-item">
@@ -55,39 +53,37 @@ const Instruction: FC = () => {
                             <li className="image-item">
                                 <p className="image-item-text">
                                     <span className="marker">1</span>
-                                    Найпростіший за допомогою Google сервісу.
+                                    {t('instruction.auth.google.text-1')}
                                     <br />
-                                    Спочатку потрібно погодитись з умовами.
+                                    {t('instruction.auth.google.text-2')}
                                     <br />
-                                    Далі активувати відповідну кнопку Google.
+                                    {t('instruction.auth.google.text-3')}
                                 </p>
 
                                 <div className="image">
                                     <img
                                         src={screenWidth < 768 ? LoginWithGoogleMobileImg : LoginWithGoogleImg}
-                                        alt="Вхід за допомогою Google сервісу"
+                                        alt={t('instruction.auth.google.img')}
                                     />
                                 </div>
                             </li>
 
                             <li className="image-item">
                                 <p className="image-item-text">
-                                    У Вас вже має бути Google аккаунт. Якщо Ви авторизовані на своєму пристрої,
-                                    то просто обираєте акаунт який Ви бажаєте використовувати у Wish Hub.
+                                    {t('instruction.auth.account.text')}
                                 </p>
 
                                 <div className="image">
                                     <img
                                         src={screenWidth < 768 ? ChooseGoogleAccountMobileImg : ChooseGoogleAccountImg}
-                                        alt="Вибір Google аккаунту"
+                                        alt={t('instruction.auth.account.img')}
                                     />
                                 </div>
                             </li>
 
                             <li className="image-item double">
                                 <p className="image-item-text">
-                                    Якщо Ви ще не авторизовані в пошті gmail на своєму пристрої,
-                                    введіть свої дані у відповідні поля.
+                                    {t('instruction.auth.data.text')}
                                 </p>
 
                                 <div className="image-box">
@@ -98,13 +94,13 @@ const Instruction: FC = () => {
                                                     ? EnterYourAccountNameMobileImg
                                                     : EnterYourAccountNameImg
                                             }
-                                            alt="Введіть свій аккаунт"
+                                            alt={t('instruction.auth.data.account-img')}
                                         />
                                     </div>
                                     <div className="image second">
                                         <img
                                             src={screenWidth < 768 ? EnterYourPasswordMobileImg : EnterYourPasswordImg}
-                                            alt="Введіть свій пароль"
+                                            alt={t('instruction.auth.data.password-img')}
                                         />
                                     </div>
                                 </div>
@@ -112,14 +108,13 @@ const Instruction: FC = () => {
 
                             <li className="image-item">
                                 <p className="image-item-text">
-                                    Далі програма зробить все за Вас. Якщо Ви вже реєструвались, Ви просто увійдете до
-                                    свого акаунта. Якщо ще ні, Ви будете автоматично зареєстровані.
+                                    {t('instruction.auth.logged.text')}
                                 </p>
 
                                 <div className="image">
                                     <img
-                                        src={screenWidth < 768 ? EnteredToWishHubMobileImg : EnteredToWishHubImg}
-                                        alt="Увійшов до Wish Hub"
+                                        src={screenWidth < 768 ? LoggedToWishHubMobileImg : LoggedToWishHubImg}
+                                        alt={t('instruction.auth.logged.img')}
                                     />
                                 </div>
                             </li>
@@ -131,35 +126,30 @@ const Instruction: FC = () => {
                             <li className="image-item">
                                 <p className="image-item-text">
                                     <span className="marker">2</span>
-                                    Якщо Ви не бажаєте використовувати Google аккаунт або у Вас його немає,
-                                    потрібно буде пройти верифікацію у веб додатку Wish Hub.
+                                    {t('instruction.auth.sing-up.text-1')}
                                     <br />
-                                    Заповніть всі поля і погодьтесь з умовами використання.
+                                    {t('instruction.auth.sing-up.text-2')}
                                 </p>
 
                                 <div className="image">
                                     <img
                                         src={screenWidth < 768 ? SingUpMobileImg : SingUpImg}
-                                        alt="Реєстрація"
+                                        alt={t('instruction.auth.sing-up.img')}
                                     />
                                 </div>
                             </li>
 
                             <li className="image-item">
                                 <p className="image-item-text">
-                                    Тепер перейдіть до своєї пошти, знайдіть відповідний лист. Якщо листа ніде немає,
-                                    перевірте папку спам. Ми не використовуємо безконтрольну розсилку.
-                                    Просто роботи кожного поштового сервісу по різному налаштовані й наш лист
-                                    випадково може потрапити до папки спам.
+                                    {t('instruction.auth.activation.text-1')}
                                     <br />
-                                    В листі натискаєте на відповідну кнопку, або ж скопіюйте посилання,
-                                    та вставте в адресну строфу браузера.
+                                    {t('instruction.auth.activation.text-2')}
                                 </p>
 
                                 <div className="image">
                                     <img
                                         src={screenWidth < 768 ? ActivationAccountMobileImg : ActivationAccountImg}
-                                        alt="Активація акаунта"
+                                        alt={t('instruction.auth.activation.img')}
                                     />
                                 </div>
                             </li>
@@ -169,10 +159,10 @@ const Instruction: FC = () => {
 
                 <div className="divider"></div>
 
-                <h2>Налаштування профілю</h2>
+                <h2>{t('instruction.next.title')}</h2>
 
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit
+                    {t('instruction.next.text')}
                 </p>
             </section>
         </div>
