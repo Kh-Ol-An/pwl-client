@@ -9,7 +9,7 @@
     overflow: hidden;
     transition: $transition;
 
-    &.open {
+    &.show {
         max-height: 70px;
     }
 

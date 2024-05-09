@@ -15,11 +15,11 @@ import { PAGINATION_LIMIT } from '@/utils/constants';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
-    open: boolean;
-    close: () => void;
+    showSidebar: boolean;
+    hideSidebar: () => void;
 }
 
-const Sidebar: FC<IProps> = ({ open, close }) => {
+const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
     const { ref, inView } = useInView({
         threshold: 0,
     });
@@ -92,7 +92,7 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
     }, [users.list]);
 
     return (
-        <div className={"sidebar" + (open ? " open" : "")}>
+        <div className={"sidebar" + (showSidebar ? " show" : "")}>
             <div className="sidebar-inner">
                 <div className="sidebar-content">
                     <div className="sidebar-head">
@@ -136,7 +136,12 @@ const Sidebar: FC<IProps> = ({ open, close }) => {
                     <div className="user-list" ref={userListRef}>
                         <ul className="list">
                             {users.list.map(user => (
-                                <UserAction key={user.id} user={user} updateUsers={updateUsers} close={close} />
+                                <UserAction
+                                    key={user.id}
+                                    user={user}
+                                    updateUsers={updateUsers}
+                                    hideSidebar={hideSidebar}
+                                />
                             ))}
                         </ul>
 

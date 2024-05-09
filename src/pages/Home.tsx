@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/store/hook';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import Inactivated from '@/layouts/Inactivated';
-import Header from '@/layouts/Header';
+import Header from '@/layouts/header/Header';
 import Sidebar from '@/layouts/sidebar/Sidebar';
 import WishList from '@/layouts/wish/WishList';
 
@@ -12,7 +12,7 @@ const Home: FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const [open, setOpen] = useState<boolean>(false);
+    const [showHeaderAndSidebar, setShowHeaderAndSidebar] = useState<boolean>(false);
 
     useEffect(() => {
         if (!myUser) return;
@@ -31,19 +31,19 @@ const Home: FC = () => {
         <>
             {!myUser?.isActivated && <Inactivated />}
 
-            <Header open={open} close={() => setOpen(false)} />
+            <Header showHeader={showHeaderAndSidebar} hideHeader={() => setShowHeaderAndSidebar(false)} />
 
             <div className="page home-page">
                 <button
-                    className={"burger" + (open ? " open" : "")}
+                    className={"burger" + (showHeaderAndSidebar ? " open" : "")}
                     type="button"
-                    onClick={() => setOpen(prevState => !prevState)}
+                    onClick={() => setShowHeaderAndSidebar(prevState => !prevState)}
                 >
                     <div className="icon-left"></div>
                     <div className="icon-right"></div>
                 </button>
 
-                <Sidebar open={open} close={() => setOpen(false)} />
+                <Sidebar showSidebar={showHeaderAndSidebar} hideSidebar={() => setShowHeaderAndSidebar(false)} />
 
                 <div className="home-page-container">
                     <WishList />

@@ -27,10 +27,10 @@ import StylesVariables from '@/styles/utils/variables.module.scss';
 interface IProps {
     user: IUser;
     updateUsers: () => void;
-    close: () => void;
+    hideSidebar: () => void;
 }
 
-const UserAction: FC<IProps> = ({ user, updateUsers, close }) => {
+const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
     const myUser = useAppSelector((state) => state.myUser.user);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
@@ -50,7 +50,7 @@ const UserAction: FC<IProps> = ({ user, updateUsers, close }) => {
 
     const handleShowDetailAccount = () => {
         setShowDetailAccount(true);
-        close();
+        hideSidebar();
     };
 
     const handleHideDetailAccount = () => {
@@ -63,7 +63,7 @@ const UserAction: FC<IProps> = ({ user, updateUsers, close }) => {
         await dispatch(getWishList({ myId: myUser.id, userId: user.id }));
         await dispatch(selectUserId(user.id));
         localStorage.setItem('selectedUserId', user.id);
-        close();
+        hideSidebar();
     };
 
     const handleAddFriend = async () => {

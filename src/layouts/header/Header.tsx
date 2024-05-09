@@ -1,6 +1,4 @@
 import React, { FC, useState } from 'react';
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useGoogleLogin } from '@react-oauth/google';
 import { Avatar, Modal } from '@mui/material';
 import {
     Settings as SettingsIcon,
@@ -13,96 +11,39 @@ import {
 import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
-import { logout, deleteMyUser } from '@/store/my-user/thunks';
+import { logout } from '@/store/my-user/thunks';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
-import { IUser } from '@/models/IUser';
-import { emailValidation, passwordValidation } from "@/utils/validations";
 import Card from '@/layouts/Card';
 import DetailAccount from '@/layouts/DetailAccount';
-import EditAccount from '@/layouts/EditAccount';
-import ChangePassword from '@/layouts/ChangePassword';
 import About from '@/layouts/About';
 import Contacts from '@/layouts/Contacts';
+import ConfirmDeleteMyUserModal from '@/layouts/header/ConfirmDeleteMyUserModal';
 import Button from '@/components/Button';
-import Switch from '@/components/Switch';
 import Action from '@/components/Action';
 import Popup from "@/components/Popup";
-import Input from "@/components/Input";
 import LogoIcon from '@/assets/images/logo.svg';
 import WishHub from '@/assets/images/wish-hub.png';
 import StylesVariables from '@/styles/utils/variables.module.scss';
+import EditAccountModal from '@/layouts/header/EditAccountModal';
 
 interface IProps {
-    open: boolean;
-    close: () => void;
+    showHeader: boolean;
+    hideHeader: () => void;
 }
 
-type Inputs = {
-    email: IUser['email']
-    password: string
-}
-
-const Header: FC<IProps> = ({ open, close }) => {
+const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     const myUser = useAppSelector((state) => state.myUser.user);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<Inputs>();
-
     const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
     const [showDetailAccount, setShowDetailAccount] = useState<boolean>(false);
-    const [isEditAccount, setIsEditAccount] = useState<boolean>(true);
     const [showEditAccount, setShowEditAccount] = useState<boolean>(false);
     const [showAbout, setShowAbout] = useState<boolean>(false);
     const [showContacts, setShowContacts] = useState<boolean>(false);
     const [showConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
-    const [confirmDeleteMyUserError, setConfirmDeleteMyUserError] = useState<string>('');
-
-    const getDataFromGoogle = useGoogleLogin({
-        onSuccess: async (tokenResponse) => {
-            if (!myUser) return;
-
-            const token = tokenResponse.access_token;
-
-            const response = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            const data = await response.json();
-            if (myUser.email !== data.email) {
-                setConfirmDeleteMyUserError('Цей email не співпадає з email акаунта який Ви намагаєтесь видалити');
-                return;
-            }
-            await dispatch(deleteMyUser({ email: data.email, password: '', id: myUser.id }));
-            close();
-        },
-    });
-
-    const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        if (!myUser) return;
-
-        if (myUser.hasPassword) {
-            if (myUser.email !== data.email) {
-                setConfirmDeleteMyUserError('Цей email не співпадає з email акаунта який Ви намагаєтесь видалити');
-                return;
-            } else {
-                setConfirmDeleteMyUserError('');
-            }
-
-            await dispatch(deleteMyUser({ ...data, id: myUser.id }));
-            close();
-        } else {
-            await getDataFromGoogle();
-        }
-    };
 
     // SelectWish
     const handleSelectWish = async () => {
@@ -111,13 +52,13 @@ const Header: FC<IProps> = ({ open, close }) => {
         await dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
         await dispatch(selectUserId(myUser.id));
         localStorage.setItem('selectedUserId', myUser.id);
-        close();
+        hideHeader();
     };
 
     // DetailAccount
     const handleShowDetailAccount = () => {
         setShowDetailAccount(true);
-        close();
+        hideHeader();
     };
 
     const handleHideDetailAccount = () => {
@@ -128,7 +69,7 @@ const Header: FC<IProps> = ({ open, close }) => {
     const handleShowEditAccount = () => {
         setShowEditAccount(true);
         setAnchor(null);
-        close();
+        hideHeader();
     };
 
     const handleHideEditAccount = () => {
@@ -139,7 +80,7 @@ const Header: FC<IProps> = ({ open, close }) => {
     const handleShowAbout = () => {
         setShowAbout(true);
         setAnchor(null);
-        close();
+        hideHeader();
     };
 
     const handleHideAbout = () => {
@@ -150,7 +91,7 @@ const Header: FC<IProps> = ({ open, close }) => {
     const handleShowContacts = () => {
         setShowContacts(true);
         setAnchor(null);
-        close();
+        hideHeader();
     };
 
     const handleHideContacts = () => {
@@ -169,7 +110,7 @@ const Header: FC<IProps> = ({ open, close }) => {
     };
 
     return (
-        <div className={"header" + (open ? " open" : "")}>
+        <div className={"header" + (showHeader ? " show" : "")}>
             <div className="header-inner">
                 <div className="header-content">
                     <div className="my-user">
@@ -261,44 +202,11 @@ const Header: FC<IProps> = ({ open, close }) => {
                     )}
 
                     {/* Edit Account */}
-                    <Modal
-                        open={showEditAccount}
-                        onClose={handleHideEditAccount}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <div className="modal">
-                            <Card>
-                                <div className="change-edit-account">
-                                    <span className={isEditAccount ? "primary-color" : ""}>Редагувати акаунт</span>
-                                    <Switch
-                                        id="change-edit-account"
-                                        name="change-edit-account"
-                                        checked={isEditAccount}
-                                        onChange={(e) => setIsEditAccount(e.target.checked)}
-                                    />
-                                    <span className={isEditAccount ? "" : "action-color"}>Змінити пароль</span>
-                                </div>
-
-                                <div className="header-actions-account">
-                                    <div className={"header-edit-account" + (isEditAccount ? " show" : "")}>
-                                        <EditAccount
-                                            close={handleHideEditAccount}
-                                            handleShowConfirmDeleteMyUser={handleShowConfirmDeleteMyUser}
-                                        />
-                                    </div>
-
-                                    <div className={"header-change-password" + (isEditAccount ? "" : " show")}>
-                                        <ChangePassword userId={myUser?.id} close={handleHideEditAccount} />
-                                    </div>
-                                </div>
-                            </Card>
-
-                            <Action onClick={handleHideEditAccount}>
-                                <CloseIcon sx={{ color: StylesVariables.blackColor }} />
-                            </Action>
-                        </div>
-                    </Modal>
+                    <EditAccountModal
+                        show={showEditAccount}
+                        hide={handleHideEditAccount}
+                        handleShowConfirmDeleteMyUser={handleShowConfirmDeleteMyUser}
+                    />
 
                     {/* About */}
                     <Modal
@@ -337,64 +245,11 @@ const Header: FC<IProps> = ({ open, close }) => {
                     </Modal>
 
                     {/* Confirm Delete My User */}
-                    <Modal
-                        open={showConfirmDeleteMyUser}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <form className="modal confirm" onSubmit={handleSubmit(onSubmit)}>
-                            <Card classes="not-full-screen">
-                                <h3 className="title attention">Увага!</h3>
-
-                                <p className="text">
-                                    Нашому суму не має меж... Ми сподіваємось що Ви дасте нам ще один шанс та
-                                    залишитись. Якщо Ви рішуче вирішили покинути нас, то підтвердьте свій намір
-                                    ввівши відповідні дані.
-                                </p>
-
-                                {!myUser?.hasPassword && confirmDeleteMyUserError.length > 0 && (
-                                    <p className="error">{confirmDeleteMyUserError}</p>
-                                )}
-
-                                {myUser?.hasPassword && (
-                                    <>
-                                        <div className="email-box">
-                                            <Input
-                                                {...register("email", emailValidation)}
-                                                id="email"
-                                                name="email"
-                                                type="text"
-                                                label="Email*"
-                                                error={errors?.email?.message}
-                                            />
-                                            {confirmDeleteMyUserError.length > 0 && (
-                                                <p className="error">{confirmDeleteMyUserError}</p>
-                                            )}
-                                        </div>
-
-                                        <Input
-                                            {...register("password", passwordValidation)}
-                                            id="password"
-                                            name="password"
-                                            type="password"
-                                            label="Пароль*"
-                                            error={errors?.password?.message}
-                                        />
-                                    </>
-                                )}
-
-                                <div className="modal-actions">
-                                    <Button variant="text" color="action-color" type="submit">
-                                        Видаліть мій акаунт
-                                    </Button>
-
-                                    <Button type="button" onClick={() => setShowConfirmDeleteMyUser(false)}>
-                                        Залишитись
-                                    </Button>
-                                </div>
-                            </Card>
-                        </form>
-                    </Modal>
+                    <ConfirmDeleteMyUserModal
+                        show={showConfirmDeleteMyUser}
+                        hide={() => setShowConfirmDeleteMyUser(false)}
+                        hideHeader={hideHeader}
+                    />
                 </div>
             </div>
         </div>
