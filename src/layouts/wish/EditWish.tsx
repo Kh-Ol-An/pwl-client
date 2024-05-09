@@ -61,7 +61,14 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        if (wishList.some((wish) => wish.name === data.name.trim() && wish.id !== idOfSelectedWish)) {
+        const nonUniqueName = wishList.some((wish) => {
+            let wishName = wish.name;
+            if (process.env.REACT_APP_CRYPTO_JS_SECRET && wish.show !== 'all') {
+                wishName = decryptedData(wish.name, process.env.REACT_APP_CRYPTO_JS_SECRET)
+            }
+            return wishName === data.name.trim() && wish.id !== idOfSelectedWish;
+        });
+        if (nonUniqueName) {
             setError(
                 'name',
                 {
@@ -75,22 +82,28 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
 
         if (!myUser || !process.env.REACT_APP_CRYPTO_JS_SECRET) return;
 
+        // name
         const encryptedName = encryptedData(data.name.trim(), process.env.REACT_APP_CRYPTO_JS_SECRET);
 
+        // price
         const priceWithoutWhiteSpaces = data.price ? removingWhiteSpaces(data.price.trim()) : '';
         const encryptedPrice = encryptedData(priceWithoutWhiteSpaces, process.env.REACT_APP_CRYPTO_JS_SECRET);
         const sendingPrice = show === 'all' ? priceWithoutWhiteSpaces : encryptedPrice;
 
+        // currency
         const encryptedCurrency = encryptedData(currency, process.env.REACT_APP_CRYPTO_JS_SECRET);
         const sendingCurrency = show === 'all' ? currency : encryptedCurrency;
 
+        // address
         const dataAddress = data.address ? data.address.trim() : '';
         const encryptedAddress = encryptedData(dataAddress, process.env.REACT_APP_CRYPTO_JS_SECRET);
         const sendingAddress = show === 'all' ? dataAddress : encryptedAddress;
 
+        // description
         const encryptedDescription = encryptedData(data.description.trim(), process.env.REACT_APP_CRYPTO_JS_SECRET);
         const sendingDescription = show === 'all' ? data.description.trim() : encryptedDescription;
 
+        // images
         const encryptedImages = images.map(image => {
             if (image instanceof File || !process.env.REACT_APP_CRYPTO_JS_SECRET) return image;
 
@@ -106,7 +119,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             name: show === 'all' ? data.name.trim() : encryptedName,
             price: material ? sendingPrice : undefined,
             currency: material ? sendingCurrency : undefined,
-            address: material ? sendingAddress : undefined,
+            address: dataAddress.length > 0 ? sendingAddress : undefined,
             description: data.description.trim().length > 0 ? sendingDescription : undefined,
             images: show === 'all' ? encryptedImages : images,
         };

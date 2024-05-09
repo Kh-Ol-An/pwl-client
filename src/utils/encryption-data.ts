@@ -15,9 +15,6 @@ export const decryptedData = (data: string, secret: string): string => {
     }
 };
 
-//export const encryptedData = (data: string, secret: string): string => data;
-//export const decryptedData = (data: string, secret: string): string => data;
-
 export const unencryptedData = (data: string, show: IWish['show']): string => {
     if (!data) {
         return '';
