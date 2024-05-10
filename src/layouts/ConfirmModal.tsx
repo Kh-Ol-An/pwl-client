@@ -1,10 +1,12 @@
 import React, { FC, ReactNode } from 'react';
+import { t } from 'i18next';
 import { Modal } from '@mui/material';
 import Card from '@/layouts/Card';
 import Button from '@/components/Button';
 
 interface IProps {
     show: boolean;
+    title?: string;
     confirmText?: string;
     closeText?: string;
     children: ReactNode;
@@ -14,8 +16,9 @@ interface IProps {
 
 const ConfirmModal: FC<IProps> = ({
     show,
-    confirmText = 'Підтвердити',
-    closeText = 'Закрити',
+    title = t('confirm-modal.title'),
+    confirmText = t('confirm-modal.confirm'),
+    closeText = t('confirm-modal.close'),
     children,
     close,
     confirm,
@@ -28,7 +31,7 @@ const ConfirmModal: FC<IProps> = ({
         >
             <div className="modal confirm">
                 <Card classes="not-full-screen">
-                    <h3 className="title attention">Увага!</h3>
+                    <h3 className="title attention">{title}</h3>
 
                     {children}
 

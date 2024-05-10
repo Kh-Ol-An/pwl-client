@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import i18next from 'i18next';
+import { t } from 'i18next';
 import { toast } from 'react-toastify';
 import api from '@/utils/api';
 import {
@@ -17,8 +17,6 @@ import {
 import { IAuth } from '@/models/IAuth';
 import { IUser } from '@/models/IUser';
 import { encryptedData } from '@/utils/encryption-data';
-
-const { t } = i18next;
 
 const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> => {
     try {

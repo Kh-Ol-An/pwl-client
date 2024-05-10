@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import ShareIcon from '@mui/icons-material/Share';
 import StylesVariables from '@/styles/utils/variables.module.scss';
@@ -10,24 +11,39 @@ interface IProps {
 }
 
 const ShareButton: FC<IProps> = ({ link = '', wishShow }) => {
+    const { t } = useTranslation();
+
     const [show, setShow] = useState<boolean>(false);
 
     const shareContent = () => {
         if (navigator.share) {
             navigator.share({
                 title: 'Wish Hub',
-                text: 'Wish Hub - це місце, де ви можете зберігати свої бажання та ділитися ними з друзями.',
+                text: t('share-button.share-text'),
                 url: `https://wish-hub.net/${link}`,
             })
-                .then(() => toast.success(`Ви успішно поділилися ${link === 'welcome' ? 'Wish Hub' : 'своїм бажанням'}.`))
+                .then(() =>
+                    toast.success(
+                        link === 'welcome'
+                            ? t('alerts.share-button.share.wish_hub_success')
+                            : t('alerts.share-button.share.wish_success')
+                    ))
                 .catch((error) => {
-                    console.log('Помилка спільного доступу', error);
-                    toast.error('Під час спроби активації функції "Поділитись" виникла помилка.');
+                    console.log(t('alerts.share-button.share.console-error'), error);
+                    toast.error(t('alerts.share-button.share.error'));
                 });
         } else {
             navigator.clipboard.writeText(`https://wish-hub.net/${link}`)
-                .then(() => toast.success(`Посилання на ${link === 'welcome' ? 'Wish Hub' : 'Ваше бажання'} було скопійовано в буфер обміну.`))
-                .catch(() => toast.error('Під час спроби скопіювати посилання виникла помилка.'));
+                .then(() =>
+                    toast.success(
+                        link === 'welcome'
+                            ? t('alerts.share-button.clipboard.wish_hub_success')
+                            : t('alerts.share-button.clipboard.wish_success')
+                    ))
+                .catch((error) => {
+                    console.log(t('alerts.share-button.clipboard.console-error'), error);
+                    toast.error(t('alerts.share-button.clipboard.error'));
+                });
         }
 
         setShow(false);
@@ -45,13 +61,16 @@ const ShareButton: FC<IProps> = ({ link = '', wishShow }) => {
 
             <ConfirmModal
                 show={show}
-                confirmText="Поділитись"
+                confirmText={t('share-button.confirm')}
                 close={() => setShow(false)}
                 confirm={shareContent}
             >
                 <p className="text-lg">
-                    Ви впевнені що хочете поділитись бажанням,
-                    яке {wishShow === 'nobody' ? 'приховане від усіх' : 'відкрите тільки для друзів'}?
+                    {
+                        wishShow === 'nobody'
+                            ? t('share-button.question-nobody')
+                            : t('share-button.question-friends')
+                    }
                 </p>
             </ConfirmModal>
         </>

@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { t } from 'i18next';
 import { toast } from 'react-toastify';
 import api from '@/utils/api';
 import {
@@ -51,7 +52,7 @@ const createWish = async ({ userId, material, show, name, price, currency, addre
             },
         );
     } catch (error: any) {
-        toast(error.response?.data?.message || 'Не вдалось додати бажання.', { type: 'error' });
+        toast(error.response?.data?.message || t('alerts.wishes-api.create-wish.error'), { type: 'error' });
         throw error;
     }
 };
@@ -77,7 +78,7 @@ const updateWish = async ({ id, userId, material, show, name, price, currency, a
             },
         );
     } catch (error: any) {
-        toast(error.response?.data?.message || 'Не вдалось оновити бажання.', { type: 'error' });
+        toast(error.response?.data?.message || t('alerts.wishes-api.update-wish.error'), { type: 'error' });
         throw error;
     }
 };
@@ -95,7 +96,7 @@ const deleteWish = async (userId: IUser['id'], wishId: IWish['id']): Promise<Axi
         );
     } catch (error: any) {
         toast(
-            error.response?.data?.message || `Бажання з ідентифікатором ${wishId} не вдалось видалити.`,
+            error.response?.data?.message || t('alerts.wishes-api.delete-wish.error', { wishId }),
             { type: 'error' },
         );
         throw error;
@@ -106,7 +107,10 @@ const getWishList = async (params: ISendWishList): Promise<AxiosResponse<IWish[]
     try {
         return await api.get('/wishes', { params });
     } catch (error: any) {
-        toast(error.response?.data?.message || 'Не вдалось отримати всі бажання.', { type: 'error' });
+        toast(
+            error.response?.data?.message || t('alerts.wishes-api.get-wish-list.error'),
+            { type: 'error' },
+        );
         throw error;
     }
 };
@@ -115,7 +119,7 @@ const getWish = async (params: ISendWish): Promise<AxiosResponse<IGetWish>> => {
     try {
         return await api.get('/wish', { params });
     } catch (error: any) {
-        toast(error.response?.data?.message || 'Не вдалось отримати бажання.', { type: 'error' });
+        toast(error.response?.data?.message || t('alerts.wishes-api.get-wish.error'), { type: 'error' });
         throw error;
     }
 };
@@ -124,7 +128,7 @@ const bookWish = async (data: IBookWish): Promise<AxiosResponse<IWish>> => {
     try {
         return await api.post('/wish/book', data);
     } catch (error: any) {
-        toast(error.response?.data?.message || 'Не вдалось забронювати бажання.', { type: 'error' });
+        toast(error.response?.data?.message || t('alerts.wishes-api.book-wish.error'), { type: 'error' });
         throw error;
     }
 };
@@ -133,7 +137,7 @@ const cancelBookWish = async (data: IActionWish): Promise<AxiosResponse<IWish>> 
     try {
         return await api.post('/wish/cancel-book', data);
     } catch (error: any) {
-        toast(error.response?.data?.message || 'Не вдалось скасувати бронювання бажання.', { type: 'error' });
+        toast(error.response?.data?.message || t('alerts.wishes-api.cancel-book-wish.error'), { type: 'error' });
         throw error;
     }
 };
@@ -142,7 +146,7 @@ const doneWish = async (data: IActionWish): Promise<AxiosResponse<{ executorUser
     try {
         return await api.post('/wish/done', data);
     } catch (error: any) {
-        toast(error.response?.data?.message || 'Не вдалось позначити бажання виконаним.', { type: 'error' });
+        toast(error.response?.data?.message || t('alerts.wishes-api.done-wish.error'), { type: 'error' });
         throw error;
     }
 };
@@ -151,7 +155,7 @@ const undoneWish = async (data: IActionWish): Promise<AxiosResponse<{ executorUs
     try {
         return await api.post('/wish/undone', data);
     } catch (error: any) {
-        toast(error.response?.data?.message || 'Не вдалось позначити бажання не виконаним.', { type: 'error' });
+        toast(error.response?.data?.message || t('alerts.wishes-api.undone-wish.error'), { type: 'error' });
         throw error;
     }
 };

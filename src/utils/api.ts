@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { t } from 'i18next';
 import { toast } from 'react-toastify';
 import myUserApi from '@/store/my-user/api';
 
@@ -23,7 +24,10 @@ api.interceptors.response.use(
                 localStorage.setItem('token', response.data.accessToken);
                 return api.request(originalRequest);
             } catch (error: any) {
-                toast(error.response?.data?.message || 'Не вдалось оновити сесію.', { type: 'error' });
+                toast(
+                    error.response?.data?.message || t('alerts.interceptors-api.response.error'),
+                    { type: 'error' },
+                );
             }
         }
         throw error;

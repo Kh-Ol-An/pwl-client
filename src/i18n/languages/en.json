@@ -1,10 +1,35 @@
 {
     "sing-in": "Sing In",
     "sing-up": "Sing Up",
+    "share-button": {
+        "share-text": "Wish Hub is a place where you can store your wishes and share them with your friends.",
+        "confirm": "Share",
+        "question-nobody": "Are you sure you want to share a wish that is hidden from everyone?",
+        "question-friends": "Are you sure you want to share a wish that is only open to your friends?"
+    },
+    "confirm-modal": {
+        "title": "Attention!",
+        "confirm": "Confirm",
+        "close": "Close"
+    },
     "alerts": {
         "auth-page": {
             "google-login": {
                 "error": "GoogleLogin: Could not sign in with Google."
+            }
+        },
+        "share-button": {
+            "share": {
+                "wish_success": "You have successfully shared Your wish.",
+                "wish_hub_success": "You have successfully shared \"Wish Hub\".",
+                "error": "An error occurred while trying to activate the \"Share\" function.",
+                "console-error": "Sharing error: "
+            },
+            "clipboard": {
+                "wish_success": "The link to Your wish has been copied to the clipboard.",
+                "wish_hub_success": "The link to \"Wish Hub\" has been copied to the clipboard.",
+                "error": "An error occurred while trying to copy the link to the clipboard.",
+                "console-error": "Clipboard error: "
             }
         },
         "my-user-api": {
@@ -27,15 +52,15 @@
                 "error": "sendActivationLink: Failed to send the activation link."
             },
             "change-forgotten-password": {
-                "success": "changeForgottenPassword: Password changed successfully. Please log in with your new password.",
+                "success": "Password changed successfully. Please log in with your new password.",
                 "error": "changeForgottenPassword: Failed to change the password."
             },
             "forgot-password": {
-                "success": "changeForgottenPassword: The password reset email has been successfully sent to: {{email}}. Please log in with your new password.",
+                "success": "The password reset email has been successfully sent to: {{email}}. Please log in with your new password.",
                 "error": "forgotPassword: Failed to send the password reset email to: {{email}}."
             },
             "change-password": {
-                "success": "changePassword: Password changed successfully. Please log in with your new password.",
+                "success": "Password changed successfully. Please log in with your new password.",
                 "error": "changePassword: Failed to change the password."
             },
             "update-my-user": {
@@ -49,6 +74,45 @@
             },
             "remove-friend": {
                 "error": "removeFriend: Failed to remove the friend."
+            }
+        },
+        "users-api": {
+            "get-users": {
+                "error": "getUsers: Failed to get users."
+            }
+        },
+        "wishes-api": {
+            "create-wish": {
+                "error": "createWish: Failed to create a wish."
+            },
+            "update-wish": {
+                "error": "updateWish: Failed to update the wish."
+            },
+            "delete-wish": {
+                "error": "deleteWish: Failed to delete the wish with ID {{wishId}}."
+            },
+            "get-wish-list": {
+                "error": "getWishList: Failed to get wish list."
+            },
+            "get-wish": {
+                "error": "getWish: Failed to get the wish."
+            },
+            "book-wish": {
+                "error": "bookWish: Failed to book the wish."
+            },
+            "cancel-book-wish": {
+                "error": "cancelBookWish: Failed to cancel the booking of the wish."
+            },
+            "done-wish": {
+                "error": "doneWish: Failed to mark the wish as done."
+            },
+            "undone-wish": {
+                "error": "undoneWish: Failed to mark the wish as not done."
+            }
+        },
+        "interceptors-api": {
+            "response": {
+                "error": "Response interceptor: Failed to refresh the session."
             }
         }
     },
