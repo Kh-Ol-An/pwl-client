@@ -1,6 +1,63 @@
 {
     "sing-in": "Увійти",
     "sing-up": "Зареєструватись",
+    "alerts": {
+        "my-user": {
+            "registration": {
+                "error": "registration: Не вдалось зареєструватись."
+            },
+            "google-authorization": {
+                "error": "googleAuthorization: Не вдалось увійти за допомогою Google."
+            },
+            "login": {
+                "error": "login: Не вдалось увійти на сайт."
+            },
+            "logout": {
+                "error": "logout: Не вдалось вийти з аккаунту."
+            },
+            "refresh": {
+                "error": "refresh: Не вдалось оновити сесію."
+            },
+            "sendActivationLink": {
+                "error": "sendActivationLink: Не вдалось надіслати посилання активації."
+            },
+            "changeForgottenPassword": {
+                "success": "changeForgottenPassword: Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.",
+                "error": "changeForgottenPassword: Не вдалось змінити пароль."
+            },
+            "forgotPassword": {
+                "success": "changeForgottenPassword: Лист з інструкцією для зміни пароля успішно відправлено на пошту: {{email}}. Будь ласка, увійдіть за допомогою нового паролю.",
+                "error": "forgotPassword: Не вдалось відправити лист з інструкцією для зміни пароля на пошту: {{email}}."
+            },
+            "changePassword": {
+                "success": "changePassword: Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.",
+                "error": "changePassword: Не вдалось змінити пароль."
+            },
+            "updateMyUser": {
+                "error": "updateMyUser: Не вдалось оновити користувача."
+            },
+            "deleteMyUser": {
+                "error": "deleteMyUser: Не вдалося видалити користувача з ідентифікатором {{userId}}."
+            },
+            "addFriend": {
+                "error": "addFriend: Не вдалось додати друга."
+            },
+            "removeFriend": {
+                "error": "removeFriend: Не вдалось видалити друга."
+            }
+        }
+    },
+    "auth": {
+        "sing-in": "Вхід",
+        "sing-up": "Реєстрація",
+        "forgot-password": "Забули пароль?"
+    },
+    "change-forgotten-password": {
+        "title": "Відновлення паролю",
+        "new_password": "Новий пароль*",
+        "repeat_new_password": "Повторіть новий пароль*",
+        "recovery": "Відновити"
+    },
     "instruction": {
         "title": "Інструкція",
         "auth": {

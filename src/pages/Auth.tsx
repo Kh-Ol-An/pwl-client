@@ -3,12 +3,14 @@ import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from '@/store/hook';
 import { registration, login, forgotPassword, googleAuthorization } from '@/store/my-user/thunks';
 import { IUser } from '@/models/IUser';
 import { accountFirstNameValidation, emailValidation, passwordValidation } from '@/utils/validations';
 import Card from '@/layouts/Card';
+import LanguageSelection from '@/components/LanguageSelection';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Logo from '@/components/Logo';
@@ -29,6 +31,8 @@ type Inputs = {
 }
 
 const Auth: FC = () => {
+    const { t } = useTranslation();
+
     const dispatch = useAppDispatch();
 
     const {
@@ -50,9 +54,9 @@ const Auth: FC = () => {
     const [checkedPrivacyPolicy, setCheckedPrivacyPolicy] = useState<boolean>(location.search === '?agree');
     const [checkedPrivacyPolicyError, setCheckedPrivacyPolicyError] = useState<string>('');
 
-    let title = 'Вхід';
-    isRegistration && (title = 'Реєстрація');
-    isForgotPassword && (title = 'Забули пароль?');
+    let title = t('auth.sing-in');
+    isRegistration && (title = t('auth.sing-up'));
+    isForgotPassword && (title = t('auth.forgot-password'));
 
     let submit = 'Увійти';
     isRegistration && (submit = 'Зареєструватися');
@@ -137,17 +141,20 @@ const Auth: FC = () => {
         <div className="auth-page">
             <div className="auth-title">
                 <Logo to="/welcome" />
+
+                <LanguageSelection />
             </div>
 
             <div className="box">
                 <Card>
                     <div className="auth-title only-mobile">
                         <Logo to="/welcome" />
+
+                        <LanguageSelection />
                     </div>
 
                     <form className="form" onSubmit={handleSubmit(onSubmit)}>
                         <h1 className="title">
-                            {/*Вітаю! {isRegistration ? 'Давай знайомитись. Моє ім\'я Олег.' : 'Нагадай хто ти?'}*/}
                             {title}
                         </h1>
 

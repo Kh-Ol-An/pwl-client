@@ -1,9 +1,11 @@
 import React, { FC, ChangeEvent, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@/store/hook';
 import { changeForgottenPassword } from '@/store/my-user/thunks';
 import { passwordValidation } from '@/utils/validations';
+import LanguageSelection from '@/components/LanguageSelection';
 import Card from '@/layouts/Card';
 import Logo from '@/components/Logo';
 import Input from '@/components/Input';
@@ -14,6 +16,8 @@ type Inputs = {
 }
 
 const ChangeForgottenPassword: FC = () => {
+    const { t } = useTranslation();
+
     const dispatch = useAppDispatch();
 
     const {
@@ -58,17 +62,21 @@ const ChangeForgottenPassword: FC = () => {
         <div className="auth-page">
             <div className="auth-title">
                 <Logo to="/welcome" />
+
+                <LanguageSelection />
             </div>
 
             <div className="box">
                 <Card>
                     <div className="auth-title only-mobile">
                         <Logo to="/welcome" />
+
+                        <LanguageSelection />
                     </div>
 
                     <form className="form" onSubmit={handleSubmit(onSubmit)}>
                         <h1 className="title">
-                            Відновлення паролю
+                            {t('change-forgotten-password.title')}
                         </h1>
 
                         <Input
@@ -76,20 +84,20 @@ const ChangeForgottenPassword: FC = () => {
                             id="newPassword"
                             name="newPassword"
                             type="password"
-                            label="Новий пароль*"
+                            label={t('change-forgotten-password.new_password')}
                             error={errors?.newPassword?.message}
                         />
                         <Input
                             id="repeat-password"
                             name="repeat-password"
                             type="password"
-                            label="Повторіть новий пароль*"
+                            label={t('change-forgotten-password.repeat_new_password')}
                             value={repeatPassword}
                             error={repeatPasswordError}
                             onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}
                         />
 
-                        <Button type="submit">Відновити</Button>
+                        <Button type="submit">{t('change-forgotten-password.recovery')}</Button>
                     </form>
                 </Card>
             </div>

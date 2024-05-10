@@ -9,9 +9,12 @@
 
     .auth-title {
         width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
 
         &.only-mobile {
-            display: block;
+            display: flex;
 
             @media only screen and (min-width: 768px) {
                 display: none;
@@ -22,7 +25,7 @@
             display: none;
 
             @media only screen and (min-width: 768px) {
-                display: block;
+                display: flex;
             }
         }
     }

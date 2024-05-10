@@ -1,6 +1,63 @@
 {
     "sing-in": "Sing In",
     "sing-up": "Sing Up",
+    "alerts": {
+        "my-user": {
+            "registration": {
+                "error": "registration: Failed to register."
+            },
+            "google-authorization": {
+                "error": "googleAuthorization: Couldn't sign in with Google."
+            },
+            "login": {
+                "error": "login: Could not log in to the site."
+            },
+            "logout": {
+                "error": "logout: Failed to log out."
+            },
+            "refresh": {
+                "error": "refresh: Failed to update the session."
+            },
+            "sendActivationLink": {
+                "error": "sendActivationLink: Failed to send the activation link."
+            },
+            "changeForgottenPassword": {
+                "success": "changeForgottenPassword: Password changed successfully. Please log in with your new password.",
+                "error": "changeForgottenPassword: Failed to change the password."
+            },
+            "forgotPassword": {
+                "success": "changeForgottenPassword: The password reset email has been successfully sent to: {{email}}. Please log in with your new password.",
+                "error": "forgotPassword: Failed to send the password reset email to: {{email}}."
+            },
+            "changePassword": {
+                "success": "changePassword: Password changed successfully. Please log in with your new password.",
+                "error": "changePassword: Failed to change the password."
+            },
+            "updateMyUser": {
+                "error": "updateMyUser: Failed to update the user."
+            },
+            "deleteMyUser": {
+                "error": "deleteMyUser: Failed to delete the user with ID {{userId}}."
+            },
+            "addFriend": {
+                "error": "addFriend: Failed to add the friend."
+            },
+            "removeFriend": {
+                "error": "removeFriend: Failed to remove the friend."
+            }
+        }
+    },
+    "auth": {
+        "sing-in": "Sing In",
+        "sing-up": "Sing Up",
+        "forgot-password": "Forgotten your password?"
+    },
+    "change-forgotten-password": {
+        "title": "Password recovery",
+        "new_password": "New password*",
+        "repeat_new_password": "Repeat the new password*",
+        "recovery": "Recovery"
+    },
     "instruction": {
         "title": "Instruction",
         "auth": {
