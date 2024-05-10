@@ -164,7 +164,7 @@ const Auth: FC = () => {
                                 onSuccess={handleGoogleLogin}
                                 onError={() => {
                                     console.log('Google OAuth Login Failed');
-                                    toast('Не вдалось увійти за допомогою Google.', { type: 'error' });
+                                    toast(t('alerts.auth-page.google-login.error'), { type: 'error' });
                                 }}
                             />
                         )}

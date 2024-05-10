@@ -2,7 +2,12 @@
     "sing-in": "Sing In",
     "sing-up": "Sing Up",
     "alerts": {
-        "my-user": {
+        "auth-page": {
+            "google-login": {
+                "error": "GoogleLogin: Could not sign in with Google."
+            }
+        },
+        "my-user-api": {
             "registration": {
                 "error": "registration: Failed to register."
             },
@@ -18,31 +23,31 @@
             "refresh": {
                 "error": "refresh: Failed to update the session."
             },
-            "sendActivationLink": {
+            "send-activation-link": {
                 "error": "sendActivationLink: Failed to send the activation link."
             },
-            "changeForgottenPassword": {
+            "change-forgotten-password": {
                 "success": "changeForgottenPassword: Password changed successfully. Please log in with your new password.",
                 "error": "changeForgottenPassword: Failed to change the password."
             },
-            "forgotPassword": {
+            "forgot-password": {
                 "success": "changeForgottenPassword: The password reset email has been successfully sent to: {{email}}. Please log in with your new password.",
                 "error": "forgotPassword: Failed to send the password reset email to: {{email}}."
             },
-            "changePassword": {
+            "change-password": {
                 "success": "changePassword: Password changed successfully. Please log in with your new password.",
                 "error": "changePassword: Failed to change the password."
             },
-            "updateMyUser": {
+            "update-my-user": {
                 "error": "updateMyUser: Failed to update the user."
             },
-            "deleteMyUser": {
+            "delete-my-user": {
                 "error": "deleteMyUser: Failed to delete the user with ID {{userId}}."
             },
-            "addFriend": {
+            "add-friend": {
                 "error": "addFriend: Failed to add the friend."
             },
-            "removeFriend": {
+            "remove-friend": {
                 "error": "removeFriend: Failed to remove the friend."
             }
         }

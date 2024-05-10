@@ -31,7 +31,10 @@ const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> 
         localStorage.setItem('token', response.data.accessToken);
         return response;
     } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.my-user.registration.error'), { type: 'error' });
+        toast(
+            error.response?.data?.message || t('alerts.my-user-api.registration.error'),
+            { type: 'error' },
+        );
         throw error;
     }
 };
@@ -43,7 +46,7 @@ const googleAuthorization = async (data: IGoogleAuth): Promise<AxiosResponse<IAu
         return response;
     } catch (error: any) {
         toast(
-            error.response?.data?.message || t('alerts.my-user.google-authorization.error'),
+            error.response?.data?.message || t('alerts.my-user-api.google-authorization.error'),
             { type: 'error' },
         );
         throw error;
@@ -61,7 +64,10 @@ const login = async (data: ILogin): Promise<AxiosResponse<IAuth>> => {
         localStorage.setItem('token', response.data.accessToken);
         return response;
     } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.my-user.login.error'), { type: 'error' });
+        toast(
+            error.response?.data?.message || t('alerts.my-user-api.login.error'),
+            { type: 'error' },
+        );
         throw error;
     }
 };
@@ -71,7 +77,10 @@ const logout = async (): Promise<void> => {
         await api.post('/logout');
         localStorage.clear();
     } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.my-user.logout.error'), { type: 'error' });
+        toast(
+            error.response?.data?.message || t('alerts.my-user-api.logout.error'),
+            { type: 'error' },
+        );
         throw error;
     }
 };
@@ -89,7 +98,7 @@ const refresh = async (): Promise<AxiosResponse<IAuth>> => {
         localStorage.setItem('token', response.data.accessToken);
         return response;
     } catch (error: any) {
-        console.log('my-user refresh error: ', error.response?.data?.message || t('alerts.my-user.refresh.error'));
+        console.log('my-user refresh error: ', error.response?.data?.message || t('alerts.my-user-api.refresh.error'));
         localStorage.removeItem('token');
         throw error;
     }
@@ -100,7 +109,7 @@ const sendActivationLink = async (userId: IUser['id']): Promise<AxiosResponse<IU
         return await api.get(`/get-activation-link/${userId}`);
     } catch (error: any) {
         toast(
-            error.response?.data?.message || t('alerts.my-user.sendActivationLink.error'),
+            error.response?.data?.message || t('alerts.my-user-api.send-activation-link.error'),
             { type: 'error' },
         )
         throw error;
@@ -116,12 +125,12 @@ const changeForgottenPassword = async (data: IChangeForgottenPassword): Promise<
         const encryptedNewPassword = encryptedData(data.newPassword, process.env.REACT_APP_CRYPTO_JS_SECRET);
         await api.put('/change-forgotten-password', { ...data, newPassword: encryptedNewPassword });
         toast(
-            t('alerts.my-user.changeForgottenPassword.success'),
+            t('alerts.my-user-api.change-forgotten-password.success'),
             { type: 'success' },
         );
     } catch (error: any) {
         toast(
-            error.response?.data?.message || t('alerts.my-user.changeForgottenPassword.error'),
+            error.response?.data?.message || t('alerts.my-user-api.change-forgotten-password.error'),
             { type: 'error' },
         );
         throw error;
@@ -132,12 +141,12 @@ const forgotPassword = async (data: IForgotPassword): Promise<void> => {
     try {
         await api.put('/forgot-password', data);
         toast(
-            t('alerts.my-user.forgotPassword.success', { email: data.email }),
+            t('alerts.my-user-api.forgot-password.success', { email: data.email }),
             { type: 'success' },
         );
     } catch (error: any) {
         toast(
-            error.response?.data?.message || t('alerts.my-user.forgotPassword.error', { email: data.email }),
+            error.response?.data?.message || t('alerts.my-user-api.forgot-password.error', { email: data.email }),
             { type: 'error' },
         );
         throw error;
@@ -159,12 +168,12 @@ const changePassword = async (data: IChangePassword): Promise<void> => {
         });
         localStorage.removeItem('token');
         toast(
-            t('alerts.my-user.changePassword.success'),
+            t('alerts.my-user-api.change-password.success'),
             { type: 'success' },
         );
     } catch (error: any) {
         toast(
-            error.response?.data?.message || t('alerts.my-user.changePassword.error'),
+            error.response?.data?.message || t('alerts.my-user-api.change-password.error'),
             { type: 'error' },
         );
         throw error;
@@ -196,7 +205,10 @@ const updateMyUser = async ({
             },
         );
     } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.my-user.updateMyUser.error'), { type: 'error' });
+        toast(
+            error.response?.data?.message || t('alerts.my-user-api.update-my-user.error'),
+            { type: 'error' },
+        );
         throw error;
     }
 };
@@ -213,7 +225,7 @@ const deleteMyUser = async (data: IDeleteMyUser): Promise<AxiosResponse<IUser['i
         return response;
     } catch (error: any) {
         toast(
-            error.response?.data?.message || t('alerts.my-user.deleteMyUser.error', { userId: data.id }),
+            error.response?.data?.message || t('alerts.my-user-api.delete-my-user.error', { userId: data.id }),
             { type: 'error' },
         );
         throw error;
@@ -224,7 +236,10 @@ const addFriend = async (data: IAddFriend): Promise<AxiosResponse<IUser>> => {
     try {
         return await api.post('/friend', data);
     } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.my-user.addFriend.error'), { type: 'error' });
+        toast(
+            error.response?.data?.message || t('alerts.my-user-api.add-friend.error'),
+            { type: 'error' },
+        );
         throw error;
     }
 };
@@ -233,7 +248,10 @@ const removeFriend = async (data: IRemoveFriend): Promise<AxiosResponse<IUser>> 
     try {
         return await api.delete('/friend', { data });
     } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.my-user.removeFriend.error'), { type: 'error' });
+        toast(
+            error.response?.data?.message || t('alerts.my-user-api.remove-friend.error'),
+            { type: 'error' },
+        );
         throw error;
     }
 };
