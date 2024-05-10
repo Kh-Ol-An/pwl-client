@@ -54,13 +54,13 @@ const Auth: FC = () => {
     const [checkedPrivacyPolicy, setCheckedPrivacyPolicy] = useState<boolean>(location.search === '?agree');
     const [checkedPrivacyPolicyError, setCheckedPrivacyPolicyError] = useState<string>('');
 
-    let title = t('auth.sing-in');
-    isRegistration && (title = t('auth.sing-up'));
-    isForgotPassword && (title = t('auth.forgot-password'));
+    let title = t('auth.title.sing_in');
+    isRegistration && (title = t('auth.title.sing_up'));
+    isForgotPassword && (title = t('auth.title.forgot_password'));
 
-    let submit = 'Увійти';
-    isRegistration && (submit = 'Зареєструватися');
-    isForgotPassword && (submit = 'Відновити');
+    let submit = t('auth.sing_in');
+    isRegistration && (submit = t('auth.sing_in'));
+    isForgotPassword && (submit = t('auth.recovery'));
 
     const handleGoogleLogin = async (response: CredentialResponse) => {
         setClickedOnSubmit(true);
@@ -68,7 +68,7 @@ const Auth: FC = () => {
         if (checkedPrivacyPolicy) {
             setCheckedPrivacyPolicyError('');
         } else {
-            return setCheckedPrivacyPolicyError('Ми не можемо Вас авторизувати, поки Ви не погодитись на наші умови.');
+            return setCheckedPrivacyPolicyError(t('auth.privacy_policy_error'));
         }
 
         if (!response.credential || checkedPrivacyPolicyError.length > 0) return;
@@ -95,14 +95,14 @@ const Auth: FC = () => {
             if (data.password === repeatPassword) {
                 setRepeatPasswordError('');
             } else {
-                return setRepeatPasswordError('Паролі не співпадають.');
+                return setRepeatPasswordError(t('auth.passwords_error'));
             }
         }
 
         if (checkedPrivacyPolicy) {
             setCheckedPrivacyPolicyError('');
         } else {
-            return setCheckedPrivacyPolicyError('Ми не можемо Вас зареєструвати, поки Ви не погодитись на наші умови.');
+            return setCheckedPrivacyPolicyError(t('auth.privacy_policy_error'));
         }
 
         if (repeatPasswordError.length > 0 || checkedPrivacyPolicyError.length > 0) return;
@@ -123,7 +123,7 @@ const Auth: FC = () => {
         if (!clickedOnSubmit) return;
 
         const password = getValues('password');
-        password === value ? setRepeatPasswordError('') : setRepeatPasswordError('Паролі не співпадають.');
+        password === value ? setRepeatPasswordError('') : setRepeatPasswordError(t('auth.passwords_error'));
     };
 
     const handleTogglePrivacyPolicy = (e: ChangeEvent<HTMLInputElement>) => {
@@ -134,7 +134,7 @@ const Auth: FC = () => {
 
         value
             ? setCheckedPrivacyPolicyError('')
-            : setCheckedPrivacyPolicyError('Ми не можемо Вас зареєструвати, поки Ви не погодитись на наші умови.');
+            : setCheckedPrivacyPolicyError(t('auth.privacy_policy_error'));
     };
 
     return (
@@ -169,7 +169,7 @@ const Auth: FC = () => {
                             />
                         )}
 
-                        <span className="auth-page-divider">або</span>
+                        <span className="auth-page-divider">{t('auth.or')}</span>
 
                         {isRegistration && (
                             <Input
@@ -177,7 +177,7 @@ const Auth: FC = () => {
                                 id="firstName"
                                 name="firstName"
                                 type="text"
-                                label="Ім'я*"
+                                label={t('auth.name')}
                                 error={errors?.firstName?.message}
                             />
                         )}
@@ -197,7 +197,7 @@ const Auth: FC = () => {
                                 id="password"
                                 name="password"
                                 type="password"
-                                label="Пароль*"
+                                label={t('auth.password')}
                                 error={errors?.password?.message}
                             />
                         )}
@@ -207,7 +207,7 @@ const Auth: FC = () => {
                                 id="repeat-password"
                                 name="repeat-password"
                                 type="password"
-                                label="Повторіть пароль*"
+                                label={t('auth.repeat_password')}
                                 value={repeatPassword}
                                 error={repeatPasswordError}
                                 onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}
@@ -221,8 +221,7 @@ const Auth: FC = () => {
                                     variant="text"
                                     onClick={() => setIsRegistration((state) => !state)}
                                 >
-                                    {/*{isRegistration ? 'Ми вже знайомі.' : 'Ти мене ще не знаєш.'}*/}
-                                    {isRegistration ? 'Увійти' : 'Зареєструватись'}
+                                    {isRegistration ? t('auth.sing_in') : t('auth.sing_up')}
                                 </Button>
                             )}
 
@@ -234,7 +233,11 @@ const Auth: FC = () => {
                                         color="action-color"
                                         onClick={() => setIsForgotPassword((state) => !state)}
                                     >
-                                        {isForgotPassword ? 'Пароль згадано!' : 'Не пам\'ятаю пароль'}
+                                        {
+                                            isForgotPassword
+                                                ? t('auth.password_remembered')
+                                                : t('auth.forgot_password')
+                                        }
                                     </Button>
                                 </div>
                             )}
@@ -249,11 +252,11 @@ const Auth: FC = () => {
                                     checked={checkedPrivacyPolicy}
                                     onChange={handleTogglePrivacyPolicy}
                                 >
-                                    Я погоджуюсь з{' '}
+                                    {t('auth.i_agree_to')}
                                     <Button to="/privacy-policy" variant="text" color="primary-color">
-                                        політикою конфіденційності
+                                        {t('auth.privacy_policy')}
                                     </Button>
-                                    сайту Wish Hub.
+                                    {t('auth.wish_hub')}
                                 </Checkbox>
 
                                 {checkedPrivacyPolicyError.length > 0 && (

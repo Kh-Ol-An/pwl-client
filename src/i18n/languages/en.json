@@ -53,14 +53,30 @@
         }
     },
     "auth": {
-        "sing-in": "Sing In",
-        "sing-up": "Sing Up",
-        "forgot-password": "Forgotten your password?"
+        "title": {
+            "sing_in": "Sing In",
+            "sing_up": "Sing Up",
+            "forgot_password": "Forgotten your password?"
+        },
+        "or": "or",
+        "name": "Name*",
+        "password": "Password*",
+        "repeat_password": "Repeat password*",
+        "sing_in": "Sing In",
+        "sing_up": "Sing Up",
+        "password_remembered": "Password remembered!",
+        "forgot_password": "Forgot my password",
+        "i_agree_to": "I agree to the Wish Hub website's",
+        "privacy_policy": "Privacy Policy.",
+        "wish_hub": "",
+        "privacy_policy_error": "We can't authorize you until you agree to our Privacy Policy.",
+        "passwords_error": "Passwords do not match.",
+        "recovery": "Recovery"
     },
     "change-forgotten-password": {
         "title": "Password recovery",
         "new_password": "New password*",
-        "repeat_new_password": "Repeat the new password*",
+        "repeat_new_password": "Repeat new password*",
         "recovery": "Recovery"
     },
     "instruction": {

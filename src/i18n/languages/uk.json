@@ -53,9 +53,25 @@
         }
     },
     "auth": {
-        "sing-in": "Вхід",
-        "sing-up": "Реєстрація",
-        "forgot-password": "Забули пароль?"
+        "title": {
+            "sing_in": "Вхід",
+            "sing_up": "Реєстрація",
+            "forgot_password": "Забули пароль?"
+        },
+        "or": "або",
+        "name": "Ім'я*",
+        "password": "Пароль*",
+        "repeat_password": "Повторіть пароль*",
+        "sing_in": "Увійти",
+        "sing_up": "Зареєструватись",
+        "password_remembered": "Пароль згадано!",
+        "forgot_password": "Не пам'ятаю пароль",
+        "i_agree_to": "Я погоджуюсь з",
+        "privacy_policy": "політикою конфіденційності",
+        "wish_hub": "сайту Wish Hub.",
+        "privacy_policy_error": "Ми не можемо авторизувати Вас, поки Ви не погодитись з нашою політикою конфіденційності.",
+        "passwords_error": "Паролі не співпадають.",
+        "recovery": "Відновити"
     },
     "change-forgotten-password": {
         "title": "Відновлення паролю",
