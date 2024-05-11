@@ -116,6 +116,12 @@
             }
         }
     },
+    "activation-link-expired": {
+        "logout": "Log out",
+        "expired": "Account activation period has expired.",
+        "utc": "The account will be deleted at 00:00 UTC.",
+        "again": "You can register with the same email again after the old account is deleted."
+    },
     "auth": {
         "title": {
             "sing_in": "Sing In",

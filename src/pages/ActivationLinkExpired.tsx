@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Logout as LogoutIcon } from '@mui/icons-material';
 import { useAppDispatch } from '@/store/hook';
 import { logout } from '@/store/my-user/thunks';
@@ -7,6 +8,8 @@ import LanguageSelection from "@/components/LanguageSelection";
 import Button from '@/components/Button';
 
 const ActivationLinkExpired = () => {
+    const { t } = useTranslation();
+
     const dispatch = useAppDispatch();
 
     return (
@@ -19,15 +22,15 @@ const ActivationLinkExpired = () => {
                 <div className="logout">
                     <Button variant="text" onClick={() => dispatch(logout())}>
                         <LogoutIcon />
-                        <span>Вийти з аккаунту</span>
+                        <span>{t('activation-link-expired.logout')}</span>
                     </Button>
                 </div>
             </div>
 
             <p className="content">
-                Термін активації акаунта закінчився. <br/>
-                Акаунт буде видалений в 00:00 за Київським часом. <br/>
-                Зареєструватись за такою ж поштою можна буде знову після видалення старого акаунту.
+                {t('activation-link-expired.expired')}<br/>
+                {t('activation-link-expired.utc')}<br/>
+                {t('activation-link-expired.again')}
             </p>
         </div>
     );
