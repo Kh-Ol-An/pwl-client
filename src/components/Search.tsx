@@ -1,5 +1,6 @@
 import React, { FC, ChangeEvent, useState, useRef, useEffect, useMemo } from 'react';
 import { debounce } from 'lodash';
+import { useTranslation } from 'react-i18next';
 import Input from '@/components/Input';
 
 const useDebounce = (callback: () => void) => {
@@ -24,6 +25,8 @@ interface Props {
 }
 
 const Search: FC<Props> = ({ changeSearchBar, id }) => {
+    const { t } = useTranslation();
+
     const [searchBar, setSearchBar] = useState('');
 
     const send = useDebounce(() => changeSearchBar(searchBar.trim()));
@@ -51,7 +54,7 @@ const Search: FC<Props> = ({ changeSearchBar, id }) => {
             id={id}
             name={id}
             type="search"
-            label="Пошук користувачів"
+            label={t('home.users-search')}
             value={searchBar}
             clear={clear}
             onChange={(event) => change(event as ChangeEvent<HTMLInputElement>)}

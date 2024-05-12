@@ -1,5 +1,6 @@
 import React, { FC, useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
@@ -20,6 +21,8 @@ interface IProps {
 }
 
 const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
+    const { t } = useTranslation();
+
     const { ref, inView } = useInView({
         threshold: 0,
     });
@@ -96,7 +99,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
             <div className="sidebar-inner">
                 <div className="sidebar-content">
                     <div className="sidebar-head">
-                        <h2 className="sidebar-title">Користувачі</h2>
+                        <h2 className="sidebar-title">{t('home.users')}</h2>
 
                         <ShareButton link="welcome" />
                     </div>
@@ -110,17 +113,17 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                                 value={userType}
                                 onChange={handleChangeUserType}
                             >
-                                <MenuItem value="all">Всі</MenuItem>
-                                <MenuItem value="friends">Друзі</MenuItem>
+                                <MenuItem value="all">{t('home.all')}</MenuItem>
+                                <MenuItem value="friends">{t('home.friends')}</MenuItem>
                                 <MenuItem value="followFrom">
                                     <span className="sidebar-user-type-item">
-                                        Запити на дружбу
+                                        {t('home.friend-requests')}
                                         {users.followFromCount > 0 && (
                                             <span className="count">{users.followFromCount}</span>
                                         )}
                                     </span>
                                 </MenuItem>
-                                <MenuItem value="followTo">Надіслані запити на дружбу</MenuItem>
+                                <MenuItem value="followTo">{t('home.sent-friend-requests')}</MenuItem>
                             </Select>
 
                             {users.followFromCount > 0 && (

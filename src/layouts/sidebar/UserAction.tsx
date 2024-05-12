@@ -8,9 +8,8 @@ import {
     ListItemButton,
     ListItemText,
     CircularProgress,
-    Modal,
 } from '@mui/material';
-import { Close as CloseIcon, PeopleAlt as PeopleAltIcon } from '@mui/icons-material';
+import { PeopleAlt as PeopleAltIcon } from '@mui/icons-material';
 import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
@@ -19,11 +18,10 @@ import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import { IRemoveFriend } from '@/store/my-user/types';
 import { IUser } from '@/models/IUser';
-import Card from '@/layouts/Card';
 import DetailAccount from '@/layouts/DetailAccount';
 import Popup from '@/components/Popup';
+import CustomModal from '@/components/CustomModal';
 import Button from '@/components/Button';
-import Action from '@/components/Action';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
@@ -121,22 +119,26 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                 >
                     {showAddFriend && (
                         <Button variant="text" fontSize="small" onClick={handleAddFriend}>
-                            {myUser?.followFrom.includes(user.id) ? "Підтвердити дружбу" : "Додати друга"}
+                            {
+                                myUser?.followFrom.includes(user.id)
+                                    ? t('home.confirm-friendship')
+                                    : t('home.add-friend')
+                            }
                         </Button>
                     )}
                     {(myUser?.friends.includes(user.id) || myUser?.followTo.includes(user.id)) && (
                         <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('followTo')}>
-                            Видалити свій запит <br/> на дружбу
+                            {t('home.delete-your')} <br/> {t('home.delete-request')}
                         </Button>
                     )}
                     {(myUser?.friends.includes(user.id) || myUser?.followFrom.includes(user.id)) && (
                         <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('followFrom')}>
-                            Видалити запит користувача <br/> на дружбу
+                            {t('home.delete-user_s')} <br/> {t('home.delete-request')}
                         </Button>
                     )}
                     {myUser?.friends.includes(user.id) && (
                         <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('friends')}>
-                            Видалити друга
+                            {t('home.remove-friend')}
                         </Button>
                     )}
                 </Popup>
@@ -160,22 +162,9 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                     </span>
                 )}
 
-                <Modal
-                    open={showDetailAccount}
-                    onClose={handleHideDetailAccount}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <div className="modal modal-md">
-                        <Card>
-                            <DetailAccount user={user} />
-                        </Card>
-
-                        <Action onClick={handleHideDetailAccount}>
-                            <CloseIcon sx={{ color: StylesVariables.blackColor }} />
-                        </Action>
-                    </div>
-                </Modal>
+                <CustomModal show={showDetailAccount} hide={handleHideDetailAccount} classes="modal modal-md">
+                    <DetailAccount user={user} />
+                </CustomModal>
             </ListItemAvatar>
 
             <ListItemButton onClick={handleSelectWish}>

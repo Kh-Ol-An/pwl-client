@@ -178,7 +178,8 @@
     },
     "home": {
         "when_your_birth": "When is Your birthday?",
-        "birthday": "Birthday*",
+        "birthday*": "Birthday*",
+        "birthday": "Birthday:",
         "bd": "Birthday: {{birthday}}",
         "birthday-error": {
             "min-date": "We have doubts that You are more than 120 years old.",
@@ -191,7 +192,22 @@
         "account_settings": "Account settings",
         "about": "About",
         "instruction": "Instruction",
-        "contacts": "Contacts"
+        "contacts": "Contacts",
+        "users": "Users",
+        "all": "All",
+        "friends": "Friends",
+        "friend-requests": "Friend Requests",
+        "sent-friend-requests": "Sent Friend Requests",
+        "users-search": "Users Search",
+        "confirm-friendship": "Confirm friendship",
+        "add-friend": "Add friend",
+        "delete-your": "Delete your friend request",
+        "delete-user_s": "Delete user's friend request",
+        "delete-request": "",
+        "remove-friend": "Remove friend",
+        "mail": "Email:",
+        "fulfilled-wishes": "Fulfilled wishes:",
+        "unfulfilled-wishes": "Unfulfilled wishes:"
     },
     "activation-link-expired": {
         "expired": "Account activation period has expired.",

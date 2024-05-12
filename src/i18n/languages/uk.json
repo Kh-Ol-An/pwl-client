@@ -178,7 +178,8 @@
     },
     "home": {
         "when_your_birth": "Коли Ви народились?",
-        "birthday": "Дата народження*",
+        "birthday*": "Дата народження*",
+        "birthday": "День народження:",
         "bd": "Д.н. {{birthday}}",
         "birthday-error": {
             "min-date": "В нас є сумніви що Вам більше ніж 120 років.",
@@ -191,7 +192,22 @@
         "account_settings": "Налаштування акаунту",
         "about": "Про",
         "instruction": "Інструкція",
-        "contacts": "Контакти"
+        "contacts": "Контакти",
+        "users": "Користувачі",
+        "all": "Всі",
+        "friends": "Друзі",
+        "friend-requests": "Запити на дружбу",
+        "sent-friend-requests": "Надіслані запити на дружбу",
+        "users-search": "Пошук користувачів",
+        "confirm-friendship": "Підтвердити дружбу",
+        "add-friend": "Додати друга",
+        "delete-your": "Видалити свій запит",
+        "delete-user_s": "Видалити запит користувача",
+        "delete-request": "на дружбу",
+        "remove-friend": "Видалити друга",
+        "mail": "Пошта:",
+        "fulfilled-wishes": "Виконані бажання:",
+        "unfulfilled-wishes": "Невиконані бажання:"
     },
     "activation-link-expired": {
         "expired": "Термін активації акаунта закінчився.",

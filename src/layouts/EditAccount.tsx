@@ -168,7 +168,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
             >
                 <DemoContainer components={['DesktopDatePicker']}>
                     <DesktopDatePicker
-                        label={t('home.birthday')}
+                        label={t('home.birthday*')}
                         format="DD.MM.YYYY"
                         dayOfWeekFormatter={(weekday) => weekday}
                         minDate={dayjs().subtract(120, 'years')} // Дозволити вибір дати до 120 років в минулому

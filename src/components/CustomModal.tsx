@@ -12,7 +12,7 @@ interface IProps {
     children: ReactNode;
 }
 
-const HeaderModal: FC<IProps> = ({ show, hide, classes = 'modal', children }) => {
+const CustomModal: FC<IProps> = ({ show, hide, classes = 'modal', children }) => {
     return (
         <Modal
             open={show}
@@ -33,4 +33,4 @@ const HeaderModal: FC<IProps> = ({ show, hide, classes = 'modal', children }) =>
     );
 };
 
-export default HeaderModal;
+export default CustomModal;

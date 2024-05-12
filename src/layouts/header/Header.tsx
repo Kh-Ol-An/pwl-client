@@ -21,13 +21,13 @@ import EditAccountModal from '@/layouts/header/EditAccountModal';
 import About from '@/layouts/header/About';
 import Contacts from '@/layouts/header/Contacts';
 import ConfirmDeleteMyUserModal from '@/layouts/header/ConfirmDeleteMyUserModal';
+import CustomModal from '@/components/CustomModal';
 import Button from '@/components/Button';
 import Popup from '@/components/Popup';
 import LanguageSelection from '@/components/LanguageSelection';
 import LogoIcon from '@/assets/images/logo.svg';
 import WishHub from '@/assets/images/wish-hub.png';
 import StylesVariables from '@/styles/utils/variables.module.scss';
-import HeaderModal from '@/layouts/header/HeaderModal';
 
 interface IProps {
     showHeader: boolean;
@@ -207,9 +207,9 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
 
                     {/* Detail Account */}
                     {myUser && (
-                        <HeaderModal show={showDetailAccount} hide={handleHideDetailAccount} classes="modal modal-md">
+                        <CustomModal show={showDetailAccount} hide={handleHideDetailAccount} classes="modal modal-md">
                             <DetailAccount user={myUser} />
-                        </HeaderModal>
+                        </CustomModal>
                     )}
 
                     {/* Edit Account */}
@@ -220,22 +220,22 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                     />
 
                     {/* About */}
-                    <HeaderModal show={showAbout} hide={handleHideAbout}>
+                    <CustomModal show={showAbout} hide={handleHideAbout}>
                         <About />
-                    </HeaderModal>
+                    </CustomModal>
 
                     {/* Contacts */}
-                    <HeaderModal show={showContacts} hide={handleHideContacts}>
+                    <CustomModal show={showContacts} hide={handleHideContacts}>
                         <Contacts />
-                    </HeaderModal>
+                    </CustomModal>
 
                     {/* Language */}
-                    <HeaderModal show={showLanguage} hide={handleHideLanguage}>
+                    <CustomModal show={showLanguage} hide={handleHideLanguage}>
                         <div className="header-language">
                             {t('home.interface_language')}:
                             <LanguageSelection />
                         </div>
-                    </HeaderModal>
+                    </CustomModal>
 
                     {/* Confirm Delete My User */}
                     <ConfirmDeleteMyUserModal
