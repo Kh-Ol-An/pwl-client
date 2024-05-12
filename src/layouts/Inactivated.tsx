@@ -1,12 +1,16 @@
 import React, { FC, useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Logout as LogoutIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
-import Button from '@/components/Button';
 import { logout, sendActivationLink } from '@/store/my-user/thunks';
 import { WAITING_TIME } from '@/utils/constants';
 import Logo from '@/components/Logo';
+import LanguageSelection from '@/components/LanguageSelection';
+import Button from '@/components/Button';
 
 const Inactivated: FC = () => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
@@ -63,37 +67,39 @@ const Inactivated: FC = () => {
             <div className="inactivated-header">
                 <Logo to="/welcome" />
 
+                <LanguageSelection />
+
                 <div className="logout">
                     <Button variant="text" onClick={() => dispatch(logout())}>
                         <LogoutIcon />
-                        <span>Вийти з аккаунту</span>
+                        <span>{t('logout')}</span>
                     </Button>
                 </div>
             </div>
 
             <p className="content">
-                Ми прагнемо, щоб всі користувачі були справжніми. <br/>
-                Перевірте свою пошту: <span className="bold">{myUser?.email}</span> і активуйте свій акаунт. <br/>
-                Якщо листа немає, перевірте папку "Спам". <br/>
+                {t('inactivated.aim')} <br/>
+                {t('inactivated.check')} <span className="bold">{myUser?.email}</span> {t('inactivated.activate')} <br/>
+                {t('inactivated.spam')} <br/>
                 {timeLeft === null ? (
                     <>
-                        Якщо Ви не отримали листа, натисніть&nbsp;
+                        {t('inactivated.click')}
                         <span className="inactivated-link">
                             <Button type="button" variant="text" onClick={handleSendActivationLink}>
-                                сюди
+                                {t('inactivated.here')}
                             </Button>
                         </span>
                     </>
                 ) : (
                     <span>
-                        Ще раз можна буде відправити листа через:
+                        {t('inactivated.resend')}
                         <span className="timer">
                             {Math.floor(timeLeft / 60)}:{timeLeft % 60 > 9 ? timeLeft % 60 : `0${timeLeft % 60}`}
                         </span>
                     </span>
                 )}<br/><br/>
                 <span className="attention">
-                    Якщо не активувати акаунт протягом доби з моменту реєстрації, він буде видалений.
+                    {t('inactivated.day')}
                 </span>
             </p>
         </div>

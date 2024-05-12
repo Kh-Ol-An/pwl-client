@@ -4,6 +4,16 @@
     "logout": "Log out",
     "first-name": "Name*",
     "last-name": "Last name*",
+    "inactivated": {
+        "aim": "We aim for all users to be real.",
+        "check": "Check your email at:",
+        "activate": "and activate your account.",
+        "spam": "If you don't see the email, check your \"Spam\" folder.",
+        "click": "If you haven't received the email, click ",
+        "here": "here.",
+        "resend": "You can resend the email again in:",
+        "day": "If the account is not activated within a day of registration, it will be deleted."
+    },
     "share-button": {
         "share-text": "Wish Hub is a place where you can store your wishes and share them with your friends.",
         "confirm": "Share",
@@ -249,7 +259,7 @@
                 "img": "Registration"
             },
             "activation": {
-                "text-1": "Now go to your mail and find the email. If the email is not there, check your spam folder. We don't use uncontrolled mailing. It's just that each email service is configured differently, and our email may accidentally end up in the spam folder.",
+                "text-1": "Now go to your mail and find the email. If the email is not there, check your \"Spam\" folder. We don't use uncontrolled mailing. It's just that each email service is configured differently, and our email may accidentally end up in the \"Spam\" folder.",
                 "text-2": "Click the appropriate button in the email, or copy the link and paste it into the address bar of your browser.",
                 "img": "Account activation"
             }
