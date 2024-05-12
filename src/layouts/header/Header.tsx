@@ -175,23 +175,23 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                     >
                         <Button variant="text" type="button" onClick={handleShowEditAccount}>
                             <ManageAccountsIcon />
-                            Налаштування аккаунту
+                            {t('home.account_settings')}
                         </Button>
 
                         <Button variant="text" type="button" onClick={handleShowAbout}>
                             <img className="wish-hub-icon" src={LogoIcon} alt="Wish Hub icon" />
-                            Про
+                            {t('home.about')}
                             <img className="wish-hub-text" src={WishHub} alt="Wish Hub" />
                         </Button>
 
                         <Button to="/instruction" variant="text">
                             <InfoIcon />
-                            Інструкція
+                            {t('home.instruction')}
                         </Button>
 
                         <Button variant="text" type="button" onClick={handleShowContacts}>
                             <ForumIcon />
-                            Контакти
+                            {t('home.contacts')}
                         </Button>
 
                         <Button variant="text" type="button" onClick={handleShowLanguage}>
@@ -201,7 +201,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
 
                         <Button variant="text" type="button" onClick={handleLogout}>
                             <LogoutIcon />
-                            Вийти з аккаунту
+                            {t('logout')}
                         </Button>
                     </Popup>
 

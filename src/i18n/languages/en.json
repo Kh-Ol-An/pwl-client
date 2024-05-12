@@ -1,6 +1,7 @@
 {
     "sing-in": "Sing In",
     "sing-up": "Sing Up",
+    "logout": "Log out",
     "first-name": "Name*",
     "last-name": "Last name*",
     "share-button": {
@@ -176,10 +177,13 @@
         },
         "interface_language": "Interface language",
         "delete-account": "Delete account",
-        "update": "Update"
+        "update": "Update",
+        "account_settings": "Account settings",
+        "about": "About",
+        "instruction": "Instruction",
+        "contacts": "Contacts"
     },
     "activation-link-expired": {
-        "logout": "Log out",
         "expired": "Account activation period has expired.",
         "utc": "The account will be deleted at 00:00 UTC.",
         "again": "You can register with the same email again after the old account is deleted."

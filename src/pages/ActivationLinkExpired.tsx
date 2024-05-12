@@ -22,7 +22,7 @@ const ActivationLinkExpired = () => {
                 <div className="logout">
                     <Button variant="text" onClick={() => dispatch(logout())}>
                         <LogoutIcon />
-                        <span>{t('activation-link-expired.logout')}</span>
+                        <span>{t('logout')}</span>
                     </Button>
                 </div>
             </div>
