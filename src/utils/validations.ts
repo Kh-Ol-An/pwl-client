@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import {
     PASSWORD_MAX_LENGTH,
     PASSWORD_MIN_LENGTH,
@@ -15,7 +16,7 @@ export const onlyWhitespaceValidation = {
         }
         const trimmedValue = value.trim();
         if (trimmedValue === '' && value.length > 0) {
-            return "Введені дані не можуть містити тільки пробіли.";
+            return t('validations.only-whitespace');
         }
         return true;
     },
@@ -26,19 +27,19 @@ export const wishNameValidation = {
     ...onlyWhitespaceValidation,
     required: {
         value: true,
-        message: "Неможливо створити бажання без назви."
+        message: t('validations.wish-name.required')
     },
     pattern: {
         value: /^[a-zA-Zа-яА-ЯіІїЇ'єЄ0-9\s-!"№#$%&()*.,;=?@_]+$/,
-        message: "Назва бажання містить недопустимі символи. Будь ласка, використовуй лише літери латинського або кириличного алфавітів, цифри, пробіли та наступні символи: -!\"№#$%&()*.,;=?@_"
+        message: t('validations.wish-name.pattern')
     },
     minLength: {
         value: NAME_MIN_LENGTH,
-        message: `Що це за така коротка назва бажання? Придумай будь ласка назву яка довша за ${NAME_MIN_LENGTH - 1} символ.`
+        message: t('validations.wish-name.min', { min: NAME_MIN_LENGTH - 1 })
     },
     maxLength: {
         value: NAME_MAX_LENGTH,
-        message: `Назва твого бажання занадто довга. Давай намагатимемося вміститися в ${NAME_MAX_LENGTH} символів.`
+        message: t('validations.wish-name.max', { max: NAME_MAX_LENGTH })
     }
 };
 
@@ -47,15 +48,15 @@ export const wishPriceValidation = {
     ...onlyWhitespaceValidation,
     required: {
         value: true,
-        message: "Матеріальне бажання яке не має своєї ціни не може бути виконано твоїм всесвітом."
+        message: t('validations.wish-price.required')
     },
     pattern: {
         value: /^(?!0)\d+(\s\d+)*$/,
-        message: "Ціна має бути цілим, позитивним числом, та починатися не з \"0\"."
+        message: t('validations.wish-price.pattern')
     },
     maxLength: {
         value: WISH_PRICE_MAX_LENGTH,
-        message: `Дуже важко уявити що можна купити за ці гроші. Давай намагатимемося вміститися в ${WISH_PRICE_MAX_LENGTH} символів.`
+        message: t('validations.wish-price.max', { max: WISH_PRICE_MAX_LENGTH })
     }
 };
 
@@ -64,7 +65,7 @@ export const wishDescriptionValidation = {
     ...onlyWhitespaceValidation,
     minLength: {
         value: WISH_DESCRIPTION_MIN_LENGTH,
-        message: `Що це за такий короткий опис бажання? Придумай будь ласка опис який довший за ${WISH_DESCRIPTION_MIN_LENGTH - 1} символ.`
+        message: t('validations.wish-price.max', { min: WISH_DESCRIPTION_MIN_LENGTH - 1 })
     },
 };
 
@@ -72,7 +73,7 @@ export const wishDescriptionValidation = {
 export const emailValidation = {
     required: {
         value: true,
-        message: "Це поле потрібне щоб я міг ідентифікувати тебе."
+        message: t('validations.email.required')
     },
     validate: (value?: string) => {
         if (!value) {
@@ -81,11 +82,11 @@ export const emailValidation = {
 
         const trimmedValue = value.trim();
         if (trimmedValue === '' && value.length > 0) {
-            return "Електронна адреса не може містити тільки пробіли.";
+            return t('validations.email.only-whitespace');
         }
 
         if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(trimmedValue)) {
-            return "Це не схоже на електронну адресу. Будь ласка, введи правильну адресу.";
+            return t('validations.email.pattern');
         }
 
         return true;
@@ -96,21 +97,21 @@ export const emailValidation = {
 export const passwordValidation = {
     required: {
         value: true,
-        message: "Це поле потрібне щоб ніхто інший не зміг скористуватись твоїми даними."
+        message: t('validations.password.required')
     },
     validate: (value: string) => {
         if (value[0] === ' ' || value[value.length - 1] === ' ') {
-            return "Введені дані не можуть починатись або закінчуватись пробілом.";
+            return t('validations.password.whitespaces');
         }
         return true;
     },
     minLength: {
         value: PASSWORD_MIN_LENGTH,
-        message: `Для безпеки даних які ти довіряєш нам зберігати давай придумаємо пароль довший за ${PASSWORD_MIN_LENGTH - 1} символи.`
+        message: t('validations.password.min', { min: PASSWORD_MIN_LENGTH - 1 })
     },
     maxLength: {
         value: PASSWORD_MAX_LENGTH,
-        message: `Здається ти перестарався. Длиний пароль не завжди якісний пароль. Давай намагатимемося вміститися в ${PASSWORD_MAX_LENGTH} символів.`
+        message: t('validations.password.max', { max: PASSWORD_MAX_LENGTH })
     }
 };
 
@@ -119,15 +120,15 @@ export const accountFirstNameValidation = {
     ...onlyWhitespaceValidation,
     required: {
         value: true,
-        message: "В тебе має бути ім'я. Не соромся)"
+        message: t('validations.first-name.required')
     },
     minLength: {
         value: NAME_MIN_LENGTH,
-        message: `Ні разу не чув такого короткого імені. Мінімальна довжина поля ${NAME_MIN_LENGTH} символи.`
+        message: t('validations.first-name.min', { min: NAME_MIN_LENGTH })
     },
     maxLength: {
         value: NAME_MAX_LENGTH,
-        message: `Здається ти щось вигадуєш. Максимальна довжина поля ${NAME_MAX_LENGTH} символів.`
+        message: t('validations.first-name.max', { max: NAME_MAX_LENGTH })
     }
 };
 
@@ -136,10 +137,10 @@ export const accountLastNameValidation = {
     ...onlyWhitespaceValidation,
     minLength: {
         value: NAME_MIN_LENGTH,
-        message: `Ні разу не чув такого короткого прізвища. Мінімальна довжина поля ${NAME_MIN_LENGTH} символи.`
+        message: t('validations.last-name.min', { min: NAME_MIN_LENGTH })
     },
     maxLength: {
         value: NAME_MAX_LENGTH,
-        message: `Здається ти щось вигадуєш. Максимальна довжина поля ${NAME_MAX_LENGTH} символів.`
+        message: t('validations.last-name.max', { max: NAME_MAX_LENGTH })
     }
 };

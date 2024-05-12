@@ -1,6 +1,8 @@
 {
     "sing-in": "Sing In",
     "sing-up": "Sing Up",
+    "first-name": "Name*",
+    "last-name": "Last name*",
     "share-button": {
         "share-text": "Wish Hub is a place where you can store your wishes and share them with your friends.",
         "confirm": "Share",
@@ -116,6 +118,66 @@
             }
         }
     },
+    "encryption-error": "Could not be decrypted",
+    "avatar-error": {
+        "file-type": "The file must be in one of the following formats:",
+        "file-size": "The file size must not exceed {{size}} MB."
+    },
+    "images-error": {
+        "file-type": "One or more files are in an unsupported format. Supported formats:",
+        "file-size": "One or more files are larger than {{size}} MB.",
+        "file-count": "Unfortunately, it is not possible to save more than {{count}} images."
+    },
+    "validations": {
+        "only-whitespace": "The entered data cannot contain only spaces.",
+        "wish-name": {
+            "required": "It is impossible to create a desire without a name.",
+            "pattern": "The wish name contains invalid characters. Please use only letters of the Latin or Cyrillic alphabet, numbers, spaces, and the following characters: -!\"№#$%&()*.,;=?@_",
+            "min": "Why is the name of the wish so short? Please come up with a name that is longer than {{min}} characters.",
+            "max": "The name of your wish is too long. Let's try to fit it into {{max}} characters."
+        },
+        "wish-price": {
+            "required": "The material desire that does not have its price cannot be fulfilled by Your universe.",
+            "pattern": "The price must be a positive integer and not start with \"0\".",
+            "max": "It is very difficult to imagine what you can buy for this money. Let's try to fit in {{max}} characters."
+        },
+        "wish-description": {
+            "min": "What is this short wish description? Please come up with a description that is longer than {{min}} character."
+        },
+        "email": {
+            "required": "This field is required so that we can identify You.",
+            "only-whitespace": "Email address cannot contain only spaces.",
+            "pattern": "This does not look like an email address. Please enter a valid email."
+        },
+        "password": {
+            "required": "This field is required to prevent anyone else from using Your data.",
+            "whitespaces": "The entered data cannot begin or end with a space.",
+            "min": "The password is too short. Please come up with a password that is longer than {{min}} characters.",
+            "max": "I think you overdid it. A long password is not always a good password. Try to keep it to {{max}} characters."
+        },
+        "first-name": {
+            "required": "You must have a name. Don't be shy :)",
+            "min": "We have never heard such a short first name. The minimum length of the field is {{min}} characters.",
+            "max": "We think you are making something up. The maximum length of the field is {{max}} characters."
+        },
+        "last-name": {
+            "min": "We have never heard such a short last name. The minimum length of the field is {{min}} characters.",
+            "max": "We think you are making something up. The maximum length of the field is {{max}} characters."
+        }
+    },
+    "home": {
+        "when_your_birth": "When is Your birthday?",
+        "birthday": "Birthday*",
+        "bd": "Birthday: {{birthday}}",
+        "birthday-error": {
+            "min-date": "We have doubts that You are more than 120 years old.",
+            "disable-future": "It is impossible to be born in the future.",
+            "invalid-date": "The entered date is invalid."
+        },
+        "interface_language": "Interface language",
+        "delete-account": "Delete account",
+        "update": "Update"
+    },
     "activation-link-expired": {
         "logout": "Log out",
         "expired": "Account activation period has expired.",
@@ -132,8 +194,6 @@
         "name": "Name*",
         "password": "Password*",
         "repeat_password": "Repeat password*",
-        "sing_in": "Sing In",
-        "sing_up": "Sing Up",
         "password_remembered": "Password remembered!",
         "forgot_password": "Forgot my password",
         "i_agree_to": "I agree to the Wish Hub website's",
@@ -148,6 +208,12 @@
         "new_password": "New password*",
         "repeat_new_password": "Repeat new password*",
         "recovery": "Recovery"
+    },
+    "welcome": {
+        "intro": "Hello!",
+        "statement": "I'm your personal wish-fulfillment assistant!",
+        "question": "What's your dream?",
+        "text": "You probably know that thoughts become things. And written wishes tend to come true much faster. Write down all your big dreams and small desires here. You can share them with your friends or keep them just for yourself :) The best part is that when you're heading to a party, you won't have to stress about gifts - you'll be able to find a list of what your friend really wants right here."
     },
     "instruction": {
         "title": "Instruction",
@@ -189,24 +255,12 @@
             "text": "To be continued..."
         }
     },
-    "welcome": {
-        "intro": "Hello!",
-        "statement": "I'm your personal wish-fulfillment assistant!",
-        "question": "What's your dream?",
-        "text": "You probably know that thoughts become things. And written wishes tend to come true much faster. Write down all your big dreams and small desires here. You can share them with your friends or keep them just for yourself :) The best part is that when you're heading to a party, you won't have to stress about gifts - you'll be able to find a list of what your friend really wants right here."
-    },
     "wish": {
         "created-by": "Wish created by user:",
         "price": "Price:",
         "address": "Where to buy:",
         "description": "Description:",
         "empty": "This wish does not exist. It may have been deleted by the user."
-    },
-    "not-found-page": {
-        "title": "Page not found",
-        "text": "Oops! The page you were looking for does not exist.",
-        "sub-text": "You may have entered the page address incorrectly.",
-        "home": "To Home"
     },
     "privacy-policy": {
         "title": "Privacy Policy",
@@ -357,5 +411,11 @@
         "if_you_have": "If you have any questions about this Privacy Policy, You can contact us:",
         "contact_email": "By email: wish.hub.net@gmail.com",
         "agree": "I Agree"
+    },
+    "not-found-page": {
+        "title": "Page not found",
+        "text": "Oops! The page you were looking for does not exist.",
+        "sub-text": "You may have entered the page address incorrectly.",
+        "home": "To Home"
     }
 }

@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect, useRef, useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Avatar } from '@mui/material';
 import { Cancel as CancelIcon } from '@mui/icons-material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -28,6 +29,8 @@ type Inputs = {
 }
 
 const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
@@ -51,13 +54,13 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
         switch (birthdayError) {
             case 'minDate': {
-                return 'В нас є сумніви що Вам більше 120 років.';
+                return t('home.birthday-error.min-date');
             }
             case 'disableFuture': {
-                return 'Неможливо народитись в майбутньому.';
+                return t('home.birthday-error.disable-future');
             }
             case 'invalidDate': {
-                return 'Введена дата недійсна.';
+                return t('home.birthday-error.invalid-date');
             }
             default: {
                 return '';
@@ -114,7 +117,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
                 id="firstName"
                 name="firstName"
                 type="text"
-                label="Ім'я*"
+                label={t('first-name')}
                 error={errors?.firstName?.message}
             />
 
@@ -123,7 +126,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
                 id="lastName"
                 name="lastName"
                 type="text"
-                label="Прізвище"
+                label={t('last-name')}
                 error={errors?.lastName?.message}
             />
 
@@ -161,11 +164,11 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
             <div
                 className={"date-picker" + (clickedOnSubmit ? " clicked-on-submit" : "")}
-                title="Коли твій день народження?"
+                title={t('home.when_your_birth')}
             >
                 <DemoContainer components={['DesktopDatePicker']}>
                     <DesktopDatePicker
-                        label="День Народження*"
+                        label={t('home.birthday')}
                         format="DD.MM.YYYY"
                         dayOfWeekFormatter={(weekday) => weekday}
                         minDate={dayjs().subtract(120, 'years')} // Дозволити вибір дати до 120 років в минулому
@@ -184,10 +187,10 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
             <div className="actions">
                 <Button type="button" variant="text" color="action-color" onClick={handleShowConfirmDeleteMyUser}>
-                    Видалити свій акаунт
+                    {t('home.delete-account')}
                 </Button>
 
-                <Button type="submit">Оновити</Button>
+                <Button type="submit">{t('home.update')}</Button>
             </div>
         </form>
     );

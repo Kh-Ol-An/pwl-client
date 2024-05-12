@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { TCurrentImage } from '@/models/IWish';
 import { ALLOWED_FILE_EXTENSIONS, ALLOWED_MAX_FILE_SIZE_IN_MB, MAX_NUMBER_OF_IMAGES_PER_WISH } from '@/utils/constants';
 
@@ -7,6 +8,8 @@ interface IProps {
 }
 
 const ImagesValidation: FC<IProps> = ({ images }) => {
+    const { t } = useTranslation();
+
     const extensionsValidation = images.some((image) => {
         if (image instanceof File) {
             const fileExtension = image.type.split('/')[1];
@@ -19,7 +22,7 @@ const ImagesValidation: FC<IProps> = ({ images }) => {
     if (extensionsValidation) {
         return (
             <p className="error">
-                Один або декілька файлів мають непідтримуваний формат. Підтримувані формати: {Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ')}.
+                {t('images-error.file-type')} {Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ')}.
             </p>
         );
     }
@@ -37,7 +40,7 @@ const ImagesValidation: FC<IProps> = ({ images }) => {
     if (sizeValidation) {
         return (
             <p className="error">
-                Один або декілька файлів перевищують розмір {ALLOWED_MAX_FILE_SIZE_IN_MB} МБ.
+                {t('images-error.file-size', { size: ALLOWED_MAX_FILE_SIZE_IN_MB })}
             </p>
         );
     }
@@ -51,7 +54,7 @@ const ImagesValidation: FC<IProps> = ({ images }) => {
     if (imagesLength > MAX_NUMBER_OF_IMAGES_PER_WISH) {
         return (
             <p className="error">
-                На жаль неможливо зберегти більш ніж {MAX_NUMBER_OF_IMAGES_PER_WISH} зображень.
+                {t('images-error.file-count', { count: MAX_NUMBER_OF_IMAGES_PER_WISH })}
             </p>
         );
     }

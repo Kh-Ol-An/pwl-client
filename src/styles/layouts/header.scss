@@ -184,3 +184,10 @@
 .modal.confirm .email-box {
     width: 100%;
 }
+
+.header-language {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: $light-color;
+}

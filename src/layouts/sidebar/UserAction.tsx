@@ -1,4 +1,6 @@
 import React, { FC, useState } from 'react';
+import i18next from "i18next";
+import { useTranslation } from 'react-i18next';
 import {
     Avatar,
     ListItem,
@@ -31,6 +33,8 @@ interface IProps {
 }
 
 const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser.user);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
@@ -47,6 +51,14 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
 
     const showAddFriend = myUser?.followFrom.includes(user.id)
         || (!myUser?.friends.includes(user.id) && !myUser?.followTo.includes(user.id));
+
+    let language = 'en';
+    i18next.language.includes('en') && (language = 'en');
+    i18next.language.includes('uk') && (language = 'uk');
+
+    let dayjsFormat = 'MMMM Do';
+    i18next.language.includes('en') && (dayjsFormat = 'MMMM Do');
+    i18next.language.includes('uk') && (dayjsFormat = 'DD MMMM');
 
     const handleShowDetailAccount = () => {
         setShowDetailAccount(true);
@@ -175,9 +187,11 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                     }
                     secondary={
                         <span className="params">
-                            {user.birthday
-                                ? `Д.н. ${dayjs(user.birthday).locale('uk').format('DD MMMM')}`
-                                : user.email}
+                            {
+                                user.birthday
+                                    ? t('home.bd', { birthday: dayjs(user.birthday).locale(language).format(dayjsFormat) })
+                                    : user.email
+                            }
                         </span>
                     }
                     sx={{ color: StylesVariables.whiteColor }}

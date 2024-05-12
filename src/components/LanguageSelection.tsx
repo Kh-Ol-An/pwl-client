@@ -1,14 +1,19 @@
 import React, { FC } from 'react';
 import i18next from "i18next";
-import { UA, US } from 'country-flag-icons/react/3x2'
+import { UA, US } from 'country-flag-icons/react/3x2';
 
 const LanguageSelection: FC = () => {
+    const handleChangeLanguage = (language: 'en' | 'uk') => {
+        i18next.changeLanguage(language);
+        location.reload();
+    };
+
     return (
         <div className="language-selection">
             <button
                 type="button"
                 disabled={i18next.language.includes('en')}
-                onClick={() => i18next.changeLanguage('en')}
+                onClick={() => handleChangeLanguage('en')}
             >
                 <US title="United States" className="flag-icon" />
             </button>
@@ -16,7 +21,7 @@ const LanguageSelection: FC = () => {
             <button
                 type="button"
                 disabled={i18next.language.includes('uk')}
-                onClick={() => i18next.changeLanguage('uk')}
+                onClick={() => handleChangeLanguage('uk')}
             >
                 <UA title="Ukraine" className="flag-icon" />
             </button>

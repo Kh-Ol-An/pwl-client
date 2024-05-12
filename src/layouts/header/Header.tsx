@@ -1,12 +1,14 @@
 import React, { FC, useState } from 'react';
-import { Avatar, Modal } from '@mui/material';
+import i18next from "i18next";
+import { useTranslation } from 'react-i18next';
+import { Avatar } from '@mui/material';
 import {
     Settings as SettingsIcon,
     ManageAccounts as ManageAccountsIcon,
     Info as InfoIcon,
     Forum as ForumIcon,
+    Language as LanguageIcon,
     Logout as LogoutIcon,
-    Close as CloseIcon,
 } from '@mui/icons-material';
 import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
@@ -14,18 +16,18 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { logout } from '@/store/my-user/thunks';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
-import Card from '@/layouts/Card';
 import DetailAccount from '@/layouts/DetailAccount';
-import About from '@/layouts/About';
-import Contacts from '@/layouts/Contacts';
+import EditAccountModal from '@/layouts/header/EditAccountModal';
+import About from '@/layouts/header/About';
+import Contacts from '@/layouts/header/Contacts';
 import ConfirmDeleteMyUserModal from '@/layouts/header/ConfirmDeleteMyUserModal';
 import Button from '@/components/Button';
-import Action from '@/components/Action';
-import Popup from "@/components/Popup";
+import Popup from '@/components/Popup';
+import LanguageSelection from '@/components/LanguageSelection';
 import LogoIcon from '@/assets/images/logo.svg';
 import WishHub from '@/assets/images/wish-hub.png';
 import StylesVariables from '@/styles/utils/variables.module.scss';
-import EditAccountModal from '@/layouts/header/EditAccountModal';
+import HeaderModal from '@/layouts/header/HeaderModal';
 
 interface IProps {
     showHeader: boolean;
@@ -33,6 +35,8 @@ interface IProps {
 }
 
 const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser.user);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
@@ -43,7 +47,16 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     const [showEditAccount, setShowEditAccount] = useState<boolean>(false);
     const [showAbout, setShowAbout] = useState<boolean>(false);
     const [showContacts, setShowContacts] = useState<boolean>(false);
+    const [showLanguage, setShowLanguage] = useState<boolean>(false);
     const [showConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
+
+    let language = 'en';
+    i18next.language.includes('en') && (language = 'en');
+    i18next.language.includes('uk') && (language = 'uk');
+
+    let dayjsFormat = 'MMMM Do';
+    i18next.language.includes('en') && (dayjsFormat = 'MMMM Do');
+    i18next.language.includes('uk') && (dayjsFormat = 'DD MMMM');
 
     // SelectWish
     const handleSelectWish = async () => {
@@ -60,7 +73,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
         setShowDetailAccount(true);
         hideHeader();
     };
-
     const handleHideDetailAccount = () => {
         setShowDetailAccount(false);
     };
@@ -71,7 +83,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
         setAnchor(null);
         hideHeader();
     };
-
     const handleHideEditAccount = () => {
         setShowEditAccount(false);
     };
@@ -82,7 +93,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
         setAnchor(null);
         hideHeader();
     };
-
     const handleHideAbout = () => {
         setShowAbout(false);
     };
@@ -93,9 +103,18 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
         setAnchor(null);
         hideHeader();
     };
-
     const handleHideContacts = () => {
         setShowContacts(false);
+    };
+
+    // Language
+    const handleShowLanguage = () => {
+        setShowLanguage(true);
+        setAnchor(null);
+        hideHeader();
+    };
+    const handleHideLanguage = () => {
+        setShowLanguage(false);
     };
 
     // ConfirmDeleteMyUser
@@ -137,7 +156,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             <span className="params">
                                 {
                                     myUser?.birthday
-                                        ? `Д.н. ${dayjs(myUser?.birthday).locale('uk').format('DD MMMM')}`
+                                        ? t('home.bd', { birthday: dayjs(myUser?.birthday).locale(language).format(dayjsFormat) })
                                         : myUser?.email
                                 }
                             </span>
@@ -175,6 +194,11 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             Контакти
                         </Button>
 
+                        <Button variant="text" type="button" onClick={handleShowLanguage}>
+                            <LanguageIcon />
+                            {t('home.interface_language')}
+                        </Button>
+
                         <Button variant="text" type="button" onClick={handleLogout}>
                             <LogoutIcon />
                             Вийти з аккаунту
@@ -183,22 +207,9 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
 
                     {/* Detail Account */}
                     {myUser && (
-                        <Modal
-                            open={showDetailAccount}
-                            onClose={handleHideDetailAccount}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                        >
-                            <div className="modal modal-md">
-                                <Card>
-                                    <DetailAccount user={myUser} />
-                                </Card>
-
-                                <Action onClick={handleHideDetailAccount}>
-                                    <CloseIcon sx={{ color: StylesVariables.blackColor }} />
-                                </Action>
-                            </div>
-                        </Modal>
+                        <HeaderModal show={showDetailAccount} hide={handleHideDetailAccount} classes="modal modal-md">
+                            <DetailAccount user={myUser} />
+                        </HeaderModal>
                     )}
 
                     {/* Edit Account */}
@@ -209,40 +220,22 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                     />
 
                     {/* About */}
-                    <Modal
-                        open={showAbout}
-                        onClose={handleHideAbout}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <div className="modal">
-                            <Card>
-                                <About />
-                            </Card>
-
-                            <Action onClick={handleHideAbout}>
-                                <CloseIcon sx={{ color: StylesVariables.blackColor }} />
-                            </Action>
-                        </div>
-                    </Modal>
+                    <HeaderModal show={showAbout} hide={handleHideAbout}>
+                        <About />
+                    </HeaderModal>
 
                     {/* Contacts */}
-                    <Modal
-                        open={showContacts}
-                        onClose={handleHideContacts}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <div className="modal">
-                            <Card>
-                                <Contacts />
-                            </Card>
+                    <HeaderModal show={showContacts} hide={handleHideContacts}>
+                        <Contacts />
+                    </HeaderModal>
 
-                            <Action onClick={handleHideContacts}>
-                                <CloseIcon sx={{ color: StylesVariables.blackColor }} />
-                            </Action>
+                    {/* Language */}
+                    <HeaderModal show={showLanguage} hide={handleHideLanguage}>
+                        <div className="header-language">
+                            {t('home.interface_language')}:
+                            <LanguageSelection />
                         </div>
-                    </Modal>
+                    </HeaderModal>
 
                     {/* Confirm Delete My User */}
                     <ConfirmDeleteMyUserModal

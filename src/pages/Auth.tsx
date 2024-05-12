@@ -58,8 +58,8 @@ const Auth: FC = () => {
     isRegistration && (title = t('auth.title.sing_up'));
     isForgotPassword && (title = t('auth.title.forgot_password'));
 
-    let submit = t('auth.sing_in');
-    isRegistration && (submit = t('auth.sing_in'));
+    let submit = t('sing-in');
+    isRegistration && (submit = t('sing-up'));
     isForgotPassword && (submit = t('auth.recovery'));
 
     const handleGoogleLogin = async (response: CredentialResponse) => {
@@ -177,7 +177,7 @@ const Auth: FC = () => {
                                 id="firstName"
                                 name="firstName"
                                 type="text"
-                                label={t('auth.name')}
+                                label={t('first-name')}
                                 error={errors?.firstName?.message}
                             />
                         )}
@@ -221,7 +221,7 @@ const Auth: FC = () => {
                                     variant="text"
                                     onClick={() => setIsRegistration((state) => !state)}
                                 >
-                                    {isRegistration ? t('auth.sing_in') : t('auth.sing_up')}
+                                    {isRegistration ? t('sing-in') : t('sing-up')}
                                 </Button>
                             )}
 

@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js';
+import { t } from 'i18next';
 import { IWish } from '@/models/IWish';
 
 export const encryptedData = (data: string, secret: string): string => CryptoJS.AES.encrypt(data, secret).toString();
@@ -7,7 +8,7 @@ export const decryptedData = (data: string, secret: string): string => {
     try {
         const decrypted = CryptoJS.AES.decrypt(data, secret).toString(CryptoJS.enc.Utf8);
         if (!decrypted) {
-            throw new Error('Не вдалося розшифрувати');
+            throw new Error(t('encryption-error'));
         }
         return decrypted;
     } catch (error) {
