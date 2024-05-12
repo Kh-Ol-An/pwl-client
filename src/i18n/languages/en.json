@@ -207,7 +207,17 @@
         "remove-friend": "Remove friend",
         "mail": "Email:",
         "fulfilled-wishes": "Fulfilled wishes:",
-        "unfulfilled-wishes": "Unfulfilled wishes:"
+        "unfulfilled-wishes": "Unfulfilled wishes:",
+        "you-any": "You don't have any wishes yet. Don't you wish for anything?",
+        "you-fulfilled": "You don't have any fulfilled wishes yet.",
+        "at-user": "User",
+        "any-wishes": "doesn't have any wishes.",
+        "any-fulfilled-wishes": "doesn't have any fulfilled wishes.",
+        "create-wish": "Create Wish",
+        "unfulfilled": "Unfulfilled",
+        "fulfilled": "Fulfilled",
+        "personal-wishes": "Personal Wishes",
+        "wishes-of-user": "Wishes of User"
     },
     "activation-link-expired": {
         "expired": "Account activation period has expired.",

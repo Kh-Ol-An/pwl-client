@@ -207,7 +207,17 @@
         "remove-friend": "Видалити друга",
         "mail": "Пошта:",
         "fulfilled-wishes": "Виконані бажання:",
-        "unfulfilled-wishes": "Невиконані бажання:"
+        "unfulfilled-wishes": "Невиконані бажання:",
+        "you-any": "В тебе немає жодного бажання. Хіба ти нічого не бажаєш?",
+        "you-fulfilled": "В тебе поки що немає жодного виконаного бажання.",
+        "at-user": "В користувача",
+        "any-wishes": "немає жодного бажання.",
+        "any-fulfilled-wishes": "немає жодного виконаного бажання.",
+        "create-wish": "Створити бажання",
+        "unfulfilled": "Не виконані",
+        "fulfilled": "Виконані",
+        "personal-wishes": "особисті бажання",
+        "wishes-of-user": "бажання користувача"
     },
     "activation-link-expired": {
         "expired": "Термін активації акаунта закінчився.",
