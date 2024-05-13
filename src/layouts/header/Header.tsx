@@ -54,9 +54,9 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     i18next.language.includes('en') && (language = 'en');
     i18next.language.includes('uk') && (language = 'uk');
 
-    let dayjsFormat = 'MMMM Do';
-    i18next.language.includes('en') && (dayjsFormat = 'MMMM Do');
-    i18next.language.includes('uk') && (dayjsFormat = 'DD MMMM');
+    let dateFormat = 'MMMM Do';
+    i18next.language.includes('en') && (dateFormat = 'MMMM Do');
+    i18next.language.includes('uk') && (dateFormat = 'DD MMMM');
 
     // SelectWish
     const handleSelectWish = async () => {
@@ -156,7 +156,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             <span className="params">
                                 {
                                     myUser?.birthday
-                                        ? t('home.bd', { birthday: dayjs(myUser?.birthday).locale(language).format(dayjsFormat) })
+                                        ? t('main.bd', { birthday: dayjs(myUser?.birthday).locale(language).format(dateFormat) })
                                         : myUser?.email
                                 }
                             </span>
@@ -175,28 +175,28 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                     >
                         <Button variant="text" type="button" onClick={handleShowEditAccount}>
                             <ManageAccountsIcon />
-                            {t('home.account_settings')}
+                            {t('main.account_settings')}
                         </Button>
 
                         <Button variant="text" type="button" onClick={handleShowAbout}>
                             <img className="wish-hub-icon" src={LogoIcon} alt="Wish Hub icon" />
-                            {t('home.about')}
+                            {t('main.about')}
                             <img className="wish-hub-text" src={WishHub} alt="Wish Hub" />
                         </Button>
 
                         <Button to="/instruction" variant="text">
                             <InfoIcon />
-                            {t('home.instruction')}
+                            {t('main.instruction')}
                         </Button>
 
                         <Button variant="text" type="button" onClick={handleShowContacts}>
                             <ForumIcon />
-                            {t('home.contacts')}
+                            {t('main.contacts')}
                         </Button>
 
                         <Button variant="text" type="button" onClick={handleShowLanguage}>
                             <LanguageIcon />
-                            {t('home.interface_language')}
+                            {t('main.interface_language')}
                         </Button>
 
                         <Button variant="text" type="button" onClick={handleLogout}>
@@ -232,7 +232,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                     {/* Language */}
                     <CustomModal show={showLanguage} hide={handleHideLanguage}>
                         <div className="header-language">
-                            {t('home.interface_language')}:
+                            {t('main.interface_language')}:
                             <LanguageSelection />
                         </div>
                     </CustomModal>

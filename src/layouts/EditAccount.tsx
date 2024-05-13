@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect, useRef, useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@mui/material';
 import { Cancel as CancelIcon } from '@mui/icons-material';
@@ -49,18 +50,22 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
     const [birthdayError, setBirthdayError] = useState<DateValidationError | null>(null);
 
+    let dateFormat = 'MM/DD/YYYY';
+    i18next.language.includes('en') && (dateFormat = 'MM/DD/YYYY');
+    i18next.language.includes('uk') && (dateFormat = 'DD.MM.YYYY');
+
     const birthdayErrorMessage = useMemo(() => {
         if (!clickedOnSubmit) return;
 
         switch (birthdayError) {
             case 'minDate': {
-                return t('home.birthday-error.min-date');
+                return t('main.birthday-error.min-date');
             }
             case 'disableFuture': {
-                return t('home.birthday-error.disable-future');
+                return t('main.birthday-error.disable-future');
             }
             case 'invalidDate': {
-                return t('home.birthday-error.invalid-date');
+                return t('main.birthday-error.invalid-date');
             }
             default: {
                 return '';
@@ -164,12 +169,12 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
             <div
                 className={"date-picker" + (clickedOnSubmit ? " clicked-on-submit" : "")}
-                title={t('home.when_your_birth')}
+                title={t('main.when_your_birth')}
             >
                 <DemoContainer components={['DesktopDatePicker']}>
                     <DesktopDatePicker
-                        label={t('home.birthday*')}
-                        format="DD.MM.YYYY"
+                        label={t('main.birthday*')}
+                        format={dateFormat}
                         dayOfWeekFormatter={(weekday) => weekday}
                         minDate={dayjs().subtract(120, 'years')} // Дозволити вибір дати до 120 років в минулому
                         disableFuture
@@ -187,10 +192,10 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
             <div className="actions">
                 <Button type="button" variant="text" color="action-color" onClick={handleShowConfirmDeleteMyUser}>
-                    {t('home.delete-account')}
+                    {t('main.delete-account')}
                 </Button>
 
-                <Button type="submit">{t('home.update')}</Button>
+                <Button type="submit">{t('main.update')}</Button>
             </div>
         </form>
     );

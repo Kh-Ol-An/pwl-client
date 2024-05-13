@@ -37,13 +37,13 @@ const WishList = () => {
     const lastName = selectedUser?.lastName ? selectedUser.lastName : "";
     const detailWish = wishes.list.find(wish => wish.id === idOfSelectedWish);
 
-    let emptyText = <>{t('home.you-any')}</>;
+    let emptyText = <>{t('main.you-any')}</>;
     myUser?.id !== selectedUserId && (emptyText = (
-        <>{t('home.at-user')} <span>{selectedUser?.firstName} {lastName}</span> {t('home.any-wishes')}</>
+        <>{t('main.at-user')} <span>{selectedUser?.firstName} {lastName}</span> {t('main.any-wishes')}</>
     ));
-    !isUndone && (emptyText = <>{t('home.you-fulfilled')}</>);
+    !isUndone && (emptyText = <>{t('main.you-fulfilled')}</>);
     !isUndone && myUser?.id !== selectedUserId && (emptyText = (
-        <>{t('home.at-user')} <span>{selectedUser?.firstName} {lastName}</span> {t('home.any-fulfilled-wishes')}</>
+        <>{t('main.at-user')} <span>{selectedUser?.firstName} {lastName}</span> {t('main.any-fulfilled-wishes')}</>
     ));
 
     const handleSelectWish = async () => {
@@ -85,7 +85,7 @@ const WishList = () => {
             <div className="head">
                 {myUser?.id === selectedUserId ? (
                     <Button onClick={() => handleShowEditWish(null)}>
-                        {t('home.create-wish')}
+                        {t('main.create-wish')}
                     </Button>
                 ) : (
                     <button className="wish-hub" type="button" onClick={handleSelectWish}>
@@ -95,7 +95,7 @@ const WishList = () => {
 
                 <div className="title-box">
                     <div className="wishes-type">
-                        <span className={isUndone ? "primary-color" : ""}>{t('home.unfulfilled')}</span>
+                        <span className={isUndone ? "primary-color" : ""}>{t('main.unfulfilled')}</span>
                         <Switch
                             id="wishes-type"
                             name="wishes-type"
@@ -103,14 +103,14 @@ const WishList = () => {
                             checked={isUndone}
                             onChange={(e) => setIsUndone(e.target.checked)}
                         />
-                        <span className={isUndone ? "" : "primary-color"}>{t('home.fulfilled')}</span>
+                        <span className={isUndone ? "" : "primary-color"}>{t('main.fulfilled')}</span>
                     </div>
 
                     <h1 className="title">
                         {
                             myUser?.id === selectedUserId
-                                ? <>{t('home.personal-wishes')}</>
-                                : <>{t('home.wishes-of-user')} <span>{selectedUser?.firstName} {lastName}</span></>
+                                ? <>{t('main.personal-wishes')}</>
+                                : <>{t('main.wishes-of-user')} <span>{selectedUser?.firstName} {lastName}</span></>
                         }
                     </h1>
                 </div>

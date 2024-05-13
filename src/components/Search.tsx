@@ -54,7 +54,7 @@ const Search: FC<Props> = ({ changeSearchBar, id }) => {
             id={id}
             name={id}
             type="search"
-            label={t('home.users-search')}
+            label={t('main.users-search')}
             value={searchBar}
             clear={clear}
             onChange={(event) => change(event as ChangeEvent<HTMLInputElement>)}

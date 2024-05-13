@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@/store/hook';
 import { doneWish } from '@/store/wishes/thunks';
 import ConfirmModal from '@/layouts/ConfirmModal';
@@ -14,6 +15,8 @@ interface IProps {
 }
 
 const DoneWish: FC<IProps> = ({ wish, userId, actionText, close }) => {
+    const { t } = useTranslation();
+
     const dispatch = useAppDispatch();
 
     const [show, setShow] = useState<boolean>(false);
@@ -39,12 +42,12 @@ const DoneWish: FC<IProps> = ({ wish, userId, actionText, close }) => {
 
             <ConfirmModal
                 show={show}
-                confirmText="Бажання виконано"
+                confirmText={t('main.wish-fulfilled')}
                 close={() => setShow(false)}
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    Ви впевнені, що бажання "{wish.name}" виконано?
+                    {t('main.sure-fulfilled', { name: wish.name })}
                 </p>
             </ConfirmModal>
         </>

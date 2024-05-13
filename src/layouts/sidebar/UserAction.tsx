@@ -54,9 +54,9 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
     i18next.language.includes('en') && (language = 'en');
     i18next.language.includes('uk') && (language = 'uk');
 
-    let dayjsFormat = 'MMMM Do';
-    i18next.language.includes('en') && (dayjsFormat = 'MMMM Do');
-    i18next.language.includes('uk') && (dayjsFormat = 'DD MMMM');
+    let dateFormat = 'MMMM Do';
+    i18next.language.includes('en') && (dateFormat = 'MMMM Do');
+    i18next.language.includes('uk') && (dateFormat = 'DD MMMM');
 
     const handleShowDetailAccount = () => {
         setShowDetailAccount(true);
@@ -121,24 +121,24 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                         <Button variant="text" fontSize="small" onClick={handleAddFriend}>
                             {
                                 myUser?.followFrom.includes(user.id)
-                                    ? t('home.confirm-friendship')
-                                    : t('home.add-friend')
+                                    ? t('main.confirm-friendship')
+                                    : t('main.add-friend')
                             }
                         </Button>
                     )}
                     {(myUser?.friends.includes(user.id) || myUser?.followTo.includes(user.id)) && (
                         <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('followTo')}>
-                            {t('home.delete-your')} <br/> {t('home.delete-request')}
+                            {t('main.delete-your')} <br/> {t('main.delete-request')}
                         </Button>
                     )}
                     {(myUser?.friends.includes(user.id) || myUser?.followFrom.includes(user.id)) && (
                         <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('followFrom')}>
-                            {t('home.delete-user_s')} <br/> {t('home.delete-request')}
+                            {t('main.delete-user_s')} <br/> {t('main.delete-request')}
                         </Button>
                     )}
                     {myUser?.friends.includes(user.id) && (
                         <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('friends')}>
-                            {t('home.remove-friend')}
+                            {t('main.remove-friend')}
                         </Button>
                     )}
                 </Popup>
@@ -178,7 +178,7 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                         <span className="params">
                             {
                                 user.birthday
-                                    ? t('home.bd', { birthday: dayjs(user.birthday).locale(language).format(dayjsFormat) })
+                                    ? t('main.bd', { birthday: dayjs(user.birthday).locale(language).format(dateFormat) })
                                     : user.email
                             }
                         </span>

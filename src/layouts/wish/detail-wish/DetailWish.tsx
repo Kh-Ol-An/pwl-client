@@ -31,9 +31,9 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
     i18next.language.includes('en') && (language = 'en');
     i18next.language.includes('uk') && (language = 'uk');
 
-    let dayjsFormat = 'MMMM DD, YYYY';
-    i18next.language.includes('en') && (dayjsFormat = 'MMMM DD, YYYY');
-    i18next.language.includes('uk') && (dayjsFormat = 'DD MMMM YYYY');
+    let dateFormat = 'MMMM DD, YYYY';
+    i18next.language.includes('en') && (dateFormat = 'MMMM DD, YYYY');
+    i18next.language.includes('uk') && (dateFormat = 'DD MMMM YYYY');
 
     let showDoneMyWish = myUser?.id === wish.userId && !showBookingExpired(wish, myUser?.id); // бажання належить користувачу
 
@@ -79,18 +79,18 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                                 <>
                                                     {
                                                         myUser?.id === wish.booking?.userId
-                                                            ? t('home.you-must')
-                                                            : t('home.wish-must')
+                                                            ? t('main.you-must')
+                                                            : t('main.wish-must')
                                                     }
                                                     <span>
                                                         {
                                                             dayjs(wish.booking?.end)
                                                                 .locale(language)
-                                                                .format(dayjsFormat)
+                                                                .format(dateFormat)
                                                         }
                                                     </span>
                                                 </>
-                                            ) : (<>{t('home.coming-true')}</>)}
+                                            ) : (<>{t('main.coming-true')}</>)}
                                         </p>
                                     )}
 
@@ -99,7 +99,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                         <DoneWish
                                             wish={wish}
                                             userId={myUser?.id}
-                                            actionText={t('home.wish-fulfilled')}
+                                            actionText={t('main.wish-fulfilled')}
                                             close={close}
                                         />
                                     )}
@@ -125,7 +125,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                     {/* Edit Wish */}
                                     {showEditWish && (
                                         <Button type="button" onClick={handleEditWish}>
-                                            {t('home.edit-wish')}
+                                            {t('main.edit-wish')}
                                         </Button>
                                     )}
                                 </div>

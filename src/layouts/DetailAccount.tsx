@@ -18,9 +18,9 @@ const DetailAccount: FC<IProps> = ({ user }) => {
     i18next.language.includes('en') && (language = 'en');
     i18next.language.includes('uk') && (language = 'uk');
 
-    let dayjsFormat = 'MMMM Do';
-    i18next.language.includes('en') && (dayjsFormat = 'MMMM Do');
-    i18next.language.includes('uk') && (dayjsFormat = 'DD MMMM');
+    let dateFormat = 'MMMM Do';
+    i18next.language.includes('en') && (dateFormat = 'MMMM Do');
+    i18next.language.includes('uk') && (dateFormat = 'DD MMMM');
 
     return (
         <div className="detail-account">
@@ -37,7 +37,7 @@ const DetailAccount: FC<IProps> = ({ user }) => {
 
                 {myUser?.id === user.id && (
                     <div className="detail-account-field">
-                        <div className="detail-account-label">{t('home.mail')}</div>
+                        <div className="detail-account-label">{t('main.mail')}</div>
                         <div className="detail-account-value" title={user.email}>
                             {user.email}
                         </div>
@@ -46,22 +46,22 @@ const DetailAccount: FC<IProps> = ({ user }) => {
 
                 {user.birthday && (
                     <div className="detail-account-field">
-                        <div className="detail-account-label">{t('home.birthday')}</div>
+                        <div className="detail-account-label">{t('main.birthday')}</div>
                         <div className="detail-account-value">
-                            {dayjs(user.birthday).locale(language).format(dayjsFormat)}
+                            {dayjs(user.birthday).locale(language).format(dateFormat)}
                         </div>
                     </div>
                 )}
 
                 <div className="detail-account-field">
-                    <div className="detail-account-label">{t('home.fulfilled-wishes')}</div>
+                    <div className="detail-account-label">{t('main.fulfilled-wishes')}</div>
                     <div className={"detail-account-value" + (user.successfulWishes > 0 ? " success" : "")}>
                         {user.successfulWishes || 0}
                     </div>
                 </div>
 
                 <div className="detail-account-field">
-                    <div className="detail-account-label">{t('home.unfulfilled-wishes')}</div>
+                    <div className="detail-account-label">{t('main.unfulfilled-wishes')}</div>
                     <div className={"detail-account-value" + (user.unsuccessfulWishes > 0 ? " unsuccess" : "")}>
                         {user.unsuccessfulWishes || 0}
                     </div>

@@ -16,26 +16,26 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
 
     let show = (
         <>
-            {t('home.show-all-1')} <span className="accent">
-                {t('home.show-all-2')}
-            </span> {t('home.show-all-3')}
+            {t('main.show-all-1')} <span className="accent">
+                {t('main.show-all-2')}
+            </span> {t('main.show-all-3')}
         </>
     );
     wish.show === 'friends' && (
         show = (
             <>
-                {t('home.show-friends-1')} <span className="accent">
-                    {t('home.show-friends-2')}
-                </span> {t('home.show-friends-3')}
+                {t('main.show-friends-1')} <span className="accent">
+                    {t('main.show-friends-2')}
+                </span> {t('main.show-friends-3')}
             </>
         )
     );
     wish.show === 'nobody' && (
         show = (
             <>
-                {t('home.show-nobody-1')} <span className="accent">
-                    {t('home.show-nobody-2')}
-                </span> {t('home.show-nobody-3')}
+                {t('main.show-nobody-1')} <span className="accent">
+                    {t('main.show-nobody-2')}
+                </span> {t('main.show-nobody-3')}
             </>
         )
     );

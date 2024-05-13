@@ -1,4 +1,6 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
+import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { DateValidationError } from '@mui/x-date-pickers/models';
@@ -18,6 +20,8 @@ interface IProps {
 }
 
 const BookWish: FC<IProps> = ({ wish, close }) => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
@@ -28,12 +32,16 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
     const [clickedOnBookWish, setClickedOnBookWish] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
+    let dateFormat = 'MM/DD/YYYY';
+    i18next.language.includes('en') && (dateFormat = 'MM/DD/YYYY');
+    i18next.language.includes('uk') && (dateFormat = 'DD.MM.YYYY');
+
     const birthdayErrorMessage = useMemo(() => {
         if (!clickedOnBookWish) return;
 
         if (bookEnd === null && clickedOnBookWish) {
             setBookEndError('invalidDate');
-            return 'Це поле обов\'язкове для заповнення.';
+            return t('main.book-end-errors.required');
         }
 
         switch (bookEndError) {
@@ -41,7 +49,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 return 'Неможливо виконати завдання в минулому.';
             }
             case 'maxDate': {
-                return 'Вважаєте розумним обіцяти виконати бажання більш ніж через рік.';
+                return 'Вважаєте розумним обіцяти виконати бажання більш ніж через рік?';
             }
             case 'invalidDate': {
                 return 'Введена дата недійсна.';
@@ -110,7 +118,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                     <DemoContainer components={['DesktopDatePicker']}>
                         <DesktopDatePicker
                             label="включно*"
-                            format="DD.MM.YYYY"
+                            format={dateFormat}
                             dayOfWeekFormatter={(weekday) => weekday}
                             disablePast
                             maxDate={dayjs().add(1, 'year')} // Дозволити вибір дати тільки на рік вперед

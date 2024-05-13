@@ -99,7 +99,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
             <div className="sidebar-inner">
                 <div className="sidebar-content">
                     <div className="sidebar-head">
-                        <h2 className="sidebar-title">{t('home.users')}</h2>
+                        <h2 className="sidebar-title">{t('main.users')}</h2>
 
                         <ShareButton link="welcome" />
                     </div>
@@ -113,17 +113,17 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                                 value={userType}
                                 onChange={handleChangeUserType}
                             >
-                                <MenuItem value="all">{t('home.all')}</MenuItem>
-                                <MenuItem value="friends">{t('home.friends')}</MenuItem>
+                                <MenuItem value="all">{t('main.all')}</MenuItem>
+                                <MenuItem value="friends">{t('main.friends')}</MenuItem>
                                 <MenuItem value="followFrom">
                                     <span className="sidebar-user-type-item">
-                                        {t('home.friend-requests')}
+                                        {t('main.friend-requests')}
                                         {users.followFromCount > 0 && (
                                             <span className="count">{users.followFromCount}</span>
                                         )}
                                     </span>
                                 </MenuItem>
-                                <MenuItem value="followTo">{t('home.sent-friend-requests')}</MenuItem>
+                                <MenuItem value="followTo">{t('main.sent-friend-requests')}</MenuItem>
                             </Select>
 
                             {users.followFromCount > 0 && (

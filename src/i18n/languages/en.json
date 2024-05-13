@@ -177,7 +177,7 @@
             "max": "We think you are making something up. The maximum length of the field is {{max}} characters."
         }
     },
-    "home": {
+    "main": {
         "when_your_birth": "When is Your birthday?",
         "birthday*": "Birthday*",
         "birthday": "Birthday:",
@@ -260,6 +260,19 @@
         "show-nobody-1": "",
         "show-nobody-2": "Nobody",
         "show-nobody-3": "can see Your wish.",
+        "sure-fulfilled": "Are you sure that the wish \"{{name}}\" is fulfilled?",
+        "book-end-errors": {
+            "required": "This field is required.",
+            "past": "It is impossible to complete a task in the past.",
+            "max": "Do you think it's reasonable to promise to fulfill a wish in more than a year?",
+            "invalid": "The entered date is invalid."
+        },
+        "next": "text",
+        "next": "text",
+        "next": "text",
+        "next": "text",
+        "next": "text",
+        "next": "text",
         "next": "text",
         "next": "text",
         "next": "text",
