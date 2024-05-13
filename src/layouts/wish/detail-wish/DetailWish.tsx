@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { useAppSelector } from '@/store/hook';
@@ -21,7 +23,17 @@ interface IProps {
 }
 
 const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser.user);
+
+    let language = 'en';
+    i18next.language.includes('en') && (language = 'en');
+    i18next.language.includes('uk') && (language = 'uk');
+
+    let dayjsFormat = 'MMMM DD, YYYY';
+    i18next.language.includes('en') && (dayjsFormat = 'MMMM DD, YYYY');
+    i18next.language.includes('uk') && (dayjsFormat = 'DD MMMM YYYY');
 
     let showDoneMyWish = myUser?.id === wish.userId && !showBookingExpired(wish, myUser?.id); // бажання належить користувачу
 
@@ -67,18 +79,18 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                                 <>
                                                     {
                                                         myUser?.id === wish.booking?.userId
-                                                            ? 'Ви маєте виконати це бажання до:'
-                                                            : 'Бажання має бути виконане до:'
+                                                            ? t('home.you-must')
+                                                            : t('home.wish-must')
                                                     }
                                                     <span>
                                                         {
                                                             dayjs(wish.booking?.end)
-                                                                .locale('uk')
-                                                                .format('DD MMMM YYYY')
+                                                                .locale(language)
+                                                                .format(dayjsFormat)
                                                         }
                                                     </span>
                                                 </>
-                                            ) : (<>Бажання вже виконується</>)}
+                                            ) : (<>{t('home.coming-true')}</>)}
                                         </p>
                                     )}
 
@@ -87,7 +99,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                         <DoneWish
                                             wish={wish}
                                             userId={myUser?.id}
-                                            actionText="Бажання виконано"
+                                            actionText={t('home.wish-fulfilled')}
                                             close={close}
                                         />
                                     )}
@@ -113,7 +125,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                     {/* Edit Wish */}
                                     {showEditWish && (
                                         <Button type="button" onClick={handleEditWish}>
-                                            Редагувати бажання
+                                            {t('home.edit-wish')}
                                         </Button>
                                     )}
                                 </div>

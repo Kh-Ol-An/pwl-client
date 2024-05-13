@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { addingWhiteSpaces } from '@/utils/formating-value';
 import { unencryptedData } from '@/utils/encryption-data';
 import { IWish } from '@/models/IWish';
@@ -11,9 +12,33 @@ interface IProps {
 }
 
 const WishContent: FC<IProps> = ({ wish, myUserId }) => {
-    let show = <>Ваше бажання бачать <span className="accent">всі</span> користувачі.</>;
-    wish.show === 'friends' && (show = <>Ваше бажання бачать тільки <span className="accent">друзі</span>.</>);
-    wish.show === 'nobody' && (show = <>Ваше бажання <span className="accent">ніхто</span> не баче.</>);
+    const { t } = useTranslation();
+
+    let show = (
+        <>
+            {t('home.show-all-1')} <span className="accent">
+                {t('home.show-all-2')}
+            </span> {t('home.show-all-3')}
+        </>
+    );
+    wish.show === 'friends' && (
+        show = (
+            <>
+                {t('home.show-friends-1')} <span className="accent">
+                    {t('home.show-friends-2')}
+                </span> {t('home.show-friends-3')}
+            </>
+        )
+    );
+    wish.show === 'nobody' && (
+        show = (
+            <>
+                {t('home.show-nobody-1')} <span className="accent">
+                    {t('home.show-nobody-2')}
+                </span> {t('home.show-nobody-3')}
+            </>
+        )
+    );
 
     let showRow = false;
     myUserId === wish.userId && (showRow = true);
@@ -50,7 +75,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
 
                     {wish.price && (
                         <div className="detail-wish-box">
-                            <span className="detail-wish-label">Ціна:</span>
+                            <span className="detail-wish-label">{t('wish.price')}</span>
                             <span className="detail-wish-data">
                                 {
                                     addingWhiteSpaces(unencryptedData(wish.price, wish.show))
@@ -65,7 +90,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
 
             {wish.address && (
                 <p className="detail-wish-description">
-                    <span className="label">Де можна придбати:</span>
+                    <span className="label">{t('wish.address')}</span>
                     {isURL(unencryptedAddress) ? (
                         <a
                             className="link"
@@ -82,7 +107,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
 
             {wish.description && (
                 <p className="detail-wish-description">
-                    <span className="label">Опис:</span>
+                    <span className="label">{t('wish.description')}</span>
                     <span className="value">{unencryptedData(wish.description, wish.show)}</span>
                 </p>
             )}
