@@ -1,6 +1,7 @@
 import React, { FC, ChangeEvent, useState, useLayoutEffect, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Tooltip } from 'react-tooltip';
+import { useTranslation } from 'react-i18next';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { Info as InfoIcon } from '@mui/icons-material';
@@ -38,6 +39,8 @@ type Inputs = {
 }
 
 const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser.user);
     const wishList = useAppSelector((state) => state.wishes.list);
 
@@ -230,14 +233,14 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         <form className="edit-wish" onSubmit={handleSubmit(onSubmit)}>
             {/* material */}
             <div className="material">
-                <span className={"yes" + (material ? " primary-color" : "")}>Матеріальне бажання</span>
+                <span className={"yes" + (material ? " primary-color" : "")}>{t('home.material-wish')}</span>
                 <Switch
                     id="material"
                     name="material"
                     checked={material}
                     onChange={(e) => setMaterial(e.target.checked)}
                 />
-                <span className={"no" + (material ? "" : " action-color")}>Не матеріальне бажання</span>
+                <span className={"no" + (material ? "" : " action-color")}>{t('home.non-material-wish')}</span>
             </div>
 
             {/* name */}
@@ -246,8 +249,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 id="name"
                 name="name"
                 type="text"
-                label="Назва твого бажання*"
-                tooltip="Сподіваюсь що ти створиш багато бажань) І щоб їх було легко розрізняти, назва має бути не тільки обов'язковою, а ще і унікальною"
+                label={t('home.wish-name')}
+                tooltip={t('home.wish-name-tooltip')}
                 error={errors?.name?.message}
             />
             <Tooltip
@@ -272,8 +275,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                         id="price"
                         name="price"
                         type="number"
-                        label="Ціна*"
-                        tooltip="Матеріальне бажання яке не має своєї ціни не може бути виконано твоїм всесвітом. Введи приблизну або точну ціну."
+                        label={t('home.wish-price')}
+                        tooltip={t('home.wish-price-tooltip')}
                         error={errors?.price?.message}
                     />
                     <div className="custom-select">
@@ -307,8 +310,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     id="address"
                     name="address"
                     type="text"
-                    label="Де можна придбати"
-                    tooltip="Назва місця, а краще адреса, а ще краще посилання де можна придбати бажання."
+                    label={t('home.where-to-buy')}
+                    tooltip={t('home.where-to-buy-tooltip')}
                     error={errors?.address?.message}
                 />
                 <Tooltip
@@ -332,11 +335,10 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             ...wishDescriptionValidation,
                             maxLength: {
                                 value: WISH_DESCRIPTION_MAX_LENGTH,
-                                message: `Назва твого бажання містить: ${
-                                    watch('description')?.length
-                                } символів. Давай намагатимемося вміститися в ${
-                                    WISH_DESCRIPTION_MAX_LENGTH
-                                } символів.`,
+                                message: t(
+                                    'validations.wish-description.max',
+                                    { current: watch('description')?.length, max: WISH_DESCRIPTION_MAX_LENGTH },
+                                ),
                             }
                         },
                     )
@@ -344,26 +346,27 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 id="description"
                 name="description"
                 type="multiline"
-                label="Опис бажання"
+                label={t('home.wish-description')}
                 error={errors?.description?.message}
             />
 
             {/* show */}
             <div className="show">
-                <span className="show-label">Хто може бачити твоє бажання*</span>
+                <span className="show-label">{t('home.can-see.title')}</span>
 
                 <div className="show-actions">
                     <Radio
-                        label="Всі"
+                        label={t('home.can-see.all')}
                         id="show-all"
                         name="show"
                         checked={show === 'all'}
                         value="all"
                         onChange={changeShow}
                     />
+
                     <div className="show-item">
                         <Radio
-                            label="Тільки друзі"
+                            label={t('home.can-see.friends')}
                             id="show-friends"
                             name="show"
                             checked={show === 'friends'}
@@ -374,7 +377,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                         <span
                             className="tooltip"
                             data-tooltip-id="show-friends"
-                            data-tooltip-content="Бажання побачать тільки ті користувачі яких Ви додали до друзів та вони додали Вас до друзів"
+                            data-tooltip-content={t('home.can-see.friends-tooltip')}
                         >
                             <InfoIcon sx={{ color: StylesVariables.specialColor }} />
                         </span>
@@ -390,14 +393,36 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             }}
                         />
                     </div>
-                    <Radio
-                        label="Ніхто"
-                        id="show-nobody"
-                        name="show"
-                        checked={show === 'nobody'}
-                        value="nobody"
-                        onChange={changeShow}
-                    />
+
+                    <div className="show-item">
+                        <Radio
+                            label={t('home.can-see.nobody')}
+                            id="show-nobody"
+                            name="show"
+                            checked={show === 'nobody'}
+                            value="nobody"
+                            onChange={changeShow}
+                        />
+
+                        <span
+                            className="tooltip"
+                            data-tooltip-id="show-nobody"
+                            data-tooltip-content={t('home.can-see.nobody-tooltip')}
+                        >
+                            <InfoIcon sx={{ color: StylesVariables.specialColor }} />
+                        </span>
+                        <Tooltip
+                            id="show-nobody"
+                            opacity={1}
+                            style={{
+                                backgroundColor: StylesVariables.blackColor,
+                                color: StylesVariables.lightColor,
+                                width: screenWidth > 411 ? '300px' : '200px',
+                                fontSize: '14px',
+                                zIndex: 9,
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -411,7 +436,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             type="button"
                             onClick={() => setShowConfirmDeleteWish(true)}
                         >
-                            Видалити бажання
+                            {t('home.delete-wish')}
                         </Button>
 
                         <ConfirmModal
@@ -421,13 +446,13 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             close={() => setShowConfirmDeleteWish(false)}
                             confirm={handleDeleteWish}
                         >
-                            <p className="text-lg">Ви впевнені, що хочете видалити це бажання?</p>
+                            <p className="text-lg">{t('home.are-you-sure')}</p>
                         </ConfirmModal>
                     </>
                 )}
 
                 <Button type="submit">
-                    {idOfSelectedWish ? 'Оновити' : 'Створити'}
+                    {idOfSelectedWish ? t('home.update') : t('home.create')}
                 </Button>
             </div>
         </form>

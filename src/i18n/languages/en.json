@@ -153,7 +153,8 @@
             "max": "It is very difficult to imagine what you can buy for this money. Let's try to fit in {{max}} characters."
         },
         "wish-description": {
-            "min": "What is this short wish description? Please come up with a description that is longer than {{min}} character."
+            "min": "What is this short wish description? Please come up with a description that is longer than {{min}} character.",
+            "max": "The name of Your wish contains: {{current}} characters. Let's try to fit it into {{max}} characters."
         },
         "email": {
             "required": "This field is required so that we can identify You.",
@@ -217,7 +218,34 @@
         "unfulfilled": "Unfulfilled",
         "fulfilled": "Fulfilled",
         "personal-wishes": "Personal Wishes",
-        "wishes-of-user": "Wishes of User"
+        "wishes-of-user": "Wishes of User",
+        "material-wish": "Material Wish",
+        "non-material-wish": "Non-material Wish",
+        "wish-name": "Name of Your wish*.",
+        "wish-name-tooltip": "We hope you will create many wishes:) And to make them easy to distinguish, the name should not only be mandatory, but also unique.",
+        "wish-price": "Price*",
+        "wish-price-tooltip": "A material wish that does not have a price cannot be fulfilled by your universe. Enter an approximate or exact price.",
+        "where-to-buy": "Where to buy",
+        "where-to-buy-tooltip": "The name of the place, or better yet, the address, or even better yet, a link to where you can buy your wish.",
+        "wish-description": "Description of the wish",
+        "can-see": {
+            "title": "Who can see Your wish?*",
+            "all": "All",
+            "friends": "Only friends",
+            "friends-tooltip": "Only users whom you have added as friends and who have added you as a friend will see your wish",
+            "nobody": "Nobody",
+            "nobody-tooltip": "Wishes in the categories \"Nobody\" and \"Only friends\" are encrypted. You can learn more about this process in the \"Instructions\" section in the respective category."
+        },
+        "delete-wish": "Delete wish",
+        "are-you-sure": "Are You sure you want to delete this wish?",
+        "create": "Create",
+        "next": "text",
+        "next": "text",
+        "next": "text",
+        "next": "text",
+        "next": "text",
+        "next": "text",
+        "next": "text"
     },
     "activation-link-expired": {
         "expired": "Account activation period has expired.",
