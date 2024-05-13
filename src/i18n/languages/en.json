@@ -516,6 +516,6 @@
         "title": "Page not found",
         "text": "Oops! The page you were looking for does not exist.",
         "sub-text": "You may have entered the page address incorrectly.",
-        "home": "To Home"
+        "to-main": "To Main"
     }
 }

@@ -1,4 +1,4 @@
-import Home from '@/pages/Home';
+import Main from '@/pages/Main';
 import ActivationLinkExpired from '@/pages/ActivationLinkExpired';
 import Auth from '@/pages/Auth';
 import ChangeForgottenPassword from '@/pages/ChangeForgottenPassword';
@@ -9,7 +9,7 @@ import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import NotFound from '@/pages/NotFound';
 
 export const privateRoutes = [
-    { path: '/', component: Home },
+    { path: '/', component: Main },
     { path: '/activation-link-expired', component: ActivationLinkExpired },
 ];
 

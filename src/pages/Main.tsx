@@ -7,7 +7,7 @@ import Header from '@/layouts/header/Header';
 import Sidebar from '@/layouts/sidebar/Sidebar';
 import WishList from '@/layouts/wish/WishList';
 
-const Home: FC = () => {
+const Main: FC = () => {
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
@@ -33,7 +33,7 @@ const Home: FC = () => {
 
             <Header showHeader={showHeaderAndSidebar} hideHeader={() => setShowHeaderAndSidebar(false)} />
 
-            <div className="page home-page">
+            <div className="page main-page">
                 <button
                     className={"burger" + (showHeaderAndSidebar ? " open" : "")}
                     type="button"
@@ -45,7 +45,7 @@ const Home: FC = () => {
 
                 <Sidebar showSidebar={showHeaderAndSidebar} hideSidebar={() => setShowHeaderAndSidebar(false)} />
 
-                <div className="home-page-container">
+                <div className="main-page-container">
                     <WishList />
 
                     {/* TODO: створити різні цінові категорії, перевіряти чи є бажання в кожній ціновій категорії і якщо немає, то радити створити бажання для цієї цінової категорії */}
@@ -62,4 +62,4 @@ const Home: FC = () => {
     );
 };
 
-export default Home;
+export default Main;
