@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
+import { useTranslation } from 'react-i18next';
 import { Cancel as CancelIcon } from '@mui/icons-material';
 import { TCurrentImage, IImage } from '@/models/IWish';
 import ImagesValidation from '@/utils/ImagesValidation';
@@ -27,6 +28,8 @@ Object.keys(ALLOWED_FILE_EXTENSIONS).forEach((ext) => {
 });
 
 const DragNDrop: FC<IProps> = ({ images, setImages, removeAllImages }) => {
+    const { t } = useTranslation();
+
     const onDrop = useCallback((acceptedImages: File[]) => {
         setImages([...images, ...acceptedImages]);
     }, [images, setImages]);
@@ -70,19 +73,19 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAllImages }) => {
             <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
                 <p className="text">
-                    <span className="mouse">Натисніть або перетягніть сюди зображення, щоб додати їх до бажання.</span>
-                    <span className="touch">Натисніть сюди, щоб додати зображення до бажання.</span>
+                    <span className="mouse">{t('home.drag')}</span>
+                    <span className="touch">{t('home.click')}</span>
                     <br />
                     <br />
-                    Також Ви можете змінювати позицію зображень перетягуючи їх між собою.
+                    {t('home.change')}
                     <br />
                     <br />
                     <span className="rules">
-                        Максимальний розмір файлу: {ALLOWED_MAX_FILE_SIZE_IN_MB} МБ.
+                        {t('home.size', { size: ALLOWED_MAX_FILE_SIZE_IN_MB })}
                         <br />
-                        Дозволені формати: {Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ')}.
+                        {t('home.formats')} {Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ')}.
                         <br />
-                        Максимальна кількість файлів: {MAX_NUMBER_OF_IMAGES_PER_WISH} шт.
+                        {t('home.count', { count: MAX_NUMBER_OF_IMAGES_PER_WISH })}
                     </span>
                 </p>
             </div>
@@ -129,7 +132,9 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAllImages }) => {
             <ImagesValidation images={images} />
 
             {images.length > 0 && (
-                <button className="remove-all" type="button" onClick={removeAllImages}>Видалити всі зображення</button>
+                <button className="remove-all" type="button" onClick={removeAllImages}>
+                    {t('home.delete-all-images')}
+                </button>
             )}
         </div>
     );
