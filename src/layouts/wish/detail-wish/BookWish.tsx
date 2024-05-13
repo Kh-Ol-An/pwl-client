@@ -46,13 +46,13 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
 
         switch (bookEndError) {
             case 'disablePast': {
-                return 'Неможливо виконати завдання в минулому.';
+                return t('main.book-end-errors.past');
             }
             case 'maxDate': {
-                return 'Вважаєте розумним обіцяти виконати бажання більш ніж через рік?';
+                return t('main.book-end-errors.max');
             }
             case 'invalidDate': {
-                return 'Введена дата недійсна.';
+                return t('main.book-end-errors.invalid');
             }
             default: {
                 return '';
@@ -95,17 +95,17 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 variant="text"
                 onClick={() => setShow(true)}
             >
-                Я виконаю бажання
+                {t('main.will-fulfill')}
             </Button>
 
             <ConfirmModal
                 show={show}
-                confirmText="Підтвердити намір"
+                confirmText={t('main.confirm-intention')}
                 close={handleHide}
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    Я маю намір виконати бажання "{wish.name}" до:
+                    {t('main.i-intend', { name: wish.name })}
                 </p>
 
                 <div
@@ -117,7 +117,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 >
                     <DemoContainer components={['DesktopDatePicker']}>
                         <DesktopDatePicker
-                            label="включно*"
+                            label={t('main.including')}
                             format={dateFormat}
                             dayOfWeekFormatter={(weekday) => weekday}
                             disablePast
@@ -135,20 +135,11 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 </div>
 
                 <p className="text book-wish-text">
-                    Після того як Ви підтвердите свій намір,
-                    ніхто з користувачів не зможе забронювати це бажання.
-                    У Вас буде можливість скасувати свій намір виконати бажання впродовж трьох діб.
+                    {t('main.after_you_confirm')}
                     <span
                         className="tooltip detail-wish-book-tooltip"
                         data-tooltip-id="book-wish"
-                        data-tooltip-content="
-                            Декларуючи свій намір виконати бажання,
-                            Ви берете на себе відповідальність за його виконання.
-                            Всесвіт покладається на Вас :)
-                            Постійна зміна рішень може погіршити Ваші відносини зі Всесвітом.
-                            Виконання бажань впливає на Ваш рейтинг в системі.
-                            Більш детально про це можна дізнатися в розділі 'Інструкція'.
-                        "
+                        data-tooltip-content={t('main.by_declaring')}
                     >
                         <InfoIcon sx={{ color: StylesVariables.specialColor }} />
                     </span>
