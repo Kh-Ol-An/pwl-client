@@ -133,7 +133,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                     </div>
 
                     <div className="sidebar-search">
-                        <Search id="search" changeSearchBar={handleChangeSearchBar} />
+                        <Search id="search" label={t('main.users-search')} changeSearchBar={handleChangeSearchBar} />
                     </div>
 
                     <div className="user-list" ref={userListRef}>
