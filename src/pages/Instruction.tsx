@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from "@/store/hook";
 import PageHeader from '@/layouts/PageHeader';
+import CustomModal from '@/components/CustomModal';
 import LoginWithGoogleMobileImg from '@/assets/images/instruction/login-with-google-mobile.jpg';
 import LoginWithGoogleImg from '@/assets/images/instruction/login-with-google.png';
 import ChooseGoogleAccountMobileImg from '@/assets/images/instruction/choose-google-account-mobile.jpg';
@@ -22,7 +23,12 @@ const Instruction: FC = () => {
 
     const myUser = useAppSelector((state) => state.myUser);
 
+    const [imageData, setImageData] = useState<{ src: string, alt: string } | null>(null);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+
+    const handleShowImage = (src: string, alt: string) => {
+        setImageData({ src, alt });
+    };
 
     useEffect(() => {
         const handleResize = () => {
@@ -60,7 +66,16 @@ const Instruction: FC = () => {
                                     {t('instruction.auth.google.text-3')}
                                 </p>
 
-                                <div className="image">
+                                <div
+                                    className="image"
+                                    onClick={
+                                        () =>
+                                            handleShowImage(
+                                                screenWidth < 768 ? LoginWithGoogleMobileImg : LoginWithGoogleImg,
+                                                t('instruction.auth.google.img'),
+                                            )
+                                    }
+                                >
                                     <img
                                         src={screenWidth < 768 ? LoginWithGoogleMobileImg : LoginWithGoogleImg}
                                         alt={t('instruction.auth.google.img')}
@@ -73,7 +88,18 @@ const Instruction: FC = () => {
                                     {t('instruction.auth.account.text')}
                                 </p>
 
-                                <div className="image">
+                                <div
+                                    className="image"
+                                    onClick={
+                                        () =>
+                                            handleShowImage(
+                                                screenWidth < 768
+                                                    ? ChooseGoogleAccountMobileImg
+                                                    : ChooseGoogleAccountImg,
+                                                t('instruction.auth.account.img'),
+                                            )
+                                    }
+                                >
                                     <img
                                         src={screenWidth < 768 ? ChooseGoogleAccountMobileImg : ChooseGoogleAccountImg}
                                         alt={t('instruction.auth.account.img')}
@@ -87,7 +113,18 @@ const Instruction: FC = () => {
                                 </p>
 
                                 <div className="image-box">
-                                    <div className="image first">
+                                    <div
+                                        className="image first"
+                                        onClick={
+                                            () =>
+                                                handleShowImage(
+                                                    screenWidth < 768
+                                                        ? EnterYourAccountNameMobileImg
+                                                        : EnterYourAccountNameImg,
+                                                    t('instruction.auth.data.account-img'),
+                                                )
+                                        }
+                                    >
                                         <img
                                             src={
                                                 screenWidth < 768
@@ -97,7 +134,18 @@ const Instruction: FC = () => {
                                             alt={t('instruction.auth.data.account-img')}
                                         />
                                     </div>
-                                    <div className="image second">
+                                    <div
+                                        className="image second"
+                                        onClick={
+                                            () =>
+                                                handleShowImage(
+                                                    screenWidth < 768
+                                                        ? EnterYourPasswordMobileImg
+                                                        : EnterYourPasswordImg,
+                                                    t('instruction.auth.data.password-img'),
+                                                )
+                                        }
+                                    >
                                         <img
                                             src={screenWidth < 768 ? EnterYourPasswordMobileImg : EnterYourPasswordImg}
                                             alt={t('instruction.auth.data.password-img')}
@@ -111,7 +159,16 @@ const Instruction: FC = () => {
                                     {t('instruction.auth.logged.text')}
                                 </p>
 
-                                <div className="image">
+                                <div
+                                    className="image"
+                                    onClick={
+                                        () =>
+                                            handleShowImage(
+                                                screenWidth < 768 ? LoggedToWishHubMobileImg : LoggedToWishHubImg,
+                                                t('instruction.auth.logged.img'),
+                                            )
+                                    }
+                                >
                                     <img
                                         src={screenWidth < 768 ? LoggedToWishHubMobileImg : LoggedToWishHubImg}
                                         alt={t('instruction.auth.logged.img')}
@@ -131,7 +188,16 @@ const Instruction: FC = () => {
                                     {t('instruction.auth.sing-up.text-2')}
                                 </p>
 
-                                <div className="image">
+                                <div
+                                    className="image"
+                                    onClick={
+                                        () =>
+                                            handleShowImage(
+                                                screenWidth < 768 ? SingUpMobileImg : SingUpImg,
+                                                t('instruction.auth.sing-up.img'),
+                                            )
+                                    }
+                                >
                                     <img
                                         src={screenWidth < 768 ? SingUpMobileImg : SingUpImg}
                                         alt={t('instruction.auth.sing-up.img')}
@@ -146,7 +212,18 @@ const Instruction: FC = () => {
                                     {t('instruction.auth.activation.text-2')}
                                 </p>
 
-                                <div className="image">
+                                <div
+                                    className="image"
+                                    onClick={
+                                        () =>
+                                            handleShowImage(
+                                                screenWidth < 768
+                                                    ? ActivationAccountMobileImg
+                                                    : ActivationAccountImg,
+                                                t('instruction.auth.activation.img'),
+                                            )
+                                    }
+                                >
                                     <img
                                         src={screenWidth < 768 ? ActivationAccountMobileImg : ActivationAccountImg}
                                         alt={t('instruction.auth.activation.img')}
@@ -165,6 +242,12 @@ const Instruction: FC = () => {
                     {t('instruction.next.text')}
                 </p>
             </section>
+
+            <CustomModal show={!!imageData} hide={() => setImageData(null)} classes="modal full">
+                {!!imageData && (
+                    <img className="instruction-full-image" src={imageData.src} alt={imageData.alt} />
+                )}
+            </CustomModal>
         </div>
     );
 };
