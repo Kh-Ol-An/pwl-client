@@ -1,22 +1,25 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Contacts = () => {
+    const { t } = useTranslation();
+
     return (
         <div className="contacts">
             <h3>
-                Контакти:
+                {t('main.contacts')}:
             </h3>
 
             <p>
-                Телефон: <a href="tel:+380508899268">+38 050 88 99 268</a>
+                {t('main.phone')} <a href="tel:+380508899268">+38 050 88 99 268</a>
             </p>
 
             <p className="contacts-mail">
-                Електронна адреса: <a href="mailto:wish-hub@ukr.net">wish-hub@ukr.net</a>
+                {t('main.email')} <a href="mailto:wish-hub@ukr.net">wish-hub@ukr.net</a>
             </p>
 
-            <p className="contacts-ps">
-                Якщо у вас є питання або пропозиції, будь ласка, зв'яжіться з нами.
+            <p className="contact-us">
+                {t('main.contact-us')}
             </p>
         </div>
     );

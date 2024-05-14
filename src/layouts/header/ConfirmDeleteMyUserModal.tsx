@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useGoogleLogin } from '@react-oauth/google';
+import { useTranslation } from 'react-i18next';
 import { Modal } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { deleteMyUser } from '@/store/my-user/thunks';
@@ -22,6 +23,8 @@ type Inputs = {
 }
 
 const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
@@ -48,7 +51,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
 
             const data = await response.json();
             if (myUser.email !== data.email) {
-                setConfirmDeleteMyUserError('Цей email не співпадає з email акаунта який Ви намагаєтесь видалити');
+                setConfirmDeleteMyUserError(t('main.email-not-match'));
                 return;
             }
             await dispatch(deleteMyUser({ email: data.email, password: '', id: myUser.id }));
@@ -61,7 +64,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
 
         if (myUser.hasPassword) {
             if (myUser.email !== data.email) {
-                setConfirmDeleteMyUserError('Цей email не співпадає з email акаунта який Ви намагаєтесь видалити');
+                setConfirmDeleteMyUserError(t('main.email-not-match'));
                 return;
             } else {
                 setConfirmDeleteMyUserError('');
@@ -82,12 +85,10 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
         >
             <form className="modal confirm" onSubmit={handleSubmit(onSubmit)}>
                 <Card classes="not-full-screen">
-                    <h3 className="title attention">Увага!</h3>
+                    <h3 className="title attention">{t('confirm-modal.title')}</h3>
 
                     <p className="text">
-                        Нашому суму не має меж... Ми сподіваємось що Ви дасте нам ще один шанс та
-                        залишитись. Якщо Ви рішуче вирішили покинути нас, то підтвердьте свій намір
-                        ввівши відповідні дані.
+                        {t('main.sadness')}
                     </p>
 
                     {!myUser?.hasPassword && confirmDeleteMyUserError.length > 0 && (
@@ -115,7 +116,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
                                 id="password"
                                 name="password"
                                 type="password"
-                                label="Пароль*"
+                                label={t('auth.password')}
                                 error={errors?.password?.message}
                             />
                         </>
@@ -123,11 +124,11 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
 
                     <div className="modal-actions">
                         <Button variant="text" color="action-color" type="submit">
-                            Видаліть мій акаунт
+                            {t('main.delete-my-account')}
                         </Button>
 
                         <Button type="button" onClick={hide}>
-                            Залишитись
+                            {t('main.stay')}
                         </Button>
                     </div>
                 </Card>

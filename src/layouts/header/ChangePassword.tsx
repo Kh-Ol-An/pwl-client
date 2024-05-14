@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { changePassword } from '@/store/my-user/thunks';
 import { IUser } from '@/models/IUser';
@@ -18,6 +19,8 @@ type Inputs = {
 }
 
 const ChangePassword: FC<IProps> = ({ userId, close }) => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const dispatch = useAppDispatch();
@@ -39,7 +42,7 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
         if (data.newPassword === repeatPassword) {
             setRepeatPasswordError('');
         } else {
-            return setRepeatPasswordError('Нові паролі не співпадають.');
+            return setRepeatPasswordError(t('main.repeat-password-error'));
         }
 
         if (!userId || repeatPasswordError.length > 0) return;
@@ -54,7 +57,7 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
         if (!clickedOnSubmit) return;
 
         const password = getValues('newPassword');
-        password === value ? setRepeatPasswordError('') : setRepeatPasswordError('Нові паролі не співпадають.');
+        password === value ? setRepeatPasswordError('') : setRepeatPasswordError(t('main.repeat-password-error'));
     };
 
     return (
@@ -65,7 +68,7 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
                     id="oldPassword"
                     name="oldPassword"
                     type="password"
-                    label="Старий пароль*"
+                    label={t('main.old-password')}
                     error={errors?.oldPassword?.message}
                 />
             )}
@@ -74,21 +77,21 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
                 id="newPassword"
                 name="newPassword"
                 type="password"
-                label="Новий пароль*"
+                label={t('main.new-password')}
                 error={errors?.newPassword?.message}
             />
             <Input
                 id="repeat-new-password"
                 name="repeat-new-password"
                 type="password"
-                label="Повторіть новий пароль*"
+                label={t('main.repeat-new-password')}
                 value={repeatPassword}
                 error={repeatPasswordError}
                 onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}
             />
 
             <div className="actions">
-                <Button type="submit" color="action-color">Змінити пароль</Button>
+                <Button type="submit" color="action-color">{t('main.change-password')}</Button>
             </div>
         </form>
     );
