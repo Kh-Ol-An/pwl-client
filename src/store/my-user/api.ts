@@ -73,7 +73,7 @@ const login = async (data: ILogin): Promise<AxiosResponse<IAuth>> => {
 const logout = async (): Promise<void> => {
     try {
         await api.post('/logout');
-        localStorage.clear();
+        localStorage.removeItem('token');
     } catch (error: any) {
         toast(
             error.response?.data?.message || t('alerts.my-user-api.logout.error'),
@@ -219,7 +219,7 @@ const deleteMyUser = async (data: IDeleteMyUser): Promise<AxiosResponse<IUser['i
 
         const encryptedPassword = encryptedData(data.password, process.env.REACT_APP_CRYPTO_JS_SECRET);
         const response = await api.post('/user/delete', { ...data, password: encryptedPassword });
-        localStorage.clear();
+        localStorage.removeItem('token');
         return response;
     } catch (error: any) {
         toast(
