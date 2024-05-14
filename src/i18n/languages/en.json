@@ -293,15 +293,7 @@
         "sadness": "Our sadness knows no bounds... We hope that you will give us another chance and to stay. If you have decided to leave us, please confirm your intention by entering the appropriate data.",
         "delete-my-account": "Delete my account",
         "stay": "Stay",
-        "email-not-match": "This email does not match the email of the account you are trying to delete.",
-        "next": "text",
-        "next": "text",
-        "next": "text",
-        "next": "text",
-        "next": "text",
-        "next": "text",
-        "next": "text",
-        "next": "text"
+        "email-not-match": "This email does not match the email of the account you are trying to delete."
     },
     "about": {
         "title": "Wishes",
@@ -425,7 +417,7 @@
         "cookies-strong": "Cookies",
         "cookies": "are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.",
         "country-strong": "Country",
-        "country": "refers to: Ukraine",
+        "country": "refers to: United States of America.",
         "device-strong": "Device",
         "device": "means any device that can access the Service such as a computer, a cellphone or a digital tablet.",
         "personal-strong": "Personal Data",
