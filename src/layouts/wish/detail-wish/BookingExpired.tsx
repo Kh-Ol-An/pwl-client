@@ -1,14 +1,11 @@
 import React, { FC } from 'react';
-import { Modal } from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@/store/hook';
 import { undoneWish, doneWish } from '@/store/wishes/thunks';
-import Card from '@/layouts/Card';
+import CustomModal from '@/components/CustomModal';
 import Button from '@/components/Button';
-import Action from '@/components/Action';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
-import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     wish: IWish;
@@ -17,6 +14,8 @@ interface IProps {
 }
 
 const BookingExpired: FC<IProps> = ({ wish, userId, close }) => {
+    const { t } = useTranslation();
+
     const dispatch = useAppDispatch();
 
     const [show, setShow] = React.useState<boolean>(true);
@@ -43,42 +42,29 @@ const BookingExpired: FC<IProps> = ({ wish, userId, close }) => {
                 color="action-color"
                 onClick={() => setShow(true)}
             >
-                Визначити статус виконання
+                {t('main.determine-status')}
             </Button>
 
-            <Modal
-                open={show}
-                onClose={() => setShow(false)}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <div className="modal confirm">
-                    <Card classes="not-full-screen">
-                        <h3 className="title attention">Увага!</h3>
+            <CustomModal show={show} hide={() => setShow(false)} classes="modal confirm">
+                <h3 className="title attention">{t('confirm-modal.title')}</h3>
 
-                        <p className="text-lg">
-                            Термін який визначив виконавець на реалізацію бажання "{wish.name}" вичерпано.
-                            <br />
-                            <br />
-                            Ваше бажання виконано?
-                        </p>
+                <p className="text-lg">
+                    {t('main.period-expired', { name: wish.name })}
+                    <br />
+                    <br />
+                    {t('main.is_your_wish')}
+                </p>
 
-                        <div className="modal-actions detail-wish-expired-actions">
-                            <Button type="button" onClick={handleUndone}>
-                                Ні
-                            </Button>
+                <div className="modal-actions detail-wish-expired-actions">
+                    <Button type="button" onClick={handleUndone}>
+                        {t('main.no')}
+                    </Button>
 
-                            <Button type="button" onClick={handleDone}>
-                                Так
-                            </Button>
-                        </div>
-                    </Card>
-
-                    <Action onClick={() => setShow(false)}>
-                        <CloseIcon sx={{ color: StylesVariables.blackColor }} />
-                    </Action>
+                    <Button type="button" onClick={handleDone}>
+                        {t('main.yes')}
+                    </Button>
                 </div>
-            </Modal>
+            </CustomModal>
         </>
     );
 };

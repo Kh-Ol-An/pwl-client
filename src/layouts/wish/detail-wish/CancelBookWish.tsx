@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@/store/hook';
 import { cancelBookWish } from '@/store/wishes/thunks';
 import ConfirmModal from '@/layouts/ConfirmModal';
@@ -13,6 +14,8 @@ interface IProps {
 }
 
 const CancelBookWish: FC<IProps> = ({ wish, userId, close }) => {
+    const { t } = useTranslation();
+
     const dispatch = useAppDispatch();
 
     const [show, setShow] = useState<boolean>(false);
@@ -31,17 +34,18 @@ const CancelBookWish: FC<IProps> = ({ wish, userId, close }) => {
                 color="action-color"
                 onClick={() => setShow(true)}
             >
-                Скасувати виконання
+                {t('main.cancel-execution')}
+
             </Button>
 
             <ConfirmModal
                 show={show}
-                confirmText="Скасувати мій намір"
+                confirmText={t('main.cancel-my-intention')}
                 close={() => setShow(false)}
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    Ви впевнені, що хочете скасувати свій намір виконати бажання "{wish.name}"?
+                    {t('main.cancel-intention', { name: wish.name})}
                 </p>
             </ConfirmModal>
         </>
