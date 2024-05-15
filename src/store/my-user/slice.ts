@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-    googleAuthorization,
     registration,
+    googleAuthorization,
     login,
     logout,
-    changePassword,
     checkAuth,
-    updateMyUser,
+    changePassword,
     changeLang,
-    deleteMyUser,
+    updateMyUser,
     addFriend,
     removeFriend,
+    deleteMyUser,
 } from '@/store/my-user/thunks';
 import { doneWish, undoneWish } from '@/store/wishes/thunks';
 import { IUser } from '@/models/IUser';
@@ -99,20 +99,6 @@ const myUserSlice = createSlice({
                 state.isLoading = false;
                 state.error = null;
             })
-            // changePassword
-            .addCase(changePassword.pending, (state) => {
-                state.isLoading = true;
-                state.error = null;
-            })
-            .addCase(changePassword.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось вийти з аккаунту.';
-            })
-            .addCase(changePassword.fulfilled, (state) => {
-                state.user = null;
-                state.isLoading = false;
-                state.error = null;
-            })
             // checkAuth
             .addCase(checkAuth.pending, (state) => {
                 state.user = null;
@@ -129,17 +115,17 @@ const myUserSlice = createSlice({
                 state.isLoading = false;
                 state.error = null;
             })
-            // updateMyUser
-            .addCase(updateMyUser.pending, (state) => {
+            // changePassword
+            .addCase(changePassword.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
             })
-            .addCase(updateMyUser.rejected, (state, action) => {
+            .addCase(changePassword.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось оновити користувача.';
+                state.error = action.error.message || 'Не вдалось вийти з аккаунту.';
             })
-            .addCase(updateMyUser.fulfilled, (state, action) => {
-                state.user = action.payload;
+            .addCase(changePassword.fulfilled, (state) => {
+                state.user = null;
                 state.isLoading = false;
                 state.error = null;
             })
@@ -157,23 +143,19 @@ const myUserSlice = createSlice({
                 state.isLoading = false;
                 state.error = null;
             })
-            // deleteMyUser
-            .addCase(deleteMyUser.pending, (state) => {
+            // updateMyUser
+            .addCase(updateMyUser.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
             })
-            .addCase(deleteMyUser.rejected, (state, action) => {
+            .addCase(updateMyUser.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось видалити користувача.';
+                state.error = action.error.message || 'Не вдалось оновити користувача.';
             })
-            .addCase(deleteMyUser.fulfilled, (state, action) => {
-                if (state.user?.id === action.payload) {
-                    state.user = null;
-                    state.error = null;
-                } else {
-                    state.error = 'Не вдалось видалити користувача.';
-                }
+            .addCase(updateMyUser.fulfilled, (state, action) => {
+                state.user = action.payload;
                 state.isLoading = false;
+                state.error = null;
             })
             // addFriend
             .addCase(addFriend.pending, (state) => {
@@ -196,6 +178,24 @@ const myUserSlice = createSlice({
             .addCase(removeFriend.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.error = null;
+            })
+            // deleteMyUser
+            .addCase(deleteMyUser.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(deleteMyUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось видалити користувача.';
+            })
+            .addCase(deleteMyUser.fulfilled, (state, action) => {
+                if (state.user?.id === action.payload) {
+                    state.user = null;
+                    state.error = null;
+                } else {
+                    state.error = 'Не вдалось видалити користувача.';
+                }
+                state.isLoading = false;
             })
             // doneWish
             .addCase(doneWish.pending, (state) => {

@@ -45,51 +45,89 @@
                 "console-error": "Clipboard error: "
             }
         },
-        "my-user-api": {
-            "registration": {
-                "error": "registration: Failed to register."
+        "my-user": {
+            "api": {
+                "registration": {
+                    "error": "api.registration: Failed to register."
+                },
+                "send-activation-link": {
+                    "error": "api.sendActivationLink: Failed to send the activation link."
+                },
+                "google-authorization": {
+                    "error": "api.googleAuthorization: Couldn't sign in with Google."
+                },
+                "login": {
+                    "error": "api.login: Could not log in to the site."
+                },
+                "logout": {
+                    "error": "api.logout: Failed to log out."
+                },
+                "refresh": {
+                    "error": "api.refresh: Failed to update the session."
+                },
+                "forgot-password": {
+                    "success": "The password reset email has been successfully sent to: {{email}}. Please log in with your new password.",
+                    "error": "api.forgotPassword: Failed to send the password reset email to: {{email}}."
+                },
+                "change-forgotten-password": {
+                    "success": "Password changed successfully. Please log in with your new password.",
+                    "error": "api.changeForgottenPassword: Failed to change the password."
+                },
+                "change-password": {
+                    "success": "Password changed successfully. Please log in with your new password.",
+                    "error": "api.changePassword: Failed to change the password."
+                },
+                "change-lang": {
+                    "error": "api.changeLang: Failed to change the interface language."
+                },
+                "update-my-user": {
+                    "error": "api.updateMyUser: Failed to update the user."
+                },
+                "add-friend": {
+                    "error": "api.addFriend: Failed to add the friend."
+                },
+                "remove-friend": {
+                    "error": "api.removeFriend: Failed to remove the friend."
+                },
+                "delete-my-user": {
+                    "error": "api.deleteMyUser: Failed to delete the user with ID {{userId}}."
+                }
             },
-            "google-authorization": {
-                "error": "googleAuthorization: Couldn't sign in with Google."
-            },
-            "login": {
-                "error": "login: Could not log in to the site."
-            },
-            "logout": {
-                "error": "logout: Failed to log out."
-            },
-            "refresh": {
-                "error": "refresh: Failed to update the session."
-            },
-            "send-activation-link": {
-                "error": "sendActivationLink: Failed to send the activation link."
-            },
-            "change-forgotten-password": {
-                "success": "Password changed successfully. Please log in with your new password.",
-                "error": "changeForgottenPassword: Failed to change the password."
-            },
-            "forgot-password": {
-                "success": "The password reset email has been successfully sent to: {{email}}. Please log in with your new password.",
-                "error": "forgotPassword: Failed to send the password reset email to: {{email}}."
-            },
-            "change-password": {
-                "success": "Password changed successfully. Please log in with your new password.",
-                "error": "changePassword: Failed to change the password."
-            },
-            "update-my-user": {
-                "error": "updateMyUser: Failed to update the user."
-            },
-            "change-lang": {
-                "error": "changeLang: Failed to change the interface language."
-            },
-            "delete-my-user": {
-                "error": "deleteMyUser: Failed to delete the user with ID {{userId}}."
-            },
-            "add-friend": {
-                "error": "addFriend: Failed to add the friend."
-            },
-            "remove-friend": {
-                "error": "removeFriend: Failed to remove the friend."
+            "slice": {
+                "registration": {
+                    "error": "slice.registration: Failed to register."
+                },
+                "google-authorization": {
+                    "error": "slice.googleAuthorization: Couldn't sign in with Google."
+                },
+                "login": {
+                    "error": "slice.login: Could not log in to the site."
+                },
+                "logout": {
+                    "error": "slice.logout: Failed to log out."
+                },
+                "refresh": {
+                    "error": "slice.refresh: Failed to update the session."
+                },
+                "change-password": {
+                    "success": "Password changed successfully. Please log in with your new password.",
+                    "error": "slice.changePassword: Failed to change the password."
+                },
+                "change-lang": {
+                    "error": "slice.changeLang: Failed to change the interface language."
+                },
+                "update-my-user": {
+                    "error": "slice.updateMyUser: Failed to update the user."
+                },
+                "add-friend": {
+                    "error": "slice.addFriend: Failed to add the friend."
+                },
+                "remove-friend": {
+                    "error": "slice.removeFriend: Failed to remove the friend."
+                },
+                "delete-my-user": {
+                    "error": "slice.deleteMyUser: Failed to delete the user with ID {{userId}}."
+                }
             }
         },
         "users-api": {

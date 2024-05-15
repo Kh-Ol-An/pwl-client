@@ -25,6 +25,15 @@ export const registration = createAsyncThunk<IAuth, IRegistration>(
     },
 );
 
+export const sendActivationLink = createAsyncThunk<IUser['email'], IUser['id']>(
+    'myUser/sendActivationLink',
+    async (data: IUser['id']) => {
+        const result = await api.sendActivationLink(data);
+
+        return result.data;
+    },
+);
+
 export const googleAuthorization = createAsyncThunk<IAuth, IGoogleAuth>(
     'myUser/googleAuthorization',
     async (data) => {
@@ -59,12 +68,24 @@ export const checkAuth = createAsyncThunk<IAuth, void>(
     },
 );
 
-export const updateMyUser = createAsyncThunk<IUser, IUpdateMyUser>(
-    'myUser/updateMyUser',
-    async (data: IUpdateMyUser) => {
-        const result = await api.updateMyUser(data);
+export const forgotPassword = createAsyncThunk<any, IForgotPassword>(
+    'myUser/forgotPassword',
+    async (data: IForgotPassword) => {
+        return await api.forgotPassword(data);
+    },
+);
 
-        return result.data;
+export const changeForgottenPassword = createAsyncThunk<any, IChangeForgottenPassword>(
+    'myUser/changeForgottenPassword',
+    async (data: IChangeForgottenPassword) => {
+        return await api.changeForgottenPassword(data);
+    },
+);
+
+export const changePassword = createAsyncThunk<any, IChangePassword>(
+    'myUser/changePassword',
+    async (data: IChangePassword) => {
+        return await api.changePassword(data);
     },
 );
 
@@ -77,40 +98,10 @@ export const changeLang = createAsyncThunk<IUser, IChangeLang>(
     },
 );
 
-export const sendActivationLink = createAsyncThunk<IUser['email'], IUser['id']>(
-    'myUser/sendActivationLink',
-    async (data: IUser['id']) => {
-        const result = await api.sendActivationLink(data);
-
-        return result.data;
-    },
-);
-
-export const changeForgottenPassword = createAsyncThunk<any, IChangeForgottenPassword>(
-    'myUser/changeForgottenPassword',
-    async (data: IChangeForgottenPassword) => {
-        return await api.changeForgottenPassword(data);
-    },
-);
-
-export const forgotPassword = createAsyncThunk<any, IForgotPassword>(
-    'myUser/forgotPassword',
-    async (data: IForgotPassword) => {
-        return await api.forgotPassword(data);
-    },
-);
-
-export const changePassword = createAsyncThunk<any, IChangePassword>(
-    'myUser/changePassword',
-    async (data: IChangePassword) => {
-        return await api.changePassword(data);
-    },
-);
-
-export const deleteMyUser = createAsyncThunk<IUser['id'], IDeleteMyUser>(
-    'myUser/deleteMyUser',
-    async (data: IDeleteMyUser) => {
-        const result = await api.deleteMyUser(data);
+export const updateMyUser = createAsyncThunk<IUser, IUpdateMyUser>(
+    'myUser/updateMyUser',
+    async (data: IUpdateMyUser) => {
+        const result = await api.updateMyUser(data);
 
         return result.data;
     },
@@ -129,6 +120,15 @@ export const removeFriend = createAsyncThunk<IUser, IRemoveFriend>(
     'myUser/removeFriend',
     async (data: IRemoveFriend) => {
         const result = await api.removeFriend(data);
+
+        return result.data;
+    },
+);
+
+export const deleteMyUser = createAsyncThunk<IUser['id'], IDeleteMyUser>(
+    'myUser/deleteMyUser',
+    async (data: IDeleteMyUser) => {
+        const result = await api.deleteMyUser(data);
 
         return result.data;
     },
