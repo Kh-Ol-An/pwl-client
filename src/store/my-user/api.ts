@@ -5,6 +5,7 @@ import api from '@/utils/api';
 import {
     IAddFriend,
     IChangeForgottenPassword,
+    IChangeLang,
     IChangePassword,
     IDeleteMyUser,
     IForgotPassword,
@@ -211,6 +212,18 @@ const updateMyUser = async ({
     }
 };
 
+const changeLang = async (data: IChangeLang): Promise<AxiosResponse<IUser>> => {
+    try {
+        return await api.put('/lang', data);
+    } catch (error: any) {
+        toast(
+            error.response?.data?.message || t('alerts.my-user-api.change-lang.error'),
+            { type: 'error' },
+        );
+        throw error;
+    }
+};
+
 const deleteMyUser = async (data: IDeleteMyUser): Promise<AxiosResponse<IUser['id']>> => {
     try {
         if (!process.env.REACT_APP_CRYPTO_JS_SECRET) {
@@ -265,6 +278,7 @@ const myUserApi = {
     forgotPassword,
     changePassword,
     updateMyUser,
+    changeLang,
     deleteMyUser,
     addFriend,
     removeFriend,

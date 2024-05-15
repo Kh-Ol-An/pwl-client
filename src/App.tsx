@@ -19,7 +19,7 @@ const App: FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const [ready, setReady] = useState(false);
+    const [ready, setReady] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(checkAuth())

@@ -7,6 +7,7 @@ import {
     IRegistration,
     IRemoveFriend,
     IUpdateMyUser,
+    IChangeLang,
     IChangePassword,
     IChangeForgottenPassword,
     IForgotPassword,
@@ -62,6 +63,15 @@ export const updateMyUser = createAsyncThunk<IUser, IUpdateMyUser>(
     'myUser/updateMyUser',
     async (data: IUpdateMyUser) => {
         const result = await api.updateMyUser(data);
+
+        return result.data;
+    },
+);
+
+export const changeLang = createAsyncThunk<IUser, IChangeLang>(
+    'myUser/changeLang',
+    async (data: IChangeLang) => {
+        const result = await api.changeLang(data);
 
         return result.data;
     },

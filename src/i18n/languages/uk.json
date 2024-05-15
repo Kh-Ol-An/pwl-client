@@ -79,6 +79,9 @@
             "update-my-user": {
                 "error": "updateMyUser: Не вдалось оновити користувача."
             },
+            "change-lang": {
+                "error": "changeLang: Не вдалось змінити мову."
+            },
             "delete-my-user": {
                 "error": "deleteMyUser: Не вдалося видалити користувача з ідентифікатором {{userId}}."
             },

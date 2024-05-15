@@ -39,6 +39,11 @@ export interface IUpdateMyUser {
     avatar: TCurrentAvatar;
 }
 
+export interface IChangeLang {
+    userId: IUser['id'];
+    lang: IUser['lang'];
+}
+
 export interface IDeleteMyUser extends ILogin {
     id: IUser['id'];
 }

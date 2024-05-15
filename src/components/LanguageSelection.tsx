@@ -1,14 +1,25 @@
 import React, { FC } from 'react';
 import i18next from "i18next";
 import { UA, US } from 'country-flag-icons/react/3x2';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
+import { changeLang } from '@/store/my-user/thunks';
+import { setIsLoading } from '@/store/my-user/slice';
+import { IUser } from '@/models/IUser';
 
 const LanguageSelection: FC = () => {
-    const handleChangeLanguage = (language: 'en' | 'uk') => {
-        i18next.changeLanguage(language);
-        location.reload();
-    };
+    const myUser = useAppSelector((state) => state.myUser);
 
-    // TODO: add preloader
+    const dispatch = useAppDispatch();
+
+    const handleChangeLanguage = async (language: IUser['lang']) => {
+        i18next.changeLanguage(language);
+
+        if (myUser.user !== null) {
+            await dispatch(changeLang({ userId: myUser.user.id, lang: language }));
+            dispatch(setIsLoading(true));
+            location.reload();
+        }
+    };
 
     return (
         <div className="language-selection">

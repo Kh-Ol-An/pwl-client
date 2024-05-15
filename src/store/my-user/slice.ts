@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
     googleAuthorization,
     registration,
@@ -7,6 +7,7 @@ import {
     changePassword,
     checkAuth,
     updateMyUser,
+    changeLang,
     deleteMyUser,
     addFriend,
     removeFriend,
@@ -29,7 +30,11 @@ const initialState: IMyUserState = {
 const myUserSlice = createSlice({
     name: 'myUser',
     initialState,
-    reducers: {},
+    reducers: {
+        setIsLoading(state, action: PayloadAction<Partial<boolean>>) {
+            state.isLoading = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             // registration
@@ -138,6 +143,20 @@ const myUserSlice = createSlice({
                 state.isLoading = false;
                 state.error = null;
             })
+            // changeLang
+            .addCase(changeLang.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(changeLang.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || 'Не вдалось оновити користувача.';
+            })
+            .addCase(changeLang.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.isLoading = false;
+                state.error = null;
+            })
             // deleteMyUser
             .addCase(deleteMyUser.pending, (state) => {
                 state.isLoading = true;
@@ -216,5 +235,7 @@ const myUserSlice = createSlice({
             });
     },
 });
+
+export const { setIsLoading } = myUserSlice.actions;
 
 export default myUserSlice.reducer;

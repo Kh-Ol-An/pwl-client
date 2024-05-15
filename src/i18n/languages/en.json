@@ -79,6 +79,9 @@
             "update-my-user": {
                 "error": "updateMyUser: Failed to update the user."
             },
+            "change-lang": {
+                "error": "changeLang: Failed to change the interface language."
+            },
             "delete-my-user": {
                 "error": "deleteMyUser: Failed to delete the user with ID {{userId}}."
             },
