@@ -8,6 +8,8 @@ const LanguageSelection: FC = () => {
         location.reload();
     };
 
+    // TODO: add preloader
+
     return (
         <div className="language-selection">
             <button
