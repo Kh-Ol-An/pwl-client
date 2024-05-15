@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
+import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from '@/store/hook';
@@ -54,6 +55,10 @@ const Auth: FC = () => {
     const [checkedPrivacyPolicy, setCheckedPrivacyPolicy] = useState<boolean>(location.search === '?agree');
     const [checkedPrivacyPolicyError, setCheckedPrivacyPolicyError] = useState<string>('');
 
+    let lang: IUser['lang'] = 'en';
+    i18next.language.includes('en') && (lang = 'en');
+    i18next.language.includes('uk') && (lang = 'uk');
+
     let title = t('auth.title.sing_in');
     isRegistration && (title = t('auth.title.sing_up'));
     isForgotPassword && (title = t('auth.title.forgot_password'));
@@ -77,6 +82,7 @@ const Auth: FC = () => {
 
         await dispatch(googleAuthorization({
             email: decodedUserData.email,
+            lang,
             isActivated: decodedUserData.email_verified,
             firstName: decodedUserData.given_name,
             lastName: decodedUserData.family_name,
@@ -108,11 +114,11 @@ const Auth: FC = () => {
         if (repeatPasswordError.length > 0 || checkedPrivacyPolicyError.length > 0) return;
 
         if (isRegistration && checkedPrivacyPolicy) {
-            return dispatch(registration({ ...data, email: data.email.trim() }));
+            return dispatch(registration({ ...data, email: data.email.trim(), lang }));
         }
 
         if (checkedPrivacyPolicy) {
-            return dispatch(login({ ...data, email: data.email.trim() }));
+            return dispatch(login({ ...data, email: data.email.trim(), lang }));
         }
     };
 

@@ -11,10 +11,12 @@ export interface IChangeForgottenPassword {
 
 export interface ILogin extends IForgotPassword {
     password: string;
+    lang: IUser['lang'];
 }
 
 export interface IGoogleAuth extends IForgotPassword {
     email: IUser['email'];
+    lang: IUser['lang'];
     isActivated: IUser['isActivated'];
     firstName: IUser['firstName'];
     lastName: IUser['lastName'];
@@ -44,8 +46,10 @@ export interface IChangeLang {
     lang: IUser['lang'];
 }
 
-export interface IDeleteMyUser extends ILogin {
+export interface IDeleteMyUser {
     id: IUser['id'];
+    email: IUser['email'];
+    password: string;
 }
 
 export interface IAddFriend {
