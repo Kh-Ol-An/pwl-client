@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { t } from 'i18next';
 import {
     registration,
     googleAuthorization,
@@ -46,7 +47,7 @@ const myUserSlice = createSlice({
             .addCase(registration.rejected, (state, action) => {
                 state.user = null;
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось зареєструватись.';
+                state.error = action.error.message || t('alerts.my-user.slice.registration.error');
             })
             .addCase(registration.fulfilled, (state, action) => {
                 state.user = action.payload.user;
@@ -62,7 +63,7 @@ const myUserSlice = createSlice({
             .addCase(googleAuthorization.rejected, (state, action) => {
                 state.user = null;
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось увійти за допомогою Google.';
+                state.error = action.error.message || t('alerts.my-user.slice.google-authorization.error');
             })
             .addCase(googleAuthorization.fulfilled, (state, action) => {
                 state.user = action.payload.user;
@@ -78,7 +79,7 @@ const myUserSlice = createSlice({
             .addCase(login.rejected, (state, action) => {
                 state.user = null;
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось увійти на сайт.';
+                state.error = action.error.message || t('alerts.my-user.slice.login.error');
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.user = action.payload.user;
@@ -92,7 +93,7 @@ const myUserSlice = createSlice({
             })
             .addCase(logout.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось вийти з аккаунту.';
+                state.error = action.error.message || t('alerts.my-user.slice.logout.error');
             })
             .addCase(logout.fulfilled, (state) => {
                 state.user = null;
@@ -108,7 +109,7 @@ const myUserSlice = createSlice({
             .addCase(checkAuth.rejected, (state, action) => {
                 state.user = null;
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось оновити сесію.';
+                state.error = action.error.message || t('alerts.my-user.slice.refresh.error');
             })
             .addCase(checkAuth.fulfilled, (state, action) => {
                 state.user = action.payload.user;
@@ -122,7 +123,7 @@ const myUserSlice = createSlice({
             })
             .addCase(changePassword.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось вийти з аккаунту.';
+                state.error = action.error.message || t('alerts.my-user.slice.change-password.error');
             })
             .addCase(changePassword.fulfilled, (state) => {
                 state.user = null;
@@ -136,7 +137,7 @@ const myUserSlice = createSlice({
             })
             .addCase(changeLang.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось оновити користувача.';
+                state.error = action.error.message || t('alerts.my-user.slice.change-lang.error');
             })
             .addCase(changeLang.fulfilled, (state, action) => {
                 state.user = action.payload;
@@ -150,7 +151,7 @@ const myUserSlice = createSlice({
             })
             .addCase(updateMyUser.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось оновити користувача.';
+                state.error = action.error.message || t('alerts.my-user.slice.update-my-user.error');
             })
             .addCase(updateMyUser.fulfilled, (state, action) => {
                 state.user = action.payload;
@@ -162,7 +163,7 @@ const myUserSlice = createSlice({
                 state.error = null;
             })
             .addCase(addFriend.rejected, (state, action) => {
-                state.error = action.error.message || 'Не вдалось додати друга.';
+                state.error = action.error.message || t('alerts.my-user.slice.add-friend.error');
             })
             .addCase(addFriend.fulfilled, (state, action) => {
                 state.user = action.payload;
@@ -173,7 +174,7 @@ const myUserSlice = createSlice({
                 state.error = null;
             })
             .addCase(removeFriend.rejected, (state, action) => {
-                state.error = action.error.message || 'Не вдалось додати друга.';
+                state.error = action.error.message || t('alerts.my-user.slice.remove-friend.error');
             })
             .addCase(removeFriend.fulfilled, (state, action) => {
                 state.user = action.payload;
@@ -193,7 +194,7 @@ const myUserSlice = createSlice({
                     state.user = null;
                     state.error = null;
                 } else {
-                    state.error = 'Не вдалось видалити користувача.';
+                    state.error = t('alerts.my-user.api.delete-my-user.error', { userId: action.payload });
                 }
                 state.isLoading = false;
             })
