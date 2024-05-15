@@ -5,7 +5,7 @@ import { IWish } from '@/models/IWish';
 export const encryptedData = (data: string, secret: string): string => CryptoJS.AES.encrypt(data, secret).toString();
 
 export const decryptedData = (data: string, secret: string, wish?: any): string => {
-    if (wish.id === '6620f3aaa436b3d1205f0e6e') {
+    if (wish?.id === '6620f3aaa436b3d1205f0e6e') {
         console.log('---------------------------------');
         console.log('decryptedData');
         console.log('wish: ', wish);
@@ -25,7 +25,7 @@ export const decryptedData = (data: string, secret: string, wish?: any): string 
 };
 
 export const unencryptedData = (data: string, show: IWish['show'], wish?: any): string => {
-    if (wish.id === '6620f3aaa436b3d1205f0e6e') {
+    if (wish?.id === '6620f3aaa436b3d1205f0e6e') {
         console.log('---------------------------------');
         console.log('unencryptedData');
         console.log('wish: ', wish);
