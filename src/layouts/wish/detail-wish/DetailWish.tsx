@@ -35,8 +35,6 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
     i18next.language.includes('en') && (dateFormat = 'MMMM DD, YYYY');
     i18next.language.includes('uk') && (dateFormat = 'DD MMMM YYYY');
 
-    let showDoneMyWish = myUser?.id === wish.userId && !showBookingExpired(wish, myUser?.id); // бажання належить користувачу
-
     let showBookWish = !wish.booking?.end && myUser?.id !== wish.userId; // бажання не заброньовано і не належить користувачу
 
     let showCancelBookWish = myUser?.id === wish.booking?.userId // бажання належить тому хто створював його
@@ -44,8 +42,8 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
         && !dayjs(wish.booking?.end).isSameOrBefore(dayjs()); // термін виконання вже минув
 
     let showDoneWish = myUser?.id === wish.userId // бажання належить користувачу
-        && wish.booking?.userId // бажання заброньовано
-        && !dayjs(wish.booking?.end).isSameOrBefore(dayjs()); // термін виконання вже минув
+        && !wish.executed // бажання не виконане
+        && !showBookingExpired(wish, myUser?.id); // термін виконання ще не минув
 
     let showEditWish = myUser?.id === wish.userId && !wish.booking?.end // бажання належить користувачу і не заброньовано
 
@@ -94,17 +92,6 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                         </p>
                                     )}
 
-                                    {/* Done my wish */}
-                                    {showDoneMyWish && (
-                                        <DoneWish
-                                            wish={wish}
-                                            userId={myUser?.id}
-                                            whoseWish="my"
-                                            actionText={t('main.wish-fulfilled')}
-                                            close={close}
-                                        />
-                                    )}
-
                                     {/* Book */}
                                     {showBookWish && <BookWish wish={wish} close={close} />}
 
@@ -115,7 +102,12 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
 
                                     {/* Done */}
                                     {showDoneWish && (
-                                        <DoneWish wish={wish} userId={myUser?.id} whoseWish="someone" close={close} />
+                                        <DoneWish
+                                            wish={wish}
+                                            userId={myUser?.id}
+                                            whoseWish={myUser?.id === wish.booking?.userId ? 'my' : 'someone'}
+                                            close={close}
+                                        />
                                     )}
 
                                     {/* Booking Expired */}

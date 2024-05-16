@@ -13,11 +13,10 @@ interface IProps {
     wish: IWish;
     userId?: IUser['id'];
     whoseWish: IDoneWish['whoseWish'];
-    actionText?: string;
     close: () => void;
 }
 
-const DoneWish: FC<IProps> = ({ wish, userId, whoseWish, actionText, close }) => {
+const DoneWish: FC<IProps> = ({ wish, userId, whoseWish, close }) => {
     const { t } = useTranslation();
 
     const dispatch = useAppDispatch();
@@ -33,15 +32,13 @@ const DoneWish: FC<IProps> = ({ wish, userId, whoseWish, actionText, close }) =>
 
     return (
         <>
-            {actionText && (
-                <Button
-                    type="button"
-                    variant="text"
-                    onClick={() => setShow(true)}
-                >
-                    {actionText}
-                </Button>
-            )}
+            <Button
+                type="button"
+                variant="text"
+                onClick={() => setShow(true)}
+            >
+                {t('main.wish-fulfilled')}
+            </Button>
 
             <ConfirmModal
                 show={show}
