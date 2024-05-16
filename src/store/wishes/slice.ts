@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { t } from 'i18next';
 import {
     createWish,
     updateWish,
@@ -40,7 +41,7 @@ const wishesSlice = createSlice({
             .addCase(createWish.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isLocalLoading = false;
-                state.error = action.error.message || 'Не вдалось створити бажання.';
+                state.error = action.error.message || t('alerts.wishes.slice.create-wish.error');
             })
             .addCase(createWish.fulfilled, (state, action) => {
                 state.list.unshift(action.payload);
@@ -57,7 +58,7 @@ const wishesSlice = createSlice({
             .addCase(updateWish.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isLocalLoading = false;
-                state.error = action.error.message || 'Не вдалось оновити бажання.';
+                state.error = action.error.message || t('alerts.wishes.slice.update-wish.error');
             })
             .addCase(updateWish.fulfilled, (state, action) => {
                 const updatedWish = action.payload;
@@ -77,7 +78,7 @@ const wishesSlice = createSlice({
             .addCase(doneWish.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isLocalLoading = false;
-                state.error = action.error.message || 'Не вдалось позначити бажання виконаним.';
+                state.error = action.error.message || t('alerts.wishes.slice.done-wish.error');
             })
             .addCase(doneWish.fulfilled, (state, action) => {
                 // Змінити бажання та покласти його там де було
@@ -102,7 +103,7 @@ const wishesSlice = createSlice({
             .addCase(undoneWish.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isLocalLoading = false;
-                state.error = action.error.message || 'Не вдалось позначити бажання не виконаним.';
+                state.error = action.error.message || t('alerts.wishes.slice.undone-wish.error');
             })
             .addCase(undoneWish.fulfilled, (state, action) => {
                 // Змінити бажання та покласти його там де було
@@ -127,7 +128,7 @@ const wishesSlice = createSlice({
             .addCase(bookWish.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isLocalLoading = false;
-                state.error = action.error.message || 'Не вдалось забронювати бажання.';
+                state.error = action.error.message || t('alerts.wishes.slice.book-wish.error');
             })
             .addCase(bookWish.fulfilled, (state, action) => {
                 // Змінити бажання та покласти його там де було
@@ -152,7 +153,7 @@ const wishesSlice = createSlice({
             .addCase(cancelBookWish.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isLocalLoading = false;
-                state.error = action.error.message || 'Не вдалось скасувати бронювання бажання.';
+                state.error = action.error.message || t('alerts.wishes.slice.cancel-book-wish.error');
             })
             .addCase(cancelBookWish.fulfilled, (state, action) => {
                 // Змінити бажання та покласти його там де було
@@ -177,7 +178,7 @@ const wishesSlice = createSlice({
             .addCase(deleteWish.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isLocalLoading = false;
-                state.error = action.error.message || 'Не вдалось видалити бажання.';
+                state.error = action.error.message || t('alerts.wishes.slice.delete-wish.error');
             })
             .addCase(deleteWish.fulfilled, (state, action) => {
                 const deletedWishId = action.payload;
@@ -197,7 +198,7 @@ const wishesSlice = createSlice({
                 state.list = [];
                 state.isLoading = false;
                 state.isLocalLoading = false;
-                state.error = action.error.message || 'Не вдалось отримати всі бажання.';
+                state.error = action.error.message || t('alerts.wishes.slice.get-wish-list.error');
             })
             .addCase(getWishList.fulfilled, (state, action) => {
                 state.list = action.payload;

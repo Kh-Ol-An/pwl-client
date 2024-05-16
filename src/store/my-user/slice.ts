@@ -205,7 +205,7 @@ const myUserSlice = createSlice({
             })
             .addCase(doneWish.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось позначити бажання виконаним.';
+                state.error = action.error.message || t('alerts.wishes.slice.done-wish.error');
             })
             .addCase(doneWish.fulfilled, (state, action) => {
                 const { executorUser } = action.payload;
@@ -223,7 +223,7 @@ const myUserSlice = createSlice({
             })
             .addCase(undoneWish.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось позначити бажання не виконаним.';
+                state.error = action.error.message || t('alerts.wishes.slice.undone-wish.error');
             })
             .addCase(undoneWish.fulfilled, (state, action) => {
                 const { executorUser } = action.payload;

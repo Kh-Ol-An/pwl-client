@@ -135,33 +135,61 @@
                 "error": "getUsers: Failed to get users."
             }
         },
-        "wishes-api": {
-            "create-wish": {
-                "error": "createWish: Failed to create a wish."
+        "wishes": {
+            "api": {
+                "create-wish": {
+                    "error": "api.createWish: Failed to create a wish."
+                },
+                "update-wish": {
+                    "error": "api.updateWish: Failed to update the wish."
+                },
+                "get-wish": {
+                    "error": "api.getWish: Failed to get the wish."
+                },
+                "done-wish": {
+                    "error": "api.doneWish: Failed to mark the wish as done."
+                },
+                "undone-wish": {
+                    "error": "api.undoneWish: Failed to mark the wish as not done."
+                },
+                "book-wish": {
+                    "error": "api.bookWish: Failed to book the wish."
+                },
+                "cancel-book-wish": {
+                    "error": "api.cancelBookWish: Failed to cancel the booking of the wish."
+                },
+                "delete-wish": {
+                    "error": "api.deleteWish: Failed to delete the wish with ID {{wishId}}."
+                },
+                "get-wish-list": {
+                    "error": "api.getWishList: Failed to get wish list."
+                }
             },
-            "update-wish": {
-                "error": "updateWish: Failed to update the wish."
-            },
-            "delete-wish": {
-                "error": "deleteWish: Failed to delete the wish with ID {{wishId}}."
-            },
-            "get-wish-list": {
-                "error": "getWishList: Failed to get wish list."
-            },
-            "get-wish": {
-                "error": "getWish: Failed to get the wish."
-            },
-            "book-wish": {
-                "error": "bookWish: Failed to book the wish."
-            },
-            "cancel-book-wish": {
-                "error": "cancelBookWish: Failed to cancel the booking of the wish."
-            },
-            "done-wish": {
-                "error": "doneWish: Failed to mark the wish as done."
-            },
-            "undone-wish": {
-                "error": "undoneWish: Failed to mark the wish as not done."
+            "slice": {
+                "create-wish": {
+                    "error": "slice.createWish: Failed to create a wish."
+                },
+                "update-wish": {
+                    "error": "slice.updateWish: Failed to update the wish."
+                },
+                "done-wish": {
+                    "error": "slice.doneWish: Failed to mark the wish as done."
+                },
+                "undone-wish": {
+                    "error": "slice.undoneWish: Failed to mark the wish as not done."
+                },
+                "book-wish": {
+                    "error": "slice.bookWish: Failed to book the wish."
+                },
+                "cancel-book-wish": {
+                    "error": "slice.cancelBookWish: Failed to cancel the booking of the wish."
+                },
+                "delete-wish": {
+                    "error": "slice.deleteWish: Failed to delete the wish."
+                },
+                "get-wish-list": {
+                    "error": "slice.getWishList: Failed to get wish list."
+                }
             }
         },
         "interceptors-api": {
