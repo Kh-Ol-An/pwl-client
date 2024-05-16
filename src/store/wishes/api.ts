@@ -3,14 +3,14 @@ import { t } from 'i18next';
 import { toast } from 'react-toastify';
 import api from '@/utils/api';
 import {
-    IBookWish,
-    IActionWish,
     ICreateWish,
-    ISendWishList,
     IUpdateWish,
-    IGetWish,
     ISendWish,
-    IDoneWish
+    IGetWish,
+    IDoneWish,
+    IActionWish,
+    IBookWish,
+    ISendWishList
 } from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
 import { TCurrentImage, IWish } from '@/models/IWish';
@@ -84,6 +84,51 @@ const updateWish = async ({ id, userId, material, show, name, price, currency, a
     }
 };
 
+const getWish = async (params: ISendWish): Promise<AxiosResponse<IGetWish>> => {
+    try {
+        return await api.get('/wish', { params });
+    } catch (error: any) {
+        toast(error.response?.data?.message || t('alerts.wishes-api.get-wish.error'), { type: 'error' });
+        throw error;
+    }
+};
+
+const doneWish = async (data: IDoneWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
+    try {
+        return await api.post('/wish/done', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || t('alerts.wishes-api.done-wish.error'), { type: 'error' });
+        throw error;
+    }
+};
+
+const undoneWish = async (data: IActionWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
+    try {
+        return await api.post('/wish/undone', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || t('alerts.wishes-api.undone-wish.error'), { type: 'error' });
+        throw error;
+    }
+};
+
+const bookWish = async (data: IBookWish): Promise<AxiosResponse<IWish>> => {
+    try {
+        return await api.post('/wish/book', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || t('alerts.wishes-api.book-wish.error'), { type: 'error' });
+        throw error;
+    }
+};
+
+const cancelBookWish = async (data: IActionWish): Promise<AxiosResponse<IWish>> => {
+    try {
+        return await api.post('/wish/cancel-book', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || t('alerts.wishes-api.cancel-book-wish.error'), { type: 'error' });
+        throw error;
+    }
+};
+
 const deleteWish = async (userId: IUser['id'], wishId: IWish['id']): Promise<AxiosResponse<IWish['id']>> => {
     try {
         return await api.delete(
@@ -116,61 +161,16 @@ const getWishList = async (params: ISendWishList): Promise<AxiosResponse<IWish[]
     }
 };
 
-const getWish = async (params: ISendWish): Promise<AxiosResponse<IGetWish>> => {
-    try {
-        return await api.get('/wish', { params });
-    } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.wishes-api.get-wish.error'), { type: 'error' });
-        throw error;
-    }
-};
-
-const bookWish = async (data: IBookWish): Promise<AxiosResponse<IWish>> => {
-    try {
-        return await api.post('/wish/book', data);
-    } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.wishes-api.book-wish.error'), { type: 'error' });
-        throw error;
-    }
-};
-
-const cancelBookWish = async (data: IActionWish): Promise<AxiosResponse<IWish>> => {
-    try {
-        return await api.post('/wish/cancel-book', data);
-    } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.wishes-api.cancel-book-wish.error'), { type: 'error' });
-        throw error;
-    }
-};
-
-const doneWish = async (data: IDoneWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
-    try {
-        return await api.post('/wish/done', data);
-    } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.wishes-api.done-wish.error'), { type: 'error' });
-        throw error;
-    }
-};
-
-const undoneWish = async (data: IActionWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
-    try {
-        return await api.post('/wish/undone', data);
-    } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.wishes-api.undone-wish.error'), { type: 'error' });
-        throw error;
-    }
-};
-
 const wishApi = {
     createWish,
     updateWish,
-    deleteWish,
-    getWishList,
     getWish,
-    bookWish,
-    cancelBookWish,
     doneWish,
     undoneWish,
+    bookWish,
+    cancelBookWish,
+    deleteWish,
+    getWishList,
 };
 
 export default wishApi;
