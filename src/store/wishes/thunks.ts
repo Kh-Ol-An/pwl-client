@@ -8,6 +8,7 @@ import {
     IUpdateWish,
     IGetWish,
     ISendWish,
+    IDoneWish,
 } from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
 import { IWish } from '@/models/IWish';
@@ -75,7 +76,7 @@ export const cancelBookWish = createAsyncThunk<IWish, IActionWish>(
     },
 );
 
-export const doneWish = createAsyncThunk<{ executorUser: IUser, bookedWish: IWish }, IActionWish>(
+export const doneWish = createAsyncThunk<{ executorUser: IUser, bookedWish: IWish }, IDoneWish>(
     'wishes/doneWish',
     async (data) => {
         const result = await api.doneWish(data);

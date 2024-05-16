@@ -6,6 +6,7 @@ import ConfirmModal from '@/layouts/ConfirmModal';
 import Button from '@/components/Button';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
+import { unencryptedData } from '@/utils/encryption-data';
 
 interface IProps {
     wish: IWish;
@@ -45,7 +46,7 @@ const CancelBookWish: FC<IProps> = ({ wish, userId, close }) => {
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    {t('main.cancel-intention', { name: wish.name})}
+                    {t('main.cancel-intention', { name: unencryptedData(wish.name, wish.show) })}
                 </p>
             </ConfirmModal>
         </>

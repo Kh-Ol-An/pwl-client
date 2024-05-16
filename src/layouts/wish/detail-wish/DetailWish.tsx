@@ -99,6 +99,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                         <DoneWish
                                             wish={wish}
                                             userId={myUser?.id}
+                                            whoseWish="my"
                                             actionText={t('main.wish-fulfilled')}
                                             close={close}
                                         />
@@ -114,12 +115,17 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
 
                                     {/* Done */}
                                     {showDoneWish && (
-                                        <DoneWish wish={wish} userId={myUser?.id} close={close} />
+                                        <DoneWish wish={wish} userId={myUser?.id} whoseWish="someone" close={close} />
                                     )}
 
                                     {/* Booking Expired */}
                                     {showBookingExpired(wish, myUser?.id) && (
-                                        <BookingExpired wish={wish} userId={myUser?.id} close={close} />
+                                        <BookingExpired
+                                            wish={wish}
+                                            userId={myUser?.id}
+                                            whoseWish={myUser?.id === wish.booking?.userId ? 'my' : 'someone'}
+                                            close={close}
+                                        />
                                     )}
 
                                     {/* Edit Wish */}

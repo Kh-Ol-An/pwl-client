@@ -2,19 +2,22 @@ import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@/store/hook';
 import { doneWish } from '@/store/wishes/thunks';
+import { IDoneWish } from '@/store/wishes/types';
 import ConfirmModal from '@/layouts/ConfirmModal';
 import Button from '@/components/Button';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
+import { unencryptedData } from '@/utils/encryption-data';
 
 interface IProps {
     wish: IWish;
     userId?: IUser['id'];
+    whoseWish: IDoneWish['whoseWish'];
     actionText?: string;
     close: () => void;
 }
 
-const DoneWish: FC<IProps> = ({ wish, userId, actionText, close }) => {
+const DoneWish: FC<IProps> = ({ wish, userId, whoseWish, actionText, close }) => {
     const { t } = useTranslation();
 
     const dispatch = useAppDispatch();
@@ -24,7 +27,7 @@ const DoneWish: FC<IProps> = ({ wish, userId, actionText, close }) => {
     const handleSubmit = async () => {
         if (!userId) return;
 
-        await dispatch(doneWish({ userId, wishId: wish.id }));
+        await dispatch(doneWish({ userId, wishId: wish.id, whoseWish }));
         close();
     };
 
@@ -47,7 +50,7 @@ const DoneWish: FC<IProps> = ({ wish, userId, actionText, close }) => {
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    {t('main.sure-fulfilled', { name: wish.name })}
+                    {t('main.sure-fulfilled', { name: unencryptedData(wish.name, wish.show) })}
                 </p>
             </ConfirmModal>
         </>

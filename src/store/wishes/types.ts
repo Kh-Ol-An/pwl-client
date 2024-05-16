@@ -38,6 +38,10 @@ export interface IActionWish {
     wishId: IWish['id'];
 }
 
+export interface IDoneWish extends IActionWish{
+    whoseWish: 'my' | 'someone';
+}
+
 export interface IBookWish extends IActionWish {
     end: string;
 }

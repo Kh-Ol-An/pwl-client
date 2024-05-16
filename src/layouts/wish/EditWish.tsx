@@ -124,7 +124,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             currency: material ? sendingCurrency : undefined,
             address: dataAddress.length > 0 ? sendingAddress : undefined,
             description: data.description.trim().length > 0 ? sendingDescription : undefined,
-            images: show === 'all' ? encryptedImages : images,
+            images: show === 'all' ? images : encryptedImages,
         };
         if (idOfSelectedWish) {
             await dispatch(updateWish({

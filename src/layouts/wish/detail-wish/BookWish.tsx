@@ -13,6 +13,7 @@ import ConfirmModal from '@/layouts/ConfirmModal';
 import Button from '@/components/Button';
 import { IWish } from '@/models/IWish';
 import StylesVariables from '@/styles/utils/variables.module.scss';
+import { unencryptedData } from '@/utils/encryption-data';
 
 interface IProps {
     wish: IWish;
@@ -105,7 +106,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    {t('main.i-intend', { name: wish.name })}
+                    {t('main.i-intend', { name: unencryptedData(wish.name, wish.show) })}
                 </p>
 
                 <div

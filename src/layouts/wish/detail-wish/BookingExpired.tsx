@@ -2,18 +2,21 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@/store/hook';
 import { undoneWish, doneWish } from '@/store/wishes/thunks';
+import { IDoneWish } from '@/store/wishes/types';
 import CustomModal from '@/components/CustomModal';
 import Button from '@/components/Button';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
+import { unencryptedData } from '@/utils/encryption-data';
 
 interface IProps {
     wish: IWish;
     userId?: IUser['id'];
+    whoseWish: IDoneWish['whoseWish'];
     close: () => void;
 }
 
-const BookingExpired: FC<IProps> = ({ wish, userId, close }) => {
+const BookingExpired: FC<IProps> = ({ wish, userId, whoseWish, close }) => {
     const { t } = useTranslation();
 
     const dispatch = useAppDispatch();
@@ -30,7 +33,7 @@ const BookingExpired: FC<IProps> = ({ wish, userId, close }) => {
     const handleDone = async () => {
         if (!userId) return;
 
-        await dispatch(doneWish({ userId, wishId: wish.id }));
+        await dispatch(doneWish({ userId, wishId: wish.id, whoseWish }));
         close();
     };
 
@@ -49,7 +52,7 @@ const BookingExpired: FC<IProps> = ({ wish, userId, close }) => {
                 <h3 className="title attention">{t('confirm-modal.title')}</h3>
 
                 <p className="text-lg">
-                    {t('main.period-expired', { name: wish.name })}
+                    {t('main.period-expired', { name: unencryptedData(wish.name, wish.show) })}
                     <br />
                     <br />
                     {t('main.is_your_wish')}

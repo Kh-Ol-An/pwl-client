@@ -9,7 +9,8 @@ import {
     ISendWishList,
     IUpdateWish,
     IGetWish,
-    ISendWish
+    ISendWish,
+    IDoneWish
 } from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
 import { TCurrentImage, IWish } from '@/models/IWish';
@@ -142,7 +143,7 @@ const cancelBookWish = async (data: IActionWish): Promise<AxiosResponse<IWish>> 
     }
 };
 
-const doneWish = async (data: IActionWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
+const doneWish = async (data: IDoneWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
     try {
         return await api.post('/wish/done', data);
     } catch (error: any) {

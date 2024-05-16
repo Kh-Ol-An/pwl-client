@@ -48,7 +48,7 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
                                 {wish.images.length > 0 && (
                                     <div className="wish-item-img">
                                         <img
-                                            src={unencryptedData(wish.images[0].path, wish.show, wish)}
+                                            src={unencryptedData(wish.images[0].path, wish.show)}
                                             alt={`wish-${wish.images[0].position}`}
                                         />
                                     </div>
