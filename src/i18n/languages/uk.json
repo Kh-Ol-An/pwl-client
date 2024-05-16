@@ -45,89 +45,51 @@
                 "console-error": "Clipboard error: "
             }
         },
-        "my-user": {
-            "api": {
-                "registration": {
-                    "error": "api.registration: Не вдалось зареєструватись."
-                },
-                "send-activation-link": {
-                    "error": "api.sendActivationLink: Не вдалось надіслати посилання активації."
-                },
-                "google-authorization": {
-                    "error": "api.googleAuthorization: Не вдалось увійти за допомогою Google."
-                },
-                "login": {
-                    "error": "api.login: Не вдалось увійти на сайт."
-                },
-                "logout": {
-                    "error": "api.logout: Не вдалось вийти з аккаунту."
-                },
-                "refresh": {
-                    "error": "api.refresh: Не вдалось оновити сесію."
-                },
-                "forgot-password": {
-                    "success": "Лист з інструкцією для зміни пароля успішно відправлено на пошту: {{email}}. Будь ласка, увійдіть за допомогою нового паролю.",
-                    "error": "api.forgotPassword: Не вдалось відправити лист з інструкцією для зміни пароля на пошту: {{email}}."
-                },
-                "change-forgotten-password": {
-                    "success": "Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.",
-                    "error": "api.changeForgottenPassword: Не вдалось змінити пароль."
-                },
-                "change-password": {
-                    "success": "Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.",
-                    "error": "api.changePassword: Не вдалось змінити пароль."
-                },
-                "change-lang": {
-                    "error": "api.changeLang: Не вдалось змінити мову."
-                },
-                "update-my-user": {
-                    "error": "api.updateMyUser: Не вдалось оновити користувача."
-                },
-                "add-friend": {
-                    "error": "api.addFriend: Не вдалось додати друга."
-                },
-                "remove-friend": {
-                    "error": "api.removeFriend: Не вдалось видалити друга."
-                },
-                "delete-my-user": {
-                    "error": "api.deleteMyUser: Не вдалося видалити користувача з ідентифікатором {{userId}}."
-                }
+        "my-user-api": {
+            "registration": {
+                "error": "{{type}}.registration: Не вдалось зареєструватись."
             },
-            "slice": {
-                "registration": {
-                    "error": "slice.registration: Не вдалось зареєструватись."
-                },
-                "google-authorization": {
-                    "error": "slice.googleAuthorization: Не вдалось увійти за допомогою Google."
-                },
-                "login": {
-                    "error": "slice.login: Не вдалось увійти на сайт."
-                },
-                "logout": {
-                    "error": "slice.logout: Не вдалось вийти з аккаунту."
-                },
-                "refresh": {
-                    "error": "slice.refresh: Не вдалось оновити сесію."
-                },
-                "change-password": {
-                    "success": "Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.",
-                    "error": "slice.changePassword: Не вдалось змінити пароль."
-                },
-                "change-lang": {
-                    "error": "slice.changeLang: Не вдалось змінити мову."
-                },
-                "update-my-user": {
-                    "error": "slice.updateMyUser: Не вдалось оновити користувача."
-                },
-                "add-friend": {
-                    "error": "slice.addFriend: Не вдалось додати друга."
-                },
-                "remove-friend": {
-                    "error": "slice.removeFriend: Не вдалось видалити друга."
-                },
-                "delete-my-user": {
-                    "error": "slice.deleteMyUser: Не вдалося видалити користувача з ідентифікатором {{userId}}."
-                }
+            "send-activation-link": {
+                "error": "{{type}}.sendActivationLink: Не вдалось надіслати посилання активації."
+            },
+            "google-authorization": {
+                "error": "{{type}}.googleAuthorization: Не вдалось увійти за допомогою Google."
+            },
+            "login": {
+                "error": "{{type}}.login: Не вдалось увійти на сайт."
+            },
+            "logout": {
+                "error": "{{type}}.logout: Не вдалось вийти з аккаунту."
+            },
+            "refresh": {
+                "error": "{{type}}.refresh: Не вдалось оновити сесію."
+            },
+            "forgot-password": {
+                "success": "Лист з інструкцією для зміни пароля успішно відправлено на пошту: {{email}}. Будь ласка, увійдіть за допомогою нового паролю.",
+                "error": "{{type}}.forgotPassword: Не вдалось відправити лист з інструкцією для зміни пароля на пошту: {{email}}."
+            },
+            "change-forgotten-password": {
+                "success": "Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.",
+                "error": "{{type}}.changeForgottenPassword: Не вдалось змінити пароль."
+            },
+            "change-password": {
+                "success": "Пароль успішно змінено. Будь ласка, увійдіть за допомогою нового паролю.",
+                "error": "{{type}}.changePassword: Не вдалось змінити пароль."
+            },
+            "change-lang": {
+                "error": "{{type}}.changeLang: Не вдалось змінити мову."
+            },
+            "update-my-user": {
+                "error": "{{type}}.updateMyUser: Не вдалось оновити користувача."
+            },
+            "add-friend": {
+                "error": "{{type}}.addFriend: Не вдалось додати друга."
+            },
+            "remove-friend": {
+                "error": "{{type}}.removeFriend: Не вдалось видалити друга."
+            },
+            "delete-my-user": {
+                "error": "{{type}}.deleteMyUser: Не вдалося видалити користувача."
             }
         },
         "users-api": {

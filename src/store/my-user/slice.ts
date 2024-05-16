@@ -47,7 +47,7 @@ const myUserSlice = createSlice({
             .addCase(registration.rejected, (state, action) => {
                 state.user = null;
                 state.isLoading = false;
-                state.error = action.error.message || t('alerts.my-user.slice.registration.error');
+                state.error = action.error.message || t('alerts.my-user-api.registration.error', { type: 'slice' });
             })
             .addCase(registration.fulfilled, (state, action) => {
                 state.user = action.payload.user;
@@ -63,7 +63,7 @@ const myUserSlice = createSlice({
             .addCase(googleAuthorization.rejected, (state, action) => {
                 state.user = null;
                 state.isLoading = false;
-                state.error = action.error.message || t('alerts.my-user.slice.google-authorization.error');
+                state.error = action.error.message || t('alerts.my-user-api.google-authorization.error', { type: 'slice' });
             })
             .addCase(googleAuthorization.fulfilled, (state, action) => {
                 state.user = action.payload.user;
@@ -79,7 +79,7 @@ const myUserSlice = createSlice({
             .addCase(login.rejected, (state, action) => {
                 state.user = null;
                 state.isLoading = false;
-                state.error = action.error.message || t('alerts.my-user.slice.login.error');
+                state.error = action.error.message || t('alerts.my-user-api.login.error', { type: 'slice' });
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.user = action.payload.user;
@@ -93,7 +93,7 @@ const myUserSlice = createSlice({
             })
             .addCase(logout.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || t('alerts.my-user.slice.logout.error');
+                state.error = action.error.message || t('alerts.my-user-api.logout.error', { type: 'slice' });
             })
             .addCase(logout.fulfilled, (state) => {
                 state.user = null;
@@ -109,7 +109,7 @@ const myUserSlice = createSlice({
             .addCase(checkAuth.rejected, (state, action) => {
                 state.user = null;
                 state.isLoading = false;
-                state.error = action.error.message || t('alerts.my-user.slice.refresh.error');
+                state.error = action.error.message || t('alerts.my-user-api.refresh.error', { type: 'slice' });
             })
             .addCase(checkAuth.fulfilled, (state, action) => {
                 state.user = action.payload.user;
@@ -123,7 +123,7 @@ const myUserSlice = createSlice({
             })
             .addCase(changePassword.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || t('alerts.my-user.slice.change-password.error');
+                state.error = action.error.message || t('alerts.my-user-api.change-password.error', { type: 'slice' });
             })
             .addCase(changePassword.fulfilled, (state) => {
                 state.user = null;
@@ -137,7 +137,7 @@ const myUserSlice = createSlice({
             })
             .addCase(changeLang.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || t('alerts.my-user.slice.change-lang.error');
+                state.error = action.error.message || t('alerts.my-user-api.change-lang.error', { type: 'slice' });
             })
             .addCase(changeLang.fulfilled, (state, action) => {
                 state.user = action.payload;
@@ -151,7 +151,7 @@ const myUserSlice = createSlice({
             })
             .addCase(updateMyUser.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || t('alerts.my-user.slice.update-my-user.error');
+                state.error = action.error.message || t('alerts.my-user-api.update-my-user.error', { type: 'slice' });
             })
             .addCase(updateMyUser.fulfilled, (state, action) => {
                 state.user = action.payload;
@@ -163,7 +163,7 @@ const myUserSlice = createSlice({
                 state.error = null;
             })
             .addCase(addFriend.rejected, (state, action) => {
-                state.error = action.error.message || t('alerts.my-user.slice.add-friend.error');
+                state.error = action.error.message || t('alerts.my-user-api.add-friend.error', { type: 'slice' });
             })
             .addCase(addFriend.fulfilled, (state, action) => {
                 state.user = action.payload;
@@ -174,7 +174,7 @@ const myUserSlice = createSlice({
                 state.error = null;
             })
             .addCase(removeFriend.rejected, (state, action) => {
-                state.error = action.error.message || t('alerts.my-user.slice.remove-friend.error');
+                state.error = action.error.message || t('alerts.my-user-api.remove-friend.error', { type: 'slice' });
             })
             .addCase(removeFriend.fulfilled, (state, action) => {
                 state.user = action.payload;
@@ -187,14 +187,14 @@ const myUserSlice = createSlice({
             })
             .addCase(deleteMyUser.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось видалити користувача.';
+                state.error = action.error.message || t('alerts.my-user-api.delete-my-user.error', { type: 'slice' });
             })
             .addCase(deleteMyUser.fulfilled, (state, action) => {
                 if (state.user?.id === action.payload) {
                     state.user = null;
                     state.error = null;
                 } else {
-                    state.error = t('alerts.my-user.api.delete-my-user.error', { userId: action.payload });
+                    state.error = t('alerts.my-user-api.delete-my-user.error', { type: 'slice' });
                 }
                 state.isLoading = false;
             })
