@@ -87,6 +87,7 @@ const logout = async (): Promise<void> => {
     try {
         await api.post('/logout');
         localStorage.removeItem('token');
+        localStorage.removeItem('selectedUserId');
     } catch (error: any) {
         toast(
             error.response?.data?.message || t('alerts.my-user-api.logout.error', { type: 'api' }),
@@ -111,6 +112,7 @@ const refresh = async (): Promise<AxiosResponse<IAuth>> => {
     } catch (error: any) {
         console.log('my-user refresh error: ', error.response?.data?.message || t('alerts.my-user-api.refresh.error', { type: 'api' }));
         localStorage.removeItem('token');
+        localStorage.removeItem('selectedUserId');
         throw error;
     }
 };
@@ -257,6 +259,7 @@ const deleteMyUser = async (data: IDeleteMyUser): Promise<AxiosResponse<IUser['i
         const encryptedPassword = encryptedData(data.password, process.env.REACT_APP_CRYPTO_JS_SECRET);
         const response = await api.post('/user/delete', { ...data, password: encryptedPassword });
         localStorage.removeItem('token');
+        localStorage.removeItem('selectedUserId');
         return response;
     } catch (error: any) {
         toast(
