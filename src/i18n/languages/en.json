@@ -94,7 +94,7 @@
         },
         "users-api": {
             "get-users": {
-                "error": "getUsers: Failed to get users."
+                "error": "{{type}}: Failed to get users."
             }
         },
         "wishes-api": {

@@ -8,7 +8,7 @@ const getUsers = async (params: ISendUsersParams): Promise<AxiosResponse<IGetUse
     try {
         return await api.get('/users', { params });
     } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.users-api.get-users.error'), { type: 'error' })
+        toast(error.response?.data?.message || t('alerts.users-api.get-users.error', { type: 'api.getUsers' }), { type: 'error' })
         throw error;
     }
 }

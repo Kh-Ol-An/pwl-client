@@ -78,7 +78,7 @@ const wishesSlice = createSlice({
             .addCase(doneWish.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isLocalLoading = false;
-                state.error = action.error.message || t('alerts.wishes-api.done-wish.error', { type: 'slice' });
+                state.error = action.error.message || t('alerts.wishes-api.done-wish.error', { type: 'wishes.slice' });
             })
             .addCase(doneWish.fulfilled, (state, action) => {
                 // Змінити бажання та покласти його там де було
@@ -103,7 +103,7 @@ const wishesSlice = createSlice({
             .addCase(undoneWish.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isLocalLoading = false;
-                state.error = action.error.message || t('alerts.wishes-api.undone-wish.error', { type: 'slice' });
+                state.error = action.error.message || t('alerts.wishes-api.undone-wish.error', { type: 'wishes.slice' });
             })
             .addCase(undoneWish.fulfilled, (state, action) => {
                 // Змінити бажання та покласти його там де було

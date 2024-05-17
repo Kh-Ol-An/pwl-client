@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { t } from 'i18next';
 import { getUsers, addUsers } from '@/store/users/thunks';
 import { doneWish, undoneWish } from '@/store/wishes/thunks';
 import { IUser } from '@/models/IUser';
@@ -37,7 +38,7 @@ const usersSlice = createSlice({
             .addCase(getUsers.rejected, (state, action) => {
                 state.isLoading = false;
                 state.stopRequests = false;
-                state.error = action.error.message || 'Не вдалось отримати всіх юзерів.';
+                state.error = action.error.message || t('alerts.users-api.get-users.error', { type: 'slice.getUsers' });
             })
             .addCase(getUsers.fulfilled, (state, action) => {
                 state.list = action.payload.users;
@@ -56,7 +57,7 @@ const usersSlice = createSlice({
             .addCase(addUsers.rejected, (state, action) => {
                 state.isLoading = false;
                 state.stopRequests = false;
-                state.error = action.error.message || 'Не вдалось отримати всіх юзерів.';
+                state.error = action.error.message || t('alerts.users-api.get-users.error', { type: 'slice.addUsers' });
             })
             .addCase(addUsers.fulfilled, (state, action) => {
                 state.list.push(...action.payload.users);
@@ -73,7 +74,7 @@ const usersSlice = createSlice({
             })
             .addCase(doneWish.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось позначити бажання виконаним.';
+                state.error = action.error.message || t('alerts.wishes-api.done-wish.error', { type: 'users.slice' });
             })
             .addCase(doneWish.fulfilled, (state, action) => {
                 // Змінити користувача та покласти його там де був
@@ -94,7 +95,7 @@ const usersSlice = createSlice({
             })
             .addCase(undoneWish.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || 'Не вдалось позначити бажання не виконаним.';
+                state.error = action.error.message || t('alerts.wishes-api.undone-wish.error', { type: 'users.slice' });
             })
             .addCase(undoneWish.fulfilled, (state, action) => {
                 // Змінити користувача та покласти його там де був
