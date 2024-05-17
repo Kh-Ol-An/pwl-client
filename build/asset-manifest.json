@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.73269e11.css",
-    "main.js": "/static/js/main.80ef883e.js",
+    "main.js": "/static/js/main.8c236198.js",
     "static/media/activation-account-mobile.jpg": "/static/media/activation-account-mobile.126a9e231ecfbe89012c.jpg",
     "static/media/sing-up-mobile.jpg": "/static/media/sing-up-mobile.ef033250fcdfd02ffa1e.jpg",
     "static/media/login-with-google-mobile.jpg": "/static/media/login-with-google-mobile.3b481c86dc8330251e9a.jpg",
@@ -24,10 +24,10 @@
     "static/media/poppins-v20-latin-700.woff2": "/static/media/poppins-v20-latin-700.d86662fe776dae29ea78.woff2",
     "index.html": "/index.html",
     "main.73269e11.css.map": "/static/css/main.73269e11.css.map",
-    "main.80ef883e.js.map": "/static/js/main.80ef883e.js.map"
+    "main.8c236198.js.map": "/static/js/main.8c236198.js.map"
   },
   "entrypoints": [
     "static/css/main.73269e11.css",
-    "static/js/main.80ef883e.js"
+    "static/js/main.8c236198.js"
   ]
 }
