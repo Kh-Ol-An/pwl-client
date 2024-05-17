@@ -2,6 +2,7 @@ import { TCurrentAvatar, IUser } from '@/models/IUser';
 
 export interface IForgotPassword {
     email: IUser['email'];
+    lang: IUser['lang'];
 }
 
 export interface IChangeForgottenPassword {
@@ -9,12 +10,13 @@ export interface IChangeForgottenPassword {
     newPassword: string;
 }
 
-export interface ILogin extends IForgotPassword {
+export interface ILogin {
+    email: IUser['email'];
     password: string;
     lang: IUser['lang'];
 }
 
-export interface IGoogleAuth extends IForgotPassword {
+export interface IGoogleAuth {
     email: IUser['email'];
     lang: IUser['lang'];
     isActivated: IUser['isActivated'];

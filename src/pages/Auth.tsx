@@ -94,7 +94,7 @@ const Auth: FC = () => {
         setClickedOnSubmit(true);
 
         if (isForgotPassword) {
-            return dispatch(forgotPassword({ email: data.email.trim() }));
+            return dispatch(forgotPassword({ email: data.email.trim(), lang }));
         }
 
         if (isRegistration) {
