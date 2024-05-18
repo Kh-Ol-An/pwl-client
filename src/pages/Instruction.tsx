@@ -51,18 +51,18 @@ const Instruction: FC = () => {
                 <h1>{t('instruction.title')}</h1>
 
                 <div>
-                    <CustomAccordion
-                        ariaControls="app-content"
-                        titleId="app-header"
-                        title={t('instruction.app.title')}
-                        contentId="app-content"
-                    >
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At deserunt eos omnis quod sequi,
-                            similique vel. Delectus earum eius error est impedit labore non odit possimus quis,
-                            reprehenderit saepe veniam.
-                        </p>
-                    </CustomAccordion>
+                    {/*<CustomAccordion*/}
+                    {/*    ariaControls="app-content"*/}
+                    {/*    titleId="app-header"*/}
+                    {/*    title={t('instruction.app.title')}*/}
+                    {/*    contentId="app-content"*/}
+                    {/*>*/}
+                    {/*    <p>*/}
+                    {/*        Lorem ipsum dolor sit amet, consectetur adipisicing elit. At deserunt eos omnis quod sequi,*/}
+                    {/*        similique vel. Delectus earum eius error est impedit labore non odit possimus quis,*/}
+                    {/*        reprehenderit saepe veniam.*/}
+                    {/*    </p>*/}
+                    {/*</CustomAccordion>*/}
 
                     <CustomAccordion
                         ariaControls="auth-content"
