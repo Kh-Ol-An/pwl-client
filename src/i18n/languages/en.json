@@ -355,6 +355,9 @@
     },
     "instruction": {
         "title": "Instruction",
+        "app": {
+            "title": "How add app icon to desktop"
+        },
         "auth": {
             "title": "Sing up/Sing in",
             "intro": "There are several ways to log in or register:",
