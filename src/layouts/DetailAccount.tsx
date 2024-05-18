@@ -14,9 +14,9 @@ const DetailAccount: FC<IProps> = ({ user }) => {
 
     const myUser = useAppSelector((state) => state.myUser.user);
 
-    let language = 'en';
-    i18next.language.includes('en') && (language = 'en');
-    i18next.language.includes('uk') && (language = 'uk');
+    let lang = 'en';
+    i18next.language.includes('en') && (lang = 'en');
+    i18next.language.includes('uk') && (lang = 'uk');
 
     let dateFormat = 'MMMM Do';
     i18next.language.includes('en') && (dateFormat = 'MMMM Do');
@@ -48,7 +48,7 @@ const DetailAccount: FC<IProps> = ({ user }) => {
                     <div className="detail-account-field">
                         <div className="detail-account-label">{t('main.birthday')}</div>
                         <div className="detail-account-value">
-                            {dayjs(user.birthday).locale(language).format(dateFormat)}
+                            {dayjs(user.birthday).locale(lang).format(dateFormat)}
                         </div>
                     </div>
                 )}

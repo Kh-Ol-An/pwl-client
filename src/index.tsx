@@ -16,13 +16,13 @@ import App from '@/App';
 import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/index.scss';
 
-let language = 'en';
-i18next.language.includes('en') && (language = 'en');
-i18next.language.includes('uk') && (language = 'uk');
+let lang = 'en';
+i18next.language.includes('en') && (lang = 'en');
+i18next.language.includes('uk') && (lang = 'uk');
 
 dayjs.extend(updateLocale)
 dayjs.extend(advancedFormat)
-dayjs.updateLocale(language, {
+dayjs.updateLocale(lang, {
     weekStart: i18next.language.includes('uk') && 1,
 })
 
@@ -32,7 +32,7 @@ const root = ReactDOM.createRoot(
 root.render(
     <Provider store={store}>
         <BrowserRouter>
-            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={language}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={lang}>
                 <GoogleOAuthProvider
                     clientId={
                         process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID ? process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID : ''

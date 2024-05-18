@@ -50,9 +50,9 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
     const showAddFriend = myUser?.followFrom.includes(user.id)
         || (!myUser?.friends.includes(user.id) && !myUser?.followTo.includes(user.id));
 
-    let language = 'en';
-    i18next.language.includes('en') && (language = 'en');
-    i18next.language.includes('uk') && (language = 'uk');
+    let lang = 'en';
+    i18next.language.includes('en') && (lang = 'en');
+    i18next.language.includes('uk') && (lang = 'uk');
 
     let dateFormat = 'MMMM Do';
     i18next.language.includes('en') && (dateFormat = 'MMMM Do');
@@ -178,7 +178,7 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                         <span className="params">
                             {
                                 user.birthday
-                                    ? t('main.bd', { birthday: dayjs(user.birthday).locale(language).format(dateFormat) })
+                                    ? t('main.bd', { birthday: dayjs(user.birthday).locale(lang).format(dateFormat) })
                                     : user.email
                             }
                         </span>

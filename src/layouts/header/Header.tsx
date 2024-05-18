@@ -50,9 +50,9 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     const [showLanguage, setShowLanguage] = useState<boolean>(false);
     const [showConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
 
-    let language = 'en';
-    i18next.language.includes('en') && (language = 'en');
-    i18next.language.includes('uk') && (language = 'uk');
+    let lang = 'en';
+    i18next.language.includes('en') && (lang = 'en');
+    i18next.language.includes('uk') && (lang = 'uk');
 
     let dateFormat = 'MMMM Do';
     i18next.language.includes('en') && (dateFormat = 'MMMM Do');
@@ -156,7 +156,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             <span className="params">
                                 {
                                     myUser?.birthday
-                                        ? t('main.bd', { birthday: dayjs(myUser?.birthday).locale(language).format(dateFormat) })
+                                        ? t('main.bd', { birthday: dayjs(myUser?.birthday).locale(lang).format(dateFormat) })
                                         : myUser?.email
                                 }
                             </span>

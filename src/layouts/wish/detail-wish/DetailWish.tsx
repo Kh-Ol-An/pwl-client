@@ -27,9 +27,9 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
 
     const myUser = useAppSelector((state) => state.myUser.user);
 
-    let language = 'en';
-    i18next.language.includes('en') && (language = 'en');
-    i18next.language.includes('uk') && (language = 'uk');
+    let lang = 'en';
+    i18next.language.includes('en') && (lang = 'en');
+    i18next.language.includes('uk') && (lang = 'uk');
 
     let dateFormat = 'MMMM DD, YYYY';
     i18next.language.includes('en') && (dateFormat = 'MMMM DD, YYYY');
@@ -83,7 +83,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                                     <span>
                                                         {
                                                             dayjs(wish.booking?.end)
-                                                                .locale(language)
+                                                                .locale(lang)
                                                                 .format(dateFormat)
                                                         }
                                                     </span>
