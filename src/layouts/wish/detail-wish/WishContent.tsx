@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { addingWhiteSpaces } from '@/utils/formating-value';
 import { unencryptedData } from '@/utils/encryption-data';
@@ -44,8 +44,6 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
     myUserId === wish.userId && (showRow = true);
     wish.price && (showRow = true);
 
-    const unencryptedAddress = wish.address ? unencryptedData(wish.address, wish.show) : '';
-
     const isURL = (str: string) => {
         try {
             new URL(str);
@@ -88,20 +86,36 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
                 </div>
             )}
 
-            {wish.address && (
+            {wish.addresses && wish.addresses.length > 0 && (
                 <p className="detail-wish-description">
                     <span className="label">{t('wish.address')}</span>
-                    {isURL(unencryptedAddress) ? (
-                        <a
-                            className="link"
-                            href={unencryptedAddress}
-                            title={unencryptedAddress}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {unencryptedAddress}
-                        </a>
-                    ) : (<>{unencryptedAddress}</>)}
+                    {wish.addresses.map((address, idx) => {
+                        const unencryptedAddress = unencryptedData(address.value, wish.show);
+
+                        if (isURL(unencryptedAddress)) {
+                            return (
+                                <Fragment key={address.id}>
+                                    <a
+                                        className="link"
+                                        href={unencryptedAddress}
+                                        title={unencryptedAddress}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {unencryptedAddress}
+                                    </a>
+                                    {wish.addresses && idx < wish.addresses.length - 1 && <br />}
+                                </Fragment>
+                            );
+                        }
+
+                        return (
+                            <Fragment key={address.id}>
+                                {unencryptedAddress}
+                                {wish.addresses && idx < wish.addresses.length - 1 && <br />}
+                            </Fragment>
+                        );
+                    })}
                 </p>
             )}
 

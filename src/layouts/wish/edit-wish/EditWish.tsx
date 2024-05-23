@@ -9,16 +9,12 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { createWish, deleteWish, updateWish } from '@/store/wishes/thunks';
 import { ICreateWish } from '@/store/wishes/types';
 import { TCurrentImage, IImage, IWish } from '@/models/IWish';
-import {
-    onlyWhitespaceValidation,
-    wishDescriptionValidation,
-    wishNameValidation,
-    wishPriceValidation,
-} from '@/utils/validations';
+import { wishDescriptionValidation, wishNameValidation, wishPriceValidation } from '@/utils/validations';
 import { WISH_DESCRIPTION_MAX_LENGTH } from '@/utils/constants';
 import { removingWhiteSpaces, addingWhiteSpaces } from '@/utils/formating-value';
 import { decryptedData, encryptedData } from '@/utils/encryption-data';
 import ConfirmModal from '@/layouts/ConfirmModal';
+import Addresses from '@/layouts/wish/edit-wish/Addresses';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import DragNDrop from '@/components/DragNDrop';
@@ -31,10 +27,10 @@ interface IProps {
     close: () => void;
 }
 
-type Inputs = {
+export type Inputs = {
     name: IWish['name']
     price: IWish['price']
-    address: IWish['address']
+    addresses: IWish['addresses']
     description: IWish['description']
 }
 
@@ -47,7 +43,9 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const dispatch = useAppDispatch();
 
     const {
+        control,
         register,
+        getValues,
         setValue,
         watch,
         setError,
@@ -97,14 +95,23 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         const encryptedCurrency = encryptedData(currency, process.env.REACT_APP_CRYPTO_JS_SECRET);
         const sendingCurrency = show === 'all' ? currency : encryptedCurrency;
 
-        // address
-        const dataAddress = data.address ? data.address.trim() : '';
-        const encryptedAddress = encryptedData(dataAddress, process.env.REACT_APP_CRYPTO_JS_SECRET);
-        const sendingAddress = show === 'all' ? dataAddress : encryptedAddress;
+        // addresses
+        const dataAddresses = (data.addresses && data.addresses.length > 0)
+            ? data.addresses.map((address) => ({ ...address, value: address.value.trim() }))
+            : [];
+        const encryptedAddresses = dataAddresses.length > 0
+            ? dataAddresses.map(
+                (address) =>
+                    process.env.REACT_APP_CRYPTO_JS_SECRET
+                        ? { ...address, value: encryptedData(address.value, process.env.REACT_APP_CRYPTO_JS_SECRET) }
+                        : address
+            ) : undefined;
+        const sendingAddresses = show === 'all' ? dataAddresses : encryptedAddresses;
 
         // description
-        const encryptedDescription = encryptedData(data.description.trim(), process.env.REACT_APP_CRYPTO_JS_SECRET);
-        const sendingDescription = show === 'all' ? data.description.trim() : encryptedDescription;
+        const dataDescription = data.description ? data.description.trim() : '';
+        const encryptedDescription = encryptedData(dataDescription, process.env.REACT_APP_CRYPTO_JS_SECRET);
+        const sendingDescription = show === 'all' ? dataDescription : encryptedDescription;
 
         // images
         const encryptedImages = images.map(image => {
@@ -122,8 +129,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             name: show === 'all' ? data.name.trim() : encryptedName,
             price: material ? sendingPrice : undefined,
             currency: material ? sendingCurrency : undefined,
-            address: dataAddress.length > 0 ? sendingAddress : undefined,
-            description: data.description.trim().length > 0 ? sendingDescription : undefined,
+            addresses: material ? sendingAddresses : undefined,
+            description: dataDescription.length > 0 ? sendingDescription : undefined,
             images: show === 'all' ? images : encryptedImages,
         };
         if (idOfSelectedWish) {
@@ -164,52 +171,67 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
     useLayoutEffect(() => {
         if (wishList.length === 0) return;
 
-        const myWish = wishList.find((wish) => wish.id === idOfSelectedWish);
+        const selectedWish = wishList.find((wish) => wish.id === idOfSelectedWish);
 
-        if (!myWish || !process.env.REACT_APP_CRYPTO_JS_SECRET) return;
+        if (!selectedWish || !process.env.REACT_APP_CRYPTO_JS_SECRET) return;
 
-        setMaterial(myWish.material);
-        setShow(myWish.show);
+        setMaterial(selectedWish.material);
+        setShow(selectedWish.show);
+
+        // name
         setValue(
             'name',
-            myWish.show === 'all'
-                ? myWish.name
-                : decryptedData(myWish.name, process.env.REACT_APP_CRYPTO_JS_SECRET),
-        );
-        myWish.price && setValue(
-            'price',
-            addingWhiteSpaces(
-                myWish.show === 'all'
-                    ? myWish.price
-                    : decryptedData(myWish.price, process.env.REACT_APP_CRYPTO_JS_SECRET)
-            ),
-        );
-        myWish.currency && setCurrency(
-            myWish.show === 'all'
-                ? myWish.currency
-                : decryptedData(myWish.currency, process.env.REACT_APP_CRYPTO_JS_SECRET) as IWish['currency']
-        );
-        myWish.address && setValue(
-            'address',
-            myWish.show === 'all'
-                ? myWish.address
-                : decryptedData(myWish.address, process.env.REACT_APP_CRYPTO_JS_SECRET),
-        );
-        setValue(
-            'description',
-            myWish.show === 'all'
-                ? myWish.description
-                : decryptedData(myWish.description, process.env.REACT_APP_CRYPTO_JS_SECRET)
+            selectedWish.show === 'all'
+                ? selectedWish.name
+                : decryptedData(selectedWish.name, process.env.REACT_APP_CRYPTO_JS_SECRET),
         );
 
-        const decryptedImages = myWish.images.map(image => {
+        // price
+        selectedWish.price && setValue(
+            'price',
+            addingWhiteSpaces(
+                selectedWish.show === 'all'
+                    ? selectedWish.price
+                    : decryptedData(selectedWish.price, process.env.REACT_APP_CRYPTO_JS_SECRET)
+            ),
+        );
+
+        // currency
+        selectedWish.currency && setCurrency(
+            selectedWish.show === 'all'
+                ? selectedWish.currency
+                : decryptedData(selectedWish.currency, process.env.REACT_APP_CRYPTO_JS_SECRET) as IWish['currency']
+        );
+
+        // addresses
+        selectedWish.addresses && selectedWish.addresses.length > 0 && setValue(
+            'addresses',
+            selectedWish.show === 'all'
+                ? selectedWish.addresses
+                : selectedWish.addresses.map(
+                    address => process.env.REACT_APP_CRYPTO_JS_SECRET
+                        ? { ...address, value: decryptedData(address.value, process.env.REACT_APP_CRYPTO_JS_SECRET) }
+                        : address
+                ),
+        );
+
+        // description
+        setValue(
+            'description',
+            selectedWish.show === 'all'
+                ? selectedWish.description
+                : decryptedData(selectedWish.description, process.env.REACT_APP_CRYPTO_JS_SECRET)
+        );
+
+        // images
+        const decryptedImages = selectedWish.images.map(image => {
             if (!process.env.REACT_APP_CRYPTO_JS_SECRET) return image;
 
             const decryptedImage = { ...image };
             decryptedImage.path = decryptedData(image.path, process.env.REACT_APP_CRYPTO_JS_SECRET);
             return decryptedImage;
         });
-        setImages(myWish.show === 'all' ? myWish.images : decryptedImages);
+        setImages(selectedWish.show === 'all' ? selectedWish.images : decryptedImages);
     }, [idOfSelectedWish, wishList, setValue]);
 
     useEffect(() => {
@@ -304,25 +326,14 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     }}
                 />
 
-                {/* address */}
-                <Input
-                    {...(material && register("address", onlyWhitespaceValidation))}
-                    id="address"
-                    name="address"
-                    type="text"
-                    label={t('main.where-to-buy')}
-                    tooltip={t('main.where-to-buy-tooltip')}
-                    error={errors?.address?.message}
-                />
-                <Tooltip
-                    id="address"
-                    style={{
-                        backgroundColor: StylesVariables.blackColor,
-                        color: StylesVariables.lightColor,
-                        width: screenWidth > 411 ? '300px' : '200px',
-                        fontSize: '14px',
-                        zIndex: 9,
-                    }}
+                {/* addresses */}
+                <Addresses
+                    control={control}
+                    getValues={getValues}
+                    register={register}
+                    errors={errors}
+                    material={material}
+                    screenWidth={screenWidth}
                 />
             </div>
 

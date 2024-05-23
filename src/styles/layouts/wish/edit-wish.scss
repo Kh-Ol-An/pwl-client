@@ -129,12 +129,12 @@
         gap: 20px;
 
         &.transition {
-            transition: $transition-slow;
+            transition: all 0.3s linear;
         }
 
         &.rolled-up {
             margin-top: 20px;
-            max-height: 200px;
+            max-height: 20000px;
         }
     }
 
@@ -182,6 +182,25 @@
 
     .drag-n-drop {
         margin-top: 20px;
+    }
+
+    .address {
+        width: 100%;
+    }
+
+    .address-field {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .remove-address {
+        padding: 4px;
+    }
+
+    .add-address {
+        margin: 20px 4px 0 auto;
     }
 
     .actions {

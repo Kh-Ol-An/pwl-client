@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@mui/material';
@@ -23,8 +23,6 @@ const Wish: FC = () => {
     const [wish, setWish] = useState<IWish | null>(null);
     const [userFullName, setUserFullName] = useState<string>('');
     const [userAvatar, setUserAvatar] = useState<IUser['avatar']>('');
-
-    const unencryptedAddress = wish?.address ? unencryptedData(wish.address, wish.show) : '';
 
     const isURL = (str: string) => {
         try {
@@ -79,20 +77,36 @@ const Wish: FC = () => {
                                 </div>
                             )}
 
-                            {wish.address && (
+                            {wish.addresses && wish.addresses.length > 0 && (
                                 <p className="wish-description">
                                     <span className="label">{t('wish.address')}</span>
-                                    {isURL(unencryptedAddress) ? (
-                                        <a
-                                            className="link"
-                                            href={unencryptedAddress}
-                                            title={unencryptedAddress}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            {unencryptedAddress}
-                                        </a>
-                                    ) : (<>{unencryptedAddress}</>)}
+                                    {wish.addresses.map((address, idx) => {
+                                        const unencryptedAddress = unencryptedData(address.value, wish.show);
+
+                                        if (isURL(unencryptedAddress)) {
+                                            return (
+                                                <Fragment key={address.id}>
+                                                    <a
+                                                        className="link"
+                                                        href={unencryptedAddress}
+                                                        title={unencryptedAddress}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        {unencryptedAddress}
+                                                        {wish.addresses && idx < wish.addresses.length - 1 && <br />}
+                                                    </a>
+                                                </Fragment>
+                                            );
+                                        }
+
+                                        return (
+                                            <Fragment key={address.id}>
+                                                {unencryptedAddress}
+                                                {wish.addresses && idx < wish.addresses.length - 1 && <br />}
+                                            </Fragment>
+                                        );
+                                    })}
                                 </p>
                             )}
 

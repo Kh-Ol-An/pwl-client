@@ -16,6 +16,11 @@ export interface IBooking {
     end: Dayjs;
 }
 
+interface IAddress {
+    id: string;
+    value: string;
+}
+
 export interface IWish {
     id: string;
     userId: IUser['id'];
@@ -24,7 +29,7 @@ export interface IWish {
     currency: 'UAH' | 'USD' | 'EUR';
     name: string;
     price?: string;
-    address?: string;
+    addresses?: IAddress[];
     description: string;
     executed: boolean;
     images: IImage[];

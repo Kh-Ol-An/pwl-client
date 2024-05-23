@@ -8,7 +8,7 @@ export interface ICreateWish {
     currency?: IWish['currency'] | string;
     name: IWish['name'];
     price?: IWish['price'];
-    address?: IWish['address'];
+    addresses?: IWish['addresses'];
     description?: IWish['description'];
     images: TCurrentImage[];
 }

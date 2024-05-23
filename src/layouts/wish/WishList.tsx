@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { selectUserId } from '@/store/selected-user/slice';
 import { getWishList } from '@/store/wishes/thunks';
 import { IWish } from '@/models/IWish';
-import EditWish from '@/layouts/wish/EditWish';
+import EditWish from '@/layouts/wish/edit-wish/EditWish';
 import WishItem from '@/layouts/wish/WishItem';
 import DetailWish from '@/layouts/wish/detail-wish/DetailWish';
 import Loading from '@/layouts/Loading';

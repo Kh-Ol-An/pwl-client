@@ -33,19 +33,27 @@ const processImages = (formData: FormData, images: TCurrentImage[]) => {
     }
 };
 
-const createWish = async ({ userId, material, show, name, price, currency, address, description, images }: ICreateWish): Promise<AxiosResponse<IWish>> => {
-    const formData = new FormData();
+const addDataToFormData = (formData: FormData, data: IUpdateWish | ICreateWish): FormData => {
+    const { userId, material, show, name, price, currency, addresses, description, images } = data;
     processCommonFields(formData, { userId, material, show, name });
     price && processCommonFields(formData, { price });
     currency && processCommonFields(formData, { currency });
-    address && processCommonFields(formData, { address });
+    addresses && addresses.length > 0 && addresses.forEach((address, idx) => {
+        formData.append(`address-${idx}`, JSON.stringify(address));
+    });
     description && processCommonFields(formData, { description });
     processImages(formData, images);
+
+    return formData;
+};
+
+const createWish = async (data: ICreateWish): Promise<AxiosResponse<IWish>> => {
+    const formData = new FormData();
 
     try {
         return await api.post(
             '/wish',
-            formData,
+            addDataToFormData(formData, data),
             {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -58,20 +66,14 @@ const createWish = async ({ userId, material, show, name, price, currency, addre
     }
 };
 
-const updateWish = async ({ id, userId, material, show, name, price, currency, address, description, images }: IUpdateWish): Promise<AxiosResponse<IWish>> => {
+const updateWish = async (data: IUpdateWish): Promise<AxiosResponse<IWish>> => {
     const formData = new FormData();
-    formData.append('id', id);
-    processCommonFields(formData, { userId, material, show, name });
-    price && processCommonFields(formData, { price });
-    currency && processCommonFields(formData, { currency });
-    address && processCommonFields(formData, { address });
-    description && processCommonFields(formData, { description });
-    processImages(formData, images);
+    formData.append('id', data.id);
 
     try {
         return await api.put(
             '/wish',
-            formData,
+            addDataToFormData(formData, data),
             {
                 headers: {
                     'Content-Type': 'multipart/form-data',
