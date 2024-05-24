@@ -142,7 +142,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                                 </span>
                             )}
                             {myUser && myUser.unsuccessfulWishes > 0 && (
-                                <span className="count unsuccess">
+                                <span className="count unsuccess">K
                                     {myUser?.unsuccessfulWishes}
                                 </span>
                             )}
