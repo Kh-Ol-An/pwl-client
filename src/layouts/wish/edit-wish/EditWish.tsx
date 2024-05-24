@@ -97,7 +97,9 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
 
         // addresses
         const dataAddresses = (data.addresses && data.addresses.length > 0)
-            ? data.addresses.map((address) => ({ ...address, value: address.value.trim() }))
+            ? data.addresses
+                .filter(address => address.value.length > 0)
+                .map((address) => ({ ...address, value: address.value.trim() }))
             : [];
         const encryptedAddresses = dataAddresses.length > 0
             ? dataAddresses.map(
