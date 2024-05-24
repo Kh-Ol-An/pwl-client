@@ -9,6 +9,7 @@ import { Tooltip } from 'react-tooltip';
 import { Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { bookWish } from '@/store/wishes/thunks';
+import getTooltipStyles from '@/utils/get-tooltip-styles';
 import ConfirmModal from '@/layouts/ConfirmModal';
 import Button from '@/components/Button';
 import { IWish } from '@/models/IWish';
@@ -149,13 +150,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 <Tooltip
                     id="book-wish"
                     opacity={1}
-                    style={{
-                        backgroundColor: StylesVariables.blackColor,
-                        color: StylesVariables.lightColor,
-                        width: screenWidth > 411 ? '300px' : '200px',
-                        fontSize: '14px',
-                        zIndex: 9,
-                    }}
+                    style={getTooltipStyles(screenWidth)}
                 />
             </ConfirmModal>
         </>

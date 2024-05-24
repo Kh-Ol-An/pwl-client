@@ -13,6 +13,7 @@ import { wishDescriptionValidation, wishNameValidation, wishPriceValidation } fr
 import { WISH_DESCRIPTION_MAX_LENGTH } from '@/utils/constants';
 import { removingWhiteSpaces, addingWhiteSpaces } from '@/utils/formating-value';
 import { decryptedData, encryptedData } from '@/utils/encryption-data';
+import getTooltipStyles from '@/utils/get-tooltip-styles';
 import ConfirmModal from '@/layouts/ConfirmModal';
 import Addresses from '@/layouts/wish/edit-wish/Addresses';
 import Button from '@/components/Button';
@@ -279,13 +280,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             />
             <Tooltip
                 id="name"
-                style={{
-                    backgroundColor: StylesVariables.blackColor,
-                    color: StylesVariables.lightColor,
-                    width: screenWidth > 411 ? '300px' : '200px',
-                    fontSize: '14px',
-                    zIndex: 9,
-                }}
+                style={getTooltipStyles(screenWidth)}
             />
 
             {/* DragNDrop */}
@@ -319,13 +314,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 </div>
                 <Tooltip
                     id="price"
-                    style={{
-                        backgroundColor: StylesVariables.blackColor,
-                        color: StylesVariables.lightColor,
-                        width: screenWidth > 411 ? '300px' : '200px',
-                        fontSize: '14px',
-                        zIndex: 9,
-                    }}
+                    style={getTooltipStyles(screenWidth)}
                 />
 
                 {/* addresses */}
@@ -397,13 +386,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                         <Tooltip
                             id="show-friends"
                             opacity={1}
-                            style={{
-                                backgroundColor: StylesVariables.blackColor,
-                                color: StylesVariables.lightColor,
-                                width: screenWidth > 411 ? '300px' : '200px',
-                                fontSize: '14px',
-                                zIndex: 9,
-                            }}
+                            style={getTooltipStyles(screenWidth)}
                         />
                     </div>
 
@@ -427,13 +410,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                         <Tooltip
                             id="show-nobody"
                             opacity={1}
-                            style={{
-                                backgroundColor: StylesVariables.blackColor,
-                                color: StylesVariables.lightColor,
-                                width: screenWidth > 411 ? '300px' : '200px',
-                                fontSize: '14px',
-                                zIndex: 9,
-                            }}
+                            style={getTooltipStyles(screenWidth)}
                         />
                     </div>
                 </div>

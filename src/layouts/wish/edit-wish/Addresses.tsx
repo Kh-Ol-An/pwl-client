@@ -6,6 +6,7 @@ import { Tooltip } from 'react-tooltip';
 import { Cancel as CancelIcon, AddCircle as AddCircleIcon } from '@mui/icons-material';
 import { ICreateWish } from '@/store/wishes/types';
 import { onlyWhitespaceValidation } from '@/utils/validations';
+import getTooltipStyles from '@/utils/get-tooltip-styles';
 import { Inputs } from '@/layouts/wish/edit-wish/EditWish';
 import Input from '@/components/Input';
 import StylesVariables from '@/styles/utils/variables.module.scss';
@@ -70,13 +71,7 @@ const Addresses: FC<IProps> = ({ control, getValues, errors, register, material,
 
                     <Tooltip
                         id={`address-${idx}`}
-                        style={{
-                            backgroundColor: StylesVariables.blackColor,
-                            color: StylesVariables.lightColor,
-                            width: screenWidth > 411 ? '300px' : '200px',
-                            fontSize: '14px',
-                            zIndex: 9,
-                        }}
+                        style={getTooltipStyles(screenWidth)}
                     />
                 </div>
             ))}
