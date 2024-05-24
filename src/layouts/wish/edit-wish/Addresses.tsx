@@ -48,8 +48,18 @@ const Addresses: FC<IProps> = ({ control, getValues, errors, register, material,
                         />
 
                         {addresses.length > 1 && (
-                            <button className="remove-address" type="button" onClick={() => remove(idx)}>
+                            <button className="action-address" type="button" onClick={() => remove(idx)}>
                                 <CancelIcon sx={{ color: StylesVariables.actionColor }} />
+                            </button>
+                        )}
+
+                        {idx === addresses.length - 1 && (
+                            <button
+                                className="action-address"
+                                type="button"
+                                onClick={() => append({ id: uuidv4(), value: "" })}
+                            >
+                                <AddCircleIcon sx={{ color: StylesVariables.successColor }} />
                             </button>
                         )}
                     </div>
@@ -70,14 +80,6 @@ const Addresses: FC<IProps> = ({ control, getValues, errors, register, material,
                     />
                 </div>
             ))}
-
-            <button
-                className="add-address"
-                type="button"
-                onClick={() => append({ id: uuidv4(), value: "" })}
-            >
-                <AddCircleIcon sx={{ color: StylesVariables.successColor }} />
-            </button>
         </div>
     );
 };
