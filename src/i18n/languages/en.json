@@ -79,6 +79,9 @@
             "change-lang": {
                 "error": "{{type}}.changeLang: Failed to change the interface language."
             },
+            "change-first-loaded": {
+                "error": "{{type}}.changeFirsLoaded: Failed to update data."
+            },
             "update-my-user": {
                 "error": "{{type}}.updateMyUser: Failed to update the user."
             },

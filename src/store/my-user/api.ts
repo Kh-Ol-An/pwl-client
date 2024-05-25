@@ -10,6 +10,7 @@ import {
     IChangeForgottenPassword,
     IChangePassword,
     IChangeLang,
+    IUserId,
     IUpdateMyUser,
     IAddFriend,
     IRemoveFriend,
@@ -193,15 +194,24 @@ const changeLang = async (data: IChangeLang): Promise<AxiosResponse<IUser>> => {
     }
 };
 
+const changeFirsLoaded = async (data: IUserId): Promise<AxiosResponse<IUser>> => {
+    try {
+        return await api.put('/first-loaded', data);
+    } catch (error: any) {
+        console.log('my-user changeFirsLoaded error: ', error.response?.data?.message || t('alerts.my-user-api.change-first-loaded.error', { type: 'api' }));
+        throw error;
+    }
+};
+
 const updateMyUser = async ({
-    id,
+    userId,
     firstName,
     lastName,
     birthday,
     avatar,
 }: IUpdateMyUser): Promise<AxiosResponse<IUser>> => {
     const formData = new FormData();
-    formData.append('id', id);
+    formData.append('userId', userId);
     formData.append('firstName', firstName);
     lastName && formData.append('lastName', lastName);
     birthday && formData.append('birthday', birthday);
@@ -281,6 +291,7 @@ const myUserApi = {
     changeForgottenPassword,
     changePassword,
     changeLang,
+    changeFirsLoaded,
     updateMyUser,
     addFriend,
     removeFriend,

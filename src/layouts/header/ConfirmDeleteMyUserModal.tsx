@@ -54,7 +54,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
                 setConfirmDeleteMyUserError(t('main.email-not-match'));
                 return;
             }
-            await dispatch(deleteMyUser({ email: data.email, password: '', id: myUser.id }));
+            await dispatch(deleteMyUser({ email: data.email, password: '', userId: myUser.id }));
             hideHeader();
         },
     });
@@ -70,7 +70,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
                 setConfirmDeleteMyUserError('');
             }
 
-            await dispatch(deleteMyUser({ ...data, id: myUser.id }));
+            await dispatch(deleteMyUser({ ...data, userId: myUser.id }));
             hideHeader();
         } else {
             await getDataFromGoogle();

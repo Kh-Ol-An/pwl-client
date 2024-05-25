@@ -79,7 +79,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
         if (!myUser || (birthdayError && birthdayError.length > 0)) return;
 
         const updateMyUserData: IUpdateMyUser = {
-            id: myUser.id,
+            userId: myUser.id,
             firstName: data.firstName.trim(),
             avatar,
         };

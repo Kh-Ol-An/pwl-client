@@ -7,6 +7,7 @@ export interface IUser {
     hasPassword: boolean;
     email: string;
     lang: 'en' | 'uk';
+    firstLoaded: boolean;
     birthday?: Dayjs;
     avatar?: string;
     wishList: string[];

@@ -29,27 +29,27 @@ export interface IRegistration extends ILogin {
     firstName: IUser['firstName'];
 }
 
-export interface IChangePassword {
+export interface IUserId {
     userId: IUser['id'];
+}
+
+export interface IChangePassword extends IUserId {
     oldPassword: string;
     newPassword: string;
 }
 
-export interface IUpdateMyUser {
-    id: IUser['id'];
+export interface IUpdateMyUser extends IUserId {
     firstName: IUser['firstName']
     lastName?: IUser['lastName'];
     birthday?: string;
     avatar: TCurrentAvatar;
 }
 
-export interface IChangeLang {
-    userId: IUser['id'];
+export interface IChangeLang extends IUserId {
     lang: IUser['lang'];
 }
 
-export interface IDeleteMyUser {
-    id: IUser['id'];
+export interface IDeleteMyUser extends IUserId {
     email: IUser['email'];
     password: string;
 }

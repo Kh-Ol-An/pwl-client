@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import i18next from "i18next";
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@mui/material';
@@ -13,7 +13,7 @@ import {
 import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
-import { logout } from '@/store/my-user/thunks';
+import { changeFirsLoaded, logout } from '@/store/my-user/thunks';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import DetailAccount from '@/layouts/DetailAccount';
@@ -83,8 +83,11 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
         setAnchor(null);
         hideHeader();
     };
-    const handleHideEditAccount = () => {
+    const handleHideEditAccount = async () => {
         setShowEditAccount(false);
+
+        if (!myUser || myUser?.firstLoaded) return;
+        await dispatch(changeFirsLoaded({ userId: myUser.id }));
     };
 
     // About
@@ -127,6 +130,12 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     const handleLogout = () => {
         dispatch(logout());
     };
+
+    useEffect(() => {
+        if (!myUser || myUser?.firstLoaded) return;
+
+        setShowEditAccount(true);
+    }, []);
 
     return (
         <div className={"header" + (showHeader ? " show" : "")}>

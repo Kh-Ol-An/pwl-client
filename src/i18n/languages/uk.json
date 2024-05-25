@@ -79,6 +79,9 @@
             "change-lang": {
                 "error": "{{type}}.changeLang: Не вдалось змінити мову."
             },
+            "change-first-loaded": {
+                "error": "{{type}}.changeFirsLoaded: Не вдалось оновити дані."
+            },
             "update-my-user": {
                 "error": "{{type}}.updateMyUser: Не вдалось оновити користувача."
             },

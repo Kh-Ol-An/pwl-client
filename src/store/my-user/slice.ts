@@ -8,6 +8,7 @@ import {
     checkAuth,
     changePassword,
     changeLang,
+    changeFirsLoaded,
     updateMyUser,
     addFriend,
     removeFriend,
@@ -140,6 +141,20 @@ const myUserSlice = createSlice({
                 state.error = action.error.message || t('alerts.my-user-api.change-lang.error', { type: 'slice' });
             })
             .addCase(changeLang.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.isLoading = false;
+                state.error = null;
+            })
+            // changeFirsLoaded
+            .addCase(changeFirsLoaded.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(changeFirsLoaded.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || t('alerts.my-user-api.change-first-loaded.error', { type: 'slice' });
+            })
+            .addCase(changeFirsLoaded.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.isLoading = false;
                 state.error = null;
