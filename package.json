@@ -71,6 +71,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.24.6",
     "@craco/craco": "^7.1.0",
     "cross-env": "^7.0.3"
   }
