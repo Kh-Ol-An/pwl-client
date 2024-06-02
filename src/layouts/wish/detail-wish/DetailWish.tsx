@@ -105,7 +105,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                         <DoneWish
                                             wish={wish}
                                             userId={myUser?.id}
-                                            whoseWish={myUser?.id === wish.booking?.userId ? 'my' : 'someone'}
+                                            whoseWish={wish.booking?.userId ? 'someone' : 'my'}
                                             close={close}
                                         />
                                     )}
@@ -115,7 +115,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                         <BookingExpired
                                             wish={wish}
                                             userId={myUser?.id}
-                                            whoseWish={myUser?.id === wish.booking?.userId ? 'my' : 'someone'}
+                                            whoseWish={wish.booking?.userId ? 'someone' : 'my'}
                                             close={close}
                                         />
                                     )}

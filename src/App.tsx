@@ -7,10 +7,14 @@ import { checkAuth } from '@/store/my-user/thunks';
 import RoutesGuard from '@/utils/RoutesGuard';
 import Loading from '@/layouts/Loading';
 import { privateRoutes, publicRoutes, unauthenticatedRoutes } from '@/pages/routes';
+import StylesVariables from '@/styles/utils/variables.module.scss';
 
 const theme = createTheme({
     palette: {
         mode: 'dark',
+    },
+    typography: {
+        fontFamily: StylesVariables.primaryFontFamily,
     },
 });
 
