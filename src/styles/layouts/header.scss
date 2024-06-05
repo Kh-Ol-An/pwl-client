@@ -15,7 +15,7 @@
 
     @media only screen and (min-width: 768px) {
         max-height: 100%;
-        border-radius: 0 0 $radius-big $radius-big;
+        border-radius: 0 0 $radius-xxl $radius-xxl;
         border-right: 4px solid $accent-color;
         border-bottom: 4px solid $accent-color;
         border-left: 4px solid $accent-color;
@@ -23,7 +23,7 @@
 
     .header-inner {
         @media only screen and (min-width: 768px) {
-            border-radius: 0 0 $radius-big $radius-big;
+            border-radius: 0 0 $radius-xxl $radius-xxl;
             border-right: 10px solid $secondary-color;
             border-bottom: 10px solid $secondary-color;
             border-left: 10px solid $secondary-color;

@@ -24,7 +24,7 @@
         z-index: unset;
         width: 45%;
         overflow: unset;
-        border-radius: 0 $radius-big $radius-big 0;
+        border-radius: 0 $radius-xxl $radius-xxl 0;
         border-top: 4px solid $accent-color;
         border-right: 4px solid $accent-color;
         border-bottom: 4px solid $accent-color;
@@ -38,7 +38,7 @@
         height: 100%;
 
         @media only screen and (min-width: 768px) {
-            border-radius: 0 $radius-big $radius-big 0;
+            border-radius: 0 $radius-xxl $radius-xxl 0;
             border-top: 10px solid $secondary-color;
             border-right: 10px solid $secondary-color;
             border-bottom: 10px solid $secondary-color;
