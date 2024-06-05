@@ -251,7 +251,7 @@ const Auth: FC = () => {
                         </div>
 
                         {!isForgotPassword && (
-                            <div>
+                            <div className="auth-privacy-policy">
                                 <Checkbox
                                     id="privacy-policy"
                                     name="privacy-policy"

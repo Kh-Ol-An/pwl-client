@@ -197,10 +197,37 @@
     font-weight: 700;
 
     @media only screen and (min-width: 390px) {
+        flex-direction: row;
+        transform: translateX(-25px);
         font-size: 24px;
     }
 
     @media only screen and (min-width: 768px) {
-        flex-direction: row;
+        transform: translateX(-65px);
+        height: 150px;
+    }
+
+    .custom-select {
+        top: 0;
+        right: unset;
+        bottom: unset;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: column;
+        background: transparent;
+        z-index: $z-index-lg-9;
+
+        @media only screen and (min-width: 390px) {
+            left: 0;
+            transform: translateX(0);
+        }
+
+        .select-item {
+            padding: 0 12px 9px 12px;
+
+            @media only screen and (min-width: 768px) {
+                padding: 0 20px 12px 20px;
+            }
+        }
     }
 }

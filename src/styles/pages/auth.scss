@@ -30,6 +30,24 @@
         }
     }
 
+    .custom-select {
+        top: 0;
+        right: 0;
+        bottom: unset;
+        left: unset;
+        flex-direction: column;
+        background: $background-color;
+        z-index: $z-index-lg-9;
+
+        .select-item {
+            padding: 0 12px 9px 12px;
+
+            @media only screen and (min-width: 768px) {
+                padding: 0 20px 12px 20px;
+            }
+        }
+    }
+
     .box {
         width: 100%;
 
@@ -84,11 +102,35 @@
     .actions {
         margin-top: -10px;
         width: 100%;
-        @include flex-between;
-        gap: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
 
-        .forgot-password {
-            margin-left: auto;
+        @media only screen and (min-width: 390px) {
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 20px;
+
+            .forgot-password {
+                margin-left: auto;
+            }
+        }
+    }
+
+    .auth-privacy-policy .button span {
+        font-size: 12px;
+    }
+
+    .button:not(.text) {
+        padding: 8px;
+
+        @media only screen and (min-width: 360px) {
+            padding: 8px 20px;
+        }
+
+        @media only screen and (min-width: 768px) {
+            padding: 15px 27px;
         }
     }
 }

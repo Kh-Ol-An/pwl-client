@@ -45,7 +45,9 @@ const Instruction: FC = () => {
 
     return (
         <div className="instruction-page">
-            <PageHeader />
+            <div className="container">
+                <PageHeader />
+            </div>
 
             <section className={"container" + (myUser.user === null ? " logged-out" : "")}>
                 <h1>{t('instruction.title')}</h1>

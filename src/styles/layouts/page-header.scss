@@ -5,7 +5,7 @@
     left: 0;
     z-index: $z-index-9;
     width: 100%;
-    padding: 16px;
+    padding: 16px 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +18,12 @@
     }
 
     @media only screen and (min-width: 768px) {
-        padding: 20px;
+        padding: 24px 20px;
+        gap: 64px;
+    }
+
+    @media only screen and (min-width: 1280px) {
+        padding: 24px 0;
     }
 
     .actions {
@@ -33,6 +38,90 @@
 
     .auth-actions {
         @include flex-center;
-        gap: 10px;
+        gap: 16px;
+
+        @media only screen and (min-width: 768px) {
+            gap: 24px;
+        }
+    }
+
+    .custom-select {
+        top: 0;
+        right: 0;
+        bottom: unset;
+        left: unset;
+        flex-direction: column;
+        background: $background-color;
+        z-index: $z-index-lg-9;
+
+        .select-item {
+            padding: 0 12px 9px 12px;
+
+            @media only screen and (min-width: 768px) {
+                padding: 0 20px 12px 20px;
+            }
+        }
+    }
+
+    .button {
+        span {
+            font-size: 12px;
+            line-height: 16px;
+
+            @media only screen and (min-width: 768px) {
+                font-size: 16px;
+                line-height: 20px;
+            }
+
+            @media only screen and (min-width: 1920px) {
+                font-size: 20px;
+                line-height: 24px;
+            }
+        }
+
+        &.text {
+            padding: 11px;
+            border: 1px solid $white-color;
+
+            @media only screen and (min-width: 360px) {
+                padding: 11px 20px;
+            }
+
+            @media only screen and (min-width: 768px) {
+                padding: 14px 27px;
+            }
+
+            span {
+                color: $white-color;
+            }
+
+            &:hover {
+                border: 1px solid $primary-color;
+
+                span {
+                    color: $primary-color;
+                }
+            }
+
+            &:active {
+                border: 1px solid $primary-color;
+
+                span {
+                    color: $primary-color;
+                }
+            }
+        }
+
+        &:not(.text) {
+            padding: 12px;
+
+            @media only screen and (min-width: 360px) {
+                padding: 12px 20px;
+            }
+
+            @media only screen and (min-width: 768px) {
+                padding: 15px 27px;
+            }
+        }
     }
 }

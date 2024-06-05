@@ -9,6 +9,29 @@
     .privacy-policy-header {
         @include flex-between;
         gap: 10px;
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .custom-select {
+            top: 0;
+            right: 0;
+            bottom: unset;
+            left: unset;
+            flex-direction: column;
+            background: $background-color;
+            z-index: $z-index-lg-9;
+
+            .select-item {
+                padding: 0 12px 9px 12px;
+
+                @media only screen and (min-width: 768px) {
+                    padding: 0 20px 12px 20px;
+                }
+            }
+        }
     }
 
     .container {
@@ -23,9 +46,13 @@
     }
 
     h1 {
-        font-size: 36px;
+        font-size: 30px;
         font-weight: 700;
         text-align: center;
+
+        @media only screen and (min-width: 360px) {
+            font-size: 36px;
+        }
     }
 
     h2 {

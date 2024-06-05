@@ -182,12 +182,12 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         setAnchor={setAnchor}
                         actionIcon={<SettingsIcon sx={{ color: StylesVariables.specialColor }} />}
                     >
-                        <Button variant="text" type="button" onClick={handleShowEditAccount}>
+                        <Button variant="text" color="primary-color" type="button" onClick={handleShowEditAccount}>
                             <ManageAccountsIcon />
                             {t('main.account_settings')}
                         </Button>
 
-                        <Button variant="text" type="button" onClick={handleShowAbout}>
+                        <Button variant="text" color="primary-color" type="button" onClick={handleShowAbout}>
                             <img className="wish-hub-icon" src={LogoIcon} alt="Wish Hub icon" />
                             {t('main.about')}
                             <img className="wish-hub-text" src={WishHub} alt="Wish Hub" />
@@ -198,17 +198,17 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         {/*    {t('main.instruction')}*/}
                         {/*</Button>*/}
 
-                        <Button variant="text" type="button" onClick={handleShowContacts}>
+                        <Button variant="text" color="primary-color" type="button" onClick={handleShowContacts}>
                             <ForumIcon />
                             {t('main.contacts')}
                         </Button>
 
-                        <Button variant="text" type="button" onClick={handleShowLanguage}>
+                        <Button variant="text" color="primary-color" type="button" onClick={handleShowLanguage}>
                             <LanguageIcon />
                             {t('main.interface_language')}
                         </Button>
 
-                        <Button variant="text" type="button" onClick={handleLogout}>
+                        <Button variant="text" color="primary-color" type="button" onClick={handleLogout}>
                             <LogoutIcon />
                             {t('logout')}
                         </Button>
