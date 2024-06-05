@@ -1,54 +1,91 @@
 .custom-select {
-    .select-box {
-        position: relative;
-        width: fit-content;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ffffff20;
+    border-radius: $radius;
+    background: $background-color;
+    transition: $transition;
+
+    @media only screen and (min-width: 768px) {
+        top: 0;
+        right: 0;
+        bottom: unset;
+        left: unset;
+        flex-direction: column;
+        background: transparent;
     }
 
-    .MuiInputBase-root {
-        &:hover:not(.Mui-disabled, .Mui-error) {
-            &::before,
-            &::after {
-                border-width: 2px;
-                border-color: $primary-color;
-            }
+    &:hover {
+        border-color: $white-color;
+    }
+
+    &.show {
+        border-color: $white-color;
+
+        .arrow-icon {
+            transform: rotate(180deg);
         }
 
-        &::before,
-        &::after {
-            border-width: 2px;
-            border-color: $primary-color;
+        .select-options {
+            max-height: 200px;
         }
     }
 
-    .MuiSelect-select {
-        &:focus {
-            background-color: transparent;
-        }
+    .select-action {
+        padding: 9px 12px;
 
-        .count {
-            display: none;
+        @media only screen and (min-width: 768px) {
+            padding: 12px 8px 12px 20px;
         }
     }
 
-    .MuiSvgIcon-root {
-        color: $primary-color;
+    .arrow-icon {
+        color: $white-color;
+        transition: $transition;
     }
 
-    .count {
-        top: -6px;
-        left: 100%;
-        transform: translateX(-50%);
-        background-color: $primary-color;
+    .flag-icon {
+        width: 28px;
+        height: 20px;
+
+        svg {
+            width: 100%;
+            height: auto;
+        }
     }
-}
 
-.sidebar-user-type-item {
-    position: relative;
+    .lang-text {
+        display: none;
 
-    .count {
-        top: -6px;
-        left: 100%;
-        background-color: $primary-color;
-        font-size: 9px;
+        @media only screen and (min-width: 768px) {
+            margin: 0 16px 0 8px;
+            display: inline-block;
+            color: $white-color;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    }
+
+    .select-options {
+        max-height: 0;
+        overflow: hidden;
+        transition: $transition;
+    }
+
+    .select-item {
+        padding: 9px 12px 0 12px;
+
+        @media only screen and (min-width: 768px) {
+            padding: 0 20px 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+        }
     }
 }

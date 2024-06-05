@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@/store/hook';
 import { undoneWish, doneWish } from '@/store/wishes/thunks';
@@ -21,7 +21,7 @@ const BookingExpired: FC<IProps> = ({ wish, userId, whoseWish, close }) => {
 
     const dispatch = useAppDispatch();
 
-    const [show, setShow] = React.useState<boolean>(true);
+    const [show, setShow] = useState<boolean>(true);
 
     const handleUndone = async () => {
         if (!userId) return;

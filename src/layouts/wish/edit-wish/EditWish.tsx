@@ -298,7 +298,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                         tooltip={t('main.wish-price-tooltip')}
                         error={errors?.price?.message}
                     />
-                    <div className="custom-select">
+                    <div className="custom-mui-select">
                         <Select
                             id="currency"
                             variant="standard"

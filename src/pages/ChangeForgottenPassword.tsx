@@ -48,7 +48,7 @@ const ChangeForgottenPassword: FC = () => {
         dispatch(changeForgottenPassword({ passwordResetLink, ...data })).then(() => navigate('/auth'));
     };
 
-    const repeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const repeatPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setRepeatPassword(value);
 

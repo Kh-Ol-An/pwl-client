@@ -1,17 +1,23 @@
 .button {
     width: auto;
-    @include flex-center;
-    gap: 4px;
-    color: $primary-color;
-    font-size: 16px;
-    line-height: 1.5;
-    font-weight: 700;
-    text-align: left;
     transition: $transition-fast;
-    white-space: nowrap;
 
-    @media only screen and (min-width: 1920px) {
-        font-size: 20px;
+    span {
+        position: relative;
+        z-index: $z-index-9;
+        @include flex-center;
+        gap: 4px;
+        color: $white-color;
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight: 700;
+        text-align: left;
+        white-space: nowrap;
+        transition: $transition-fast;
+
+        @media only screen and (min-width: 1920px) {
+            font-size: 20px;
+        }
     }
 
     &.disabled {
@@ -25,51 +31,80 @@
     }
 
     &.text {
-        color: $primary-color;
+        border-radius: $radius-md;
     }
 
     &.primary-color {
-        color: $primary-color;
-
-        &:hover {
-            @include icon-shadow($primary-color);
+        span {
+            color: $primary-color;
         }
 
-        &:active {
-            @include icon-shadow($primary-color);
+        &:hover span {
+            color: $primary-light-color;
+        }
+
+        &:active span {
+            color: $primary-light-color;
         }
     }
 
     &.action-color {
-        color: $action-color;
-
-        &:hover {
-            @include icon-shadow($action-color);
+        span {
+            color: $action-color;
         }
 
-        &:active {
-            @include icon-shadow($action-color);
+        &:hover span {
+            color: $action-light-color;
+        }
+
+        &:active span {
+            color: $action-light-color;
         }
     }
 
     &:not(.text) {
+        position: relative;
         padding: 4px 16px;
         @include flex-center;
         gap: 8px;
-        background: $primary-color;
-        color: $accent-color;
-        border-radius: $radius;
+        background: transparent;
+        border-radius: $radius-md;
+
+        span {
+            color: $background-color;
+        }
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: $radius-md;
+            transition: $transition-fast;
+        }
+
+        &::before {
+            background: linear-gradient(140deg, $primary-light-color 0%, $primary-color 30%, $primary-dark-color 100%);
+        }
+
+        &::after {
+            background: linear-gradient(140deg, $primary-dark-color 0%, $primary-color 70%, $primary-light-color 100%);
+            opacity: 0;
+        }
+
+        &:hover::after {
+            opacity: 1;
+        }
+
+        &:active::after {
+            opacity: 1;
+        }
     }
 
     &.action-color:not(.text) {
         background: $action-color;
-    }
-
-    &:hover {
-        @include icon-shadow($primary-color);
-    }
-
-    &:active {
-        @include icon-shadow($primary-color);
     }
 }

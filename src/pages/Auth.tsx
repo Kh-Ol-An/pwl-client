@@ -225,6 +225,7 @@ const Auth: FC = () => {
                                 <Button
                                     type="button"
                                     variant="text"
+                                    color="primary-color"
                                     onClick={() => setIsRegistration((state) => !state)}
                                 >
                                     {isRegistration ? t('sing-in') : t('sing-up')}

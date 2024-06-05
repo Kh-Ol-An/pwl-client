@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, MouseEvent, ReactNode } from 'react';
 import { Popover } from '@mui/material';
 import Card from "@/layouts/Card";
 
@@ -13,7 +13,7 @@ const Popup: FC<IProps> = ({ anchor, setAnchor, actionIcon, children }) => {
     const open = Boolean(anchor);
     const id = open ? 'simple-popover' : undefined;
 
-    const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleOpen = (event: MouseEvent<HTMLButtonElement>) => {
         setAnchor(event.currentTarget);
     };
 

@@ -37,7 +37,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
     const [userType, setUserType] = useState<ISendUsersParams['userType']>('all');
     const [search, setSearch] = useState<string>('');
 
-    const userListRef = useRef<HTMLDivElement | null>(null);
+    const userListRef = useRef<HTMLDivElement>(null);
 
     const handleChangeUserType = (event: SelectChangeEvent) => {
         const value = event.target.value as ISendUsersParams['userType'];
@@ -104,7 +104,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                         <ShareButton link="welcome" />
                     </div>
 
-                    <div className="custom-select">
+                    <div className="custom-mui-select">
                         <div className="select-box">
                             <Select
                                 id="sidebar-user-type"

@@ -1,0 +1,56 @@
+.custom-mui-select {
+    padding: 0 16px;
+
+    .select-box {
+        position: relative;
+        width: fit-content;
+    }
+
+    .MuiInputBase-root {
+        &:hover:not(.Mui-disabled, .Mui-error) {
+            &::before,
+            &::after {
+                border-width: 2px;
+                border-color: $primary-color;
+            }
+        }
+
+        &::before,
+        &::after {
+            border-width: 2px;
+            border-color: $primary-color;
+        }
+    }
+
+    .MuiSelect-select {
+        &:focus {
+            background-color: transparent;
+        }
+
+        .count {
+            display: none;
+        }
+    }
+
+    .MuiSvgIcon-root {
+        color: $primary-color;
+    }
+
+    .count {
+        top: -6px;
+        left: 100%;
+        transform: translateX(-50%);
+        background-color: $primary-color;
+    }
+}
+
+.sidebar-user-type-item {
+    position: relative;
+
+    .count {
+        top: -6px;
+        left: 100%;
+        background-color: $primary-color;
+        font-size: 9px;
+    }
+}

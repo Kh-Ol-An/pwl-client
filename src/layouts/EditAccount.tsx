@@ -43,7 +43,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const inputRef = useRef<HTMLInputElement | null>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
     const [avatar, setAvatar] = useState<TCurrentAvatar>('');

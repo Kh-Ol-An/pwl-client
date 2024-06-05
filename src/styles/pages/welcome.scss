@@ -2,48 +2,120 @@
     width: 100%;
     min-height: 100svh;
 
-    .section {
-        padding: 140px 20px 40px;
+    .cover {
+        padding: 0 14px 40px;
+        background-image: url("../../assets/images/welcome/bg-cover.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #1f1f23;
         width: 100%;
-        min-height: 100svh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 40px;
+        min-height: 830px;
 
-        @media only screen and (min-width: 1024px) {
-            padding: 40px 200px;
-            gap: 120px;
+        @media only screen and (min-width: 768px) {
+            padding: 0 0 80px;
         }
     }
 
-    .section-text {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 22px;
-        font-weight: 700;
-        color: $light-color;
-        text-align: center;
+    .head {
+        padding: 16px 14px;
+        @include flex-between;
 
         @media only screen and (min-width: 768px) {
-            font-size: 28px;
+            padding: 24px 0; // + 24px
         }
+    }
 
-        @media only screen and (min-width: 1366px) {
-            font-size: 34px;
+    .actions {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: $z-index-9;
+        padding: 8px 14px;
+        @include flex-between;
+        gap: 20px;
+        background: $background-color;
+
+        @media only screen and (min-width: 768px) {
+            position: static;
+            right: unset;
+            bottom: unset;
+            left: unset;
+            z-index: unset;
+            padding: 0;
+            gap: 64px;
+            background: transparent;
         }
+    }
 
-        &.sm {
-            font-size: 18px;
+    .auth-actions {
+        @include flex-center;
+        gap: 16px;
+
+        @media only screen and (min-width: 768px) {
+            gap: 24px;
+        }
+    }
+
+    .button {
+        span {
+            font-size: 12px;
+            line-height: 16px;
 
             @media only screen and (min-width: 768px) {
-                font-size: 22px;
+                font-size: 16px;
+                line-height: 20px;
             }
 
-            @media only screen and (min-width: 1366px) {
-                font-size: 26px;
+            @media only screen and (min-width: 1920px) {
+                font-size: 20px;
+                line-height: 24px;
+            }
+        }
+
+        &.text {
+            padding: 11px;
+            border: 1px solid $white-color;
+
+            @media only screen and (min-width: 360px) {
+                padding: 11px 20px;
+            }
+
+            @media only screen and (min-width: 768px) {
+                padding: 14px 27px;
+            }
+
+            span {
+                color: $white-color;
+            }
+
+            &:hover {
+                border: 1px solid $primary-color;
+
+                span {
+                    color: $primary-color;
+                }
+            }
+
+            &:active {
+                border: 1px solid $primary-color;
+
+                span {
+                    color: $primary-color;
+                }
+            }
+        }
+
+        &:not(.text) {
+            padding: 12px;
+
+            @media only screen and (min-width: 360px) {
+                padding: 12px 20px;
+            }
+
+            @media only screen and (min-width: 768px) {
+                padding: 15px 27px;
             }
         }
     }

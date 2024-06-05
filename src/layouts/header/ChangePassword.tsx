@@ -50,7 +50,7 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
         close();
     };
 
-    const repeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const repeatPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setRepeatPassword(value);
 

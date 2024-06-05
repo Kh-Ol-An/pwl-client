@@ -48,14 +48,14 @@ const Button: FC<IProps> = ({
     if (to) {
         return (
             <Link to={to} {...linkTagProps}>
-                {children}
+                <span>{children}</span>
             </Link>
         );
     }
 
     return (
         <button type={type} disabled={disabled} {...tagProps}>
-            {children}
+            <span>{children}</span>
         </button>
     );
 };
