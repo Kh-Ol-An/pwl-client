@@ -258,14 +258,14 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         <form className="edit-wish" onSubmit={handleSubmit(onSubmit)}>
             {/* material */}
             <div className="material">
-                <span className={"yes" + (material ? " primary-color" : "")}>{t('main.material-wish')}</span>
+                <span className={"yes" + (material ? " primary-color" : "")}>{t('main-page.material-wish')}</span>
                 <Switch
                     id="material"
                     name="material"
                     checked={material}
                     onChange={(e) => setMaterial(e.target.checked)}
                 />
-                <span className={"no" + (material ? "" : " action-color")}>{t('main.non-material-wish')}</span>
+                <span className={"no" + (material ? "" : " action-color")}>{t('main-page.non-material-wish')}</span>
             </div>
 
             {/* name */}
@@ -274,8 +274,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 id="name"
                 name="name"
                 type="text"
-                label={t('main.wish-name')}
-                tooltip={t('main.wish-name-tooltip')}
+                label={t('main-page.wish-name')}
+                tooltip={t('main-page.wish-name-tooltip')}
                 error={errors?.name?.message}
             />
             <Tooltip
@@ -294,8 +294,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                         id="price"
                         name="price"
                         type="number"
-                        label={t('main.wish-price')}
-                        tooltip={t('main.wish-price-tooltip')}
+                        label={t('main-page.wish-price')}
+                        tooltip={t('main-page.wish-price-tooltip')}
                         error={errors?.price?.message}
                     />
                     <div className="custom-mui-select">
@@ -348,17 +348,17 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 id="description"
                 name="description"
                 type="multiline"
-                label={t('main.wish-description')}
+                label={t('main-page.wish-description')}
                 error={errors?.description?.message}
             />
 
             {/* show */}
             <div className="show">
-                <span className="show-label">{t('main.can-see.title')}</span>
+                <span className="show-label">{t('main-page.can-see.title')}</span>
 
                 <div className="show-actions">
                     <Radio
-                        label={t('main.can-see.all')}
+                        label={t('main-page.can-see.all')}
                         id="show-all"
                         name="show"
                         checked={show === 'all'}
@@ -368,7 +368,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
 
                     <div className="show-item">
                         <Radio
-                            label={t('main.can-see.friends')}
+                            label={t('main-page.can-see.friends')}
                             id="show-friends"
                             name="show"
                             checked={show === 'friends'}
@@ -379,7 +379,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                         <span
                             className="tooltip"
                             data-tooltip-id="show-friends"
-                            data-tooltip-content={t('main.can-see.friends-tooltip')}
+                            data-tooltip-content={t('main-page.can-see.friends-tooltip')}
                         >
                             <InfoIcon sx={{ color: StylesVariables.specialColor }} />
                         </span>
@@ -392,7 +392,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
 
                     <div className="show-item">
                         <Radio
-                            label={t('main.can-see.nobody')}
+                            label={t('main-page.can-see.nobody')}
                             id="show-nobody"
                             name="show"
                             checked={show === 'nobody'}
@@ -403,7 +403,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                         <span
                             className="tooltip"
                             data-tooltip-id="show-nobody"
-                            data-tooltip-content={t('main.can-see.nobody-tooltip')}
+                            data-tooltip-content={t('main-page.can-see.nobody-tooltip')}
                         >
                             <InfoIcon sx={{ color: StylesVariables.specialColor }} />
                         </span>
@@ -426,7 +426,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             type="button"
                             onClick={() => setShowConfirmDeleteWish(true)}
                         >
-                            {t('main.delete-wish')}
+                            {t('main-page.delete-wish')}
                         </Button>
 
                         <ConfirmModal
@@ -436,13 +436,13 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             close={() => setShowConfirmDeleteWish(false)}
                             confirm={handleDeleteWish}
                         >
-                            <p className="text-lg">{t('main.are-you-sure')}</p>
+                            <p className="text-lg">{t('main-page.are-you-sure')}</p>
                         </ConfirmModal>
                     </>
                 )}
 
                 <Button type="submit">
-                    {idOfSelectedWish ? t('main.update') : t('main.create')}
+                    {idOfSelectedWish ? t('main-page.update') : t('main-page.create')}
                 </Button>
             </div>
         </form>

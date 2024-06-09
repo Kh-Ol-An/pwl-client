@@ -37,17 +37,17 @@ const DoneWish: FC<IProps> = ({ wish, userId, whoseWish, close }) => {
                 variant="text"
                 onClick={() => setShow(true)}
             >
-                {t('main.wish-fulfilled')}
+                {t('main-page.wish-fulfilled')}
             </Button>
 
             <ConfirmModal
                 show={show}
-                confirmText={t('main.wish-fulfilled')}
+                confirmText={t('main-page.wish-fulfilled')}
                 close={() => setShow(false)}
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    {t('main.sure-fulfilled', { name: unencryptedData(wish.name, wish.show) })}
+                    {t('main-page.sure-fulfilled', { name: unencryptedData(wish.name, wish.show) })}
                 </p>
             </ConfirmModal>
         </>

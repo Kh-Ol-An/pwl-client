@@ -48,25 +48,25 @@ const Welcome: FC = () => {
 
                     <div className="cover-content">
                         <div className="text-block">
-                            <h1>{t('welcome.solve_the_problem')}</h1>
+                            <h1>{t('welcome-page.solve_the_problem')}</h1>
 
-                            <p>{t('welcome.unique_platform')}</p>
+                            <p>{t('welcome-page.unique_platform')}</p>
                         </div>
 
                         <div className="cover-figure">
-                            <img className="cover-figure-emoji-1" src={Emoji1Img} alt={t('welcome.emoji')} />
-                            <img className="cover-figure-arrow-1" src={Arrow1Img} alt={t('welcome.arrow')} />
-                            <img className="cover-figure-smile-1" src={Smile1Img} alt={t('welcome.smile')} />
+                            <img className="cover-figure-emoji-1" src={Emoji1Img} alt={t('welcome-page.emoji')} />
+                            <img className="cover-figure-arrow-1" src={Arrow1Img} alt={t('welcome-page.arrow')} />
+                            <img className="cover-figure-smile-1" src={Smile1Img} alt={t('welcome-page.smile')} />
 
                             <div className="cover-figure-wishlist">
                                 <div className="cover-figure-wishlist_head">
                                     <div className="cover-figure-wishlist_title">
-                                        <h4>{t('welcome.birthday_wishlist')}</h4>
+                                        <h4>{t('welcome-page.birthday_wishlist')}</h4>
 
                                         <img src={PartyPopperIcon} alt="Party Popper Icon"/>
                                     </div>
 
-                                    <span>{t('welcome.count_wishes')}</span>
+                                    <span>{t('welcome-page.count_wishes')}</span>
                                 </div>
 
                                 <ul className="cover-figure-wishlist_list">
@@ -76,12 +76,12 @@ const Welcome: FC = () => {
                                             <span className="cover-figure-wishlist_checkbox"></span>
 
                                             <div className="cover-figure-wishlist_img">
-                                                <img src={FlowersImg} alt={t('welcome.bouquet_of')}/>
+                                                <img src={FlowersImg} alt={t('welcome-page.bouquet_of')}/>
                                             </div>
 
                                             <div className="cover-figure-wishlist_content">
-                                                <span>{t('welcome.bouquet_of')}</span>
-                                                <p>{t('welcome.i_love_roses')}</p>
+                                                <span>{t('welcome-page.bouquet_of')}</span>
+                                                <p>{t('welcome-page.i_love_roses')}</p>
                                             </div>
                                         </div>
                                     </li>
@@ -90,16 +90,16 @@ const Welcome: FC = () => {
                                     <li className="cover-figure-wishlist_item">
                                         <div className="cover-figure-wishlist_block">
                                             <span className="cover-figure-wishlist_checkbox">
-                                                <img src={CheckedIcon} alt={t('welcome.checked_icon')}/>
+                                                <img src={CheckedIcon} alt={t('welcome-page.checked_icon')}/>
                                             </span>
 
                                             <div className="cover-figure-wishlist_img">
-                                                <img src={BearImg} alt={t('welcome.teddy_bear')}/>
+                                                <img src={BearImg} alt={t('welcome-page.teddy_bear')}/>
                                             </div>
 
                                             <div className="cover-figure-wishlist_content">
-                                                <span>{t('welcome.teddy_bear')}</span>
-                                                <p>{t('welcome.childhood_dream')}</p>
+                                                <span>{t('welcome-page.teddy_bear')}</span>
+                                                <p>{t('welcome-page.childhood_dream')}</p>
                                             </div>
                                         </div>
                                     </li>
@@ -110,12 +110,12 @@ const Welcome: FC = () => {
                                             <span className="cover-figure-wishlist_checkbox"></span>
 
                                             <div className="cover-figure-wishlist_img">
-                                                <img src={VRHeadsetImg} alt={t('welcome.vr_headset')}/>
+                                                <img src={VRHeadsetImg} alt={t('welcome-page.vr_headset')}/>
                                             </div>
 
                                             <div className="cover-figure-wishlist_content">
-                                                <span>{t('welcome.vr_headset')}</span>
-                                                <p>{t('welcome.childhood_dream')}</p>
+                                                <span>{t('welcome-page.vr_headset')}</span>
+                                                <p>{t('welcome-page.childhood_dream')}</p>
                                             </div>
                                         </div>
                                     </li>
@@ -124,7 +124,7 @@ const Welcome: FC = () => {
                                     <li className="cover-figure-wishlist_item">
                                         <div className="cover-figure-wishlist_block">
                                             <span className="cover-figure-wishlist_checkbox">
-                                                <img src={CheckedIcon} alt={t('welcome.checked_icon')}/>
+                                                <img src={CheckedIcon} alt={t('welcome-page.checked_icon')}/>
                                             </span>
 
                                             <div className="cover-figure-wishlist_img">
@@ -133,7 +133,7 @@ const Welcome: FC = () => {
 
                                             <div className="cover-figure-wishlist_content">
                                                 <span>Beats by Dre</span>
-                                                <p>{t('welcome.the_best_wireless')}</p>
+                                                <p>{t('welcome-page.the_best_wireless')}</p>
                                             </div>
                                         </div>
                                     </li>
@@ -142,9 +142,9 @@ const Welcome: FC = () => {
                         </div>
 
                         <div className="action-block">
-                        <h3>{t('welcome.special_celebrations')}</h3>
+                        <h3>{t('welcome-page.special_celebrations')}</h3>
 
-                            <p>{t('welcome.create_wish_lists')}</p>
+                            <p>{t('welcome-page.create_wish_lists')}</p>
 
                             <Button to="/auth?register">{t('sing-up')}</Button>
 

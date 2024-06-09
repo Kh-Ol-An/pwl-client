@@ -28,9 +28,9 @@ const ActivationLinkExpired = () => {
             </div>
 
             <p className="content">
-                {t('activation-link-expired.expired')}<br/>
-                {t('activation-link-expired.utc')}<br/>
-                {t('activation-link-expired.again')}
+                {t('activation-link-expired-page.expired')}<br/>
+                {t('activation-link-expired-page.utc')}<br/>
+                {t('activation-link-expired-page.again')}
             </p>
         </div>
     );

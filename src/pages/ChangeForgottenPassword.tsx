@@ -76,7 +76,7 @@ const ChangeForgottenPassword: FC = () => {
 
                     <form className="form" onSubmit={handleSubmit(onSubmit)}>
                         <h1 className="title">
-                            {t('change-forgotten-password.title')}
+                            {t('change-forgotten-password-page.title')}
                         </h1>
 
                         <Input
@@ -84,20 +84,20 @@ const ChangeForgottenPassword: FC = () => {
                             id="newPassword"
                             name="newPassword"
                             type="password"
-                            label={t('change-forgotten-password.new_password')}
+                            label={t('change-forgotten-password-page.new_password')}
                             error={errors?.newPassword?.message}
                         />
                         <Input
                             id="repeat-password"
                             name="repeat-password"
                             type="password"
-                            label={t('change-forgotten-password.repeat_new_password')}
+                            label={t('change-forgotten-password-page.repeat_new_password')}
                             value={repeatPassword}
                             error={repeatPasswordError}
                             onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}
                         />
 
-                        <Button type="submit">{t('change-forgotten-password.recovery')}</Button>
+                        <Button type="submit">{t('change-forgotten-password-page.recovery')}</Button>
                     </form>
                 </Card>
             </div>

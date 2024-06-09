@@ -99,7 +99,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
             <div className="sidebar-inner">
                 <div className="sidebar-content">
                     <div className="sidebar-head">
-                        <h2 className="sidebar-title">{t('main.users')}</h2>
+                        <h2 className="sidebar-title">{t('main-page.users')}</h2>
 
                         <ShareButton link="welcome" />
                     </div>
@@ -113,17 +113,17 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                                 value={userType}
                                 onChange={handleChangeUserType}
                             >
-                                <MenuItem value="all">{t('main.all')}</MenuItem>
-                                <MenuItem value="friends">{t('main.friends')}</MenuItem>
+                                <MenuItem value="all">{t('main-page.all')}</MenuItem>
+                                <MenuItem value="friends">{t('main-page.friends')}</MenuItem>
                                 <MenuItem value="followFrom">
                                     <span className="sidebar-user-type-item">
-                                        {t('main.friend-requests')}
+                                        {t('main-page.friend-requests')}
                                         {users.followFromCount > 0 && (
                                             <span className="count">{users.followFromCount}</span>
                                         )}
                                     </span>
                                 </MenuItem>
-                                <MenuItem value="followTo">{t('main.sent-friend-requests')}</MenuItem>
+                                <MenuItem value="followTo">{t('main-page.sent-friend-requests')}</MenuItem>
                             </Select>
 
                             {users.followFromCount > 0 && (
@@ -133,7 +133,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                     </div>
 
                     <div className="sidebar-search">
-                        <Search id="search" label={t('main.users-search')} changeSearchBar={handleChangeSearchBar} />
+                        <Search id="search" label={t('main-page.users-search')} changeSearchBar={handleChangeSearchBar} />
                     </div>
 
                     <div className="user-list" ref={userListRef}>

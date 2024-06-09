@@ -165,7 +165,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             <span className="params">
                                 {
                                     myUser?.birthday
-                                        ? t('main.bd', { birthday: dayjs(myUser?.birthday).locale(lang).format(dateFormat) })
+                                        ? t('main-page.bd', { birthday: dayjs(myUser?.birthday).locale(lang).format(dateFormat) })
                                         : myUser?.email
                                 }
                             </span>
@@ -184,28 +184,28 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                     >
                         <Button variant="text" color="primary-color" type="button" onClick={handleShowEditAccount}>
                             <ManageAccountsIcon />
-                            {t('main.account_settings')}
+                            {t('main-page.account_settings')}
                         </Button>
 
                         <Button variant="text" color="primary-color" type="button" onClick={handleShowAbout}>
                             <img className="wish-hub-icon" src={LogoIcon} alt="Wish Hub icon" />
-                            {t('main.about')}
+                            {t('main-page.about')}
                             <img className="wish-hub-text" src={WishHub} alt="Wish Hub" />
                         </Button>
 
                         {/*<Button to="/instruction" variant="text">*/}
                         {/*    <InfoIcon />*/}
-                        {/*    {t('main.instruction')}*/}
+                        {/*    {t('main-page.instruction')}*/}
                         {/*</Button>*/}
 
                         <Button variant="text" color="primary-color" type="button" onClick={handleShowContacts}>
                             <ForumIcon />
-                            {t('main.contacts')}
+                            {t('main-page.contacts')}
                         </Button>
 
                         <Button variant="text" color="primary-color" type="button" onClick={handleShowLanguage}>
                             <LanguageIcon />
-                            {t('main.interface_language')}
+                            {t('main-page.interface_language')}
                         </Button>
 
                         <Button variant="text" color="primary-color" type="button" onClick={handleLogout}>
@@ -241,7 +241,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                     {/* Language */}
                     <CustomModal show={showLanguage} hide={handleHideLanguage}>
                         <div className="header-language">
-                            {t('main.interface_language')}:
+                            {t('main-page.interface_language')}:
                             <LanguageSelection />
                         </div>
                     </CustomModal>

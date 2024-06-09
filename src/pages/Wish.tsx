@@ -51,7 +51,7 @@ const Wish: FC = () => {
             {wish ? (
                 <>
                     <div className="wish-head">
-                        {t('wish.created-by')}
+                        {t('wish-page.created-by')}
                         <div className="wish-head-user">
                             <Avatar alt={userFullName} src={userAvatar} sx={{ width: 56, height: 56 }} />
                             <span className="wish-head-user-name">{userFullName}</span>
@@ -66,7 +66,7 @@ const Wish: FC = () => {
                         <div className={"wish-wrap" + (wish.images.length > 1 ? " with-top" : "")}>
                             {wish.price && (
                                 <div className="wish-box">
-                                    <span className="wish-label">{t('wish.price')}</span>
+                                    <span className="wish-label">{t('wish-page.price')}</span>
                                     <span className="wish-data">
                                         {
                                             addingWhiteSpaces(unencryptedData(wish.price, wish.show))
@@ -79,7 +79,7 @@ const Wish: FC = () => {
 
                             {wish.addresses && wish.addresses.length > 0 && (
                                 <p className="wish-description">
-                                    <span className="label">{t('wish.address')}</span>
+                                    <span className="label">{t('wish-page.address')}</span>
                                     {wish.addresses.map((address, idx) => {
                                         const unencryptedAddress = unencryptedData(address.value, wish.show);
 
@@ -112,7 +112,7 @@ const Wish: FC = () => {
 
                             {wish.description && (
                                 <p className="wish-description">
-                                    <span className="label">{t('wish.description')}</span>
+                                    <span className="label">{t('wish-page.description')}</span>
                                     <span className="value">{unencryptedData(wish.description, wish.show)}</span>
                                 </p>
                             )}
@@ -120,7 +120,7 @@ const Wish: FC = () => {
                     </div>
                 </>
             ) : (
-                <p className="wish-empty">{t('wish.empty')}</p>
+                <p className="wish-empty">{t('wish-page.empty')}</p>
             )}
         </div>
     );

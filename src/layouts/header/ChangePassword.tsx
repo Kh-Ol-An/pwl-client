@@ -42,7 +42,7 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
         if (data.newPassword === repeatPassword) {
             setRepeatPasswordError('');
         } else {
-            return setRepeatPasswordError(t('main.repeat-password-error'));
+            return setRepeatPasswordError(t('main-page.repeat-password-error'));
         }
 
         if (!userId || repeatPasswordError.length > 0) return;
@@ -57,7 +57,7 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
         if (!clickedOnSubmit) return;
 
         const password = getValues('newPassword');
-        password === value ? setRepeatPasswordError('') : setRepeatPasswordError(t('main.repeat-password-error'));
+        password === value ? setRepeatPasswordError('') : setRepeatPasswordError(t('main-page.repeat-password-error'));
     };
 
     return (
@@ -68,7 +68,7 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
                     id="oldPassword"
                     name="oldPassword"
                     type="password"
-                    label={t('main.old-password')}
+                    label={t('main-page.old-password')}
                     error={errors?.oldPassword?.message}
                 />
             )}
@@ -77,21 +77,21 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
                 id="newPassword"
                 name="newPassword"
                 type="password"
-                label={t('main.new-password')}
+                label={t('main-page.new-password')}
                 error={errors?.newPassword?.message}
             />
             <Input
                 id="repeat-new-password"
                 name="repeat-new-password"
                 type="password"
-                label={t('main.repeat-new-password')}
+                label={t('main-page.repeat-new-password')}
                 value={repeatPassword}
                 error={repeatPasswordError}
                 onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}
             />
 
             <div className="actions">
-                <Button type="submit" color="action-color">{t('main.change-password')}</Button>
+                <Button type="submit" color="action-color">{t('main-page.change-password')}</Button>
             </div>
         </form>
     );

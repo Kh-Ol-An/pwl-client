@@ -16,116 +16,116 @@ const PrivacyPolicy: FC = () => {
             </div>
 
             <div className="container">
-                <h1>{t('privacy-policy.title')}</h1>
+                <h1>{t('privacy-policy-page.title')}</h1>
 
-                <p>{t('privacy-policy.updated')}</p>
+                <p>{t('privacy-policy-page.updated')}</p>
 
-                <p>{t('privacy-policy.intro')}</p>
+                <p>{t('privacy-policy-page.intro')}</p>
 
                 <p>
-                    {t('privacy-policy.we-use')}
+                    {t('privacy-policy-page.we-use')}
                     <a
                         href="https://www.privacypolicies.com/privacy-policy-generator/"
                         target="_blank"
                         rel="noopener noreferrer external nofollow"
                     >
-                        {t('privacy-policy.generator')}
+                        {t('privacy-policy-page.generator')}
                     </a>
                 </p>
 
-                <h2>{t('privacy-policy.interpretation-definitions')}</h2>
+                <h2>{t('privacy-policy-page.interpretation-definitions')}</h2>
 
-                <h3>{t('privacy-policy.interpretation')}</h3>
+                <h3>{t('privacy-policy-page.interpretation')}</h3>
 
-                <p>{t('privacy-policy.interpretation-text')}</p>
+                <p>{t('privacy-policy-page.interpretation-text')}</p>
 
-                <h3>{t('privacy-policy.definitions')}</h3>
+                <h3>{t('privacy-policy-page.definitions')}</h3>
 
-                <p>{t('privacy-policy.definitions-intro')}</p>
+                <p>{t('privacy-policy-page.definitions-intro')}</p>
 
                 <ul>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.account-strong')}
-                            </strong> {t('privacy-policy.account')}
+                                {t('privacy-policy-page.account-strong')}
+                            </strong> {t('privacy-policy-page.account')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.affiliate-strong')}
-                            </strong> {t('privacy-policy.affiliate')}
+                                {t('privacy-policy-page.affiliate-strong')}
+                            </strong> {t('privacy-policy-page.affiliate')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.company-strong')}
-                            </strong> {t('privacy-policy.company')}
+                                {t('privacy-policy-page.company-strong')}
+                            </strong> {t('privacy-policy-page.company')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.cookies-strong')}
-                            </strong> {t('privacy-policy.cookies')}
+                                {t('privacy-policy-page.cookies-strong')}
+                            </strong> {t('privacy-policy-page.cookies')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.country-strong')}
-                            </strong> {t('privacy-policy.country')}
+                                {t('privacy-policy-page.country-strong')}
+                            </strong> {t('privacy-policy-page.country')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.device-strong')}
-                            </strong> {t('privacy-policy.device')}
+                                {t('privacy-policy-page.device-strong')}
+                            </strong> {t('privacy-policy-page.device')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.personal-strong')}
-                            </strong> {t('privacy-policy.personal')}
+                                {t('privacy-policy-page.personal-strong')}
+                            </strong> {t('privacy-policy-page.personal')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.service-strong')}
-                            </strong> {t('privacy-policy.service')}
+                                {t('privacy-policy-page.service-strong')}
+                            </strong> {t('privacy-policy-page.service')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.provider-strong')}
-                            </strong> {t('privacy-policy.provider')}
+                                {t('privacy-policy-page.provider-strong')}
+                            </strong> {t('privacy-policy-page.provider')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.third-party-strong')}
-                            </strong> {t('privacy-policy.third-party')}
+                                {t('privacy-policy-page.third-party-strong')}
+                            </strong> {t('privacy-policy-page.third-party')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.usage-strong')}
-                            </strong> {t('privacy-policy.usage')}
+                                {t('privacy-policy-page.usage-strong')}
+                            </strong> {t('privacy-policy-page.usage')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.website-strong')}
-                            </strong> {t('privacy-policy.website')}
+                                {t('privacy-policy-page.website-strong')}
+                            </strong> {t('privacy-policy-page.website')}
                             <a href="https://wish-hub.net/">
                                 https://wish-hub.net/
                             </a>
@@ -134,47 +134,47 @@ const PrivacyPolicy: FC = () => {
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.you-strong')}
-                            </strong> {t('privacy-policy.you')}
+                                {t('privacy-policy-page.you-strong')}
+                            </strong> {t('privacy-policy-page.you')}
                         </p>
                     </li>
                 </ul>
 
-                <h2>{t('privacy-policy.collecting')}</h2>
+                <h2>{t('privacy-policy-page.collecting')}</h2>
 
-                <h3>{t('privacy-policy.types')}</h3>
+                <h3>{t('privacy-policy-page.types')}</h3>
 
-                <h4>{t('privacy-policy.personal-data')}</h4>
+                <h4>{t('privacy-policy-page.personal-data')}</h4>
 
-                <p>{t('privacy-policy.personal-info')}</p>
+                <p>{t('privacy-policy-page.personal-info')}</p>
 
                 <ul>
                     <li>
-                        <p>{t('privacy-policy.email')}</p>
+                        <p>{t('privacy-policy-page.email')}</p>
                     </li>
                     <li>
-                        <p>{t('privacy-policy.full-name')}</p>
+                        <p>{t('privacy-policy-page.full-name')}</p>
                     </li>
                     <li>
-                        <p>{t('privacy-policy.phone')}</p>
+                        <p>{t('privacy-policy-page.phone')}</p>
                     </li>
                     <li>
-                        <p>{t('privacy-policy.address')}</p>
+                        <p>{t('privacy-policy-page.address')}</p>
                     </li>
                     <li>
-                        <p>{t('privacy-policy.usage_data')}</p>
+                        <p>{t('privacy-policy-page.usage_data')}</p>
                     </li>
                 </ul>
 
-                <h4>{t('privacy-policy.usage_data_title')}</h4>
-                <p>{t('privacy-policy.usage_data_is')}</p>
-                <p>{t('privacy-policy.usage_data_may')}</p>
-                <p>{t('privacy-policy.when_you_access')}</p>
-                <p>{t('privacy-policy.we_may_also')}</p>
+                <h4>{t('privacy-policy-page.usage_data_title')}</h4>
+                <p>{t('privacy-policy-page.usage_data_is')}</p>
+                <p>{t('privacy-policy-page.usage_data_may')}</p>
+                <p>{t('privacy-policy-page.when_you_access')}</p>
+                <p>{t('privacy-policy-page.we_may_also')}</p>
 
-                <h4>{t('privacy-policy.information_from_third-party')}</h4>
+                <h4>{t('privacy-policy-page.information_from_third-party')}</h4>
 
-                <p>{t('privacy-policy.the_company_allows')}</p>
+                <p>{t('privacy-policy-page.the_company_allows')}</p>
 
                 <ul>
                     <li>Google</li>
@@ -184,220 +184,220 @@ const PrivacyPolicy: FC = () => {
                     <li>LinkedIn</li>
                 </ul>
 
-                <p>{t('privacy-policy.if_you_decide')}</p>
-                <p>{t('privacy-policy.you_may_also')}</p>
+                <p>{t('privacy-policy-page.if_you_decide')}</p>
+                <p>{t('privacy-policy-page.you_may_also')}</p>
 
-                <h4>{t('privacy-policy.tracking_technologies')}</h4>
+                <h4>{t('privacy-policy-page.tracking_technologies')}</h4>
 
-                <p>{t('privacy-policy.we_use_cookies')}</p>
+                <p>{t('privacy-policy-page.we_use_cookies')}</p>
 
                 <ul>
                     <li>
                         <strong>
-                            {t('privacy-policy.cookies_or_browser_cookies')}
-                        </strong> {t('privacy-policy.a_cookie_is')}
+                            {t('privacy-policy-page.cookies_or_browser_cookies')}
+                        </strong> {t('privacy-policy-page.a_cookie_is')}
                     </li>
                     <li>
                         <strong>
-                            {t('privacy-policy.web_beacons')}
-                        </strong> {t('privacy-policy.certain_sections_of')}
+                            {t('privacy-policy-page.web_beacons')}
+                        </strong> {t('privacy-policy-page.certain_sections_of')}
                     </li>
                 </ul>
 
                 <p>
-                    {t('privacy-policy.cookies_can_be')}
+                    {t('privacy-policy-page.cookies_can_be')}
                     <a
                         href="https://www.privacypolicies.com/blog/privacy-policy-template/#Use_Of_Cookies_Log_Files_And_Tracking"
                         target="_blank"
                         rel="noopener noreferrer external nofollow"
                     >
-                        {t('privacy-policy.privacy_policies_website')}
+                        {t('privacy-policy-page.privacy_policies_website')}
                     </a>
-                    {t('privacy-policy.article')}
+                    {t('privacy-policy-page.article')}
                 </p>
-                <p>{t('privacy-policy.we_use_both')}</p>
+                <p>{t('privacy-policy-page.we_use_both')}</p>
 
                 <ul>
                     <li>
-                        <p><strong>{t('privacy-policy.necessary')}</strong></p>
-                        <p>{t('privacy-policy.session_cookies')}</p>
-                        <p>{t('privacy-policy.administered_1')}</p>
-                        <p>{t('privacy-policy.these_cookies_are')}</p>
+                        <p><strong>{t('privacy-policy-page.necessary')}</strong></p>
+                        <p>{t('privacy-policy-page.session_cookies')}</p>
+                        <p>{t('privacy-policy-page.administered_1')}</p>
+                        <p>{t('privacy-policy-page.these_cookies_are')}</p>
                     </li>
                     <li>
-                        <p><strong>{t('privacy-policy.cookies_policy')}</strong></p>
-                        <p>{t('privacy-policy.persistent_cookies_1')}</p>
-                        <p>{t('privacy-policy.administered_2')}</p>
-                        <p>{t('privacy-policy.these_cookies_identify')}</p>
+                        <p><strong>{t('privacy-policy-page.cookies_policy')}</strong></p>
+                        <p>{t('privacy-policy-page.persistent_cookies_1')}</p>
+                        <p>{t('privacy-policy-page.administered_2')}</p>
+                        <p>{t('privacy-policy-page.these_cookies_identify')}</p>
                     </li>
                     <li>
-                        <p><strong>{t('privacy-policy.functionality_cookies')}</strong></p>
-                        <p>{t('privacy-policy.persistent_cookies_2')}</p>
-                        <p>{t('privacy-policy.administered_3')}</p>
-                        <p>{t('privacy-policy.these_cookies_allow')}</p>
+                        <p><strong>{t('privacy-policy-page.functionality_cookies')}</strong></p>
+                        <p>{t('privacy-policy-page.persistent_cookies_2')}</p>
+                        <p>{t('privacy-policy-page.administered_3')}</p>
+                        <p>{t('privacy-policy-page.these_cookies_allow')}</p>
                     </li>
                 </ul>
 
-                <p>{t('privacy-policy.for_more_information')}</p>
+                <p>{t('privacy-policy-page.for_more_information')}</p>
 
-                <h3>{t('privacy-policy.use_of_your')}</h3>
+                <h3>{t('privacy-policy-page.use_of_your')}</h3>
 
-                <p>{t('privacy-policy.the_company_may')}</p>
+                <p>{t('privacy-policy-page.the_company_may')}</p>
 
                 <ul>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.to_provide_and')}
-                            </strong> {t('privacy-policy.including_to_monitor')}
+                                {t('privacy-policy-page.to_provide_and')}
+                            </strong> {t('privacy-policy-page.including_to_monitor')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.to_manage_your_account')}
-                            </strong> {t('privacy-policy.to_manage_your_registration')}
+                                {t('privacy-policy-page.to_manage_your_account')}
+                            </strong> {t('privacy-policy-page.to_manage_your_registration')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.for_the_performance')}
-                            </strong> {t('privacy-policy.the_development')}
+                                {t('privacy-policy-page.for_the_performance')}
+                            </strong> {t('privacy-policy-page.the_development')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.to_contact_you')}
-                            </strong> {t('privacy-policy.by_email')}
+                                {t('privacy-policy-page.to_contact_you')}
+                            </strong> {t('privacy-policy-page.by_email')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.to_provide_you')}
-                            </strong> {t('privacy-policy.with_news')}
+                                {t('privacy-policy-page.to_provide_you')}
+                            </strong> {t('privacy-policy-page.with_news')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.to_manage_your_requests')}
-                            </strong> {t('privacy-policy.to_attend')}
+                                {t('privacy-policy-page.to_manage_your_requests')}
+                            </strong> {t('privacy-policy-page.to_attend')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.for_business_transfers')}
-                            </strong> {t('privacy-policy.we_may_use_1')}
+                                {t('privacy-policy-page.for_business_transfers')}
+                            </strong> {t('privacy-policy-page.we_may_use_1')}
                         </p>
                     </li>
                     <li>
                         <p>
                             <strong>
-                                {t('privacy-policy.for_other_purposes')}
-                            </strong> {t('privacy-policy.we_may_use_2')}
+                                {t('privacy-policy-page.for_other_purposes')}
+                            </strong> {t('privacy-policy-page.we_may_use_2')}
                         </p>
                     </li>
                 </ul>
 
-                <p>{t('privacy-policy.we_may_share_1')}</p>
+                <p>{t('privacy-policy-page.we_may_share_1')}</p>
 
                 <ul>
                     <li>
                         <strong>
-                            {t('privacy-policy.with_service_providers')}
-                        </strong> {t('privacy-policy.we_may_share_2')}
+                            {t('privacy-policy-page.with_service_providers')}
+                        </strong> {t('privacy-policy-page.we_may_share_2')}
                     </li>
                     <li>
                         <strong>
-                            {t('privacy-policy.for_business_transfers_2')}
-                        </strong> {t('privacy-policy.we_may_share_3')}
+                            {t('privacy-policy-page.for_business_transfers_2')}
+                        </strong> {t('privacy-policy-page.we_may_share_3')}
                     </li>
                     <li>
                         <strong>
-                            {t('privacy-policy.with_affiliates')}
-                        </strong> {t('privacy-policy.we_may_share_4')}
+                            {t('privacy-policy-page.with_affiliates')}
+                        </strong> {t('privacy-policy-page.we_may_share_4')}
                     </li>
                     <li>
                         <strong>
-                            {t('privacy-policy.with_business_partners')}
-                        </strong> {t('privacy-policy.we_may_share_5')}
+                            {t('privacy-policy-page.with_business_partners')}
+                        </strong> {t('privacy-policy-page.we_may_share_5')}
                     </li>
                     <li>
                         <strong>
-                            {t('privacy-policy.with_other_users')}
-                        </strong> {t('privacy-policy.when_you_share')}
+                            {t('privacy-policy-page.with_other_users')}
+                        </strong> {t('privacy-policy-page.when_you_share')}
                     </li>
                     <li>
                         <strong>
-                            {t('privacy-policy.with_your_consent')}
-                        </strong> {t('privacy-policy.we_may_disclose')}
+                            {t('privacy-policy-page.with_your_consent')}
+                        </strong> {t('privacy-policy-page.we_may_disclose')}
                     </li>
                 </ul>
 
-                <h3>{t('privacy-policy.retention')}</h3>
-                <p>{t('privacy-policy.company_will_retain')}</p>
-                <p>{t('privacy-policy.company_will_also')}</p>
+                <h3>{t('privacy-policy-page.retention')}</h3>
+                <p>{t('privacy-policy-page.company_will_retain')}</p>
+                <p>{t('privacy-policy-page.company_will_also')}</p>
 
-                <h3>{t('privacy-policy.transfer')}</h3>
-                <p>{t('privacy-policy.your_information')}</p>
-                <p>{t('privacy-policy.your_consent')}</p>
-                <p>{t('privacy-policy.company_will_take')}</p>
+                <h3>{t('privacy-policy-page.transfer')}</h3>
+                <p>{t('privacy-policy-page.your_information')}</p>
+                <p>{t('privacy-policy-page.your_consent')}</p>
+                <p>{t('privacy-policy-page.company_will_take')}</p>
 
-                <h3>{t('privacy-policy.delete')}</h3>
-                <p>{t('privacy-policy.you_have_the')}</p>
-                <p>{t('privacy-policy.our_service_may')}</p>
-                <p>{t('privacy-policy.you_may_update')}</p>
-                <p>{t('privacy-policy.please_note')}</p>
+                <h3>{t('privacy-policy-page.delete')}</h3>
+                <p>{t('privacy-policy-page.you_have_the')}</p>
+                <p>{t('privacy-policy-page.our_service_may')}</p>
+                <p>{t('privacy-policy-page.you_may_update')}</p>
+                <p>{t('privacy-policy-page.please_note')}</p>
 
-                <h3>{t('privacy-policy.disclosure')}</h3>
+                <h3>{t('privacy-policy-page.disclosure')}</h3>
 
-                <h4>{t('privacy-policy.business_transactions')}</h4>
-                <p>{t('privacy-policy.if_the_company')}</p>
+                <h4>{t('privacy-policy-page.business_transactions')}</h4>
+                <p>{t('privacy-policy-page.if_the_company')}</p>
 
-                <h4>{t('privacy-policy.law_enforcement')}</h4>
-                <p>{t('privacy-policy.under_certain')}</p>
+                <h4>{t('privacy-policy-page.law_enforcement')}</h4>
+                <p>{t('privacy-policy-page.under_certain')}</p>
 
-                <h4>{t('privacy-policy.other_legal')}</h4>
-                <p>{t('privacy-policy.company_may_disclose')}</p>
+                <h4>{t('privacy-policy-page.other_legal')}</h4>
+                <p>{t('privacy-policy-page.company_may_disclose')}</p>
 
                 <ul>
-                    <li>{t('privacy-policy.comply_with')}</li>
-                    <li>{t('privacy-policy.protect_defend')}</li>
-                    <li>{t('privacy-policy.prevent_investigate')}</li>
-                    <li>{t('privacy-policy.protect_personal')}</li>
-                    <li>{t('privacy-policy.protect_against')}</li>
+                    <li>{t('privacy-policy-page.comply_with')}</li>
+                    <li>{t('privacy-policy-page.protect_defend')}</li>
+                    <li>{t('privacy-policy-page.prevent_investigate')}</li>
+                    <li>{t('privacy-policy-page.protect_personal')}</li>
+                    <li>{t('privacy-policy-page.protect_against')}</li>
                 </ul>
 
-                <h3>{t('privacy-policy.security')}</h3>
-                <p>{t('privacy-policy.the_security_of')}</p>
+                <h3>{t('privacy-policy-page.security')}</h3>
+                <p>{t('privacy-policy-page.the_security_of')}</p>
 
-                <h2>{t('privacy-policy.children_privacy')}</h2>
-                <p>{t('privacy-policy.our_service_does')}</p>
-                <p>{t('privacy-policy.if_we_need')}</p>
+                <h2>{t('privacy-policy-page.children_privacy')}</h2>
+                <p>{t('privacy-policy-page.our_service_does')}</p>
+                <p>{t('privacy-policy-page.if_we_need')}</p>
 
-                <h2>{t('privacy-policy.other_websites')}</h2>
-                <p>{t('privacy-policy.our_service_may_contain')}</p>
-                <p>{t('privacy-policy.we_have_no')}</p>
+                <h2>{t('privacy-policy-page.other_websites')}</h2>
+                <p>{t('privacy-policy-page.our_service_may_contain')}</p>
+                <p>{t('privacy-policy-page.we_have_no')}</p>
 
-                <h2>{t('privacy-policy.changes')}</h2>
-                <p>{t('privacy-policy.we_may_update')}</p>
-                <p>{t('privacy-policy.we_will_let')}</p>
-                <p>{t('privacy-policy.you_are_advised')}</p>
+                <h2>{t('privacy-policy-page.changes')}</h2>
+                <p>{t('privacy-policy-page.we_may_update')}</p>
+                <p>{t('privacy-policy-page.we_will_let')}</p>
+                <p>{t('privacy-policy-page.you_are_advised')}</p>
 
-                <h2>{t('privacy-policy.contact_us')}</h2>
+                <h2>{t('privacy-policy-page.contact_us')}</h2>
 
-                <p>{t('privacy-policy.if_you_have')}</p>
+                <p>{t('privacy-policy-page.if_you_have')}</p>
 
                 <ul>
-                    <li>{t('privacy-policy.contact_email')}</li>
+                    <li>{t('privacy-policy-page.contact_email')}</li>
                 </ul>
 
                 <div className="agree">
-                    <Button to="/auth?agree">{t('privacy-policy.agree')}</Button>
+                    <Button to="/auth?agree">{t('privacy-policy-page.agree')}</Button>
                 </div>
             </div>
         </div>

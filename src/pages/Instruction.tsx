@@ -50,13 +50,13 @@ const Instruction: FC = () => {
             </div>
 
             <section className={"container" + (myUser.user === null ? " logged-out" : "")}>
-                <h1>{t('instruction.title')}</h1>
+                <h1>{t('instruction-page.title')}</h1>
 
                 <div>
                     {/*<CustomAccordion*/}
                     {/*    ariaControls="app-content"*/}
                     {/*    titleId="app-header"*/}
-                    {/*    title={t('instruction.app.title')}*/}
+                    {/*    title={t('instruction-page.app.title')}*/}
                     {/*    contentId="app-content"*/}
                     {/*>*/}
                     {/*    <p>*/}
@@ -69,10 +69,10 @@ const Instruction: FC = () => {
                     <CustomAccordion
                         ariaControls="auth-content"
                         titleId="auth-header"
-                        title={t('instruction.auth.title')}
+                        title={t('instruction-page.auth.title')}
                         contentId="auth-content"
                     >
-                        <p>{t('instruction.auth.intro')}</p>
+                        <p>{t('instruction-page.auth.intro')}</p>
 
                         <ol className="numbered-list">
                             <li className="numbered-item">
@@ -80,11 +80,11 @@ const Instruction: FC = () => {
                                     <li className="image-item">
                                         <p className="image-item-text">
                                             <span className="marker">1</span>
-                                            {t('instruction.auth.google.text-1')}
+                                            {t('instruction-page.auth.google.text-1')}
                                             <br />
-                                            {t('instruction.auth.google.text-2')}
+                                            {t('instruction-page.auth.google.text-2')}
                                             <br />
-                                            {t('instruction.auth.google.text-3')}
+                                            {t('instruction-page.auth.google.text-3')}
                                         </p>
 
                                         <div
@@ -95,20 +95,20 @@ const Instruction: FC = () => {
                                                         screenWidth < 768
                                                             ? LoginWithGoogleMobileImg
                                                             : LoginWithGoogleImg,
-                                                        t('instruction.auth.google.img'),
+                                                        t('instruction-page.auth.google.img'),
                                                     )
                                             }
                                         >
                                             <img
                                                 src={screenWidth < 768 ? LoginWithGoogleMobileImg : LoginWithGoogleImg}
-                                                alt={t('instruction.auth.google.img')}
+                                                alt={t('instruction-page.auth.google.img')}
                                             />
                                         </div>
                                     </li>
 
                                     <li className="image-item">
                                         <p className="image-item-text">
-                                            {t('instruction.auth.account.text')}
+                                            {t('instruction-page.auth.account.text')}
                                         </p>
 
                                         <div
@@ -119,7 +119,7 @@ const Instruction: FC = () => {
                                                         screenWidth < 768
                                                             ? ChooseGoogleAccountMobileImg
                                                             : ChooseGoogleAccountImg,
-                                                        t('instruction.auth.account.img'),
+                                                        t('instruction-page.auth.account.img'),
                                                     )
                                             }
                                         >
@@ -127,14 +127,14 @@ const Instruction: FC = () => {
                                                 src={screenWidth < 768
                                                     ? ChooseGoogleAccountMobileImg
                                                     : ChooseGoogleAccountImg}
-                                                alt={t('instruction.auth.account.img')}
+                                                alt={t('instruction-page.auth.account.img')}
                                             />
                                         </div>
                                     </li>
 
                                     <li className="image-item double">
                                         <p className="image-item-text">
-                                            {t('instruction.auth.data.text')}
+                                            {t('instruction-page.auth.data.text')}
                                         </p>
 
                                         <div className="image-box">
@@ -146,7 +146,7 @@ const Instruction: FC = () => {
                                                             screenWidth < 768
                                                                 ? EnterYourAccountNameMobileImg
                                                                 : EnterYourAccountNameImg,
-                                                            t('instruction.auth.data.account-img'),
+                                                            t('instruction-page.auth.data.account-img'),
                                                         )
                                                 }
                                             >
@@ -156,7 +156,7 @@ const Instruction: FC = () => {
                                                             ? EnterYourAccountNameMobileImg
                                                             : EnterYourAccountNameImg
                                                     }
-                                                    alt={t('instruction.auth.data.account-img')}
+                                                    alt={t('instruction-page.auth.data.account-img')}
                                                 />
                                             </div>
                                             <div
@@ -167,7 +167,7 @@ const Instruction: FC = () => {
                                                             screenWidth < 768
                                                                 ? EnterYourPasswordMobileImg
                                                                 : EnterYourPasswordImg,
-                                                            t('instruction.auth.data.password-img'),
+                                                            t('instruction-page.auth.data.password-img'),
                                                         )
                                                 }
                                             >
@@ -175,7 +175,7 @@ const Instruction: FC = () => {
                                                     src={screenWidth < 768
                                                         ? EnterYourPasswordMobileImg
                                                         : EnterYourPasswordImg}
-                                                    alt={t('instruction.auth.data.password-img')}
+                                                    alt={t('instruction-page.auth.data.password-img')}
                                                 />
                                             </div>
                                         </div>
@@ -183,7 +183,7 @@ const Instruction: FC = () => {
 
                                     <li className="image-item">
                                         <p className="image-item-text">
-                                            {t('instruction.auth.logged.text')}
+                                            {t('instruction-page.auth.logged.text')}
                                         </p>
 
                                         <div
@@ -194,13 +194,13 @@ const Instruction: FC = () => {
                                                         screenWidth < 768
                                                             ? LoggedToWishHubMobileImg
                                                             : LoggedToWishHubImg,
-                                                        t('instruction.auth.logged.img'),
+                                                        t('instruction-page.auth.logged.img'),
                                                     )
                                             }
                                         >
                                             <img
                                                 src={screenWidth < 768 ? LoggedToWishHubMobileImg : LoggedToWishHubImg}
-                                                alt={t('instruction.auth.logged.img')}
+                                                alt={t('instruction-page.auth.logged.img')}
                                             />
                                         </div>
                                     </li>
@@ -212,9 +212,9 @@ const Instruction: FC = () => {
                                     <li className="image-item">
                                         <p className="image-item-text">
                                             <span className="marker">2</span>
-                                            {t('instruction.auth.sing-up.text-1')}
+                                            {t('instruction-page.auth.sing-up.text-1')}
                                             <br />
-                                            {t('instruction.auth.sing-up.text-2')}
+                                            {t('instruction-page.auth.sing-up.text-2')}
                                         </p>
 
                                         <div
@@ -223,22 +223,22 @@ const Instruction: FC = () => {
                                                 () =>
                                                     handleShowImage(
                                                         screenWidth < 768 ? SingUpMobileImg : SingUpImg,
-                                                        t('instruction.auth.sing-up.img'),
+                                                        t('instruction-page.auth.sing-up.img'),
                                                     )
                                             }
                                         >
                                             <img
                                                 src={screenWidth < 768 ? SingUpMobileImg : SingUpImg}
-                                                alt={t('instruction.auth.sing-up.img')}
+                                                alt={t('instruction-page.auth.sing-up.img')}
                                             />
                                         </div>
                                     </li>
 
                                     <li className="image-item">
                                         <p className="image-item-text">
-                                            {t('instruction.auth.activation.text-1')}
+                                            {t('instruction-page.auth.activation.text-1')}
                                             <br />
-                                            {t('instruction.auth.activation.text-2')}
+                                            {t('instruction-page.auth.activation.text-2')}
                                         </p>
 
                                         <div
@@ -249,7 +249,7 @@ const Instruction: FC = () => {
                                                         screenWidth < 768
                                                             ? ActivationAccountMobileImg
                                                             : ActivationAccountImg,
-                                                        t('instruction.auth.activation.img'),
+                                                        t('instruction-page.auth.activation.img'),
                                                     )
                                             }
                                         >
@@ -257,7 +257,7 @@ const Instruction: FC = () => {
                                                 src={screenWidth < 768
                                                     ? ActivationAccountMobileImg
                                                     : ActivationAccountImg}
-                                                alt={t('instruction.auth.activation.img')}
+                                                alt={t('instruction-page.auth.activation.img')}
                                             />
                                         </div>
                                     </li>
@@ -269,11 +269,11 @@ const Instruction: FC = () => {
                     <CustomAccordion
                         ariaControls="next-content"
                         titleId="next-header"
-                        title={t('instruction.next.title')}
+                        title={t('instruction-page.next.title')}
                         contentId="next-content"
                     >
                         <p>
-                            {t('instruction.next.text')}
+                            {t('instruction-page.next.text')}
                         </p>
                     </CustomAccordion>
                 </div>

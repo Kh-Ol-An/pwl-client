@@ -59,13 +59,13 @@ const Auth: FC = () => {
     i18next.language.includes('en') && (lang = 'en');
     i18next.language.includes('uk') && (lang = 'uk');
 
-    let title = t('auth.title.sing_in');
-    isRegistration && (title = t('auth.title.sing_up'));
-    isForgotPassword && (title = t('auth.title.forgot_password'));
+    let title = t('auth-page.title.sing_in');
+    isRegistration && (title = t('auth-page.title.sing_up'));
+    isForgotPassword && (title = t('auth-page.title.forgot_password'));
 
     let submit = t('sing-in');
     isRegistration && (submit = t('sing-up'));
-    isForgotPassword && (submit = t('auth.recovery'));
+    isForgotPassword && (submit = t('auth-page.recovery'));
 
     const handleGoogleLogin = async (response: CredentialResponse) => {
         setClickedOnSubmit(true);
@@ -73,7 +73,7 @@ const Auth: FC = () => {
         if (checkedPrivacyPolicy) {
             setCheckedPrivacyPolicyError('');
         } else {
-            return setCheckedPrivacyPolicyError(t('auth.privacy_policy_error'));
+            return setCheckedPrivacyPolicyError(t('auth-page.privacy_policy_error'));
         }
 
         if (!response.credential || checkedPrivacyPolicyError.length > 0) return;
@@ -101,14 +101,14 @@ const Auth: FC = () => {
             if (data.password === repeatPassword) {
                 setRepeatPasswordError('');
             } else {
-                return setRepeatPasswordError(t('auth.passwords_error'));
+                return setRepeatPasswordError(t('auth-page.passwords_error'));
             }
         }
 
         if (checkedPrivacyPolicy) {
             setCheckedPrivacyPolicyError('');
         } else {
-            return setCheckedPrivacyPolicyError(t('auth.privacy_policy_error'));
+            return setCheckedPrivacyPolicyError(t('auth-page.privacy_policy_error'));
         }
 
         if (repeatPasswordError.length > 0 || checkedPrivacyPolicyError.length > 0) return;
@@ -129,7 +129,7 @@ const Auth: FC = () => {
         if (!clickedOnSubmit) return;
 
         const password = getValues('password');
-        password === value ? setRepeatPasswordError('') : setRepeatPasswordError(t('auth.passwords_error'));
+        password === value ? setRepeatPasswordError('') : setRepeatPasswordError(t('auth-page.passwords_error'));
     };
 
     const handleTogglePrivacyPolicy = (e: ChangeEvent<HTMLInputElement>) => {
@@ -140,7 +140,7 @@ const Auth: FC = () => {
 
         value
             ? setCheckedPrivacyPolicyError('')
-            : setCheckedPrivacyPolicyError(t('auth.privacy_policy_error'));
+            : setCheckedPrivacyPolicyError(t('auth-page.privacy_policy_error'));
     };
 
     return (
@@ -175,7 +175,7 @@ const Auth: FC = () => {
                             />
                         )}
 
-                        <span className="auth-page-divider">{t('auth.or')}</span>
+                        <span className="auth-page-divider">{t('auth-page.or')}</span>
 
                         {isRegistration && (
                             <Input
@@ -203,7 +203,7 @@ const Auth: FC = () => {
                                 id="password"
                                 name="password"
                                 type="password"
-                                label={t('auth.password')}
+                                label={t('auth-page.password')}
                                 error={errors?.password?.message}
                             />
                         )}
@@ -213,7 +213,7 @@ const Auth: FC = () => {
                                 id="repeat-password"
                                 name="repeat-password"
                                 type="password"
-                                label={t('auth.repeat_password')}
+                                label={t('auth-page.repeat_password')}
                                 value={repeatPassword}
                                 error={repeatPasswordError}
                                 onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}
@@ -242,8 +242,8 @@ const Auth: FC = () => {
                                     >
                                         {
                                             isForgotPassword
-                                                ? t('auth.password_remembered')
-                                                : t('auth.forgot_password')
+                                                ? t('auth-page.password_remembered')
+                                                : t('auth-page.forgot_password')
                                         }
                                     </Button>
                                 </div>
@@ -259,11 +259,11 @@ const Auth: FC = () => {
                                     checked={checkedPrivacyPolicy}
                                     onChange={handleTogglePrivacyPolicy}
                                 >
-                                    {t('auth.i_agree_to')}
+                                    {t('auth-page.i_agree_to')}
                                     <Button to="/privacy-policy" variant="text" color="primary-color">
-                                        {t('auth.privacy_policy')}
+                                        {t('auth-page.privacy_policy')}
                                     </Button>
-                                    {t('auth.wish_hub')}
+                                    {t('auth-page.wish_hub')}
                                 </Checkbox>
 
                                 {checkedPrivacyPolicyError.length > 0 && (

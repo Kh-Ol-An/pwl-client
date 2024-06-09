@@ -37,7 +37,7 @@ const DetailAccount: FC<IProps> = ({ user }) => {
 
                 {myUser?.id === user.id && (
                     <div className="detail-account-field">
-                        <div className="detail-account-label">{t('main.mail')}</div>
+                        <div className="detail-account-label">{t('main-page.mail')}</div>
                         <div className="detail-account-value" title={user.email}>
                             {user.email}
                         </div>
@@ -46,7 +46,7 @@ const DetailAccount: FC<IProps> = ({ user }) => {
 
                 {user.birthday && (
                     <div className="detail-account-field">
-                        <div className="detail-account-label">{t('main.birthday')}</div>
+                        <div className="detail-account-label">{t('main-page.birthday')}</div>
                         <div className="detail-account-value">
                             {dayjs(user.birthday).locale(lang).format(dateFormat)}
                         </div>
@@ -54,14 +54,14 @@ const DetailAccount: FC<IProps> = ({ user }) => {
                 )}
 
                 <div className="detail-account-field">
-                    <div className="detail-account-label">{t('main.fulfilled-wishes')}</div>
+                    <div className="detail-account-label">{t('main-page.fulfilled-wishes')}</div>
                     <div className={"detail-account-value" + (user.successfulWishes > 0 ? " success" : "")}>
                         {user.successfulWishes || 0}
                     </div>
                 </div>
 
                 <div className="detail-account-field">
-                    <div className="detail-account-label">{t('main.unfulfilled-wishes')}</div>
+                    <div className="detail-account-label">{t('main-page.unfulfilled-wishes')}</div>
                     <div className={"detail-account-value" + (user.unsuccessfulWishes > 0 ? " unsuccess" : "")}>
                         {user.unsuccessfulWishes || 0}
                     </div>

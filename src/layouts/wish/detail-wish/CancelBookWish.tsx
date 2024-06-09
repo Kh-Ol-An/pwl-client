@@ -35,18 +35,18 @@ const CancelBookWish: FC<IProps> = ({ wish, userId, close }) => {
                 color="action-color"
                 onClick={() => setShow(true)}
             >
-                {t('main.cancel-execution')}
+                {t('main-page.cancel-execution')}
 
             </Button>
 
             <ConfirmModal
                 show={show}
-                confirmText={t('main.cancel-my-intention')}
+                confirmText={t('main-page.cancel-my-intention')}
                 close={() => setShow(false)}
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    {t('main.cancel-intention', { name: unencryptedData(wish.name, wish.show) })}
+                    {t('main-page.cancel-intention', { name: unencryptedData(wish.name, wish.show) })}
                 </p>
             </ConfirmModal>
         </>

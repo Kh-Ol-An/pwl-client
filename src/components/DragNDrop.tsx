@@ -73,19 +73,19 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAllImages }) => {
             <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
                 <p className="text">
-                    <span className="mouse">{t('main.drag')}</span>
-                    <span className="touch">{t('main.click')}</span>
+                    <span className="mouse">{t('main-page.drag')}</span>
+                    <span className="touch">{t('main-page.click')}</span>
                     <br />
                     <br />
-                    {t('main.change')}
+                    {t('main-page.change')}
                     <br />
                     <br />
                     <span className="rules">
-                        {t('main.size', { size: ALLOWED_MAX_FILE_SIZE_IN_MB })}
+                        {t('main-page.size', { size: ALLOWED_MAX_FILE_SIZE_IN_MB })}
                         <br />
-                        {t('main.formats')} {Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ')}.
+                        {t('main-page.formats')} {Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ')}.
                         <br />
-                        {t('main.count', { count: MAX_NUMBER_OF_IMAGES_PER_WISH })}
+                        {t('main-page.count', { count: MAX_NUMBER_OF_IMAGES_PER_WISH })}
                     </span>
                 </p>
             </div>
@@ -133,7 +133,7 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAllImages }) => {
 
             {images.length > 0 && (
                 <button className="remove-all" type="button" onClick={removeAllImages}>
-                    {t('main.delete-all-images')}
+                    {t('main-page.delete-all-images')}
                 </button>
             )}
         </div>

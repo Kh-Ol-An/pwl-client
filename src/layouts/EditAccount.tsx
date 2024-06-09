@@ -59,13 +59,13 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
         switch (birthdayError) {
             case 'minDate': {
-                return t('main.birthday-error.min-date');
+                return t('main-page.birthday-error.min-date');
             }
             case 'disableFuture': {
-                return t('main.birthday-error.disable-future');
+                return t('main-page.birthday-error.disable-future');
             }
             case 'invalidDate': {
-                return t('main.birthday-error.invalid-date');
+                return t('main-page.birthday-error.invalid-date');
             }
             default: {
                 return '';
@@ -169,11 +169,11 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
             <div
                 className={"date-picker" + (clickedOnSubmit ? " clicked-on-submit" : "")}
-                title={t('main.when_your_birth')}
+                title={t('main-page.when_your_birth')}
             >
                 <DemoContainer components={['DesktopDatePicker']}>
                     <DesktopDatePicker
-                        label={t('main.birthday*')}
+                        label={t('main-page.birthday*')}
                         format={dateFormat}
                         dayOfWeekFormatter={(weekday) => weekday}
                         minDate={dayjs().subtract(120, 'years')} // Дозволити вибір дати до 120 років в минулому
@@ -192,10 +192,10 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
             <div className="actions">
                 <Button type="button" variant="text" color="action-color" onClick={handleShowConfirmDeleteMyUser}>
-                    {t('main.delete-account')}
+                    {t('main-page.delete-account')}
                 </Button>
 
-                <Button type="submit">{t('main.update')}</Button>
+                <Button type="submit">{t('main-page.update')}</Button>
             </div>
         </form>
     );

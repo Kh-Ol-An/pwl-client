@@ -121,24 +121,24 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                         <Button variant="text" fontSize="small" onClick={handleAddFriend}>
                             {
                                 myUser?.followFrom.includes(user.id)
-                                    ? t('main.confirm-friendship')
-                                    : t('main.add-friend')
+                                    ? t('main-page.confirm-friendship')
+                                    : t('main-page.add-friend')
                             }
                         </Button>
                     )}
                     {(myUser?.friends.includes(user.id) || myUser?.followTo.includes(user.id)) && (
                         <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('followTo')}>
-                            {t('main.delete-your')} <br/> {t('main.delete-request')}
+                            {t('main-page.delete-your')} <br/> {t('main-page.delete-request')}
                         </Button>
                     )}
                     {(myUser?.friends.includes(user.id) || myUser?.followFrom.includes(user.id)) && (
                         <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('followFrom')}>
-                            {t('main.delete-user_s')} <br/> {t('main.delete-request')}
+                            {t('main-page.delete-user_s')} <br/> {t('main-page.delete-request')}
                         </Button>
                     )}
                     {myUser?.friends.includes(user.id) && (
                         <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('friends')}>
-                            {t('main.remove-friend')}
+                            {t('main-page.remove-friend')}
                         </Button>
                     )}
                 </Popup>
@@ -178,7 +178,7 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                         <span className="params">
                             {
                                 user.birthday
-                                    ? t('main.bd', { birthday: dayjs(user.birthday).locale(lang).format(dateFormat) })
+                                    ? t('main-page.bd', { birthday: dayjs(user.birthday).locale(lang).format(dateFormat) })
                                     : user.email
                             }
                         </span>

@@ -44,8 +44,8 @@ const Addresses: FC<IProps> = ({ control, getValues, errors, register, material,
                             id={`address-${idx}`}
                             name={`addresses[${idx}].value`}
                             type="text"
-                            label={t('main.where-to-buy')}
-                            tooltip={t('main.where-to-buy-tooltip')}
+                            label={t('main-page.where-to-buy')}
+                            tooltip={t('main-page.where-to-buy-tooltip')}
                         />
 
                         {addresses.length > 1 && (

@@ -43,18 +43,18 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
 
         if (bookEnd === null && clickedOnBookWish) {
             setBookEndError('invalidDate');
-            return t('main.book-end-errors.required');
+            return t('main-page.book-end-errors.required');
         }
 
         switch (bookEndError) {
             case 'disablePast': {
-                return t('main.book-end-errors.past');
+                return t('main-page.book-end-errors.past');
             }
             case 'maxDate': {
-                return t('main.book-end-errors.max');
+                return t('main-page.book-end-errors.max');
             }
             case 'invalidDate': {
-                return t('main.book-end-errors.invalid');
+                return t('main-page.book-end-errors.invalid');
             }
             default: {
                 return '';
@@ -97,17 +97,17 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 variant="text"
                 onClick={() => setShow(true)}
             >
-                {t('main.will-fulfill')}
+                {t('main-page.will-fulfill')}
             </Button>
 
             <ConfirmModal
                 show={show}
-                confirmText={t('main.confirm-intention')}
+                confirmText={t('main-page.confirm-intention')}
                 close={handleHide}
                 confirm={handleSubmit}
             >
                 <p className="text-lg">
-                    {t('main.i-intend', { name: unencryptedData(wish.name, wish.show) })}
+                    {t('main-page.i-intend', { name: unencryptedData(wish.name, wish.show) })}
                 </p>
 
                 <div
@@ -119,7 +119,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 >
                     <DemoContainer components={['DesktopDatePicker']}>
                         <DesktopDatePicker
-                            label={t('main.including')}
+                            label={t('main-page.including')}
                             format={dateFormat}
                             dayOfWeekFormatter={(weekday) => weekday}
                             disablePast
@@ -137,11 +137,11 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 </div>
 
                 <p className="text book-wish-text">
-                    {t('main.after_you_confirm')}
+                    {t('main-page.after_you_confirm')}
                     <span
                         className="tooltip detail-wish-book-tooltip"
                         data-tooltip-id="book-wish"
-                        data-tooltip-content={t('main.by_declaring')}
+                        data-tooltip-content={t('main-page.by_declaring')}
                     >
                         <InfoIcon sx={{ color: StylesVariables.specialColor }} />
                     </span>

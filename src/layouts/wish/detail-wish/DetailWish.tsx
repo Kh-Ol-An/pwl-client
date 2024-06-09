@@ -77,8 +77,8 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                                 <>
                                                     {
                                                         myUser?.id === wish.booking?.userId
-                                                            ? t('main.you-must')
-                                                            : t('main.wish-must')
+                                                            ? t('main-page.you-must')
+                                                            : t('main-page.wish-must')
                                                     }
                                                     <span>
                                                         {
@@ -88,7 +88,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                                         }
                                                     </span>
                                                 </>
-                                            ) : (<>{t('main.coming-true')}</>)}
+                                            ) : (<>{t('main-page.coming-true')}</>)}
                                         </p>
                                     )}
 
@@ -123,7 +123,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                     {/* Edit Wish */}
                                     {showEditWish && (
                                         <Button type="button" onClick={handleEditWish}>
-                                            {t('main.edit-wish')}
+                                            {t('main-page.edit-wish')}
                                         </Button>
                                     )}
                                 </div>

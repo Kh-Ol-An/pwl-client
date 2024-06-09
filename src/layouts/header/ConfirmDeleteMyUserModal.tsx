@@ -51,7 +51,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
 
             const data = await response.json();
             if (myUser.email !== data.email) {
-                setConfirmDeleteMyUserError(t('main.email-not-match'));
+                setConfirmDeleteMyUserError(t('main-page.email-not-match'));
                 return;
             }
             await dispatch(deleteMyUser({ email: data.email, password: '', userId: myUser.id }));
@@ -64,7 +64,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
 
         if (myUser.hasPassword) {
             if (myUser.email !== data.email) {
-                setConfirmDeleteMyUserError(t('main.email-not-match'));
+                setConfirmDeleteMyUserError(t('main-page.email-not-match'));
                 return;
             } else {
                 setConfirmDeleteMyUserError('');
@@ -88,7 +88,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
                     <h3 className="title attention">{t('confirm-modal.title')}</h3>
 
                     <p className="text">
-                        {t('main.sadness')}
+                        {t('main-page.sadness')}
                     </p>
 
                     {!myUser?.hasPassword && confirmDeleteMyUserError.length > 0 && (
@@ -124,11 +124,11 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
 
                     <div className="modal-actions">
                         <Button variant="text" color="action-color" type="submit">
-                            {t('main.delete-my-account')}
+                            {t('main-page.delete-my-account')}
                         </Button>
 
                         <Button type="button" onClick={hide}>
-                            {t('main.stay')}
+                            {t('main-page.stay')}
                         </Button>
                     </div>
                 </Card>

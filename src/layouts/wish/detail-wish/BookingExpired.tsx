@@ -45,26 +45,26 @@ const BookingExpired: FC<IProps> = ({ wish, userId, whoseWish, close }) => {
                 color="action-color"
                 onClick={() => setShow(true)}
             >
-                {t('main.determine-status')}
+                {t('main-page.determine-status')}
             </Button>
 
             <CustomModal show={show} hide={() => setShow(false)} classes="modal confirm">
                 <h3 className="title attention">{t('confirm-modal.title')}</h3>
 
                 <p className="text-lg">
-                    {t('main.period-expired', { name: unencryptedData(wish.name, wish.show) })}
+                    {t('main-page.period-expired', { name: unencryptedData(wish.name, wish.show) })}
                     <br />
                     <br />
-                    {t('main.is_your_wish')}
+                    {t('main-page.is_your_wish')}
                 </p>
 
                 <div className="modal-actions detail-wish-expired-actions">
                     <Button type="button" onClick={handleUndone}>
-                        {t('main.no')}
+                        {t('main-page.no')}
                     </Button>
 
                     <Button type="button" onClick={handleDone}>
-                        {t('main.yes')}
+                        {t('main-page.yes')}
                     </Button>
                 </div>
             </CustomModal>
