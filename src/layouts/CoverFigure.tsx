@@ -30,87 +30,85 @@ const CoverFigure: FC = () => {
             <img className="cover-figure-arrow-1" src={Arrow1Img} alt={t('welcome-page.arrow')}/>
             <img className="cover-figure-smile-1" src={Smile1Img} alt={t('welcome-page.smile')}/>
 
-            <div className="cover-figure-wishlist">
-                <div className="cover-figure-wishlist_head">
-                    <div className="cover-figure-wishlist_title">
-                        <h4>{t('welcome-page.birthday_wishlist')}</h4>
+            <div className="cover-figure_head">
+                <div className="cover-figure_title">
+                    <h4>{t('welcome-page.birthday_wishlist')}</h4>
 
-                        <img src={PartyPopperIcon} alt={t('welcome-page.party_popper_icon')}/>
-                    </div>
-
-                    <span>{t('welcome-page.count_wishes')}</span>
+                    <img src={PartyPopperIcon} alt={t('welcome-page.party_popper_icon')}/>
                 </div>
 
-                <ul className="cover-figure-wishlist_list">
-                    {/* Flowers */}
-                    <li className="cover-figure-wishlist_item">
-                        <div className="cover-figure-wishlist_block">
-                            <span className="cover-figure-wishlist_checkbox"></span>
-
-                            <div className="cover-figure-wishlist_img">
-                                <img src={FlowersImg} alt={t('welcome-page.bouquet_of')}/>
-                            </div>
-
-                            <div className="cover-figure-wishlist_content">
-                                <span>{t('welcome-page.bouquet_of')}</span>
-                                <p>{t('welcome-page.i_love_roses')}</p>
-                            </div>
-                        </div>
-                    </li>
-
-                    {/* Bear */}
-                    <li className="cover-figure-wishlist_item">
-                        <div className="cover-figure-wishlist_block">
-                            <span className="cover-figure-wishlist_checkbox">
-                                <img src={CheckedIcon} alt={t('welcome-page.checked_icon')}/>
-                            </span>
-
-                            <div className="cover-figure-wishlist_img">
-                                <img src={BearImg} alt={t('welcome-page.teddy_bear')}/>
-                            </div>
-
-                            <div className="cover-figure-wishlist_content">
-                                <span>{t('welcome-page.teddy_bear')}</span>
-                                <p>{t('welcome-page.childhood_dream')}</p>
-                            </div>
-                        </div>
-                    </li>
-
-                    {/* VR Headset */}
-                    <li className="cover-figure-wishlist_item">
-                        <div className="cover-figure-wishlist_block">
-                            <span className="cover-figure-wishlist_checkbox"></span>
-
-                            <div className="cover-figure-wishlist_img">
-                                <img src={VRHeadsetImg} alt={t('welcome-page.vr_headset')}/>
-                            </div>
-
-                            <div className="cover-figure-wishlist_content">
-                                <span>{t('welcome-page.vr_headset')}</span>
-                                <p>{t('welcome-page.childhood_dream')}</p>
-                            </div>
-                        </div>
-                    </li>
-
-                    {/* Headphones */}
-                    <li className="cover-figure-wishlist_item">
-                        <div className="cover-figure-wishlist_block">
-                            <span className="cover-figure-wishlist_checkbox">
-                                <img src={CheckedIcon} alt={t('welcome-page.checked_icon')}/>
-                            </span>
-
-                            <div className="cover-figure-wishlist_img">
-                                <img src={HeadphonesImg} alt="Beats by Dre"/>
-                            </div>
-
-                            <div className="cover-figure-wishlist_content">
-                                <span>Beats by Dre</span>
-                                <p>{t('welcome-page.the_best_wireless')}</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                <span>{t('welcome-page.count_wishes')}</span>
             </div>
+
+            <ul className="cover-figure_list">
+                {/* Flowers */}
+                <li className="cover-figure_item">
+                    <div className="cover-figure_block">
+                        <span className="cover-figure_checkbox"></span>
+
+                        <div className="cover-figure_img">
+                            <img src={FlowersImg} alt={t('welcome-page.bouquet_of')}/>
+                        </div>
+
+                        <div className="cover-figure_content">
+                            <span>{t('welcome-page.bouquet_of')}</span>
+                            <p>{t('welcome-page.i_love_roses')}</p>
+                        </div>
+                    </div>
+                </li>
+
+                {/* Bear */}
+                <li className="cover-figure_item">
+                    <div className="cover-figure_block">
+                        <span className="cover-figure_checkbox">
+                            <img src={CheckedIcon} alt={t('welcome-page.checked_icon')}/>
+                        </span>
+
+                        <div className="cover-figure_img">
+                            <img src={BearImg} alt={t('welcome-page.teddy_bear')}/>
+                        </div>
+
+                        <div className="cover-figure_content">
+                            <span>{t('welcome-page.teddy_bear')}</span>
+                            <p>{t('welcome-page.childhood_dream')}</p>
+                        </div>
+                    </div>
+                </li>
+
+                {/* VR Headset */}
+                <li className="cover-figure_item">
+                    <div className="cover-figure_block">
+                        <span className="cover-figure_checkbox"></span>
+
+                        <div className="cover-figure_img">
+                            <img src={VRHeadsetImg} alt={t('welcome-page.vr_headset')}/>
+                        </div>
+
+                        <div className="cover-figure_content">
+                            <span>{t('welcome-page.vr_headset')}</span>
+                            <p>{t('welcome-page.childhood_dream')}</p>
+                        </div>
+                    </div>
+                </li>
+
+                {/* Headphones */}
+                <li className="cover-figure_item">
+                    <div className="cover-figure_block">
+                        <span className="cover-figure_checkbox">
+                            <img src={CheckedIcon} alt={t('welcome-page.checked_icon')}/>
+                        </span>
+
+                        <div className="cover-figure_img">
+                            <img src={HeadphonesImg} alt="Beats by Dre"/>
+                        </div>
+
+                        <div className="cover-figure_content">
+                            <span>Beats by Dre</span>
+                            <p>{t('welcome-page.the_best_wireless')}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     );
 };

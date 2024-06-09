@@ -37,7 +37,7 @@ const Welcome: FC = () => {
                         <CoverFigure />
 
                         <div className="action-block">
-                        <h3>{t('welcome-page.special_celebrations')}</h3>
+                            <h3>{t('welcome-page.special_celebrations')}</h3>
 
                             <p>{t('welcome-page.create_wish_lists')}</p>
 
