@@ -6,7 +6,9 @@
     border-radius: $radius-lg-xl;
 
     @media only screen and (min-width: 768px) {
+        margin: 162px auto 0 auto;
         padding: 24px 16px;
+        width: 438px;
         border-radius: $radius-big;
     }
 
@@ -15,33 +17,227 @@
         grid-row: 1/3;
         transform: translateY(30px);
         margin: auto 70px 0 80px;
+        width: 438px;
     }
 }
 
-.cover-figure-emoji-1 {
+.cover-figure-emoji-1,
+.cover-figure-arrow-1,
+.cover-figure-smile-1,
+.cover-figure-emoji-2,
+.cover-figure-arrow-2,
+.cover-figure-smile-2,
+.cover-figure-emoji-3,
+.cover-figure-arrow-3,
+.cover-figure-smile-3,
+.cover-figure-emoji-4,
+.cover-figure-arrow-4,
+.cover-figure-smile-4,
+.cover-figure-emoji-5,
+.cover-figure-arrow-5 {
     position: absolute;
-    bottom: -46px;
-    left: -64px;
-    width: 152px;
-    height: 152px;
 }
 
-.cover-figure-arrow-1 {
-    position: absolute;
-    bottom: 70px;
-    left: 18px;
+.cover-figure-emoji-1,
+.cover-figure-arrow-1,
+.cover-figure-smile-1,
+.cover-figure-emoji-2,
+.cover-figure-arrow-2 {
+    transform: translateX(-100%);
+}
+
+.cover-figure-smile-2,
+.cover-figure-emoji-3,
+.cover-figure-arrow-3,
+.cover-figure-smile-3 {
+    transform: translateY(-100%);
+}
+
+.cover-figure-emoji-4,
+.cover-figure-arrow-4,
+.cover-figure-smile-4,
+.cover-figure-emoji-5,
+.cover-figure-arrow-5 {
+    transform: translateX(100%);
+}
+
+.cover-figure-smile-1,
+.cover-figure-smile-2,
+.cover-figure-smile-3,
+.cover-figure-smile-4 {
     width: 56px;
     height: 56px;
 }
 
-.cover-figure-smile-1 {
-    position: absolute;
-    bottom: 166px;
-    left: 22px;
-    width: 40px;
-    height: 40px;
+// 1
+.cover-figure-emoji-1 {
+    bottom: -66px;
+    left: 34px;
+    width: 200px;
+    height: 200px;
+
+    @media only screen and (min-width: 1024px) {
+        width: 230px;
+        height: 230px;
+    }
 }
 
+.cover-figure-arrow-1 {
+    bottom: 90px;
+    left: -8px;
+    width: 56px;
+    height: 56px;
+
+    @media only screen and (min-width: 1024px) {
+        bottom: 106px;
+    }
+}
+
+.cover-figure-smile-1 {
+    bottom: 236px;
+    left: -60px;
+
+    @media only screen and (min-width: 1024px) {
+        left: -80px;
+    }
+}
+
+// 2
+.cover-figure-emoji-2 {
+    top: -114px;
+    left: 38px;
+    width: 200px;
+    height: 200px;
+
+    @media only screen and (min-width: 1024px) {
+        left: 42px;
+        width: 230px;
+        height: 230px;
+    }
+}
+
+.cover-figure-arrow-2 {
+    top: 50px;
+    left: 10px;
+    width: 76px;
+    height: 76px;
+
+    @media only screen and (min-width: 1024px) {
+        top: 68px;
+        left: 8px;
+    }
+}
+
+.cover-figure-smile-2 {
+    top: -48px;
+    left: 42px;
+
+    @media only screen and (min-width: 1024px) {
+        top: -64px;
+        left: 18px;
+    }
+}
+
+// 3
+.cover-figure-emoji-3 {
+    top: -14px;
+    left: 158px;
+    width: 150px;
+    height: 150px;
+
+    @media only screen and (min-width: 1024px) {
+        top: -8px;
+        left: 148px;
+        width: 168px;
+        height: 168px;
+    }
+}
+
+.cover-figure-arrow-3 {
+    top: 28px;
+    left: 234px;
+    width: 60px;
+    height: 60px;
+
+    @media only screen and (min-width: 1024px) {
+        top: 28px;
+        left: 242px;
+    }
+}
+
+.cover-figure-smile-3 {
+    top: -46px;
+    right: -6px;
+
+    @media only screen and (min-width: 1024px) {
+        top: -52px;
+        right: -30px;
+    }
+}
+
+// 4
+.cover-figure-emoji-4 {
+    top: -66px;
+    right: 4px;
+    width: 170px;
+    height: 170px;
+
+    @media only screen and (min-width: 1024px) {
+        right: 14px;
+        width: 200px;
+        height: 200px;
+    }
+}
+
+.cover-figure-arrow-4 {
+    top: 82px;
+    right: -14px;
+    width: 60px;
+    height: 60px;
+
+    @media only screen and (min-width: 1024px) {
+        top: 102px;
+        right: -16px;
+    }
+}
+
+.cover-figure-smile-4 {
+    bottom: 222px;
+    right: -60px;
+
+    @media only screen and (min-width: 1024px) {
+        right: -74px;
+    }
+}
+
+// 5
+.cover-figure-emoji-5 {
+    right: 20px;
+    bottom: -56px;
+    width: 200px;
+    height: 200px;
+
+    @media only screen and (min-width: 1024px) {
+        right: 46px;
+        bottom: -78px;
+        width: 230px;
+        height: 230px;
+    }
+}
+
+.cover-figure-arrow-5 {
+    right: -6px;
+    bottom: 102px;
+    width: 60px;
+    height: 60px;
+
+    @media only screen and (min-width: 1024px) {
+        right: -4px;
+        bottom: 110px;
+    }
+}
+
+// head
 .cover-figure_head {
     @include flex-between;
 
