@@ -10,7 +10,7 @@ import { Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { bookWish } from '@/store/wishes/thunks';
 import getTooltipStyles from '@/utils/get-tooltip-styles';
-import ConfirmModal from '@/layouts/ConfirmModal';
+import ConfirmModal from '@/components/ConfirmModal';
 import Button from '@/components/Button';
 import { IWish } from '@/models/IWish';
 import StylesVariables from '@/styles/utils/variables.module.scss';

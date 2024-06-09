@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@/store/hook';
 import { cancelBookWish } from '@/store/wishes/thunks';
-import ConfirmModal from '@/layouts/ConfirmModal';
+import ConfirmModal from '@/components/ConfirmModal';
 import Button from '@/components/Button';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';

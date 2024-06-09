@@ -2,8 +2,8 @@ import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import ShareIcon from '@mui/icons-material/Share';
+import ConfirmModal from '@/components/ConfirmModal';
 import StylesVariables from '@/styles/utils/variables.module.scss';
-import ConfirmModal from '@/layouts/ConfirmModal';
 
 interface IProps {
     link?: string;

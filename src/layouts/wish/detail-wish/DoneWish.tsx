@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@/store/hook';
 import { doneWish } from '@/store/wishes/thunks';
 import { IDoneWish } from '@/store/wishes/types';
-import ConfirmModal from '@/layouts/ConfirmModal';
+import ConfirmModal from '@/components/ConfirmModal';
 import Button from '@/components/Button';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
