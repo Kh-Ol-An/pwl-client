@@ -1,4 +1,5 @@
 import React, { FC, MouseEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import EditIcon from '@mui/icons-material/Edit';
@@ -19,6 +20,8 @@ interface IProps {
 }
 
 const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
+    const { t } = useTranslation();
+
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const handleEditWish = (e: MouseEvent<HTMLButtonElement>) => {
@@ -49,7 +52,7 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
                                     <div className="wish-item-img">
                                         <img
                                             src={unencryptedData(wish.images[0].path, wish.show)}
-                                            alt={`wish-${wish.images[0].position}`}
+                                            alt={`${t('wish')} ${wish.images[0].position}`}
                                         />
                                     </div>
                                 )}

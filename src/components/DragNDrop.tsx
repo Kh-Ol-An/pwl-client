@@ -112,7 +112,7 @@ const DragNDrop: FC<IProps> = ({ images, setImages, removeAllImages }) => {
                                             >
                                                 <img
                                                     src={showImage(image)}
-                                                    alt={`wish-${idx}`}
+                                                    alt={`${t('wish')} ${idx}`}
                                                     loading="lazy"
                                                 />
                                                 <button className="remove" type="button" onClick={removeImage(image, idx)}>

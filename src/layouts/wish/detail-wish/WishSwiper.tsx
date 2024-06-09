@@ -7,6 +7,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+import { useTranslation } from 'react-i18next';
 import { IWish } from '@/models/IWish';
 import { unencryptedData } from '@/utils/encryption-data';
 import StylesVariables from '@/styles/utils/variables.module.scss';
@@ -16,6 +17,8 @@ interface IProps {
 }
 
 const WishSwiper: FC<IProps> = ({ wish }) => {
+    const { t } = useTranslation();
+
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
@@ -58,7 +61,7 @@ const WishSwiper: FC<IProps> = ({ wish }) => {
                     <SwiperSlide key={image.id}>
                         <img
                             src={unencryptedData(image.path, wish.show)}
-                            alt={`wish-${image.position}`}
+                            alt={`${t('wish')} ${image.position}`}
                         />
                     </SwiperSlide>
                 ))}
@@ -81,7 +84,7 @@ const WishSwiper: FC<IProps> = ({ wish }) => {
                         <SwiperSlide key={image.id}>
                             <img
                                 src={unencryptedData(image.path, wish.show)}
-                                alt={`wish-${image.position}`}
+                                alt={`${t('wish')} ${image.position}`}
                             />
                         </SwiperSlide>
                     ))}

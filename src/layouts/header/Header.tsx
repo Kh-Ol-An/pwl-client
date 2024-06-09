@@ -188,7 +188,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         </Button>
 
                         <Button variant="text" color="primary-color" type="button" onClick={handleShowAbout}>
-                            <img className="wish-hub-icon" src={LogoIcon} alt="Wish Hub icon" />
+                            <img className="wish-hub-icon" src={LogoIcon} alt={t('wish_hub_icon')} />
                             {t('main-page.about')}
                             <img className="wish-hub-text" src={WishHub} alt="Wish Hub" />
                         </Button>

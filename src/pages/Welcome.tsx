@@ -63,7 +63,7 @@ const Welcome: FC = () => {
                                     <div className="cover-figure-wishlist_title">
                                         <h4>{t('welcome-page.birthday_wishlist')}</h4>
 
-                                        <img src={PartyPopperIcon} alt="Party Popper Icon"/>
+                                        <img src={PartyPopperIcon} alt={t('welcome-page.party_popper_icon')} />
                                     </div>
 
                                     <span>{t('welcome-page.count_wishes')}</span>
@@ -148,9 +148,17 @@ const Welcome: FC = () => {
 
                             <Button to="/auth?register">{t('sing-up')}</Button>
 
-                            <img className="action-block_gift-big" src={ActionBlockGiftBigImg} alt="bigger gift"/>
+                            <img
+                                className="action-block_gift-big"
+                                src={ActionBlockGiftBigImg}
+                                alt={t('welcome-page.bigger_gift')}
+                            />
 
-                            <img className="action-block_gift-small" src={ActionBlockGiftSmallImg} alt="smaller gift"/>
+                            <img
+                                className="action-block_gift-small"
+                                src={ActionBlockGiftSmallImg}
+                                alt={t('welcome-page.smaller_gift')}
+                            />
                         </div>
                     </div>
                 </div>
