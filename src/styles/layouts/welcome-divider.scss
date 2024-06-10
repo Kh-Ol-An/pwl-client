@@ -1,0 +1,22 @@
+.welcome-divider {
+    max-width: 100%;
+    overflow: hidden;
+    padding: 3px 0;
+    @include flex-center;
+    gap: 20px;
+    border-top: 1px dashed $primary-color;
+    border-bottom: 1px dashed $primary-color;
+    background-color: #45f3ff20;
+
+    span {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 1.5;
+        color: $primary-color;
+    }
+
+    img {
+        width: 12px;
+        height: 12px;
+    }
+}

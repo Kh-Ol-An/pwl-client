@@ -48,6 +48,8 @@
 .cover-figure-emoji-5,
 .cover-figure-arrow-5 {
     position: absolute;
+    opacity: 0;
+    animation: wishAppear 0.3s forwards ease-in-out;
 }
 
 .cover-figure-emoji-1,
@@ -97,6 +99,7 @@
     left: 2px;
     width: 64px;
     height: 64px;
+    animation-delay: 5.3s;
 
     @media only screen and (min-width: 412px) {
         bottom: -24px;
@@ -118,6 +121,7 @@
     left: -4px;
     width: 30px;
     height: 30px;
+    animation-delay: 5s;
 
     @media only screen and (min-width: 768px) {
         bottom: 90px;
@@ -130,6 +134,7 @@
 .cover-figure-smile-1 {
     bottom: 112px;
     left: -22px;
+    animation-delay: 3.5s;
 
     @media only screen and (min-width: 390px) {
         bottom: 124px;
@@ -147,6 +152,7 @@
     left: 4px;
     width: 66px;
     height: 66px;
+    animation-delay: 2s;
 
     @media only screen and (min-width: 412px) {
         top: -14px;
@@ -167,6 +173,7 @@
     left: 6px;
     width: 40px;
     height: 40px;
+    animation-delay: 1.8s;
 
     @media only screen and (min-width: 768px) {
         top: 50px;
@@ -179,6 +186,7 @@
 .cover-figure-smile-2 {
     top: -18px;
     left: 10px;
+    animation-delay: 5s;
 
     @media only screen and (min-width: 390px) {
         left: 20px;
@@ -200,6 +208,7 @@
     left: 64px;
     width: 70px;
     height: 70px;
+    animation-delay: 3.7s;
 
     @media only screen and (min-width: 360px) {
         left: 76px;
@@ -229,6 +238,7 @@
     left: 100px;
     width: 34px;
     height: 34px;
+    animation-delay: 3.6s;
 
     @media only screen and (min-width: 360px) {
         left: 112px;
@@ -254,6 +264,7 @@
 .cover-figure-smile-3 {
     top: -20px;
     right: -4px;
+    animation-delay: 6.5s;
 
     @media only screen and (min-width: 390px) {
         right: 12px;
@@ -275,6 +286,7 @@
     right: -2px;
     width: 60px;
     height: 60px;
+    animation-delay: 4.7s;
 
     @media only screen and (min-width: 412px) {
         top: -20px;
@@ -295,6 +307,7 @@
     right: -4px;
     width: 30px;
     height: 30px;
+    animation-delay: 4.5s;
 
     @media only screen and (min-width: 768px) {
         top: 70px;
@@ -307,6 +320,7 @@
 .cover-figure-smile-4 {
     bottom: 116px;
     right: -22px;
+    animation-delay: 4.6s;
 
     @media only screen and (min-width: 390px) {
         bottom: 128px;
@@ -324,6 +338,7 @@
     bottom: -6px;
     width: 60px;
     height: 60px;
+    animation-delay: 3.2s;
 
     @media only screen and (min-width: 412px) {
         right: 0;
@@ -345,6 +360,7 @@
     bottom: 50px;
     width: 32px;
     height: 32px;
+    animation-delay: 3s;
 
     @media only screen and (min-width: 768px) {
         bottom: 102px;
@@ -390,6 +406,8 @@
         font-weight: 600;
         color: $special-color;
         white-space: nowrap;
+        opacity: 0;
+        animation: 0.3s wishAppear 7s forwards ease-in-out;
 
         @media only screen and (min-width: 360px) {
             font-size: 8px;
@@ -449,9 +467,7 @@
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0;
-    animation-duration: 300ms;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
+    animation: wishAppear 0.3s forwards ease-in-out;
 
     @media only screen and (min-width: 768px) {
         border-radius: $radius-xl;
@@ -459,40 +475,68 @@
 }
 
 .cover-figure_item:nth-child(1) {
+    .cover-figure_img img {
+        animation-delay: 0.8s;
+    }
+
+    .cover-figure_content {
+        animation-delay: 1.5s;
+    }
 }
 
 .cover-figure_item:nth-child(2) {
     .cover-figure_block {
         animation-name: wishItemFulfilled-2;
-        animation-delay: 4s;
-
-        &::before {
-            animation-name: wishAppear;
-            animation-delay: 4s;
-        }
-    }
-
-    .cover-figure_checkbox img {
-        animation-delay: 4s;
-    }
-}
-
-.cover-figure_item:nth-child(3) {
-}
-
-.cover-figure_item:nth-child(4) {
-    .cover-figure_block {
-        animation-name: wishItemFulfilled-4;
         animation-delay: 5s;
 
         &::before {
-            animation-name: wishAppear;
             animation-delay: 5s;
         }
     }
 
     .cover-figure_checkbox img {
         animation-delay: 5s;
+    }
+
+    .cover-figure_img img {
+        animation-delay: 2s;
+    }
+
+    .cover-figure_content {
+        animation-delay: 2.2s;
+    }
+}
+
+.cover-figure_item:nth-child(3) {
+    .cover-figure_img img {
+        animation-delay: 3s;
+    }
+
+    .cover-figure_content {
+        animation-delay: 3s;
+    }
+}
+
+.cover-figure_item:nth-child(4) {
+    .cover-figure_block {
+        animation-name: wishItemFulfilled-4;
+        animation-delay: 6s;
+
+        &::before {
+            animation-delay: 6s;
+        }
+    }
+
+    .cover-figure_checkbox img {
+        animation-delay: 6s;
+    }
+
+    .cover-figure_img img {
+        animation-delay: 3.5s;
+    }
+
+    .cover-figure_content {
+        animation-delay: 3.5s;
     }
 }
 
@@ -505,9 +549,7 @@
     border-width: 1px;
     border-style: dashed;
     border-color: transparent;
-    animation-duration: 300ms;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
+    animation: 0.3s forwards ease-in-out;
 
     @media only screen and (min-width: 768px) {
         padding: 16px 8px 20px 18px;
@@ -539,7 +581,7 @@
         width: 12px;
         height: 12px;
         opacity: 0;
-        animation: wishAppear 300ms forwards ease-in-out;
+        animation: wishAppear 0.3s forwards ease-in-out;
 
         @media only screen and (min-width: 768px) {
             width: 22px;
@@ -573,6 +615,8 @@
         transform: translate(-50%, 8px);
         width: 34px;
         height: 42px;
+        opacity: 0;
+        animation: wishAppear 0.3s forwards ease-in-out;
 
         @media only screen and (min-width: 768px) {
             width: 70px;
@@ -586,6 +630,8 @@
     margin-left: 12px;
     display: flex;
     flex-direction: column;
+    opacity: 0;
+    animation: wishAppear 0.3s forwards ease-in-out;
 
     @media only screen and (min-width: 768px) {
         margin-left: 20px;

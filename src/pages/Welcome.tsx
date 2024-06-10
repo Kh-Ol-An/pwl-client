@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import CoverFigure from "@/layouts/CoverFigure";
+import WelcomeDivider from "@/layouts/WelcomeDivider";
 import Logo from "@/components/Logo";
 import LanguageSelection from "@/components/LanguageSelection";
 import Button from "@/components/Button";
 import ActionBlockGiftBigImg from "@/assets/images/welcome/action-block-gift-big.png";
 import ActionBlockGiftSmallImg from "@/assets/images/welcome/action-block-gift-small.png";
-import CoverFigure from "@/layouts/CoverFigure";
 
 const Welcome: FC = () => {
     const { t } = useTranslation();
@@ -18,7 +19,7 @@ const Welcome: FC = () => {
                         <Logo />
 
                         <div className="actions">
-                            <LanguageSelection/>
+                            <LanguageSelection />
 
                             <div className="auth-actions">
                                 <Button to="/auth" variant="text">{t('sing-in')}</Button>
@@ -58,6 +59,8 @@ const Welcome: FC = () => {
                     </div>
                 </div>
             </section>
+
+            <WelcomeDivider />
         </div>
     );
 };
