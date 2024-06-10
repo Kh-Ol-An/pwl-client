@@ -26,31 +26,30 @@ const CoverFigure: FC = () => {
 
     return (
         <div className="cover-figure">
-            <img className="cover-figure-emoji-1" src={Emoji1Img} alt={t('welcome-page.emoji')}/>
-            <img className="cover-figure-arrow-1" src={Arrow1Img} alt={t('welcome-page.arrow')}/>
-            <img className="cover-figure-smile-1" src={Smile1Img} alt={t('welcome-page.smile')}/>
+            <img className="cover-figure-emoji-1" src={Emoji1Img} alt={t('welcome-page.emoji')} />
+            <img className="cover-figure-arrow-1" src={Arrow1Img} alt={t('welcome-page.arrow')} />
+            <img className="cover-figure-smile-1" src={Smile1Img} alt={t('welcome-page.smile')} />
 
-            <img className="cover-figure-emoji-2" src={Emoji2Img} alt={t('welcome-page.emoji')}/>
-            <img className="cover-figure-arrow-2" src={Arrow2Img} alt={t('welcome-page.arrow')}/>
-            <img className="cover-figure-smile-2" src={Smile2Img} alt={t('welcome-page.smile')}/>
+            <img className="cover-figure-emoji-2" src={Emoji2Img} alt={t('welcome-page.emoji')} />
+            <img className="cover-figure-arrow-2" src={Arrow2Img} alt={t('welcome-page.arrow')} />
+            <img className="cover-figure-smile-2" src={Smile2Img} alt={t('welcome-page.smile')} />
 
-            <img className="cover-figure-emoji-3" src={Emoji3Img} alt={t('welcome-page.emoji')}/>
-            <img className="cover-figure-arrow-3" src={Arrow3Img} alt={t('welcome-page.arrow')}/>
-            <img className="cover-figure-smile-3" src={Smile3Img} alt={t('welcome-page.smile')}/>
+            <img className="cover-figure-emoji-3" src={Emoji3Img} alt={t('welcome-page.emoji')} />
+            <img className="cover-figure-arrow-3" src={Arrow3Img} alt={t('welcome-page.arrow')} />
+            <img className="cover-figure-smile-3" src={Smile3Img} alt={t('welcome-page.smile')} />
 
-            <img className="cover-figure-emoji-4" src={Emoji4Img} alt={t('welcome-page.emoji')}/>
-            <img className="cover-figure-arrow-4" src={Arrow4Img} alt={t('welcome-page.arrow')}/>
-            <img className="cover-figure-smile-4" src={Smile4Img} alt={t('welcome-page.smile')}/>
+            <img className="cover-figure-emoji-4" src={Emoji4Img} alt={t('welcome-page.emoji')} />
+            <img className="cover-figure-arrow-4" src={Arrow4Img} alt={t('welcome-page.arrow')} />
+            <img className="cover-figure-smile-4" src={Smile4Img} alt={t('welcome-page.smile')} />
 
-            <img className="cover-figure-emoji-5" src={Emoji5Img} alt={t('welcome-page.emoji')}/>
-            <img className="cover-figure-arrow-5" src={Arrow5Img} alt={t('welcome-page.arrow')}/>
+            <img className="cover-figure-emoji-5" src={Emoji5Img} alt={t('welcome-page.emoji')} />
+            <img className="cover-figure-arrow-5" src={Arrow5Img} alt={t('welcome-page.arrow')} />
 
             <div className="cover-figure_head">
-                <div className="cover-figure_title">
-                    <h4>{t('welcome-page.birthday_wishlist')}</h4>
-
-                    <img src={PartyPopperIcon} alt={t('welcome-page.party_popper_icon')}/>
-                </div>
+                <h4>
+                    {t('welcome-page.birthday_wishlist')}
+                    <img src={PartyPopperIcon} alt={t('welcome-page.party_popper_icon')} />
+                </h4>
 
                 <span>{t('welcome-page.count_wishes')}</span>
             </div>
@@ -59,10 +58,10 @@ const CoverFigure: FC = () => {
                 {/* Flowers */}
                 <li className="cover-figure_item">
                     <div className="cover-figure_block">
-                        <span className="cover-figure_checkbox"></span>
+                    <span className="cover-figure_checkbox"></span>
 
                         <div className="cover-figure_img">
-                            <img src={FlowersImg} alt={t('welcome-page.bouquet_of')}/>
+                            <img src={FlowersImg} alt={t('welcome-page.bouquet_of')} />
                         </div>
 
                         <div className="cover-figure_content">
@@ -76,11 +75,11 @@ const CoverFigure: FC = () => {
                 <li className="cover-figure_item">
                     <div className="cover-figure_block">
                         <span className="cover-figure_checkbox">
-                            <img src={CheckedIcon} alt={t('welcome-page.checked_icon')}/>
+                            <img src={CheckedIcon} alt={t('welcome-page.checked_icon')} />
                         </span>
 
                         <div className="cover-figure_img">
-                            <img src={BearImg} alt={t('welcome-page.teddy_bear')}/>
+                            <img src={BearImg} alt={t('welcome-page.teddy_bear')} />
                         </div>
 
                         <div className="cover-figure_content">

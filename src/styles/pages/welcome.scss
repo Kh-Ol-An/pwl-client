@@ -7,7 +7,7 @@
         padding: 0 14px 40px;
         background-image: url("../../assets/images/welcome/bg-cover.png");
         background-size: cover;
-        background-position: center;
+        background-position: 76% 50%;
         background-repeat: no-repeat;
         background-color: #1f1f23;
         width: 100%;
@@ -15,6 +15,10 @@
 
         @media only screen and (min-width: 768px) {
             padding: 0 0 80px;
+        }
+
+        @media only screen and (min-width: 1366px) {
+            background-position: center;
         }
 
         .container {
@@ -137,8 +141,9 @@
 
     // text block
     .text-block {
+        margin: 0 auto;
+
         @media only screen and (min-width: 768px) {
-            margin: 0 auto;
             width: 700px;
         }
 
@@ -149,16 +154,16 @@
 
         h1 {
             font-size: 30px;
+            line-height: 1.25;
             font-weight: 600;
             color: $white-color;
-            line-height: 1.25;
 
-            @media only screen and (min-width: 768px) {
-                font-size: 58px;
+            @media only screen and (min-width: 500px) {
                 text-align: center;
             }
 
-            @media only screen and (min-width: 1366px) {
+            @media only screen and (min-width: 768px) {
+                font-size: 58px;
                 text-align: left;
             }
         }
@@ -166,18 +171,21 @@
         p {
             margin-top: 8px;
             font-size: 16px;
+            line-height: 1.5;
             font-weight: 500;
             color: $special-color;
-            line-height: 1.5;
+
+            @media only screen and (min-width: 500px) {
+                text-align: center;
+            }
 
             @media only screen and (min-width: 768px) {
                 margin-top: 24px;
                 font-size: 18px;
-                text-align: center;
+                text-align: left;
             }
 
             @media only screen and (min-width: 1366px) {
-                text-align: left;
                 width: 90%;
             }
 
@@ -190,7 +198,7 @@
     // action block
     .action-block {
         position: relative;
-        margin-top: 30px;
+        margin: 30px auto 0;
         padding: 24px;
         border-radius: $radius-big;
         border: 1px dashed $special-dark-color;
@@ -200,8 +208,11 @@
         background-position: center;
         background-repeat: no-repeat;
 
+        @media only screen and (min-width: 500px) {
+            width: 400px;
+        }
+
         @media only screen and (min-width: 768px) {
-            margin: 30px auto 0;
             padding: 40px 24px;
             width: 500px;
         }
