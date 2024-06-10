@@ -411,23 +411,6 @@
         margin-top: 26px;
         gap: 8px;
     }
-
-    .cover-figure_item:nth-child(2) .cover-figure_block,
-    .cover-figure_item:nth-child(4) .cover-figure_block {
-        border-color: $primary-color;
-        background-image: url("../../assets/images/welcome/wishlist-item-bg.png");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    .cover-figure_item:nth-child(2) .cover-figure_block {
-        transform: rotate(-5deg);
-    }
-
-    .cover-figure_item:nth-child(4) .cover-figure_block {
-        transform: rotate(5deg);
-    }
 }
 
 .cover-figure_item {
@@ -450,7 +433,71 @@
     }
 }
 
+.cover-figure_item:nth-child(2) .cover-figure_block::before,
+.cover-figure_item:nth-child(4) .cover-figure_block::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: $radius-md;
+    background-image: url("../../assets/images/welcome/wishlist-item-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+
+    @media only screen and (min-width: 768px) {
+        border-radius: $radius-xl;
+    }
+}
+
+.cover-figure_item:nth-child(1) {
+}
+
+.cover-figure_item:nth-child(2) {
+    .cover-figure_block {
+        animation-name: wishItemFulfilled-2;
+        animation-delay: 4s;
+
+        &::before {
+            animation-name: wishAppear;
+            animation-delay: 4s;
+        }
+    }
+
+    .cover-figure_checkbox img {
+        animation-delay: 4s;
+    }
+}
+
+.cover-figure_item:nth-child(3) {
+}
+
+.cover-figure_item:nth-child(4) {
+    .cover-figure_block {
+        animation-name: wishItemFulfilled-4;
+        animation-delay: 5s;
+
+        &::before {
+            animation-name: wishAppear;
+            animation-delay: 5s;
+        }
+    }
+
+    .cover-figure_checkbox img {
+        animation-delay: 5s;
+    }
+}
+
 .cover-figure_block {
+    position: relative;
     height: 100%;
     display: flex;
     padding: 6px 4px 8px 8px;
@@ -458,6 +505,9 @@
     border-width: 1px;
     border-style: dashed;
     border-color: transparent;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
 
     @media only screen and (min-width: 768px) {
         padding: 16px 8px 20px 18px;
@@ -488,7 +538,8 @@
         transform: translate(-50%, -50%);
         width: 12px;
         height: 12px;
-        //opacity: 0;
+        opacity: 0;
+        animation: wishAppear 300ms forwards ease-in-out;
 
         @media only screen and (min-width: 768px) {
             width: 22px;

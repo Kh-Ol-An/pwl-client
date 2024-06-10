@@ -33,3 +33,23 @@
         border-color: rgba(255, 255, 255, 0.5);
     }
 }
+
+@keyframes wishItemFulfilled-2 {
+    to {
+        transform: rotate(-5deg);
+        border-color: $primary-color;
+    }
+}
+
+@keyframes wishItemFulfilled-4 {
+    to {
+        transform: rotate(5deg);
+        border-color: $primary-color;
+    }
+}
+
+@keyframes wishAppear {
+    to {
+        opacity: 1;
+    }
+}
