@@ -93,13 +93,14 @@
     }
 }
 
-// 111
+// ******************** ICON 1 ********************
+// ------- animation 5 -------
 .cover-figure-emoji-1 {
     bottom: -20px;
     left: 2px;
     width: 64px;
     height: 64px;
-    animation-delay: 5.3s;
+    animation-delay: 3.6s;
 
     @media only screen and (min-width: 412px) {
         bottom: -24px;
@@ -121,7 +122,7 @@
     left: -4px;
     width: 30px;
     height: 30px;
-    animation-delay: 5s;
+    animation-delay: 3.4s;
 
     @media only screen and (min-width: 768px) {
         bottom: 90px;
@@ -131,10 +132,11 @@
     }
 }
 
+// ------- animation 3.1 -------
 .cover-figure-smile-1 {
     bottom: 112px;
     left: -22px;
-    animation-delay: 3.5s;
+    animation-delay: 2.3s;
 
     @media only screen and (min-width: 390px) {
         bottom: 124px;
@@ -146,13 +148,14 @@
     }
 }
 
-// 222
+// ******************** ICON 2 ********************
+// ------- animation 1 -------
 .cover-figure-emoji-2 {
     top: -10px;
     left: 4px;
     width: 66px;
     height: 66px;
-    animation-delay: 2s;
+    animation-delay: 0.9s;
 
     @media only screen and (min-width: 412px) {
         top: -14px;
@@ -173,7 +176,7 @@
     left: 6px;
     width: 40px;
     height: 40px;
-    animation-delay: 1.8s;
+    animation-delay: 0.6s;
 
     @media only screen and (min-width: 768px) {
         top: 50px;
@@ -183,10 +186,11 @@
     }
 }
 
+// ------- animation 5.1 -------
 .cover-figure-smile-2 {
     top: -18px;
     left: 10px;
-    animation-delay: 5s;
+    animation-delay: 3.5s;
 
     @media only screen and (min-width: 390px) {
         left: 20px;
@@ -202,13 +206,14 @@
     }
 }
 
-// 333
+// ******************** ICON 3 ********************
+// ------- animation 3 -------
 .cover-figure-emoji-3 {
     top: -4px;
     left: 64px;
     width: 70px;
     height: 70px;
-    animation-delay: 3.7s;
+    animation-delay: 2.4s;
 
     @media only screen and (min-width: 360px) {
         left: 76px;
@@ -238,7 +243,7 @@
     left: 100px;
     width: 34px;
     height: 34px;
-    animation-delay: 3.6s;
+    animation-delay: 2.2s;
 
     @media only screen and (min-width: 360px) {
         left: 112px;
@@ -261,10 +266,11 @@
     }
 }
 
+// ------- animation 6 -------
 .cover-figure-smile-3 {
     top: -20px;
     right: -4px;
-    animation-delay: 6.5s;
+    animation-delay: 4s;
 
     @media only screen and (min-width: 390px) {
         right: 12px;
@@ -280,13 +286,14 @@
     }
 }
 
-// 444
+// ******************** ICON 4 ********************
+// ------- animation 4 -------
 .cover-figure-emoji-4 {
     top: -12px;
     right: -2px;
     width: 60px;
     height: 60px;
-    animation-delay: 4.7s;
+    animation-delay: 3.1s;
 
     @media only screen and (min-width: 412px) {
         top: -20px;
@@ -307,7 +314,7 @@
     right: -4px;
     width: 30px;
     height: 30px;
-    animation-delay: 4.5s;
+    animation-delay: 2.9s;
 
     @media only screen and (min-width: 768px) {
         top: 70px;
@@ -317,10 +324,11 @@
     }
 }
 
+// ------- animation 4.1 -------
 .cover-figure-smile-4 {
     bottom: 116px;
     right: -22px;
-    animation-delay: 4.6s;
+    animation-delay: 3s;
 
     @media only screen and (min-width: 390px) {
         bottom: 128px;
@@ -332,13 +340,14 @@
     }
 }
 
-// 555
+// ******************** ICON 5 ********************
+// ------- animation 2 -------
 .cover-figure-emoji-5 {
     right: -2px;
     bottom: -6px;
     width: 60px;
     height: 60px;
-    animation-delay: 3.2s;
+    animation-delay: 2s;
 
     @media only screen and (min-width: 412px) {
         right: 0;
@@ -360,7 +369,7 @@
     bottom: 50px;
     width: 32px;
     height: 32px;
-    animation-delay: 3s;
+    animation-delay: 1.9s;
 
     @media only screen and (min-width: 768px) {
         bottom: 102px;
@@ -369,7 +378,7 @@
     }
 }
 
-// head
+// HEAD
 .cover-figure_head {
     @include flex-between;
 
@@ -407,7 +416,7 @@
         color: $special-color;
         white-space: nowrap;
         opacity: 0;
-        animation: 0.3s wishAppear 7s forwards ease-in-out;
+        animation: 0.3s wishAppear 3.9s forwards ease-in-out;
 
         @media only screen and (min-width: 360px) {
             font-size: 8px;
@@ -476,59 +485,59 @@
 
 .cover-figure_item:nth-child(1) {
     .cover-figure_img img {
-        animation-delay: 0.8s;
+        animation-delay: 0.1s;
     }
 
     .cover-figure_content {
-        animation-delay: 1.5s;
+        animation-delay: 0.5s;
     }
 }
 
 .cover-figure_item:nth-child(2) {
     .cover-figure_block {
         animation-name: wishItemFulfilled-2;
-        animation-delay: 5s;
+        animation-delay: 3.3s;
 
         &::before {
-            animation-delay: 5s;
+            animation-delay: 3.3s;
         }
     }
 
     .cover-figure_checkbox img {
-        animation-delay: 5s;
+        animation-delay: 3.3s;
     }
 
     .cover-figure_img img {
-        animation-delay: 2s;
+        animation-delay: 1.5s;
     }
 
     .cover-figure_content {
-        animation-delay: 2.2s;
+        animation-delay: 1.6s;
     }
 }
 
 .cover-figure_item:nth-child(3) {
     .cover-figure_img img {
-        animation-delay: 3s;
+        animation-delay: 2s;
     }
 
     .cover-figure_content {
-        animation-delay: 3s;
+        animation-delay: 2s;
     }
 }
 
 .cover-figure_item:nth-child(4) {
     .cover-figure_block {
         animation-name: wishItemFulfilled-4;
-        animation-delay: 6s;
+        animation-delay: 4.3s;
 
         &::before {
-            animation-delay: 6s;
+            animation-delay: 4.3s;
         }
     }
 
     .cover-figure_checkbox img {
-        animation-delay: 6s;
+        animation-delay: 4.3s;
     }
 
     .cover-figure_img img {
