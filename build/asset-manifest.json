@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.39bc7639.css",
-    "main.js": "/static/js/main.c0c143a5.js",
-    "static/media/bg-cover.png": "/static/media/bg-cover.58cf2d57096d68a08d69.png",
-    "static/media/activation-account-mobile.jpg": "/static/media/activation-account-mobile.126a9e231ecfbe89012c.jpg",
-    "static/media/sing-up-mobile.jpg": "/static/media/sing-up-mobile.ef033250fcdfd02ffa1e.jpg",
-    "static/media/login-with-google-mobile.jpg": "/static/media/login-with-google-mobile.3b481c86dc8330251e9a.jpg",
-    "static/media/enter-your-account-name-mobile.jpg": "/static/media/enter-your-account-name-mobile.2d0a63e5b820290d4f40.jpg",
+    "main.css": "/static/css/main.7e8ae503.css",
+    "main.js": "/static/js/main.b9a7dce3.js",
     "static/media/logo.svg": "/static/media/logo.d9c61562f6fb50c58bbc6bf5d7644308.svg",
-    "static/media/choose-google-account-mobile.jpg": "/static/media/choose-google-account-mobile.314cf98fa9554e223eef.jpg",
-    "static/media/enter-your-password-mobile.jpg": "/static/media/enter-your-password-mobile.9715ac09ba9f8e95a374.jpg",
-    "static/media/logged-to-wish-hub-mobile.jpg": "/static/media/logged-to-wish-hub-mobile.53b72d89122e41671572.jpg",
+    "static/media/activation-account-mobile.jpg": "/static/media/activation-account-mobile.df64b86abdbb82842de5.jpg",
+    "static/media/bg-cover.png": "/static/media/bg-cover.c273fa2ed880ef4cce44.png",
+    "static/media/sing-up-mobile.jpg": "/static/media/sing-up-mobile.d6f5a806037f06513a5f.jpg",
     "static/media/activation-account.png": "/static/media/activation-account.e7e8c128c72610b302dd.png",
+    "static/media/enter-your-account-name-mobile.jpg": "/static/media/enter-your-account-name-mobile.93d94733b7dd4db2f8cc.jpg",
+    "static/media/login-with-google-mobile.jpg": "/static/media/login-with-google-mobile.59cd26a08754714eb5ab.jpg",
+    "static/media/choose-google-account-mobile.jpg": "/static/media/choose-google-account-mobile.6a78fdcf719527b6fe3a.jpg",
     "static/media/invisible-gift.png": "/static/media/invisible-gift.fe94cb9059572503ab0e.png",
     "static/media/choose-google-account.png": "/static/media/choose-google-account.7bfdac45d0c323bcd550.png",
     "static/media/logged-to-wish-hub.png": "/static/media/logged-to-wish-hub.dd1faa1fc053dfe4fb17.png",
+    "static/media/enter-your-password-mobile.jpg": "/static/media/enter-your-password-mobile.a0065ddc7d97ed5a8800.jpg",
     "static/media/action-block-bg.png": "/static/media/action-block-bg.9f2873d265f69b5c9ba4.png",
+    "static/media/logged-to-wish-hub-mobile.jpg": "/static/media/logged-to-wish-hub-mobile.1e57a7cae0d2a4d3cc09.jpg",
     "static/media/sing-up.png": "/static/media/sing-up.bd2b14ef3d9aad7326ef.png",
     "static/media/enter-your-account-name.png": "/static/media/enter-your-account-name.855f05996a6fde2466c2.png",
     "static/media/login-with-google.png": "/static/media/login-with-google.96a7006a0ae62ddf1ee2.png",
@@ -35,11 +35,11 @@
     "static/media/checked-icon.svg": "/static/media/checked-icon.1d1b7d0474f3db924ca2f1e49308f5af.svg",
     "index.html": "/index.html",
     "static/media/star.svg": "/static/media/star.4d42500e0b69077dee5804cd895392d0.svg",
-    "main.39bc7639.css.map": "/static/css/main.39bc7639.css.map",
-    "main.c0c143a5.js.map": "/static/js/main.c0c143a5.js.map"
+    "main.7e8ae503.css.map": "/static/css/main.7e8ae503.css.map",
+    "main.b9a7dce3.js.map": "/static/js/main.b9a7dce3.js.map"
   },
   "entrypoints": [
-    "static/css/main.39bc7639.css",
-    "static/js/main.c0c143a5.js"
+    "static/css/main.7e8ae503.css",
+    "static/js/main.b9a7dce3.js"
   ]
 }
