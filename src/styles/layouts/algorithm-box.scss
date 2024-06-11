@@ -1,0 +1,76 @@
+.algorithm-box {
+    padding: 24px 22px;
+    border-radius: $radius-big;
+    border: 1px dashed $secondary-light-color;
+    background-image: url("../../assets/images/welcome/algorithm-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.algorithm-head {
+    display: flex;
+    align-items: center;
+    gap: 14px
+}
+
+.algorithm-box-bg {
+    position: relative;
+    min-width: 44px;
+    width: 44px;
+    height: 44px;
+    @include flex-center;
+    border-radius: $radius-md;
+    background-color: $background-color;
+
+    @media only screen and (min-width: 768px) {
+        min-width: 54px;
+        height: 54px;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: rotate(15deg);
+        border-radius: $radius-md;
+        border: 1px dashed $white-dark-color;
+    }
+
+    img {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+
+        @media only screen and (min-width: 768px) {
+            width: 28px;
+            height: 28px;
+        }
+    }
+}
+
+.algorithm-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: $white-color;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 20px;
+    }
+}
+
+.algorithm-text {
+    margin-top: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: $special-color;
+
+    @media only screen and (min-width: 768px) {
+        margin-top: 16px;
+    }
+}

@@ -17,11 +17,14 @@
     }
 
     .name {
-        width: 90px;
-        object-fit: contain;
+        font-family: $secondary-font-family;
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 600;
+        color: $primary-color;
 
         @media only screen and (min-width: 768px) {
-            width: 106px;
+            font-size: 24px;
         }
     }
 }
