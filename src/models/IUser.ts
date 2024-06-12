@@ -1,5 +1,10 @@
 import { Dayjs } from 'dayjs';
 
+export interface ICandidate {
+    firstName?: string;
+    email?: string;
+}
+
 export interface IUser {
     id: string;
     firstName: string;

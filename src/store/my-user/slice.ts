@@ -15,16 +15,18 @@ import {
     deleteMyUser,
 } from '@/store/my-user/thunks';
 import { doneWish, undoneWish } from '@/store/wishes/thunks';
-import { IUser } from '@/models/IUser';
+import { ICandidate, IUser } from '@/models/IUser';
 
 interface IMyUserState {
     user: IUser | null;
+    candidate: ICandidate | null;
     isLoading: boolean;
     error: string | null;
 }
 
 const initialState: IMyUserState = {
     user: null,
+    candidate: null,
     isLoading: false,
     error: null,
 };
@@ -35,6 +37,9 @@ const myUserSlice = createSlice({
     reducers: {
         setIsLoading(state, action: PayloadAction<Partial<boolean>>) {
             state.isLoading = action.payload;
+        },
+        setCandidate(state, action: PayloadAction<Partial<ICandidate>>) {
+            state.candidate = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -252,6 +257,6 @@ const myUserSlice = createSlice({
     },
 });
 
-export const { setIsLoading } = myUserSlice.actions;
+export const { setIsLoading, setCandidate } = myUserSlice.actions;
 
 export default myUserSlice.reducer;

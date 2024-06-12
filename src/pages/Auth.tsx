@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { useAppDispatch } from '@/store/hook';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { registration, login, forgotPassword, googleAuthorization } from '@/store/my-user/thunks';
 import { IUser } from '@/models/IUser';
 import { accountFirstNameValidation, emailValidation, passwordValidation } from '@/utils/validations';
@@ -36,12 +36,20 @@ const Auth: FC = () => {
 
     const dispatch = useAppDispatch();
 
+    const candidate = useAppSelector((state) => state.myUser.candidate);
+
     const {
         register,
         getValues,
         handleSubmit,
         formState: { errors },
-    } = useForm<Inputs>();
+    } = useForm<Inputs>({
+        defaultValues: {
+            firstName: candidate?.firstName || '',
+            email: candidate?.email || '',
+            password: '',
+        }
+    });
 
     const location = useLocation();
 

@@ -45,7 +45,7 @@ const LanguageSelection: FC = () => {
 
             if (myUser.user !== null) {
                 await dispatch(changeLang({ userId: myUser.user.id, lang: value as IUser['lang'] }));
-                dispatch(setIsLoading(true));
+                await dispatch(setIsLoading(true));
                 location.reload();
             }
         } catch (error) {

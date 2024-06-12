@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useTranslation } from 'react-i18next';
+import { useAppDispatch } from "@/store/hook";
+import { setCandidate } from "@/store/my-user/slice";
 import { IUser } from "@/models/IUser";
 import { accountFirstNameValidation, emailValidation } from "@/utils/validations";
 import CoverFigure from "@/layouts/CoverFigure";
@@ -33,11 +36,20 @@ type Inputs = {
 const Welcome: FC = () => {
     const { t } = useTranslation();
 
+    const navigate = useNavigate();
+
+    const dispatch = useAppDispatch();
+
     const {
         register,
         getValues,
         formState: { errors },
     } = useForm<Inputs>();
+
+    const handleSingUp = async () => {
+        await dispatch(setCandidate({ firstName: getValues('firstName'), email: getValues('email')}))
+        navigate('/auth?register');
+    }
 
     return (
         <div className="welcome-page">
@@ -225,7 +237,9 @@ const Welcome: FC = () => {
                                 />
                             </div>
 
-                            <Button to="/auth?register">{ t('sing-up') }</Button>
+                            <Button onClick={handleSingUp} >
+                                { t('sing-up') }
+                            </Button>
 
                             <img
                                 className="sing-up_love-emoji"
@@ -256,6 +270,8 @@ const Welcome: FC = () => {
             </section>
 
             <WelcomeDivider />
+
+            <div className="footer">2024. Wish Hub. All rights reserved</div>
         </div>
     );
 };

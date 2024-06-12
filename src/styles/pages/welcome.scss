@@ -725,4 +725,15 @@
             }
         }
     }
+
+    .footer {
+        padding: 10px;
+        width: 100%;
+        background-color: $background-color;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 1;
+        color: $special-color;
+        text-align: center;
+    }
 }
