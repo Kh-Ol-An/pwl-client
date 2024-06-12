@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { useTranslation } from "react-i18next";
 import StarIcon from "@/assets/images/welcome/star.svg";
 
-const WelcomeDivider = () => {
+const Divider = () => {
     const { t } = useTranslation();
 
     return (
@@ -17,4 +17,4 @@ const WelcomeDivider = () => {
     );
 };
 
-export default WelcomeDivider;
+export default Divider;
