@@ -6,8 +6,8 @@ import WelcomeDivider from "@/layouts/WelcomeDivider";
 import AlgorithmBox from "@/layouts/AlgorithmBox";
 import LanguageSelection from "@/components/LanguageSelection";
 import Button from "@/components/Button";
-import ActionBlockGiftBigImg from "@/assets/images/welcome/action-block-gift-big.png";
-import ActionBlockGiftSmallImg from "@/assets/images/welcome/action-block-gift-small.png";
+import ActionGiftBigImg from "@/assets/images/welcome/action-gift-big.png";
+import ActionGiftSmallImg from "@/assets/images/welcome/action-gift-small.png";
 import PlusIcon from "@/assets/images/welcome/plus-icon.svg";
 import EyeIcon from "@/assets/images/welcome/eye-icon.svg";
 import LockIcon from "@/assets/images/welcome/lock-icon.svg";
@@ -51,13 +51,13 @@ const Welcome: FC = () => {
 
                             <img
                                 className="action-block_gift-big"
-                                src={ ActionBlockGiftBigImg }
+                                src={ ActionGiftBigImg }
                                 alt={ t('welcome-page.bigger_gift') }
                             />
 
                             <img
                                 className="action-block_gift-small"
-                                src={ ActionBlockGiftSmallImg }
+                                src={ ActionGiftSmallImg }
                                 alt={ t('welcome-page.smaller_gift') }
                             />
                         </div>

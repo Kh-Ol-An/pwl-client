@@ -12,18 +12,20 @@ const PageHeader = () => {
 
     return (
         <div className="page-header">
-            <div className="actions">
-                <Logo />
+            <div className="container">
+                <div className="actions">
+                    <Logo />
 
-                <LanguageSelection />
-            </div>
-
-            {myUser.user === null && (
-                <div className="auth-actions">
-                    <Button to="/auth" variant="text">{t('sing-in')}</Button>
-                    <Button to="/auth?register">{t('sing-up')}</Button>
+                    <LanguageSelection />
                 </div>
-            )}
+
+                {myUser.user === null && (
+                    <div className="auth-actions">
+                        <Button to="/auth" variant="text">{t('sing-in')}</Button>
+                        <Button to="/auth?register">{t('sing-up')}</Button>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

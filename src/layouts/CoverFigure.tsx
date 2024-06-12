@@ -15,11 +15,7 @@ import Smile1Img from "@/assets/images/welcome/smile-1.png";
 import Smile2Img from "@/assets/images/welcome/smile-2.png";
 import Smile3Img from "@/assets/images/welcome/smile-3.png";
 import Smile4Img from "@/assets/images/welcome/smile-4.png";
-import Arrow1Img from "@/assets/images/welcome/arrow-1.png";
-import Arrow2Img from "@/assets/images/welcome/arrow-2.png";
-import Arrow3Img from "@/assets/images/welcome/arrow-3.png";
-import Arrow4Img from "@/assets/images/welcome/arrow-4.png";
-import Arrow5Img from "@/assets/images/welcome/arrow-5.png";
+import ArrowImg from "@/assets/images/welcome/arrow.svg";
 
 const CoverFigure: FC = () => {
     const { t } = useTranslation();
@@ -27,23 +23,23 @@ const CoverFigure: FC = () => {
     return (
         <div className="cover-figure">
             <img className="cover-figure-emoji-1" src={Emoji1Img} alt={t('welcome-page.emoji')} />
-            <img className="cover-figure-arrow-1" src={Arrow1Img} alt={t('welcome-page.arrow')} />
+            <img className="cover-figure-arrow-1" src={ArrowImg} alt={t('welcome-page.arrow')} />
             <img className="cover-figure-smile-1" src={Smile1Img} alt={t('welcome-page.smile')} />
 
             <img className="cover-figure-emoji-2" src={Emoji2Img} alt={t('welcome-page.emoji')} />
-            <img className="cover-figure-arrow-2" src={Arrow2Img} alt={t('welcome-page.arrow')} />
+            <img className="cover-figure-arrow-2" src={ArrowImg} alt={t('welcome-page.arrow')} />
             <img className="cover-figure-smile-2" src={Smile2Img} alt={t('welcome-page.smile')} />
 
             <img className="cover-figure-emoji-3" src={Emoji3Img} alt={t('welcome-page.emoji')} />
-            <img className="cover-figure-arrow-3" src={Arrow3Img} alt={t('welcome-page.arrow')} />
+            <img className="cover-figure-arrow-3" src={ArrowImg} alt={t('welcome-page.arrow')} />
             <img className="cover-figure-smile-3" src={Smile3Img} alt={t('welcome-page.smile')} />
 
             <img className="cover-figure-emoji-4" src={Emoji4Img} alt={t('welcome-page.emoji')} />
-            <img className="cover-figure-arrow-4" src={Arrow4Img} alt={t('welcome-page.arrow')} />
+            <img className="cover-figure-arrow-4" src={ArrowImg} alt={t('welcome-page.arrow')} />
             <img className="cover-figure-smile-4" src={Smile4Img} alt={t('welcome-page.smile')} />
 
             <img className="cover-figure-emoji-5" src={Emoji5Img} alt={t('welcome-page.emoji')} />
-            <img className="cover-figure-arrow-5" src={Arrow5Img} alt={t('welcome-page.arrow')} />
+            <img className="cover-figure-arrow-5" src={ArrowImg} alt={t('welcome-page.arrow')} />
 
             <div className="cover-figure_head">
                 <h4>

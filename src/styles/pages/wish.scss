@@ -23,6 +23,10 @@
     }
 
     .page-header {
+        .container {
+            max-width: 100%;
+        }
+
         @media only screen and (min-width: 1280px) {
             padding: 24px 20px;
         }

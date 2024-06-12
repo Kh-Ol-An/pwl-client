@@ -208,7 +208,7 @@
         border-radius: $radius-big;
         border: 1px dashed $special-dark-color;
         overflow: hidden;
-        background-image: url("../../assets/images/welcome/action-block-bg.png");
+        background-image: url("../../assets/images/welcome/action-bg.png");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -294,9 +294,8 @@
     // join
     .join {
         padding: 40px 14px 64px;
-        background-image: url("../../assets/images/welcome/cover-bg.png");
+        background-image: url("../../assets/images/welcome/join-bg.png");
         background-size: cover;
-        //background-position: 76% 50%;
         background-position: center;
         background-repeat: no-repeat;
         background-color: #1f1f23;
@@ -367,5 +366,19 @@
 
     .foot {
         margin-top: 44px;
+    }
+
+    .benefits {
+        padding: 20px 20px 24px 40px;
+        border-radius: $radius-big;
+        background-image: url("../../assets/images/welcome/benefits-bg.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: $background-color;
+
+        @media only screen and (min-width: 768px) {
+            padding: 40px 60px 40px 80px;
+        }
     }
 }
