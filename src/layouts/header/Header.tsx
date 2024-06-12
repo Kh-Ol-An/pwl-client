@@ -26,7 +26,6 @@ import Button from '@/components/Button';
 import Popup from '@/components/Popup';
 import LanguageSelection from '@/components/LanguageSelection';
 import LogoIcon from '@/assets/images/logo.svg';
-import WishHub from '@/assets/images/wish-hub.png';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
@@ -172,11 +171,11 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         </button>
                     </div>
 
-                    <button className="logo" type="button" onClick={handleSelectWish}>
-                        <img className="name" src={WishHub} alt="Wish Hub" />
+                    <button className="logo" type="button" onClick={ handleSelectWish }>
+                        <span className="logo-name">Wish Hub</span>
                     </button>
 
-                    {/* Settings */}
+                    {/* Settings */ }
                     <Popup
                         anchor={anchor}
                         setAnchor={setAnchor}
@@ -187,10 +186,10 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             {t('main-page.account_settings')}
                         </Button>
 
-                        <Button variant="text" color="primary-color" type="button" onClick={handleShowAbout}>
-                            <img className="wish-hub-icon" src={LogoIcon} alt={t('wish_hub_icon')} />
-                            {t('main-page.about')}
-                            <img className="wish-hub-text" src={WishHub} alt="Wish Hub" />
+                        <Button variant="text" color="primary-color" type="button" onClick={ handleShowAbout }>
+                            <img className="wish-hub-icon" src={ LogoIcon } alt={ t('wish_hub_icon') } />
+                            { t('main-page.about') }
+                            <span className="logo-name">Wish Hub</span>
                         </Button>
 
                         {/*<Button to="/instruction" variant="text">*/}
