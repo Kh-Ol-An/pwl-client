@@ -6,15 +6,15 @@ import BearImg from "@/assets/images/welcome/bear.png";
 import VRHeadsetImg from "@/assets/images/welcome/vr-headset.png";
 import HeadphonesImg from "@/assets/images/welcome/headphones.png";
 import CheckedIcon from "@/assets/images/welcome/checked-icon.svg";
-import Emoji1Img from "@/assets/images/welcome/emoji-1.png";
-import Emoji2Img from "@/assets/images/welcome/emoji-2.png";
-import Emoji3Img from "@/assets/images/welcome/emoji-3.png";
-import Emoji4Img from "@/assets/images/welcome/emoji-4.png";
-import Emoji5Img from "@/assets/images/welcome/emoji-5.png";
-import Smile1Img from "@/assets/images/welcome/smile-1.png";
-import Smile2Img from "@/assets/images/welcome/smile-2.png";
-import Smile3Img from "@/assets/images/welcome/smile-3.png";
-import Smile4Img from "@/assets/images/welcome/smile-4.png";
+import StarEmojiImg from "@/assets/images/welcome/star-emoji.png";
+import PigtailsEmojiImg from "@/assets/images/welcome/pigtails-emoji.png";
+import WinkingEmojiImg from "@/assets/images/welcome/winking-emoji.png";
+import BeardedEmojiImg from "@/assets/images/welcome/bearded_emoji.png";
+import GreatEmojiImg from "@/assets/images/welcome/great-emoji.png";
+import LoveSmileImg from "@/assets/images/welcome/love-smile.png";
+import FestiveSmileImg from "@/assets/images/welcome/festive-smile.png";
+import StarSmileImg from "@/assets/images/welcome/star-smile.png";
+import SunglassesSmileImg from "@/assets/images/welcome/sunglasses-smile.png";
 import ArrowImg from "@/assets/images/welcome/arrow.svg";
 
 const CoverFigure: FC = () => {
@@ -22,23 +22,23 @@ const CoverFigure: FC = () => {
 
     return (
         <div className="cover-figure">
-            <img className="cover-figure-emoji-1" src={Emoji1Img} alt={t('welcome-page.emoji')} />
+            <img className="cover-figure-emoji-1" src={StarEmojiImg} alt={t('welcome-page.star_emoji')} />
             <img className="cover-figure-arrow-1" src={ArrowImg} alt={t('welcome-page.arrow')} />
-            <img className="cover-figure-smile-1" src={Smile1Img} alt={t('welcome-page.smile')} />
+            <img className="cover-figure-smile-1" src={LoveSmileImg} alt={t('welcome-page.love_smile')} />
 
-            <img className="cover-figure-emoji-2" src={Emoji2Img} alt={t('welcome-page.emoji')} />
+            <img className="cover-figure-emoji-2" src={PigtailsEmojiImg} alt={t('welcome-page.pigtails_emoji')} />
             <img className="cover-figure-arrow-2" src={ArrowImg} alt={t('welcome-page.arrow')} />
-            <img className="cover-figure-smile-2" src={Smile2Img} alt={t('welcome-page.smile')} />
+            <img className="cover-figure-smile-2" src={FestiveSmileImg} alt={t('welcome-page.festive_smile')} />
 
-            <img className="cover-figure-emoji-3" src={Emoji3Img} alt={t('welcome-page.emoji')} />
+            <img className="cover-figure-emoji-3" src={WinkingEmojiImg} alt={t('welcome-page.winking_emoji')} />
             <img className="cover-figure-arrow-3" src={ArrowImg} alt={t('welcome-page.arrow')} />
-            <img className="cover-figure-smile-3" src={Smile3Img} alt={t('welcome-page.smile')} />
+            <img className="cover-figure-smile-3" src={StarSmileImg} alt={t('welcome-page.star_smile')} />
 
-            <img className="cover-figure-emoji-4" src={Emoji4Img} alt={t('welcome-page.emoji')} />
+            <img className="cover-figure-emoji-4" src={BeardedEmojiImg} alt={t('welcome-page.bearded_emoji')} />
             <img className="cover-figure-arrow-4" src={ArrowImg} alt={t('welcome-page.arrow')} />
-            <img className="cover-figure-smile-4" src={Smile4Img} alt={t('welcome-page.smile')} />
+            <img className="cover-figure-smile-4" src={SunglassesSmileImg} alt={t('welcome-page.smile_sunglasses')} />
 
-            <img className="cover-figure-emoji-5" src={Emoji5Img} alt={t('welcome-page.emoji')} />
+            <img className="cover-figure-emoji-5" src={GreatEmojiImg} alt={t('welcome-page.great_emoji')} />
             <img className="cover-figure-arrow-5" src={ArrowImg} alt={t('welcome-page.arrow')} />
 
             <div className="cover-figure_head">
