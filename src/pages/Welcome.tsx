@@ -1,8 +1,13 @@
 import React, { FC } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { setCandidate } from "@/store/my-user/slice";
+import { useAppDispatch } from "@/store/hook";
 import CoverFigure from "@/layouts/welcome/CoverFigure";
 import Divider from "@/layouts/welcome/Divider";
 import AlgorithmBox from "@/layouts/welcome/AlgorithmBox";
+import Benefits from "@/layouts/welcome/Benefits";
+import SingUp from "@/layouts/welcome/SingUp";
 import Logo from "@/components/Logo";
 import LanguageSelection from "@/components/LanguageSelection";
 import Button from "@/components/Button";
@@ -13,11 +18,23 @@ import EyeIcon from "@/assets/images/welcome/eye-icon.svg";
 import LockIcon from "@/assets/images/welcome/lock-icon.svg";
 import ChainIcon from "@/assets/images/welcome/chain-icon.svg";
 import ArrowImg from "@/assets/images/welcome/arrow.svg";
-import Benefits from "@/layouts/welcome/Benefits";
-import SingUp from "@/layouts/welcome/SingUp";
 
 const Welcome: FC = () => {
     const { t } = useTranslation();
+
+    const navigate = useNavigate();
+
+    const dispatch = useAppDispatch();
+
+    const handleSingIn = async () => {
+        await dispatch(setCandidate({ firstName: '', email: '' }))
+        navigate('/auth');
+    }
+
+    const handleSingUp = async () => {
+        await dispatch(setCandidate({ firstName: '', email: '' }))
+        navigate('/auth?register');
+    }
 
     return (
         <div className="welcome-page">
@@ -30,8 +47,8 @@ const Welcome: FC = () => {
                             <LanguageSelection />
 
                             <div className="auth-actions">
-                                <Button to="/auth" variant="text">{ t('sing-in') }</Button>
-                                <Button to="/auth?register">{ t('sing-up') }</Button>
+                                <Button onClick={handleSingIn} variant="text">{ t('sing-in') }</Button>
+                                <Button onClick={handleSingUp}>{ t('sing-up') }</Button>
                             </div>
                         </div>
                     </div>
@@ -50,7 +67,7 @@ const Welcome: FC = () => {
 
                             <p>{ t('welcome-page.create_wish_lists') }</p>
 
-                            <Button to="/auth?register">{ t('sing-up') }</Button>
+                            <Button onClick={handleSingUp}>{ t('sing-up') }</Button>
 
                             <img
                                 className="action-block_gift-big"
