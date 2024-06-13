@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store/hook';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
+import getMobileOperatingSystem from '@/utils/get-mobile-operating-system';
 import Inactivated from '@/layouts/Inactivated';
 import Header from '@/layouts/header/Header';
 import Sidebar from '@/layouts/sidebar/Sidebar';
@@ -13,8 +14,12 @@ const Main: FC = () => {
     const dispatch = useAppDispatch();
 
     const [showHeaderAndSidebar, setShowHeaderAndSidebar] = useState<boolean>(false);
+    const [os, setOs] = useState<string>('');
 
     useEffect(() => {
+        const mobileOs = getMobileOperatingSystem();
+        setOs(mobileOs);
+
         if (!myUser) return;
 
         const selectedUserId = localStorage.getItem('selectedUserId');
