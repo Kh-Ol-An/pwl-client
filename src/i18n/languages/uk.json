@@ -412,7 +412,14 @@
   "instruction-page": {
     "title": "Інструкція",
     "app": {
-      "title": "Як додати іконку на екран"
+      "title": "Як додати Wish Hub на головний екран телефона",
+      "browser": "Щоб додати Wish Hub на головний екран телефона ви маєте відкрити цей сайт у браузері {{browser}}.",
+      "browser_icon": "Іконка {{icon}}",
+      "text": "text",
+      "text": "text",
+      "text": "text",
+      "text": "text",
+      "text": "text"
     },
     "auth": {
       "title": "Реєстрація/Вхід",

@@ -6,7 +6,7 @@ import StylesVariables from '@/styles/utils/variables.module.scss';
 interface IProps {
     ariaControls: string;
     titleId: string;
-    title: string;
+    title: ReactNode;
     contentId: string;
     children: ReactNode;
 }

@@ -9,17 +9,24 @@
 @import 'setup/base';
 
 // layouts
+@import 'layouts/instruction/auth';
+@import 'layouts/instruction/app';
+
+@import 'layouts/welcome/algorithm-box';
+@import 'layouts/welcome/benefits';
+@import 'layouts/welcome/cover-figure';
+@import 'layouts/welcome/divider';
+@import 'layouts/welcome/sing-up';
+
 @import 'layouts/wish/detail-wish/detail-wish';
 @import 'layouts/wish/detail-wish/wish-swiper';
 @import 'layouts/wish/edit-wish';
 @import 'layouts/wish/wish-item';
 @import 'layouts/wish/wish-list';
+
 @import 'layouts/about';
-@import 'layouts/welcome/algorithm-box';
-@import 'layouts/welcome/benefits';
 @import 'layouts/card';
 @import 'layouts/contacts';
-@import 'layouts/welcome/cover-figure';
 @import 'layouts/detail-account';
 @import 'layouts/edit-account';
 @import 'layouts/header';
@@ -29,8 +36,6 @@
 @import 'layouts/page';
 @import 'layouts/page-header';
 @import 'layouts/sidebar';
-@import 'layouts/welcome/divider';
-@import 'layouts/welcome/sing-up';
 
 // components
 @import 'components/action';

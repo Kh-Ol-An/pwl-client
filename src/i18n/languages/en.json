@@ -412,7 +412,14 @@
   "instruction-page": {
     "title": "Instruction",
     "app": {
-      "title": "How add app icon to desktop"
+      "title": "How to add Wish Hub to your phone's home screen",
+      "browser": "To add Wish Hub to your phone's home screen, you need to open this site in the {{browser}} browser.",
+      "browser_icon": "{{icon}} icon",
+      "text": "text",
+      "text": "text",
+      "text": "text",
+      "text": "text",
+      "text": "text"
     },
     "auth": {
       "title": "Sing up/Sing in",
