@@ -44,6 +44,61 @@
     p {
         font-size: 16px;
     }
+
+    .image-list {
+        @include flex-column;
+        gap: 20px;
+    }
+
+    .image-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+
+        @media only screen and (min-width: 768px) {
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 24px;
+            min-height: 340px;
+        }
+    }
+
+    .image-item + .image-item {
+        padding-top: 20px;
+        border-top: 1px dashed $primary-color;
+    }
+
+    .image-item-text {
+        font-size: 18px;
+
+        @media only screen and (min-width: 412px) {
+            font-size: 20px;
+        }
+
+        @media only screen and (min-width: 768px) {
+            font-size: 22px;
+        }
+    }
+
+    .image {
+        border: 2px solid $special-color;
+        border-radius: $radius-md;
+        overflow: hidden;
+
+        @media only screen and (min-width: 768px) {
+            min-width: 52%;
+            width: 52%;
+            max-width: 52%;
+        }
+
+        @media only screen and (min-width: 1366px) {
+            min-width: 58%;
+            width: 58%;
+            max-width: 58%;
+        }
+    }
 }
 
 .instruction-full-image {

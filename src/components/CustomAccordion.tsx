@@ -4,6 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
+    defaultExpanded?: boolean;
     ariaControls: string;
     titleId: string;
     title: ReactNode;
@@ -11,9 +12,9 @@ interface IProps {
     children: ReactNode;
 }
 
-const CustomAccordion: FC<IProps> = ({ ariaControls, titleId, title, contentId, children }) => {
+const CustomAccordion: FC<IProps> = ({ defaultExpanded = false, ariaControls, titleId, title, contentId, children }) => {
     return (
-        <Accordion sx={{ backgroundColor: StylesVariables.accentColor }}>
+        <Accordion defaultExpanded={defaultExpanded} sx={{ backgroundColor: StylesVariables.accentColor }}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={ariaControls} id={titleId}>
                 <h2>{title}</h2>
             </AccordionSummary>

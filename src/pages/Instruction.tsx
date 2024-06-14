@@ -13,10 +13,21 @@ const Instruction: FC = () => {
     const myUser = useAppSelector((state) => state.myUser);
 
     const [os, setOs] = useState<string>('');
+    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
     useEffect(() => {
         const mobileOs = getMobileOperatingSystem();
         setOs(mobileOs);
+
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
     return (
@@ -29,14 +40,17 @@ const Instruction: FC = () => {
                 <h1>{t('instruction-page.title')}</h1>
 
                 <div>
-                    <CustomAccordion
-                        ariaControls="app-content"
-                        titleId="app-header"
-                        title={t('instruction-page.app.title')}
-                        contentId="app-content"
-                    >
-                        <App />
-                    </CustomAccordion>
+                    {screenWidth < 1280 && (
+                        <CustomAccordion
+                            defaultExpanded
+                            ariaControls="app-content"
+                            titleId="app-header"
+                            title={t('instruction-page.app.title')}
+                            contentId="app-content"
+                        >
+                            <App />
+                        </CustomAccordion>
+                    )}
 
                     <CustomAccordion
                         ariaControls="auth-content"

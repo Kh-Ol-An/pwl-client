@@ -1,20 +1,20 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from "react-i18next";
 import CustomModal from "@/components/CustomModal";
-import LoginWithGoogleMobileImg from "@/assets/images/instruction/login-with-google-mobile.jpg";
-import LoginWithGoogleImg from "@/assets/images/instruction/login-with-google.png";
-import ChooseGoogleAccountMobileImg from "@/assets/images/instruction/choose-google-account-mobile.jpg";
-import ChooseGoogleAccountImg from "@/assets/images/instruction/choose-google-account.png";
-import EnterYourAccountNameMobileImg from "@/assets/images/instruction/enter-your-account-name-mobile.jpg";
-import EnterYourAccountNameImg from "@/assets/images/instruction/enter-your-account-name.png";
-import EnterYourPasswordMobileImg from "@/assets/images/instruction/enter-your-password-mobile.jpg";
-import EnterYourPasswordImg from "@/assets/images/instruction/enter-your-password.png";
-import LoggedToWishHubMobileImg from "@/assets/images/instruction/logged-to-wish-hub-mobile.jpg";
-import LoggedToWishHubImg from "@/assets/images/instruction/logged-to-wish-hub.png";
-import SingUpMobileImg from "@/assets/images/instruction/sing-up-mobile.jpg";
-import SingUpImg from "@/assets/images/instruction/sing-up.png";
-import ActivationAccountMobileImg from "@/assets/images/instruction/activation-account-mobile.jpg";
-import ActivationAccountImg from "@/assets/images/instruction/activation-account.png";
+import LoginWithGoogleMobileImg from "@/assets/images/instruction/auth/login-with-google-mobile.jpg";
+import LoginWithGoogleImg from "@/assets/images/instruction/auth/login-with-google.png";
+import ChooseGoogleAccountMobileImg from "@/assets/images/instruction/auth/choose-google-account-mobile.jpg";
+import ChooseGoogleAccountImg from "@/assets/images/instruction/auth/choose-google-account.png";
+import EnterYourAccountNameMobileImg from "@/assets/images/instruction/auth/enter-your-account-name-mobile.jpg";
+import EnterYourAccountNameImg from "@/assets/images/instruction/auth/enter-your-account-name.png";
+import EnterYourPasswordMobileImg from "@/assets/images/instruction/auth/enter-your-password-mobile.jpg";
+import EnterYourPasswordImg from "@/assets/images/instruction/auth/enter-your-password.png";
+import LoggedToWishHubMobileImg from "@/assets/images/instruction/auth/logged-to-wish-hub-mobile.jpg";
+import LoggedToWishHubImg from "@/assets/images/instruction/auth/logged-to-wish-hub.png";
+import SingUpMobileImg from "@/assets/images/instruction/auth/sing-up-mobile.jpg";
+import SingUpImg from "@/assets/images/instruction/auth/sing-up.png";
+import ActivationAccountMobileImg from "@/assets/images/instruction/auth/activation-account-mobile.jpg";
+import ActivationAccountImg from "@/assets/images/instruction/auth/activation-account.png";
 
 const Auth: FC = () => {
     const { t } = useTranslation();
@@ -39,7 +39,7 @@ const Auth: FC = () => {
     }, []);
 
     return (
-        <>
+        <div className="instruction-auth">
             <p>{ t('instruction-page.auth.intro') }</p>
 
             <ol className="numbered-list">
@@ -239,7 +239,7 @@ const Auth: FC = () => {
                     <img className="instruction-full-image" src={imageData.src} alt={imageData.alt} />
                 )}
             </CustomModal>
-        </>
+        </div>
     );
 };
 

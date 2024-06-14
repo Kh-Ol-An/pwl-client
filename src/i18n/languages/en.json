@@ -415,11 +415,25 @@
       "title": "How to add Wish Hub to your phone's home screen",
       "browser": "To add Wish Hub to your phone's home screen, you need to open this site in the {{browser}} browser.",
       "browser_icon": "{{icon}} icon",
-      "text": "text",
-      "text": "text",
-      "text": "text",
-      "text": "text",
-      "text": "text"
+      "menu": {
+        "Android": "Click on the three dots (menu) in the upper right corner.",
+        "iOS": "Click the \"Share\" icon (the square with the up arrow) at the bottom of the screen.",
+        "img": "Activating menu"
+      },
+      "add": {
+        "Android": "Select the \"Add to Home\" option.",
+        "iOS": "Scroll down and select \"To Home\".",
+        "img": "Add to the home screen"
+      },
+      "install": {
+        "Android": "Click \"Install\"",
+        "iOS": "Click \"Add\"",
+        "img": "Click Add"
+      },
+      "done": {
+        "text": "Done. Look for the \"Wish Hub\" application on your phone screen.",
+        "img": "\"Wish Hub\" on the phone screen"
+      }
     },
     "auth": {
       "title": "Sing up/Sing in",
