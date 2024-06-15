@@ -73,7 +73,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
 
                     {wish.price && (
                         <div className="detail-wish-box">
-                            <span className="detail-wish-label">{t('wish.price')}</span>
+                            <span className="detail-wish-label">{t('wish-page.price')}</span>
                             <span className="detail-wish-data">
                                 {
                                     addingWhiteSpaces(unencryptedData(wish.price, wish.show))
@@ -88,7 +88,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
 
             {wish.addresses && wish.addresses.length > 0 && (
                 <p className="detail-wish-description">
-                    <span className="label">{t('wish.address')}</span>
+                    <span className="label">{t('wish-page.address')}</span>
                     {wish.addresses.map((address, idx) => {
                         const unencryptedAddress = unencryptedData(address.value, wish.show);
 
@@ -121,7 +121,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
 
             {wish.description && (
                 <p className="detail-wish-description">
-                    <span className="label">{t('wish.description')}</span>
+                    <span className="label">{t('wish-page.description')}</span>
                     <span className="value">{unencryptedData(wish.description, wish.show)}</span>
                 </p>
             )}
