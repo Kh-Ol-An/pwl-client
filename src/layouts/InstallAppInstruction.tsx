@@ -8,6 +8,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { useTranslation } from "react-i18next";
+import SwipeLeftIcon from '@mui/icons-material/SwipeLeft';
 import getMobileOperatingSystem from "@/utils/get-mobile-operating-system";
 import Button from '@/components/Button';
 import OpenChromeMenuImg from "@/assets/images/instruction/app/open-chrome-menu.jpg";
@@ -62,6 +63,8 @@ const InstallAppInstruction: FC = () => {
                             src={ os === 'iOS' ? SafariShareImg : OpenChromeMenuImg }
                             alt={ t('instruction-page.app.menu.img') }
                         />
+
+                        <SwipeLeftIcon />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>

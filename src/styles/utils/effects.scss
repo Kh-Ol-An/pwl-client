@@ -53,3 +53,39 @@
         opacity: 1;
     }
 }
+
+@keyframes swipeLeft {
+    0% {
+        transform: translate(0, -100%);
+        opacity: 1;
+        color: $primary-color;
+    }
+    30% {
+        opacity: 1;
+        color: $primary-color;
+    }
+    40% {
+        transform: translate(-30px, -100%);
+        opacity: 0;
+        color: $special-color;
+    }
+    59% {
+        transform: translate(0, -100%);
+        opacity: 0;
+        color: $special-color;
+    }
+    60% {
+        transform: translate(0, -100%);
+        opacity: 1;
+        color: $primary-color;
+    }
+    90% {
+        opacity: 1;
+        color: $primary-color;
+    }
+    100% {
+        transform: translate(-30px, -100%);
+        opacity: 0;
+        color: $special-color;
+    }
+}

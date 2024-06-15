@@ -35,6 +35,18 @@
         background-color: $primary-color;
     }
 
+    .MuiSvgIcon-root {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translate(-30px, -100%);
+        opacity: 0;
+        width: 120px;
+        height: 120px;
+        color: $primary-color;
+        animation: swipeLeft 2.5s forwards ease-in-out;
+    }
+
     .button {
         margin: 18px 0 0 auto;
     }
@@ -42,10 +54,14 @@
 
 .install-app-instruction_title {
     margin-bottom: 16px;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
     text-align: center;
     color: $light-color;
+
+    @media only screen and (min-width: 360px) {
+        font-size: 24px;
+    }
 }
 
 .install-app-instruction_img {
