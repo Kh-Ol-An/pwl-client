@@ -13,6 +13,8 @@ import getMobileOperatingSystem from "@/utils/get-mobile-operating-system";
 import Button from '@/components/Button';
 import OpenChromeMenuImg from "@/assets/images/instruction/app/open-chrome-menu.jpg";
 import SafariShareImg from "@/assets/images/instruction/app/safari-share.jpg";
+import GoogleChromeIcon from "@/assets/images/instruction/google-chrome-icon.svg";
+import SafariIcon from "@/assets/images/instruction/safari-icon.svg";
 import AddAppToAndroidScreenImg from "@/assets/images/instruction/app/add-app-to-android-screen.jpg";
 import AddAppToIosScreenImg from "@/assets/images/instruction/app/add-app-to-ios-screen.jpg";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
@@ -63,6 +65,26 @@ const InstallAppInstruction: FC = () => {
                             src={ os === 'iOS' ? SafariShareImg : OpenChromeMenuImg }
                             alt={ t('instruction-page.app.menu.img') }
                         />
+
+                        <div className="install-app-instruction_browser">
+                            <p>
+                                {
+                                    t(
+                                        'instruction-page.app.browser',
+                                        { browser: os === 'iOS' ? 'Safari' : 'Google Chrome' },
+                                    )
+                                }
+                            </p>
+                            <img
+                                src={ os === 'iOS' ? SafariIcon : GoogleChromeIcon }
+                                alt={
+                                    t(
+                                        'instruction-page.app.browser_icon',
+                                        { icon: os === 'iOS' ? 'Safari' : 'Google Chrome' },
+                                    )
+                                }
+                            />
+                        </div>
 
                         <SwipeLeftIcon />
                     </div>
