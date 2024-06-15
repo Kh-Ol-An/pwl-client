@@ -5,7 +5,7 @@ import { Avatar } from '@mui/material';
 import {
     Settings as SettingsIcon,
     ManageAccounts as ManageAccountsIcon,
-//    Info as InfoIcon,
+    Info as InfoIcon,
     Forum as ForumIcon,
     Language as LanguageIcon,
     Logout as LogoutIcon,
@@ -192,10 +192,10 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             <span className="logo-name">Wish Hub</span>
                         </Button>
 
-                        {/*<Button to="/instruction" variant="text">*/}
-                        {/*    <InfoIcon />*/}
-                        {/*    {t('main-page.instruction')}*/}
-                        {/*</Button>*/}
+                        <Button to="/instruction" variant="text" color="primary-color">
+                            <InfoIcon />
+                            {t('main-page.instruction')}
+                        </Button>
 
                         <Button variant="text" color="primary-color" type="button" onClick={handleShowContacts}>
                             <ForumIcon />

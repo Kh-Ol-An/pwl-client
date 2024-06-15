@@ -83,8 +83,8 @@
       "change-lang": {
         "error": "{{type}}.changeLang: Failed to change the interface language."
       },
-      "change-first-loaded": {
-        "error": "{{type}}.changeFirsLoaded: Failed to update data."
+      "update-data": {
+        "error": "{{type}}.changeShowedInfo: Failed to update data."
       },
       "update-my-user": {
         "error": "{{type}}.updateMyUser: Failed to update the user."
@@ -413,6 +413,8 @@
     "title": "Instruction",
     "app": {
       "title": "How to add Wish Hub to your phone's home screen",
+      "second-title": "To get quick access to Wish Hub, create an app on your phone's home screen",
+      "not_again": "Do not show again",
       "browser": "To add Wish Hub to your phone's home screen, you need to open this site in the {{browser}} browser.",
       "browser_icon": "{{icon}} icon",
       "menu": {

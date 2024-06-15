@@ -12,6 +12,7 @@ export interface IUser {
     hasPassword: boolean;
     email: string;
     lang: 'en' | 'uk';
+    showedInfo: boolean;
     firstLoaded: boolean;
     birthday?: Dayjs;
     avatar?: string;

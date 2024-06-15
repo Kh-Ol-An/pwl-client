@@ -194,11 +194,20 @@ const changeLang = async (data: IChangeLang): Promise<AxiosResponse<IUser>> => {
     }
 };
 
+const changeShowedInfo = async (data: IUserId): Promise<AxiosResponse<IUser>> => {
+    try {
+        return await api.put('/showed-info', data);
+    } catch (error: any) {
+        console.log('my-user changeShowedInfo error: ', error.response?.data?.message || t('alerts.my-user-api.update-data.error', { type: 'api' }));
+        throw error;
+    }
+};
+
 const changeFirsLoaded = async (data: IUserId): Promise<AxiosResponse<IUser>> => {
     try {
         return await api.put('/first-loaded', data);
     } catch (error: any) {
-        console.log('my-user changeFirsLoaded error: ', error.response?.data?.message || t('alerts.my-user-api.change-first-loaded.error', { type: 'api' }));
+        console.log('my-user changeFirsLoaded error: ', error.response?.data?.message || t('alerts.my-user-api.update-data.error', { type: 'api' }));
         throw error;
     }
 };
@@ -291,6 +300,7 @@ const myUserApi = {
     changeForgottenPassword,
     changePassword,
     changeLang,
+    changeShowedInfo,
     changeFirsLoaded,
     updateMyUser,
     addFriend,

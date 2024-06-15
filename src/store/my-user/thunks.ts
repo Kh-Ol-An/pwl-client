@@ -99,6 +99,15 @@ export const changeLang = createAsyncThunk<IUser, IChangeLang>(
     },
 );
 
+export const changeShowedInfo = createAsyncThunk<IUser, IUserId>(
+    'myUser/changeShowedInfo',
+    async (data: IUserId) => {
+        const result = await api.changeShowedInfo(data);
+
+        return result.data;
+    },
+);
+
 export const changeFirsLoaded = createAsyncThunk<IUser, IUserId>(
     'myUser/changeFirsLoaded',
     async (data: IUserId) => {

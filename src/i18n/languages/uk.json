@@ -83,7 +83,7 @@
       "change-lang": {
         "error": "{{type}}.changeLang: Не вдалось змінити мову."
       },
-      "change-first-loaded": {
+      "update-data": {
         "error": "{{type}}.changeFirsLoaded: Не вдалось оновити дані."
       },
       "update-my-user": {
@@ -413,6 +413,8 @@
     "title": "Інструкція",
     "app": {
       "title": "Як додати Wish Hub на головний екран телефона",
+      "second-title": "Щоб мати швидкий доступ до Wish Hub, створіть додаток на головному екрані телефона",
+      "not_again": "Більше не показувати",
       "browser": "Щоб додати Wish Hub на головний екран телефона ви маєте відкрити цей сайт у браузері {{browser}}.",
       "browser_icon": "Іконка {{icon}}",
       "menu": {

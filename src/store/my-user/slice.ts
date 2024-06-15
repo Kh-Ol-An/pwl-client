@@ -8,6 +8,7 @@ import {
     checkAuth,
     changePassword,
     changeLang,
+    changeShowedInfo,
     changeFirsLoaded,
     updateMyUser,
     addFriend,
@@ -150,6 +151,20 @@ const myUserSlice = createSlice({
                 state.isLoading = false;
                 state.error = null;
             })
+            // changeShowedInfo
+            .addCase(changeShowedInfo.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(changeShowedInfo.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.error.message || t('alerts.my-user-api.update-data.error', { type: 'slice' });
+            })
+            .addCase(changeShowedInfo.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.isLoading = false;
+                state.error = null;
+            })
             // changeFirsLoaded
             .addCase(changeFirsLoaded.pending, (state) => {
                 state.isLoading = true;
@@ -157,7 +172,7 @@ const myUserSlice = createSlice({
             })
             .addCase(changeFirsLoaded.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.error.message || t('alerts.my-user-api.change-first-loaded.error', { type: 'slice' });
+                state.error = action.error.message || t('alerts.my-user-api.update-data.error', { type: 'slice' });
             })
             .addCase(changeFirsLoaded.fulfilled, (state, action) => {
                 state.user = action.payload;

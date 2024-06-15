@@ -49,7 +49,7 @@ const WishSwiper: FC<IProps> = ({ wish }) => {
                 grabCursor={true}
                 cubeEffect={{
                     shadow: screenWidth >= 768,
-                    slideShadows: true,
+                    slideShadows: false,
                     shadowOffset: 20,
                     shadowScale: 0.94,
                 }}

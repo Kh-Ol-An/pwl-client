@@ -1,0 +1,61 @@
+.install-app-instruction {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $z-index-big-9;
+    padding: 16px 16px 60px;
+    width: 100%;
+    height: 100svh;
+    background-color: $background-color;
+
+    .swiper {
+        height: 100%;
+    }
+
+    .swiper-slide {
+        display: flex;
+        flex-direction: column;
+        background-color: $background-color;
+    }
+
+    .swiper-pagination {
+        margin-bottom: -28px;
+    }
+
+    .swiper-pagination-bullet {
+        background-color: $light-color;
+        opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+        width: 16px;
+        border-radius: $radius-round;
+        background-color: $primary-color;
+    }
+
+    .button {
+        margin: 18px 0 0 auto;
+    }
+}
+
+.install-app-instruction_title {
+    margin-bottom: 16px;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: $light-color;
+}
+
+.install-app-instruction_img {
+    position: relative;
+    flex: 1;
+    border: 2px solid $special-color;
+    border-radius: $radius-md;
+    overflow: hidden;
+
+    img {
+        object-fit: contain;
+    }
+}
