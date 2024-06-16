@@ -606,8 +606,8 @@
     width: 24px;
     height: 24px;
     border-radius: $radius-sm;
-    border: 1px dashed $special-dark-color;
-    background-color: $special-deep-dark-color;
+    border: 1px dashed $white-opacity-color;
+    background-color: $white-deep-opacity-color;
 
     @media only screen and (min-width: 768px) {
         margin-left: 18px;

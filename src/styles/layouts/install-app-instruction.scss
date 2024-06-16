@@ -39,6 +39,7 @@
         position: absolute;
         top: 50%;
         right: 20px;
+        z-index: $z-index-md-1;
         transform: translate(-30px, -100%);
         opacity: 0;
         width: 120px;
@@ -105,4 +106,17 @@
         height: 28px;
         object-fit: contain;
     }
+}
+
+.install-app-instruction_bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $z-index-1;
+    width: 100%;
+    height: 100%;
+    background-color: #19191999;
+    animation: 0.3s fadingBg 2.5s forwards ease-in-out;
 }

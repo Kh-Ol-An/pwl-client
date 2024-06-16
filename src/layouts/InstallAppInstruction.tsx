@@ -30,7 +30,6 @@ const InstallAppInstruction: FC = () => {
     const [ os, setOs ] = useState<string>('');
 
     const handleHid = () => {
-        console.log('handleHid');
         if (!myUser) return;
         dispatch(changeShowedInfo({ userId: myUser.id }))
     };
@@ -86,11 +85,13 @@ const InstallAppInstruction: FC = () => {
                             />
                         </div>
 
+                        <div className="install-app-instruction_bg"></div>
+
                         <SwipeLeftIcon />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className="install-app-instruction_img">
+                <div className="install-app-instruction_img">
                         <img
                             src={ os === 'iOS' ? AddAppToIosScreenImg : AddAppToAndroidScreenImg }
                             alt={ t('instruction-page.app.menu.img') }

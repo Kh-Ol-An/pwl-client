@@ -27,7 +27,7 @@
         height: 100%;
         transform: rotate(3deg);
         border-radius: $radius-big;
-        border: 1px dashed $white-dark-color;
+        border: 1px dashed $white-opacity-color;
 
         @media only screen and (min-width: 768px) {
             transform: rotate(5deg);
