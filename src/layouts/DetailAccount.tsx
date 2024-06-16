@@ -22,6 +22,20 @@ const DetailAccount: FC<IProps> = ({ user }) => {
     i18next.language.includes('en') && (dateFormat = 'MMMM Do');
     i18next.language.includes('uk') && (dateFormat = 'DD MMMM');
 
+    let successfulWishes = 0;
+    user.successfulWishes > 0 && (successfulWishes = user.successfulWishes);
+
+    let unsuccessfulWishes = 0;
+    user.unsuccessfulWishes > 0 && (unsuccessfulWishes = user.unsuccessfulWishes);
+
+    let tWishSuccess = 'wishes';
+    successfulWishes === 1 && (tWishSuccess = 'wish');
+    (successfulWishes === 2 || successfulWishes === 3 || successfulWishes === 4) && (tWishSuccess = 'wish_2_3_4');
+
+    let tWishUnsuccess = 'wishes';
+    unsuccessfulWishes === 1 && (tWishUnsuccess = 'wish');
+    (unsuccessfulWishes === 2 || unsuccessfulWishes === 3 || unsuccessfulWishes === 4) && (tWishUnsuccess = 'wish_2_3_4');
+
     return (
         <div className="detail-account">
             {user.avatar && (
@@ -54,17 +68,23 @@ const DetailAccount: FC<IProps> = ({ user }) => {
                 )}
 
                 <div className="detail-account-field">
-                    <div className="detail-account-label">{t('main-page.fulfilled-wishes')}</div>
-                    <div className={"detail-account-value" + (user.successfulWishes > 0 ? " success" : "")}>
-                        {user.successfulWishes || 0}
+                    <div className="detail-account-label">{ t('main-page.i_have_fulfilled') }</div>
+
+                    <div className={ "detail-account-value" + (successfulWishes > 0 ? " success" : "") }>
+                        { successfulWishes }
                     </div>
+
+                    <div className="detail-account-label">{ t(`main-page.${tWishSuccess}`) }</div>
                 </div>
 
                 <div className="detail-account-field">
-                    <div className="detail-account-label">{t('main-page.unfulfilled-wishes')}</div>
-                    <div className={"detail-account-value" + (user.unsuccessfulWishes > 0 ? " unsuccess" : "")}>
-                        {user.unsuccessfulWishes || 0}
+                    <div className="detail-account-label">{ t('main-page.i_did_not_fulfill') }</div>
+
+                    <div className={ "detail-account-value" + (unsuccessfulWishes > 0 ? " unsuccess" : "") }>
+                        { unsuccessfulWishes }
                     </div>
+
+                    <div className="detail-account-label">{ t(`main-page.${tWishUnsuccess}`) }</div>
                 </div>
             </div>
         </div>
