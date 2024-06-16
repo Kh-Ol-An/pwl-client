@@ -95,6 +95,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
             <Button
                 type="button"
                 variant="text"
+                color="primary-color"
                 onClick={() => setShow(true)}
             >
                 {t('main-page.will-fulfill')}

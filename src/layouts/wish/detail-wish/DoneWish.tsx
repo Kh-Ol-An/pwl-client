@@ -35,6 +35,7 @@ const DoneWish: FC<IProps> = ({ wish, userId, whoseWish, close }) => {
             <Button
                 type="button"
                 variant="text"
+                color="primary-color"
                 onClick={() => setShow(true)}
             >
                 {t('main-page.wish-fulfilled')}
