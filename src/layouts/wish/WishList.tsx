@@ -122,16 +122,20 @@ const WishList = () => {
                 <ul className="list">
                     { selectedWishList.map((wish) => (
                         <li
-                            className={
-                                "item" + (selectedWishList.length < 2 ? " alone" : "") + (wish.booking?.end ? " booked" : "")
-                            }
+                            className={"item" + (selectedWishList.length < 2 ? " alone" : "")}
                             key={ wish.id }
                         >
-                            <WishItem
-                                wish={ wish }
-                                showWish={ () => handleShowWish(wish.id) }
-                                editWish={ () => handleShowEditWish(wish.id) }
-                            />
+                            <div className={wish.booking?.end ? "booked" : ""}>
+                                <WishItem
+                                    wish={ wish }
+                                    showWish={ () => handleShowWish(wish.id) }
+                                    editWish={ () => handleShowEditWish(wish.id) }
+                                />
+                            </div>
+
+                            {wish.booking?.end && (
+                                <span className="reserved">{ t('reserved') }</span>
+                            )}
                         </li>
                     )) }
                 </ul>

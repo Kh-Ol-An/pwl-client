@@ -8,6 +8,7 @@
   "logout": "Log out",
   "first-name": "Name*",
   "last-name": "Last name*",
+  "reserved": "Reserved",
   "inactivated": {
     "aim": "We aim for all users to be real.",
     "check": "Check your email at:",
