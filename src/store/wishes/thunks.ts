@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '@/store/wishes/api';
 import {
     ICreateWish,
+    ICreatedWish,
     IUpdateWish,
     IGetWish,
     ISendWish,
@@ -13,7 +14,7 @@ import {
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
 
-export const createWish = createAsyncThunk<IWish, ICreateWish>(
+export const createWish = createAsyncThunk<ICreatedWish, ICreateWish>(
     'wishes/createWish',
     async (data) => {
         const result = await api.createWish(data);

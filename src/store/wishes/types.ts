@@ -1,5 +1,6 @@
 import { TCurrentImage, IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
+import { IQuote } from "@/models/IQuote";
 
 export interface ICreateWish {
     userId: IUser['id'];
@@ -11,6 +12,11 @@ export interface ICreateWish {
     addresses?: IWish['addresses'];
     description?: IWish['description'];
     images: TCurrentImage[];
+}
+
+export interface ICreatedWish {
+    wish: IWish;
+    quote: IQuote;
 }
 
 export interface IUpdateWish extends ICreateWish {

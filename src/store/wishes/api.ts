@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import api from '@/utils/api';
 import {
     ICreateWish,
+    ICreatedWish,
     IUpdateWish,
     ISendWish,
     IGetWish,
@@ -47,7 +48,7 @@ const addDataToFormData = (formData: FormData, data: IUpdateWish | ICreateWish):
     return formData;
 };
 
-const createWish = async (data: ICreateWish): Promise<AxiosResponse<IWish>> => {
+const createWish = async (data: ICreateWish): Promise<AxiosResponse<ICreatedWish>> => {
     const formData = new FormData();
 
     try {

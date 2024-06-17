@@ -44,7 +44,7 @@ const wishesSlice = createSlice({
                 state.error = action.error.message || t('alerts.wishes-api.create-wish.error', { type: 'slice' });
             })
             .addCase(createWish.fulfilled, (state, action) => {
-                state.list.unshift(action.payload);
+                state.list.unshift(action.payload.wish);
                 state.isLoading = false;
                 state.isLocalLoading = false;
                 state.error = null;

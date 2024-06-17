@@ -2,12 +2,13 @@ import React, { FC, ChangeEvent, useState, useLayoutEffect, useEffect } from 're
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Tooltip } from 'react-tooltip';
 import { useTranslation } from 'react-i18next';
+import { toast } from "react-toastify";
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { createWish, deleteWish, updateWish } from '@/store/wishes/thunks';
-import { ICreateWish } from '@/store/wishes/types';
+import { ICreatedWish, ICreateWish } from '@/store/wishes/types';
 import { TCurrentImage, IImage, IWish } from '@/models/IWish';
 import { wishDescriptionValidation, wishNameValidation, wishPriceValidation } from '@/utils/validations';
 import { WISH_DESCRIPTION_MAX_LENGTH } from '@/utils/constants';
@@ -137,12 +138,29 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             images: show === 'all' ? images : encryptedImages,
         };
         if (idOfSelectedWish) {
-            await dispatch(updateWish({
-                ...wishData,
-                id: idOfSelectedWish,
-            }));
+            try {
+                await dispatch(updateWish({
+                    ...wishData,
+                    id: idOfSelectedWish,
+                }));
+            } catch (e: any) {
+                console.log(e)
+            }
         } else {
-            await dispatch(createWish(wishData));
+            try {
+                const response = await dispatch(createWish(wishData));
+                const quote = (response.payload as ICreatedWish).quote;
+                toast(
+                    <div>
+                        <h6>Бажання успішно створено!</h6>
+                        <p>{quote?.text}</p>
+                        <p>{quote?.author}</p>
+                    </div>,
+                    { type: 'success' },
+                );
+            } catch (e: any) {
+                console.log(e)
+            }
         }
         close();
     };
