@@ -22,6 +22,7 @@ import Input from '@/components/Input';
 import DragNDrop from '@/components/DragNDrop';
 import Switch from '@/components/Switch';
 import Radio from '@/components/Radio';
+import QuoteMessage from "@/components/QuoteMessage";
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
@@ -144,22 +145,22 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     id: idOfSelectedWish,
                 }));
             } catch (e: any) {
-                console.log(e)
+                console.error(e)
             }
         } else {
             try {
                 const response = await dispatch(createWish(wishData));
                 const quote = (response.payload as ICreatedWish).quote;
                 toast(
-                    <div>
-                        <h6>Бажання успішно створено!</h6>
-                        <p>{quote?.text}</p>
-                        <p>{quote?.author}</p>
-                    </div>,
+                    <QuoteMessage
+                        title={t('alerts.wishes-api.create-wish.success')}
+                        text={quote?.text}
+                        author={quote?.author}
+                    />,
                     { type: 'success' },
                 );
             } catch (e: any) {
-                console.log(e)
+                console.error(e)
             }
         }
         close();

@@ -1,8 +1,29 @@
+.Toastify__toast-container {
+    @media only screen and (min-width: 768px) {
+        width: 380px;
+    }
+}
+
 .toast-body {
     display: flex;
     align-items: center;
     font-family: $primary-font-family;
     font-size: 14px;
     font-weight: 700;
-    color: #020024;
+    color: $light-color;
+}
+
+.Toastify__close-button > svg {
+    width: 36px;
+    height: 40px;
+
+    @media only screen and (min-width: 768px) {
+        width: 22px;
+        height: 24px;
+    }
+
+    @media only screen and (min-width: 1366px) {
+        width: 16px;
+        height: 18px;
+    }
 }

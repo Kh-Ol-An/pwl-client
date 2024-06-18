@@ -54,7 +54,7 @@ const App: FC = () => {
                 </Routes>
             )}
 
-            <ToastContainer theme="colored" bodyClassName={() => "toast-body"} />
+            <ToastContainer theme="dark" bodyClassName={() => "toast-body"} />
         </ThemeProvider>
     );
 };

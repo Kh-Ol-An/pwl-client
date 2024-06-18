@@ -72,7 +72,7 @@ const updateWish = async (data: IUpdateWish): Promise<AxiosResponse<IWish>> => {
     formData.append('id', data.id);
 
     try {
-        return await api.put(
+        const response = await api.put(
             '/wish',
             addDataToFormData(formData, data),
             {
@@ -81,6 +81,10 @@ const updateWish = async (data: IUpdateWish): Promise<AxiosResponse<IWish>> => {
                 },
             },
         );
+
+        toast(t('alerts.wishes-api.update-wish.success'), { type: 'success' });
+
+        return response;
     } catch (error: any) {
         toast(error.response?.data?.message || t('alerts.wishes-api.update-wish.error', { type: 'api' }), { type: 'error' });
         throw error;
@@ -98,7 +102,11 @@ const getWish = async (params: ISendWish): Promise<AxiosResponse<IGetWish>> => {
 
 const doneWish = async (data: IDoneWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
     try {
-        return await api.post('/wish/done', data);
+        const response = await api.post('/wish/done', data);
+
+        toast(t('alerts.wishes-api.done-wish.success'), { type: 'success' });
+
+        return response;
     } catch (error: any) {
         toast(error.response?.data?.message || t('alerts.wishes-api.done-wish.error', { type: 'api' }), { type: 'error' });
         throw error;
@@ -107,7 +115,11 @@ const doneWish = async (data: IDoneWish): Promise<AxiosResponse<{ executorUser: 
 
 const undoneWish = async (data: IActionWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
     try {
-        return await api.post('/wish/undone', data);
+        const response = await api.post('/wish/undone', data);
+
+        toast(t('alerts.wishes-api.undone-wish.success'), { type: 'success' });
+
+        return response;
     } catch (error: any) {
         toast(error.response?.data?.message || t('alerts.wishes-api.undone-wish.error', { type: 'api' }), { type: 'error' });
         throw error;
@@ -125,7 +137,11 @@ const bookWish = async (data: IBookWish): Promise<AxiosResponse<IWish>> => {
 
 const cancelBookWish = async (data: IActionWish): Promise<AxiosResponse<IWish>> => {
     try {
-        return await api.post('/wish/cancel-book', data);
+        const response = await api.post('/wish/cancel-book', data);
+
+        toast(t('alerts.wishes-api.cancel-book-wish.success'), { type: 'success' });
+
+        return response;
     } catch (error: any) {
         toast(error.response?.data?.message || t('alerts.wishes-api.cancel-book-wish.error', { type: 'api' }), { type: 'error' });
         throw error;
@@ -134,7 +150,7 @@ const cancelBookWish = async (data: IActionWish): Promise<AxiosResponse<IWish>> 
 
 const deleteWish = async (userId: IUser['id'], wishId: IWish['id']): Promise<AxiosResponse<IWish['id']>> => {
     try {
-        return await api.delete(
+        const response = await api.delete(
             '/wish',
             {
                 params: {
@@ -143,6 +159,10 @@ const deleteWish = async (userId: IUser['id'], wishId: IWish['id']): Promise<Axi
                 }
             }
         );
+
+        toast(t('alerts.wishes-api.delete-wish.success'), { type: 'success' });
+
+        return response;
     } catch (error: any) {
         toast(
             error.response?.data?.message || t('alerts.wishes-api.delete-wish.error', { type: 'api' }),

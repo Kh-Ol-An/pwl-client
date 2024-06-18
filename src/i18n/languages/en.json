@@ -107,28 +107,35 @@
     },
     "wishes-api": {
       "create-wish": {
-        "error": "{{type}}.createWish: Failed to create a wish."
+        "error": "{{type}}.createWish: Failed to create a wish.",
+        "success": "The wish has been successfully created."
       },
       "update-wish": {
-        "error": "{{type}}.updateWish: Failed to update the wish."
+        "error": "{{type}}.updateWish: Failed to update the wish.",
+        "success": "The wish has been successfully updated."
       },
       "get-wish": {
         "error": "{{type}}.getWish: Failed to get the wish."
       },
       "done-wish": {
-        "error": "{{type}}.doneWish: Failed to mark the wish as done."
+        "error": "{{type}}.doneWish: Failed to mark the wish as done.",
+        "success": "The wish has been successfully marked as done."
       },
       "undone-wish": {
-        "error": "{{type}}.undoneWish: Failed to mark the wish as not done."
+        "error": "{{type}}.undoneWish: Failed to mark the wish as not done.",
+        "success": "The wish has been successfully marked as not done."
       },
       "book-wish": {
-        "error": "{{type}}.bookWish: Failed to book the wish."
+        "error": "{{type}}.bookWish: Failed to book the wish.",
+        "success": "The wish has been successfully booked."
       },
       "cancel-book-wish": {
-        "error": "{{type}}.cancelBookWish: Failed to cancel the booking of the wish."
+        "error": "{{type}}.cancelBookWish: Failed to cancel the booking of the wish.",
+        "success": "The wish booking has been successfully canceled."
       },
       "delete-wish": {
-        "error": "{{type}}.deleteWish: Failed to delete the wish with ID {{wishId}}."
+        "error": "{{type}}.deleteWish: Failed to delete the wish with ID {{wishId}}.",
+        "success": "The wish has been successfully deleted."
       },
       "get-wish-list": {
         "error": "{{type}}.getWishList: Failed to get wish list."

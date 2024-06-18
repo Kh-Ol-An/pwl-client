@@ -6,12 +6,15 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { DateValidationError } from '@mui/x-date-pickers/models';
 import dayjs, { Dayjs } from 'dayjs';
 import { Tooltip } from 'react-tooltip';
+import { toast } from "react-toastify";
 import { Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { bookWish } from '@/store/wishes/thunks';
+import { ICreatedWish } from "@/store/wishes/types";
 import getTooltipStyles from '@/utils/get-tooltip-styles';
 import ConfirmModal from '@/components/ConfirmModal';
 import Button from '@/components/Button';
+import QuoteMessage from "@/components/QuoteMessage";
 import { IWish } from '@/models/IWish';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import { unencryptedData } from '@/utils/encryption-data';
@@ -67,7 +70,21 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
 
         if (!myUser || !bookEnd || (bookEndError && bookEndError.length > 0)) return;
 
-        await dispatch(bookWish({ userId: myUser.id, wishId: wish.id, end: bookEnd.add(1, 'day').format() }));
+        try {
+            const response = await dispatch(bookWish({ userId: myUser.id, wishId: wish.id, end: bookEnd.add(1, 'day').format() }));
+            const quote = (response.payload as ICreatedWish).quote;
+            toast(
+                <QuoteMessage
+                    title={t('alerts.wishes-api.book-wish.success')}
+                    text={quote?.text}
+                    author={quote?.author}
+                />,
+                { type: 'success' },
+            );
+        } catch (e: any) {
+            console.error(e)
+        }
+
         close();
     };
 

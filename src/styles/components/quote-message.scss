@@ -1,0 +1,45 @@
+.quote-message {
+    padding: 0 16px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    h6 {
+        padding: 8px;
+        font-size: 16px;
+        font-weight: 700;
+    }
+}
+
+.quote-message_box {
+    position: relative;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: rotate(2deg);
+        border-radius: $radius;
+        border: 1px dashed $white-opacity-color;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    span {
+        margin: 4px 0 0 auto;
+        font-size: 12px;
+        font-weight: 400;
+        font-style: italic;
+    }
+}

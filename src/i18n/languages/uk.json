@@ -107,28 +107,35 @@
     },
     "wishes-api": {
       "create-wish": {
-        "error": "{{type}}.createWish: Не вдалось створити бажання."
+        "error": "{{type}}.createWish: Не вдалось створити бажання.",
+        "success": "Бажання успішно створено."
       },
       "update-wish": {
-        "error": "{{type}}.updateWish: Не вдалось оновити бажання."
+        "error": "{{type}}.updateWish: Не вдалось оновити бажання.",
+        "success": "Бажання успішно оновлено."
       },
       "get-wish": {
         "error": "{{type}}.getWish: Не вдалось отримати бажання."
       },
       "done-wish": {
-        "error": "{{type}}.doneWish: Не вдалось позначити бажання виконаним."
+        "error": "{{type}}.doneWish: Не вдалось позначити бажання виконаним.",
+        "success": "Бажання успішно позначено виконаним."
       },
       "undone-wish": {
-        "error": "{{type}}.undoneWish: Не вдалось позначити бажання не виконаним."
+        "error": "{{type}}.undoneWish: Не вдалось позначити бажання не виконаним.",
+        "success": "Бажання успішно позначено не виконаним."
       },
       "book-wish": {
-        "error": "{{type}}.bookWish: Не вдалось забронювати бажання."
+        "error": "{{type}}.bookWish: Не вдалось забронювати бажання.",
+        "success": "Бажання успішно заброньовано."
       },
       "cancel-book-wish": {
-        "error": "{{type}}.cancelBookWish: Не вдалось скасувати бронювання бажання."
+        "error": "{{type}}.cancelBookWish: Не вдалось скасувати бронювання бажання.",
+        "success": "Бронювання бажання успішно скасовано."
       },
       "delete-wish": {
-        "error": "{{type}}.deleteWish: Не вдалося видалити побажання з ідентифікатором {{wishId}}."
+        "error": "{{type}}.deleteWish: Не вдалося видалити побажання з ідентифікатором {{wishId}}.",
+        "success": "Бажання успішно видалено."
       },
       "get-wish-list": {
         "error": "{{type}}.getWishList: Не вдалось отримати список бажань."
