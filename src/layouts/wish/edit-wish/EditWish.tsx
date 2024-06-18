@@ -1,6 +1,7 @@
 import React, { FC, ChangeEvent, useState, useLayoutEffect, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Tooltip } from 'react-tooltip';
+import i18next from "i18next";
 import { useTranslation } from 'react-i18next';
 import { toast } from "react-toastify";
 import Select from '@mui/material/Select';
@@ -10,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { createWish, deleteWish, updateWish } from '@/store/wishes/thunks';
 import { ICreatedWish, ICreateWish } from '@/store/wishes/types';
 import { TCurrentImage, IImage, IWish } from '@/models/IWish';
+import { IUser } from "@/models/IUser";
 import { wishDescriptionValidation, wishNameValidation, wishPriceValidation } from '@/utils/validations';
 import { WISH_DESCRIPTION_MAX_LENGTH } from '@/utils/constants';
 import { removingWhiteSpaces, addingWhiteSpaces } from '@/utils/formating-value';
@@ -63,6 +65,10 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const [currency, setCurrency] = useState<IWish['currency']>('UAH');
     const [isTransition, setIsTransition] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+
+    let lang: IUser['lang'] = 'en';
+    i18next.language.includes('en') && (lang = 'en');
+    i18next.language.includes('uk') && (lang = 'uk');
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         const nonUniqueName = wishList.some((wish) => {
@@ -150,7 +156,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         } else {
             try {
                 const response = await dispatch(createWish(wishData));
-                const quote = (response.payload as ICreatedWish).quote;
+                const quote = (response.payload as ICreatedWish).quote[lang];
                 toast(
                     <QuoteMessage
                         title={t('alerts.wishes-api.create-wish.success')}

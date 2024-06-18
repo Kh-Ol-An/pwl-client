@@ -15,6 +15,7 @@ import getTooltipStyles from '@/utils/get-tooltip-styles';
 import ConfirmModal from '@/components/ConfirmModal';
 import Button from '@/components/Button';
 import QuoteMessage from "@/components/QuoteMessage";
+import { IUser } from "@/models/IUser";
 import { IWish } from '@/models/IWish';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import { unencryptedData } from '@/utils/encryption-data';
@@ -36,6 +37,10 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
     const [show, setShow] = useState<boolean>(false);
     const [clickedOnBookWish, setClickedOnBookWish] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+
+    let lang: IUser['lang'] = 'en';
+    i18next.language.includes('en') && (lang = 'en');
+    i18next.language.includes('uk') && (lang = 'uk');
 
     let dateFormat = 'MM/DD/YYYY';
     i18next.language.includes('en') && (dateFormat = 'MM/DD/YYYY');
@@ -72,7 +77,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
 
         try {
             const response = await dispatch(bookWish({ userId: myUser.id, wishId: wish.id, end: bookEnd.add(1, 'day').format() }));
-            const quote = (response.payload as ICreatedWish).quote;
+            const quote = (response.payload as ICreatedWish).quote[lang];
             toast(
                 <QuoteMessage
                     title={t('alerts.wishes-api.book-wish.success')}
