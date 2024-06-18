@@ -33,7 +33,7 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
         <div
             className={
                 "wish-item"
-                + (wish.images.length > 0 ? " can-hover" : "")
+                + (wish.images?.length > 0 ? " can-hover" : "")
                 + (myUser?.id === wish.booking?.userId ? " i-m-booked" : "")
                 + (showBookingExpired(wish, myUser?.id) ? " booking-expired" : "")
             }
