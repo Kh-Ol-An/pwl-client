@@ -1,7 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from "@/store/hook";
-import getMobileOperatingSystem from "@/utils/get-mobile-operating-system";
 import PageHeader from '@/layouts/PageHeader';
 import App from "@/layouts/instruction/App";
 import Auth from "@/layouts/instruction/Auth";
@@ -12,13 +11,9 @@ const Instruction: FC = () => {
 
     const myUser = useAppSelector((state) => state.myUser);
 
-    const [os, setOs] = useState<string>('');
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
     useEffect(() => {
-        const mobileOs = getMobileOperatingSystem();
-        setOs(mobileOs);
-
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
         };

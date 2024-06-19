@@ -24,7 +24,6 @@
 @import 'layouts/wish/wish-item';
 @import 'layouts/wish/wish-list';
 
-@import 'layouts/about';
 @import 'layouts/card';
 @import 'layouts/contacts';
 @import 'layouts/detail-account';
@@ -65,6 +64,7 @@
 @import 'components/tooltip';
 
 // pages
+@import 'pages/about';
 @import 'pages/auth';
 @import 'pages/main';
 @import 'pages/instruction';

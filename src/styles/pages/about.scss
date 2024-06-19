@@ -1,0 +1,109 @@
+.about-page {
+    width: 100%;
+    min-height: 100svh;
+
+    section:first-of-type {
+        padding-top: 60px;
+
+        @media only screen and (min-width: 768px) {
+            padding-top: 90px;
+        }
+
+        &.logged-out {
+            padding-top: 120px;
+
+            @media only screen and (min-width: 500px) {
+                padding-top: 90px;
+            }
+
+            @media only screen and (min-width: 768px) {
+                padding-top: 90px;
+            }
+
+            @media only screen and (min-width: 1280px) {
+                padding-top: 90px;
+            }
+        }
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        color: $light-color;
+        padding: 0 16px 30px;
+
+        @media only screen and (min-width: 768px) {
+            padding: 0 20px 40px;
+        }
+
+        &.logged-out {
+            padding: 0 16px 30px;
+
+            @media only screen and (min-width: 500px) {
+                padding: 0 16px 30px;
+            }
+
+            @media only screen and (min-width: 768px) {
+                padding: 0 20px 40px;
+            }
+
+            @media only screen and (min-width: 1280px) {
+                padding: 0 0 40px;
+            }
+        }
+    }
+
+    h1 {
+        position: relative;
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+
+        @media only screen and (min-width: 390px) {
+            font-size: 32px;
+        }
+
+        button {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+
+            &:hover {
+                svg {
+                    color: $primary-light-color;
+                }
+            }
+        }
+
+        svg {
+            width: 28px;
+            height: 28px;
+            color: $primary-color;
+            transition: $transition;
+
+            @media only screen and (min-width: 360px) {
+                width: 36px;
+                height: 36px;
+            }
+
+            @media only screen and (min-width: 1280px) {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    }
+
+    h2 {
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: justify;
+    }
+}

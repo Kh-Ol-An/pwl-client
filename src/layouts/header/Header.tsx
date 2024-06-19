@@ -18,7 +18,6 @@ import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import DetailAccount from '@/layouts/DetailAccount';
 import EditAccountModal from '@/layouts/header/EditAccountModal';
-import About from '@/layouts/header/About';
 import Contacts from '@/layouts/header/Contacts';
 import ConfirmDeleteMyUserModal from '@/layouts/header/ConfirmDeleteMyUserModal';
 import CustomModal from '@/components/CustomModal';
@@ -44,7 +43,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
     const [showDetailAccount, setShowDetailAccount] = useState<boolean>(false);
     const [showEditAccount, setShowEditAccount] = useState<boolean>(false);
-    const [showAbout, setShowAbout] = useState<boolean>(false);
     const [showContacts, setShowContacts] = useState<boolean>(false);
     const [showLanguage, setShowLanguage] = useState<boolean>(false);
     const [showConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
@@ -87,16 +85,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
 
         if (!myUser || myUser?.firstLoaded) return;
         await dispatch(changeFirsLoaded({ userId: myUser.id }));
-    };
-
-    // About
-    const handleShowAbout = () => {
-        setShowAbout(true);
-        setAnchor(null);
-        hideHeader();
-    };
-    const handleHideAbout = () => {
-        setShowAbout(false);
     };
 
     // Contacts
@@ -186,7 +174,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             {t('main-page.account_settings')}
                         </Button>
 
-                        <Button variant="text" color="primary-color" type="button" onClick={ handleShowAbout }>
+                        <Button to="/about" variant="text" color="primary-color">
                             <img className="wish-hub-icon" src={ LogoIcon } alt={ t('wish_hub_icon') } />
                             { t('main-page.about') }
                             <span className="logo-name">Wish Hub</span>
@@ -226,11 +214,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         hide={handleHideEditAccount}
                         handleShowConfirmDeleteMyUser={handleShowConfirmDeleteMyUser}
                     />
-
-                    {/* About */}
-                    <CustomModal show={showAbout} hide={handleHideAbout}>
-                        <About />
-                    </CustomModal>
 
                     {/* Contacts */}
                     <CustomModal show={showContacts} hide={handleHideContacts}>

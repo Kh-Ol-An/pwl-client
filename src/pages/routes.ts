@@ -4,6 +4,7 @@ import Auth from '@/pages/Auth';
 import ChangeForgottenPassword from '@/pages/ChangeForgottenPassword';
 import Welcome from '@/pages/Welcome';
 import Instruction from '@/pages/Instruction';
+import AboutOld from "@/pages/About";
 import Wish from '@/pages/Wish';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import NotFound from '@/pages/NotFound';
@@ -21,6 +22,7 @@ export const unauthenticatedRoutes = [
 export const publicRoutes = [
     { path: '/welcome', component: Welcome },
     { path: '/instruction', component: Instruction },
+    { path: '/about', component: AboutOld },
     { path: '/wish/:wishId', component: Wish },
     { path: '/privacy-policy', component: PrivacyPolicy },
     { path: '/*', component: NotFound },
