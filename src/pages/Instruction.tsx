@@ -37,7 +37,6 @@ const Instruction: FC = () => {
                 <div>
                     {screenWidth < 1280 && (
                         <CustomAccordion
-                            defaultExpanded
                             ariaControls="app-content"
                             titleId="app-header"
                             title={t('instruction-page.app.title')}
