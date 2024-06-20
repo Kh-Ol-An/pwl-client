@@ -21,27 +21,29 @@ const EditAccountModal: FC<IProps> = ({ show, hide, handleShowConfirmDeleteMyUse
 
     return (
         <CustomModal show={show} hide={hide}>
-            <div className="change-edit-account">
-                <span className={isEditAccount ? "primary-color" : ""}>{t('main-page.edit-account')}</span>
-                <Switch
-                    id="change-edit-account"
-                    name="change-edit-account"
-                    checked={isEditAccount}
-                    onChange={(e) => setIsEditAccount(e.target.checked)}
-                />
-                <span className={isEditAccount ? "" : "action-color"}>{t('main-page.change-password')}</span>
-            </div>
-
-            <div className="header-actions-account">
-                <div className={"header-edit-account" + (isEditAccount ? " show" : "")}>
-                    <EditAccount
-                        close={hide}
-                        handleShowConfirmDeleteMyUser={handleShowConfirmDeleteMyUser}
+            <div className="edit-account-container">
+                <div className="change-edit-account">
+                    <span className={isEditAccount ? "primary-color" : ""}>{t('main-page.edit-account')}</span>
+                    <Switch
+                        id="change-edit-account"
+                        name="change-edit-account"
+                        checked={isEditAccount}
+                        onChange={(e) => setIsEditAccount(e.target.checked)}
                     />
+                    <span className={isEditAccount ? "" : "action-color"}>{t('main-page.change-password')}</span>
                 </div>
 
-                <div className={"header-change-password" + (isEditAccount ? "" : " show")}>
-                    <ChangePassword userId={myUser?.id} close={hide} />
+                <div className="header-actions-account">
+                    <div className={"header-edit-account" + (isEditAccount ? " show" : "")}>
+                        <EditAccount
+                            close={hide}
+                            handleShowConfirmDeleteMyUser={handleShowConfirmDeleteMyUser}
+                        />
+                    </div>
+
+                    <div className={"header-change-password" + (isEditAccount ? "" : " show")}>
+                        <ChangePassword userId={myUser?.id} close={hide} />
+                    </div>
                 </div>
             </div>
         </CustomModal>

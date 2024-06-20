@@ -1,7 +1,9 @@
 .edit-wish {
+    margin: auto;
     width: 100%;
     padding-top: 4px;
     @include flex-column;
+    justify-content: center;
 
     .material {
         width: 100%;

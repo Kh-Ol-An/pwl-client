@@ -1,3 +1,10 @@
+.edit-account-container {
+    margin: auto;
+    @include flex-column;
+    justify-content: center;
+    gap: 20px;
+}
+
 .edit-account {
     @include flex-column;
     gap: 20px;

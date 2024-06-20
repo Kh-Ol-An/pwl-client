@@ -139,6 +139,10 @@
         color: $special-color;
         text-align: center;
 
+        @media only screen and (min-width: 360px) {
+            font-size: 14px;
+        }
+
         @media only screen and (min-width: 412px) {
             font-size: 16px;
         }
@@ -157,28 +161,68 @@
     display: flex;
 }
 
-.header-edit-account {
-    max-width: 0;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: $transition;
-
-    &.show {
-        transform: scaleX(1);
-        max-width: 400px;
-    }
-}
-
+.header-edit-account,
 .header-change-password {
     max-width: 0;
     transform: scaleX(0);
-    transform-origin: right;
     transition: $transition;
 
     &.show {
         transform: scaleX(1);
-        max-width: 400px;
+        max-width: 232px;
+
+        @media only screen and (min-width: 360px) {
+            max-width: 272px;
+        }
+
+        @media only screen and (min-width: 375px) {
+            max-width: 287px;
+        }
+
+        @media only screen and (min-width: 385px) {
+            max-width: 297px;
+        }
+
+        @media only screen and (min-width: 390px) {
+            max-width: 302px;
+        }
+
+        @media only screen and (min-width: 393px) {
+            max-width: 305px;
+        }
+
+        @media only screen and (min-width: 412px) {
+            max-width: 324px;
+        }
+
+        @media only screen and (min-width: 414px) {
+            max-width: 326px;
+        }
+
+        @media only screen and (min-width: 428px) {
+            max-width: 340px;
+        }
+
+        @media only screen and (min-width: 430px) {
+            max-width: 342px;
+        }
+
+        @media only screen and (min-width: 768px) {
+            max-width: 378px;
+        }
+
+        @media only screen and (min-width: 1366px) {
+            max-width: 400px;
+        }
     }
+}
+
+.header-edit-account {
+    transform-origin: left;
+}
+
+.header-change-password {
+    transform-origin: right;
 }
 
 .modal.confirm .email-box {
