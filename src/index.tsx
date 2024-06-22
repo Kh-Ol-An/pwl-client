@@ -20,19 +20,29 @@ let lang = 'en';
 i18next.language.includes('en') && (lang = 'en');
 i18next.language.includes('uk') && (lang = 'uk');
 
-dayjs.extend(updateLocale)
-dayjs.extend(advancedFormat)
+dayjs.extend(updateLocale);
+dayjs.extend(advancedFormat);
 dayjs.updateLocale(lang, {
     weekStart: i18next.language.includes('uk') && 1,
-})
+});
+
+if ('serviceWorker' in navigator && 'PushManager' in window) {
+    navigator.serviceWorker.register('@/utils/service-worker.ts')
+        .then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+        });
+}
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
-    <Provider store={store}>
+    <Provider store={ store }>
         <BrowserRouter>
-            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={lang}>
+            <LocalizationProvider dateAdapter={ AdapterDayjs } adapterLocale={ lang }>
                 <GoogleOAuthProvider
                     clientId={
                         process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID ? process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID : ''
