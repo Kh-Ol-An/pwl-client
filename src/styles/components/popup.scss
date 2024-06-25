@@ -4,5 +4,15 @@
 
 .popup {
     @include flex-column-left;
-    gap: 10px;
+
+    .button {
+        padding: 8px 0;
+        width: 100%;
+        justify-content: left;
+        color: $primary-color;
+
+        span {
+            color: inherit;
+        }
+    }
 }
