@@ -49,7 +49,7 @@ export interface IChangeLang extends IUserId {
     lang: IUser['lang'];
 }
 
-export interface INotificationSubscription extends IUserId {
+export interface INotificationSubscribe extends IUserId {
     subscription: PushSubscription;
 }
 

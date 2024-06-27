@@ -1,25 +1,14 @@
 import myUserApi from '@/store/my-user/api';
 import { IUser } from "@/models/IUser";
 
-export const requestNotificationPermission = async (userId: IUser['id']) => {
-    const reg = await navigator.serviceWorker.ready;
-    const sub = await reg.pushManager.getSubscription();
-    console.log('reg: ', reg);
-    console.log('sub: ', sub);
-    if ('Notification' in window && navigator.serviceWorker) {
-        const permission = await Notification.requestPermission();
-        if (permission === 'granted') {
-            const registration = await navigator.serviceWorker.ready;
-            if (!process.env.REACT_APP_PUBLIC_VAPID_KEY) {
-                return Promise.reject('REACT_APP_PUBLIC_VAPID_KEY is not defined.');
-            }
-            const subscription: PushSubscription = await registration.pushManager.subscribe({
-                userVisibleOnly: true,
-                applicationServerKey: urlBase64ToUint8Array(process.env.REACT_APP_PUBLIC_VAPID_KEY)
-            });
-            await myUserApi.notificationSubscription({ userId, subscription });
-            console.log('User is subscribed:', subscription);
-        }
+export const checkNotificationSubscription = async (userId: IUser['id']) => {
+    try {
+        const registration = await navigator.serviceWorker.ready;
+        const subscription = await registration.pushManager.getSubscription();
+        if (subscription) return;
+        await myUserApi.notificationUnsubscribe({ userId });
+    } catch (e) {
+        console.error(e);
     }
 };
 
@@ -32,4 +21,26 @@ const urlBase64ToUint8Array = (base64String: string) => {
         outputArray[i] = rawData.charCodeAt(i);
     }
     return outputArray;
+};
+
+export const requestNotificationPermission = async (userId: IUser['id']) => {
+    if ('Notification' in window && navigator.serviceWorker) {
+        try {
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+                if (!process.env.REACT_APP_PUBLIC_VAPID_KEY) {
+                    return Promise.reject('REACT_APP_PUBLIC_VAPID_KEY is not defined.');
+                }
+
+                const registration = await navigator.serviceWorker.ready;
+                const subscription: PushSubscription = await registration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: urlBase64ToUint8Array(process.env.REACT_APP_PUBLIC_VAPID_KEY)
+                });
+                await myUserApi.notificationSubscribe({ userId, subscription });
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
 };

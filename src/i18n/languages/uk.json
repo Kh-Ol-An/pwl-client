@@ -84,8 +84,11 @@
       "change-lang": {
         "error": "{{type}}.changeLang: Не вдалось змінити мову."
       },
-      "notification": {
+      "notification-subscribe": {
         "error": "{{type}}.notification: Не вдалося підписатися на сповіщення."
+      },
+      "notification-unsubscribe": {
+        "error": "{{type}}.notification: Не вдалося відписатися від сповіщень."
       },
       "update-data": {
         "error": "{{type}}.changeFirsLoaded: Не вдалось оновити дані."

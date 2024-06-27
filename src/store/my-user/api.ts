@@ -10,7 +10,7 @@ import {
     IChangeForgottenPassword,
     IChangePassword,
     IChangeLang,
-    INotificationSubscription,
+    INotificationSubscribe,
     IUserId,
     IUpdateMyUser,
     IAddFriend,
@@ -195,12 +195,24 @@ const changeLang = async (data: IChangeLang): Promise<AxiosResponse<IUser>> => {
     }
 };
 
-const notificationSubscription = async (data: INotificationSubscription): Promise<AxiosResponse<PushSubscription>> => {
+const notificationSubscribe = async (data: INotificationSubscribe): Promise<AxiosResponse<IUser>> => {
     try {
-        return await api.put('/notification-subscription', data);
+        return await api.put('/notification-subscribe', data);
     } catch (error: any) {
         toast(
-            error.response?.data?.message || t('alerts.my-user-api.notification.error', { type: 'api' }),
+            error.response?.data?.message || t('alerts.my-user-api.notification-subscribe.error', { type: 'api' }),
+            { type: 'error' },
+        );
+        throw error;
+    }
+};
+
+const notificationUnsubscribe = async (data: IUserId): Promise<AxiosResponse<IUser>> => {
+    try {
+        return await api.put('/notification-unsubscribe', data);
+    } catch (error: any) {
+        toast(
+            error.response?.data?.message || t('alerts.my-user-api.notification-unsubscribe.error', { type: 'api' }),
             { type: 'error' },
         );
         throw error;
@@ -313,7 +325,8 @@ const myUserApi = {
     changeForgottenPassword,
     changePassword,
     changeLang,
-    notificationSubscription,
+    notificationSubscribe,
+    notificationUnsubscribe,
     changeShowedInfo,
     changeFirsLoaded,
     updateMyUser,

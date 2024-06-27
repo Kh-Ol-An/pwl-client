@@ -5,10 +5,10 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { checkAuth } from '@/store/my-user/thunks';
 import RoutesGuard from '@/utils/RoutesGuard';
+import { checkNotificationSubscription, requestNotificationPermission } from "@/utils/notification-manager";
 import Loading from '@/layouts/Loading';
 import { privateRoutes, publicRoutes, unauthenticatedRoutes } from '@/pages/routes';
 import StylesVariables from '@/styles/utils/variables.module.scss';
-import { requestNotificationPermission } from "@/utils/notification-manager";
 
 const theme = createTheme({
     palette: {
@@ -32,11 +32,12 @@ const App: FC = () => {
             .catch(() => setReady(false));
     }, []);
 
-    // useEffect(() => {
-    //     if (!myUser.user) return;
-    //
-    //     requestNotificationPermission(myUser.user.id);
-    // }, [myUser.user]);
+    useEffect(() => {
+        if (!myUser.user) return;
+
+        checkNotificationSubscription(myUser.user.id);
+        requestNotificationPermission(myUser.user.id);
+    }, [myUser.user]);
 
     return (
         <ThemeProvider theme={theme}>

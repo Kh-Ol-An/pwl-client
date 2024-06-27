@@ -84,8 +84,11 @@
       "change-lang": {
         "error": "{{type}}.changeLang: Failed to change the interface language."
       },
-      "notification": {
+      "notification-subscribe": {
         "error": "{{type}}.notification: Failed to notification subscription."
+      },
+      "notification-unsubscribe": {
+        "error": "{{type}}.notification: Failed to notification unsubscription."
       },
       "update-data": {
         "error": "{{type}}.changeShowedInfo: Failed to update data."
