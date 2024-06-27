@@ -8,6 +8,7 @@ import RoutesGuard from '@/utils/RoutesGuard';
 import Loading from '@/layouts/Loading';
 import { privateRoutes, publicRoutes, unauthenticatedRoutes } from '@/pages/routes';
 import StylesVariables from '@/styles/utils/variables.module.scss';
+import { requestNotificationPermission } from "@/utils/notification-manager";
 
 const theme = createTheme({
     palette: {
@@ -30,6 +31,12 @@ const App: FC = () => {
             .then(() => setReady(true))
             .catch(() => setReady(false));
     }, []);
+
+    // useEffect(() => {
+    //     if (!myUser.user) return;
+    //
+    //     requestNotificationPermission(myUser.user.id);
+    // }, [myUser.user]);
 
     return (
         <ThemeProvider theme={theme}>

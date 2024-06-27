@@ -27,13 +27,12 @@ dayjs.updateLocale(lang, {
 });
 
 if ('serviceWorker' in navigator && 'PushManager' in window) {
-    navigator.serviceWorker.register('@/utils/service-worker.ts')
-        .then((registration) => {
-            console.log('Service Worker registered with scope:', registration.scope);
-        })
-        .catch((error) => {
-            console.error('Service Worker registration failed:', error);
-        });
+    navigator.serviceWorker.register('/service-worker.js')
+        .then(function(registration) {
+            console.log('Service Worker registered with scope:', registration);
+        }).catch(function(error) {
+        console.error('Service Worker registration failed:', error);
+    });
 }
 
 const root = ReactDOM.createRoot(
@@ -56,6 +55,9 @@ root.render(
 );
 
 // TODO: text
+// TODO: Додати інструкцію як встановлювати додаток на компьютер
+// TODO: Додати інструкцію про шифрування даних
+// TODO: Додати інструкцію про лічильник виконаних та невиконаних бажань
 // TODO: Вибір полу і якщо жінка то можливість обрати улюблені квіти
 // TODO: Запустити рекламу в Україні і Америці та залучити близько 1000 користувачів
 // TODO: кнопка назад на телефоні (свайп з краю екрана)

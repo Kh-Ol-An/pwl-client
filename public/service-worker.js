@@ -1,7 +1,6 @@
-export {};
-
-self.addEventListener('push', function(event: PushEvent) {
-    const data = event.data?.json();
+self.addEventListener('push', (event) => {
+    console.log('push: ', event);
+    const data = event.data.json();
     const options = {
         body: data.body,
         icon: '@assets/images/logo.svg',

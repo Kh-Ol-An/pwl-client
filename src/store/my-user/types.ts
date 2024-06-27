@@ -49,6 +49,10 @@ export interface IChangeLang extends IUserId {
     lang: IUser['lang'];
 }
 
+export interface INotificationSubscription extends IUserId {
+    subscription: PushSubscription;
+}
+
 export interface IDeleteMyUser extends IUserId {
     email: IUser['email'];
     password: string;

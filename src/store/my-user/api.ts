@@ -10,6 +10,7 @@ import {
     IChangeForgottenPassword,
     IChangePassword,
     IChangeLang,
+    INotificationSubscription,
     IUserId,
     IUpdateMyUser,
     IAddFriend,
@@ -194,6 +195,18 @@ const changeLang = async (data: IChangeLang): Promise<AxiosResponse<IUser>> => {
     }
 };
 
+const notificationSubscription = async (data: INotificationSubscription): Promise<AxiosResponse<PushSubscription>> => {
+    try {
+        return await api.put('/notification-subscription', data);
+    } catch (error: any) {
+        toast(
+            error.response?.data?.message || t('alerts.my-user-api.notification.error', { type: 'api' }),
+            { type: 'error' },
+        );
+        throw error;
+    }
+};
+
 const changeShowedInfo = async (data: IUserId): Promise<AxiosResponse<IUser>> => {
     try {
         return await api.put('/showed-info', data);
@@ -300,6 +313,7 @@ const myUserApi = {
     changeForgottenPassword,
     changePassword,
     changeLang,
+    notificationSubscription,
     changeShowedInfo,
     changeFirsLoaded,
     updateMyUser,

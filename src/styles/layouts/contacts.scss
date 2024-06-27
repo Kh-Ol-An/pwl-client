@@ -18,7 +18,7 @@
     }
 
     p {
-        margin-top: 10px;
+        margin-top: 16px;
         @include flex-center;
         gap: 4px;
         font-size: 14px;
@@ -28,7 +28,7 @@
         }
     }
 
-    .contacts-mail {
+    .contacts-adapt {
         flex-direction: column;
 
         @media only screen and (min-width: 390px) {
@@ -43,6 +43,36 @@
 
         @media only screen and (min-width: 1366px) {
             font-size: 18px;
+        }
+    }
+
+    .contacts-social-networks {
+        margin-left: 10px;
+        @include flex-center;
+        gap: 10px;
+
+        a {
+            width: 30px;
+            height: 30px;
+            transition: $transition;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        .contacts-tiktok {
+            width: 32px;
+            height: 32px;
+        }
+
+        .contacts-instagram {
+            margin-left: 8px;
+        }
+
+        .contacts-facebook {
+            width: 28px;
+            height: 28px;
         }
     }
 
