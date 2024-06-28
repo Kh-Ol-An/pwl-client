@@ -1,9 +1,11 @@
 import React, { FC, createElement, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import i18next from "i18next";
 import { ToastContainer } from 'react-toastify';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { checkAuth } from '@/store/my-user/thunks';
+import { IUser } from "@/models/IUser";
 import RoutesGuard from '@/utils/RoutesGuard';
 import { checkNotificationSubscription, requestNotificationPermission } from "@/utils/notification-manager";
 import Loading from '@/layouts/Loading';
@@ -26,6 +28,10 @@ const App: FC = () => {
 
     const [ready, setReady] = useState<boolean>(false);
 
+    let lang: IUser['lang'] = 'en';
+    i18next.language.includes('en') && (lang = 'en');
+    i18next.language.includes('uk') && (lang = 'uk');
+
     useEffect(() => {
         dispatch(checkAuth())
             .then(() => setReady(true))
@@ -33,10 +39,18 @@ const App: FC = () => {
     }, []);
 
     useEffect(() => {
-        if (!myUser.user) return;
+        const setSettings = async () => {
+            if (!myUser.user) return;
 
-        checkNotificationSubscription(myUser.user.id);
-        requestNotificationPermission(myUser.user.id);
+            const myUserLang = myUser.user.lang;
+            const myUserId = myUser.user.id;
+            if (lang !== myUserLang) {
+                await i18next.changeLanguage(myUserLang);
+            }
+            await checkNotificationSubscription(myUserId);
+            await requestNotificationPermission(myUserId);
+        };
+        setSettings();
     }, [myUser.user]);
 
     return (
