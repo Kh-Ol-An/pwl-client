@@ -3,7 +3,7 @@ self.addEventListener('push', (event) => {
     const data = event.data.json();
     const options = {
         body: data.body,
-        icon: '@assets/images/logo.svg',
+        icon: '/favicon.svg',
     };
     event.waitUntil(
         self.registration.showNotification(data.title, options)

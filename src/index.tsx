@@ -28,11 +28,12 @@ dayjs.updateLocale(lang, {
 
 if ('serviceWorker' in navigator && 'PushManager' in window) {
     navigator.serviceWorker.register('/service-worker.js')
-        .then(function(registration) {
+        .then((registration) => {
             console.log('Service Worker registered with scope:', registration);
-        }).catch(function(error) {
-        console.error('Service Worker registration failed:', error);
-    });
+        })
+        .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+        });
 }
 
 const root = ReactDOM.createRoot(
@@ -55,6 +56,8 @@ root.render(
 );
 
 // TODO: text
+// TODO: Додати кнопку "Встановити додаток"
+// TODO: робота над помилками
 // TODO: Додати інструкцію як встановлювати додаток на компьютер
 // TODO: Додати інструкцію про шифрування даних
 // TODO: Додати інструкцію про лічильник виконаних та невиконаних бажань
