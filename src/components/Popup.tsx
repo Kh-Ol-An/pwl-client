@@ -23,7 +23,7 @@ const Popup: FC<IProps> = ({ anchor, setAnchor, actionIcon, children }) => {
 
     return (
         <>
-            <button className="settings" type="button" onClick={handleOpen}>
+            <button className="people-icon" type="button" onClick={handleOpen}>
                 {actionIcon}
             </button>
 
