@@ -38,13 +38,19 @@ const WishList = () => {
 
     let emptyText = <>{ t('main-page.you-any') }</>;
     myUser?.id !== selectedUserId && (emptyText = (
-        <>{ t('main-page.at-user') }
-            <span>{ selectedUser?.firstName } { lastName }</span> { t('main-page.any-wishes') }</>
+        <>
+            { t('main-page.at-user') }&nbsp;
+            <span>{ selectedUser?.firstName } { lastName }</span>&nbsp;
+            { t('main-page.any-wishes') }
+        </>
     ));
     !isUndone && (emptyText = <>{ t('main-page.you-fulfilled') }</>);
     !isUndone && myUser?.id !== selectedUserId && (emptyText = (
-        <>{ t('main-page.at-user') }
-            <span>{ selectedUser?.firstName } { lastName }</span> { t('main-page.any-fulfilled-wishes') }</>
+        <>
+            { t('main-page.at-user') }&nbsp;
+            <span>{ selectedUser?.firstName } { lastName }</span>&nbsp;
+            { t('main-page.any-fulfilled-wishes') }
+        </>
     ));
 
     const handleSelectWish = async () => {
@@ -111,8 +117,10 @@ const WishList = () => {
                         {
                             myUser?.id === selectedUserId
                                 ? <>{ t('main-page.personal-wishes') }</>
-                                : <>{ t('main-page.wishes-of-user') }
-                                    <span>{ selectedUser?.firstName } { lastName }</span></>
+                                : <>
+                                    { t('main-page.wishes-of-user') }&nbsp;
+                                    <span>{ selectedUser?.firstName } { lastName }</span>
+                                  </>
                         }
                     </h1>
                 </div>
@@ -122,10 +130,10 @@ const WishList = () => {
                 <ul className="list">
                     { selectedWishList.map((wish) => (
                         <li
-                            className={"item" + (selectedWishList.length < 2 ? " alone" : "")}
+                            className={ "item" + (selectedWishList.length < 2 ? " alone" : "") }
                             key={ wish.id }
                         >
-                            <div className={wish.booking?.end ? "booked" : ""}>
+                            <div className={ wish.booking?.end ? "booked" : "" }>
                                 <WishItem
                                     wish={ wish }
                                     showWish={ () => handleShowWish(wish.id) }
@@ -133,9 +141,9 @@ const WishList = () => {
                                 />
                             </div>
 
-                            {wish.booking?.end && (
+                            { wish.booking?.end && (
                                 <span className="reserved">{ t('reserved') }</span>
-                            )}
+                            ) }
                         </li>
                     )) }
                 </ul>
