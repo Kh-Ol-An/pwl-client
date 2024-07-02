@@ -33,6 +33,14 @@ const App: FC = () => {
     i18next.language.includes('uk') && (lang = 'uk');
 
     useEffect(() => {
+        const action = async () => {
+            if ('getInstalledRelatedApps' in navigator) {
+                const installed = await (navigator as any).getInstalledRelatedApps();
+                console.log('installed: ', installed);
+            }
+        };
+        action();
+
         dispatch(checkAuth())
             .then(() => setReady(true))
             .catch(() => setReady(false));

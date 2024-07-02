@@ -6,6 +6,12 @@
   "display": "standalone",
   "orientation": "portrait",
   "start_url": "/",
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://wish-hub.net/manifest"
+    }
+  ],
   "icons": [
     {
       "src": "./app-icons/windows11/SmallTile.scale-100.png",
