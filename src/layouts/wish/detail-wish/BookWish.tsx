@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { bookWish } from '@/store/wishes/thunks';
-import { ICreatedWish } from "@/store/wishes/types";
+import { IWishWithQuote } from "@/store/wishes/types";
 import getTooltipStyles from '@/utils/get-tooltip-styles';
 import ConfirmModal from '@/components/ConfirmModal';
 import Button from '@/components/Button';
@@ -77,7 +77,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
 
         try {
             const response = await dispatch(bookWish({ userId: myUser.id, wishId: wish.id, end: bookEnd.add(1, 'day').format() }));
-            const quote = (response.payload as ICreatedWish).quote[lang];
+            const quote = (response.payload as IWishWithQuote).quote[lang];
             toast(
                 <QuoteMessage
                     title={t('alerts.wishes-api.book-wish.success')}

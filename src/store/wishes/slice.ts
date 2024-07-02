@@ -132,13 +132,13 @@ const wishesSlice = createSlice({
             })
             .addCase(bookWish.fulfilled, (state, action) => {
                 // Змінити бажання та покласти його там де було
-                const { id } = action.payload;
+                const { id } = action.payload.wish;
                 // Знаходимо індекс бажання в списку за його ідентифікатором
                 const index = state.list.findIndex(wish => wish.id === id);
                 // Перевіряємо, чи було знайдено бажання
                 if (index !== -1) {
                     // Оновлюємо дані бажання
-                    state.list[index] = action.payload;
+                    state.list[index] = action.payload.wish;
                 }
                 state.isLoading = false;
                 state.isLocalLoading = false;

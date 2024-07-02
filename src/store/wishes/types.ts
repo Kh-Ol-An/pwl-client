@@ -14,7 +14,7 @@ export interface ICreateWish {
     images: TCurrentImage[];
 }
 
-export interface ICreatedWish {
+export interface IWishWithQuote {
     wish: IWish;
     quote: IQuote;
 }

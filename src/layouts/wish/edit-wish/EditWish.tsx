@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { createWish, deleteWish, updateWish } from '@/store/wishes/thunks';
-import { ICreatedWish, ICreateWish } from '@/store/wishes/types';
+import { IWishWithQuote, ICreateWish } from '@/store/wishes/types';
 import { TCurrentImage, IImage, IWish } from '@/models/IWish';
 import { IUser } from "@/models/IUser";
 import { wishDescriptionValidation, wishNameValidation, wishPriceValidation } from '@/utils/validations';
@@ -156,7 +156,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         } else {
             try {
                 const response = await dispatch(createWish(wishData));
-                const quote = (response.payload as ICreatedWish).quote[lang];
+                const quote = (response.payload as IWishWithQuote).quote[lang];
                 toast(
                     <QuoteMessage
                         title={t('alerts.wishes-api.create-wish.success')}

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from '@/store/wishes/api';
 import {
     ICreateWish,
-    ICreatedWish,
+    IWishWithQuote,
     IUpdateWish,
     IGetWish,
     ISendWish,
@@ -14,7 +14,7 @@ import {
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
 
-export const createWish = createAsyncThunk<ICreatedWish, ICreateWish>(
+export const createWish = createAsyncThunk<IWishWithQuote, ICreateWish>(
     'wishes/createWish',
     async (data) => {
         const result = await api.createWish(data);
@@ -59,7 +59,7 @@ export const undoneWish = createAsyncThunk<{ executorUser: IUser, bookedWish: IW
     },
 );
 
-export const bookWish = createAsyncThunk<IWish, IBookWish>(
+export const bookWish = createAsyncThunk<IWishWithQuote, IBookWish>(
     'wishes/bookWish',
     async (data) => {
         const result = await api.bookWish(data);
