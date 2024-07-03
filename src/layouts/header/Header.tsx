@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect } from 'react';
-import i18next from "i18next";
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@mui/material';
 import {
@@ -16,6 +15,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { changeFirsLoaded, logout } from '@/store/my-user/thunks';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
+import { getMonthWithDate, getLang } from "@/utils/lang-action";
 import DetailAccount from '@/layouts/DetailAccount';
 import EditAccountModal from '@/layouts/header/EditAccountModal';
 import Contacts from '@/layouts/header/Contacts';
@@ -46,14 +46,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     const [showContacts, setShowContacts] = useState<boolean>(false);
     const [showLanguage, setShowLanguage] = useState<boolean>(false);
     const [showConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
-
-    let lang = 'en';
-    i18next.language.includes('en') && (lang = 'en');
-    i18next.language.includes('uk') && (lang = 'uk');
-
-    let dateFormat = 'MMMM Do';
-    i18next.language.includes('en') && (dateFormat = 'MMMM Do');
-    i18next.language.includes('uk') && (dateFormat = 'DD MMMM');
 
     // SelectWish
     const handleSelectWish = async () => {
@@ -152,7 +144,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             <span className="params">
                                 {
                                     myUser?.birthday
-                                        ? t('main-page.bd', { birthday: dayjs(myUser?.birthday).locale(lang).format(dateFormat) })
+                                        ? t('main-page.bd', { birthday: dayjs(myUser?.birthday).locale(getLang()).format(getMonthWithDate()) })
                                         : myUser?.email
                                 }
                             </span>

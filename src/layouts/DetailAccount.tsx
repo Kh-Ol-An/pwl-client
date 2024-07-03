@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import dayjs from 'dayjs';
-import i18next from "i18next";
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@/store/hook';
+import { getLang, getMonthWithDate } from "@/utils/lang-action";
 import { IUser } from '@/models/IUser';
 
 interface IProps {
@@ -13,14 +13,6 @@ const DetailAccount: FC<IProps> = ({ user }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
-
-    let lang = 'en';
-    i18next.language.includes('en') && (lang = 'en');
-    i18next.language.includes('uk') && (lang = 'uk');
-
-    let dateFormat = 'MMMM Do';
-    i18next.language.includes('en') && (dateFormat = 'MMMM Do');
-    i18next.language.includes('uk') && (dateFormat = 'DD MMMM');
 
     let successfulWishes = 0;
     user.successfulWishes > 0 && (successfulWishes = user.successfulWishes);
@@ -62,7 +54,7 @@ const DetailAccount: FC<IProps> = ({ user }) => {
                     <div className="detail-account-field">
                         <div className="detail-account-label">{t('main-page.birthday')}</div>
                         <div className="detail-account-value">
-                            {dayjs(user.birthday).locale(lang).format(dateFormat)}
+                            {dayjs(user.birthday).locale(getLang()).format(getMonthWithDate())}
                         </div>
                     </div>
                 )}

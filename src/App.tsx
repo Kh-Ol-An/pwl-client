@@ -5,9 +5,9 @@ import { ToastContainer } from 'react-toastify';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { checkAuth } from '@/store/my-user/thunks';
-import { IUser } from "@/models/IUser";
 import RoutesGuard from '@/utils/RoutesGuard';
 import { checkNotificationSubscription, requestNotificationPermission } from "@/utils/notification-manager";
+import { getLang } from "@/utils/lang-action";
 import Loading from '@/layouts/Loading';
 import { privateRoutes, publicRoutes, unauthenticatedRoutes } from '@/pages/routes';
 import StylesVariables from '@/styles/utils/variables.module.scss';
@@ -28,10 +28,6 @@ const App: FC = () => {
 
     const [ready, setReady] = useState<boolean>(false);
 
-    let lang: IUser['lang'] = 'en';
-    i18next.language.includes('en') && (lang = 'en');
-    i18next.language.includes('uk') && (lang = 'uk');
-
     useEffect(() => {
         dispatch(checkAuth())
             .then(() => setReady(true))
@@ -44,7 +40,7 @@ const App: FC = () => {
 
             const myUserLang = myUser.user.lang;
             const myUserId = myUser.user.id;
-            if (lang !== myUserLang) {
+            if (getLang() !== myUserLang) {
                 await i18next.changeLanguage(myUserLang);
             }
             await checkNotificationSubscription(myUserId);

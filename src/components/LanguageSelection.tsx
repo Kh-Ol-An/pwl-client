@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import i18next from "i18next";
 import { UA, US } from 'country-flag-icons/react/3x2';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
@@ -6,6 +6,7 @@ import { changeLang } from '@/store/my-user/thunks';
 import { setIsLoading } from '@/store/my-user/slice';
 import { IUser } from '@/models/IUser';
 import CustomSelect, { IOption } from "@/components/CustomSelect";
+import { getLang } from "@/utils/lang-action";
 
 const options: IOption[] = [
     {
@@ -33,10 +34,7 @@ const LanguageSelection: FC = () => {
 
     const dispatch = useAppDispatch();
 
-    let currentLang: IUser['lang'] = 'en';
-    i18next.language.includes('en') && (currentLang = 'en');
-    i18next.language.includes('uk') && (currentLang = 'uk');
-    const [lang, setLang] = useState<IUser['lang']>(currentLang);
+    const [lang, setLang] = useState<IUser['lang']>(getLang());
 
     const handleChangeLanguage = async (value: IOption['value']) => {
         try {
@@ -52,6 +50,10 @@ const LanguageSelection: FC = () => {
             console.error('Language Selection: ', error);
         }
     };
+
+    useEffect(() => {
+        setLang(getLang());
+    }, []);
 
     return (
         <div className="language-selection">

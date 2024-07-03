@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
@@ -13,6 +12,7 @@ import DoneWish from '@/layouts/wish/detail-wish/DoneWish';
 import BookingExpired from '@/layouts/wish/detail-wish/BookingExpired';
 import Button from '@/components/Button';
 import showBookingExpired from '@/utils/show-booking-expired';
+import { getFullDate, getLang } from "@/utils/lang-action";
 
 dayjs.extend(isSameOrBefore);
 
@@ -26,14 +26,6 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
-
-    let lang = 'en';
-    i18next.language.includes('en') && (lang = 'en');
-    i18next.language.includes('uk') && (lang = 'uk');
-
-    let dateFormat = 'MMMM DD, YYYY';
-    i18next.language.includes('en') && (dateFormat = 'MMMM DD, YYYY');
-    i18next.language.includes('uk') && (dateFormat = 'DD MMMM YYYY');
 
     let showBookWish = !wish.booking?.end && myUser?.id !== wish.userId; // бажання не заброньовано і не належить користувачу
 
@@ -83,8 +75,8 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                                     <span>
                                                         {
                                                             dayjs(wish.booking?.end)
-                                                                .locale(lang)
-                                                                .format(dateFormat)
+                                                                .locale(getLang())
+                                                                .format(getFullDate())
                                                         }
                                                     </span>
                                                 </>

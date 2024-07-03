@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
@@ -12,13 +11,13 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { bookWish } from '@/store/wishes/thunks';
 import { IWishWithQuote } from "@/store/wishes/types";
 import getTooltipStyles from '@/utils/get-tooltip-styles';
+import { unencryptedData } from '@/utils/encryption-data';
+import { getFullShortDate, getLang } from "@/utils/lang-action";
 import ConfirmModal from '@/components/ConfirmModal';
 import Button from '@/components/Button';
 import QuoteMessage from "@/components/QuoteMessage";
-import { IUser } from "@/models/IUser";
 import { IWish } from '@/models/IWish';
 import StylesVariables from '@/styles/utils/variables.module.scss';
-import { unencryptedData } from '@/utils/encryption-data';
 
 interface IProps {
     wish: IWish;
@@ -37,14 +36,6 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
     const [show, setShow] = useState<boolean>(false);
     const [clickedOnBookWish, setClickedOnBookWish] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-
-    let lang: IUser['lang'] = 'en';
-    i18next.language.includes('en') && (lang = 'en');
-    i18next.language.includes('uk') && (lang = 'uk');
-
-    let dateFormat = 'MM/DD/YYYY';
-    i18next.language.includes('en') && (dateFormat = 'MM/DD/YYYY');
-    i18next.language.includes('uk') && (dateFormat = 'DD.MM.YYYY');
 
     const birthdayErrorMessage = useMemo(() => {
         if (!clickedOnBookWish) return;
@@ -77,7 +68,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
 
         try {
             const response = await dispatch(bookWish({ userId: myUser.id, wishId: wish.id, end: bookEnd.add(1, 'day').format() }));
-            const quote = (response.payload as IWishWithQuote).quote[lang];
+            const quote = (response.payload as IWishWithQuote).quote[getLang()];
             toast(
                 <QuoteMessage
                     title={t('alerts.wishes-api.book-wish.success')}
@@ -143,7 +134,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                     <DemoContainer components={['DesktopDatePicker']}>
                         <DesktopDatePicker
                             label={t('main-page.including')}
-                            format={dateFormat}
+                            format={getFullShortDate()}
                             dayOfWeekFormatter={(weekday) => weekday}
                             disablePast
                             maxDate={dayjs().add(1, 'year')} // Дозволити вибір дати тільки на рік вперед

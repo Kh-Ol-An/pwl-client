@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect, useRef, useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@mui/material';
 import { Cancel as CancelIcon } from '@mui/icons-material';
@@ -14,6 +13,7 @@ import { IUpdateMyUser } from '@/store/my-user/types';
 import { TCurrentAvatar, IUser } from '@/models/IUser';
 import { accountFirstNameValidation, accountLastNameValidation } from '@/utils/validations';
 import AvatarValidation from '@/utils/AvatarValidation';
+import { getFullShortDate } from "@/utils/lang-action";
 import { ALLOWED_FILE_EXTENSIONS } from '@/utils/constants';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
@@ -49,10 +49,6 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
     const [avatar, setAvatar] = useState<TCurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
     const [birthdayError, setBirthdayError] = useState<DateValidationError | null>(null);
-
-    let dateFormat = 'MM/DD/YYYY';
-    i18next.language.includes('en') && (dateFormat = 'MM/DD/YYYY');
-    i18next.language.includes('uk') && (dateFormat = 'DD.MM.YYYY');
 
     const birthdayErrorMessage = useMemo(() => {
         if (!clickedOnSubmit) return;
@@ -174,7 +170,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
                 <DemoContainer components={['DesktopDatePicker']}>
                     <DesktopDatePicker
                         label={t('main-page.birthday*')}
-                        format={dateFormat}
+                        format={getFullShortDate()}
                         dayOfWeekFormatter={(weekday) => weekday}
                         minDate={dayjs().subtract(120, 'years')} // Дозволити вибір дати до 120 років в минулому
                         disableFuture

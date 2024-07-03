@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import i18next from "i18next";
 import { useTranslation } from 'react-i18next';
 import {
     Avatar,
@@ -18,6 +17,7 @@ import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import { IRemoveFriend } from '@/store/my-user/types';
 import { IUser } from '@/models/IUser';
+import { getLang, getMonthWithDate } from "@/utils/lang-action";
 import DetailAccount from '@/layouts/DetailAccount';
 import Popup from '@/components/Popup';
 import CustomModal from '@/components/CustomModal';
@@ -49,14 +49,6 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
 
     const showAddFriend = myUser?.followFrom.includes(user.id)
         || (!myUser?.friends.includes(user.id) && !myUser?.followTo.includes(user.id));
-
-    let lang = 'en';
-    i18next.language.includes('en') && (lang = 'en');
-    i18next.language.includes('uk') && (lang = 'uk');
-
-    let dateFormat = 'MMMM Do';
-    i18next.language.includes('en') && (dateFormat = 'MMMM Do');
-    i18next.language.includes('uk') && (dateFormat = 'DD MMMM');
 
     const handleShowDetailAccount = () => {
         setShowDetailAccount(true);
@@ -178,7 +170,7 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                         <span className="params">
                             {
                                 user.birthday
-                                    ? t('main-page.bd', { birthday: dayjs(user.birthday).locale(lang).format(dateFormat) })
+                                    ? t('main-page.bd', { birthday: dayjs(user.birthday).locale(getLang()).format(getMonthWithDate()) })
                                     : user.email
                             }
                         </span>

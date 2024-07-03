@@ -3,13 +3,13 @@ import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
-import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { registration, login, forgotPassword, googleAuthorization } from '@/store/my-user/thunks';
 import { IUser } from '@/models/IUser';
 import { accountFirstNameValidation, emailValidation, passwordValidation } from '@/utils/validations';
+import { getLang } from "@/utils/lang-action";
 import Card from '@/layouts/Card';
 import LanguageSelection from '@/components/LanguageSelection';
 import Input from '@/components/Input';
@@ -63,10 +63,6 @@ const Auth: FC = () => {
     const [checkedPrivacyPolicy, setCheckedPrivacyPolicy] = useState<boolean>(location.search === '?agree');
     const [checkedPrivacyPolicyError, setCheckedPrivacyPolicyError] = useState<string>('');
 
-    let lang: IUser['lang'] = 'en';
-    i18next.language.includes('en') && (lang = 'en');
-    i18next.language.includes('uk') && (lang = 'uk');
-
     let title = t('auth-page.title.sing_in');
     isRegistration && (title = t('auth-page.title.sing_up'));
     isForgotPassword && (title = t('auth-page.title.forgot_password'));
@@ -90,7 +86,7 @@ const Auth: FC = () => {
 
         await dispatch(googleAuthorization({
             email: decodedUserData.email,
-            lang,
+            lang: getLang(),
             isActivated: decodedUserData.email_verified,
             firstName: decodedUserData.given_name,
             lastName: decodedUserData.family_name,
@@ -102,7 +98,7 @@ const Auth: FC = () => {
         setClickedOnSubmit(true);
 
         if (isForgotPassword) {
-            return dispatch(forgotPassword({ email: data.email.trim(), lang }));
+            return dispatch(forgotPassword({ email: data.email.trim(), lang: getLang() }));
         }
 
         if (isRegistration) {
@@ -122,11 +118,11 @@ const Auth: FC = () => {
         if (repeatPasswordError.length > 0 || checkedPrivacyPolicyError.length > 0) return;
 
         if (isRegistration && checkedPrivacyPolicy) {
-            return dispatch(registration({ ...data, email: data.email.trim(), lang }));
+            return dispatch(registration({ ...data, email: data.email.trim(), lang: getLang() }));
         }
 
         if (checkedPrivacyPolicy) {
-            return dispatch(login({ ...data, email: data.email.trim(), lang }));
+            return dispatch(login({ ...data, email: data.email.trim(), lang: getLang() }));
         }
     };
 
