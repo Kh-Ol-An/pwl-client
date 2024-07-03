@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
@@ -32,26 +32,37 @@ const WishList = () => {
     const [ idOfSelectedWish, setIdOfSelectedWish ] = useState<IWish['id'] | null>(null);
     const [ selectedWishList, setSelectedWishList ] = useState<IWish[]>(wishes.list.filter(wish => !wish.executed));
 
-    const selectedUser = userList.find(user => user.id === selectedUserId);
+    const selectedUser = useMemo(() => userList.find(user => user.id === selectedUserId), [ userList, selectedUserId ]);
     const lastName = selectedUser?.lastName ? selectedUser.lastName : "";
     const detailWish = wishes.list.find(wish => wish.id === idOfSelectedWish);
 
-    let emptyText = <>{ t('main-page.you-any') }</>;
-    myUser?.id !== selectedUserId && (emptyText = (
-        <>
-            { t('main-page.at-user') }&nbsp;
-            <span>{ selectedUser?.firstName } { lastName }</span>&nbsp;
-            { t('main-page.any-wishes') }
-        </>
-    ));
-    !isUndone && (emptyText = <>{ t('main-page.you-fulfilled') }</>);
-    !isUndone && myUser?.id !== selectedUserId && (emptyText = (
-        <>
-            { t('main-page.at-user') }&nbsp;
-            <span>{ selectedUser?.firstName } { lastName }</span>&nbsp;
-            { t('main-page.any-fulfilled-wishes') }
-        </>
-    ));
+    const emptyText = useMemo(() => {
+        if (myUser?.id === selectedUserId) {
+            if (isUndone) {
+                return t('main-page.you-any');
+            }
+
+            return t('main-page.you-fulfilled');
+        }
+
+        if (isUndone) {
+            return (
+                <>
+                    { t('main-page.at-user') }&nbsp;
+                    <span>{ selectedUser?.firstName } { lastName }</span>&nbsp;
+                    { t('main-page.any-wishes') }
+                </>
+            );
+        }
+
+        return (
+            <>
+                { t('main-page.at-user') }&nbsp;
+                <span>{ selectedUser?.firstName } { lastName }</span>&nbsp;
+                { t('main-page.any-fulfilled-wishes') }
+            </>
+        );
+    }, [ t, myUser?.id, selectedUserId, selectedUser, lastName, isUndone ]);
 
     const handleSelectWish = async () => {
         if (!myUser) return;
@@ -120,7 +131,7 @@ const WishList = () => {
                                 : <>
                                     { t('main-page.wishes-of-user') }&nbsp;
                                     <span>{ selectedUser?.firstName } { lastName }</span>
-                                  </>
+                                </>
                         }
                     </h1>
                 </div>
