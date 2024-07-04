@@ -96,7 +96,7 @@ const CoverFigure: FC = () => {
 
                         <div className="cover-figure_content">
                             <span>{t('welcome-page.vr_headset')}</span>
-                            <p>{t('welcome-page.childhood_dream')}</p>
+                            <p>{t('welcome-page.i_will_be')}</p>
                         </div>
                     </div>
                 </li>
