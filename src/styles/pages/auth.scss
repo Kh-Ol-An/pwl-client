@@ -73,6 +73,18 @@
         }
     }
 
+    .card-inner-border {
+        border-width: 16px;
+
+        @media only screen and (min-width: 412px) {
+            border-width: 18px;
+        }
+
+        @media only screen and (min-width: 768px) {
+            border-width: 20px;
+        }
+    }
+
     .form {
         @include flex-column;
         justify-content: center;
