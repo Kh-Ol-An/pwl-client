@@ -23,14 +23,26 @@ const EditAccountModal: FC<IProps> = ({ show, hide, handleShowConfirmDeleteMyUse
         <CustomModal show={show} hide={hide}>
             <div className="edit-account-container">
                 <div className="change-edit-account">
-                    <span className={isEditAccount ? "primary-color" : ""}>{t('main-page.edit-account')}</span>
+                    <button
+                        className={isEditAccount ? "primary-color" : ""}
+                        type="button"
+                        onClick={() => setIsEditAccount(true)}
+                    >
+                        {t('main-page.edit-account')}
+                    </button>
                     <Switch
                         id="change-edit-account"
                         name="change-edit-account"
                         checked={isEditAccount}
                         onChange={(e) => setIsEditAccount(e.target.checked)}
                     />
-                    <span className={isEditAccount ? "" : "action-color"}>{t('main-page.change-password')}</span>
+                    <button
+                        className={isEditAccount ? "" : "action-color"}
+                        type="button"
+                        onClick={() => setIsEditAccount(false)}
+                    >
+                        {t('main-page.change-password')}
+                    </button>
                 </div>
 
                 <div className="header-actions-account">

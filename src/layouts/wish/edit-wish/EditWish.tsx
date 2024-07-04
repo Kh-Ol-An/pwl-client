@@ -278,14 +278,26 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         <form className="edit-wish" onSubmit={handleSubmit(onSubmit)}>
             {/* material */}
             <div className="material">
-                <span className={"yes" + (material ? " primary-color" : "")}>{t('main-page.material-wish')}</span>
+                <button
+                    className={"yes" + (material ? " primary-color" : "")}
+                    type="button"
+                    onClick={() => setMaterial(true)}
+                >
+                    {t('main-page.material-wish')}
+                </button>
                 <Switch
                     id="material"
                     name="material"
                     checked={material}
                     onChange={(e) => setMaterial(e.target.checked)}
                 />
-                <span className={"no" + (material ? "" : " action-color")}>{t('main-page.non-material-wish')}</span>
+                <button
+                    className={"no" + (material ? "" : " action-color")}
+                    type="button"
+                    onClick={() => setMaterial(false)}
+                >
+                    {t('main-page.non-material-wish')}
+                </button>
             </div>
 
             {/* name */}

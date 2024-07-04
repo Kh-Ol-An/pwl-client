@@ -17,7 +17,7 @@
             align-items: center;
             justify-content: space-between;
 
-            button {
+            & > button {
                 order: 1;
             }
         }
@@ -49,7 +49,7 @@
             @include flex-center;
             gap: 10px;
 
-            span {
+            button {
                 font-size: 20px;
                 font-weight: 700;
                 color: $special-color;

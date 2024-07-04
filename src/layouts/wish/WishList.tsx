@@ -102,7 +102,13 @@ const WishList = () => {
 
                 <div className="title-box">
                     <div className="wishes-type">
-                        <span className={ isUndone ? "primary-color" : "" }>{ t('main-page.unfulfilled') }</span>
+                        <button
+                            className={ isUndone ? "primary-color" : "" }
+                            type="button"
+                            onClick={ () => setIsUndone(true) }
+                        >
+                            { t('main-page.unfulfilled') }
+                        </button>
                         <Switch
                             id="wishes-type"
                             name="wishes-type"
@@ -110,7 +116,13 @@ const WishList = () => {
                             checked={ isUndone }
                             onChange={ (e) => setIsUndone(e.target.checked) }
                         />
-                        <span className={ isUndone ? "" : "primary-color" }>{ t('main-page.fulfilled') }</span>
+                        <button
+                            className={ isUndone ? "" : "primary-color" }
+                            type="button"
+                            onClick={ () => setIsUndone(false) }
+                        >
+                            { t('main-page.fulfilled') }
+                        </button>
                     </div>
 
                     <h1 className="title">
