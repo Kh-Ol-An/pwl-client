@@ -224,14 +224,6 @@
                 padding: 0;
             }
         }
-
-        .button:not(.text) {
-            margin-top: 12px;
-
-            @media only screen and (min-width: 768px) {
-                margin-top: 0;
-            }
-        }
     }
 
     .detail-wish-actions-booked {
