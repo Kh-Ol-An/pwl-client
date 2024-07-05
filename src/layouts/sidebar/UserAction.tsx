@@ -143,16 +143,16 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                     onClick={handleShowDetailAccount}
                 />
 
-                {user.successfulWishes > 0 && (
-                    <span className="count success">
-                        {user.successfulWishes}
-                    </span>
-                )}
-                {user.unsuccessfulWishes > 0 && (
-                    <span className="count unsuccess">
-                        {user.unsuccessfulWishes}
-                    </span>
-                )}
+                {/*{user.successfulWishes > 0 && (*/}
+                {/*    <span className="count success">*/}
+                {/*        {user.successfulWishes}*/}
+                {/*    </span>*/}
+                {/*)}*/}
+                {/*{user.unsuccessfulWishes > 0 && (*/}
+                {/*    <span className="count unsuccess">*/}
+                {/*        {user.unsuccessfulWishes}*/}
+                {/*    </span>*/}
+                {/*)}*/}
 
                 <CustomModal show={showDetailAccount} hide={handleHideDetailAccount} classes="modal modal-md">
                     <DetailAccount user={user} />

@@ -124,16 +124,16 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         <button className="avatar-box" type="button" onClick={handleShowDetailAccount}>
                             <Avatar alt={myUser?.firstName} src={myUser?.avatar} />
 
-                            {myUser && myUser.successfulWishes > 0 && (
-                                <span className="count success">
-                                    {myUser?.successfulWishes}
-                                </span>
-                            )}
-                            {myUser && myUser.unsuccessfulWishes > 0 && (
-                                <span className="count unsuccess">K
-                                    {myUser?.unsuccessfulWishes}
-                                </span>
-                            )}
+                            {/*{myUser && myUser.successfulWishes > 0 && (*/}
+                            {/*    <span className="count success">*/}
+                            {/*        {myUser?.successfulWishes}*/}
+                            {/*    </span>*/}
+                            {/*)}*/}
+                            {/*{myUser && myUser.unsuccessfulWishes > 0 && (*/}
+                            {/*    <span className="count unsuccess">K*/}
+                            {/*        {myUser?.unsuccessfulWishes}*/}
+                            {/*    </span>*/}
+                            {/*)}*/}
                         </button>
 
                         <button className="content" type="button" onClick={handleSelectWish}>
