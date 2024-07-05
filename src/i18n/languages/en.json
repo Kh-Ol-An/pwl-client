@@ -291,7 +291,10 @@
     "book-end-errors": {
       "required": "This field is required.",
       "past": "It is impossible to complete a task in the past.",
-      "max": "Do you think it's reasonable to promise to fulfill a wish in more than a year?",
+      "max": {
+        "my": "If you are not sure that you will realize your wish within 10 years, then you should not generally limit yourself to a specific date.",
+        "another": "Do you think it's reasonable to promise to fulfill a wish in more than a year?"
+      },
       "invalid": "The entered date is invalid."
     },
     "will-fulfill": "I will fulfill wish",

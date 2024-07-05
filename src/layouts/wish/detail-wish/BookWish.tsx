@@ -17,14 +17,16 @@ import ConfirmModal from '@/components/ConfirmModal';
 import Button from '@/components/Button';
 import QuoteMessage from "@/components/QuoteMessage";
 import { IWish } from '@/models/IWish';
+import { IUser } from "@/models/IUser";
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     wish: IWish;
+    userId?: IUser['id'];
     close: () => void;
 }
 
-const BookWish: FC<IProps> = ({ wish, close }) => {
+const BookWish: FC<IProps> = ({ wish, userId, close }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
@@ -50,7 +52,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                 return t('main-page.book-end-errors.past');
             }
             case 'maxDate': {
-                return t('main-page.book-end-errors.max');
+                return t(`main-page.book-end-errors.max.${userId === wish.userId ? 'my' : 'another'}`);
             }
             case 'invalidDate': {
                 return t('main-page.book-end-errors.invalid');
@@ -137,7 +139,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
                             format={getFullShortDate()}
                             dayOfWeekFormatter={(weekday) => weekday}
                             disablePast
-                            maxDate={dayjs().add(1, 'year')} // Дозволити вибір дати тільки на рік вперед
+                            maxDate={dayjs().add(userId === wish.userId ? 10 : 1, 'year')} // Дозволити вибір дати тільки на рік вперед
                             value={bookEnd}
                             onChange={(value) => setBookEnd(value)}
                             onError={(newError) => setBookEndError(newError)}

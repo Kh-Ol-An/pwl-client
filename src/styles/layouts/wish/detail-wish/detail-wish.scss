@@ -207,7 +207,6 @@
     .detail-wish-actions {
         display: flex;
         flex-direction: column;
-        gap: 10px;
 
         @media only screen and (min-width: 768px) {
             margin: auto 0 0 auto;
@@ -218,14 +217,19 @@
 
         .button {
             margin-left: auto;
-            width: fit-content;
-        }
-
-        .button.text {
             padding: 8px;
+            width: fit-content;
 
             @media only screen and (min-width: 768px) {
                 padding: 0;
+            }
+        }
+
+        .button:not(.text) {
+            margin-top: 12px;
+
+            @media only screen and (min-width: 768px) {
+                margin-top: 0;
             }
         }
     }
@@ -243,7 +247,7 @@
 }
 
 .modal .book-wish-text {
-    margin-top: 20px;
+    margin-top: 24px;
     font-size: 14px;
 
     @media only screen and (min-width: 768px) {

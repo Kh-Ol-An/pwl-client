@@ -27,8 +27,6 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
 
     const myUser = useAppSelector((state) => state.myUser.user);
 
-    let showBookWish = !wish.booking?.end && myUser?.id !== wish.userId; // бажання не заброньовано і не належить користувачу
-
     let showCancelBookWish = myUser?.id === wish.booking?.userId // бажання належить тому хто створював його
         && !dayjs().isAfter(dayjs(wish.booking?.start).add(3, 'days')) // бажання можна скасувати за 3 дні до початку
         && !dayjs(wish.booking?.end).isSameOrBefore(dayjs()); // термін виконання ще не минув
@@ -85,7 +83,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                     )}
 
                                     {/* Book */}
-                                    {showBookWish && <BookWish wish={wish} close={close} />}
+                                    {!wish.booking?.end && <BookWish wish={wish} userId={myUser?.id} close={close} />}
 
                                     {/* Cancel Book */}
                                     {showCancelBookWish && (
