@@ -69,25 +69,25 @@ const SingUp: FC = () => {
             <img
                 className="sing-up_love-emoji"
                 src={ LoveEmojiImg }
-                alt={ t('welcome-page.love_emoji') }
+                alt={ t('welcome-page.alts.love_emoji') }
             />
 
             <img
                 className="sing-up_festive-emoji"
                 src={ FestiveEmojiImg }
-                alt={ t('welcome-page.festive_emoji') }
+                alt={ t('welcome-page.alts.festive_emoji') }
             />
 
             <img
                 className="sing-up_festive-smile"
                 src={ FestiveSmileImg }
-                alt={ t('welcome-page.festive_smile') }
+                alt={ t('welcome-page.alts.festive_smile') }
             />
 
             <img
                 className="sing-up_star-smile"
                 src={ StarSmileImg }
-                alt={ t('welcome-page.star_smile') }
+                alt={ t('welcome-page.alts.star_smile') }
             />
         </div>
     );

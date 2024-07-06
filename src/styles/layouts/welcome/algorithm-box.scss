@@ -1,4 +1,5 @@
 .algorithm-box {
+    align-self: stretch;
     padding: 24px 22px;
     width: 100%;
     border-radius: $radius-big;
@@ -38,7 +39,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        transform: rotate(15deg);
+        transform: rotate(10deg);
         border-radius: $radius-md;
         border: 1px dashed $white-opacity-color;
     }

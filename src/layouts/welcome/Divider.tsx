@@ -10,7 +10,7 @@ const Divider = () => {
             { Array.from({ length: 40 }).map((_, index) => (
                 <Fragment key={ index }>
                     <span>WishHub</span>
-                    <img src={ StarIcon } alt={ t('star_icon') } />
+                    <img src={ StarIcon } alt={ t('welcome-page.alts.star_icon') } />
                 </Fragment>
             )) }
         </div>

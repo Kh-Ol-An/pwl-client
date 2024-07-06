@@ -22,29 +22,29 @@ const CoverFigure: FC = () => {
 
     return (
         <div className="cover-figure">
-            <img className="cover-figure-emoji-1" src={StarEmojiImg} alt={t('welcome-page.star_emoji')} />
-            <img className="cover-figure-arrow-1" src={ArrowImg} alt={t('welcome-page.arrow')} />
-            <img className="cover-figure-smile-1" src={LoveSmileImg} alt={t('welcome-page.love_smile')} />
+            <img className="cover-figure-emoji-1" src={StarEmojiImg} alt={t('welcome-page.alts.star_emoji')} />
+            <img className="cover-figure-arrow-1" src={ArrowImg} alt={t('welcome-page.alts.arrow')} />
+            <img className="cover-figure-smile-1" src={LoveSmileImg} alt={t('welcome-page.alts.love_smile')} />
 
-            <img className="cover-figure-emoji-2" src={PigtailsEmojiImg} alt={t('welcome-page.pigtails_emoji')} />
-            <img className="cover-figure-arrow-2" src={ArrowImg} alt={t('welcome-page.arrow')} />
-            <img className="cover-figure-smile-2" src={FestiveSmileImg} alt={t('welcome-page.festive_smile')} />
+            <img className="cover-figure-emoji-2" src={PigtailsEmojiImg} alt={t('welcome-page.alts.pigtails_emoji')} />
+            <img className="cover-figure-arrow-2" src={ArrowImg} alt={t('welcome-page.alts.arrow')} />
+            <img className="cover-figure-smile-2" src={FestiveSmileImg} alt={t('welcome-page.alts.festive_smile')} />
 
-            <img className="cover-figure-emoji-3" src={WinkingEmojiImg} alt={t('welcome-page.winking_emoji')} />
-            <img className="cover-figure-arrow-3" src={ArrowImg} alt={t('welcome-page.arrow')} />
-            <img className="cover-figure-smile-3" src={StarSmileImg} alt={t('welcome-page.star_smile')} />
+            <img className="cover-figure-emoji-3" src={WinkingEmojiImg} alt={t('welcome-page.alts.winking_emoji')} />
+            <img className="cover-figure-arrow-3" src={ArrowImg} alt={t('welcome-page.alts.arrow')} />
+            <img className="cover-figure-smile-3" src={StarSmileImg} alt={t('welcome-page.alts.star_smile')} />
 
-            <img className="cover-figure-emoji-4" src={BeardedEmojiImg} alt={t('welcome-page.bearded_emoji')} />
-            <img className="cover-figure-arrow-4" src={ArrowImg} alt={t('welcome-page.arrow')} />
-            <img className="cover-figure-smile-4" src={SunglassesSmileImg} alt={t('welcome-page.smile_sunglasses')} />
+            <img className="cover-figure-emoji-4" src={BeardedEmojiImg} alt={t('welcome-page.alts.bearded_emoji')} />
+            <img className="cover-figure-arrow-4" src={ArrowImg} alt={t('welcome-page.alts.arrow')} />
+            <img className="cover-figure-smile-4" src={SunglassesSmileImg} alt={t('welcome-page.alts.sunglasses_smile')} />
 
-            <img className="cover-figure-emoji-5" src={GreatEmojiImg} alt={t('welcome-page.great_emoji')} />
-            <img className="cover-figure-arrow-5" src={ArrowImg} alt={t('welcome-page.arrow')} />
+            <img className="cover-figure-emoji-5" src={GreatEmojiImg} alt={t('welcome-page.alts.great_emoji')} />
+            <img className="cover-figure-arrow-5" src={ArrowImg} alt={t('welcome-page.alts.arrow')} />
 
             <div className="cover-figure_head">
                 <h4>
                     {t('welcome-page.birthday_wishlist')}
-                    <img src={PartyPopperIcon} alt={t('welcome-page.party_popper_icon')} />
+                    <img src={PartyPopperIcon} alt={t('welcome-page.alts.party_popper_icon')} />
                 </h4>
 
                 <span>{t('welcome-page.count_wishes')}</span>
@@ -71,7 +71,7 @@ const CoverFigure: FC = () => {
                 <li className="cover-figure_item">
                     <div className="cover-figure_block">
                         <span className="cover-figure_checkbox">
-                            <img src={CheckedIcon} alt={t('welcome-page.checked_icon')} />
+                            <img src={CheckedIcon} alt={t('welcome-page.alts.checked_icon')} />
                         </span>
 
                         <div className="cover-figure_img">

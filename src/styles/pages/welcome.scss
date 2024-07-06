@@ -134,13 +134,8 @@
     .cover-content {
         @media only screen and (min-width: 1366px) {
             display: grid;
-            grid-template-columns: 8fr 9fr;
-            grid-template-rows: repeat(2, 1fr);
-            gap: 24px;
-        }
-
-        @media only screen and (min-width: 1440px) {
             grid-template-columns: repeat(2, 1fr);
+            gap: 36px 0;
         }
     }
 
@@ -170,6 +165,10 @@
             @media only screen and (min-width: 768px) {
                 font-size: 58px;
                 text-align: left;
+            }
+
+            @media only screen and (min-width: 1366px) {
+                width: 110%;
             }
         }
 
