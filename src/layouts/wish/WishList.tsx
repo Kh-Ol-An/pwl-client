@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal } from '@mui/material';
+import { Modal, MenuItem } from '@mui/material';
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CloseIcon from '@mui/icons-material/Close';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { selectUserId } from '@/store/selected-user/slice';
@@ -12,9 +13,10 @@ import DetailWish from '@/layouts/wish/detail-wish/DetailWish';
 import Loading from '@/layouts/Loading';
 import Action from '@/components/Action';
 import Button from '@/components/Button';
-import Switch from '@/components/Switch';
 import CustomModal from '@/components/CustomModal';
 import StylesVariables from '@/styles/utils/variables.module.scss';
+
+type TWishType = 'all' | 'unfulfilled' | 'fulfilled';
 
 const WishList = () => {
     const { t } = useTranslation();
@@ -26,30 +28,26 @@ const WishList = () => {
 
     const dispatch = useAppDispatch();
 
-    const [ isUndone, setIsUndone ] = useState<boolean>(true);
+    const [ wishType, setWishType ] = useState<TWishType>('all');
     const [ showWish, setShowWish ] = useState<boolean>(false);
     const [ showEditWish, setShowEditWish ] = useState<boolean>(false);
     const [ idOfSelectedWish, setIdOfSelectedWish ] = useState<IWish['id'] | null>(null);
     const [ selectedWishList, setSelectedWishList ] = useState<IWish[]>(wishes.list.filter(wish => !wish.executed));
+    const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
+
+    const wishListRef = useRef<HTMLUListElement>(null);
 
     const selectedUser = userList.find(user => user.id === selectedUserId);
     const lastName = selectedUser?.lastName ? selectedUser.lastName : "";
     const detailWish = wishes.list.find(wish => wish.id === idOfSelectedWish);
 
-    let emptyText = <>{ t('main-page.you-any') }</>;
+    let emptyText = <>{ t('main-page.you_have_any') }</>;
+    myUser?.id === selectedUserId && wishType !== 'all' && (emptyText = <>{ t(`main-page.you_have_${ wishType }`) }</>);
     myUser?.id !== selectedUserId && (emptyText = (
         <>
-            { t('main-page.at-user') }&nbsp;
-            <span>{ selectedUser?.firstName } { lastName }</span>&nbsp;
-            { t('main-page.any-wishes') }
-        </>
-    ));
-    !isUndone && (emptyText = <>{ t('main-page.you-fulfilled') }</>);
-    !isUndone && myUser?.id !== selectedUserId && (emptyText = (
-        <>
-            { t('main-page.at-user') }&nbsp;
-            <span>{ selectedUser?.firstName } { lastName }</span>&nbsp;
-            { t('main-page.any-fulfilled-wishes') }
+            <span>{ t('main-page.at-user') }</span>
+            <span className="empty-name">{ selectedUser?.firstName } { lastName }</span>
+            <span>{ t(`main-page.does_not_have_${ wishType === 'all' ? '' : wishType }`) }</span>
         </>
     ));
 
@@ -79,13 +77,40 @@ const WishList = () => {
         setShowEditWish(false);
     };
 
+    const handleChangeWishType = (event: SelectChangeEvent) => {
+        const value = event.target.value as TWishType;
+        setWishType(value);
+
+        if (!wishListRef.current) return;
+
+        wishListRef.current.scrollTo(0, 0);
+    };
+
     useEffect(() => {
-        if (isUndone) {
-            setSelectedWishList(wishes.list.filter(wish => !wish.executed));
-        } else {
+        if (wishType === 'all') {
+            setSelectedWishList(wishes.list);
+        }
+
+        if (wishType === 'fulfilled') {
             setSelectedWishList(wishes.list.filter(wish => wish.executed));
         }
-    }, [ isUndone, wishes.list ]);
+
+        if (wishType === 'unfulfilled') {
+            setSelectedWishList(wishes.list.filter(wish => !wish.executed));
+        }
+    }, [ wishType, wishes.list ]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     return (
         <div className="wish-list">
@@ -101,45 +126,38 @@ const WishList = () => {
                 ) }
 
                 <div className="title-box">
-                    <div className="wishes-type">
-                        <button
-                            className={ isUndone ? "primary-color" : "" }
-                            type="button"
-                            onClick={ () => setIsUndone(true) }
+                    <div className="wish-list-type">
+                        <Select
+                            id="wish-list-type"
+                            variant="standard"
+                            sx={ { fontSize: screenWidth < 1024 ? 20 : 24 } }
+                            value={ wishType }
+                            onChange={ handleChangeWishType }
                         >
-                            { t('main-page.unfulfilled') }
-                        </button>
-                        <Switch
-                            id="wishes-type"
-                            name="wishes-type"
-                            hiddenChoice
-                            checked={ isUndone }
-                            onChange={ (e) => setIsUndone(e.target.checked) }
-                        />
-                        <button
-                            className={ isUndone ? "" : "primary-color" }
-                            type="button"
-                            onClick={ () => setIsUndone(false) }
-                        >
-                            { t('main-page.fulfilled') }
-                        </button>
+                            <MenuItem value="all">{ t('main-page.all') }</MenuItem>
+                            <MenuItem value="unfulfilled">{ t('main-page.unfulfilled') }</MenuItem>
+                            <MenuItem value="fulfilled">{ t('main-page.fulfilled') }</MenuItem>
+                        </Select>
                     </div>
 
-                    <h1 className="title">
-                        {
-                            myUser?.id === selectedUserId
-                                ? <>{ t('main-page.personal-wishes') }</>
-                                : <>
-                                    { t('main-page.wishes-of-user') }&nbsp;
-                                    <span>{ selectedUser?.firstName } { lastName }</span>
-                                </>
-                        }
-                    </h1>
+                    {
+                        myUser?.id === selectedUserId
+                            ? <>
+                                <h2 className="title">{ t('main-page.title-personal') }</h2>
+                                <h2 className="title">{ t('main-page.title-wishes') }</h2>
+                            </>
+                            : <>
+                                <h2 className="title">{ t('main-page.title-wishes') }</h2>
+                                <h2 className="title">{ t('main-page.of-user') }</h2>
+                                <h2 className="title title-name">{ selectedUser?.firstName }</h2>
+                                <h2 className="title title-name">{ lastName }</h2>
+                            </>
+                    }
                 </div>
             </div>
 
             { selectedWishList.length > 0 ? (
-                <ul className="list">
+                <ul className="list" ref={ wishListRef }>
                     { selectedWishList.map((wish) => (
                         <li
                             className={ "item" + (selectedWishList.length < 2 ? " alone" : "") }
@@ -160,8 +178,8 @@ const WishList = () => {
                     )) }
                 </ul>
             ) : (
-                <div className="text-box">
-                    <p className="text">{ emptyText }</p>
+                <div className="empty-box">
+                    <p className="empty-text">{ emptyText }</p>
                 </div>
             ) }
 

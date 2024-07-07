@@ -21,77 +21,79 @@
                 order: 1;
             }
         }
+    }
 
-        .wish-hub {
-            width: 112px;
-            padding: 6px 0;
+    .wish-hub {
+        width: 112px;
+        padding: 6px 0;
 
-            @media only screen and (min-width: 768px) {
-                display: none;
-            }
+        @media only screen and (min-width: 768px) {
+            display: none;
+        }
+    }
+
+    .title-box {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-self: center;
+
+        @media only screen and (min-width: 1024px) {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+    }
+
+    .wish-list-type {
+        margin-right: 6px;
+        width: fit-content;
+        height: 35px;
+
+        .MuiInputBase-root {
+            height: 35px;
         }
 
-        .title-box {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-self: center;
-            gap: 4px;
+        .MuiInput-input {
+            background-color: transparent;
+            font-weight: 700;
+            color: $light-color;
+        }
+    }
 
-            @media only screen and (min-width: 1024px) {
-                flex-direction: row;
-                align-items: flex-start;
-                gap: 10px;
-            }
+    .title {
+        padding: 0 6px;
+        width: auto;
+        align-self: stretch;
+        font-size: 20px;
+        line-height: 35px;
+
+        @media only screen and (min-width: 768px) {
+            margin: 0;
+            height: auto;
         }
 
-        .wishes-type {
-            @include flex-center;
-            gap: 10px;
-
-            button {
-                font-size: 20px;
-                font-weight: 700;
-                color: $special-color;
-                white-space: nowrap;
-                opacity: 0.3;
-                transition: $transition-slow;
-
-                &.primary-color {
-                    color: $primary-color;
-                    opacity: 1;
-                }
-
-                @media only screen and (min-width: 1024px) {
-                    font-size: 24px;
-                }
-            }
+        @media only screen and (min-width: 1024px) {
+            font-size: 24px;
+            text-align: left;
         }
+    }
 
-        .title {
-            margin: 0 auto;
-            font-size: 20px;
+    .title-name {
+        max-width: calc(100vw - 34px);
+        padding: 0 6px;
+        font-style: italic;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 20px;
+        line-height: 35px;
+        height: 35px;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 24px;
             line-height: 35px;
-            max-height: 70px;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-
-            @media only screen and (min-width: 768px) {
-                margin: 0;
-                height: auto;
-            }
-
-            @media only screen and (min-width: 1024px) {
-                font-size: 24px;
-                text-align: left;
-            }
-
-            span {
-                font-style: italic;
-            }
+            height: 35px;
+            max-width: 50vw;
         }
     }
 
@@ -133,19 +135,44 @@
         }
     }
 
-    .text-box {
+    .empty-box {
         @include flex-center;
         width: 100%;
         height: 100%;
+    }
 
-        span {
-            font-style: italic;
+    .empty-text {
+        width: 100%;
+        @include flex-column;
+        font-size: 16px;
+        color: $light-color;
+        text-align: center;
+
+        @media only screen and (min-width: 1024px) {
+            font-size: 24px;
         }
     }
 
-    .text {
-        font-size: 20px;
-        color: $white-color;
-        text-align: center;
+    .empty-name {
+        max-width: calc(100vw - 34px);
+        padding: 0 2px;
+        font-style: italic;
+        font-size: 16px;
+        color: $light-color;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        line-height: 20px;
+        height: 20px;
+
+        @media only screen and (min-width: 768px) {
+            max-width: 50vw;
+        }
+
+        @media only screen and (min-width: 1024px) {
+            font-size: 24px;
+            line-height: 30px;
+            height: 30px;
+        }
     }
 }

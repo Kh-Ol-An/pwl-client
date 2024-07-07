@@ -72,12 +72,14 @@
     }
 
     .modal-actions {
+        margin: 0 0 0 auto;
         width: 100%;
         display: flex;
         flex-direction: column;
         gap: 10px;
 
         @media only screen and (min-width: 412px) {
+            width: auto;
             flex-direction: row;
             align-items: center;
             justify-content: flex-end;
@@ -86,8 +88,11 @@
 
         .button {
             margin-left: auto;
-            padding: 8px;
             width: fit-content;
+        }
+
+        .button.text {
+            padding: 8px;
 
             @media only screen and (min-width: 768px) {
                 padding: 0;

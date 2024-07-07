@@ -2,6 +2,10 @@
     border-radius: $radius-xxl;
 }
 
+.MuiPaper-root.MuiMenu-paper {
+    border-radius: $radius-md;
+}
+
 .popup {
     @include flex-column-left;
 
