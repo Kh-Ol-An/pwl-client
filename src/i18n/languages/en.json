@@ -7,7 +7,6 @@
   "logout": "Log out",
   "first-name": "Name*",
   "last-name": "Last name*",
-  "reserved": "Reserved",
   "inactivated": {
     "aim": "We aim for all users to be real.",
     "check": "Check your email at:",
@@ -244,10 +243,14 @@
     "does_not_have_unfulfilled": "doesn't have any unfulfilled wishes available for viewing.",
     "create-wish": "Create Wish",
     "unfulfilled": "Unfulfilled",
-    "fulfilled": "Fulfilled",
+    "fulfilled": {
+      "single": "Fulfilled",
+      "plural": "Fulfilled"
+    },
     "title-personal": "Personal",
     "title-wishes": "Wishes",
     "of-user": "of User",
+    "reserved": "Reserved",
     "material-wish": "Material Wish",
     "non-material-wish": "Non-material Wish",
     "wish-name": "Name of Your wish*.",

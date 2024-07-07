@@ -136,7 +136,7 @@ const WishList = () => {
                         >
                             <MenuItem value="all">{ t('main-page.all') }</MenuItem>
                             <MenuItem value="unfulfilled">{ t('main-page.unfulfilled') }</MenuItem>
-                            <MenuItem value="fulfilled">{ t('main-page.fulfilled') }</MenuItem>
+                            <MenuItem value="fulfilled">{ t('main-page.fulfilled.plural') }</MenuItem>
                         </Select>
                     </div>
 
@@ -163,7 +163,7 @@ const WishList = () => {
                             className={ "item" + (selectedWishList.length < 2 ? " alone" : "") }
                             key={ wish.id }
                         >
-                            <div className={ wish.booking?.end ? "booked" : "" }>
+                            <div className={ (wish.booking?.end || wish.executed) ? "opacity" : "" }>
                                 <WishItem
                                     wish={ wish }
                                     showWish={ () => handleShowWish(wish.id) }
@@ -172,7 +172,11 @@ const WishList = () => {
                             </div>
 
                             { wish.booking?.end && (
-                                <span className="reserved">{ t('reserved') }</span>
+                                <span className="marked reserved">{ t('main-page.reserved') }</span>
+                            ) }
+
+                            { wish.executed && (
+                                <span className="marked">{ t('main-page.fulfilled.single') }</span>
                             ) }
                         </li>
                     )) }

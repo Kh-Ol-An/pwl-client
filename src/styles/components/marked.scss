@@ -1,0 +1,14 @@
+.marked {
+    position: absolute;
+    top: 12%;
+    right: 8%;
+    transform: rotate(-3deg);
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: 700;
+    color: $primary-color;
+
+    &.reserved {
+        color: $action-light-color;
+    }
+}
