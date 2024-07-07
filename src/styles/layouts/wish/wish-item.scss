@@ -1,59 +1,74 @@
 .wish-item {
-    @include flex-center;
+    position: relative;
     width: 100%;
-    min-height: 196px;
-    height: 196px;
-    max-height: 196px;
+    min-height: 120px;
+    height: 120px;
+    max-height: 120px;
+    border-radius: $radius-md;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: $secondary-light-color;
+    cursor: pointer;
 
-    .wish-item-outer-border {
-        width: 100%;
-        height: 100%;
-        border-radius: $radius-xxl;
-        border-width: 6px;
-        border-style: solid;
-        border-color: $accent-color;
-        background: $secondary-color;
-        transition: $transition-slow;
-
-        @media only screen and (min-width: 768px) {
-            border-width: 8px;
-        }
+    &.alone {
+        max-width: 400px;
     }
 
-    .wish-item-inner-border {
-        width: 100%;
-        height: 100%;
-        border-radius: $radius-xl;
-        border-width: 10px;
-        border-style: solid;
-        border-color: $secondary-color;
-        transition: $transition-slow;
-
-        @media only screen and (min-width: 768px) {
-            border-width: 60px 40px;
-        }
+    &.reserved {
+        opacity: 0.5;
     }
 
-    .wish-item-content {
-        width: 100%;
-        height: 100%;
-        @include flex-column;
-        justify-content: center;
-        box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.5);
-        border-radius: $radius-lg;
-        border-width: 0 0 2px 0;
-        border-style: solid;
-        border-color: rgba(255, 255, 255, 0.5);
-        background: $accent-color;
-        padding: 14px 16px;
-    }
-
-    &.i-m-booked .wish-item-content {
+    &.fulfilled .wish-box {
+        transform: rotate(-3deg);
         border-color: $primary-color;
+        background-image: url("../../../assets/images/welcome/wish-bg.png");
     }
 
-    &.booking-expired .wish-item-content {
+    &.i-m-booked {
+        border-color: $action-light-color;
+    }
+
+    &.booking-expired {
         animation: borderFlash 1s infinite;
+    }
+
+    .wish-box {
+        padding: 24px 16px;
+        @include flex-center;
+        gap: 16px;
+        width: 100%;
+        height: 100%;
+        border-radius: $radius-md;
+        border-width: 1px;
+        border-style: dashed;
+        border-color: transparent;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+
+    .wish-item-img {
+        min-width: 80px;
+        width: 80px;
+        height: 80px;
+        max-height: 80px;
+
+        img {
+            min-height: 100%;
+            border-radius: $radius-md;
+            border: 1px dashed $white-very-opacity-color;
+            object-fit: contain;
+        }
+    }
+
+    .wish-item-data {
+        width: calc(100% - 128px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 10px;
     }
 
     .wish-item-name {
@@ -68,69 +83,43 @@
         white-space: nowrap;
     }
 
-    .wish-item-data {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        gap: 20px;
-        margin-top: 14px;
-        transition: $transition-slow;
-
-        @media only screen and (min-width: 768px) {
-            margin-top: 0;
-            height: 0;
-            overflow: hidden;
-        }
-    }
-
-    .wish-item-img {
-        position: relative;
-        width: 90px;
-        height: 90px;
-
-        &::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            inset: 0;
-            box-shadow: inset 0 0 6px 6px $accent-color;
-        }
-
-        img {
-            object-fit: contain;
-        }
-    }
-
     .wish-item-price {
-        color: $light-color;
+        color: $special-color;
         font-size: 16px;
         text-align: center;
     }
 
-    .action {
-        top: -2px;
-        right: -2px;
-
-        svg {
-            width: 90%;
-            height: 90%;
-        }
+    .reserved,
+    .fulfilled {
+        position: absolute;
+        top: 12%;
+        right: 8%;
+        background-color: transparent;
+        font-size: 18px;
+        font-weight: 700;
     }
 
-    &.can-hover:hover {
-        .wish-item-outer-border {
-            border-width: 6px;
-        }
+    .reserved {
+        transform: rotate(-3deg);
+        color: $action-light-color;
+    }
 
-        .wish-item-inner-border {
-            border-width: 10px;
-        }
+    .fulfilled {
+        color: $primary-color;
+    }
 
-        .wish-item-data {
-            margin-top: 14px;
-            height: 90px;
+    .wish-item-action {
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        width: 40px;
+        height: 40px;
+        border-radius: $radius-md;
+        background-color: $white-deep-opacity-color;
+
+        svg {
+            width: 60%;
+            height: 60%;
         }
     }
 }

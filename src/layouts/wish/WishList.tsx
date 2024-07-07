@@ -159,26 +159,13 @@ const WishList = () => {
             { selectedWishList.length > 0 ? (
                 <ul className="list" ref={ wishListRef }>
                     { selectedWishList.map((wish) => (
-                        <li
-                            className={ "item" + (selectedWishList.length < 2 ? " alone" : "") }
+                        <WishItem
                             key={ wish.id }
-                        >
-                            <div className={ (wish.booking?.end || wish.executed) ? "opacity" : "" }>
-                                <WishItem
-                                    wish={ wish }
-                                    showWish={ () => handleShowWish(wish.id) }
-                                    editWish={ () => handleShowEditWish(wish.id) }
-                                />
-                            </div>
-
-                            { wish.booking?.end && (
-                                <span className="marked reserved">{ t('main-page.reserved') }</span>
-                            ) }
-
-                            { wish.executed && (
-                                <span className="marked">{ t('main-page.fulfilled.single') }</span>
-                            ) }
-                        </li>
+                            wish={ wish }
+                            selectedWishListLength={ selectedWishList.length }
+                            showWish={ () => handleShowWish(wish.id) }
+                            editWish={ () => handleShowEditWish(wish.id) }
+                        />
                     )) }
                 </ul>
             ) : (
