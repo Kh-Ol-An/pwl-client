@@ -17,6 +17,7 @@
 
     @media only screen and (min-width: 768px) {
         max-height: 100%;
+        transform: scaleY(1);
         border-radius: 0 0 $radius-xxl $radius-xxl;
         border-right: 4px solid $accent-color;
         border-bottom: 4px solid $accent-color;
