@@ -6,9 +6,9 @@ import {
     IUpdateWish,
     IGetWish,
     ISendWish,
+    IBookWish,
     IDoneWish,
     IActionWish,
-    IBookWish,
     ISendWishList,
 } from '@/store/wishes/types';
 import { IWish } from '@/models/IWish';
@@ -41,24 +41,6 @@ export const getWish = createAsyncThunk<IGetWish, ISendWish>(
     },
 );
 
-export const doneWish = createAsyncThunk<{ executorUser: IUser, bookedWish: IWish }, IDoneWish>(
-    'wishes/doneWish',
-    async (data) => {
-        const result = await api.doneWish(data);
-
-        return result.data;
-    },
-);
-
-export const undoneWish = createAsyncThunk<{ executorUser: IUser, bookedWish: IWish }, IActionWish>(
-    'wishes/undoneWish',
-    async (data) => {
-        const result = await api.undoneWish(data);
-
-        return result.data;
-    },
-);
-
 export const bookWish = createAsyncThunk<IWishWithQuote, IBookWish>(
     'wishes/bookWish',
     async (data) => {
@@ -72,6 +54,24 @@ export const cancelBookWish = createAsyncThunk<IWish, IActionWish>(
     'wishes/cancelBookWish',
     async (data) => {
         const result = await api.cancelBookWish(data);
+
+        return result.data;
+    },
+);
+
+export const doneWish = createAsyncThunk<{ executorUser: IUser, bookedWish: IWish }, IDoneWish>(
+    'wishes/doneWish',
+    async (data) => {
+        const result = await api.doneWish(data);
+
+        return result.data;
+    },
+);
+
+export const undoneWish = createAsyncThunk<{ executorUser: IUser, bookedWish: IWish }, IActionWish>(
+    'wishes/undoneWish',
+    async (data) => {
+        const result = await api.undoneWish(data);
 
         return result.data;
     },

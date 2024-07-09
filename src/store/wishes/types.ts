@@ -39,6 +39,10 @@ export interface IGetWish {
     wish: IWish;
 }
 
+export interface IBookWish extends IActionWish {
+    end: string;
+}
+
 export interface IActionWish {
     userId: IUser['id'];
     wishId: IWish['id'];
@@ -46,8 +50,4 @@ export interface IActionWish {
 
 export interface IDoneWish extends IActionWish{
     whoseWish: 'my' | 'someone';
-}
-
-export interface IBookWish extends IActionWish {
-    end: string;
 }

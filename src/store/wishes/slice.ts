@@ -3,10 +3,10 @@ import { t } from 'i18next';
 import {
     createWish,
     updateWish,
-    doneWish,
-    undoneWish,
     bookWish,
     cancelBookWish,
+    doneWish,
+    undoneWish,
     deleteWish,
     getWishList,
 } from '@/store/wishes/thunks';
@@ -69,56 +69,6 @@ const wishesSlice = createSlice({
                 state.isLocalLoading = false;
                 state.error = null;
             })
-            // doneWish
-            .addCase(doneWish.pending, (state) => {
-                state.isLoading = true;
-                state.isLocalLoading = false;
-                state.error = null;
-            })
-            .addCase(doneWish.rejected, (state, action) => {
-                state.isLoading = false;
-                state.isLocalLoading = false;
-                state.error = action.error.message || t('alerts.wishes-api.done-wish.error', { type: 'wishes.slice' });
-            })
-            .addCase(doneWish.fulfilled, (state, action) => {
-                // Змінити бажання та покласти його там де було
-                const { bookedWish } = action.payload;
-                // Знаходимо індекс бажання в списку за його ідентифікатором
-                const index = state.list.findIndex(wish => wish.id === bookedWish.id);
-                // Перевіряємо, чи було знайдено бажання
-                if (index !== -1) {
-                    // Оновлюємо дані бажання
-                    state.list[index] = bookedWish;
-                }
-                state.isLoading = false;
-                state.isLocalLoading = false;
-                state.error = null;
-            })
-            // undoneWish
-            .addCase(undoneWish.pending, (state) => {
-                state.isLoading = true;
-                state.isLocalLoading = false;
-                state.error = null;
-            })
-            .addCase(undoneWish.rejected, (state, action) => {
-                state.isLoading = false;
-                state.isLocalLoading = false;
-                state.error = action.error.message || t('alerts.wishes-api.undone-wish.error', { type: 'wishes.slice' });
-            })
-            .addCase(undoneWish.fulfilled, (state, action) => {
-                // Змінити бажання та покласти його там де було
-                const { bookedWish } = action.payload;
-                // Знаходимо індекс бажання в списку за його ідентифікатором
-                const index = state.list.findIndex(wish => wish.id === bookedWish.id);
-                // Перевіряємо, чи було знайдено бажання
-                if (index !== -1) {
-                    // Оновлюємо дані бажання
-                    state.list[index] = bookedWish;
-                }
-                state.isLoading = false;
-                state.isLocalLoading = false;
-                state.error = null;
-            })
             // bookWish
             .addCase(bookWish.pending, (state) => {
                 state.isLoading = true;
@@ -164,6 +114,56 @@ const wishesSlice = createSlice({
                 if (index !== -1) {
                     // Оновлюємо дані бажання
                     state.list[index] = action.payload;
+                }
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = null;
+            })
+            // doneWish
+            .addCase(doneWish.pending, (state) => {
+                state.isLoading = true;
+                state.isLocalLoading = false;
+                state.error = null;
+            })
+            .addCase(doneWish.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = action.error.message || t('alerts.wishes-api.done-wish.error', { type: 'wishes.slice' });
+            })
+            .addCase(doneWish.fulfilled, (state, action) => {
+                // Змінити бажання та покласти його там де було
+                const { bookedWish } = action.payload;
+                // Знаходимо індекс бажання в списку за його ідентифікатором
+                const index = state.list.findIndex(wish => wish.id === bookedWish.id);
+                // Перевіряємо, чи було знайдено бажання
+                if (index !== -1) {
+                    // Оновлюємо дані бажання
+                    state.list[index] = bookedWish;
+                }
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = null;
+            })
+            // undoneWish
+            .addCase(undoneWish.pending, (state) => {
+                state.isLoading = true;
+                state.isLocalLoading = false;
+                state.error = null;
+            })
+            .addCase(undoneWish.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = action.error.message || t('alerts.wishes-api.undone-wish.error', { type: 'wishes.slice' });
+            })
+            .addCase(undoneWish.fulfilled, (state, action) => {
+                // Змінити бажання та покласти його там де було
+                const { bookedWish } = action.payload;
+                // Знаходимо індекс бажання в списку за його ідентифікатором
+                const index = state.list.findIndex(wish => wish.id === bookedWish.id);
+                // Перевіряємо, чи було знайдено бажання
+                if (index !== -1) {
+                    // Оновлюємо дані бажання
+                    state.list[index] = bookedWish;
                 }
                 state.isLoading = false;
                 state.isLocalLoading = false;

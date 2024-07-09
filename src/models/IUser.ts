@@ -1,19 +1,20 @@
 import { Dayjs } from 'dayjs';
 
 export interface ICandidate {
-    firstName?: string;
     email?: string;
+    firstName?: string;
 }
 
 export interface IUser {
     id: string;
-    firstName: string;
-    lastName?: string;
-    hasPassword: boolean;
     email: string;
+    hasPassword: boolean;
+    isActivated: boolean;
     lang: 'en' | 'uk';
     showedInfo: boolean;
     firstLoaded: boolean;
+    firstName: string;
+    lastName?: string;
     birthday?: Dayjs;
     avatar?: string;
     wishList: string[];
@@ -22,9 +23,6 @@ export interface IUser {
     friends: string[];
     followFrom: string[];
     followTo: string[];
-    isActivated: boolean;
-    createdAt: Dayjs;
-    updatedAt: Dayjs;
 }
 
 export type TCurrentAvatar = (File | 'delete' | string);

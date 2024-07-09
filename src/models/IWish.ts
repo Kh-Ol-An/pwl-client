@@ -26,14 +26,12 @@ export interface IWish {
     userId: IUser['id'];
     material: boolean;
     show: 'all' | 'friends' | 'nobody';
-    currency: 'UAH' | 'USD' | 'EUR';
     name: string;
+    images: IImage[];
     price?: string;
+    currency: 'UAH' | 'USD' | 'EUR';
     addresses?: IAddress[];
     description: string;
-    executed: boolean;
-    images: IImage[];
     booking?: IBooking;
-    createdAt: Dayjs;
-    updatedAt: Dayjs;
+    executed: boolean;
 }

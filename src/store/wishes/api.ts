@@ -8,9 +8,9 @@ import {
     IUpdateWish,
     ISendWish,
     IGetWish,
-    IDoneWish,
-    IActionWish,
     IBookWish,
+    IActionWish,
+    IDoneWish,
     ISendWishList
 } from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
@@ -100,9 +100,31 @@ const getWish = async (params: ISendWish): Promise<AxiosResponse<IGetWish>> => {
     }
 };
 
+const bookWish = async (data: IBookWish): Promise<AxiosResponse<IWishWithQuote>> => {
+    try {
+        return await api.put('/wish/book', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || t('alerts.wishes-api.book-wish.error', { type: 'api' }), { type: 'error' });
+        throw error;
+    }
+};
+
+const cancelBookWish = async (data: IActionWish): Promise<AxiosResponse<IWish>> => {
+    try {
+        const response = await api.put('/wish/cancel-book', data);
+
+        toast(t('alerts.wishes-api.cancel-book-wish.success'), { type: 'success' });
+
+        return response;
+    } catch (error: any) {
+        toast(error.response?.data?.message || t('alerts.wishes-api.cancel-book-wish.error', { type: 'api' }), { type: 'error' });
+        throw error;
+    }
+};
+
 const doneWish = async (data: IDoneWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
     try {
-        const response = await api.post('/wish/done', data);
+        const response = await api.put('/wish/done', data);
 
         toast(t('alerts.wishes-api.done-wish.success'), { type: 'success' });
 
@@ -115,35 +137,13 @@ const doneWish = async (data: IDoneWish): Promise<AxiosResponse<{ executorUser: 
 
 const undoneWish = async (data: IActionWish): Promise<AxiosResponse<{ executorUser: IUser, bookedWish: IWish }>> => {
     try {
-        const response = await api.post('/wish/undone', data);
+        const response = await api.put('/wish/undone', data);
 
         toast(t('alerts.wishes-api.undone-wish.success'), { type: 'success' });
 
         return response;
     } catch (error: any) {
         toast(error.response?.data?.message || t('alerts.wishes-api.undone-wish.error', { type: 'api' }), { type: 'error' });
-        throw error;
-    }
-};
-
-const bookWish = async (data: IBookWish): Promise<AxiosResponse<IWishWithQuote>> => {
-    try {
-        return await api.post('/wish/book', data);
-    } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.wishes-api.book-wish.error', { type: 'api' }), { type: 'error' });
-        throw error;
-    }
-};
-
-const cancelBookWish = async (data: IActionWish): Promise<AxiosResponse<IWish>> => {
-    try {
-        const response = await api.post('/wish/cancel-book', data);
-
-        toast(t('alerts.wishes-api.cancel-book-wish.success'), { type: 'success' });
-
-        return response;
-    } catch (error: any) {
-        toast(error.response?.data?.message || t('alerts.wishes-api.cancel-book-wish.error', { type: 'api' }), { type: 'error' });
         throw error;
     }
 };
@@ -188,10 +188,10 @@ const wishApi = {
     createWish,
     updateWish,
     getWish,
-    doneWish,
-    undoneWish,
     bookWish,
     cancelBookWish,
+    doneWish,
+    undoneWish,
     deleteWish,
     getWishList,
 };
