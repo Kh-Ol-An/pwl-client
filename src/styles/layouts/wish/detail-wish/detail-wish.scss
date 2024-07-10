@@ -220,7 +220,7 @@
     .detail-wish-likes {
         margin-right: auto;
         @include flex-center;
-        gap: 10px;
+        gap: 4px;
     }
 
     .detail-wish-likes-icon {
@@ -240,8 +240,14 @@
         }
     }
 
-    .detail-wish-dislikes {
+    .detail-wish-likes-action {
+        padding: 8px;
+    }
+
+    .detail-wish-dislikes-action {
         margin-left: 20px;
+        padding: 8px;
+
         .detail-wish-likes-icon {
             transform: scale(-1);
 

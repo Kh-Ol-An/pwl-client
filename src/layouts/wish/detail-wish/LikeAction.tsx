@@ -41,7 +41,7 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
         <>
             <button
                 type="button"
-                className={ `detail-wish-${ type }` }
+                className={ `detail-wish-${ type }-action` }
                 onClick={ handleAction }
             >
                 { wish[type].some(like => like.userId === myUser?.id) ? (
