@@ -6,10 +6,11 @@ interface IProps {
     anchor: HTMLButtonElement | null;
     setAnchor: (el: HTMLButtonElement | null) => void;
     actionIcon: ReactNode;
+    isTopPosition?: boolean;
     children: ReactNode;
 }
 
-const Popup: FC<IProps> = ({ anchor, setAnchor, actionIcon, children }) => {
+const Popup: FC<IProps> = ({ anchor, setAnchor, actionIcon, isTopPosition = false, children }) => {
     const open = Boolean(anchor);
     const id = open ? 'simple-popover' : undefined;
 
@@ -32,11 +33,17 @@ const Popup: FC<IProps> = ({ anchor, setAnchor, actionIcon, children }) => {
                 open={open}
                 anchorEl={anchor}
                 onClose={handleClose}
-                anchorOrigin={{
+                anchorOrigin={isTopPosition ? {
+                    vertical: 'top',
+                    horizontal: 'left',
+                } : {
                     vertical: 'bottom',
                     horizontal: 'right',
                 }}
-                transformOrigin={{
+                transformOrigin={isTopPosition ? {
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                } : {
                     vertical: 'top',
                     horizontal: 'right',
                 }}

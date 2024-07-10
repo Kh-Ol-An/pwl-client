@@ -121,6 +121,14 @@
       "get-wish": {
         "error": "{{type}}.getWish: Failed to get the wish."
       },
+      "book-wish": {
+        "error": "{{type}}.bookWish: Failed to book the wish.",
+        "success": "The wish has been successfully booked."
+      },
+      "cancel-book-wish": {
+        "error": "{{type}}.cancelBookWish: Failed to cancel the booking of the wish.",
+        "success": "The wish booking has been successfully canceled."
+      },
       "done-wish": {
         "error": "{{type}}.doneWish: Failed to mark the wish as done.",
         "success": "The wish has been successfully marked as done."
@@ -129,13 +137,11 @@
         "error": "{{type}}.undoneWish: Failed to mark the wish as not done.",
         "success": "The wish has been successfully marked as not done."
       },
-      "book-wish": {
-        "error": "{{type}}.bookWish: Failed to book the wish.",
-        "success": "The wish has been successfully booked."
+      "like-wish": {
+        "error": "{{type}}.likeWish: Failed to like the wish."
       },
-      "cancel-book-wish": {
-        "error": "{{type}}.cancelBookWish: Failed to cancel the booking of the wish.",
-        "success": "The wish booking has been successfully canceled."
+      "dislike-wish": {
+        "error": "{{type}}.dislikeWish: Failed to dislike the wish."
       },
       "delete-wish": {
         "error": "{{type}}.deleteWish: Failed to delete the wish with ID {{wishId}}.",

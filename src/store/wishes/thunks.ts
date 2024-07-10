@@ -77,6 +77,24 @@ export const undoneWish = createAsyncThunk<{ executorUser: IUser, bookedWish: IW
     },
 );
 
+export const likeWish = createAsyncThunk<IWish, IActionWish>(
+    'wishes/likeWish',
+    async (data) => {
+        const result = await api.likeWish(data);
+
+        return result.data;
+    },
+);
+
+export const dislikeWish = createAsyncThunk<IWish, IActionWish>(
+    'wishes/dislikeWish',
+    async (data) => {
+        const result = await api.dislikeWish(data);
+
+        return result.data;
+    },
+);
+
 export const deleteWish = createAsyncThunk<IWish['id'], [IUser['id'], IWish['id']]>(
     'wishes/deleteWish',
     async ([userId, wishId]) => {

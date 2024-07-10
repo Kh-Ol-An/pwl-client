@@ -204,6 +204,53 @@
         }
     }
 
+    .detail-wish-foot {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        @media only screen and (min-width: 768px) {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+    }
+
+    .detail-wish-likes {
+        margin-right: auto;
+        @include flex-center;
+        gap: 10px;
+    }
+
+    .detail-wish-likes-icon {
+        color: $light-color;
+
+        &.liked {
+            color: $primary-color;
+        }
+    }
+
+    .detail-wish-count {
+        color: $light-color;
+        font-size: 16px;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 18px;
+        }
+    }
+
+    .detail-wish-dislikes {
+        margin-left: 20px;
+        .detail-wish-likes-icon {
+            transform: scale(-1);
+
+            &.liked {
+                color: $action-color;
+            }
+        }
+    }
+
     .detail-wish-actions {
         display: flex;
         flex-direction: column;
@@ -265,4 +312,24 @@
     position: relative;
     top: 3px;
     margin-left: 4px;
+}
+
+.detail-wish-likes_user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-wish-likes_user-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+
+    .detail-wish-likes_user-name {
+        width: 100%;
+        font-size: 12px;
+        color: $light-color;
+        text-align: left;
+    }
 }

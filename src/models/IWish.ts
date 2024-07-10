@@ -21,6 +21,12 @@ interface IAddress {
     value: string;
 }
 
+interface ILike {
+    userId: string;
+    userAvatar: string;
+    userFullName: string;
+}
+
 export interface IWish {
     id: string;
     userId: IUser['id'];
@@ -32,6 +38,8 @@ export interface IWish {
     currency: 'UAH' | 'USD' | 'EUR';
     addresses?: IAddress[];
     description: string;
-    booking?: IBooking;
     executed: boolean;
+    booking?: IBooking;
+    likes: ILike[];
+    dislikes: ILike[];
 }

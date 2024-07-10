@@ -148,6 +148,24 @@ const undoneWish = async (data: IActionWish): Promise<AxiosResponse<{ executorUs
     }
 };
 
+const likeWish = async (data: IActionWish): Promise<AxiosResponse<IWish>> => {
+    try {
+        return await api.put('/wish/like', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || t('alerts.wishes-api.like-wish.error', { type: 'api' }), { type: 'error' });
+        throw error;
+    }
+};
+
+const dislikeWish = async (data: IActionWish): Promise<AxiosResponse<IWish>> => {
+    try {
+        return await api.put('/wish/dislike', data);
+    } catch (error: any) {
+        toast(error.response?.data?.message || t('alerts.wishes-api.dislike-wish.error', { type: 'api' }), { type: 'error' });
+        throw error;
+    }
+};
+
 const deleteWish = async (userId: IUser['id'], wishId: IWish['id']): Promise<AxiosResponse<IWish['id']>> => {
     try {
         const response = await api.delete(
@@ -192,6 +210,8 @@ const wishApi = {
     cancelBookWish,
     doneWish,
     undoneWish,
+    likeWish,
+    dislikeWish,
     deleteWish,
     getWishList,
 };

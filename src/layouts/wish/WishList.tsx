@@ -174,9 +174,10 @@ const WishList = () => {
                 </div>
             ) }
 
+            {/* TODO: розбирись з цим, чому тут два прелоадери */}
             { wishes.isLoading && <Loading /> }
-
             { wishes.isLocalLoading && <Loading isLocal /> }
+            {/* TODO: розбирись з цим, чому тут два прелоадери */}
 
             { detailWish && (
                 <Modal
