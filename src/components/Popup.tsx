@@ -1,6 +1,5 @@
 import React, { FC, MouseEvent, ReactNode } from 'react';
 import { Popover } from '@mui/material';
-import Card from "@/layouts/Card";
 
 interface IProps {
     anchor: HTMLButtonElement | null;
@@ -49,11 +48,9 @@ const Popup: FC<IProps> = ({ anchor, setAnchor, actionIcon, isTopPosition = fals
                 }}
                 style={{ borderRadius: '20px' }}
             >
-                <Card classes="thin-border">
-                    <div className="popup">
-                        {children}
-                    </div>
-                </Card>
+                <div className="popup">
+                    {children}
+                </div>
             </Popover>
         </>
     );

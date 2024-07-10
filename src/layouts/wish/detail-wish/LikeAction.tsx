@@ -44,7 +44,7 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
                 className={ `detail-wish-${ type }` }
                 onClick={ handleAction }
             >
-                { wish[type].length > 0 ? (
+                { wish[type].some(like => like.userId === myUser?.id) ? (
                     <ThumbUpAltIcon className="detail-wish-likes-icon liked" />
                 ) : (
                     <ThumbUpOffAltIcon className="detail-wish-likes-icon" />

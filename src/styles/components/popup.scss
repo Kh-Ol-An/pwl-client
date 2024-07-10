@@ -1,5 +1,5 @@
 .MuiPaper-root.MuiPopover-paper {
-    border-radius: $radius-xxl;
+    border-radius: $radius-lg;
 }
 
 .MuiPaper-root.MuiMenu-paper {
@@ -7,6 +7,7 @@
 }
 
 .popup {
+    padding: 8px 16px;
     @include flex-column-left;
 
     .button {
