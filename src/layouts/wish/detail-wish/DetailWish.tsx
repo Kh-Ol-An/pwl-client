@@ -62,7 +62,7 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                 <WishContent wish={ wish } myUserId={ myUser?.id } />
 
                                 <div className="detail-wish-foot">
-                                    <div className="detail-wish-likes">
+                                    <div className="wish-likes">
                                         <LikeAction wish={wish} type="likes" close={close} />
 
                                         <LikeAction wish={wish} type="dislikes" close={close} />

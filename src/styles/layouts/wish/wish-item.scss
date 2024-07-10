@@ -84,6 +84,7 @@
     }
 
     .wish-item-price {
+        margin-bottom: 24px;
         color: $special-color;
         font-size: 16px;
         text-align: center;
@@ -108,10 +109,19 @@
         color: $primary-color;
     }
 
-    .wish-item-action {
+    .wish-item-actions {
         position: absolute;
-        right: 8px;
-        bottom: 8px;
+        right: 4px;
+        bottom: 4px;
+        display: flex;
+        align-items: flex-end;
+
+        .wish-likes {
+            margin-right: 24px;
+        }
+    }
+
+    .wish-item-edit {
         width: 40px;
         height: 40px;
         border-radius: $radius-md;

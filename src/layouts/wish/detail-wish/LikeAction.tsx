@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, MouseEvent, useState } from 'react';
 import { Avatar } from "@mui/material";
 import { ThumbUpAlt as ThumbUpAltIcon, ThumbUpOffAlt as ThumbUpOffAltIcon } from "@mui/icons-material";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
@@ -11,7 +11,7 @@ import { IUser } from "@/models/IUser";
 interface IProps {
     wish: IWish;
     type: 'likes' | 'dislikes';
-    close: () => void;
+    close?: () => void;
 }
 
 const LikeAction: FC<IProps> = ({ wish, type, close }) => {
@@ -21,7 +21,8 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
 
     const [ anchor, setAnchor ] = useState<HTMLButtonElement | null>(null);
 
-    const handleAction = () => {
+    const handleAction = (e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
         if (!myUser) return;
         type === 'likes' && dispatch(likeWish({ userId: myUser.id, wishId: wish.id }));
         type === 'dislikes' && dispatch(dislikeWish({ userId: myUser.id, wishId: wish.id }));
@@ -34,20 +35,20 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
         await dispatch(selectUserId(userId));
         localStorage.setItem('selectedUserId', userId);
         setAnchor(null);
-        close();
+        close && close();
     };
 
     return (
         <>
             <button
                 type="button"
-                className={ `detail-wish-${ type }-action` }
+                className={ `wish-${ type }-action` }
                 onClick={ handleAction }
             >
                 { wish[type].some(like => like.userId === myUser?.id) ? (
-                    <ThumbUpAltIcon className="detail-wish-likes-icon liked" />
+                    <ThumbUpAltIcon className="wish-likes-icon liked" />
                 ) : (
-                    <ThumbUpOffAltIcon className="detail-wish-likes-icon" />
+                    <ThumbUpOffAltIcon className="wish-likes-icon" />
                 ) }
             </button>
 
@@ -55,14 +56,14 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
                 <Popup
                     anchor={ anchor }
                     setAnchor={ setAnchor }
-                    actionIcon={ <span className="detail-wish-count">{ wish[type].length }</span> }
+                    actionIcon={ <span className="wish-likes-count">{ wish[type].length }</span> }
                     isTopPosition
                 >
-                    <ul className="detail-wish-likes_user-list">
+                    <ul className="wish-likes_user-list">
                         { wish[type].map((like) => (
                             <li key={ like.userId }>
                                 <button
-                                    className="detail-wish-likes_user-item"
+                                    className="wish-likes_user-item"
                                     type="button"
                                     onClick={ () => handleSelectWish(like.userId) }
                                 >
@@ -72,7 +73,7 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
                                         sx={ { width: 24, height: 24 } }
                                     />
 
-                                    <span className="detail-wish-likes_user-name">
+                                    <span className="wish-likes_user-name">
                                         { like.userFullName }
                                     </span>
                                 </button>

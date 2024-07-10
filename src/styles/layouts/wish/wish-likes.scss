@@ -1,0 +1,81 @@
+.wish-likes {
+    margin-right: auto;
+    @include flex-center;
+    gap: 4px;
+}
+
+.wish-likes-icon {
+    color: $special-color;
+
+    &.liked {
+        color: $primary-color;
+    }
+}
+
+.wish-likes-count {
+    color: $special-color;
+    font-size: 16px;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 18px;
+    }
+}
+
+.wish-likes-action {
+    padding: 8px;
+}
+
+.wish-dislikes-action {
+    margin-left: 20px;
+    padding: 8px;
+
+    .wish-likes-icon {
+        transform: scale(-1);
+
+        &.liked {
+            color: $action-color;
+        }
+    }
+}
+
+.wish-likes_user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 8px;
+    max-height: 120px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $special-color;
+        border-radius: $radius-round;
+    }
+}
+
+.wish-likes_user-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+
+    .wish-likes_user-name {
+        width: 100%;
+        font-size: 12px;
+        color: $light-color;
+        text-align: left;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        display: block;
+        max-width: 150px;
+
+        @media only screen and (min-width: 412px) {
+            max-width: 200px;
+        }
+    }
+}

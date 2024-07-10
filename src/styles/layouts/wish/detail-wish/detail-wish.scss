@@ -217,46 +217,6 @@
         }
     }
 
-    .detail-wish-likes {
-        margin-right: auto;
-        @include flex-center;
-        gap: 4px;
-    }
-
-    .detail-wish-likes-icon {
-        color: $light-color;
-
-        &.liked {
-            color: $primary-color;
-        }
-    }
-
-    .detail-wish-count {
-        color: $light-color;
-        font-size: 16px;
-
-        @media only screen and (min-width: 768px) {
-            font-size: 18px;
-        }
-    }
-
-    .detail-wish-likes-action {
-        padding: 8px;
-    }
-
-    .detail-wish-dislikes-action {
-        margin-left: 20px;
-        padding: 8px;
-
-        .detail-wish-likes-icon {
-            transform: scale(-1);
-
-            &.liked {
-                color: $action-color;
-            }
-        }
-    }
-
     .detail-wish-actions {
         display: flex;
         flex-direction: column;
@@ -318,46 +278,4 @@
     position: relative;
     top: 3px;
     margin-left: 4px;
-}
-
-.detail-wish-likes_user-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding-right: 8px;
-    max-height: 120px;
-    overflow-y: auto;
-
-    &::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: $special-color;
-        border-radius: $radius-round;
-    }
-}
-
-.detail-wish-likes_user-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-
-    .detail-wish-likes_user-name {
-        width: 100%;
-        font-size: 12px;
-        color: $light-color;
-        text-align: left;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        display: block;
-        max-width: 150px;
-
-        @media only screen and (min-width: 412px) {
-            max-width: 200px;
-        }
-    }
 }

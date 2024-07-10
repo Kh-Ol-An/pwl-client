@@ -8,6 +8,7 @@ import { IWish } from '@/models/IWish';
 import { addingWhiteSpaces } from '@/utils/formating-value';
 import { unencryptedData } from '@/utils/encryption-data';
 import showBookingExpired from '@/utils/show-booking-expired';
+import LikeAction from "@/layouts/wish/detail-wish/LikeAction";
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 dayjs.extend(isSameOrBefore);
@@ -42,21 +43,21 @@ const WishItem: FC<IProps> = ({ wish, selectedWishListLength, showWish, editWish
             onClick={showWish}
         >
             <div className="wish-box">
-                {wish.images.length > 0 && (
+                { wish.images.length > 0 && (
                     <div className="wish-item-img">
                         <img
-                            src={unencryptedData(wish.images[0].path, wish.show)}
-                            alt={`${t('wish')} ${wish.images[0].position}`}
+                            src={ unencryptedData(wish.images[0].path, wish.show) }
+                            alt={ `${ t('wish') } ${ wish.images[0].position }` }
                         />
                     </div>
-                )}
+                ) }
 
                 <div className="wish-item-data">
                     <div className="wish-item-name">
-                        {unencryptedData(wish.name, wish.show)}
+                        { unencryptedData(wish.name, wish.show) }
                     </div>
 
-                    {wish.price && (
+                    { wish.price && (
                         <div className="wish-item-price">
                             {
                                 addingWhiteSpaces(unencryptedData(wish.price, wish.show))
@@ -64,7 +65,7 @@ const WishItem: FC<IProps> = ({ wish, selectedWishListLength, showWish, editWish
                             unencryptedData(wish.currency, wish.show) || 'UAH'
                         }
                         </div>
-                    )}
+                    ) }
                 </div>
 
                 { wish.booking?.end && (
@@ -79,11 +80,19 @@ const WishItem: FC<IProps> = ({ wish, selectedWishListLength, showWish, editWish
                 </span>
                 ) }
 
-                {myUser?.id === wish.userId && !wish.booking?.userId && !wish.executed && (
-                    <button className="wish-item-action" type="button" onClick={ handleEditWish }>
-                        <EditIcon sx={ { color: StylesVariables.lightColor } } />
-                    </button>
-                ) }
+                <div className="wish-item-actions">
+                    <div className="wish-likes">
+                        <LikeAction wish={ wish } type="likes" />
+
+                        <LikeAction wish={ wish } type="dislikes" />
+                    </div>
+
+                    { myUser?.id === wish.userId && !wish.booking?.userId && !wish.executed && (
+                        <button className="wish-item-edit" type="button" onClick={ handleEditWish }>
+                            <EditIcon sx={ { color: StylesVariables.lightColor } } />
+                        </button>
+                    ) }
+                </div>
             </div>
         </li>
     );
