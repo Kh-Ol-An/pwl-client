@@ -50,6 +50,15 @@ const DetailAccount: FC<IProps> = ({ user }) => {
                     </div>
                 )}
 
+                {user.deliveryAddress && (
+                    <div className="detail-account-field delivery-address">
+                        <div className="detail-account-label">{t('main-page.delivery-address')}:</div>
+                        <div className="detail-account-value" title={ user.deliveryAddress }>
+                            { user.deliveryAddress }
+                        </div>
+                    </div>
+                )}
+
                 {user.birthday && (
                     <div className="detail-account-field">
                         <div className="detail-account-label">{t('main-page.birthday')}</div>

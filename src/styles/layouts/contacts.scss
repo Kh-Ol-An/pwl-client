@@ -49,6 +49,7 @@
     .contacts-social-networks {
         margin-left: 10px;
         @include flex-center;
+        height: 34px;
         gap: 16px;
 
         a {
