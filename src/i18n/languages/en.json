@@ -203,9 +203,13 @@
     "last-name": {
       "min": "We have never heard such a short last name. The minimum length of the field is {{min}} characters.",
       "max": "We think you are making something up. The maximum length of the field is {{max}} characters."
+    },
+    "delivery-address": {
+      "min": "Such a short address? The minimum length of the field is {{min}} characters."
     }
   },
   "main-page": {
+    "delivery-address": "Where to deliver fulfilled wishes",
     "when_your_birth": "When is Your birthday?",
     "birthday*": "Birthday*",
     "birthday": "Birthday:",

@@ -12,6 +12,8 @@ export const NAME_MIN_LENGTH = 2;
 
 export const NAME_MAX_LENGTH = 80;
 
+export const DELIVERY_ADDRESS_MIN_LENGTH = 4;
+
 export const WISH_PRICE_MAX_LENGTH = 19;
 
 export const WISH_DESCRIPTION_MIN_LENGTH = 2;

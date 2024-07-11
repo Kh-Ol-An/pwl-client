@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { updateMyUser } from '@/store/my-user/thunks';
 import { IUpdateMyUser } from '@/store/my-user/types';
 import { TCurrentAvatar, IUser } from '@/models/IUser';
-import { accountFirstNameValidation, accountLastNameValidation } from '@/utils/validations';
+import { accountDeliveryAddress, accountFirstNameValidation, accountLastNameValidation } from '@/utils/validations';
 import AvatarValidation from '@/utils/AvatarValidation';
 import { getFullShortDate } from "@/utils/lang-action";
 import { ALLOWED_FILE_EXTENSIONS } from '@/utils/constants';
@@ -27,6 +27,7 @@ interface IProps {
 type Inputs = {
     firstName: IUser['firstName']
     lastName: IUser['lastName']
+    deliveryAddress: IUser['deliveryAddress']
 }
 
 const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
@@ -82,6 +83,9 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
         if (data.lastName) {
             updateMyUserData.lastName = data.lastName.trim();
         }
+        if (data.deliveryAddress) {
+            updateMyUserData.deliveryAddress = data.deliveryAddress.trim();
+        }
         if (birthday) {
             updateMyUserData.birthday = birthday.format();
         }
@@ -108,6 +112,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
         setValue('firstName', myUser.firstName);
         myUser.lastName && setValue('lastName', myUser.lastName);
         setAvatar(myUser.avatar || '');
+        myUser.deliveryAddress && setValue('deliveryAddress', myUser.deliveryAddress);
         myUser.birthday && setBirthday(dayjs(myUser.birthday));
     }, [myUser, setValue]);
 
@@ -162,6 +167,15 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
                 <AvatarValidation avatar={avatar} />
             </div>
+
+            <Input
+                {...register("deliveryAddress", accountDeliveryAddress)}
+                id="deliveryAddress"
+                name="deliveryAddress"
+                type="text"
+                label={t('main-page.delivery-address')}
+                error={errors?.deliveryAddress?.message}
+            />
 
             <div
                 className={"date-picker" + (clickedOnSubmit ? " clicked-on-submit" : "")}

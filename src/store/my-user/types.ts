@@ -41,8 +41,9 @@ export interface IChangePassword extends IUserId {
 export interface IUpdateMyUser extends IUserId {
     firstName: IUser['firstName']
     lastName?: IUser['lastName'];
-    birthday?: string;
     avatar: TCurrentAvatar;
+    deliveryAddress?: string;
+    birthday?: string;
 }
 
 export interface IChangeLang extends IUserId {

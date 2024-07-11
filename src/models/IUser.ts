@@ -15,8 +15,9 @@ export interface IUser {
     firstLoaded: boolean;
     firstName: string;
     lastName?: string;
-    birthday?: Dayjs;
     avatar?: string;
+    deliveryAddress?: string;
+    birthday?: Dayjs;
     wishList: string[];
     successfulWishes: number;
     unsuccessfulWishes: number;

@@ -6,6 +6,7 @@ import {
     NAME_MIN_LENGTH,
     WISH_DESCRIPTION_MIN_LENGTH,
     WISH_PRICE_MAX_LENGTH,
+    DELIVERY_ADDRESS_MIN_LENGTH,
 } from '@/utils/constants';
 
 // Only whitespace
@@ -65,7 +66,7 @@ export const wishDescriptionValidation = {
     ...onlyWhitespaceValidation,
     minLength: {
         value: WISH_DESCRIPTION_MIN_LENGTH,
-        message: t('validations.wish-price.max', { min: WISH_DESCRIPTION_MIN_LENGTH - 1 })
+        message: t('validations.wish-price.min', { min: WISH_DESCRIPTION_MIN_LENGTH - 1 })
     },
 };
 
@@ -143,4 +144,13 @@ export const accountLastNameValidation = {
         value: NAME_MAX_LENGTH,
         message: t('validations.last-name.max', { max: NAME_MAX_LENGTH })
     }
+};
+
+// Account delivery address
+export const accountDeliveryAddress = {
+    ...onlyWhitespaceValidation,
+    minLength: {
+        value: DELIVERY_ADDRESS_MIN_LENGTH,
+        message: t('validations.delivery-address.min', { min: DELIVERY_ADDRESS_MIN_LENGTH - 1 })
+    },
 };
