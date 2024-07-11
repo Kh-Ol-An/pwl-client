@@ -63,10 +63,15 @@ const wishesSlice = createSlice({
                 state.error = action.error.message || t('alerts.wishes-api.update-wish.error', { type: 'slice' });
             })
             .addCase(updateWish.fulfilled, (state, action) => {
-                const updatedWish = action.payload;
-                const wishListWithoutUpdatedWish = state.list.filter(wish => wish.id !== updatedWish.id);
-                wishListWithoutUpdatedWish.unshift(updatedWish);
-                state.list = wishListWithoutUpdatedWish;
+                // Змінити бажання та покласти його там де було
+                const { id } = action.payload;
+                // Знаходимо індекс бажання в списку за його ідентифікатором
+                const index = state.list.findIndex(wish => wish.id === id);
+                // Перевіряємо, чи було знайдено бажання
+                if (index !== -1) {
+                    // Оновлюємо дані бажання
+                    state.list[index] = action.payload;
+                }
                 state.isLoading = false;
                 state.isLocalLoading = false;
                 state.error = null;

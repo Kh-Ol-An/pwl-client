@@ -32,7 +32,7 @@ const WishList = () => {
     const [ showWish, setShowWish ] = useState<boolean>(false);
     const [ showEditWish, setShowEditWish ] = useState<boolean>(false);
     const [ idOfSelectedWish, setIdOfSelectedWish ] = useState<IWish['id'] | null>(null);
-    const [ selectedWishList, setSelectedWishList ] = useState<IWish[]>(wishes.list.filter(wish => !wish.executed));
+    const [ selectedWishList, setSelectedWishList ] = useState<IWish[]>(wishes.list);
     const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     const wishListRef = useRef<HTMLUListElement>(null);
