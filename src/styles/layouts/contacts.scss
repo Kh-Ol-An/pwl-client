@@ -49,7 +49,7 @@
     .contacts-social-networks {
         margin-left: 10px;
         @include flex-center;
-        gap: 10px;
+        gap: 16px;
 
         a {
             width: 30px;
@@ -59,20 +59,6 @@
             &:hover {
                 transform: scale(1.1);
             }
-        }
-
-        .contacts-tiktok {
-            width: 32px;
-            height: 32px;
-        }
-
-        .contacts-instagram {
-            margin-left: 8px;
-        }
-
-        .contacts-facebook {
-            width: 28px;
-            height: 28px;
         }
     }
 
