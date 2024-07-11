@@ -45,10 +45,10 @@
         border-radius: $radius-lg;
         border-bottom: 2px solid rgba(255, 255, 255, 0.5);
         background: $accent-color;
-        padding: 0 10px;
+        padding: 0 2px;
 
         @media only screen and (min-width: 768px) {
-            padding: 0 40px;
+            padding: 0 30px;
         }
     }
 
@@ -58,10 +58,10 @@
         overflow-y: auto;
         @include flex-column;
         gap: 20px;
-        padding: 10px 8px 10px;
+        padding: 10px 16px 10px;
 
         @media only screen and (min-width: 768px) {
-            padding: 24px 8px 24px;
+            padding: 24px 16px 24px;
             height: auto;
             max-height: calc(100svh - 170px);
         }
