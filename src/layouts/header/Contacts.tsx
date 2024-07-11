@@ -5,6 +5,7 @@ import TelegramIcon from '@/assets/images/social-networks/telegram.svg';
 import InstagramIcon from '@/assets/images/social-networks/instagram.svg';
 import FacebookIcon from '@/assets/images/social-networks/facebook.svg';
 import YoutubeIcon from '@/assets/images/social-networks/youtube.svg';
+// Іконки соціальних мереж взято з https://www.svgrepo.com/
 
 const Contacts: FC = () => {
     const { t } = useTranslation();

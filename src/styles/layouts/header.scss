@@ -166,56 +166,56 @@
 
 .header-edit-account,
 .header-change-password {
-    max-width: 0;
+    width: 0;
     transform: scaleX(0);
     transition: $transition;
 
     &.show {
         transform: scaleX(1);
-        max-width: 232px;
+        width: 232px;
 
         @media only screen and (min-width: 360px) {
-            max-width: 272px;
+            width: 272px;
         }
 
         @media only screen and (min-width: 375px) {
-            max-width: 287px;
+            width: 287px;
         }
 
         @media only screen and (min-width: 385px) {
-            max-width: 297px;
+            width: 297px;
         }
 
         @media only screen and (min-width: 390px) {
-            max-width: 302px;
+            width: 302px;
         }
 
         @media only screen and (min-width: 393px) {
-            max-width: 305px;
+            width: 305px;
         }
 
         @media only screen and (min-width: 412px) {
-            max-width: 324px;
+            width: 324px;
         }
 
         @media only screen and (min-width: 414px) {
-            max-width: 326px;
+            width: 326px;
         }
 
         @media only screen and (min-width: 428px) {
-            max-width: 340px;
+            width: 340px;
         }
 
         @media only screen and (min-width: 430px) {
-            max-width: 342px;
+            width: 342px;
         }
 
         @media only screen and (min-width: 768px) {
-            max-width: 378px;
+            width: 378px;
         }
 
         @media only screen and (min-width: 1366px) {
-            max-width: 400px;
+            width: 400px;
         }
     }
 }

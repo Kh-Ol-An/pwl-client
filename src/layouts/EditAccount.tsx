@@ -18,6 +18,8 @@ import { ALLOWED_FILE_EXTENSIONS } from '@/utils/constants';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import StylesVariables from '@/styles/utils/variables.module.scss';
+import { Tooltip } from "react-tooltip";
+import getTooltipStyles from "@/utils/get-tooltip-styles";
 
 interface IProps {
     close: () => void;
@@ -50,6 +52,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
     const [avatar, setAvatar] = useState<TCurrentAvatar>('');
     const [birthday, setBirthday] = useState<Dayjs | null>(null);
     const [birthdayError, setBirthdayError] = useState<DateValidationError | null>(null);
+    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
     const birthdayErrorMessage = useMemo(() => {
         if (!clickedOnSubmit) return;
@@ -116,6 +119,18 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
         myUser.birthday && setBirthday(dayjs(myUser.birthday));
     }, [myUser, setValue]);
 
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     return (
         <form className="edit-account" onSubmit={handleSubmit(onSubmit)}>
             <Input
@@ -174,7 +189,12 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
                 name="deliveryAddress"
                 type="text"
                 label={t('main-page.delivery-address')}
+                tooltip={t('main-page.delivery-address-tooltip')}
                 error={errors?.deliveryAddress?.message}
+            />
+            <Tooltip
+                id="deliveryAddress"
+                style={getTooltipStyles(screenWidth)}
             />
 
             <div

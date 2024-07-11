@@ -206,6 +206,14 @@
 
     .detail-wish-foot {
         margin-top: auto;
+    }
+
+    .detail-wish-delivery-address {
+        color: $special-color;
+        text-align: center;
+    }
+
+    .detail-wish-foot-box {
         display: flex;
         flex-direction: column;
         gap: 10px;

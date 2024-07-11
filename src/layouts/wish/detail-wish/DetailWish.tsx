@@ -14,29 +14,33 @@ import LikeAction from "@/layouts/wish/detail-wish/LikeAction";
 import Button from '@/components/Button';
 import showBookingExpired from '@/utils/show-booking-expired';
 import { getFullDate, getLang } from "@/utils/lang-action";
+import { IUser } from "@/models/IUser";
 
 dayjs.extend(isSameOrBefore);
 
 interface IProps {
     wish: IWish;
+    selectedUser?: IUser;
     editWish: () => void;
     close: () => void;
 }
 
-const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
+const DetailWish: FC<IProps> = ({ wish, selectedUser, editWish, close }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
 
-    let showCancelBookWish = myUser?.id === wish.booking?.userId // бажання належить тому хто створював його
+    const showDeliveryAddress = selectedUser?.deliveryAddress && myUser?.id === wish.booking?.userId;
+
+    const showCancelBookWish = myUser?.id === wish.booking?.userId // бажання належить тому хто створював його
         && !dayjs().isAfter(dayjs(wish.booking?.start).add(3, 'days')) // бажання можна скасувати за 3 дні до початку
         && !dayjs(wish.booking?.end).isSameOrBefore(dayjs()); // термін виконання ще не минув
 
-    let showDoneWish = myUser?.id === wish.userId // бажання належить користувачу
+    const showDoneWish = myUser?.id === wish.userId // бажання належить користувачу
         && !wish.executed // бажання не виконане
         && !showBookingExpired(wish, myUser?.id); // термін виконання ще не минув
 
-    let showEditWish = myUser?.id === wish.userId && !wish.booking?.end // бажання належить користувачу і не заброньовано
+    const showEditWish = myUser?.id === wish.userId && !wish.booking?.end // бажання належить користувачу і не заброньовано
 
     // МОЖЛИВІ КЕЙСИ
     // Моє бажання / не моє
@@ -62,69 +66,78 @@ const DetailWish: FC<IProps> = ({ wish, editWish, close }) => {
                                 <WishContent wish={ wish } myUserId={ myUser?.id } />
 
                                 <div className="detail-wish-foot">
-                                    <div className="wish-likes">
-                                        <LikeAction wish={wish} type="likes" close={close} />
+                                    { showDeliveryAddress && (
+                                        <p className="detail-wish-delivery-address">
+                                            { t('main-page.you_can_send') }
+                                            { selectedUser.deliveryAddress }
+                                        </p>
+                                    ) }
 
-                                        <LikeAction wish={wish} type="dislikes" close={close} />
-                                    </div>
+                                    <div className="detail-wish-foot-box">
+                                        <div className="wish-likes">
+                                            <LikeAction wish={wish} type="likes" close={close} />
 
-                                    <div className="detail-wish-actions">
-                                        { wish.booking?.end && (
-                                            <p className="detail-wish-actions-booked">
-                                                { (myUser?.id === wish.booking?.userId || myUser?.id === wish.userId) ? (
-                                                    <>
-                                                        {
-                                                            myUser?.id === wish.booking?.userId
-                                                                ? t('main-page.you-must')
-                                                                : t('main-page.wish-must')
-                                                        }
-                                                        <span>
-                                                        {
-                                                            dayjs(wish.booking?.end)
-                                                                .locale(getLang())
-                                                                .format(getFullDate())
-                                                        }
-                                                    </span>
-                                                    </>
-                                                ) : (<>{ t('main-page.coming-true') }</>) }
-                                            </p>
-                                        ) }
+                                            <LikeAction wish={wish} type="dislikes" close={close} />
+                                        </div>
 
-                                        {/* Book */ }
-                                        { !wish.booking?.end &&
-                                            <BookWish wish={ wish } userId={ myUser?.id } close={ close } /> }
+                                        <div className="detail-wish-actions">
+                                            { wish.booking?.end && (
+                                                <p className="detail-wish-actions-booked">
+                                                    { (myUser?.id === wish.booking?.userId || myUser?.id === wish.userId) ? (
+                                                        <>
+                                                            {
+                                                                myUser?.id === wish.booking?.userId
+                                                                    ? t('main-page.you-must')
+                                                                    : t('main-page.wish-must')
+                                                            }
+                                                            <span>
+                                                            {
+                                                                dayjs(wish.booking?.end)
+                                                                    .locale(getLang())
+                                                                    .format(getFullDate())
+                                                            }
+                                                        </span>
+                                                        </>
+                                                    ) : (<>{ t('main-page.coming-true') }</>) }
+                                                </p>
+                                            ) }
 
-                                        {/* Cancel Book */ }
-                                        { showCancelBookWish && (
-                                            <CancelBookWish wish={ wish } userId={ myUser?.id } close={ close } />
-                                        ) }
+                                            {/* Book */ }
+                                            { !wish.booking?.end &&
+                                                <BookWish wish={ wish } userId={ myUser?.id } close={ close } /> }
 
-                                        {/* Done */ }
-                                        { showDoneWish && (
-                                            <DoneWish
-                                                wish={ wish }
-                                                userId={ myUser?.id }
-                                                whoseWish={ wish.booking?.userId ? 'someone' : 'my' }
-                                                close={ close }
-                                            />
-                                        ) }
+                                            {/* Cancel Book */ }
+                                            { showCancelBookWish && (
+                                                <CancelBookWish wish={ wish } userId={ myUser?.id } close={ close } />
+                                            ) }
 
-                                        {/* Booking Expired */ }
-                                        { showBookingExpired(wish, myUser?.id) && (
-                                            <BookingExpired
-                                                wish={ wish }
-                                                userId={ myUser?.id }
-                                                whoseWish={ wish.booking?.userId ? 'someone' : 'my' }
-                                                close={ close }
-                                            />
-                                        ) }
+                                            {/* Done */ }
+                                            { showDoneWish && (
+                                                <DoneWish
+                                                    wish={ wish }
+                                                    userId={ myUser?.id }
+                                                    whoseWish={ wish.booking?.userId ? 'someone' : 'my' }
+                                                    close={ close }
+                                                />
+                                            ) }
 
-                                        {/* Edit Wish */ }
-                                        { showEditWish && (
-                                            <Button type="button" onClick={ handleEditWish }>
-                                                { t('main-page.edit-wish') }
-                                            </Button>
-                                        ) }
+                                            {/* Booking Expired */ }
+                                            { showBookingExpired(wish, myUser?.id) && (
+                                                <BookingExpired
+                                                    wish={ wish }
+                                                    userId={ myUser?.id }
+                                                    whoseWish={ wish.booking?.userId ? 'someone' : 'my' }
+                                                    close={ close }
+                                                />
+                                            ) }
+
+                                            {/* Edit Wish */ }
+                                            { showEditWish && (
+                                                <Button type="button" onClick={ handleEditWish }>
+                                                    { t('main-page.edit-wish') }
+                                                </Button>
+                                            ) }
+                                        </div>
                                     </div>
                                 </div>
                             </div>

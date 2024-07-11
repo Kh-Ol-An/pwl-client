@@ -189,6 +189,7 @@ const WishList = () => {
                     <div className="modal modal-lg">
                         <DetailWish
                             wish={ detailWish }
+                            selectedUser={ selectedUser }
                             editWish={ () => handleShowEditWish(idOfSelectedWish) }
                             close={ handleHideWish }
                         />
