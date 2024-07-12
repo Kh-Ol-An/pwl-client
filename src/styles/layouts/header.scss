@@ -237,6 +237,33 @@
     }
 }
 
+.header-lang {
+    @include flex-center;
+    gap: 4px;
+    white-space: nowrap;
+    color: $primary-color;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 700;
+
+    .header-lang-select {
+        padding-left: 140px;
+    }
+
+    .language-selection {
+        height: 40px;
+    }
+
+    .custom-select {
+        top: 50%;
+        transform: translateY(-50%);
+
+        .select-action {
+            padding: 6px 8px 6px 20px;
+        }
+    }
+}
+
 .header-edit-account {
     transform-origin: left;
 }

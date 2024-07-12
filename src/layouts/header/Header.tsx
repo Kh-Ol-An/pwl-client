@@ -44,7 +44,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     const [ showDetailAccount, setShowDetailAccount ] = useState<boolean>(false);
     const [ showEditAccount, setShowEditAccount ] = useState<boolean>(false);
     const [ showContacts, setShowContacts ] = useState<boolean>(false);
-    const [ showLanguage, setShowLanguage ] = useState<boolean>(false);
     const [ showConfirmDeleteMyUser, setShowConfirmDeleteMyUser ] = useState<boolean>(false);
 
     // SelectWish
@@ -87,16 +86,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     };
     const handleHideContacts = () => {
         setShowContacts(false);
-    };
-
-    // Language
-    const handleShowLanguage = () => {
-        setShowLanguage(true);
-        setAnchor(null);
-        hideHeader();
-    };
-    const handleHideLanguage = () => {
-        setShowLanguage(false);
     };
 
     // ConfirmDeleteMyUser
@@ -145,11 +134,9 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         actionClasses="header-settings-icon"
                         anchor={ anchor }
                         setAnchor={ setAnchor }
-                        actionIcon={ <SettingsIcon sx={ {
-                            width: 32,
-                            height: 32,
-                            color: StylesVariables.specialColor
-                        } } /> }
+                        actionIcon={
+                            <SettingsIcon sx={ { width: 32, height: 32, color: StylesVariables.specialColor } } />
+                        }
                     >
                         <Button variant="text" color="primary-color" type="button" onClick={ handleShowEditAccount }>
                             <ManageAccountsIcon />
@@ -172,10 +159,13 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             { t('main-page.contacts') }
                         </Button>
 
-                        <Button variant="text" color="primary-color" type="button" onClick={ handleShowLanguage }>
+                        <div className="header-lang">
                             <LanguageIcon />
-                            { t('main-page.interface_language') }
-                        </Button>
+                            { t('main-page.interface_language') }:
+                            <div className="header-lang-select">
+                                <LanguageSelection />
+                            </div>
+                        </div>
 
                         <Button variant="text" color="primary-color" type="button" onClick={ handleLogout }>
                             <LogoutIcon />
@@ -185,9 +175,11 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
 
                     {/* Detail Account */ }
                     { myUser && (
-                        <CustomModal show={ showDetailAccount }
-                                     hide={ handleHideDetailAccount }
-                                     classes="modal modal-md">
+                        <CustomModal
+                            show={ showDetailAccount }
+                            hide={ handleHideDetailAccount }
+                            classes="modal modal-md"
+                        >
                             <DetailAccount user={ myUser } />
                         </CustomModal>
                     ) }
@@ -202,14 +194,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                     {/* Contacts */ }
                     <CustomModal show={ showContacts } hide={ handleHideContacts }>
                         <Contacts />
-                    </CustomModal>
-
-                    {/* Language */ }
-                    <CustomModal show={ showLanguage } hide={ handleHideLanguage }>
-                        <div className="header-language">
-                            { t('main-page.interface_language') }:
-                            <LanguageSelection />
-                        </div>
                     </CustomModal>
 
                     {/* Confirm Delete My User */ }
