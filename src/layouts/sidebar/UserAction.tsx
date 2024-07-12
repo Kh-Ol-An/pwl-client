@@ -93,6 +93,7 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
             disablePadding
             secondaryAction={
                 <Popup
+                    actionClasses="people-icon"
                     anchor={anchor}
                     setAnchor={setAnchor}
                     actionIcon={

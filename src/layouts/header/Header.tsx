@@ -40,12 +40,12 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
 
     const dispatch = useAppDispatch();
 
-    const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
-    const [showDetailAccount, setShowDetailAccount] = useState<boolean>(false);
-    const [showEditAccount, setShowEditAccount] = useState<boolean>(false);
-    const [showContacts, setShowContacts] = useState<boolean>(false);
-    const [showLanguage, setShowLanguage] = useState<boolean>(false);
-    const [showConfirmDeleteMyUser, setShowConfirmDeleteMyUser] = useState<boolean>(false);
+    const [ anchor, setAnchor ] = useState<HTMLButtonElement | null>(null);
+    const [ showDetailAccount, setShowDetailAccount ] = useState<boolean>(false);
+    const [ showEditAccount, setShowEditAccount ] = useState<boolean>(false);
+    const [ showContacts, setShowContacts ] = useState<boolean>(false);
+    const [ showLanguage, setShowLanguage ] = useState<boolean>(false);
+    const [ showConfirmDeleteMyUser, setShowConfirmDeleteMyUser ] = useState<boolean>(false);
 
     // SelectWish
     const handleSelectWish = async () => {
@@ -117,53 +117,43 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     }, []);
 
     return (
-        <div className={"header" + (showHeader ? " show" : "")}>
+        <div className={ "header" + (showHeader ? " show" : "") }>
             <div className="header-inner">
                 <div className="header-content">
-                    <div className="my-user">
-                        <button className="avatar-box" type="button" onClick={handleShowDetailAccount}>
-                            <Avatar alt={myUser?.firstName} src={myUser?.avatar} />
-
-                            {/*{myUser && myUser.successfulWishes > 0 && (*/}
-                            {/*    <span className="count success">*/}
-                            {/*        {myUser?.successfulWishes}*/}
-                            {/*    </span>*/}
-                            {/*)}*/}
-                            {/*{myUser && myUser.unsuccessfulWishes > 0 && (*/}
-                            {/*    <span className="count unsuccess">K*/}
-                            {/*        {myUser?.unsuccessfulWishes}*/}
-                            {/*    </span>*/}
-                            {/*)}*/}
-                        </button>
-
-                        <button className="content" type="button" onClick={handleSelectWish}>
-                            <span className={"name" + (myUser?.id === selectedUserId ? " selected" : "")}>
-                                {myUser?.firstName} {myUser?.lastName}
-                            </span>
-
-                            <span className="params">
-                                {
-                                    myUser?.birthday
-                                        ? t('main-page.bd', { birthday: dayjs(myUser?.birthday).locale(getLang()).format(getMonthWithDate()) })
-                                        : myUser?.email
-                                }
-                            </span>
-                        </button>
-                    </div>
-
                     <button className="logo" type="button" onClick={ handleSelectWish }>
                         <span className="logo-name">Wish Hub</span>
                     </button>
 
+                    <div className="my-user">
+                        <button className="avatar-box" type="button" onClick={ handleShowDetailAccount }>
+                            <Avatar
+                                alt={ myUser?.firstName }
+                                src={ myUser?.avatar }
+                                sx={ { width: '100%', height: '100%' } }
+                            />
+                        </button>
+
+                        <button className="content" type="button" onClick={ handleSelectWish }>
+                            <span className={ "name" + (myUser?.id === selectedUserId ? " selected" : "") }>
+                                { myUser?.firstName } { myUser?.lastName }
+                            </span>
+                        </button>
+                    </div>
+
                     {/* Settings */ }
                     <Popup
-                        anchor={anchor}
-                        setAnchor={setAnchor}
-                        actionIcon={<SettingsIcon sx={{ color: StylesVariables.specialColor }} />}
+                        actionClasses="header-settings-icon"
+                        anchor={ anchor }
+                        setAnchor={ setAnchor }
+                        actionIcon={ <SettingsIcon sx={ {
+                            width: 32,
+                            height: 32,
+                            color: StylesVariables.specialColor
+                        } } /> }
                     >
-                        <Button variant="text" color="primary-color" type="button" onClick={handleShowEditAccount}>
+                        <Button variant="text" color="primary-color" type="button" onClick={ handleShowEditAccount }>
                             <ManageAccountsIcon />
-                            {t('main-page.account_settings')}
+                            { t('main-page.account_settings') }
                         </Button>
 
                         <Button to="/about" variant="text" color="primary-color">
@@ -174,57 +164,59 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
 
                         <Button to="/instruction" variant="text" color="primary-color">
                             <InfoIcon />
-                            {t('main-page.instruction')}
+                            { t('main-page.instruction') }
                         </Button>
 
-                        <Button variant="text" color="primary-color" type="button" onClick={handleShowContacts}>
+                        <Button variant="text" color="primary-color" type="button" onClick={ handleShowContacts }>
                             <ForumIcon />
-                            {t('main-page.contacts')}
+                            { t('main-page.contacts') }
                         </Button>
 
-                        <Button variant="text" color="primary-color" type="button" onClick={handleShowLanguage}>
+                        <Button variant="text" color="primary-color" type="button" onClick={ handleShowLanguage }>
                             <LanguageIcon />
-                            {t('main-page.interface_language')}
+                            { t('main-page.interface_language') }
                         </Button>
 
-                        <Button variant="text" color="primary-color" type="button" onClick={handleLogout}>
+                        <Button variant="text" color="primary-color" type="button" onClick={ handleLogout }>
                             <LogoutIcon />
-                            {t('logout')}
+                            { t('logout') }
                         </Button>
                     </Popup>
 
-                    {/* Detail Account */}
-                    {myUser && (
-                        <CustomModal show={showDetailAccount} hide={handleHideDetailAccount} classes="modal modal-md">
-                            <DetailAccount user={myUser} />
+                    {/* Detail Account */ }
+                    { myUser && (
+                        <CustomModal show={ showDetailAccount }
+                                     hide={ handleHideDetailAccount }
+                                     classes="modal modal-md">
+                            <DetailAccount user={ myUser } />
                         </CustomModal>
-                    )}
+                    ) }
 
-                    {/* Edit Account */}
+                    {/* Edit Account */ }
                     <EditAccountModal
-                        show={showEditAccount}
-                        hide={handleHideEditAccount}
-                        handleShowConfirmDeleteMyUser={handleShowConfirmDeleteMyUser}
+                        show={ showEditAccount }
+                        hide={ handleHideEditAccount }
+                        handleShowConfirmDeleteMyUser={ handleShowConfirmDeleteMyUser }
                     />
 
-                    {/* Contacts */}
-                    <CustomModal show={showContacts} hide={handleHideContacts}>
+                    {/* Contacts */ }
+                    <CustomModal show={ showContacts } hide={ handleHideContacts }>
                         <Contacts />
                     </CustomModal>
 
-                    {/* Language */}
-                    <CustomModal show={showLanguage} hide={handleHideLanguage}>
+                    {/* Language */ }
+                    <CustomModal show={ showLanguage } hide={ handleHideLanguage }>
                         <div className="header-language">
-                            {t('main-page.interface_language')}:
+                            { t('main-page.interface_language') }:
                             <LanguageSelection />
                         </div>
                     </CustomModal>
 
-                    {/* Confirm Delete My User */}
+                    {/* Confirm Delete My User */ }
                     <ConfirmDeleteMyUserModal
-                        show={showConfirmDeleteMyUser}
-                        hide={() => setShowConfirmDeleteMyUser(false)}
-                        hideHeader={hideHeader}
+                        show={ showConfirmDeleteMyUser }
+                        hide={ () => setShowConfirmDeleteMyUser(false) }
+                        hideHeader={ hideHeader }
                     />
                 </div>
             </div>

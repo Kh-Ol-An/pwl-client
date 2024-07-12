@@ -21,7 +21,7 @@ const CustomModal: FC<IProps> = ({ show, hide, classes = 'modal', children }) =>
             aria-describedby="modal-modal-description"
         >
             <div className={classes}>
-                <Card>
+                <Card classes="not-full-screen">
                     {children}
                 </Card>
 

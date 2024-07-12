@@ -2,6 +2,7 @@ import React, { FC, MouseEvent, ReactNode } from 'react';
 import { Popover } from '@mui/material';
 
 interface IProps {
+    actionClasses?: string;
     anchor: HTMLButtonElement | null;
     setAnchor: (el: HTMLButtonElement | null) => void;
     actionIcon: ReactNode;
@@ -9,7 +10,7 @@ interface IProps {
     children: ReactNode;
 }
 
-const Popup: FC<IProps> = ({ anchor, setAnchor, actionIcon, isTopPosition = false, children }) => {
+const Popup: FC<IProps> = ({ actionClasses, anchor, setAnchor, actionIcon, isTopPosition = false, children }) => {
     const open = Boolean(anchor);
     const id = open ? 'simple-popover' : undefined;
 
@@ -23,7 +24,7 @@ const Popup: FC<IProps> = ({ anchor, setAnchor, actionIcon, isTopPosition = fals
 
     return (
         <>
-            <button className="people-icon" type="button" onClick={handleOpen}>
+            <button className={actionClasses} type="button" onClick={handleOpen}>
                 {actionIcon}
             </button>
 

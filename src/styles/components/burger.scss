@@ -1,6 +1,6 @@
 .burger {
     position: absolute;
-    top: 17px;
+    top: 21px;
     left: 16px;
     z-index: $z-index-9;
     width: 30px;
@@ -82,7 +82,7 @@
     }
 
     &.open {
-        top: 20px;
+        top: 24px;
 
         .icon-left {
             background-color: transparent;
