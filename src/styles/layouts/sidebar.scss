@@ -37,6 +37,11 @@
         width: 30%;
     }
 
+    @media only screen and (min-width: 1366px) {
+        width: 25%;
+        max-width: 450px;
+    }
+
     .sidebar-inner {
         height: 100%;
 
@@ -92,11 +97,11 @@
 
     .user-list {
         position: relative;
-        height: calc(100svh - 246px);
+        height: calc(100svh - 236px);
         overflow-y: auto;
 
         @media only screen and (min-width: 768px) {
-            height: calc(100svh - 268px);
+            height: calc(100svh - 285px);
         }
 
         &::-webkit-scrollbar {
