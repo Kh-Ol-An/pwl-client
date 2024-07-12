@@ -1,4 +1,11 @@
 .main-page {
+    //background-image: url("../../assets/images/welcome/cover-bg.png");
+    ////background-image: url("../../assets/images/welcome/join-bg.png");
+    //background-size: cover;
+    //background-position: center;
+    //background-repeat: no-repeat;
+    //background-color: #1f1f23;
+
     .main-page-container {
         @include flex-column;
         width: 100%;

@@ -5,9 +5,10 @@
     height: 120px;
     max-height: 120px;
     border-radius: $radius-md;
-    border-width: 1px;
+    border-width: 2px;
     border-style: dashed;
     border-color: $secondary-light-color;
+    //background-color: rgba(0, 0, 0, 0.4);
     cursor: pointer;
 
     &.alone {
@@ -19,7 +20,7 @@
     }
 
     &.fulfilled .wish-box {
-        transform: rotate(-3deg);
+        transform: rotate(-2deg);
         border-color: $primary-color;
         background-image: url("../../../assets/images/welcome/wish-bg.png");
     }
@@ -101,7 +102,7 @@
     }
 
     .reserved {
-        transform: rotate(-3deg);
+        transform: rotate(-2deg);
         color: $action-light-color;
     }
 
