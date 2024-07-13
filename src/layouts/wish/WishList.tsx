@@ -162,7 +162,6 @@ const WishList = () => {
                         <WishItem
                             key={ wish.id }
                             wish={ wish }
-                            selectedWishListLength={ selectedWishList.length }
                             showWish={ () => handleShowWish(wish.id) }
                             editWish={ () => handleShowEditWish(wish.id) }
                         />

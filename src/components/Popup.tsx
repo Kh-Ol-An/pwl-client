@@ -15,10 +15,12 @@ const Popup: FC<IProps> = ({ actionClasses, anchor, setAnchor, actionIcon, isTop
     const id = open ? 'simple-popover' : undefined;
 
     const handleOpen = (event: MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
         setAnchor(event.currentTarget);
     };
 
-    const handleClose = () => {
+    const handleClose = (event: MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
         setAnchor(null);
     };
 

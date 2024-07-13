@@ -1,31 +1,24 @@
 .wish-item {
     position: relative;
     width: 100%;
-    min-height: 120px;
-    height: 120px;
-    max-height: 120px;
     border-radius: $radius-md;
     border-width: 2px;
     border-style: dashed;
     border-color: $secondary-light-color;
-    //background-color: rgba(0, 0, 0, 0.4);
     cursor: pointer;
 
-    &.alone {
-        max-width: 400px;
-    }
-
-    &.reserved {
+    .reserved-box {
         opacity: 0.5;
     }
 
     &.fulfilled .wish-box {
-        transform: rotate(-2deg);
+        transform: rotate(-3deg);
         border-color: $primary-color;
         background-image: url("../../../assets/images/welcome/wish-bg.png");
     }
 
     &.i-m-booked {
+        border-width: 1px;
         border-color: $action-light-color;
     }
 
@@ -34,8 +27,8 @@
     }
 
     .wish-box {
-        padding: 24px 16px;
-        @include flex-center;
+        padding: 24px 16px 28px;
+        @include flex-column;
         gap: 16px;
         width: 100%;
         height: 100%;
@@ -50,21 +43,25 @@
     }
 
     .wish-item-img {
-        min-width: 80px;
-        width: 80px;
-        height: 80px;
-        max-height: 80px;
+        position: relative;
+        padding-top: 100%;
+        width: 100%;
 
         img {
-            min-height: 100%;
-            border-radius: $radius-md;
-            border: 1px dashed $white-very-opacity-color;
+            position: absolute;
+            top: 0;
+            left: 0;
             object-fit: contain;
+        }
+
+        .wish-item-img-effects {
+            filter: grayscale(1);
+            opacity: 0.1;
         }
     }
 
     .wish-item-data {
-        width: calc(100% - 128px);
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -85,52 +82,69 @@
     }
 
     .wish-item-price {
-        margin-bottom: 24px;
         color: $special-color;
         font-size: 16px;
         text-align: center;
     }
 
-    .reserved,
-    .fulfilled {
+    .wish-likes {
         position: absolute;
-        top: 12%;
-        right: 8%;
-        background-color: transparent;
-        font-size: 18px;
-        font-weight: 700;
-    }
-
-    .reserved {
-        transform: rotate(-2deg);
-        color: $action-light-color;
-    }
-
-    .fulfilled {
-        color: $primary-color;
-    }
-
-    .wish-item-actions {
-        position: absolute;
-        right: 4px;
+        left: 50%;
         bottom: 4px;
-        display: flex;
-        align-items: flex-end;
-
-        .wish-likes {
-            margin-right: 24px;
-        }
+        transform: translateX(-50%);
     }
 
     .wish-item-edit {
+        position: absolute;
+        top: 4px;
+        right: 4px;
         width: 40px;
         height: 40px;
         border-radius: $radius-md;
-        background-color: $white-deep-opacity-color;
+        background-color: $secondary-light-color;
 
         svg {
             width: 60%;
             height: 60%;
         }
+    }
+
+    .reserved,
+    .fulfilled {
+        position: absolute;
+        top: 24%;
+        left: 50%;
+        transform: rotate(-22deg) translateX(-50%);
+        transform-origin: left;
+        padding: 2px 4px;
+        border-radius: $radius;
+        border-width: 2px;
+        border-style: solid;
+        background-color: transparent;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        filter: url(#worn-out);
+        backdrop-filter: blur(10px);
+
+        @media only screen and (min-width: 360px) {
+            padding: 4px 8px;
+            font-size: 16px;
+        }
+
+        @media only screen and (min-width: 1024px) {
+            top: 34%;
+            font-size: 20px;
+        }
+    }
+
+    .reserved {
+        border-color: $action-color;
+        color: $action-color;
+    }
+
+    .fulfilled {
+        border-color: $primary-color;
+        color: $primary-color;
     }
 }
