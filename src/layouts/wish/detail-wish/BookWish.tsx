@@ -93,6 +93,11 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
         setShow(false);
     };
 
+    const handleChangeDate = (value: dayjs.Dayjs | null) => {
+        setBookEndError(null);
+        setBookEnd(value)
+    };
+
     useEffect(() => {
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
@@ -141,7 +146,7 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
                             disablePast
                             maxDate={dayjs().add(userId === wish.userId ? 10 : 1, 'year')} // Дозволити вибір дати тільки на рік вперед
                             value={bookEnd}
-                            onChange={(value) => setBookEnd(value)}
+                            onChange={handleChangeDate}
                             onError={(newError) => setBookEndError(newError)}
                             slotProps={{
                                 textField: {
