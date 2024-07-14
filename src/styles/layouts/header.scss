@@ -36,7 +36,7 @@
     .header-content {
         position: relative;
         @include flex-between;
-        padding: 16px 20px;
+        padding: 18px 20px;
         background: $accent-color;
 
         @media only screen and (min-width: 768px) {
@@ -237,33 +237,6 @@
     }
 }
 
-.header-lang {
-    @include flex-center;
-    gap: 4px;
-    white-space: nowrap;
-    color: $primary-color;
-    font-size: 16px;
-    line-height: 1.5;
-    font-weight: 700;
-
-    .header-lang-select {
-        padding-left: 140px;
-    }
-
-    .language-selection {
-        height: 40px;
-    }
-
-    .custom-select {
-        top: 50%;
-        transform: translateY(-50%);
-
-        .select-action {
-            padding: 6px 8px 6px 20px;
-        }
-    }
-}
-
 .header-edit-account {
     transform-origin: left;
 }
@@ -276,48 +249,58 @@
     width: 100%;
 }
 
-.header-language {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    height: 100%;
-    color: $light-color;
-    font-size: 22px;
-    font-weight: 700;
+.header-popup {
+    .button {
+        padding: 16px 0;
 
-    @media only screen and (min-width: 390px) {
-        flex-direction: row;
-        transform: translateX(-25px);
-        font-size: 24px;
-    }
-
-    @media only screen and (min-width: 768px) {
-        transform: translateX(-65px);
-        height: 150px;
-    }
-
-    .custom-select {
-        top: 0;
-        right: unset;
-        bottom: unset;
-        left: 50%;
-        transform: translateX(-50%);
-        flex-direction: column;
-        background: transparent;
-        z-index: $z-index-lg-9;
-
-        @media only screen and (min-width: 390px) {
-            left: 0;
-            transform: translateX(0);
-        }
-
-        .select-item {
-            padding: 0 12px 9px 12px;
+        span {
+            font-size: 18px;
 
             @media only screen and (min-width: 768px) {
-                padding: 0 20px 12px 20px;
+                font-size: 24px;
+            }
+        }
+    }
+
+    .header-lang {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        white-space: nowrap;
+        color: $primary-color;
+        line-height: 1.5;
+        font-weight: 700;
+        padding: 2px 0;
+        font-size: 18px;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 24px;
+        }
+
+        .header-lang-select {
+            padding-left: 8px;
+            padding-right: 52px;
+
+            @media only screen and (min-width: 768px) {
+                padding-left: 140px;
+                padding-right: 0;
+            }
+        }
+
+        .language-selection {
+            height: 40px;
+        }
+
+        .custom-select {
+            top: 50%;
+            transform: translateY(-50%);
+            height: fit-content;
+
+            .select-action {
+
+                @media only screen and (min-width: 768px) {
+                    padding: 6px 8px 6px 20px;
+                }
             }
         }
     }

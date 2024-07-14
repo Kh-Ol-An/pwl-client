@@ -5,6 +5,7 @@ import {
     Settings as SettingsIcon,
     ManageAccounts as ManageAccountsIcon,
     Info as InfoIcon,
+    PrivacyTip as PrivacyTipIcon,
     Forum as ForumIcon,
     Language as LanguageIcon,
     Logout as LogoutIcon,
@@ -138,39 +139,46 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             <SettingsIcon sx={ { width: 32, height: 32, color: StylesVariables.specialColor } } />
                         }
                     >
-                        <Button variant="text" color="primary-color" type="button" onClick={ handleShowEditAccount }>
-                            <ManageAccountsIcon />
-                            { t('main-page.account_settings') }
-                        </Button>
+                        <div className="header-popup">
+                            <Button variant="text" color="primary-color" type="button" onClick={ handleShowEditAccount }>
+                                <ManageAccountsIcon />
+                                { t('main-page.account_settings') }
+                            </Button>
 
-                        <Button to="/about" variant="text" color="primary-color">
-                            <img className="wish-hub-icon" src={ LogoIcon } alt={ t('wish_hub_icon') } />
-                            { t('main-page.about') }
-                            <span className="logo-name">Wish Hub</span>
-                        </Button>
+                            <Button to="/about" variant="text" color="primary-color">
+                                <img className="wish-hub-icon" src={ LogoIcon } alt={ t('wish_hub_icon') } />
+                                { t('main-page.about') }
+                                <span className="logo-name">Wish Hub</span>
+                            </Button>
 
-                        <Button to="/instruction" variant="text" color="primary-color">
-                            <InfoIcon />
-                            { t('main-page.instruction') }
-                        </Button>
+                            <Button to="/instruction" variant="text" color="primary-color">
+                                <InfoIcon />
+                                { t('main-page.instruction') }
+                            </Button>
 
-                        <Button variant="text" color="primary-color" type="button" onClick={ handleShowContacts }>
-                            <ForumIcon />
-                            { t('main-page.contacts') }
-                        </Button>
+                            <Button to="/privacy-policy" variant="text" color="primary-color">
+                                <PrivacyTipIcon />
+                                { t('privacy-policy-page.title') }
+                            </Button>
 
-                        <div className="header-lang">
-                            <LanguageIcon />
-                            { t('main-page.interface_language') }:
-                            <div className="header-lang-select">
-                                <LanguageSelection />
+                            <Button variant="text" color="primary-color" type="button" onClick={ handleShowContacts }>
+                                <ForumIcon />
+                                { t('main-page.contacts') }
+                            </Button>
+
+                            <div className="header-lang">
+                                <LanguageIcon />
+                                { t('main-page.interface_language') }:
+                                <div className="header-lang-select">
+                                    <LanguageSelection />
+                                </div>
                             </div>
-                        </div>
 
-                        <Button variant="text" color="primary-color" type="button" onClick={ handleLogout }>
-                            <LogoutIcon />
-                            { t('logout') }
-                        </Button>
+                            <Button variant="text" color="primary-color" type="button" onClick={ handleLogout }>
+                                <LogoutIcon />
+                                { t('logout') }
+                            </Button>
+                        </div>
                     </Popup>
 
                     {/* Detail Account */ }
