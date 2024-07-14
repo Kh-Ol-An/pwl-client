@@ -7,8 +7,29 @@
     border-color: $secondary-light-color;
     cursor: pointer;
 
-    .reserved-box {
+    &.example_0 {
         opacity: 0.5;
+        cursor: default;
+    }
+
+    &.example_1 {
+        opacity: 0.4;
+        cursor: default;
+    }
+
+    &.example_2 {
+        opacity: 0.3;
+        cursor: default;
+    }
+
+    &.example_3 {
+        opacity: 0.2;
+        cursor: default;
+    }
+
+    &.opacity {
+        opacity: 0;
+        pointer-events: none;
     }
 
     &.fulfilled .wish-box {
@@ -18,7 +39,6 @@
     }
 
     &.i-m-booked {
-        border-width: 1px;
         border-color: $action-light-color;
     }
 
@@ -31,15 +51,17 @@
         @include flex-column;
         gap: 16px;
         width: 100%;
-        height: 100%;
         border-radius: $radius-md;
-        border-width: 1px;
+        border-width: 2px;
         border-style: dashed;
         border-color: transparent;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        cursor: pointer;
+
+        &.reserved-box {
+            opacity: 0.5;
+        }
     }
 
     .wish-item-img {
@@ -58,6 +80,10 @@
             filter: grayscale(1);
             opacity: 0.1;
         }
+    }
+
+    .wish-item-img-icon {
+        filter: grayscale(0.75);
     }
 
     .wish-item-data {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import CloseIcon from '@mui/icons-material/Close';
+import { Close as CloseIcon, AddCircle as AddCircleIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { selectUserId } from '@/store/selected-user/slice';
 import { getWishList } from '@/store/wishes/thunks';
@@ -12,8 +12,8 @@ import WishItem from '@/layouts/wish/WishItem';
 import DetailWish from '@/layouts/wish/detail-wish/DetailWish';
 import Loading from '@/layouts/Loading';
 import Action from '@/components/Action';
-import Button from '@/components/Button';
 import CustomModal from '@/components/CustomModal';
+import LogoIcon from "@/assets/images/logo.svg";
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 type TWishType = 'all' | 'unfulfilled' | 'fulfilled';
@@ -41,8 +41,24 @@ const WishList = () => {
     const lastName = selectedUser?.lastName ? selectedUser.lastName : "";
     const detailWish = wishes.list.find(wish => wish.id === idOfSelectedWish);
 
-    let emptyText = <>{ t('main-page.you_have_any') }</>;
-    myUser?.id === selectedUserId && wishType !== 'all' && (emptyText = <>{ t(`main-page.you_have_${ wishType }`) }</>);
+    const wishesExample = [
+        {
+            name: t('main-page.wishes-example.first'),
+        },
+        {
+            name: t('main-page.wishes-example.second'),
+        },
+        {
+            name: t('main-page.wishes-example.third'),
+        },
+        {
+            name: t('main-page.wishes-example.fourth'),
+        }
+    ]
+
+    let emptyText;
+    // let emptyText = <>{ t('main-page.you_have_any') }</>;
+    // myUser?.id === selectedUserId && wishType !== 'all' && (emptyText = <>{ t(`main-page.you_have_${ wishType }`) }</>);
     myUser?.id !== selectedUserId && (emptyText = (
         <>
             <span>{ t('main-page.at-user') }</span>
@@ -115,15 +131,9 @@ const WishList = () => {
     return (
         <div className="wish-list">
             <div className="head">
-                { myUser?.id === selectedUserId ? (
-                    <Button onClick={ () => handleShowEditWish(null) }>
-                        { t('main-page.create-wish') }
-                    </Button>
-                ) : (
-                    <button className="wish-hub" type="button" onClick={ handleSelectWish }>
-                        <span className="logo-name">Wish Hub</span>
-                    </button>
-                ) }
+                <button className="wish-hub" type="button" onClick={ handleSelectWish }>
+                    <span className="logo-name">Wish Hub</span>
+                </button>
 
                 <div className="title-box">
                     <div className="wish-list-type">
@@ -156,16 +166,59 @@ const WishList = () => {
                 </div>
             </div>
 
-            { selectedWishList.length > 0 ? (
+            { (myUser?.id === selectedUserId || selectedWishList.length > 0) ? (
                 <ul className="list" ref={ wishListRef }>
-                    { selectedWishList.map((wish) => (
+                    { myUser?.id === selectedUserId && (
+                        <li className="create-wish">
+                            <button
+                                className="create-wish-action"
+                                type="button"
+                                onClick={ () => handleShowEditWish(null) }
+                            >
+                                <AddCircleIcon className="create-wish-plus" />
+                            </button>
+                        </li>
+                    ) }
+
+                    { selectedWishList.length > 0 && selectedWishList.map((wish) => (
                         <WishItem
                             key={ wish.id }
                             wish={ wish }
-                            showWish={ () => handleShowWish(wish.id) }
                             editWish={ () => handleShowEditWish(wish.id) }
+                            showWish={ () => handleShowWish(wish.id) }
                         />
                     )) }
+
+                    { wishesExample.map((wish, idx) => {
+                        if (selectedWishList.length > idx) return null;
+
+                        return (
+                            <li
+                                key={ idx }
+                                className={
+                                    "wish-item"
+                                    + (myUser?.id !== selectedUserId ? " opacity" : ` example_${ idx }`)
+                                }
+                                onClick={ () => handleShowEditWish(null) }
+                            >
+                                <div className="wish-box">
+                                    <div className="wish-item-img">
+                                        <img
+                                            className="wish-item-img-icon"
+                                            src={ LogoIcon }
+                                            alt="Wish Hub Logo"
+                                        />
+                                    </div>
+
+                                    <div className="wish-item-data">
+                                        <div className="wish-item-name">
+                                            { wish.name }
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        );
+                    }) }
                 </ul>
             ) : (
                 <div className="empty-box">
@@ -173,10 +226,10 @@ const WishList = () => {
                 </div>
             ) }
 
-            {/* TODO: розбирись з цим, чому тут два прелоадери */}
+            {/* TODO: розбирись з цим, чому тут два прелоадери */ }
             { wishes.isLoading && <Loading /> }
             { wishes.isLocalLoading && <Loading isLocal /> }
-            {/* TODO: розбирись з цим, чому тут два прелоадери */}
+            {/* TODO: розбирись з цим, чому тут два прелоадери */ }
 
             { detailWish && (
                 <Modal

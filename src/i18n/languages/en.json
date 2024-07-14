@@ -253,7 +253,12 @@
     "at-user": "User",
     "does_not_have_": "doesn't have any wishes available for viewing.",
     "does_not_have_fulfilled": "doesn't have any fulfilled wishes available for viewing.",
-    "does_not_have_unfulfilled": "doesn't have any unfulfilled wishes available for viewing.",
+    "does_not_have_unfulfilled": "doesn't have any unfulfilled wishes available for viewing.","wishes-example": {
+      "first": "Your gifts",
+      "second": "Your wishes",
+      "third": "Your goals",
+      "fourth": "Your dreams"
+    },
     "create-wish": "Create Wish",
     "unfulfilled": "Unfulfilled",
     "fulfilled": {
