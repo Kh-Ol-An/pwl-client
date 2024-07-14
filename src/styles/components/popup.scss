@@ -1,9 +1,13 @@
 .MuiPaper-root.MuiPopover-paper {
     border-radius: $radius-lg;
+    background-color: $accent-light-color;
+    background-image: unset;
 }
 
 .MuiPaper-root.MuiMenu-paper {
     border-radius: $radius-md;
+    background-color: $accent-light-color;
+    background-image: unset;
 }
 
 .popup {
