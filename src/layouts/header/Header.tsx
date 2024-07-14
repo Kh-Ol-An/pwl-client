@@ -10,13 +10,11 @@ import {
     Language as LanguageIcon,
     Logout as LogoutIcon,
 } from '@mui/icons-material';
-import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { changeFirsLoaded, logout } from '@/store/my-user/thunks';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
-import { getMonthWithDate, getLang } from "@/utils/lang-action";
 import DetailAccount from '@/layouts/DetailAccount';
 import EditAccountModal from '@/layouts/header/EditAccountModal';
 import Contacts from '@/layouts/header/Contacts';
