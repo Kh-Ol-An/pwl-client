@@ -1,11 +1,8 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Logout as LogoutIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
-import { logout, sendActivationLink } from '@/store/my-user/thunks';
+import { sendActivationLink } from '@/store/my-user/thunks';
 import { WAITING_TIME } from '@/utils/constants';
-import Logo from '@/components/Logo';
-import LanguageSelection from '@/components/LanguageSelection';
 import Button from '@/components/Button';
 
 const Inactivated: FC = () => {
@@ -15,7 +12,7 @@ const Inactivated: FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const [timeLeft, setTimeLeft] = useState<number | null>(null);
+    const [ timeLeft, setTimeLeft ] = useState<number | null>(null);
 
     const handleSendActivationLink = async () => {
         if (!myUser) return;
@@ -63,46 +60,35 @@ const Inactivated: FC = () => {
     }, []);
 
     return (
-        <div className="inactivated">
-            <div className="inactivated-header">
-                <Logo to="/welcome" />
-
-                <LanguageSelection />
-
-                <div className="logout">
-                    <Button variant="text" onClick={() => dispatch(logout())}>
-                        <LogoutIcon />
-                        <span>{t('logout')}</span>
-                    </Button>
-                </div>
-            </div>
-
-            <p className="content">
-                {t('inactivated.aim')} <br/>
-                {t('inactivated.check')} <span className="bold">{myUser?.email}</span> {t('inactivated.activate')} <br/>
-                {t('inactivated.spam')} <br/>
-                {timeLeft === null ? (
-                    <>
-                        {t('inactivated.click')}
-                        <span className="inactivated-link">
-                            <Button type="button" variant="text" onClick={handleSendActivationLink}>
-                                {t('inactivated.here')}
-                            </Button>
-                        </span>
-                    </>
-                ) : (
-                    <span>
-                        {t('inactivated.resend')}
-                        <span className="timer">
-                            {Math.floor(timeLeft / 60)}:{timeLeft % 60 > 9 ? timeLeft % 60 : `0${timeLeft % 60}`}
-                        </span>
+        <p className="inactivated">
+            { t('inactivated.aim') }
+            <br />
+            { t('inactivated.check') } <span className="bold">{ myUser?.email }</span> { t('inactivated.activate') }
+            <br />
+            { t('inactivated.spam') }
+            <br />
+            { timeLeft === null ? (
+                <>
+                    { t('inactivated.click') }
+                    <span className="inactivated-link">
+                        <Button type="button" variant="text" onClick={ handleSendActivationLink }>
+                            { t('inactivated.here') }
+                        </Button>
                     </span>
-                )}<br/><br/>
-                <span className="attention">
-                    {t('inactivated.day')}
+                </>
+            ) : (
+                <span>
+                    { t('inactivated.resend') }
+                    <span className="timer">
+                        { Math.floor(timeLeft / 60) }:{ timeLeft % 60 > 9 ? timeLeft % 60 : `0${ timeLeft % 60 }` }
+                    </span>
                 </span>
-            </p>
-        </div>
+            ) }
+            <br />
+            <span className="attention">
+                { t('inactivated.day') }
+            </span>
+        </p>
     );
 };
 

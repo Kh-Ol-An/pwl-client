@@ -10,7 +10,6 @@ import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import NotFound from '@/pages/NotFound';
 
 export const privateRoutes = [
-    { path: '/', component: Main },
     { path: '/activation-link-expired', component: ActivationLinkExpired },
 ];
 
@@ -20,6 +19,7 @@ export const unauthenticatedRoutes = [
 ];
 
 export const publicRoutes = [
+    { path: '/', component: Main },
     { path: '/welcome', component: Welcome },
     { path: '/instruction', component: Instruction },
     { path: '/about', component: AboutOld },

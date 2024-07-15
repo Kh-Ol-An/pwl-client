@@ -13,7 +13,7 @@ const ActivationLinkExpired = () => {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="inactivated">
+        <div className="activation-link-expired">
             <div className="inactivated-header">
                 <Logo to="/welcome" />
 
@@ -28,8 +28,10 @@ const ActivationLinkExpired = () => {
             </div>
 
             <p className="content">
-                {t('activation-link-expired-page.expired')}<br/>
-                {t('activation-link-expired-page.utc')}<br/>
+                {t('activation-link-expired-page.expired')}
+                <br/>
+                {t('activation-link-expired-page.utc')}
+                <br/>
                 {t('activation-link-expired-page.again')}
             </p>
         </div>

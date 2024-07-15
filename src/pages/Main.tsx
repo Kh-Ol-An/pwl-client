@@ -41,32 +41,30 @@ const Main: FC = () => {
 
     return (
         <>
-            {myUser?.isActivated ? (
-                <>
-                    <Header showHeader={showHeaderAndSidebar} hideHeader={() => setShowHeaderAndSidebar(false)} />
+            <Header showHeader={showHeaderAndSidebar} hideHeader={() => setShowHeaderAndSidebar(false)} />
 
-                    <div className="page main-page">
-                        <button
-                            className={"burger" + (showHeaderAndSidebar ? " open" : "")}
-                            type="button"
-                            onClick={() => setShowHeaderAndSidebar(prevState => !prevState)}
-                        >
-                            <div className="icon-left"></div>
-                            <div className="icon-right"></div>
-                        </button>
+            <div className="page main-page">
+                <button
+                    className={"burger" + (showHeaderAndSidebar ? " open" : "")}
+                    type="button"
+                    onClick={() => setShowHeaderAndSidebar(prevState => !prevState)}
+                >
+                    <div className="icon-left"></div>
+                    <div className="icon-right"></div>
+                </button>
 
-                        <Sidebar showSidebar={showHeaderAndSidebar} hideSidebar={() => setShowHeaderAndSidebar(false)} />
+                <Sidebar showSidebar={showHeaderAndSidebar} hideSidebar={() => setShowHeaderAndSidebar(false)} />
 
-                        <div className="main-page-container">
-                            <WishList />
-                        </div>
-                    </div>
+                <div className="main-page-container">
+                    <WishList />
+                </div>
+            </div>
 
-                    {screenWidth < 1280 && !myUser.showedInfo && (
-                        <InstallAppInstruction />
-                    )}
-                </>
-            ) : <Inactivated />}
+            {screenWidth < 1280 && !myUser?.showedInfo && (
+                <InstallAppInstruction />
+            )}
+
+            {!myUser?.isActivated && <Inactivated />}
         </>
     );
 };
