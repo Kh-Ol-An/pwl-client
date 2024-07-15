@@ -20,7 +20,7 @@ const AvatarValidation: FC<IProps> = ({ avatar }) => {
     if (!Object.keys(ALLOWED_FILE_EXTENSIONS).includes(fileExtension)) {
         return (
             <p className="error">
-                {t('avatar-error.file-type')} {Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ')}.
+                { t('avatar-error.file-type') } { Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ') }.
             </p>
         );
     }
@@ -30,12 +30,12 @@ const AvatarValidation: FC<IProps> = ({ avatar }) => {
     if (avatar.size > ALLOWED_MAX_FILE_SIZE_IN_MB * 1024 * 1024) {
         return (
             <p className="error">
-                {t('avatar-error.file-size', { size: ALLOWED_MAX_FILE_SIZE_IN_MB })}
+                { t('avatar-error.file-size', { size: ALLOWED_MAX_FILE_SIZE_IN_MB }) }
             </p>
         );
     }
 
-   return null;
+    return null;
 };
 
 export default AvatarValidation;

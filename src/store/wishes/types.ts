@@ -48,6 +48,6 @@ export interface IActionWish {
     wishId: IWish['id'];
 }
 
-export interface IDoneWish extends IActionWish{
+export interface IDoneWish extends IActionWish {
     whoseWish: 'my' | 'someone';
 }

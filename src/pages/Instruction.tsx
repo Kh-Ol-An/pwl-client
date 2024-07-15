@@ -11,7 +11,7 @@ const Instruction: FC = () => {
 
     const myUser = useAppSelector((state) => state.myUser);
 
-    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+    const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     useEffect(() => {
         const handleResize = () => {
@@ -31,25 +31,25 @@ const Instruction: FC = () => {
                 <PageHeader />
             </div>
 
-            <section className={"container" + (myUser.user === null ? " logged-out" : "")}>
-                <h1>{t('instruction-page.title')}</h1>
+            <section className={ "container" + (myUser.user === null ? " logged-out" : "") }>
+                <h1>{ t('instruction-page.title') }</h1>
 
                 <div>
-                    {screenWidth < 1280 && (
+                    { screenWidth < 1280 && (
                         <CustomAccordion
                             ariaControls="app-content"
                             titleId="app-header"
-                            title={t('instruction-page.app.title')}
+                            title={ t('instruction-page.app.title') }
                             contentId="app-content"
                         >
                             <App />
                         </CustomAccordion>
-                    )}
+                    ) }
 
                     <CustomAccordion
                         ariaControls="auth-content"
                         titleId="auth-header"
-                        title={t('instruction-page.auth.title')}
+                        title={ t('instruction-page.auth.title') }
                         contentId="auth-content"
                     >
                         <Auth />
@@ -58,11 +58,11 @@ const Instruction: FC = () => {
                     <CustomAccordion
                         ariaControls="next-content"
                         titleId="next-header"
-                        title={t('instruction-page.next.title')}
+                        title={ t('instruction-page.next.title') }
                         contentId="next-content"
                     >
                         <p>
-                            {t('instruction-page.next.text')}
+                            { t('instruction-page.next.text') }
                         </p>
                     </CustomAccordion>
                 </div>

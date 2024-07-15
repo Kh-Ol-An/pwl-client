@@ -42,7 +42,7 @@ const registration = async (data: IRegistration): Promise<AxiosResponse<IAuth>> 
 
 const sendActivationLink = async (userId: IUser['id']): Promise<AxiosResponse<IUser['email']>> => {
     try {
-        return await api.get(`/get-activation-link/${userId}`);
+        return await api.get(`/get-activation-link/${ userId }`);
     } catch (error: any) {
         toast(
             error.response?.data?.message || t('alerts.my-user-api.send-activation-link.error', { type: 'api' }),
@@ -128,7 +128,10 @@ const forgotPassword = async (data: IForgotPassword): Promise<void> => {
         );
     } catch (error: any) {
         toast(
-            error.response?.data?.message || t('alerts.my-user-api.forgot-password.error', { type: 'api', email: data.email }),
+            error.response?.data?.message || t('alerts.my-user-api.forgot-password.error', {
+                type: 'api',
+                email: data.email
+            }),
             { type: 'error' },
         );
         throw error;
@@ -238,13 +241,13 @@ const changeFirsLoaded = async (data: IUserId): Promise<AxiosResponse<IUser>> =>
 };
 
 const updateMyUser = async ({
-    userId,
-    firstName,
-    lastName,
-    avatar,
-    deliveryAddress,
-    birthday,
-}: IUpdateMyUser): Promise<AxiosResponse<IUser>> => {
+                                userId,
+                                firstName,
+                                lastName,
+                                avatar,
+                                deliveryAddress,
+                                birthday,
+                            }: IUpdateMyUser): Promise<AxiosResponse<IUser>> => {
     const formData = new FormData();
     formData.append('userId', userId);
     formData.append('firstName', firstName);

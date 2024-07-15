@@ -7,7 +7,7 @@ interface PrivateRouteProps {
 }
 
 const RoutesGuard: FC<PrivateRouteProps> = ({ guard, redirectPath }) => {
-    return guard ? <Outlet /> : <Navigate to={redirectPath} replace />;
+    return guard ? <Outlet /> : <Navigate to={ redirectPath } replace />;
 };
 
 export default RoutesGuard;

@@ -8,19 +8,19 @@ interface IProps {
 
 const Card: FC<IProps> = ({ withLights = false, classes, children }) => {
     return (
-        <div className={"card" + (classes ? ` ${classes}` : "")}>
-            {withLights && (
+        <div className={ "card" + (classes ? ` ${ classes }` : "") }>
+            { withLights && (
                 <>
                     <div className="card-light-one"></div>
                     <div className="card-light-two"></div>
                 </>
-            )}
+            ) }
 
             <div className="card-outer-border">
                 <div className="card-inner-border">
                     <div className="card-content">
                         <div className="card-scroll">
-                            {children}
+                            { children }
                         </div>
                     </div>
                 </div>

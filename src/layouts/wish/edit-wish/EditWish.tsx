@@ -57,13 +57,13 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const [material, setMaterial] = useState<ICreateWish['material']>(true);
-    const [show, setShow] = useState<ICreateWish['show']>('all');
-    const [showConfirmDeleteWish, setShowConfirmDeleteWish] = useState<boolean>(false);
-    const [images, setImages] = useState<TCurrentImage[]>([]);
-    const [currency, setCurrency] = useState<IWish['currency']>('UAH');
-    const [isTransition, setIsTransition] = useState<boolean>(false);
-    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+    const [ material, setMaterial ] = useState<ICreateWish['material']>(true);
+    const [ show, setShow ] = useState<ICreateWish['show']>('all');
+    const [ showConfirmDeleteWish, setShowConfirmDeleteWish ] = useState<boolean>(false);
+    const [ images, setImages ] = useState<TCurrentImage[]>([]);
+    const [ currency, setCurrency ] = useState<IWish['currency']>('UAH');
+    const [ isTransition, setIsTransition ] = useState<boolean>(false);
+    const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         const nonUniqueName = wishList.some((wish) => {
@@ -154,9 +154,9 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 const quote = (response.payload as IWishWithQuote).quote[getLang()];
                 toast(
                     <QuoteMessage
-                        title={t('alerts.wishes-api.create-wish.success')}
-                        text={quote?.text}
-                        author={quote?.author}
+                        title={ t('alerts.wishes-api.create-wish.success') }
+                        text={ quote?.text }
+                        author={ quote?.author }
                     />,
                     { type: 'success' },
                 );
@@ -187,7 +187,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
     const handleDeleteWish = async () => {
         if (!myUser || !idOfSelectedWish) return;
 
-        await dispatch(deleteWish([myUser.id, idOfSelectedWish]));
+        await dispatch(deleteWish([ myUser.id, idOfSelectedWish ]));
         close();
     };
 
@@ -255,7 +255,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             return decryptedImage;
         });
         setImages(selectedWish.show === 'all' ? selectedWish.images : decryptedImages);
-    }, [idOfSelectedWish, wishList, setValue]);
+    }, [ idOfSelectedWish, wishList, setValue ]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -275,68 +275,68 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
     }, []);
 
     return (
-        <form className="edit-wish" onSubmit={handleSubmit(onSubmit)}>
-            {/* material */}
+        <form className="edit-wish" onSubmit={ handleSubmit(onSubmit) }>
+            {/* material */ }
             <div className="material">
                 <button
-                    className={"yes" + (material ? " primary-color" : "")}
+                    className={ "yes" + (material ? " primary-color" : "") }
                     type="button"
-                    onClick={() => setMaterial(true)}
+                    onClick={ () => setMaterial(true) }
                 >
-                    {t('main-page.material-wish')}
+                    { t('main-page.material-wish') }
                 </button>
                 <Switch
                     id="material"
                     name="material"
-                    checked={material}
-                    onChange={(e) => setMaterial(e.target.checked)}
+                    checked={ material }
+                    onChange={ (e) => setMaterial(e.target.checked) }
                 />
                 <button
-                    className={"no" + (material ? "" : " action-color")}
+                    className={ "no" + (material ? "" : " action-color") }
                     type="button"
-                    onClick={() => setMaterial(false)}
+                    onClick={ () => setMaterial(false) }
                 >
-                    {t('main-page.non-material-wish')}
+                    { t('main-page.non-material-wish') }
                 </button>
             </div>
 
-            {/* name */}
+            {/* name */ }
             <Input
-                {...register("name", wishNameValidation)}
+                { ...register("name", wishNameValidation) }
                 id="name"
                 name="name"
                 type="text"
-                label={t('main-page.wish-name')}
-                tooltip={t('main-page.wish-name-tooltip')}
-                error={errors?.name?.message}
+                label={ t('main-page.wish-name') }
+                tooltip={ t('main-page.wish-name-tooltip') }
+                error={ errors?.name?.message }
             />
             <Tooltip
                 id="name"
-                style={getTooltipStyles(screenWidth)}
+                style={ getTooltipStyles(screenWidth) }
             />
 
-            {/* DragNDrop */}
-            <DragNDrop images={images} setImages={setImages} removeAllImages={removeAllImages} />
+            {/* DragNDrop */ }
+            <DragNDrop images={ images } setImages={ setImages } removeAllImages={ removeAllImages } />
 
-            <div className={"expander" + (isTransition ? " transition" : "") + (material ? " rolled-up" : "")}>
-                {/* price */}
+            <div className={ "expander" + (isTransition ? " transition" : "") + (material ? " rolled-up" : "") }>
+                {/* price */ }
                 <div className="price">
                     <Input
-                        {...(material && register("price", wishPriceValidation))}
+                        { ...(material && register("price", wishPriceValidation)) }
                         id="price"
                         name="price"
                         type="number"
-                        label={t('main-page.wish-price')}
-                        tooltip={t('main-page.wish-price-tooltip')}
-                        error={errors?.price?.message}
+                        label={ t('main-page.wish-price') }
+                        tooltip={ t('main-page.wish-price-tooltip') }
+                        error={ errors?.price?.message }
                     />
                     <div className="custom-mui-select">
                         <Select
                             id="currency"
                             variant="standard"
-                            sx={{ padding: '0 10px', color: StylesVariables.primaryColor }}
-                            value={currency}
-                            onChange={e => setCurrency(e.target.value as IWish['currency'])}
+                            sx={ { padding: '0 10px', color: StylesVariables.primaryColor } }
+                            value={ currency }
+                            onChange={ e => setCurrency(e.target.value as IWish['currency']) }
                         >
                             <MenuItem value="UAH">UAH</MenuItem>
                             <MenuItem value="USD">USD</MenuItem>
@@ -346,21 +346,21 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 </div>
                 <Tooltip
                     id="price"
-                    style={getTooltipStyles(screenWidth)}
+                    style={ getTooltipStyles(screenWidth) }
                 />
 
-                {/* addresses */}
+                {/* addresses */ }
                 <Addresses
-                    control={control}
-                    getValues={getValues}
-                    register={register}
-                    errors={errors}
-                    material={material}
-                    screenWidth={screenWidth}
+                    control={ control }
+                    getValues={ getValues }
+                    register={ register }
+                    errors={ errors }
+                    material={ material }
+                    screenWidth={ screenWidth }
                 />
             </div>
 
-            {/* description */}
+            {/* description */ }
             <Input
                 {
                     ...register(
@@ -380,101 +380,101 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 id="description"
                 name="description"
                 type="multiline"
-                label={t('main-page.wish-description')}
-                error={errors?.description?.message}
+                label={ t('main-page.wish-description') }
+                error={ errors?.description?.message }
             />
 
-            {/* show */}
+            {/* show */ }
             <div className="show">
-                <span className="show-label">{t('main-page.can-see.title')}</span>
+                <span className="show-label">{ t('main-page.can-see.title') }</span>
 
                 <div className="show-actions">
                     <Radio
-                        label={t('main-page.can-see.all')}
+                        label={ t('main-page.can-see.all') }
                         id="show-all"
                         name="show"
-                        checked={show === 'all'}
+                        checked={ show === 'all' }
                         value="all"
-                        onChange={changeShow}
+                        onChange={ changeShow }
                     />
 
                     <div className="show-item">
                         <Radio
-                            label={t('main-page.can-see.friends')}
+                            label={ t('main-page.can-see.friends') }
                             id="show-friends"
                             name="show"
-                            checked={show === 'friends'}
+                            checked={ show === 'friends' }
                             value="friends"
-                            onChange={changeShow}
+                            onChange={ changeShow }
                         />
 
                         <span
                             className="tooltip"
                             data-tooltip-id="show-friends"
-                            data-tooltip-content={t('main-page.can-see.friends-tooltip')}
+                            data-tooltip-content={ t('main-page.can-see.friends-tooltip') }
                         >
-                            <InfoIcon sx={{ color: StylesVariables.specialColor }} />
+                            <InfoIcon sx={ { color: StylesVariables.specialColor } } />
                         </span>
                         <Tooltip
                             id="show-friends"
-                            opacity={1}
-                            style={getTooltipStyles(screenWidth)}
+                            opacity={ 1 }
+                            style={ getTooltipStyles(screenWidth) }
                         />
                     </div>
 
                     <div className="show-item">
                         <Radio
-                            label={t('main-page.can-see.nobody')}
+                            label={ t('main-page.can-see.nobody') }
                             id="show-nobody"
                             name="show"
-                            checked={show === 'nobody'}
+                            checked={ show === 'nobody' }
                             value="nobody"
-                            onChange={changeShow}
+                            onChange={ changeShow }
                         />
 
                         <span
                             className="tooltip"
                             data-tooltip-id="show-nobody"
-                            data-tooltip-content={t('main-page.can-see.nobody-tooltip')}
+                            data-tooltip-content={ t('main-page.can-see.nobody-tooltip') }
                         >
-                            <InfoIcon sx={{ color: StylesVariables.specialColor }} />
+                            <InfoIcon sx={ { color: StylesVariables.specialColor } } />
                         </span>
                         <Tooltip
                             id="show-nobody"
-                            opacity={1}
-                            style={getTooltipStyles(screenWidth)}
+                            opacity={ 1 }
+                            style={ getTooltipStyles(screenWidth) }
                         />
                     </div>
                 </div>
             </div>
 
-            {/* actions */}
+            {/* actions */ }
             <div className="actions">
-                {idOfSelectedWish && (
+                { idOfSelectedWish && (
                     <>
                         <Button
                             color="action-color"
                             variant="text"
                             type="button"
-                            onClick={() => setShowConfirmDeleteWish(true)}
+                            onClick={ () => setShowConfirmDeleteWish(true) }
                         >
-                            {t('main-page.delete-wish')}
+                            { t('main-page.delete-wish') }
                         </Button>
 
                         <ConfirmModal
-                            show={showConfirmDeleteWish}
+                            show={ showConfirmDeleteWish }
                             confirmText="Видалити"
                             closeText="Залишити"
-                            close={() => setShowConfirmDeleteWish(false)}
-                            confirm={handleDeleteWish}
+                            close={ () => setShowConfirmDeleteWish(false) }
+                            confirm={ handleDeleteWish }
                         >
-                            <p className="text-lg">{t('main-page.are-you-sure')}</p>
+                            <p className="text-lg">{ t('main-page.are-you-sure') }</p>
                         </ConfirmModal>
                     </>
-                )}
+                ) }
 
                 <Button type="submit">
-                    {idOfSelectedWish ? t('main-page.update') : t('main-page.create')}
+                    { idOfSelectedWish ? t('main-page.update') : t('main-page.create') }
                 </Button>
             </div>
         </form>

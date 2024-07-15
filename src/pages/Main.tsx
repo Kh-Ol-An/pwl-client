@@ -13,8 +13,8 @@ const Main: FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const [showHeaderAndSidebar, setShowHeaderAndSidebar] = useState<boolean>(false);
-    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+    const [ showHeaderAndSidebar, setShowHeaderAndSidebar ] = useState<boolean>(false);
+    const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     useEffect(() => {
         const handleResize = () => {
@@ -41,30 +41,30 @@ const Main: FC = () => {
 
     return (
         <>
-            <Header showHeader={showHeaderAndSidebar} hideHeader={() => setShowHeaderAndSidebar(false)} />
+            <Header showHeader={ showHeaderAndSidebar } hideHeader={ () => setShowHeaderAndSidebar(false) } />
 
             <div className="page main-page">
                 <button
-                    className={"burger" + (showHeaderAndSidebar ? " open" : "")}
+                    className={ "burger" + (showHeaderAndSidebar ? " open" : "") }
                     type="button"
-                    onClick={() => setShowHeaderAndSidebar(prevState => !prevState)}
+                    onClick={ () => setShowHeaderAndSidebar(prevState => !prevState) }
                 >
                     <div className="icon-left"></div>
                     <div className="icon-right"></div>
                 </button>
 
-                <Sidebar showSidebar={showHeaderAndSidebar} hideSidebar={() => setShowHeaderAndSidebar(false)} />
+                <Sidebar showSidebar={ showHeaderAndSidebar } hideSidebar={ () => setShowHeaderAndSidebar(false) } />
 
                 <div className="main-page-container">
                     <WishList />
                 </div>
             </div>
 
-            {screenWidth < 1280 && !myUser?.showedInfo && (
+            { screenWidth < 1280 && !myUser?.showedInfo && (
                 <InstallAppInstruction />
-            )}
+            ) }
 
-            {!myUser?.isActivated && <Inactivated />}
+            { !myUser?.isActivated && <Inactivated /> }
         </>
     );
 };

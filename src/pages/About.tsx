@@ -24,7 +24,7 @@ const About: FC = () => {
 
             <section className={ "container" + (myUser.user === null ? " logged-out" : "") }>
                 <h1>
-                    <button type="button" onClick={goBack}>
+                    <button type="button" onClick={ goBack }>
                         <ArrowBackIcon />
                     </button>
 

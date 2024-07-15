@@ -32,9 +32,9 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const [repeatPassword, setRepeatPassword] = useState<string>('');
-    const [repeatPasswordError, setRepeatPasswordError] = useState<string>('');
-    const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
+    const [ repeatPassword, setRepeatPassword ] = useState<string>('');
+    const [ repeatPasswordError, setRepeatPasswordError ] = useState<string>('');
+    const [ clickedOnSubmit, setClickedOnSubmit ] = useState<boolean>(false);
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setClickedOnSubmit(true);
@@ -61,37 +61,37 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
     };
 
     return (
-        <form className="edit-account" onSubmit={handleSubmit(onSubmit)}>
-            {myUser?.hasPassword && (
+        <form className="edit-account" onSubmit={ handleSubmit(onSubmit) }>
+            { myUser?.hasPassword && (
                 <Input
-                    {...register("oldPassword", passwordValidation)}
+                    { ...register("oldPassword", passwordValidation) }
                     id="oldPassword"
                     name="oldPassword"
                     type="password"
-                    label={t('main-page.old-password')}
-                    error={errors?.oldPassword?.message}
+                    label={ t('main-page.old-password') }
+                    error={ errors?.oldPassword?.message }
                 />
-            )}
+            ) }
             <Input
-                {...register("newPassword", passwordValidation)}
+                { ...register("newPassword", passwordValidation) }
                 id="newPassword"
                 name="newPassword"
                 type="password"
-                label={t('main-page.new-password')}
-                error={errors?.newPassword?.message}
+                label={ t('main-page.new-password') }
+                error={ errors?.newPassword?.message }
             />
             <Input
                 id="repeat-new-password"
                 name="repeat-new-password"
                 type="password"
-                label={t('main-page.repeat-new-password')}
-                value={repeatPassword}
-                error={repeatPasswordError}
-                onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}
+                label={ t('main-page.repeat-new-password') }
+                value={ repeatPassword }
+                error={ repeatPasswordError }
+                onChange={ (event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>) }
             />
 
             <div className="actions">
-                <Button type="submit">{t('main-page.change-password')}</Button>
+                <Button type="submit">{ t('main-page.change-password') }</Button>
             </div>
         </form>
     );

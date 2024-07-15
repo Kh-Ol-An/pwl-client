@@ -38,9 +38,9 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
 
     const dispatch = useAppDispatch();
 
-    const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [showDetailAccount, setShowDetailAccount] = useState<boolean>(false);
+    const [ anchor, setAnchor ] = useState<HTMLButtonElement | null>(null);
+    const [ isLoading, setIsLoading ] = useState<boolean>(false);
+    const [ showDetailAccount, setShowDetailAccount ] = useState<boolean>(false);
 
     let iconColor = StylesVariables.lightColor;
     myUser?.followTo.includes(user.id) && (iconColor = StylesVariables.specialColor);
@@ -94,77 +94,77 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
             secondaryAction={
                 <Popup
                     actionClasses="people-icon"
-                    anchor={anchor}
-                    setAnchor={setAnchor}
+                    anchor={ anchor }
+                    setAnchor={ setAnchor }
                     actionIcon={
                         isLoading
                             ? <CircularProgress
-                                  sx={{
-                                      maxWidth: 24,
-                                      maxHeight: 24,
-                                      color: StylesVariables.primaryColor,
-                                  }}
-                              />
+                                sx={ {
+                                    maxWidth: 24,
+                                    maxHeight: 24,
+                                    color: StylesVariables.primaryColor,
+                                } }
+                            />
                             : <PeopleAltIcon
-                                  sx={{ color: iconColor, opacity: myUser?.followFrom.includes(user.id) ? 0.4 : 1 }}
-                              />
+                                sx={ { color: iconColor, opacity: myUser?.followFrom.includes(user.id) ? 0.4 : 1 } }
+                            />
                     }
                 >
-                    {showAddFriend && (
-                        <Button variant="text" fontSize="small" onClick={handleAddFriend}>
+                    { showAddFriend && (
+                        <Button variant="text" fontSize="small" onClick={ handleAddFriend }>
                             {
                                 myUser?.followFrom.includes(user.id)
                                     ? t('main-page.confirm-friendship')
                                     : t('main-page.add-friend')
                             }
                         </Button>
-                    )}
-                    {(myUser?.friends.includes(user.id) || myUser?.followTo.includes(user.id)) && (
-                        <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('followTo')}>
-                            {t('main-page.delete-your')} <br/> {t('main-page.delete-request')}
+                    ) }
+                    { (myUser?.friends.includes(user.id) || myUser?.followTo.includes(user.id)) && (
+                        <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('followTo') }>
+                            { t('main-page.delete-your') } <br /> { t('main-page.delete-request') }
                         </Button>
-                    )}
-                    {(myUser?.friends.includes(user.id) || myUser?.followFrom.includes(user.id)) && (
-                        <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('followFrom')}>
-                            {t('main-page.delete-user_s')} <br/> {t('main-page.delete-request')}
+                    ) }
+                    { (myUser?.friends.includes(user.id) || myUser?.followFrom.includes(user.id)) && (
+                        <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('followFrom') }>
+                            { t('main-page.delete-user_s') } <br /> { t('main-page.delete-request') }
                         </Button>
-                    )}
-                    {myUser?.friends.includes(user.id) && (
-                        <Button variant="text" fontSize="small" onClick={() => handleRemoveFriend('friends')}>
-                            {t('main-page.remove-friend')}
+                    ) }
+                    { myUser?.friends.includes(user.id) && (
+                        <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('friends') }>
+                            { t('main-page.remove-friend') }
                         </Button>
-                    )}
+                    ) }
                 </Popup>
             }
         >
             <ListItemAvatar>
                 <Avatar
-                    src={user.avatar}
-                    alt={`${user.firstName} ${user.lastName ? user.lastName : ''}`}
-                    onClick={handleShowDetailAccount}
+                    src={ user.avatar }
+                    alt={ `${ user.firstName } ${ user.lastName ? user.lastName : '' }` }
+                    onClick={ handleShowDetailAccount }
                 />
 
-                {/*{user.successfulWishes > 0 && (*/}
-                {/*    <span className="count success">*/}
-                {/*        {user.successfulWishes}*/}
-                {/*    </span>*/}
-                {/*)}*/}
-                {/*{user.unsuccessfulWishes > 0 && (*/}
-                {/*    <span className="count unsuccess">*/}
-                {/*        {user.unsuccessfulWishes}*/}
-                {/*    </span>*/}
-                {/*)}*/}
+                {/*{user.successfulWishes > 0 && (*/ }
+                {/*    <span className="count success">*/ }
+                {/*        {user.successfulWishes}*/ }
+                {/*    </span>*/ }
+                {/*)}*/ }
+                {/*{user.unsuccessfulWishes > 0 && (*/ }
+                {/*    <span className="count unsuccess">*/ }
+                {/*        {user.unsuccessfulWishes}*/ }
+                {/*    </span>*/ }
+                {/*)}*/ }
 
-                <CustomModal show={showDetailAccount} hide={handleHideDetailAccount} classes="modal modal-md">
-                    <DetailAccount user={user} />
+                <CustomModal show={ showDetailAccount } hide={ handleHideDetailAccount } classes="modal modal-md">
+                    <DetailAccount user={ user } />
                 </CustomModal>
             </ListItemAvatar>
 
-            <ListItemButton onClick={handleSelectWish}>
+            <ListItemButton onClick={ handleSelectWish }>
                 <ListItemText
                     primary={
-                        <span className={"name" + (user.id === selectedUserId ? " selected" : "")}>
-                            {user.firstName} {user.lastName}
+                        <span className={ "name" + (user.id === selectedUserId ? " selected" : "") }>
+                            { user.firstName } { user.lastName }
                         </span>
                     }
                     secondary={
@@ -176,7 +176,7 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                             }
                         </span>
                     }
-                    sx={{ color: StylesVariables.whiteColor }}
+                    sx={ { color: StylesVariables.whiteColor } }
                 />
             </ListItemButton>
         </ListItem>

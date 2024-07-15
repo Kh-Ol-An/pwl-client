@@ -15,32 +15,32 @@ interface IProps {
 }
 
 const ConfirmModal: FC<IProps> = ({
-    show,
-    title = t('confirm-modal.title'),
-    confirmText = t('confirm-modal.confirm'),
-    closeText = t('confirm-modal.close'),
-    children,
-    close,
-    confirm,
-}) => {
+                                      show,
+                                      title = t('confirm-modal.title'),
+                                      confirmText = t('confirm-modal.confirm'),
+                                      closeText = t('confirm-modal.close'),
+                                      children,
+                                      close,
+                                      confirm,
+                                  }) => {
     return (
         <Modal
-            open={show}
+            open={ show }
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
             <div className="modal confirm">
                 <Card classes="not-full-screen">
-                    <h3 className="title attention">{title}</h3>
+                    <h3 className="title attention">{ title }</h3>
 
-                    {children}
+                    { children }
 
                     <div className="modal-actions">
-                        <Button variant="text" color="action-color" type="button" onClick={confirm}>
-                            {confirmText}
+                        <Button variant="text" color="action-color" type="button" onClick={ confirm }>
+                            { confirmText }
                         </Button>
 
-                        <Button type="button" onClick={close}>{closeText}</Button>
+                        <Button type="button" onClick={ close }>{ closeText }</Button>
                     </div>
                 </Card>
             </div>

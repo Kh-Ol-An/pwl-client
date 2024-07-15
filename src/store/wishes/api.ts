@@ -17,7 +17,7 @@ import { IUser } from '@/models/IUser';
 import { TCurrentImage, IWish } from '@/models/IWish';
 
 const processCommonFields = (formData: FormData, commonFields: { [key: string]: string | boolean }) => {
-    for (const [key, value] of Object.entries(commonFields)) {
+    for (const [ key, value ] of Object.entries(commonFields)) {
         formData.append(key, value.toString());
     }
 };
@@ -26,9 +26,9 @@ const processImages = (formData: FormData, images: TCurrentImage[]) => {
     if (images && Array.isArray(images)) {
         images.forEach((image, idx) => {
             if (image instanceof File) {
-                formData.append(`image-${idx}`, image);
+                formData.append(`image-${ idx }`, image);
             } else if (image) {
-                formData.append(`image-${idx}`, JSON.stringify(image));
+                formData.append(`image-${ idx }`, JSON.stringify(image));
             }
         });
     }
@@ -40,7 +40,7 @@ const addDataToFormData = (formData: FormData, data: IUpdateWish | ICreateWish):
     price && processCommonFields(formData, { price });
     currency && processCommonFields(formData, { currency });
     addresses && addresses.length > 0 && addresses.forEach((address, idx) => {
-        formData.append(`address-${idx}`, JSON.stringify(address));
+        formData.append(`address-${ idx }`, JSON.stringify(address));
     });
     description && processCommonFields(formData, { description });
     processImages(formData, images);

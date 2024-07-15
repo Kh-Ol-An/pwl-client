@@ -26,33 +26,33 @@ const Popup: FC<IProps> = ({ actionClasses, anchor, setAnchor, actionIcon, isTop
 
     return (
         <>
-            <button className={actionClasses} type="button" onClick={handleOpen}>
-                {actionIcon}
+            <button className={ actionClasses } type="button" onClick={ handleOpen }>
+                { actionIcon }
             </button>
 
             <Popover
-                id={id}
-                open={open}
-                anchorEl={anchor}
-                onClose={handleClose}
-                anchorOrigin={isTopPosition ? {
+                id={ id }
+                open={ open }
+                anchorEl={ anchor }
+                onClose={ handleClose }
+                anchorOrigin={ isTopPosition ? {
                     vertical: 'top',
                     horizontal: 'left',
                 } : {
                     vertical: 'bottom',
                     horizontal: 'right',
-                }}
-                transformOrigin={isTopPosition ? {
+                } }
+                transformOrigin={ isTopPosition ? {
                     vertical: 'bottom',
                     horizontal: 'left',
                 } : {
                     vertical: 'top',
                     horizontal: 'right',
-                }}
-                style={{ borderRadius: '20px' }}
+                } }
+                style={ { borderRadius: '20px' } }
             >
                 <div className="popup">
-                    {children}
+                    { children }
                 </div>
             </Popover>
         </>

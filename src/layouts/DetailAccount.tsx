@@ -30,43 +30,43 @@ const DetailAccount: FC<IProps> = ({ user }) => {
 
     return (
         <div className="detail-account">
-            {user.avatar && (
+            { user.avatar && (
                 <div className="detail-account-avatar">
-                    <img src={user.avatar} alt={`${user.firstName} ${user.lastName ? user.lastName : ''}`} />
+                    <img src={ user.avatar } alt={ `${ user.firstName } ${ user.lastName ? user.lastName : '' }` } />
                 </div>
-            )}
+            ) }
 
             <div className="detail-account-info">
-                <h2 className="detail-account-title" title={`${user.firstName} ${user.lastName}`}>
-                    {user.firstName} {user.lastName}
+                <h2 className="detail-account-title" title={ `${ user.firstName } ${ user.lastName }` }>
+                    { user.firstName } { user.lastName }
                 </h2>
 
-                {myUser?.id === user.id && (
+                { myUser?.id === user.id && (
                     <div className="detail-account-field">
-                        <div className="detail-account-label">{t('main-page.mail')}</div>
-                        <div className="detail-account-value" title={user.email}>
-                            {user.email}
+                        <div className="detail-account-label">{ t('main-page.mail') }</div>
+                        <div className="detail-account-value" title={ user.email }>
+                            { user.email }
                         </div>
                     </div>
-                )}
+                ) }
 
-                {user.deliveryAddress && (
+                { user.deliveryAddress && (
                     <div className="detail-account-field delivery-address">
-                        <div className="detail-account-label">{t('main-page.delivery-address')}:</div>
+                        <div className="detail-account-label">{ t('main-page.delivery-address') }:</div>
                         <div className="detail-account-value" title={ user.deliveryAddress }>
                             { user.deliveryAddress }
                         </div>
                     </div>
-                )}
+                ) }
 
-                {user.birthday && (
+                { user.birthday && (
                     <div className="detail-account-field">
-                        <div className="detail-account-label">{t('main-page.birthday')}</div>
+                        <div className="detail-account-label">{ t('main-page.birthday') }</div>
                         <div className="detail-account-value">
-                            {dayjs(user.birthday).locale(getLang()).format(getMonthWithDate())}
+                            { dayjs(user.birthday).locale(getLang()).format(getMonthWithDate()) }
                         </div>
                     </div>
-                )}
+                ) }
 
                 <div className="detail-account-field">
                     <div className="detail-account-label">{ t('main-page.i_have_fulfilled') }</div>
@@ -75,7 +75,7 @@ const DetailAccount: FC<IProps> = ({ user }) => {
                         { successfulWishes }
                     </div>
 
-                    <div className="detail-account-label">{ t(`main-page.${tWishSuccess}`) }</div>
+                    <div className="detail-account-label">{ t(`main-page.${ tWishSuccess }`) }</div>
                 </div>
 
                 <div className="detail-account-field">
@@ -85,7 +85,7 @@ const DetailAccount: FC<IProps> = ({ user }) => {
                         { unsuccessfulWishes }
                     </div>
 
-                    <div className="detail-account-label">{ t(`main-page.${tWishUnsuccess}`) }</div>
+                    <div className="detail-account-label">{ t(`main-page.${ tWishUnsuccess }`) }</div>
                 </div>
             </div>
         </div>

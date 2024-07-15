@@ -30,9 +30,9 @@ const ChangeForgottenPassword: FC = () => {
     const { passwordResetLink } = useParams<{ passwordResetLink: string }>();
     const navigate = useNavigate();
 
-    const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
-    const [repeatPassword, setRepeatPassword] = useState<string>('');
-    const [repeatPasswordError, setRepeatPasswordError] = useState<string>('');
+    const [ clickedOnSubmit, setClickedOnSubmit ] = useState<boolean>(false);
+    const [ repeatPassword, setRepeatPassword ] = useState<string>('');
+    const [ repeatPasswordError, setRepeatPasswordError ] = useState<string>('');
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         setClickedOnSubmit(true);
@@ -74,30 +74,30 @@ const ChangeForgottenPassword: FC = () => {
                         <LanguageSelection />
                     </div>
 
-                    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                    <form className="form" onSubmit={ handleSubmit(onSubmit) }>
                         <h1 className="title">
-                            {t('change-forgotten-password-page.title')}
+                            { t('change-forgotten-password-page.title') }
                         </h1>
 
                         <Input
-                            {...register("newPassword", passwordValidation)}
+                            { ...register("newPassword", passwordValidation) }
                             id="newPassword"
                             name="newPassword"
                             type="password"
-                            label={t('change-forgotten-password-page.new_password')}
-                            error={errors?.newPassword?.message}
+                            label={ t('change-forgotten-password-page.new_password') }
+                            error={ errors?.newPassword?.message }
                         />
                         <Input
                             id="repeat-password"
                             name="repeat-password"
                             type="password"
-                            label={t('change-forgotten-password-page.repeat_new_password')}
-                            value={repeatPassword}
-                            error={repeatPasswordError}
-                            onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}
+                            label={ t('change-forgotten-password-page.repeat_new_password') }
+                            value={ repeatPassword }
+                            error={ repeatPasswordError }
+                            onChange={ (event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>) }
                         />
 
-                        <Button type="submit">{t('change-forgotten-password-page.recovery')}</Button>
+                        <Button type="submit">{ t('change-forgotten-password-page.recovery') }</Button>
                     </form>
                 </Card>
             </div>

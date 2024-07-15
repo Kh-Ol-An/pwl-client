@@ -19,12 +19,12 @@ const PageHeader = () => {
                     <LanguageSelection />
                 </div>
 
-                {myUser.user === null && (
+                { myUser.user === null && (
                     <div className="auth-actions">
-                        <Button to="/auth" variant="text">{t('sing-in')}</Button>
-                        <Button to="/auth?register">{t('sing-up')}</Button>
+                        <Button to="/auth" variant="text">{ t('sing-in') }</Button>
+                        <Button to="/auth?register">{ t('sing-up') }</Button>
                     </div>
-                )}
+                ) }
             </div>
         </div>
     );

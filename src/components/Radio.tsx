@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const Radio: FC<IProps> = ({ label, id, name, checked, value, onChange }) => {
-    const [isTransition, setIsTransition] = useState<boolean>(false);
+    const [ isTransition, setIsTransition ] = useState<boolean>(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -37,14 +37,14 @@ const Radio: FC<IProps> = ({ label, id, name, checked, value, onChange }) => {
             <input
                 className="hidden"
                 type="radio"
-                id={id}
-                name={name}
-                value={value}
-                onChange={onChange}
+                id={ id }
+                name={ name }
+                value={ value }
+                onChange={ onChange }
             />
 
-            <label className={(checked ? " checked" : "") + (isTransition ? " transition" : "")} htmlFor={id}>
-                {label}
+            <label className={ (checked ? " checked" : "") + (isTransition ? " transition" : "") } htmlFor={ id }>
+                { label }
             </label>
         </div>
     );

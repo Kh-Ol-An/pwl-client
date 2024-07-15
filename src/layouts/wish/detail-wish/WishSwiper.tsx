@@ -19,8 +19,8 @@ interface IProps {
 const WishSwiper: FC<IProps> = ({ wish }) => {
     const { t } = useTranslation();
 
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+    const [ thumbsSwiper, setThumbsSwiper ] = useState(null);
+    const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     let slidesPerView = 3;
     screenWidth >= 390 && (slidesPerView = 4);
@@ -42,54 +42,54 @@ const WishSwiper: FC<IProps> = ({ wish }) => {
         <div className="wish-swiper">
             <Swiper
                 className="swiper-cube"
-                style={{
+                style={ {
                     '--swiper-navigation-color': StylesVariables.primaryColor,
-                }}
-                effect={wish.images.length > 1 && 'cube'}
-                grabCursor={true}
-                cubeEffect={{
+                } }
+                effect={ wish.images.length > 1 && 'cube' }
+                grabCursor={ true }
+                cubeEffect={ {
                     shadow: screenWidth >= 768,
                     slideShadows: false,
                     shadowOffset: 20,
                     shadowScale: 0.94,
-                }}
-                thumbs={{ swiper: thumbsSwiper }}
-                navigation={wish.images.length > 1}
-                modules={[EffectCube, FreeMode, Navigation, Thumbs]}
+                } }
+                thumbs={ { swiper: thumbsSwiper } }
+                navigation={ wish.images.length > 1 }
+                modules={ [ EffectCube, FreeMode, Navigation, Thumbs ] }
             >
-                {wish.images.map((image) => (
-                    <SwiperSlide key={image.id}>
+                { wish.images.map((image) => (
+                    <SwiperSlide key={ image.id }>
                         <img
-                            src={unencryptedData(image.path, wish.show)}
-                            alt={`${t('wish')} ${image.position}`}
+                            src={ unencryptedData(image.path, wish.show) }
+                            alt={ `${ t('wish') } ${ image.position }` }
                         />
                     </SwiperSlide>
-                ))}
+                )) }
             </Swiper>
 
-            {wish.images.length > 1 && (
+            { wish.images.length > 1 && (
                 <Swiper
                     className="swiper-nav"
-                    style={{
+                    style={ {
                         '--swiper-navigation-color': StylesVariables.primaryColor,
-                    }}
-                    spaceBetween={8}
-                    slidesPerView={slidesPerView}
-                    watchSlidesProgress={true}
-                    navigation={true}
-                    modules={[FreeMode, Navigation, Thumbs]}
-                    onSwiper={setThumbsSwiper}
+                    } }
+                    spaceBetween={ 8 }
+                    slidesPerView={ slidesPerView }
+                    watchSlidesProgress={ true }
+                    navigation={ true }
+                    modules={ [ FreeMode, Navigation, Thumbs ] }
+                    onSwiper={ setThumbsSwiper }
                 >
-                    {wish.images.map((image) => (
-                        <SwiperSlide key={image.id}>
+                    { wish.images.map((image) => (
+                        <SwiperSlide key={ image.id }>
                             <img
-                                src={unencryptedData(image.path, wish.show)}
-                                alt={`${t('wish')} ${image.position}`}
+                                src={ unencryptedData(image.path, wish.show) }
+                                alt={ `${ t('wish') } ${ image.position }` }
                             />
                         </SwiperSlide>
-                    ))}
+                    )) }
                 </Swiper>
-            )}
+            ) }
         </div>
     );
 };

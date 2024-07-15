@@ -20,9 +20,9 @@ const Wish: FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const [wish, setWish] = useState<IWish | null>(null);
-    const [userFullName, setUserFullName] = useState<string>('');
-    const [userAvatar, setUserAvatar] = useState<IUser['avatar']>('');
+    const [ wish, setWish ] = useState<IWish | null>(null);
+    const [ userFullName, setUserFullName ] = useState<string>('');
+    const [ userAvatar, setUserAvatar ] = useState<IUser['avatar']>('');
 
     const isURL = (str: string) => {
         try {
@@ -39,89 +39,89 @@ const Wish: FC = () => {
                 if (!response.payload) return;
 
                 setWish(response.payload.wish);
-                setUserFullName(`${response.payload.userFirstName} ${response.payload.userLastName}`);
+                setUserFullName(`${ response.payload.userFirstName } ${ response.payload.userLastName }`);
                 setUserAvatar(response.payload.userAvatar);
             });
     }, []);
 
     return (
-        <div className={"wish" + (myUser.user === null ? " logged-out" : "")}>
+        <div className={ "wish" + (myUser.user === null ? " logged-out" : "") }>
             <PageHeader />
 
-            {wish ? (
+            { wish ? (
                 <>
                     <div className="wish-head">
-                        {t('wish-page.created-by')}
+                        { t('wish-page.created-by') }
                         <div className="wish-head-user">
-                            <Avatar alt={userFullName} src={userAvatar} sx={{ width: 56, height: 56 }} />
-                            <span className="wish-head-user-name">{userFullName}</span>
+                            <Avatar alt={ userFullName } src={ userAvatar } sx={ { width: 56, height: 56 } } />
+                            <span className="wish-head-user-name">{ userFullName }</span>
                         </div>
                     </div>
 
-                    <h1 className="wish-title">{unencryptedData(wish.name, wish.show)}</h1>
+                    <h1 className="wish-title">{ unencryptedData(wish.name, wish.show) }</h1>
 
                     <div className="wish-content">
-                        {wish.images.length > 0 && <WishSwiper wish={wish} />}
+                        { wish.images.length > 0 && <WishSwiper wish={ wish } /> }
 
-                        <div className={"wish-wrap" + (wish.images.length > 1 ? " with-top" : "")}>
-                            {wish.price && (
+                        <div className={ "wish-wrap" + (wish.images.length > 1 ? " with-top" : "") }>
+                            { wish.price && (
                                 <div className="wish-box">
-                                    <span className="wish-label">{t('wish-page.price')}</span>
+                                    <span className="wish-label">{ t('wish-page.price') }</span>
                                     <span className="wish-data">
                                         {
                                             addingWhiteSpaces(unencryptedData(wish.price, wish.show))
                                         } {
-                                            unencryptedData(wish.currency, wish.show) || 'UAH'
-                                        }
+                                        unencryptedData(wish.currency, wish.show) || 'UAH'
+                                    }
                                     </span>
                                 </div>
-                            )}
+                            ) }
 
-                            {wish.addresses && wish.addresses.length > 0 && (
+                            { wish.addresses && wish.addresses.length > 0 && (
                                 <p className="wish-description">
-                                    <span className="label">{t('wish-page.address')}</span>
-                                    {wish.addresses.map((address, idx) => {
+                                    <span className="label">{ t('wish-page.address') }</span>
+                                    { wish.addresses.map((address, idx) => {
                                         const unencryptedAddress = unencryptedData(address.value, wish.show);
 
                                         if (isURL(unencryptedAddress)) {
                                             return (
-                                                <Fragment key={address.id}>
+                                                <Fragment key={ address.id }>
                                                     <a
                                                         className="link"
-                                                        href={unencryptedAddress}
-                                                        title={unencryptedAddress}
+                                                        href={ unencryptedAddress }
+                                                        title={ unencryptedAddress }
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                     >
-                                                        {unencryptedAddress}
-                                                        {wish.addresses && idx < wish.addresses.length - 1 && <br />}
+                                                        { unencryptedAddress }
+                                                        { wish.addresses && idx < wish.addresses.length - 1 && <br /> }
                                                     </a>
                                                 </Fragment>
                                             );
                                         }
 
                                         return (
-                                            <Fragment key={address.id}>
-                                                {unencryptedAddress}
-                                                {wish.addresses && idx < wish.addresses.length - 1 && <br />}
+                                            <Fragment key={ address.id }>
+                                                { unencryptedAddress }
+                                                { wish.addresses && idx < wish.addresses.length - 1 && <br /> }
                                             </Fragment>
                                         );
-                                    })}
+                                    }) }
                                 </p>
-                            )}
+                            ) }
 
-                            {wish.description && (
+                            { wish.description && (
                                 <p className="wish-description">
-                                    <span className="label">{t('wish-page.description')}</span>
-                                    <span className="value">{unencryptedData(wish.description, wish.show)}</span>
+                                    <span className="label">{ t('wish-page.description') }</span>
+                                    <span className="value">{ unencryptedData(wish.description, wish.show) }</span>
                                 </p>
-                            )}
+                            ) }
                         </div>
                     </div>
                 </>
             ) : (
-                <p className="wish-empty">{t('wish-page.empty')}</p>
-            )}
+                <p className="wish-empty">{ t('wish-page.empty') }</p>
+            ) }
         </div>
     );
 };

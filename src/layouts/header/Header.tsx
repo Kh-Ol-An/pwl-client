@@ -138,7 +138,10 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         }
                     >
                         <div className="header-popup">
-                            <Button variant="text" color="primary-color" type="button" onClick={ handleShowEditAccount }>
+                            <Button variant="text"
+                                    color="primary-color"
+                                    type="button"
+                                    onClick={ handleShowEditAccount }>
                                 <ManageAccountsIcon />
                                 { t('main-page.account_settings') }
                             </Button>

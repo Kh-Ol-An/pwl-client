@@ -32,7 +32,7 @@ const SingUp: FC = () => {
     } = useForm<Inputs>();
 
     const handleSingUp = async () => {
-        await dispatch(setCandidate({ firstName: getValues('firstName'), email: getValues('email')}))
+        await dispatch(setCandidate({ firstName: getValues('firstName'), email: getValues('email') }))
         navigate('/auth?register');
     }
 

@@ -17,12 +17,12 @@ const NotFound: FC = () => {
                 </div>
 
                 <div className="content">
-                    <h1 className="title">{t('not-found-page.title')}</h1>
+                    <h1 className="title">{ t('not-found-page.title') }</h1>
                     <h2 className="sub-title">404</h2>
-                    <p className="text">{t('not-found-page.text')}</p>
-                    <p className="sub-text">{t('not-found-page.sub-text')}</p>
+                    <p className="text">{ t('not-found-page.text') }</p>
+                    <p className="sub-text">{ t('not-found-page.sub-text') }</p>
                     <br />
-                    <Button to="/">{t('not-found-page.to-main')}</Button>
+                    <Button to="/">{ t('not-found-page.to-main') }</Button>
                 </div>
             </div>
         </div>

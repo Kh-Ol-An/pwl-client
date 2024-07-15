@@ -16,26 +16,26 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
 
     let show = (
         <>
-            {t('main-page.show-all-1')} <span className="accent">
-                {t('main-page.show-all-2')}
-            </span> {t('main-page.show-all-3')}
+            { t('main-page.show-all-1') } <span className="accent">
+                { t('main-page.show-all-2') }
+            </span> { t('main-page.show-all-3') }
         </>
     );
     wish.show === 'friends' && (
         show = (
             <>
-                {t('main-page.show-friends-1')} <span className="accent">
-                    {t('main-page.show-friends-2')}
-                </span> {t('main-page.show-friends-3')}
+                { t('main-page.show-friends-1') } <span className="accent">
+                    { t('main-page.show-friends-2') }
+                </span> { t('main-page.show-friends-3') }
             </>
         )
     );
     wish.show === 'nobody' && (
         show = (
             <>
-                {t('main-page.show-nobody-1')} <span className="accent">
-                    {t('main-page.show-nobody-2')}
-                </span> {t('main-page.show-nobody-3')}
+                { t('main-page.show-nobody-1') } <span className="accent">
+                    { t('main-page.show-nobody-2') }
+                </span> { t('main-page.show-nobody-3') }
             </>
         )
     );
@@ -57,74 +57,74 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
         <>
             <div className="detail-wish-title">
                 <h3 className="detail-wish-name">
-                    {unencryptedData(wish.name, wish.show)}
+                    { unencryptedData(wish.name, wish.show) }
                 </h3>
 
-                {myUserId === wish.userId && (
-                    <ShareButton link={`wish/${wish.id}`} wishShow={wish.show} />
-                )}
+                { myUserId === wish.userId && (
+                    <ShareButton link={ `wish/${ wish.id }` } wishShow={ wish.show } />
+                ) }
             </div>
 
-            {showRow && (
+            { showRow && (
                 <div className="detail-wish-row">
-                    {myUserId === wish.userId && (
-                        <p className="detail-wish-label">{show}</p>
-                    )}
+                    { myUserId === wish.userId && (
+                        <p className="detail-wish-label">{ show }</p>
+                    ) }
 
-                    {wish.price && (
+                    { wish.price && (
                         <div className="detail-wish-box">
-                            <span className="detail-wish-label">{t('wish-page.price')}</span>
+                            <span className="detail-wish-label">{ t('wish-page.price') }</span>
                             <span className="detail-wish-data">
                                 {
                                     addingWhiteSpaces(unencryptedData(wish.price, wish.show))
                                 } {
-                                    unencryptedData(wish.currency, wish.show) || 'UAH'
-                                }
+                                unencryptedData(wish.currency, wish.show) || 'UAH'
+                            }
                             </span>
                         </div>
-                    )}
+                    ) }
                 </div>
-            )}
+            ) }
 
-            {wish.addresses && wish.addresses.length > 0 && (
+            { wish.addresses && wish.addresses.length > 0 && (
                 <p className="detail-wish-description">
-                    <span className="label">{t('wish-page.address')}</span>
-                    {wish.addresses.map((address, idx) => {
+                    <span className="label">{ t('wish-page.address') }</span>
+                    { wish.addresses.map((address, idx) => {
                         const unencryptedAddress = unencryptedData(address.value, wish.show);
 
                         if (isURL(unencryptedAddress)) {
                             return (
-                                <Fragment key={address.id}>
+                                <Fragment key={ address.id }>
                                     <a
                                         className="link"
-                                        href={unencryptedAddress}
-                                        title={unencryptedAddress}
+                                        href={ unencryptedAddress }
+                                        title={ unencryptedAddress }
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        {unencryptedAddress}
+                                        { unencryptedAddress }
                                     </a>
-                                    {wish.addresses && idx < wish.addresses.length - 1 && <br />}
+                                    { wish.addresses && idx < wish.addresses.length - 1 && <br /> }
                                 </Fragment>
                             );
                         }
 
                         return (
-                            <Fragment key={address.id}>
-                                {unencryptedAddress}
-                                {wish.addresses && idx < wish.addresses.length - 1 && <br />}
+                            <Fragment key={ address.id }>
+                                { unencryptedAddress }
+                                { wish.addresses && idx < wish.addresses.length - 1 && <br /> }
                             </Fragment>
                         );
-                    })}
+                    }) }
                 </p>
-            )}
+            ) }
 
-            {wish.description && (
+            { wish.description && (
                 <p className="detail-wish-description">
-                    <span className="label">{t('wish-page.description')}</span>
-                    <span className="value">{unencryptedData(wish.description, wish.show)}</span>
+                    <span className="label">{ t('wish-page.description') }</span>
+                    <span className="value">{ unencryptedData(wish.description, wish.show) }</span>
                 </p>
-            )}
+            ) }
         </>
     );
 };

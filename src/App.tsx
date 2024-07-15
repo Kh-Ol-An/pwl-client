@@ -26,7 +26,7 @@ const App: FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const [ready, setReady] = useState<boolean>(false);
+    const [ ready, setReady ] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(checkAuth())
@@ -47,32 +47,32 @@ const App: FC = () => {
             await requestNotificationPermission(myUserId);
         };
         setSettings();
-    }, [myUser.user]);
+    }, [ myUser.user ]);
 
     return (
-        <ThemeProvider theme={theme}>
-            {myUser.isLoading && <Loading />}
+        <ThemeProvider theme={ theme }>
+            { myUser.isLoading && <Loading /> }
 
-            {ready && (
+            { ready && (
                 <Routes>
-                    <Route element={<RoutesGuard guard={myUser.user !== null} redirectPath="/auth" />}>
-                        {privateRoutes.map(({ path, component }) => (
-                            <Route key={path} path={path} element={createElement(component)} />
-                        ))}
+                    <Route element={ <RoutesGuard guard={ myUser.user !== null } redirectPath="/auth" /> }>
+                        { privateRoutes.map(({ path, component }) => (
+                            <Route key={ path } path={ path } element={ createElement(component) } />
+                        )) }
                     </Route>
-                    <Route element={<RoutesGuard guard={myUser.user === null} redirectPath="/" />}>
-                        {unauthenticatedRoutes.map(({ path, component }) => (
-                            <Route key={path} path={path} element={createElement(component)} />
-                        ))}
+                    <Route element={ <RoutesGuard guard={ myUser.user === null } redirectPath="/" /> }>
+                        { unauthenticatedRoutes.map(({ path, component }) => (
+                            <Route key={ path } path={ path } element={ createElement(component) } />
+                        )) }
                     </Route>
 
-                    {publicRoutes.map(({ path, component }) => (
-                        <Route key={path} path={path} element={createElement(component)} />
-                    ))}
+                    { publicRoutes.map(({ path, component }) => (
+                        <Route key={ path } path={ path } element={ createElement(component) } />
+                    )) }
                 </Routes>
-            )}
+            ) }
 
-            <ToastContainer theme="dark" bodyClassName={() => "toast-body"} />
+            <ToastContainer theme="dark" bodyClassName={ () => "toast-body" } />
         </ThemeProvider>
     );
 };

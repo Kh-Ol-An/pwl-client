@@ -33,11 +33,11 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
 
     const dispatch = useAppDispatch();
 
-    const [bookEnd, setBookEnd] = useState<Dayjs | null>(null);
-    const [bookEndError, setBookEndError] = useState<DateValidationError | null>(null);
-    const [show, setShow] = useState<boolean>(false);
-    const [clickedOnBookWish, setClickedOnBookWish] = useState<boolean>(false);
-    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+    const [ bookEnd, setBookEnd ] = useState<Dayjs | null>(null);
+    const [ bookEndError, setBookEndError ] = useState<DateValidationError | null>(null);
+    const [ show, setShow ] = useState<boolean>(false);
+    const [ clickedOnBookWish, setClickedOnBookWish ] = useState<boolean>(false);
+    const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     const birthdayErrorMessage = useMemo(() => {
         if (!clickedOnBookWish) return;
@@ -52,7 +52,7 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
                 return t('main-page.book-end-errors.past');
             }
             case 'maxDate': {
-                return t(`main-page.book-end-errors.max.${userId === wish.userId ? 'my' : 'another'}`);
+                return t(`main-page.book-end-errors.max.${ userId === wish.userId ? 'my' : 'another' }`);
             }
             case 'invalidDate': {
                 return t('main-page.book-end-errors.invalid');
@@ -61,7 +61,7 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
                 return '';
             }
         }
-    }, [clickedOnBookWish, bookEnd, bookEndError]);
+    }, [ clickedOnBookWish, bookEnd, bookEndError ]);
 
     const handleSubmit = async () => {
         setClickedOnBookWish(true);
@@ -69,13 +69,17 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
         if (!myUser || !bookEnd || (bookEndError && bookEndError.length > 0)) return;
 
         try {
-            const response = await dispatch(bookWish({ userId: myUser.id, wishId: wish.id, end: bookEnd.add(1, 'day').format() }));
+            const response = await dispatch(bookWish({
+                userId: myUser.id,
+                wishId: wish.id,
+                end: bookEnd.add(1, 'day').format()
+            }));
             const quote = (response.payload as IWishWithQuote).quote[getLang()];
             toast(
                 <QuoteMessage
-                    title={t('alerts.wishes-api.book-wish.success')}
-                    text={quote?.text}
-                    author={quote?.author}
+                    title={ t('alerts.wishes-api.book-wish.success') }
+                    text={ quote?.text }
+                    author={ quote?.author }
                 />,
                 { type: 'success' },
             );
@@ -116,19 +120,19 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
                 type="button"
                 variant="text"
                 color="primary-color"
-                onClick={() => setShow(true)}
+                onClick={ () => setShow(true) }
             >
-                {t('main-page.will-fulfill')}
+                { t('main-page.will-fulfill') }
             </Button>
 
             <ConfirmModal
-                show={show}
-                confirmText={t('main-page.confirm-intention')}
-                close={handleHide}
-                confirm={handleSubmit}
+                show={ show }
+                confirmText={ t('main-page.confirm-intention') }
+                close={ handleHide }
+                confirm={ handleSubmit }
             >
                 <p className="text-lg">
-                    {t('main-page.i-intend', { name: unencryptedData(wish.name, wish.show) })}
+                    { t('main-page.i-intend', { name: unencryptedData(wish.name, wish.show) }) }
                 </p>
 
                 <div
@@ -138,40 +142,40 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
                         + (bookEnd === null ? " error" : "")
                     }
                 >
-                    <DemoContainer components={['DesktopDatePicker']}>
+                    <DemoContainer components={ [ 'DesktopDatePicker' ] }>
                         <DesktopDatePicker
-                            label={t('main-page.including')}
-                            format={getFullShortDate()}
-                            dayOfWeekFormatter={(weekday) => weekday}
+                            label={ t('main-page.including') }
+                            format={ getFullShortDate() }
+                            dayOfWeekFormatter={ (weekday) => weekday }
                             disablePast
-                            maxDate={dayjs().add(userId === wish.userId ? 10 : 1, 'year')} // Дозволити вибір дати тільки на рік вперед
-                            value={bookEnd}
-                            onChange={handleChangeDate}
-                            onError={(newError) => setBookEndError(newError)}
-                            slotProps={{
+                            maxDate={ dayjs().add(userId === wish.userId ? 10 : 1, 'year') } // Дозволити вибір дати тільки на рік вперед
+                            value={ bookEnd }
+                            onChange={ handleChangeDate }
+                            onError={ (newError) => setBookEndError(newError) }
+                            slotProps={ {
                                 textField: {
                                     helperText: birthdayErrorMessage,
                                 },
-                            }}
+                            } }
                         />
                     </DemoContainer>
                 </div>
 
                 <p className="text book-wish-text">
-                    {t('main-page.after_you_confirm')}
+                    { t('main-page.after_you_confirm') }
                     <span
                         className="tooltip detail-wish-book-tooltip"
                         data-tooltip-id="book-wish"
-                        data-tooltip-content={t('main-page.by_declaring')}
+                        data-tooltip-content={ t('main-page.by_declaring') }
                     >
-                        <InfoIcon sx={{ color: StylesVariables.specialColor }} />
+                        <InfoIcon sx={ { color: StylesVariables.specialColor } } />
                     </span>
                 </p>
 
                 <Tooltip
                     id="book-wish"
-                    opacity={1}
-                    style={getTooltipStyles(screenWidth)}
+                    opacity={ 1 }
+                    style={ getTooltipStyles(screenWidth) }
                 />
             </ConfirmModal>
         </>

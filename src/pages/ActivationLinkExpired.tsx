@@ -20,19 +20,19 @@ const ActivationLinkExpired = () => {
                 <LanguageSelection />
 
                 <div>
-                    <Button variant="text" onClick={() => dispatch(logout())}>
+                    <Button variant="text" onClick={ () => dispatch(logout()) }>
                         <LogoutIcon />
-                        <span className="logout-text">{t('logout')}</span>
+                        <span className="logout-text">{ t('logout') }</span>
                     </Button>
                 </div>
             </div>
 
             <p className="content">
-                {t('activation-link-expired-page.expired')}
-                <br/>
-                {t('activation-link-expired-page.utc')}
-                <br/>
-                {t('activation-link-expired-page.again')}
+                { t('activation-link-expired-page.expired') }
+                <br />
+                { t('activation-link-expired-page.utc') }
+                <br />
+                { t('activation-link-expired-page.again') }
             </p>
         </div>
     );

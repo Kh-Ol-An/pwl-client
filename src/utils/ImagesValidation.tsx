@@ -22,7 +22,7 @@ const ImagesValidation: FC<IProps> = ({ images }) => {
     if (extensionsValidation) {
         return (
             <p className="error">
-                {t('images-error.file-type')} {Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ')}.
+                { t('images-error.file-type') } { Object.keys(ALLOWED_FILE_EXTENSIONS).join(', ') }.
             </p>
         );
     }
@@ -40,7 +40,7 @@ const ImagesValidation: FC<IProps> = ({ images }) => {
     if (sizeValidation) {
         return (
             <p className="error">
-                {t('images-error.file-size', { size: ALLOWED_MAX_FILE_SIZE_IN_MB })}
+                { t('images-error.file-size', { size: ALLOWED_MAX_FILE_SIZE_IN_MB }) }
             </p>
         );
     }
@@ -54,12 +54,12 @@ const ImagesValidation: FC<IProps> = ({ images }) => {
     if (imagesLength > MAX_NUMBER_OF_IMAGES_PER_WISH) {
         return (
             <p className="error">
-                {t('images-error.file-count', { count: MAX_NUMBER_OF_IMAGES_PER_WISH })}
+                { t('images-error.file-count', { count: MAX_NUMBER_OF_IMAGES_PER_WISH }) }
             </p>
         );
     }
 
-   return null;
+    return null;
 };
 
 export default ImagesValidation;

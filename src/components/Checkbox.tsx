@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const Checkbox: FC<IProps> = ({ id, name, checked, value, onChange, children }) => {
-    const [isTransition, setIsTransition] = useState<boolean>(false);
+    const [ isTransition, setIsTransition ] = useState<boolean>(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -37,15 +37,15 @@ const Checkbox: FC<IProps> = ({ id, name, checked, value, onChange, children }) 
             <input
                 className="hidden"
                 type="checkbox"
-                id={id}
-                name={name}
-                checked={checked}
-                value={value}
-                onChange={onChange}
+                id={ id }
+                name={ name }
+                checked={ checked }
+                value={ value }
+                onChange={ onChange }
             />
 
-            <label htmlFor={id}>
-                {children}
+            <label htmlFor={ id }>
+                { children }
             </label>
         </div>
     );

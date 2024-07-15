@@ -12,15 +12,22 @@ interface IProps {
     children: ReactNode;
 }
 
-const CustomAccordion: FC<IProps> = ({ defaultExpanded = false, ariaControls, titleId, title, contentId, children }) => {
+const CustomAccordion: FC<IProps> = ({
+                                         defaultExpanded = false,
+                                         ariaControls,
+                                         titleId,
+                                         title,
+                                         contentId,
+                                         children
+                                     }) => {
     return (
-        <Accordion defaultExpanded={defaultExpanded} sx={{ backgroundColor: StylesVariables.accentColor }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={ariaControls} id={titleId}>
-                <h2>{title}</h2>
+        <Accordion defaultExpanded={ defaultExpanded } sx={ { backgroundColor: StylesVariables.accentColor } }>
+            <AccordionSummary expandIcon={ <ExpandMoreIcon /> } aria-controls={ ariaControls } id={ titleId }>
+                <h2>{ title }</h2>
             </AccordionSummary>
 
-            <AccordionDetails id={contentId}>
-                {children}
+            <AccordionDetails id={ contentId }>
+                { children }
             </AccordionDetails>
         </Accordion>
     );

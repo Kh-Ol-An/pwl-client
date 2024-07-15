@@ -21,7 +21,7 @@ const options: IOption[] = [
     {
         label: (
             <>
-                <UA title="Ukraine" className="flag-icon"/>
+                <UA title="Ukraine" className="flag-icon" />
                 <span className="lang-text">Укр</span>
             </>
         ),
@@ -34,7 +34,7 @@ const LanguageSelection: FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const [lang, setLang] = useState<IUser['lang']>(getLang());
+    const [ lang, setLang ] = useState<IUser['lang']>(getLang());
 
     const handleChangeLanguage = async (value: IOption['value']) => {
         try {
@@ -58,9 +58,9 @@ const LanguageSelection: FC = () => {
     return (
         <div className="language-selection">
             <CustomSelect
-                options={options}
-                value={lang}
-                onChange={handleChangeLanguage}
+                options={ options }
+                value={ lang }
+                onChange={ handleChangeLanguage }
             />
         </div>
     );

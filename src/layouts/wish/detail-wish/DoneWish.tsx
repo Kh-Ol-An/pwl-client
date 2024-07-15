@@ -21,7 +21,7 @@ const DoneWish: FC<IProps> = ({ wish, userId, whoseWish, close }) => {
 
     const dispatch = useAppDispatch();
 
-    const [show, setShow] = useState<boolean>(false);
+    const [ show, setShow ] = useState<boolean>(false);
 
     const handleSubmit = async () => {
         if (!userId) return;
@@ -36,19 +36,19 @@ const DoneWish: FC<IProps> = ({ wish, userId, whoseWish, close }) => {
                 type="button"
                 variant="text"
                 color="primary-color"
-                onClick={() => setShow(true)}
+                onClick={ () => setShow(true) }
             >
-                {t('main-page.wish-fulfilled')}
+                { t('main-page.wish-fulfilled') }
             </Button>
 
             <ConfirmModal
-                show={show}
-                confirmText={t('main-page.wish-fulfilled')}
-                close={() => setShow(false)}
-                confirm={handleSubmit}
+                show={ show }
+                confirmText={ t('main-page.wish-fulfilled') }
+                close={ () => setShow(false) }
+                confirm={ handleSubmit }
             >
                 <p className="text-lg">
-                    {t('main-page.sure-fulfilled', { name: unencryptedData(wish.name, wish.show) })}
+                    { t('main-page.sure-fulfilled', { name: unencryptedData(wish.name, wish.show) }) }
                 </p>
             </ConfirmModal>
         </>

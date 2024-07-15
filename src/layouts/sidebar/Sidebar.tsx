@@ -33,9 +33,9 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
 
     const dispatch = useAppDispatch();
 
-    const [firstLoad, setFirstLoad] = useState<boolean>(true);
-    const [userType, setUserType] = useState<ISendUsersParams['userType']>('all');
-    const [search, setSearch] = useState<string>('');
+    const [ firstLoad, setFirstLoad ] = useState<boolean>(true);
+    const [ userType, setUserType ] = useState<ISendUsersParams['userType']>('all');
+    const [ search, setSearch ] = useState<string>('');
 
     const userListRef = useRef<HTMLDivElement>(null);
 
@@ -81,7 +81,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
 
         if (!inView || !myUser || users.stopRequests) return;
         dispatch(addUsers({ page: users.page, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
-    }, [inView]);
+    }, [ inView ]);
 
     useEffect(() => {
         if (firstLoad) {
@@ -92,14 +92,14 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
         if (!myUser || myUser.id === selectedUserId || users.list.some(user => user.id === selectedUserId)) return;
         dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
         dispatch(selectUserId(myUser.id));
-    }, [users.list]);
+    }, [ users.list ]);
 
     return (
-        <div className={"sidebar" + (showSidebar ? " show" : "")}>
+        <div className={ "sidebar" + (showSidebar ? " show" : "") }>
             <div className="sidebar-inner">
                 <div className="sidebar-content">
                     <div className="sidebar-head">
-                        <h2 className="sidebar-title">{t('main-page.users')}</h2>
+                        <h2 className="sidebar-title">{ t('main-page.users') }</h2>
 
                         <ShareButton link="welcome" />
                     </div>
@@ -109,52 +109,54 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                             <Select
                                 id="sidebar-user-type"
                                 variant="standard"
-                                sx={{ padding: '0 10px', color: StylesVariables.primaryColor }}
-                                value={userType}
-                                onChange={handleChangeUserType}
+                                sx={ { padding: '0 10px', color: StylesVariables.primaryColor } }
+                                value={ userType }
+                                onChange={ handleChangeUserType }
                             >
-                                <MenuItem value="all">{t('main-page.all')}</MenuItem>
-                                <MenuItem value="friends">{t('main-page.friends')}</MenuItem>
+                                <MenuItem value="all">{ t('main-page.all') }</MenuItem>
+                                <MenuItem value="friends">{ t('main-page.friends') }</MenuItem>
                                 <MenuItem value="followFrom">
                                     <span className="sidebar-user-type-item">
-                                        {t('main-page.friend-requests')}
-                                        {users.followFromCount > 0 && (
-                                            <span className="count">{users.followFromCount}</span>
-                                        )}
+                                        { t('main-page.friend-requests') }
+                                        { users.followFromCount > 0 && (
+                                            <span className="count">{ users.followFromCount }</span>
+                                        ) }
                                     </span>
                                 </MenuItem>
-                                <MenuItem value="followTo">{t('main-page.sent-friend-requests')}</MenuItem>
+                                <MenuItem value="followTo">{ t('main-page.sent-friend-requests') }</MenuItem>
                             </Select>
 
-                            {users.followFromCount > 0 && (
-                                <span className="count">{users.followFromCount}</span>
-                            )}
+                            { users.followFromCount > 0 && (
+                                <span className="count">{ users.followFromCount }</span>
+                            ) }
                         </div>
                     </div>
 
                     <div className="sidebar-search">
-                        <Search id="search" label={t('main-page.users-search')} changeSearchBar={handleChangeSearchBar} />
+                        <Search id="search"
+                                label={ t('main-page.users-search') }
+                                changeSearchBar={ handleChangeSearchBar } />
                     </div>
 
-                    <div className="user-list" ref={userListRef}>
+                    <div className="user-list" ref={ userListRef }>
                         <ul className="list">
-                            {users.list.map(user => (
+                            { users.list.map(user => (
                                 <UserAction
-                                    key={user.id}
-                                    user={user}
-                                    updateUsers={updateUsers}
-                                    hideSidebar={hideSidebar}
+                                    key={ user.id }
+                                    user={ user }
+                                    updateUsers={ updateUsers }
+                                    hideSidebar={ hideSidebar }
                                 />
-                            ))}
+                            )) }
                         </ul>
 
                         <div
                             className="observable-element"
-                            style={{ display: users.stopRequests ? 'none' : 'block' }}
-                            ref={ref}
+                            style={ { display: users.stopRequests ? 'none' : 'block' } }
+                            ref={ ref }
                         ></div>
 
-                        {users.isLoading && <Loading isLocal />}
+                        { users.isLoading && <Loading isLocal /> }
                     </div>
                 </div>
             </div>

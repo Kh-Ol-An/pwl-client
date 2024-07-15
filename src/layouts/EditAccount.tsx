@@ -48,11 +48,11 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
-    const [avatar, setAvatar] = useState<TCurrentAvatar>('');
-    const [birthday, setBirthday] = useState<Dayjs | null>(null);
-    const [birthdayError, setBirthdayError] = useState<DateValidationError | null>(null);
-    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+    const [ clickedOnSubmit, setClickedOnSubmit ] = useState<boolean>(false);
+    const [ avatar, setAvatar ] = useState<TCurrentAvatar>('');
+    const [ birthday, setBirthday ] = useState<Dayjs | null>(null);
+    const [ birthdayError, setBirthdayError ] = useState<DateValidationError | null>(null);
+    const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     const birthdayErrorMessage = useMemo(() => {
         if (!clickedOnSubmit) return;
@@ -71,7 +71,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
                 return '';
             }
         }
-    }, [clickedOnSubmit, birthdayError]);
+    }, [ clickedOnSubmit, birthdayError ]);
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         setClickedOnSubmit(true);
@@ -117,7 +117,7 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
         setAvatar(myUser.avatar || '');
         myUser.deliveryAddress && setValue('deliveryAddress', myUser.deliveryAddress);
         myUser.birthday && setBirthday(dayjs(myUser.birthday));
-    }, [myUser, setValue]);
+    }, [ myUser, setValue ]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -132,23 +132,23 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
     }, []);
 
     return (
-        <form className="edit-account" onSubmit={handleSubmit(onSubmit)}>
+        <form className="edit-account" onSubmit={ handleSubmit(onSubmit) }>
             <Input
-                {...register("firstName", accountFirstNameValidation)}
+                { ...register("firstName", accountFirstNameValidation) }
                 id="firstName"
                 name="firstName"
                 type="text"
-                label={t('first-name')}
-                error={errors?.firstName?.message}
+                label={ t('first-name') }
+                error={ errors?.firstName?.message }
             />
 
             <Input
-                {...register("lastName", accountLastNameValidation)}
+                { ...register("lastName", accountLastNameValidation) }
                 id="lastName"
                 name="lastName"
                 type="text"
-                label={t('last-name')}
-                error={errors?.lastName?.message}
+                label={ t('last-name') }
+                error={ errors?.lastName?.message }
             />
 
             <div className="avatar-box">
@@ -157,75 +157,75 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
                         <input
                             className="hidden"
                             id="avatar"
-                            ref={inputRef}
-                            accept={Object.values(ALLOWED_FILE_EXTENSIONS).join(",")}
+                            ref={ inputRef }
+                            accept={ Object.values(ALLOWED_FILE_EXTENSIONS).join(",") }
                             type="file"
-                            onChange={(e) => {
+                            onChange={ (e) => {
                                 const file = e.target.files?.[0];
                                 if (!file) return;
 
                                 setAvatar(file);
-                            }}
+                            } }
                         />
                         <Avatar
-                            sx={{ cursor: 'pointer', width: '100%', height: '100%' }}
-                            src={showAvatar()} alt={`${myUser?.firstName} ${myUser?.lastName}`}
+                            sx={ { cursor: 'pointer', width: '100%', height: '100%' } }
+                            src={ showAvatar() } alt={ `${ myUser?.firstName } ${ myUser?.lastName }` }
                         />
                     </label>
 
-                    {(avatar instanceof File || (avatar.length > 0 && avatar !== 'delete')) && (
-                        <button className="remove" type="button" onClick={removeAvatar}>
-                            <CancelIcon sx={{ color: StylesVariables.actionColor }} />
+                    { (avatar instanceof File || (avatar.length > 0 && avatar !== 'delete')) && (
+                        <button className="remove" type="button" onClick={ removeAvatar }>
+                            <CancelIcon sx={ { color: StylesVariables.actionColor } } />
                         </button>
-                    )}
+                    ) }
                 </div>
 
-                <AvatarValidation avatar={avatar} />
+                <AvatarValidation avatar={ avatar } />
             </div>
 
             <Input
-                {...register("deliveryAddress", accountDeliveryAddress)}
+                { ...register("deliveryAddress", accountDeliveryAddress) }
                 id="deliveryAddress"
                 name="deliveryAddress"
                 type="text"
-                label={t('main-page.delivery-address')}
-                tooltip={t('main-page.delivery-address-tooltip')}
-                error={errors?.deliveryAddress?.message}
+                label={ t('main-page.delivery-address') }
+                tooltip={ t('main-page.delivery-address-tooltip') }
+                error={ errors?.deliveryAddress?.message }
             />
             <Tooltip
                 id="deliveryAddress"
-                style={getTooltipStyles(screenWidth)}
+                style={ getTooltipStyles(screenWidth) }
             />
 
             <div
-                className={"date-picker" + (clickedOnSubmit ? " clicked-on-submit" : "")}
-                title={t('main-page.when_your_birth')}
+                className={ "date-picker" + (clickedOnSubmit ? " clicked-on-submit" : "") }
+                title={ t('main-page.when_your_birth') }
             >
-                <DemoContainer components={['DesktopDatePicker']}>
+                <DemoContainer components={ [ 'DesktopDatePicker' ] }>
                     <DesktopDatePicker
-                        label={t('main-page.birthday*')}
-                        format={getFullShortDate()}
-                        dayOfWeekFormatter={(weekday) => weekday}
-                        minDate={dayjs().subtract(120, 'years')} // Дозволити вибір дати до 120 років в минулому
+                        label={ t('main-page.birthday*') }
+                        format={ getFullShortDate() }
+                        dayOfWeekFormatter={ (weekday) => weekday }
+                        minDate={ dayjs().subtract(120, 'years') } // Дозволити вибір дати до 120 років в минулому
                         disableFuture
-                        value={birthday}
-                        onChange={(value) => setBirthday(value)}
-                        onError={(newError) => setBirthdayError(newError)}
-                        slotProps={{
+                        value={ birthday }
+                        onChange={ (value) => setBirthday(value) }
+                        onError={ (newError) => setBirthdayError(newError) }
+                        slotProps={ {
                             textField: {
                                 helperText: birthdayErrorMessage,
                             },
-                        }}
+                        } }
                     />
                 </DemoContainer>
             </div>
 
             <div className="actions">
-                <Button type="button" variant="text" color="action-color" onClick={handleShowConfirmDeleteMyUser}>
-                    {t('main-page.delete-account')}
+                <Button type="button" variant="text" color="action-color" onClick={ handleShowConfirmDeleteMyUser }>
+                    { t('main-page.delete-account') }
                 </Button>
 
-                <Button type="submit">{t('main-page.update')}</Button>
+                <Button type="submit">{ t('main-page.update') }</Button>
             </div>
         </form>
     );

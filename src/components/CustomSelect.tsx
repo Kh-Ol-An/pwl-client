@@ -13,8 +13,8 @@ interface IProps {
 }
 
 const CustomSelect: FC<IProps> = ({ options, value, onChange }) => {
-    const [show, setShow] = useState<boolean>(false);
-    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+    const [ show, setShow ] = useState<boolean>(false);
+    const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -51,26 +51,28 @@ const CustomSelect: FC<IProps> = ({ options, value, onChange }) => {
 
     return (
         <div
-            className={"custom-select" + (show ? " show" : "")}
-            ref={containerRef}
+            className={ "custom-select" + (show ? " show" : "") }
+            ref={ containerRef }
         >
-            <button className="select-action" type="button" onClick={handleClick}>
-                {options.find((option) => option.value === value)?.label || options[0].label}
-                {screenWidth >= 768 && <KeyboardArrowDownIcon className="arrow-icon"/>}
+            <button className="select-action" type="button" onClick={ handleClick }>
+                { options.find((option) => option.value === value)?.label || options[0].label }
+                { screenWidth >= 768 && <KeyboardArrowDownIcon className="arrow-icon" /> }
             </button>
 
             <ul className="select-options">
-                {options.map((option) => {
+                { options.map((option) => {
                     if (option.value === value) return null;
 
                     return (
-                        <li key={option.value}>
-                            <button className="select-item" type="button" onClick={() => handleOptionChange(option.value)}>
-                                {option.label}
+                        <li key={ option.value }>
+                            <button className="select-item"
+                                    type="button"
+                                    onClick={ () => handleOptionChange(option.value) }>
+                                { option.label }
                             </button>
                         </li>
                     )
-                })}
+                }) }
             </ul>
         </div>
     );

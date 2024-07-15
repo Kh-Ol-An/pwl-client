@@ -21,18 +21,18 @@ interface IProps {
 }
 
 const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IProps>(({
-    id,
-    name,
-    type,
-    label,
-    tooltip,
-    value,
-    error,
-    clear,
-    onChange,
-    ...props
-}, ref) => {
-    const [showPassword, setShowPassword] = useState<boolean>(false);
+                                                                                          id,
+                                                                                          name,
+                                                                                          type,
+                                                                                          label,
+                                                                                          tooltip,
+                                                                                          value,
+                                                                                          error,
+                                                                                          clear,
+                                                                                          onChange,
+                                                                                          ...props
+                                                                                      }, ref) => {
+    const [ showPassword, setShowPassword ] = useState<boolean>(false);
 
     const getTypes = (type: string) => {
         switch (type) {
@@ -47,83 +47,83 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
 
     return (
         <div className="input">
-            <div className={"wrap" + (type === 'multiline' ? " with-bg" : "")}>
+            <div className={ "wrap" + (type === 'multiline' ? " with-bg" : "") }>
                 {
                     type === 'multiline'
                         ? <textarea
-                              ref={ref as Ref<HTMLTextAreaElement>}
-                              id={id}
-                              name={name}
-                              placeholder="hidden"
-                              value={value}
-                              onChange={onChange}
-                              {...props}
-                          />
+                            ref={ ref as Ref<HTMLTextAreaElement> }
+                            id={ id }
+                            name={ name }
+                            placeholder="hidden"
+                            value={ value }
+                            onChange={ onChange }
+                            { ...props }
+                        />
                         : <input
-                              className={type === 'password' ? 'with-icon' : ''}
-                              ref={ref as Ref<HTMLInputElement>}
-                              id={id}
-                              name={name}
-                              type={getTypes(type)}
-                              inputMode={type === 'number' ? 'numeric' : 'text'}
-                              autoComplete={type}
-                              placeholder="hidden"
-                              value={value}
-                              onChange={(e) => {
-                                  if (type === 'number') {
-                                      e.target.value = addingWhiteSpaces(e.target.value);
-                                  }
-                                  onChange && onChange(e);
-                              }}
-                              {...props}
-                          />
+                            className={ type === 'password' ? 'with-icon' : '' }
+                            ref={ ref as Ref<HTMLInputElement> }
+                            id={ id }
+                            name={ name }
+                            type={ getTypes(type) }
+                            inputMode={ type === 'number' ? 'numeric' : 'text' }
+                            autoComplete={ type }
+                            placeholder="hidden"
+                            value={ value }
+                            onChange={ (e) => {
+                                if (type === 'number') {
+                                    e.target.value = addingWhiteSpaces(e.target.value);
+                                }
+                                onChange && onChange(e);
+                            } }
+                            { ...props }
+                        />
                 }
 
-                {type === 'password' && (
-                    <button type="button" onClick={() => setShowPassword(prevState => !prevState)}>
-                        {showPassword ?
-                            <VisibilityOffIcon sx={{ color: StylesVariables.accentColor }} /> :
-                            <VisibilityIcon sx={{ color: StylesVariables.accentColor }} />}
+                { type === 'password' && (
+                    <button type="button" onClick={ () => setShowPassword(prevState => !prevState) }>
+                        { showPassword ?
+                            <VisibilityOffIcon sx={ { color: StylesVariables.accentColor } } /> :
+                            <VisibilityIcon sx={ { color: StylesVariables.accentColor } } /> }
                     </button>
-                )}
+                ) }
 
-                {type === 'search' && (
+                { type === 'search' && (
                     <>
-                        {value && value.length > 0 ? (
-                            <button className="clear" type="button" onClick={clear}>
+                        { value && value.length > 0 ? (
+                            <button className="clear" type="button" onClick={ clear }>
                                 +
                             </button>
                         ) : (
                             <>
                                 <div className="search-icon default">
-                                    <SearchIcon sx={{ color: StylesVariables.primaryColor }} />
+                                    <SearchIcon sx={ { color: StylesVariables.primaryColor } } />
                                 </div>
 
                                 <div className="search-icon hovered">
-                                    <SearchIcon sx={{ color: StylesVariables.accentColor }} />
+                                    <SearchIcon sx={ { color: StylesVariables.accentColor } } />
                                 </div>
                             </>
-                        )}
+                        ) }
                     </>
-                )}
+                ) }
 
-                <label htmlFor={id}>
-                    {label}
-                    {tooltip && tooltip.length > 0 && (
+                <label htmlFor={ id }>
+                    { label }
+                    { tooltip && tooltip.length > 0 && (
                         <span
                             className="tooltip"
-                            data-tooltip-id={id}
-                            data-tooltip-content={tooltip}
+                            data-tooltip-id={ id }
+                            data-tooltip-content={ tooltip }
                         >
-                            <InfoIcon sx={{ color: StylesVariables.specialColor }} />
+                            <InfoIcon sx={ { color: StylesVariables.specialColor } } />
                         </span>
-                    )}
+                    ) }
                 </label>
 
                 <div className="background"></div>
             </div>
 
-            {error && <p className="error">{error}</p>}
+            { error && <p className="error">{ error }</p> }
         </div>
     );
 });

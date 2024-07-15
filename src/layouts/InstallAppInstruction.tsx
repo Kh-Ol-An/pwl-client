@@ -44,18 +44,18 @@ const InstallAppInstruction: FC = () => {
             <Swiper
                 className="swiper-cube"
                 effect="creative"
-                grabCursor={true}
-                creativeEffect={{
+                grabCursor={ true }
+                creativeEffect={ {
                     prev: {
                         shadow: true,
-                        translate: [0, 0, -400],
+                        translate: [ 0, 0, -400 ],
                     },
                     next: {
-                        translate: ['100%', 0, 120],
+                        translate: [ '100%', 0, 120 ],
                     },
-                }}
-                pagination={true}
-                modules={[EffectCreative, Pagination, FreeMode]}
+                } }
+                pagination={ true }
+                modules={ [ EffectCreative, Pagination, FreeMode ] }
             >
                 <SwiperSlide>
                     <h2 className="install-app-instruction_title">{ t('instruction-page.app.second-title') }</h2>
@@ -91,7 +91,7 @@ const InstallAppInstruction: FC = () => {
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                <div className="install-app-instruction_img">
+                    <div className="install-app-instruction_img">
                         <img
                             src={ os === 'iOS' ? AddAppToIosScreenImg : AddAppToAndroidScreenImg }
                             alt={ t('instruction-page.app.menu.img') }
@@ -100,8 +100,8 @@ const InstallAppInstruction: FC = () => {
                 </SwiperSlide>
             </Swiper>
 
-            <Button variant="text" color="primary-color" type="button" onClick={handleHid}>
-                {t('instruction-page.app.not_again')}
+            <Button variant="text" color="primary-color" type="button" onClick={ handleHid }>
+                { t('instruction-page.app.not_again') }
             </Button>
         </div>
     );

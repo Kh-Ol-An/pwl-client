@@ -7,7 +7,7 @@ const useDebounce = (callback: () => void) => {
 
     useEffect(() => {
         ref.current = callback;
-    }, [callback]);
+    }, [ callback ]);
 
     return useMemo(() => {
         const callRef = () => {
@@ -25,7 +25,7 @@ interface Props {
 }
 
 const Search: FC<Props> = ({ id, label, changeSearchBar }) => {
-    const [searchBar, setSearchBar] = useState('');
+    const [ searchBar, setSearchBar ] = useState('');
 
     const send = useDebounce(() => changeSearchBar(searchBar.trim()));
 
@@ -49,13 +49,13 @@ const Search: FC<Props> = ({ id, label, changeSearchBar }) => {
 
     return (
         <Input
-            id={id}
-            name={id}
+            id={ id }
+            name={ id }
             type="search"
-            label={label}
-            value={searchBar}
-            clear={clear}
-            onChange={(event) => change(event as ChangeEvent<HTMLInputElement>)}
+            label={ label }
+            value={ searchBar }
+            clear={ clear }
+            onChange={ (event) => change(event as ChangeEvent<HTMLInputElement>) }
         />
     );
 };

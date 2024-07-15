@@ -36,45 +36,45 @@ const Addresses: FC<IProps> = ({ control, getValues, errors, register, material,
 
     return (
         <div className="address">
-            {addresses && addresses.map((address, idx) => (
-                <div key={address.id}>
+            { addresses && addresses.map((address, idx) => (
+                <div key={ address.id }>
                     <div className="address-field">
                         <Input
-                            {...(material && register(`addresses.${idx}.value`, onlyWhitespaceValidation))}
-                            id={`address-${idx}`}
-                            name={`addresses[${idx}].value`}
+                            { ...(material && register(`addresses.${ idx }.value`, onlyWhitespaceValidation)) }
+                            id={ `address-${ idx }` }
+                            name={ `addresses[${ idx }].value` }
                             type="text"
-                            label={t('main-page.where-to-buy')}
-                            tooltip={t('main-page.where-to-buy-tooltip')}
+                            label={ t('main-page.where-to-buy') }
+                            tooltip={ t('main-page.where-to-buy-tooltip') }
                         />
 
-                        {addresses.length > 1 && (
-                            <button className="action-address" type="button" onClick={() => remove(idx)}>
-                                <CancelIcon sx={{ color: StylesVariables.actionColor }} />
+                        { addresses.length > 1 && (
+                            <button className="action-address" type="button" onClick={ () => remove(idx) }>
+                                <CancelIcon sx={ { color: StylesVariables.actionColor } } />
                             </button>
-                        )}
+                        ) }
 
-                        {idx === addresses.length - 1 && (
+                        { idx === addresses.length - 1 && (
                             <button
                                 className="action-address"
                                 type="button"
-                                onClick={() => append({ id: uuidv4(), value: "" })}
+                                onClick={ () => append({ id: uuidv4(), value: "" }) }
                             >
-                                <AddCircleIcon sx={{ color: StylesVariables.successColor }} />
+                                <AddCircleIcon sx={ { color: StylesVariables.successColor } } />
                             </button>
-                        )}
+                        ) }
                     </div>
 
-                    {errors?.addresses?.[idx]?.value && (
-                        <span className="error">{errors?.addresses?.[idx]?.value?.message}</span>
-                    )}
+                    { errors?.addresses?.[idx]?.value && (
+                        <span className="error">{ errors?.addresses?.[idx]?.value?.message }</span>
+                    ) }
 
                     <Tooltip
-                        id={`address-${idx}`}
-                        style={getTooltipStyles(screenWidth)}
+                        id={ `address-${ idx }` }
+                        style={ getTooltipStyles(screenWidth) }
                     />
                 </div>
-            ))}
+            )) }
         </div>
     );
 };

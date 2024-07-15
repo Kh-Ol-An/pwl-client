@@ -12,8 +12,8 @@ const Logo: FC<IProps> = ({ to = '/' }) => {
 
     return (
         <div className="logo">
-            <Link className="logo-box" to={to}>
-                <img className="logo-icon" src={LogoIcon} alt={t('logo')} />
+            <Link className="logo-box" to={ to }>
+                <img className="logo-icon" src={ LogoIcon } alt={ t('logo') } />
                 <span className="logo-name">Wish Hub</span>
             </Link>
         </div>

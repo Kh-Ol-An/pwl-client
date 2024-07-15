@@ -39,7 +39,7 @@ const App: FC = () => {
             </div>
 
             <ul className="image-list">
-                {/* menu */}
+                {/* menu */ }
                 <li className="image-item">
                     <p className="image-item-text">
                         { t(`instruction-page.app.menu.${ os }`) }
@@ -61,7 +61,7 @@ const App: FC = () => {
                     </div>
                 </li>
 
-                {/* add */}
+                {/* add */ }
                 <li className="image-item">
                     <p className="image-item-text">
                         { t(`instruction-page.app.add.${ os }`) }
@@ -83,7 +83,7 @@ const App: FC = () => {
                     </div>
                 </li>
 
-                {/* install */}
+                {/* install */ }
                 <li className="image-item">
                     <p className="image-item-text">
                         { t(`instruction-page.app.install.${ os }`) }
@@ -105,7 +105,7 @@ const App: FC = () => {
                     </div>
                 </li>
 
-                {/* done */}
+                {/* done */ }
                 <li className="image-item">
                     <p className="image-item-text">
                         { t('instruction-page.app.done.text') }

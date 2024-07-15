@@ -17,44 +17,44 @@ const EditAccountModal: FC<IProps> = ({ show, hide, handleShowConfirmDeleteMyUse
 
     const myUser = useAppSelector((state) => state.myUser.user);
 
-    const [isEditAccount, setIsEditAccount] = useState<boolean>(true);
+    const [ isEditAccount, setIsEditAccount ] = useState<boolean>(true);
 
     return (
-        <CustomModal show={show} hide={hide}>
+        <CustomModal show={ show } hide={ hide }>
             <div className="edit-account-container">
                 <div className="change-edit-account">
                     <button
-                        className={isEditAccount ? "primary-color" : ""}
+                        className={ isEditAccount ? "primary-color" : "" }
                         type="button"
-                        onClick={() => setIsEditAccount(true)}
+                        onClick={ () => setIsEditAccount(true) }
                     >
-                        {t('main-page.edit-account')}
+                        { t('main-page.edit-account') }
                     </button>
                     <Switch
                         id="change-edit-account"
                         name="change-edit-account"
-                        checked={isEditAccount}
-                        onChange={(e) => setIsEditAccount(e.target.checked)}
+                        checked={ isEditAccount }
+                        onChange={ (e) => setIsEditAccount(e.target.checked) }
                     />
                     <button
-                        className={isEditAccount ? "" : "action-color"}
+                        className={ isEditAccount ? "" : "action-color" }
                         type="button"
-                        onClick={() => setIsEditAccount(false)}
+                        onClick={ () => setIsEditAccount(false) }
                     >
-                        {t('main-page.change-password')}
+                        { t('main-page.change-password') }
                     </button>
                 </div>
 
                 <div className="header-actions-account">
-                    <div className={"header-edit-account" + (isEditAccount ? " show" : "")}>
+                    <div className={ "header-edit-account" + (isEditAccount ? " show" : "") }>
                         <EditAccount
-                            close={hide}
-                            handleShowConfirmDeleteMyUser={handleShowConfirmDeleteMyUser}
+                            close={ hide }
+                            handleShowConfirmDeleteMyUser={ handleShowConfirmDeleteMyUser }
                         />
                     </div>
 
-                    <div className={"header-change-password" + (isEditAccount ? "" : " show")}>
-                        <ChangePassword userId={myUser?.id} close={hide} />
+                    <div className={ "header-change-password" + (isEditAccount ? "" : " show") }>
+                        <ChangePassword userId={ myUser?.id } close={ hide } />
                     </div>
                 </div>
             </div>

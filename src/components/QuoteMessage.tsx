@@ -9,13 +9,13 @@ interface IProps {
 const QuoteMessage: FC<IProps> = ({ title, text, author }) => {
     return (
         <div className="quote-message">
-            <h6>{title}</h6>
-            {text && (
+            <h6>{ title }</h6>
+            { text && (
                 <div className="quote-message_box">
                     <p>{ text }</p>
                     <span>{ author }</span>
                 </div>
-            )}
+            ) }
         </div>
     );
 };

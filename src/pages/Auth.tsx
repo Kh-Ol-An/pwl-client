@@ -53,15 +53,15 @@ const Auth: FC = () => {
 
     const location = useLocation();
 
-    const [isRegistration, setIsRegistration] = useState<boolean>(
+    const [ isRegistration, setIsRegistration ] = useState<boolean>(
         location.search === '?register' || location.search === '?agree'
     );
-    const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
-    const [clickedOnSubmit, setClickedOnSubmit] = useState<boolean>(false);
-    const [repeatPassword, setRepeatPassword] = useState<string>('');
-    const [repeatPasswordError, setRepeatPasswordError] = useState<string>('');
-    const [checkedPrivacyPolicy, setCheckedPrivacyPolicy] = useState<boolean>(location.search === '?agree');
-    const [checkedPrivacyPolicyError, setCheckedPrivacyPolicyError] = useState<string>('');
+    const [ isForgotPassword, setIsForgotPassword ] = useState<boolean>(false);
+    const [ clickedOnSubmit, setClickedOnSubmit ] = useState<boolean>(false);
+    const [ repeatPassword, setRepeatPassword ] = useState<string>('');
+    const [ repeatPasswordError, setRepeatPasswordError ] = useState<string>('');
+    const [ checkedPrivacyPolicy, setCheckedPrivacyPolicy ] = useState<boolean>(location.search === '?agree');
+    const [ checkedPrivacyPolicyError, setCheckedPrivacyPolicyError ] = useState<string>('');
 
     let title = t('auth-page.title.sing_in');
     isRegistration && (title = t('auth-page.title.sing_up'));
@@ -163,86 +163,86 @@ const Auth: FC = () => {
                         <LanguageSelection />
                     </div>
 
-                    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                    <form className="form" onSubmit={ handleSubmit(onSubmit) }>
                         <h1 className="title">
-                            {title}
+                            { title }
                         </h1>
 
-                        {!isForgotPassword && (
+                        { !isForgotPassword && (
                             <GoogleLogin
-                                text={isRegistration ? 'signup_with' : 'signin_with'}
-                                onSuccess={handleGoogleLogin}
-                                onError={() => {
+                                text={ isRegistration ? 'signup_with' : 'signin_with' }
+                                onSuccess={ handleGoogleLogin }
+                                onError={ () => {
                                     console.log('Google OAuth Login Failed');
                                     toast(t('alerts.auth-page.google-login.error'), { type: 'error' });
-                                }}
+                                } }
                             />
-                        )}
+                        ) }
 
-                        <span className="auth-page-divider">{t('auth-page.or')}</span>
+                        <span className="auth-page-divider">{ t('auth-page.or') }</span>
 
-                        {isRegistration && (
+                        { isRegistration && (
                             <Input
-                                {...register("firstName", accountFirstNameValidation)}
+                                { ...register("firstName", accountFirstNameValidation) }
                                 id="firstName"
                                 name="firstName"
                                 type="text"
-                                label={t('first-name')}
-                                error={errors?.firstName?.message}
+                                label={ t('first-name') }
+                                error={ errors?.firstName?.message }
                             />
-                        )}
+                        ) }
 
                         <Input
-                            {...register("email", emailValidation)}
+                            { ...register("email", emailValidation) }
                             id="email"
                             name="email"
                             type="text"
                             label="Email*"
-                            error={errors?.email?.message}
+                            error={ errors?.email?.message }
                         />
 
-                        {!isForgotPassword && (
+                        { !isForgotPassword && (
                             <Input
-                                {...register("password", passwordValidation)}
+                                { ...register("password", passwordValidation) }
                                 id="password"
                                 name="password"
                                 type="password"
-                                label={t('auth-page.password')}
-                                error={errors?.password?.message}
+                                label={ t('auth-page.password') }
+                                error={ errors?.password?.message }
                             />
-                        )}
+                        ) }
 
-                        {isRegistration && (
+                        { isRegistration && (
                             <Input
                                 id="repeat-password"
                                 name="repeat-password"
                                 type="password"
-                                label={t('auth-page.repeat_password')}
-                                value={repeatPassword}
-                                error={repeatPasswordError}
-                                onChange={(event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>)}
+                                label={ t('auth-page.repeat_password') }
+                                value={ repeatPassword }
+                                error={ repeatPasswordError }
+                                onChange={ (event) => repeatPasswordChange(event as ChangeEvent<HTMLInputElement>) }
                             />
-                        )}
+                        ) }
 
                         <div className="actions">
-                            {!isForgotPassword && (
+                            { !isForgotPassword && (
                                 <Button
                                     type="button"
                                     variant="text"
                                     color="primary-color"
-                                    onClick={() => setIsRegistration((state) => !state)}
+                                    onClick={ () => setIsRegistration((state) => !state) }
                                 >
-                                    {isRegistration ? t('sing-in') : t('sing-up')}
+                                    { isRegistration ? t('sing-in') : t('sing-up') }
                                 </Button>
-                            )}
+                            ) }
 
-                            {!isRegistration && (
+                            { !isRegistration && (
                                 <div className="forgot-password">
                                     <Button
                                         type="button"
                                         variant="text"
                                         color="action-color"
-                                        onClick={() => setIsForgotPassword((state) => !state)}
+                                        onClick={ () => setIsForgotPassword((state) => !state) }
                                     >
                                         {
                                             isForgotPassword
@@ -251,32 +251,32 @@ const Auth: FC = () => {
                                         }
                                     </Button>
                                 </div>
-                            )}
+                            ) }
                         </div>
 
-                        {!isForgotPassword && (
+                        { !isForgotPassword && (
                             <div className="auth-privacy-policy">
                                 <Checkbox
                                     id="privacy-policy"
                                     name="privacy-policy"
                                     value="privacy-policy"
-                                    checked={checkedPrivacyPolicy}
-                                    onChange={handleTogglePrivacyPolicy}
+                                    checked={ checkedPrivacyPolicy }
+                                    onChange={ handleTogglePrivacyPolicy }
                                 >
-                                    {t('auth-page.i_agree_to')}
+                                    { t('auth-page.i_agree_to') }
                                     <Button to="/privacy-policy" variant="text" color="primary-color">
-                                        {t('auth-page.privacy_policy')}
+                                        { t('auth-page.privacy_policy') }
                                     </Button>
-                                    {t('auth-page.wish_hub')}
+                                    { t('auth-page.wish_hub') }
                                 </Checkbox>
 
-                                {checkedPrivacyPolicyError.length > 0 && (
-                                    <p className="error">{checkedPrivacyPolicyError}</p>
-                                )}
+                                { checkedPrivacyPolicyError.length > 0 && (
+                                    <p className="error">{ checkedPrivacyPolicyError }</p>
+                                ) }
                             </div>
-                        )}
+                        ) }
 
-                        <Button type="submit">{submit}</Button>
+                        <Button type="submit">{ submit }</Button>
                     </form>
                 </Card>
             </div>

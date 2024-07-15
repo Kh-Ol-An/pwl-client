@@ -21,7 +21,7 @@ const BookingExpired: FC<IProps> = ({ wish, userId, whoseWish, close }) => {
 
     const dispatch = useAppDispatch();
 
-    const [show, setShow] = useState<boolean>(true);
+    const [ show, setShow ] = useState<boolean>(true);
 
     const handleUndone = async () => {
         if (!userId) return;
@@ -43,28 +43,28 @@ const BookingExpired: FC<IProps> = ({ wish, userId, whoseWish, close }) => {
                 type="button"
                 variant="text"
                 color="action-color"
-                onClick={() => setShow(true)}
+                onClick={ () => setShow(true) }
             >
-                {t('main-page.determine-status')}
+                { t('main-page.determine-status') }
             </Button>
 
-            <CustomModal show={show} hide={() => setShow(false)} classes="modal confirm">
-                <h3 className="title attention">{t('confirm-modal.title')}</h3>
+            <CustomModal show={ show } hide={ () => setShow(false) } classes="modal confirm">
+                <h3 className="title attention">{ t('confirm-modal.title') }</h3>
 
                 <p className="text-lg">
-                    {t('main-page.period-expired', { name: unencryptedData(wish.name, wish.show) })}
+                    { t('main-page.period-expired', { name: unencryptedData(wish.name, wish.show) }) }
                     <br />
                     <br />
-                    {t('main-page.is_your_wish')}
+                    { t('main-page.is_your_wish') }
                 </p>
 
                 <div className="modal-actions detail-wish-expired-actions">
-                    <Button type="button" onClick={handleUndone}>
-                        {t('main-page.no')}
+                    <Button type="button" onClick={ handleUndone }>
+                        { t('main-page.no') }
                     </Button>
 
-                    <Button type="button" onClick={handleDone}>
-                        {t('main-page.yes')}
+                    <Button type="button" onClick={ handleDone }>
+                        { t('main-page.yes') }
                     </Button>
                 </div>
             </CustomModal>

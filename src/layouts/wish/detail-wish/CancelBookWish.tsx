@@ -19,7 +19,7 @@ const CancelBookWish: FC<IProps> = ({ wish, userId, close }) => {
 
     const dispatch = useAppDispatch();
 
-    const [show, setShow] = useState<boolean>(false);
+    const [ show, setShow ] = useState<boolean>(false);
 
     const handleSubmit = async () => {
         if (!userId) return;
@@ -33,20 +33,20 @@ const CancelBookWish: FC<IProps> = ({ wish, userId, close }) => {
                 type="button"
                 variant="text"
                 color="action-color"
-                onClick={() => setShow(true)}
+                onClick={ () => setShow(true) }
             >
-                {t('main-page.cancel-execution')}
+                { t('main-page.cancel-execution') }
 
             </Button>
 
             <ConfirmModal
-                show={show}
-                confirmText={t('main-page.cancel-my-intention')}
-                close={() => setShow(false)}
-                confirm={handleSubmit}
+                show={ show }
+                confirmText={ t('main-page.cancel-my-intention') }
+                close={ () => setShow(false) }
+                confirm={ handleSubmit }
             >
                 <p className="text-lg">
-                    {t('main-page.cancel-intention', { name: unencryptedData(wish.name, wish.show) })}
+                    { t('main-page.cancel-intention', { name: unencryptedData(wish.name, wish.show) }) }
                 </p>
             </ConfirmModal>
         </>

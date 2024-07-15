@@ -21,10 +21,10 @@ const Switch: FC<IProps> = ({ id, name, hiddenChoice, checked, onChange }) => {
                         <input
                             className="hidden"
                             type="checkbox"
-                            id={id}
-                            name={name}
-                            checked={checked}
-                            onChange={onChange}
+                            id={ id }
+                            name={ name }
+                            checked={ checked }
+                            onChange={ onChange }
                         />
                     </div>
                 </div>

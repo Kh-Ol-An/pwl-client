@@ -15,23 +15,23 @@ interface IProps {
 }
 
 const Button: FC<IProps> = ({
-    to,
-    target,
-    tabIndex = 0,
-    variant,
-    color,
-    fontSize,
-    disabled,
-    type = 'button',
-    onClick,
-    children,
-}) => {
+                                to,
+                                target,
+                                tabIndex = 0,
+                                variant,
+                                color,
+                                fontSize,
+                                disabled,
+                                type = 'button',
+                                onClick,
+                                children,
+                            }) => {
     const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
         disabled && event.preventDefault();
     };
 
     const tagProps: Record<string, any> = {
-        className: `button${color ? ` ${color}` : ''}${variant ? ` ${variant}` : ''}${fontSize ? ` ${fontSize}` : ''}${disabled ? ' disabled' : ''}`,
+        className: `button${ color ? ` ${ color }` : '' }${ variant ? ` ${ variant }` : '' }${ fontSize ? ` ${ fontSize }` : '' }${ disabled ? ' disabled' : '' }`,
         tabIndex,
         onClick: onClick || handleClick,
     };
@@ -47,15 +47,15 @@ const Button: FC<IProps> = ({
 
     if (to) {
         return (
-            <Link to={to} {...linkTagProps}>
-                <span>{children}</span>
+            <Link to={ to } { ...linkTagProps }>
+                <span>{ children }</span>
             </Link>
         );
     }
 
     return (
-        <button type={type} disabled={disabled} {...tagProps}>
-            <span>{children}</span>
+        <button type={ type } disabled={ disabled } { ...tagProps }>
+            <span>{ children }</span>
         </button>
     );
 };

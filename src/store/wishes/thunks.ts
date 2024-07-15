@@ -95,9 +95,9 @@ export const dislikeWish = createAsyncThunk<IWish, IActionWish>(
     },
 );
 
-export const deleteWish = createAsyncThunk<IWish['id'], [IUser['id'], IWish['id']]>(
+export const deleteWish = createAsyncThunk<IWish['id'], [ IUser['id'], IWish['id'] ]>(
     'wishes/deleteWish',
-    async ([userId, wishId]) => {
+    async ([ userId, wishId ]) => {
         const result = await api.deleteWish(userId, wishId);
 
         return result.data;

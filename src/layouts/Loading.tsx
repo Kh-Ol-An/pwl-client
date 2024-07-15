@@ -6,7 +6,7 @@ interface IProps {
 
 const Loading: FC<IProps> = ({ isLocal }) => {
     return (
-        <div className={"loading" + (isLocal ? " local" : "")}>
+        <div className={ "loading" + (isLocal ? " local" : "") }>
             <div className="spinner">
                 <div></div>
                 <div></div>

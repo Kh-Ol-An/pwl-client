@@ -19,8 +19,8 @@ import ActivationAccountImg from "@/assets/images/instruction/auth/activation-ac
 const Auth: FC = () => {
     const { t } = useTranslation();
 
-    const [imageData, setImageData] = useState<{ src: string, alt: string } | null>(null);
-    const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+    const [ imageData, setImageData ] = useState<{ src: string, alt: string } | null>(null);
+    const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     const handleShowImage = (src: string, alt: string) => {
         setImageData({ src, alt });
@@ -234,10 +234,10 @@ const Auth: FC = () => {
                 </li>
             </ol>
 
-            <CustomModal show={!!imageData} hide={() => setImageData(null)} classes="modal full">
-                {!!imageData && (
-                    <img className="instruction-full-image" src={imageData.src} alt={imageData.alt} />
-                )}
+            <CustomModal show={ !!imageData } hide={ () => setImageData(null) } classes="modal full">
+                { !!imageData && (
+                    <img className="instruction-full-image" src={ imageData.src } alt={ imageData.alt } />
+                ) }
             </CustomModal>
         </div>
     );

@@ -21,7 +21,7 @@
         background-color: $special-color;
         transition: $transition;
 
-        &:before{
+        &:before {
             content: "";
             position: absolute;
             top: -13px;
@@ -33,7 +33,7 @@
             transition: $transition;
         }
 
-        &:after{
+        &:after {
             content: "";
             position: absolute;
             top: 13px;
@@ -56,7 +56,7 @@
         background-color: $special-color;
         transition: $transition;
 
-        &:before{
+        &:before {
             content: "";
             position: absolute;
             top: -13px;
@@ -68,7 +68,7 @@
             transition: $transition;
         }
 
-        &:after{
+        &:after {
             content: "";
             position: absolute;
             top: 13px;
@@ -88,11 +88,11 @@
             background-color: transparent;
             transition: $transition;
 
-            &:before{
+            &:before {
                 transform: rotateZ(45deg) scaleX(1.4) translate(4px, 4px);
             }
 
-            &:after{
+            &:after {
                 transform: rotateZ(-45deg) scaleX(1.4) translate(4px, -4px);
             }
         }
@@ -101,11 +101,11 @@
             background-color: transparent;
             transition: $transition;
 
-            &:before{
+            &:before {
                 transform: rotateZ(-45deg) scaleX(1.4) translate(-4px, 4px);
             }
 
-            &:after{
+            &:after {
                 transform: rotateZ(45deg) scaleX(1.4) translate(-4px, -4px);
             }
         }

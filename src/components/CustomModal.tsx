@@ -15,18 +15,18 @@ interface IProps {
 const CustomModal: FC<IProps> = ({ show, hide, classes = 'modal', children }) => {
     return (
         <Modal
-            open={show}
-            onClose={hide}
+            open={ show }
+            onClose={ hide }
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <div className={classes}>
+            <div className={ classes }>
                 <Card classes="not-full-screen">
-                    {children}
+                    { children }
                 </Card>
 
-                <Action onClick={hide}>
-                    <CloseIcon sx={{ color: StylesVariables.blackColor }} />
+                <Action onClick={ hide }>
+                    <CloseIcon sx={ { color: StylesVariables.blackColor } } />
                 </Action>
             </div>
         </Modal>

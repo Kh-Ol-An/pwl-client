@@ -13,15 +13,15 @@ interface IProps {
 const ShareButton: FC<IProps> = ({ link = '', wishShow }) => {
     const { t } = useTranslation();
 
-    const [show, setShow] = useState<boolean>(false);
+    const [ show, setShow ] = useState<boolean>(false);
 
     const shareContent = () => {
         if (navigator.share) {
             navigator.share({
-                title: 'Wish Hub',
-                text: t('share-button.share-text'),
-                url: `https://wish-hub.net/${link}`,
-            })
+                    title: 'Wish Hub',
+                    text: t('share-button.share-text'),
+                    url: `https://wish-hub.net/${ link }`,
+                })
                 .then(() =>
                     toast.success(
                         link === 'welcome'
@@ -33,7 +33,7 @@ const ShareButton: FC<IProps> = ({ link = '', wishShow }) => {
                     toast.error(t('alerts.share-button.share.error'));
                 });
         } else {
-            navigator.clipboard.writeText(`https://wish-hub.net/${link}`)
+            navigator.clipboard.writeText(`https://wish-hub.net/${ link }`)
                 .then(() =>
                     toast.success(
                         link === 'welcome'
@@ -55,15 +55,15 @@ const ShareButton: FC<IProps> = ({ link = '', wishShow }) => {
 
     return (
         <>
-            <button className="share-button" type="button" onClick={handleClick}>
-                <ShareIcon sx={{ color: StylesVariables.primaryColor }} />
+            <button className="share-button" type="button" onClick={ handleClick }>
+                <ShareIcon sx={ { color: StylesVariables.primaryColor } } />
             </button>
 
             <ConfirmModal
-                show={show}
-                confirmText={t('share-button.confirm')}
-                close={() => setShow(false)}
-                confirm={shareContent}
+                show={ show }
+                confirmText={ t('share-button.confirm') }
+                close={ () => setShow(false) }
+                confirm={ shareContent }
             >
                 <p className="text-lg">
                     {
