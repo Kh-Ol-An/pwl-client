@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
-import { addUsers, getUsers } from '@/store/users/thunks';
+import { addUsers, getAllUsers, getUsers } from '@/store/users/thunks';
 import { ISendUsersParams } from '@/store/users/types';
 import Loading from '@/layouts/Loading';
 import UserAction from '@/layouts/sidebar/UserAction';
@@ -53,11 +53,15 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
     const handleChangeSearchBar = (value: string) => {
         setSearch(value);
 
-        if (!myUser || !userListRef.current) return;
+        if (!userListRef.current) return;
 
         userListRef.current.scrollTo(0, 0);
 
-        dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search: value }));
+        if (myUser === null) {
+            dispatch(getAllUsers({ page: 1, limit: PAGINATION_LIMIT, search: value }));
+        } else {
+            dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search: value }));
+        }
     };
 
     const updateUsers = () => {
@@ -69,8 +73,11 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
     };
 
     useEffect(() => {
-        if (!myUser) return;
-        dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
+        if (myUser === null) {
+            dispatch(getAllUsers({ page: 1, limit: PAGINATION_LIMIT, search }));
+        } else {
+            dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
+        }
     }, []);
 
     useEffect(() => {
@@ -104,33 +111,35 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                         <ShareButton link="welcome" />
                     </div>
 
-                    <div className="custom-mui-select">
-                        <div className="select-box">
-                            <Select
-                                id="sidebar-user-type"
-                                variant="standard"
-                                sx={ { padding: '0 10px', color: StylesVariables.primaryColor } }
-                                value={ userType }
-                                onChange={ handleChangeUserType }
-                            >
-                                <MenuItem value="all">{ t('main-page.all') }</MenuItem>
-                                <MenuItem value="friends">{ t('main-page.friends') }</MenuItem>
-                                <MenuItem value="followFrom">
+                    { myUser !== null && (
+                        <div className="custom-mui-select">
+                            <div className="select-box">
+                                <Select
+                                    id="sidebar-user-type"
+                                    variant="standard"
+                                    sx={ { padding: '0 10px', color: StylesVariables.primaryColor } }
+                                    value={ userType }
+                                    onChange={ handleChangeUserType }
+                                >
+                                    <MenuItem value="all">{ t('main-page.all') }</MenuItem>
+                                    <MenuItem value="friends">{ t('main-page.friends') }</MenuItem>
+                                    <MenuItem value="followFrom">
                                     <span className="sidebar-user-type-item">
                                         { t('main-page.friend-requests') }
                                         { users.followFromCount > 0 && (
                                             <span className="count">{ users.followFromCount }</span>
                                         ) }
                                     </span>
-                                </MenuItem>
-                                <MenuItem value="followTo">{ t('main-page.sent-friend-requests') }</MenuItem>
-                            </Select>
+                                    </MenuItem>
+                                    <MenuItem value="followTo">{ t('main-page.sent-friend-requests') }</MenuItem>
+                                </Select>
 
-                            { users.followFromCount > 0 && (
-                                <span className="count">{ users.followFromCount }</span>
-                            ) }
+                                { users.followFromCount > 0 && (
+                                    <span className="count">{ users.followFromCount }</span>
+                                ) }
+                            </div>
                         </div>
-                    </div>
+                    ) }
 
                     <div className="sidebar-search">
                         <Search id="search"
@@ -138,7 +147,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                                 changeSearchBar={ handleChangeSearchBar } />
                     </div>
 
-                    <div className="user-list" ref={ userListRef }>
+                    <div className={ "user-list" + (myUser === null ? ' without-select' : '') } ref={ userListRef }>
                         <ul className="list">
                             { users.list.map(user => (
                                 <UserAction

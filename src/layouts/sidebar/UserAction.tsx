@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
     Avatar,
@@ -42,6 +43,8 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
     const [ showDetailAccount, setShowDetailAccount ] = useState<boolean>(false);
 
+    const navigate = useNavigate();
+
     let iconColor = StylesVariables.lightColor;
     myUser?.followTo.includes(user.id) && (iconColor = StylesVariables.specialColor);
     (myUser?.followFrom.includes(user.id) || myUser?.friends.includes(user.id))
@@ -69,23 +72,27 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
     };
 
     const handleAddFriend = async () => {
-        if (!myUser) return;
-
-        setIsLoading(true);
-        await dispatch(addFriend({ myId: myUser.id, friendId: user.id }));
-        setIsLoading(false);
-        setAnchor(null);
-        updateUsers();
+        if (myUser === null) {
+            navigate('/auth');
+        } else {
+            setIsLoading(true);
+            await dispatch(addFriend({ myId: myUser.id, friendId: user.id }));
+            setIsLoading(false);
+            setAnchor(null);
+            updateUsers();
+        }
     };
 
     const handleRemoveFriend = async (whereRemove: IRemoveFriend['whereRemove']) => {
-        if (!myUser) return;
-
-        setIsLoading(true);
-        await dispatch(removeFriend({ myId: myUser.id, friendId: user.id, whereRemove }));
-        setIsLoading(false);
-        setAnchor(null);
-        updateUsers();
+        if (myUser === null) {
+            navigate('/auth');
+        } else {
+            setIsLoading(true);
+            await dispatch(removeFriend({ myId: myUser.id, friendId: user.id, whereRemove }));
+            setIsLoading(false);
+            setAnchor(null);
+            updateUsers();
+        }
     };
 
     return (
@@ -143,17 +150,6 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                     alt={ `${ user.firstName } ${ user.lastName ? user.lastName : '' }` }
                     onClick={ handleShowDetailAccount }
                 />
-
-                {/*{user.successfulWishes > 0 && (*/ }
-                {/*    <span className="count success">*/ }
-                {/*        {user.successfulWishes}*/ }
-                {/*    </span>*/ }
-                {/*)}*/ }
-                {/*{user.unsuccessfulWishes > 0 && (*/ }
-                {/*    <span className="count unsuccess">*/ }
-                {/*        {user.unsuccessfulWishes}*/ }
-                {/*    </span>*/ }
-                {/*)}*/ }
 
                 <CustomModal show={ showDetailAccount } hide={ handleHideDetailAccount } classes="modal modal-md">
                     <DetailAccount user={ user } />

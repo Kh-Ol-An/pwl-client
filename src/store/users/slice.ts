@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { t } from 'i18next';
-import { getUsers, addUsers } from '@/store/users/thunks';
+import { getUsers, getAllUsers, addUsers } from '@/store/users/thunks';
 import { doneWish, undoneWish } from '@/store/wishes/thunks';
 import { IUser } from '@/models/IUser';
 import { PAGINATION_LIMIT } from '@/utils/constants';
@@ -45,6 +45,24 @@ const usersSlice = createSlice({
                 state.followFromCount = action.payload.followFromCount;
                 state.page = 2;
                 action.payload.users.length === PAGINATION_LIMIT && (state.stopRequests = false);
+                state.isLoading = false;
+                state.error = null;
+            })
+            // getAllUsers
+            .addCase(getAllUsers.pending, (state) => {
+                state.isLoading = true;
+                state.stopRequests = true;
+                state.error = null;
+            })
+            .addCase(getAllUsers.rejected, (state, action) => {
+                state.isLoading = false;
+                state.stopRequests = false;
+                state.error = action.error.message || t('alerts.users-api.get-all-users.error', { type: 'slice.getAllUsers' });
+            })
+            .addCase(getAllUsers.fulfilled, (state, action) => {
+                state.list = action.payload;
+                state.page = 2;
+                action.payload.length === PAGINATION_LIMIT && (state.stopRequests = false);
                 state.isLoading = false;
                 state.error = null;
             })

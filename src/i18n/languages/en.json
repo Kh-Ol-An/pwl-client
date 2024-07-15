@@ -107,6 +107,9 @@
     "users-api": {
       "get-users": {
         "error": "{{type}}: Failed to get users."
+      },
+      "get-all-users": {
+        "error": "{{type}}: Failed to get all users."
       }
     },
     "wishes-api": {

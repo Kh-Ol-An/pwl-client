@@ -64,7 +64,7 @@ const Main: FC = () => {
                 <InstallAppInstruction />
             ) }
 
-            { !myUser?.isActivated && <Inactivated /> }
+            { myUser && !myUser.isActivated && <Inactivated /> }
         </>
     );
 };
