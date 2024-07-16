@@ -28,7 +28,8 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
         type === 'dislikes' && dispatch(dislikeWish({ userId: myUser.id, wishId: wish.id }));
     };
 
-    const handleSelectWish = async (userId: IUser['id']) => {
+    const handleSelectWish = async (e: MouseEvent<HTMLButtonElement>, userId: IUser['id']) => {
+        e.stopPropagation();
         if (!myUser) return;
 
         await dispatch(getWishList({ myId: myUser.id, userId }));
@@ -45,14 +46,14 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
                 className={ `wish-${ type }-action` }
                 onClick={ handleAction }
             >
-                { wish[type].some(like => like.userId === myUser?.id) ? (
+                { wish[type]?.some(like => like.userId === myUser?.id) ? (
                     <ThumbUpAltIcon className="wish-likes-icon liked" />
                 ) : (
                     <ThumbUpOffAltIcon className="wish-likes-icon" />
                 ) }
             </button>
 
-            { wish[type].length > 0 && (
+            { wish[type]?.length > 0 && (
                 <Popup
                     anchor={ anchor }
                     setAnchor={ setAnchor }
@@ -65,7 +66,7 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
                                 <button
                                     className="wish-likes_user-item"
                                     type="button"
-                                    onClick={ () => handleSelectWish(like.userId) }
+                                    onClick={ (e) => handleSelectWish(e, like.userId) }
                                 >
                                     <Avatar
                                         src={ like.userAvatar }

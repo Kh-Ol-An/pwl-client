@@ -32,6 +32,12 @@ export interface ISendWishList {
     userId: IUser['id'];
 }
 
+export interface ISendAllWishes {
+    page: number;
+    limit: number;
+    search: string;
+}
+
 export interface IGetWish {
     userFirstName: IUser['firstName'];
     userLastName: IUser['lastName'];

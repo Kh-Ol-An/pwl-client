@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { useTranslation } from 'react-i18next';
 import { Modal, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Close as CloseIcon, AddCircle as AddCircleIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { selectUserId } from '@/store/selected-user/slice';
-import { getWishList } from '@/store/wishes/thunks';
+import { addAllWishes, getAllWishes, getWishList } from '@/store/wishes/thunks';
 import { IWish } from '@/models/IWish';
 import EditWish from '@/layouts/wish/edit-wish/EditWish';
 import WishItem from '@/layouts/wish/WishItem';
@@ -15,19 +16,28 @@ import Action from '@/components/Action';
 import CustomModal from '@/components/CustomModal';
 import LogoIcon from "@/assets/images/logo.svg";
 import StylesVariables from '@/styles/utils/variables.module.scss';
+import { USERS_PAGINATION_LIMIT, WISHES_PAGINATION_LIMIT } from "@/utils/constants";
+import { addUsers, getAllUsers, getUsers } from "@/store/users/thunks";
+import Search from "@/components/Search";
 
 type TWishType = 'all' | 'unfulfilled' | 'fulfilled';
 
 const WishList = () => {
     const { t } = useTranslation();
 
+    const { ref, inView } = useInView({
+        threshold: 0,
+    });
+
     const myUser = useAppSelector((state) => state.myUser.user);
     const wishes = useAppSelector((state) => state.wishes);
-    const userList = useAppSelector((state) => state.users.list);
+    const users = useAppSelector((state) => state.users);
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
 
+    const [ search, setSearch ] = useState<string>('');
+    const [ firstLoad, setFirstLoad ] = useState<boolean>(true);
     const [ wishType, setWishType ] = useState<TWishType>('all');
     const [ showWish, setShowWish ] = useState<boolean>(false);
     const [ showEditWish, setShowEditWish ] = useState<boolean>(false);
@@ -37,7 +47,7 @@ const WishList = () => {
 
     const wishListRef = useRef<HTMLUListElement>(null);
 
-    const selectedUser = userList.find(user => user.id === selectedUserId);
+    const selectedUser = users.list.find(user => user.id === selectedUserId);
     const lastName = selectedUser?.lastName ? selectedUser.lastName : "";
     const detailWish = wishes.list.find(wish => wish.id === idOfSelectedWish);
 
@@ -57,8 +67,6 @@ const WishList = () => {
     ]
 
     let emptyText;
-    // let emptyText = <>{ t('main-page.you_have_any') }</>;
-    // myUser?.id === selectedUserId && wishType !== 'all' && (emptyText = <>{ t(`main-page.you_have_${ wishType }`) }</>);
     myUser?.id !== selectedUserId && (emptyText = (
         <>
             <span>{ t('main-page.at-user') }</span>
@@ -66,6 +74,16 @@ const WishList = () => {
             <span>{ t(`main-page.does_not_have_${ wishType === 'all' ? '' : wishType }`) }</span>
         </>
     ));
+
+    const handleChangeSearchBar = (value: string) => {
+        setSearch(value);
+
+        if (!wishListRef.current) return;
+
+        wishListRef.current.scrollTo(0, 0);
+
+        dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: value }));
+    };
 
     const handleSelectWish = async () => {
         if (!myUser) return;
@@ -103,20 +121,44 @@ const WishList = () => {
     };
 
     useEffect(() => {
-        if (wishType === 'all') {
-            setSelectedWishList(wishes.list);
-        }
+        if (myUser) {
+            if (wishType === 'all') {
+                setSelectedWishList(wishes.list);
+            }
 
-        if (wishType === 'fulfilled') {
-            setSelectedWishList(wishes.list.filter(wish => wish.executed));
-        }
+            if (wishType === 'fulfilled') {
+                setSelectedWishList(wishes.list.filter(wish => wish.executed));
+            }
 
-        if (wishType === 'unfulfilled') {
-            setSelectedWishList(wishes.list.filter(wish => !wish.executed));
+            if (wishType === 'unfulfilled') {
+                setSelectedWishList(wishes.list.filter(wish => !wish.executed));
+            }
+        } else {
+            setSelectedWishList(prevState => ([ ...prevState, ...wishes.list ]));
         }
-    }, [ wishType, wishes.list ]);
+    }, [ myUser, wishType, wishes.list ]);
 
     useEffect(() => {
+        if (firstLoad) {
+            setFirstLoad(false);
+            return;
+        }
+
+        if (!inView || wishes.stopRequests) return;
+        dispatch(addAllWishes({ page: wishes.page, limit: WISHES_PAGINATION_LIMIT, search }));
+    }, [ inView ]);
+
+    useEffect(() => {
+        const selectedUserId = localStorage.getItem('selectedUserId');
+        if (selectedUserId) {
+            if (myUser) {
+                dispatch(getWishList({ myId: myUser.id, userId: selectedUserId }));
+                dispatch(selectUserId(selectedUserId));
+            }
+        } else {
+            dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search }));
+        }
+
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
         };
@@ -135,38 +177,45 @@ const WishList = () => {
                     <span className="logo-name">Wish Hub</span>
                 </button>
 
-                <div className="title-box">
-                    <div className="wish-list-type">
-                        <Select
-                            id="wish-list-type"
-                            variant="standard"
-                            sx={ { fontSize: screenWidth < 1024 ? 20 : 24 } }
-                            value={ wishType }
-                            onChange={ handleChangeWishType }
-                        >
-                            <MenuItem value="all">{ t('main-page.all') }</MenuItem>
-                            <MenuItem value="unfulfilled">{ t('main-page.unfulfilled') }</MenuItem>
-                            <MenuItem value="fulfilled">{ t('main-page.fulfilled.plural') }</MenuItem>
-                        </Select>
-                    </div>
+                { myUser && (
+                    <div className="title-box">
+                        <div className="wish-list-type">
+                            <Select
+                                id="wish-list-type"
+                                variant="standard"
+                                sx={ { fontSize: screenWidth < 1024 ? 20 : 24 } }
+                                value={ wishType }
+                                onChange={ handleChangeWishType }
+                            >
+                                <MenuItem value="all">{ t('main-page.all') }</MenuItem>
+                                <MenuItem value="unfulfilled">{ t('main-page.unfulfilled') }</MenuItem>
+                                <MenuItem value="fulfilled">{ t('main-page.fulfilled.plural') }</MenuItem>
+                            </Select>
+                        </div>
 
-                    {
-                        myUser?.id === selectedUserId
-                            ? <>
-                                <h2 className="title">{ t('main-page.title-personal') }</h2>
-                                <h2 className="title">{ t('main-page.title-wishes') }</h2>
-                            </>
-                            : <>
-                                <h2 className="title">{ t('main-page.title-wishes') }</h2>
-                                <h2 className="title">{ t('main-page.of-user') }</h2>
-                                <h2 className="title title-name">{ selectedUser?.firstName }</h2>
-                                <h2 className="title title-name">{ lastName }</h2>
-                            </>
-                    }
-                </div>
+                        {
+                            myUser.id === selectedUserId
+                                ? <>
+                                    <h2 className="title">{ t('main-page.title-personal') }</h2>
+                                    <h2 className="title">{ t('main-page.title-wishes') }</h2>
+                                </>
+                                : <>
+                                    <h2 className="title">{ t('main-page.title-wishes') }</h2>
+                                    <h2 className="title">{ t('main-page.of-user') }</h2>
+                                    <h2 className="title title-name">{ selectedUser?.firstName }</h2>
+                                    <h2 className="title title-name">{ lastName }</h2>
+                                </>
+                        }
+                    </div>
+                ) }
+                <Search
+                    id="search"
+                    label={ t('main-page.wishes-search') }
+                    changeSearchBar={ handleChangeSearchBar }
+                />
             </div>
 
-            { (myUser?.id === selectedUserId || selectedWishList.length > 0) ? (
+            { (myUser?.id === selectedUserId || selectedWishList?.length > 0) ? (
                 <ul className="list" ref={ wishListRef }>
                     { myUser?.id === selectedUserId && (
                         <li className="create-wish">
@@ -180,9 +229,9 @@ const WishList = () => {
                         </li>
                     ) }
 
-                    { selectedWishList.length > 0 && selectedWishList.map((wish) => (
+                    { selectedWishList?.length > 0 && selectedWishList.map((wish, idx) => (
                         <WishItem
-                            key={ wish.id }
+                            key={ wish.id + idx }
                             wish={ wish }
                             editWish={ () => handleShowEditWish(wish.id) }
                             showWish={ () => handleShowWish(wish.id) }
@@ -190,7 +239,7 @@ const WishList = () => {
                     )) }
 
                     { wishesExample.map((wish, idx) => {
-                        if (selectedWishList.length > idx) return null;
+                        if (selectedWishList?.length > idx) return null;
 
                         return (
                             <li
@@ -219,6 +268,12 @@ const WishList = () => {
                             </li>
                         );
                     }) }
+
+                    <div
+                        className="observable-element"
+                        style={ { display: users.stopRequests ? 'none' : 'block' } }
+                        ref={ ref }
+                    ></div>
                 </ul>
             ) : (
                 <div className="empty-box">

@@ -10,6 +10,7 @@ import {
     IDoneWish,
     IActionWish,
     ISendWishList,
+    ISendAllWishes,
 } from '@/store/wishes/types';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
@@ -108,6 +109,35 @@ export const getWishList = createAsyncThunk<IWish[], ISendWishList>(
     'wishes/getWishList',
     async (params) => {
         const result = await api.getWishList(params);
+
+        return result.data;
+    },
+);
+
+// Додавання нових бажань під час infinity scroll
+export const addWishList = createAsyncThunk<IWish[], ISendWishList>(
+    'wishes/addWishList',
+    async (params) => {
+        const result = await api.getWishList(params);
+
+        return result.data;
+    },
+);
+
+export const getAllWishes = createAsyncThunk<IWish[], ISendAllWishes>(
+    'wishes/getAllWishes',
+    async (params) => {
+        const result = await api.getAllWishes(params);
+
+        return result.data;
+    },
+);
+
+// Додавання нових бажань під час infinity scroll
+export const addAllWishes = createAsyncThunk<IWish[], ISendAllWishes>(
+    'wishes/addAllWishes',
+    async (params) => {
+        const result = await api.getAllWishes(params);
 
         return result.data;
     },

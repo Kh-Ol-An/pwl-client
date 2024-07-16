@@ -72,26 +72,26 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
     };
 
     const handleAddFriend = async () => {
-        if (myUser === null) {
-            navigate('/auth');
-        } else {
+        if (myUser) {
             setIsLoading(true);
             await dispatch(addFriend({ myId: myUser.id, friendId: user.id }));
             setIsLoading(false);
             setAnchor(null);
             updateUsers();
+        } else {
+            navigate('/auth');
         }
     };
 
     const handleRemoveFriend = async (whereRemove: IRemoveFriend['whereRemove']) => {
-        if (myUser === null) {
-            navigate('/auth');
-        } else {
+        if (myUser) {
             setIsLoading(true);
             await dispatch(removeFriend({ myId: myUser.id, friendId: user.id, whereRemove }));
             setIsLoading(false);
             setAnchor(null);
             updateUsers();
+        } else {
+            navigate('/auth');
         }
     };
 

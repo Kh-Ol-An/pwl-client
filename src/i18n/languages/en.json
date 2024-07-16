@@ -152,6 +152,9 @@
       },
       "get-wish-list": {
         "error": "{{type}}.getWishList: Failed to get wish list."
+      },
+      "get-all-wishes": {
+        "error": "{{type}}.getAllWishes: Failed to get all wishes."
       }
     },
     "interceptors-api": {
@@ -238,6 +241,7 @@
     "friend-requests": "Friend Requests",
     "sent-friend-requests": "Sent Friend Requests",
     "users-search": "Users Search",
+    "wishes-search": "Wishes Search",
     "confirm-friendship": "Confirm friendship",
     "add-friend": "Add friend",
     "delete-your": "Delete your friend request",
@@ -250,9 +254,6 @@
     "wishes": "wishes.",
     "wish": "wish.",
     "wish_2_3_4": "wishes.",
-    "you_have_any": "You don't have any wishes yet. Don't you wish for anything?",
-    "you_have_fulfilled": "You don't have any fulfilled wishes yet.",
-    "you_have_unfulfilled": "You don't have any unfulfilled wishes yet.",
     "at-user": "User",
     "does_not_have_": "doesn't have any wishes available for viewing.",
     "does_not_have_fulfilled": "doesn't have any fulfilled wishes available for viewing.",

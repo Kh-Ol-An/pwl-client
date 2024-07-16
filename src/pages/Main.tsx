@@ -23,17 +23,6 @@ const Main: FC = () => {
 
         window.addEventListener("resize", handleResize);
 
-        if (!myUser) return;
-
-        const selectedUserId = localStorage.getItem('selectedUserId');
-        if (selectedUserId) {
-            dispatch(getWishList({ myId: myUser.id, userId: selectedUserId }));
-            dispatch(selectUserId(selectedUserId));
-        } else {
-            dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
-            dispatch(selectUserId(myUser.id));
-        }
-
         return () => {
             window.removeEventListener("resize", handleResize);
         };

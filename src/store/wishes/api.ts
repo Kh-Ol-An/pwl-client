@@ -11,7 +11,8 @@ import {
     IBookWish,
     IActionWish,
     IDoneWish,
-    ISendWishList
+    ISendWishList,
+    ISendAllWishes,
 } from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
 import { TCurrentImage, IWish } from '@/models/IWish';
@@ -202,6 +203,18 @@ const getWishList = async (params: ISendWishList): Promise<AxiosResponse<IWish[]
     }
 };
 
+const getAllWishes = async (params: ISendAllWishes): Promise<AxiosResponse<IWish[]>> => {
+    try {
+        return await api.get('/all-wishes', { params });
+    } catch (error: any) {
+        toast(
+            error.response?.data?.message || t('alerts.wishes-api.get-all-wishes.error', { type: 'api' }),
+            { type: 'error' },
+        );
+        throw error;
+    }
+};
+
 const wishApi = {
     createWish,
     updateWish,
@@ -214,6 +227,7 @@ const wishApi = {
     dislikeWish,
     deleteWish,
     getWishList,
+    getAllWishes,
 };
 
 export default wishApi;

@@ -35,14 +35,14 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
             className={
                 "wish-item"
                 + (wish.executed ? " fulfilled" : "")
-                + (myUser?.id === wish.booking?.userId ? " i-m-booked" : "")
+                + (myUser && myUser.id === wish.booking?.userId ? " i-m-booked" : "")
                 + (showBookingExpired(wish, myUser?.id) ? " booking-expired" : "")
             }
             onClick={ showWish }
         >
             <div className={ "wish-box" + (wish.booking?.end ? " reserved-box" : "") }>
                 <div className="wish-item-img">
-                    { wish.images.length > 0 ? (
+                    { wish.images?.length > 0 ? (
                         <img
                             src={ unencryptedData(wish.images[0].path, wish.show) }
                             alt={ `${ t('wish') } ${ wish.images[0].position }` }

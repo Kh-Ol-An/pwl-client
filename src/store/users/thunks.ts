@@ -12,6 +12,16 @@ export const getUsers = createAsyncThunk<IGetUsers, ISendUsersParams>(
     },
 );
 
+// Додавання нових користувачів під час infinity scroll
+export const addUsers = createAsyncThunk<IGetUsers, ISendUsersParams>(
+    'users/addUsers',
+    async (params) => {
+        const result = await api.getUsers(params);
+
+        return result.data;
+    },
+);
+
 export const getAllUsers = createAsyncThunk<IUser[], ISendAllUsersParams>(
     'users/getAllUsers',
     async (params) => {
@@ -21,10 +31,11 @@ export const getAllUsers = createAsyncThunk<IUser[], ISendAllUsersParams>(
     },
 );
 
-export const addUsers = createAsyncThunk<IGetUsers, ISendUsersParams>(
-    'users/addUsers',
+// Додавання нових користувачів під час infinity scroll
+export const addAllUsers = createAsyncThunk<IUser[], ISendAllUsersParams>(
+    'users/addAllUsers',
     async (params) => {
-        const result = await api.getUsers(params);
+        const result = await api.getAllUsers(params);
 
         return result.data;
     },

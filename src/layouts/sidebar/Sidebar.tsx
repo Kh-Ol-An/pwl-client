@@ -4,15 +4,13 @@ import { useTranslation } from 'react-i18next';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
-import { getWishList } from '@/store/wishes/thunks';
-import { selectUserId } from '@/store/selected-user/slice';
-import { addUsers, getAllUsers, getUsers } from '@/store/users/thunks';
+import { addAllUsers, addUsers, getAllUsers, getUsers } from '@/store/users/thunks';
 import { ISendUsersParams } from '@/store/users/types';
 import Loading from '@/layouts/Loading';
 import UserAction from '@/layouts/sidebar/UserAction';
 import Search from '@/components/Search';
 import ShareButton from '@/components/ShareButton';
-import { PAGINATION_LIMIT } from '@/utils/constants';
+import { USERS_PAGINATION_LIMIT } from '@/utils/constants';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
@@ -29,7 +27,6 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
 
     const myUser = useAppSelector((state) => state.myUser.user);
     const users = useAppSelector((state) => state.users);
-    const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
 
@@ -47,7 +44,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
 
         userListRef.current.scrollTo(0, 0);
 
-        dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType: value, search }));
+        dispatch(getUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, myUserId: myUser.id, userType: value, search }));
     };
 
     const handleChangeSearchBar = (value: string) => {
@@ -57,10 +54,16 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
 
         userListRef.current.scrollTo(0, 0);
 
-        if (myUser === null) {
-            dispatch(getAllUsers({ page: 1, limit: PAGINATION_LIMIT, search: value }));
+        if (!myUser) {
+            dispatch(getAllUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, search: value }));
         } else {
-            dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search: value }));
+            dispatch(getUsers({
+                page: 1,
+                limit: USERS_PAGINATION_LIMIT,
+                myUserId: myUser.id,
+                userType,
+                search: value
+            }));
         }
     };
 
@@ -69,14 +72,14 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
 
         userListRef.current.scrollTo(0, 0);
 
-        dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
+        dispatch(getUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
     };
 
     useEffect(() => {
-        if (myUser === null) {
-            dispatch(getAllUsers({ page: 1, limit: PAGINATION_LIMIT, search }));
+        if (!myUser) {
+            dispatch(getAllUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, search }));
         } else {
-            dispatch(getUsers({ page: 1, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
+            dispatch(getUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
         }
     }, []);
 
@@ -86,20 +89,19 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
             return;
         }
 
-        if (!inView || !myUser || users.stopRequests) return;
-        dispatch(addUsers({ page: users.page, limit: PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
-    }, [ inView ]);
-
-    useEffect(() => {
-        if (firstLoad) {
-            setFirstLoad(false);
-            return;
+        if (!inView || users.stopRequests) return;
+        if (myUser) {
+            dispatch(addUsers({
+                page: users.page,
+                limit: USERS_PAGINATION_LIMIT,
+                myUserId: myUser.id,
+                userType,
+                search
+            }));
+        } else {
+            dispatch(addAllUsers({ page: users.page, limit: USERS_PAGINATION_LIMIT, search }));
         }
-
-        if (!myUser || myUser.id === selectedUserId || users.list.some(user => user.id === selectedUserId)) return;
-        dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
-        dispatch(selectUserId(myUser.id));
-    }, [ users.list ]);
+    }, [ inView ]);
 
     return (
         <div className={ "sidebar" + (showSidebar ? " show" : "") }>
@@ -111,7 +113,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                         <ShareButton link="welcome" />
                     </div>
 
-                    { myUser !== null && (
+                    { myUser && (
                         <div className="custom-mui-select">
                             <div className="select-box">
                                 <Select
@@ -142,9 +144,11 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                     ) }
 
                     <div className="sidebar-search">
-                        <Search id="search"
-                                label={ t('main-page.users-search') }
-                                changeSearchBar={ handleChangeSearchBar } />
+                        <Search
+                            id="search"
+                            label={ t('main-page.users-search') }
+                            changeSearchBar={ handleChangeSearchBar }
+                        />
                     </div>
 
                     <div className={ "user-list" + (myUser === null ? ' without-select' : '') } ref={ userListRef }>

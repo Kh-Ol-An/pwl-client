@@ -11,8 +11,12 @@ import {
     dislikeWish,
     deleteWish,
     getWishList,
+    addWishList,
+    getAllWishes,
+    addAllWishes,
 } from '@/store/wishes/thunks';
 import { IWish } from '@/models/IWish';
+import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
 
 const changeWish = (state: IState, newWish: IWish) => {
     // Змінити бажання та покласти його там де було
@@ -27,6 +31,8 @@ const changeWish = (state: IState, newWish: IWish) => {
 
 interface IState {
     list: IWish[];
+    page: number;
+    stopRequests: boolean;
     isLoading: boolean;
     isLocalLoading: boolean;
     error: string | null;
@@ -34,6 +40,8 @@ interface IState {
 
 const initialState: IState = {
     list: [],
+    page: 1,
+    stopRequests: false,
     isLoading: false,
     isLocalLoading: false,
     error: null,
@@ -202,18 +210,91 @@ const wishesSlice = createSlice({
             // getWishList
             .addCase(getWishList.pending, (state) => {
                 state.list = [];
+                state.stopRequests = true;
                 state.isLoading = false;
                 state.isLocalLoading = true;
                 state.error = null;
             })
             .addCase(getWishList.rejected, (state, action) => {
                 state.list = [];
+                state.stopRequests = false;
                 state.isLoading = false;
                 state.isLocalLoading = false;
                 state.error = action.error.message || t('alerts.wishes-api.get-wish-list.error', { type: 'slice' });
             })
             .addCase(getWishList.fulfilled, (state, action) => {
                 state.list = action.payload;
+                state.page = 2;
+                action.payload.length === WISHES_PAGINATION_LIMIT && (state.stopRequests = false);
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = null;
+            })
+            // addWishList
+            .addCase(addWishList.pending, (state) => {
+                state.list = [];
+                state.stopRequests = true;
+                state.isLoading = false;
+                state.isLocalLoading = true;
+                state.error = null;
+            })
+            .addCase(addWishList.rejected, (state, action) => {
+                state.list = [];
+                state.stopRequests = false;
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = action.error.message || t('alerts.wishes-api.get-wish-list.error', { type: 'slice' });
+            })
+            .addCase(addWishList.fulfilled, (state, action) => {
+                state.list.push(...action.payload);
+                state.page += 1;
+                action.payload.length === WISHES_PAGINATION_LIMIT && (state.stopRequests = false);
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = null;
+            })
+            // getAllWishes
+            .addCase(getAllWishes.pending, (state) => {
+                state.list = [];
+                state.stopRequests = true;
+                state.isLoading = false;
+                state.isLocalLoading = true;
+                state.error = null;
+            })
+            .addCase(getAllWishes.rejected, (state, action) => {
+                state.list = [];
+                state.stopRequests = false;
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = action.error.message || t('alerts.wishes-api.get-all-wishes.error', { type: 'slice' });
+            })
+            .addCase(getAllWishes.fulfilled, (state, action) => {
+                state.list = action.payload;
+                state.page = 2;
+                action.payload.length === WISHES_PAGINATION_LIMIT && (state.stopRequests = false);
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = null;
+            })
+            // addAllWishes
+            .addCase(addAllWishes.pending, (state) => {
+                state.list = [];
+                state.stopRequests = true;
+                state.isLoading = false;
+                state.isLocalLoading = true;
+                state.error = null;
+            })
+            .addCase(addAllWishes.rejected, (state, action) => {
+                state.list = [];
+                state.stopRequests = false;
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = action.error.message || t('alerts.wishes-api.get-all-wishes.error', { type: 'slice' });
+            })
+            .addCase(addAllWishes.fulfilled, (state, action) => {
+                state.list.push(...action.payload);
+                state.page += 1;
+                action.payload.length === WISHES_PAGINATION_LIMIT && (state.stopRequests = false);
                 state.isLoading = false;
                 state.isLocalLoading = false;
                 state.error = null;
