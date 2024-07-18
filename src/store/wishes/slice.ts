@@ -58,7 +58,7 @@ const wishesSlice = createSlice({
         setWishStatus(state, action: PayloadAction<Partial<TWishStatus>>) {
             state.status = action.payload;
         },
-        setWishSearch(state, action: PayloadAction<Partial<string>>) {
+        setWishesSearch(state, action: PayloadAction<Partial<string>>) {
             state.search = action.payload;
         },
     },
@@ -220,14 +220,12 @@ const wishesSlice = createSlice({
             })
             // getWishList
             .addCase(getWishList.pending, (state) => {
-                state.list = [];
                 state.stopRequests = true;
                 state.isLoading = false;
                 state.isLocalLoading = true;
                 state.error = null;
             })
             .addCase(getWishList.rejected, (state, action) => {
-                state.list = [];
                 state.stopRequests = false;
                 state.isLoading = false;
                 state.isLocalLoading = false;
@@ -243,14 +241,12 @@ const wishesSlice = createSlice({
             })
             // addWishList
             .addCase(addWishList.pending, (state) => {
-                state.list = [];
                 state.stopRequests = true;
                 state.isLoading = false;
                 state.isLocalLoading = true;
                 state.error = null;
             })
             .addCase(addWishList.rejected, (state, action) => {
-                state.list = [];
                 state.stopRequests = false;
                 state.isLoading = false;
                 state.isLocalLoading = false;
@@ -266,14 +262,12 @@ const wishesSlice = createSlice({
             })
             // getAllWishes
             .addCase(getAllWishes.pending, (state) => {
-                state.list = [];
                 state.stopRequests = true;
                 state.isLoading = false;
                 state.isLocalLoading = true;
                 state.error = null;
             })
             .addCase(getAllWishes.rejected, (state, action) => {
-                state.list = [];
                 state.stopRequests = false;
                 state.isLoading = false;
                 state.isLocalLoading = false;
@@ -289,14 +283,12 @@ const wishesSlice = createSlice({
             })
             // addAllWishes
             .addCase(addAllWishes.pending, (state) => {
-                state.list = [];
                 state.stopRequests = true;
                 state.isLoading = false;
                 state.isLocalLoading = true;
                 state.error = null;
             })
             .addCase(addAllWishes.rejected, (state, action) => {
-                state.list = [];
                 state.stopRequests = false;
                 state.isLoading = false;
                 state.isLocalLoading = false;
@@ -313,6 +305,6 @@ const wishesSlice = createSlice({
     },
 });
 
-export const { setWishStatus, setWishSearch } = wishesSlice.actions;
+export const { setWishStatus, setWishesSearch } = wishesSlice.actions;
 
 export default wishesSlice.reducer;

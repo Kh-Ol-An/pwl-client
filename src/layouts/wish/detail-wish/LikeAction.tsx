@@ -8,7 +8,7 @@ import Popup from "@/components/Popup";
 import { IWish } from "@/models/IWish";
 import { IUser } from "@/models/IUser";
 import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
-import { setWishSearch, setWishStatus } from "@/store/wishes/slice";
+import { setWishesSearch, setWishStatus } from "@/store/wishes/slice";
 
 interface IProps {
     wish: IWish;
@@ -42,7 +42,7 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
             limit: WISHES_PAGINATION_LIMIT,
             search: '',
         }));
-        await dispatch(setWishSearch(''));
+        await dispatch(setWishesSearch(''));
         await dispatch(setWishStatus('all'));
         await dispatch(selectUserId(userId));
         localStorage.setItem('selectedUserId', userId);

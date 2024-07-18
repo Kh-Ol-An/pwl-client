@@ -23,8 +23,10 @@ import Button from '@/components/Button';
 import Popup from '@/components/Popup';
 import LanguageSelection from '@/components/LanguageSelection';
 import LogoIcon from '@/assets/images/logo.svg';
-import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
-import { setWishSearch, setWishStatus } from "@/store/wishes/slice";
+import { USERS_PAGINATION_LIMIT, WISHES_PAGINATION_LIMIT } from "@/utils/constants";
+import { setWishesSearch, setWishStatus } from "@/store/wishes/slice";
+import { getAllUsers } from "@/store/users/thunks";
+import { setUsersSearch } from "@/store/users/slice";
 
 interface IProps {
     showHeader: boolean;
@@ -35,7 +37,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
-    const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
 
@@ -47,12 +48,10 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
 
     // SelectAllWishes
     const handleSelectAllWishes = async () => {
-        if (!myUser) return;
-
         await dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: '' }));
         await dispatch(selectUserId(null));
         localStorage.removeItem('selectedUserId');
-        await dispatch(setWishSearch(''));
+        await dispatch(setWishesSearch(''));
         await dispatch(setWishStatus('all'));
     };
 
@@ -68,7 +67,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
             limit: WISHES_PAGINATION_LIMIT,
             search: '',
         }));
-        await dispatch(setWishSearch(''));
+        await dispatch(setWishesSearch(''));
         await dispatch(setWishStatus('all'));
         await dispatch(selectUserId(myUser.id));
         localStorage.setItem('selectedUserId', myUser.id);
@@ -115,8 +114,13 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     };
 
     // Logout
-    const handleLogout = () => {
-        dispatch(logout());
+    const handleLogout = async () => {
+        await dispatch(logout());
+        await dispatch(getAllUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, search: '' }));
+        await dispatch(setUsersSearch(''));
+        await handleSelectAllWishes();
+        setAnchor(null);
+        hideHeader();
     };
 
     useEffect(() => {

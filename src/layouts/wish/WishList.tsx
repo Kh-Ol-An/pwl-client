@@ -6,7 +6,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Close as CloseIcon, AddCircle as AddCircleIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { selectUserId } from '@/store/selected-user/slice';
-import { setWishStatus, setWishSearch } from '@/store/wishes/slice';
+import { setWishStatus, setWishesSearch } from '@/store/wishes/slice';
 import { addAllWishes, getAllWishes, getWishList, addWishList } from '@/store/wishes/thunks';
 import { IWish, TWishStatus } from '@/models/IWish';
 import EditWish from '@/layouts/wish/edit-wish/EditWish';
@@ -86,7 +86,7 @@ const WishList = () => {
     };
 
     const handleChangeSearchBar = (value: string) => {
-        setWishSearch(value);
+        setWishesSearch(value);
 
         if (!wishListRef.current) return;
 
@@ -103,7 +103,7 @@ const WishList = () => {
         if (!myUser) return;
 
         await dispatch(addAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: '' }));
-        await dispatch(setWishSearch(''));
+        await dispatch(setWishesSearch(''));
         await dispatch(selectUserId(null));
         localStorage.removeItem('selectedUserId');
     };
@@ -126,24 +126,6 @@ const WishList = () => {
         setShowEditWish(false);
     };
 
-    // useEffect(() => {
-    //     if (myUser) {
-    //         if (wishes.status === 'all') {
-    //             setSelectedWishList(wishes.list);
-    //         }
-    //
-    //         if (wishes.status === 'fulfilled') {
-    //             setSelectedWishList(wishes.list.filter(wish => wish.executed));
-    //         }
-    //
-    //         if (wishes.status === 'unfulfilled') {
-    //             setSelectedWishList(wishes.list.filter(wish => !wish.executed));
-    //         }
-    //     } else {
-    //         setSelectedWishList(prevState => ([ ...prevState, ...wishes.list ]));
-    //     }
-    // }, [ myUser, wishes.list ]);
-
     useEffect(() => {
         if (firstLoad) {
             setFirstLoad(false);
@@ -152,7 +134,6 @@ const WishList = () => {
 
         if (!inView || wishes.stopRequests) return;
 
-        console.log('selectedUserId: ', selectedUserId);
         if (selectedUserId && myUser) {
             dispatch(addWishList({
                 myId: myUser.id,
@@ -207,7 +188,7 @@ const WishList = () => {
                     <span className="logo-name">Wish Hub</span>
                 </button>
 
-                { myUser && (
+                { myUser && selectedUserId && (
                     <div className="title-box">
                         <div className="wish-list-type">
                             <Select
@@ -239,11 +220,13 @@ const WishList = () => {
                     </div>
                 ) }
 
-                <Search
-                    id="wish-search"
-                    label={ t('main-page.wishes-search') }
-                    changeSearchBar={ handleChangeSearchBar }
-                />
+                <div className="wish-search">
+                    <Search
+                        id="wish-search"
+                        label={ t('main-page.wishes-search') }
+                        changeSearchBar={ handleChangeSearchBar }
+                    />
+                </div>
             </div>
 
             { (myUser?.id === selectedUserId || wishes.list.length > 0) ? (

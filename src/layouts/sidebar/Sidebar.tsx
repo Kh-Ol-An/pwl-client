@@ -12,6 +12,7 @@ import Search from '@/components/Search';
 import ShareButton from '@/components/ShareButton';
 import { USERS_PAGINATION_LIMIT } from '@/utils/constants';
 import StylesVariables from '@/styles/utils/variables.module.scss';
+import { setUsersSearch } from '@/store/users/slice';
 
 interface IProps {
     showSidebar: boolean;
@@ -32,7 +33,6 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
 
     const [ firstLoad, setFirstLoad ] = useState<boolean>(true);
     const [ userType, setUserType ] = useState<ISendUsersParams['userType']>('all');
-    const [ search, setSearch ] = useState<string>('');
 
     const userListRef = useRef<HTMLDivElement>(null);
 
@@ -44,11 +44,17 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
 
         userListRef.current.scrollTo(0, 0);
 
-        dispatch(getUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, myUserId: myUser.id, userType: value, search }));
+        dispatch(getUsers({
+            page: 1,
+            limit: USERS_PAGINATION_LIMIT,
+            myUserId: myUser.id,
+            userType: value,
+            search: users.search
+        }));
     };
 
-    const handleChangeSearchBar = (value: string) => {
-        setSearch(value);
+    const handleChangeSearchBar = async (value: string) => {
+        await dispatch(setUsersSearch(value));
 
         if (!userListRef.current) return;
 
@@ -72,7 +78,13 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
 
         userListRef.current.scrollTo(0, 0);
 
-        dispatch(getUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
+        dispatch(getUsers({
+            page: 1,
+            limit: USERS_PAGINATION_LIMIT,
+            myUserId: myUser.id,
+            userType,
+            search: users.search
+        }));
     };
 
     useEffect(() => {
@@ -88,12 +100,26 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
                 limit: USERS_PAGINATION_LIMIT,
                 myUserId: myUser.id,
                 userType,
-                search
+                search: users.search,
             }));
         } else {
-            dispatch(addAllUsers({ page: users.page, limit: USERS_PAGINATION_LIMIT, search }));
+            dispatch(addAllUsers({ page: users.page, limit: USERS_PAGINATION_LIMIT, search: users.search }));
         }
     }, [ inView ]);
+
+    useEffect(() => {
+        if (myUser) {
+            dispatch(getUsers({
+                page: users.page,
+                limit: USERS_PAGINATION_LIMIT,
+                myUserId: myUser.id,
+                userType,
+                search: users.search,
+            }));
+        } else {
+            dispatch(getAllUsers({ page: users.page, limit: USERS_PAGINATION_LIMIT, search: users.search }));
+        }
+    }, []);
 
     return (
         <div className={ "sidebar" + (showSidebar ? " show" : "") }>

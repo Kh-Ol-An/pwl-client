@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { t } from 'i18next';
 import { getUsers, addUsers, getAllUsers, addAllUsers } from '@/store/users/thunks';
 import { doneWish, undoneWish } from '@/store/wishes/thunks';
@@ -7,6 +7,7 @@ import { USERS_PAGINATION_LIMIT } from '@/utils/constants';
 
 interface IUsersState {
     list: IUser[];
+    search: string;
     followFromCount: number;
     page: number;
     stopRequests: boolean;
@@ -16,6 +17,7 @@ interface IUsersState {
 
 const initialState: IUsersState = {
     list: [],
+    search: '',
     followFromCount: 0,
     page: 1,
     stopRequests: false,
@@ -26,7 +28,11 @@ const initialState: IUsersState = {
 const usersSlice = createSlice({
     name: 'users',
     initialState,
-    reducers: {},
+    reducers: {
+        setUsersSearch(state, action: PayloadAction<Partial<string>>) {
+            state.search = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             // getUsers
@@ -147,5 +153,7 @@ const usersSlice = createSlice({
             });
     },
 });
+
+export const { setUsersSearch } = usersSlice.actions;
 
 export default usersSlice.reducer;
