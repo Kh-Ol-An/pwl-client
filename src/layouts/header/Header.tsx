@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@mui/material';
 import {
@@ -27,6 +28,7 @@ import { USERS_PAGINATION_LIMIT, WISHES_PAGINATION_LIMIT } from "@/utils/constan
 import { setWishesSearch, setWishStatus } from "@/store/wishes/slice";
 import { getAllUsers } from "@/store/users/thunks";
 import { setUsersSearch } from "@/store/users/slice";
+import YouTubeIcon from '@/assets/images/social-networks/youtube.svg';
 
 interface IProps {
     showHeader: boolean;
@@ -38,6 +40,8 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
 
     const myUser = useAppSelector((state) => state.myUser.user);
 
+    const navigate = useNavigate();
+
     const dispatch = useAppDispatch();
 
     const [ anchor, setAnchor ] = useState<HTMLButtonElement | null>(null);
@@ -45,6 +49,14 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     const [ showEditAccount, setShowEditAccount ] = useState<boolean>(false);
     const [ showContacts, setShowContacts ] = useState<boolean>(false);
     const [ showConfirmDeleteMyUser, setShowConfirmDeleteMyUser ] = useState<boolean>(false);
+
+    const handleSingIn = async () => {
+        navigate('/auth');
+    }
+
+    const handleSingUp = async () => {
+        navigate('/auth?register');
+    }
 
     // SelectAllWishes
     const handleSelectAllWishes = async () => {
@@ -153,45 +165,42 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         }
                     >
                         <div className="header-popup">
-                            <Button
-                                variant="text"
-                                color="primary-color"
-                                type="button"
-                                onClick={ handleSelectWish }
-                            >
-                                {/*<ManageAccountsIcon />*/}
-                                Selcet Oner WISH
-                            </Button>
+                            <div className="header-popup-auth">
+                                <Button onClick={ handleSingIn } variant="text">{ t('sing-in') }</Button>
+                                <Button onClick={ handleSingUp }>{ t('sing-up') }</Button>
+                            </div>
 
-                            <Button
-                                variant="text"
-                                color="primary-color"
-                                type="button"
-                                onClick={ handleShowEditAccount }
-                            >
-                                <ManageAccountsIcon />
-                                { t('main-page.account_settings') }
-                            </Button>
+                            <div className="header-popup-box">
+                                <Button
+                                    variant="text"
+                                    color="primary-color"
+                                    type="button"
+                                    onClick={ handleSelectWish }
+                                >
+                                    <img className="wish-hub-icon" src={ LogoIcon } alt={ t('wish_hub_icon') } />
+                                    { t('main-page.my-wishes') }
+                                </Button>
 
-                            <Button to="/about" variant="text" color="primary-color">
-                                <img className="wish-hub-icon" src={ LogoIcon } alt={ t('wish_hub_icon') } />
-                                { t('main-page.about') }
-                                <span className="logo-name">Wish Hub</span>
-                            </Button>
+                                <Button
+                                    variant="text"
+                                    color="primary-color"
+                                    type="button"
+                                    onClick={ handleShowEditAccount }
+                                >
+                                    <ManageAccountsIcon />
+                                    { t('main-page.account_settings') }
+                                </Button>
+                            </div>
 
                             <Button to="/instruction" variant="text" color="primary-color">
-                                <InfoIcon />
+                                <img className="wish-hub-icon" src={ YouTubeIcon } alt="YouTube icon" />
                                 { t('main-page.instruction') }
                             </Button>
 
-                            <Button to="/privacy-policy" variant="text" color="primary-color">
-                                <PrivacyTipIcon />
-                                { t('privacy-policy-page.title') }
-                            </Button>
-
-                            <Button variant="text" color="primary-color" type="button" onClick={ handleShowContacts }>
-                                <ForumIcon />
-                                { t('main-page.contacts') }
+                            <Button to="/about" variant="text" color="primary-color">
+                                <InfoIcon />
+                                { t('main-page.about') }
+                                <span className="logo-name">Wish Hub</span>
                             </Button>
 
                             <div className="header-lang">
@@ -202,9 +211,19 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                                 </div>
                             </div>
 
+                            <Button variant="text" color="primary-color" type="button" onClick={ handleShowContacts }>
+                                <ForumIcon />
+                                { t('main-page.contacts') }
+                            </Button>
+
                             <Button variant="text" color="primary-color" type="button" onClick={ handleLogout }>
                                 <LogoutIcon />
                                 { t('logout') }
+                            </Button>
+
+                            <Button to="/privacy-policy" variant="text" color="primary-color">
+                                <PrivacyTipIcon />
+                                { t('privacy-policy-page.title') }
                             </Button>
                         </div>
                     </Popup>

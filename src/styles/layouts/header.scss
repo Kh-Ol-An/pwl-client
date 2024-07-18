@@ -190,6 +190,13 @@
 }
 
 .header-popup {
+    .header-popup-auth {
+        @include flex-center;
+        gap: 16px;
+    }
+
+    .header-popup-box {}
+
     .button {
         padding: 16px 0;
 

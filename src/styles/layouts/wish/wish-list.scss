@@ -15,9 +15,9 @@
 
         @media only screen and (min-width: 1024px) {
             padding: 0 10px 0 20px;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
+            //flex-direction: row;
+            //align-items: center;
+            //justify-content: space-between;
 
             & > button {
                 order: 1;
@@ -27,6 +27,16 @@
         .button {
             padding: 8px 16px;
         }
+    }
+
+    .head-top {
+        @include flex-between;
+        width: 100%;
+    }
+
+    .head-bottom {
+        @include flex-between;
+        width: 100%;
     }
 
     .wish-hub {

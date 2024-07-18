@@ -128,30 +128,32 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                             />
                     }
                 >
-                    { showAddFriend && (
-                        <Button variant="text" fontSize="small" onClick={ handleAddFriend }>
-                            {
-                                myUser?.followFrom.includes(user.id)
-                                    ? t('main-page.confirm-friendship')
-                                    : t('main-page.add-friend')
-                            }
-                        </Button>
-                    ) }
-                    { (myUser?.friends.includes(user.id) || myUser?.followTo.includes(user.id)) && (
-                        <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('followTo') }>
-                            { t('main-page.delete-your') } <br /> { t('main-page.delete-request') }
-                        </Button>
-                    ) }
-                    { (myUser?.friends.includes(user.id) || myUser?.followFrom.includes(user.id)) && (
-                        <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('followFrom') }>
-                            { t('main-page.delete-user_s') } <br /> { t('main-page.delete-request') }
-                        </Button>
-                    ) }
-                    { myUser?.friends.includes(user.id) && (
-                        <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('friends') }>
-                            { t('main-page.remove-friend') }
-                        </Button>
-                    ) }
+                    <div className="popup">
+                        { showAddFriend && (
+                            <Button variant="text" fontSize="small" onClick={ handleAddFriend }>
+                                {
+                                    myUser?.followFrom.includes(user.id)
+                                        ? t('main-page.confirm-friendship')
+                                        : t('main-page.add-friend')
+                                }
+                            </Button>
+                        ) }
+                        { (myUser?.friends.includes(user.id) || myUser?.followTo.includes(user.id)) && (
+                            <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('followTo') }>
+                                { t('main-page.delete-your') } <br /> { t('main-page.delete-request') }
+                            </Button>
+                        ) }
+                        { (myUser?.friends.includes(user.id) || myUser?.followFrom.includes(user.id)) && (
+                            <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('followFrom') }>
+                                { t('main-page.delete-user_s') } <br /> { t('main-page.delete-request') }
+                            </Button>
+                        ) }
+                        { myUser?.friends.includes(user.id) && (
+                            <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('friends') }>
+                                { t('main-page.remove-friend') }
+                            </Button>
+                        ) }
+                    </div>
                 </Popup>
             }
         >

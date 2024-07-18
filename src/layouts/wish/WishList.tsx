@@ -19,6 +19,7 @@ import LogoIcon from "@/assets/images/logo.svg";
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
 import Search from "@/components/Search";
+import ShareButton from "@/components/ShareButton";
 
 const WishList = () => {
     const { t } = useTranslation();
@@ -188,44 +189,54 @@ const WishList = () => {
                     <span className="logo-name">Wish Hub</span>
                 </button>
 
-                { myUser && selectedUserId && (
-                    <div className="title-box">
-                        <div className="wish-list-type">
-                            <Select
-                                id="wish-list-type"
-                                variant="standard"
-                                sx={ { fontSize: screenWidth < 1024 ? 20 : 24 } }
-                                value={ wishes.status }
-                                onChange={ handleChangeWishStatus }
-                            >
-                                <MenuItem value="all">{ t('main-page.all') }</MenuItem>
-                                <MenuItem value="unfulfilled">{ t('main-page.unfulfilled') }</MenuItem>
-                                <MenuItem value="fulfilled">{ t('main-page.fulfilled.plural') }</MenuItem>
-                            </Select>
+                <div className="head-top">
+                    { myUser && selectedUserId && (
+                        <div className="title-box">
+                            <div className="wish-list-type">
+                                <Select
+                                    id="wish-list-type"
+                                    variant="standard"
+                                    sx={ { fontSize: screenWidth < 1024 ? 20 : 24 } }
+                                    value={ wishes.status }
+                                    onChange={ handleChangeWishStatus }
+                                >
+                                    <MenuItem value="all">{ t('main-page.all') }</MenuItem>
+                                    <MenuItem value="unfulfilled">{ t('main-page.unfulfilled') }</MenuItem>
+                                    <MenuItem value="fulfilled">{ t('main-page.fulfilled.plural') }</MenuItem>
+                                </Select>
+                            </div>
+
+                            {
+                                myUser.id === selectedUserId
+                                    ? <>
+                                        <h2 className="title">{ t('main-page.title-personal') }</h2>
+                                        <h2 className="title">{ t('main-page.title-wishes') }</h2>
+                                    </>
+                                    : <>
+                                        <h2 className="title">{ t('main-page.title-wishes') }</h2>
+                                        <h2 className="title">{ t('main-page.of-user') }</h2>
+                                        <h2 className="title title-name">{ selectedUser?.firstName }</h2>
+                                        <h2 className="title title-name">{ lastName }</h2>
+                                    </>
+                            }
                         </div>
+                    ) }
 
-                        {
-                            myUser.id === selectedUserId
-                                ? <>
-                                    <h2 className="title">{ t('main-page.title-personal') }</h2>
-                                    <h2 className="title">{ t('main-page.title-wishes') }</h2>
-                                </>
-                                : <>
-                                    <h2 className="title">{ t('main-page.title-wishes') }</h2>
-                                    <h2 className="title">{ t('main-page.of-user') }</h2>
-                                    <h2 className="title title-name">{ selectedUser?.firstName }</h2>
-                                    <h2 className="title title-name">{ lastName }</h2>
-                                </>
-                        }
-                    </div>
-                ) }
+                    <ShareButton link="welcome" />
+                </div>
 
-                <div className="wish-search">
-                    <Search
-                        id="wish-search"
-                        label={ t('main-page.wishes-search') }
-                        changeSearchBar={ handleChangeSearchBar }
-                    />
+                <div className="head-bottom">
+                    { wishes.list.length > 5 && (
+                        <div className="wish-search">
+                            <Search
+                                id="wish-search"
+                                label={ t('main-page.wishes-search') }
+                                changeSearchBar={ handleChangeSearchBar }
+                            />
+                        </div>
+                    ) }
+
+                    <ShareButton link="welcome" />
                 </div>
             </div>
 

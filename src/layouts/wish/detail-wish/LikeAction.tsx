@@ -71,27 +71,29 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
                     actionIcon={ <span className="wish-likes-count">{ wish[type].length }</span> }
                     isTopPosition
                 >
-                    <ul className="wish-likes_user-list">
-                        { wish[type].map((like) => (
-                            <li key={ like.userId }>
-                                <button
-                                    className="wish-likes_user-item"
-                                    type="button"
-                                    onClick={ (e) => handleSelectWish(e, like.userId) }
-                                >
-                                    <Avatar
-                                        src={ like.userAvatar }
-                                        alt={ like.userFullName }
-                                        sx={ { width: 24, height: 24 } }
-                                    />
+                    <div className="popup">
+                        <ul className="wish-likes_user-list">
+                            { wish[type].map((like) => (
+                                <li key={ like.userId }>
+                                    <button
+                                        className="wish-likes_user-item"
+                                        type="button"
+                                        onClick={ (e) => handleSelectWish(e, like.userId) }
+                                    >
+                                        <Avatar
+                                            src={ like.userAvatar }
+                                            alt={ like.userFullName }
+                                            sx={ { width: 24, height: 24 } }
+                                        />
 
-                                    <span className="wish-likes_user-name">
-                                        { like.userFullName }
-                                    </span>
-                                </button>
-                            </li>
-                        )) }
-                    </ul>
+                                        <span className="wish-likes_user-name">
+                                            { like.userFullName }
+                                        </span>
+                                    </button>
+                                </li>
+                            )) }
+                        </ul>
+                    </div>
                 </Popup>
             ) }
         </>

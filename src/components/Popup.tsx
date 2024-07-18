@@ -51,9 +51,7 @@ const Popup: FC<IProps> = ({ actionClasses, anchor, setAnchor, actionIcon, isTop
                 } }
                 style={ { borderRadius: '20px' } }
             >
-                <div className="popup">
-                    { children }
-                </div>
+                { children }
             </Popover>
         </>
     );
