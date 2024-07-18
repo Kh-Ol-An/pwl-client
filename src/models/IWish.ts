@@ -27,6 +27,8 @@ interface ILike {
     userFullName: string;
 }
 
+export type TWishStatus = 'all' | 'unfulfilled' | 'fulfilled';
+
 export interface IWish {
     id: string;
     userId: IUser['id'];

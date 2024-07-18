@@ -2,7 +2,6 @@ import React, { FC, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Avatar } from '@mui/material';
 import {
-    Settings as SettingsIcon,
     ManageAccounts as ManageAccountsIcon,
     Info as InfoIcon,
     PrivacyTip as PrivacyTipIcon,
@@ -13,7 +12,7 @@ import {
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { changeFirsLoaded, logout } from '@/store/my-user/thunks';
-import { getWishList } from '@/store/wishes/thunks';
+import { getAllWishes, addAllWishes, getWishList } from '@/store/wishes/thunks';
 import { selectUserId } from '@/store/selected-user/slice';
 import DetailAccount from '@/layouts/DetailAccount';
 import EditAccountModal from '@/layouts/header/EditAccountModal';
@@ -24,7 +23,8 @@ import Button from '@/components/Button';
 import Popup from '@/components/Popup';
 import LanguageSelection from '@/components/LanguageSelection';
 import LogoIcon from '@/assets/images/logo.svg';
-import StylesVariables from '@/styles/utils/variables.module.scss';
+import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
+import { setWishSearch, setWishStatus } from "@/store/wishes/slice";
 
 interface IProps {
     showHeader: boolean;
@@ -45,13 +45,34 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     const [ showContacts, setShowContacts ] = useState<boolean>(false);
     const [ showConfirmDeleteMyUser, setShowConfirmDeleteMyUser ] = useState<boolean>(false);
 
+    // SelectAllWishes
+    const handleSelectAllWishes = async () => {
+        if (!myUser) return;
+
+        await dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: '' }));
+        await dispatch(selectUserId(null));
+        localStorage.removeItem('selectedUserId');
+        await dispatch(setWishSearch(''));
+        await dispatch(setWishStatus('all'));
+    };
+
     // SelectWish
     const handleSelectWish = async () => {
         if (!myUser) return;
 
-        await dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
+        await dispatch(getWishList({
+            myId: myUser.id,
+            userId: myUser.id,
+            wishStatus: 'all',
+            page: 1,
+            limit: WISHES_PAGINATION_LIMIT,
+            search: '',
+        }));
+        await dispatch(setWishSearch(''));
+        await dispatch(setWishStatus('all'));
         await dispatch(selectUserId(myUser.id));
         localStorage.setItem('selectedUserId', myUser.id);
+        setAnchor(null);
         hideHeader();
     };
 
@@ -108,25 +129,9 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
         <div className={ "header" + (showHeader ? " show" : "") }>
             <div className="header-inner">
                 <div className="header-content">
-                    <button className="logo" type="button" onClick={ handleSelectWish }>
+                    <button className="logo" type="button" onClick={ handleSelectAllWishes }>
                         <span className="logo-name">Wish Hub</span>
                     </button>
-
-                    <div className="my-user">
-                        <button className="avatar-box" type="button" onClick={ handleShowDetailAccount }>
-                            <Avatar
-                                alt={ myUser?.firstName }
-                                src={ myUser?.avatar }
-                                sx={ { width: '100%', height: '100%' } }
-                            />
-                        </button>
-
-                        <button className="content" type="button" onClick={ handleSelectWish }>
-                            <span className={ "name" + (myUser?.id === selectedUserId ? " selected" : "") }>
-                                { myUser?.firstName } { myUser?.lastName }
-                            </span>
-                        </button>
-                    </div>
 
                     {/* Settings */ }
                     <Popup
@@ -134,14 +139,32 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         anchor={ anchor }
                         setAnchor={ setAnchor }
                         actionIcon={
-                            <SettingsIcon sx={ { width: 32, height: 32, color: StylesVariables.specialColor } } />
+                            <div className="avatar-box">
+                                <Avatar
+                                    alt={ myUser?.firstName }
+                                    src={ myUser?.avatar }
+                                    sx={ { width: '100%', height: '100%' } }
+                                />
+                            </div>
                         }
                     >
                         <div className="header-popup">
-                            <Button variant="text"
-                                    color="primary-color"
-                                    type="button"
-                                    onClick={ handleShowEditAccount }>
+                            <Button
+                                variant="text"
+                                color="primary-color"
+                                type="button"
+                                onClick={ handleSelectWish }
+                            >
+                                {/*<ManageAccountsIcon />*/}
+                                Selcet Oner WISH
+                            </Button>
+
+                            <Button
+                                variant="text"
+                                color="primary-color"
+                                type="button"
+                                onClick={ handleShowEditAccount }
+                            >
                                 <ManageAccountsIcon />
                                 { t('main-page.account_settings') }
                             </Button>

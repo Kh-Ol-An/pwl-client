@@ -27,15 +27,16 @@ export interface ISendWish {
     wishId: IWish['id'];
 }
 
-export interface ISendWishList {
-    myId: IUser['id'];
-    userId: IUser['id'];
-}
-
 export interface ISendAllWishes {
     page: number;
     limit: number;
     search: string;
+}
+
+export interface ISendWishList extends ISendAllWishes {
+    myId: IUser['id'];
+    userId: IUser['id'];
+    wishStatus: 'all' | 'fulfilled' | 'unfulfilled';
 }
 
 export interface IGetWish {

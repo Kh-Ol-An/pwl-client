@@ -6,8 +6,9 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Close as CloseIcon, AddCircle as AddCircleIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { selectUserId } from '@/store/selected-user/slice';
-import { addAllWishes, getAllWishes, getWishList } from '@/store/wishes/thunks';
-import { IWish } from '@/models/IWish';
+import { setWishStatus, setWishSearch } from '@/store/wishes/slice';
+import { addAllWishes, getAllWishes, getWishList, addWishList } from '@/store/wishes/thunks';
+import { IWish, TWishStatus } from '@/models/IWish';
 import EditWish from '@/layouts/wish/edit-wish/EditWish';
 import WishItem from '@/layouts/wish/WishItem';
 import DetailWish from '@/layouts/wish/detail-wish/DetailWish';
@@ -16,11 +17,8 @@ import Action from '@/components/Action';
 import CustomModal from '@/components/CustomModal';
 import LogoIcon from "@/assets/images/logo.svg";
 import StylesVariables from '@/styles/utils/variables.module.scss';
-import { USERS_PAGINATION_LIMIT, WISHES_PAGINATION_LIMIT } from "@/utils/constants";
-import { addUsers, getAllUsers, getUsers } from "@/store/users/thunks";
+import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
 import Search from "@/components/Search";
-
-type TWishType = 'all' | 'unfulfilled' | 'fulfilled';
 
 const WishList = () => {
     const { t } = useTranslation();
@@ -36,13 +34,10 @@ const WishList = () => {
 
     const dispatch = useAppDispatch();
 
-    const [ search, setSearch ] = useState<string>('');
     const [ firstLoad, setFirstLoad ] = useState<boolean>(true);
-    const [ wishType, setWishType ] = useState<TWishType>('all');
     const [ showWish, setShowWish ] = useState<boolean>(false);
     const [ showEditWish, setShowEditWish ] = useState<boolean>(false);
     const [ idOfSelectedWish, setIdOfSelectedWish ] = useState<IWish['id'] | null>(null);
-    const [ selectedWishList, setSelectedWishList ] = useState<IWish[]>(wishes.list);
     const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     const wishListRef = useRef<HTMLUListElement>(null);
@@ -71,26 +66,46 @@ const WishList = () => {
         <>
             <span>{ t('main-page.at-user') }</span>
             <span className="empty-name">{ selectedUser?.firstName } { lastName }</span>
-            <span>{ t(`main-page.does_not_have_${ wishType === 'all' ? '' : wishType }`) }</span>
+            <span>{ t(`main-page.does_not_have_${ wishes.status === 'all' ? '' : wishes.status }`) }</span>
         </>
     ));
 
-    const handleChangeSearchBar = (value: string) => {
-        setSearch(value);
+    const handleChangeWishStatus = async (event: SelectChangeEvent) => {
+        const value = event.target.value as TWishStatus;
+        await dispatch(setWishStatus(value));
 
         if (!wishListRef.current) return;
 
         wishListRef.current.scrollTo(0, 0);
 
-        dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: value }));
+        dispatch(getAllWishes({
+            page: 1,
+            limit: WISHES_PAGINATION_LIMIT,
+            search: value
+        }));
     };
 
-    const handleSelectWish = async () => {
+    const handleChangeSearchBar = (value: string) => {
+        setWishSearch(value);
+
+        if (!wishListRef.current) return;
+
+        wishListRef.current.scrollTo(0, 0);
+
+        dispatch(getAllWishes({
+            page: 1,
+            limit: WISHES_PAGINATION_LIMIT,
+            search: value
+        }));
+    };
+
+    const handleSelectAllWishes = async () => {
         if (!myUser) return;
 
-        await dispatch(getWishList({ myId: myUser.id, userId: myUser.id }));
-        await dispatch(selectUserId(myUser.id));
-        localStorage.setItem('selectedUserId', myUser.id);
+        await dispatch(addAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: '' }));
+        await dispatch(setWishSearch(''));
+        await dispatch(selectUserId(null));
+        localStorage.removeItem('selectedUserId');
     };
 
     const handleShowWish = (id: IWish['id'] | null) => {
@@ -111,32 +126,23 @@ const WishList = () => {
         setShowEditWish(false);
     };
 
-    const handleChangeWishType = (event: SelectChangeEvent) => {
-        const value = event.target.value as TWishType;
-        setWishType(value);
-
-        if (!wishListRef.current) return;
-
-        wishListRef.current.scrollTo(0, 0);
-    };
-
-    useEffect(() => {
-        if (myUser) {
-            if (wishType === 'all') {
-                setSelectedWishList(wishes.list);
-            }
-
-            if (wishType === 'fulfilled') {
-                setSelectedWishList(wishes.list.filter(wish => wish.executed));
-            }
-
-            if (wishType === 'unfulfilled') {
-                setSelectedWishList(wishes.list.filter(wish => !wish.executed));
-            }
-        } else {
-            setSelectedWishList(prevState => ([ ...prevState, ...wishes.list ]));
-        }
-    }, [ myUser, wishType, wishes.list ]);
+    // useEffect(() => {
+    //     if (myUser) {
+    //         if (wishes.status === 'all') {
+    //             setSelectedWishList(wishes.list);
+    //         }
+    //
+    //         if (wishes.status === 'fulfilled') {
+    //             setSelectedWishList(wishes.list.filter(wish => wish.executed));
+    //         }
+    //
+    //         if (wishes.status === 'unfulfilled') {
+    //             setSelectedWishList(wishes.list.filter(wish => !wish.executed));
+    //         }
+    //     } else {
+    //         setSelectedWishList(prevState => ([ ...prevState, ...wishes.list ]));
+    //     }
+    // }, [ myUser, wishes.list ]);
 
     useEffect(() => {
         if (firstLoad) {
@@ -145,18 +151,42 @@ const WishList = () => {
         }
 
         if (!inView || wishes.stopRequests) return;
-        dispatch(addAllWishes({ page: wishes.page, limit: WISHES_PAGINATION_LIMIT, search }));
+
+        console.log('selectedUserId: ', selectedUserId);
+        if (selectedUserId && myUser) {
+            dispatch(addWishList({
+                myId: myUser.id,
+                userId: selectedUserId,
+                wishStatus: wishes.status,
+                page: wishes.page,
+                limit: WISHES_PAGINATION_LIMIT,
+                search: wishes.search,
+            }));
+        } else {
+            dispatch(addAllWishes({
+                page: wishes.page,
+                limit: WISHES_PAGINATION_LIMIT,
+                search: wishes.search
+            }));
+        }
     }, [ inView ]);
 
     useEffect(() => {
         const selectedUserId = localStorage.getItem('selectedUserId');
         if (selectedUserId) {
             if (myUser) {
-                dispatch(getWishList({ myId: myUser.id, userId: selectedUserId }));
+                dispatch(getWishList({
+                    myId: myUser.id,
+                    userId: selectedUserId,
+                    wishStatus: wishes.status,
+                    page: 1,
+                    limit: WISHES_PAGINATION_LIMIT,
+                    search: wishes.search,
+                }));
                 dispatch(selectUserId(selectedUserId));
             }
         } else {
-            dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search }));
+            dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: wishes.search }));
         }
 
         const handleResize = () => {
@@ -173,7 +203,7 @@ const WishList = () => {
     return (
         <div className="wish-list">
             <div className="head">
-                <button className="wish-hub" type="button" onClick={ handleSelectWish }>
+                <button className="wish-hub" type="button" onClick={ handleSelectAllWishes }>
                     <span className="logo-name">Wish Hub</span>
                 </button>
 
@@ -184,8 +214,8 @@ const WishList = () => {
                                 id="wish-list-type"
                                 variant="standard"
                                 sx={ { fontSize: screenWidth < 1024 ? 20 : 24 } }
-                                value={ wishType }
-                                onChange={ handleChangeWishType }
+                                value={ wishes.status }
+                                onChange={ handleChangeWishStatus }
                             >
                                 <MenuItem value="all">{ t('main-page.all') }</MenuItem>
                                 <MenuItem value="unfulfilled">{ t('main-page.unfulfilled') }</MenuItem>
@@ -208,14 +238,15 @@ const WishList = () => {
                         }
                     </div>
                 ) }
+
                 <Search
-                    id="search"
+                    id="wish-search"
                     label={ t('main-page.wishes-search') }
                     changeSearchBar={ handleChangeSearchBar }
                 />
             </div>
 
-            { (myUser?.id === selectedUserId || selectedWishList?.length > 0) ? (
+            { (myUser?.id === selectedUserId || wishes.list.length > 0) ? (
                 <ul className="list" ref={ wishListRef }>
                     { myUser?.id === selectedUserId && (
                         <li className="create-wish">
@@ -229,7 +260,7 @@ const WishList = () => {
                         </li>
                     ) }
 
-                    { selectedWishList?.length > 0 && selectedWishList.map((wish, idx) => (
+                    { wishes.list.length > 0 && wishes.list.map((wish, idx) => (
                         <WishItem
                             key={ wish.id + idx }
                             wish={ wish }
@@ -239,7 +270,7 @@ const WishList = () => {
                     )) }
 
                     { wishesExample.map((wish, idx) => {
-                        if (selectedWishList?.length > idx) return null;
+                        if (wishes.list.length > idx) return null;
 
                         return (
                             <li

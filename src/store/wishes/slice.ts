@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { t } from 'i18next';
 import {
     createWish,
@@ -15,7 +15,7 @@ import {
     getAllWishes,
     addAllWishes,
 } from '@/store/wishes/thunks';
-import { IWish } from '@/models/IWish';
+import { IWish, TWishStatus } from '@/models/IWish';
 import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
 
 const changeWish = (state: IState, newWish: IWish) => {
@@ -31,6 +31,8 @@ const changeWish = (state: IState, newWish: IWish) => {
 
 interface IState {
     list: IWish[];
+    status: 'all' | 'unfulfilled' | 'fulfilled';
+    search: string;
     page: number;
     stopRequests: boolean;
     isLoading: boolean;
@@ -40,6 +42,8 @@ interface IState {
 
 const initialState: IState = {
     list: [],
+    status: 'all',
+    search: '',
     page: 1,
     stopRequests: false,
     isLoading: false,
@@ -50,7 +54,14 @@ const initialState: IState = {
 const wishesSlice = createSlice({
     name: 'wishes',
     initialState,
-    reducers: {},
+    reducers: {
+        setWishStatus(state, action: PayloadAction<Partial<TWishStatus>>) {
+            state.status = action.payload;
+        },
+        setWishSearch(state, action: PayloadAction<Partial<string>>) {
+            state.search = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             // create
@@ -301,5 +312,7 @@ const wishesSlice = createSlice({
             });
     },
 });
+
+export const { setWishStatus, setWishSearch } = wishesSlice.actions;
 
 export default wishesSlice.reducer;

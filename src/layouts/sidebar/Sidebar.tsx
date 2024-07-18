@@ -76,14 +76,6 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
     };
 
     useEffect(() => {
-        if (!myUser) {
-            dispatch(getAllUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, search }));
-        } else {
-            dispatch(getUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, myUserId: myUser.id, userType, search }));
-        }
-    }, []);
-
-    useEffect(() => {
         if (firstLoad) {
             setFirstLoad(false);
             return;
@@ -145,7 +137,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
 
                     <div className="sidebar-search">
                         <Search
-                            id="search"
+                            id="user-search"
                             label={ t('main-page.users-search') }
                             changeSearchBar={ handleChangeSearchBar }
                         />

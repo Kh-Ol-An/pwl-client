@@ -7,6 +7,8 @@ import { dislikeWish, getWishList, likeWish } from "@/store/wishes/thunks";
 import Popup from "@/components/Popup";
 import { IWish } from "@/models/IWish";
 import { IUser } from "@/models/IUser";
+import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
+import { setWishSearch, setWishStatus } from "@/store/wishes/slice";
 
 interface IProps {
     wish: IWish;
@@ -32,7 +34,16 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
         e.stopPropagation();
         if (!myUser) return;
 
-        await dispatch(getWishList({ myId: myUser.id, userId }));
+        await dispatch(getWishList({
+            myId: myUser.id,
+            userId,
+            wishStatus: 'all',
+            page: 1,
+            limit: WISHES_PAGINATION_LIMIT,
+            search: '',
+        }));
+        await dispatch(setWishSearch(''));
+        await dispatch(setWishStatus('all'));
         await dispatch(selectUserId(userId));
         localStorage.setItem('selectedUserId', userId);
         setAnchor(null);

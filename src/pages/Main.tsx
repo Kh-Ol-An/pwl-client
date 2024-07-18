@@ -49,11 +49,15 @@ const Main: FC = () => {
                 </div>
             </div>
 
-            { screenWidth < 1280 && !myUser?.showedInfo && (
-                <InstallAppInstruction />
-            ) }
+            { myUser && (
+                <>
+                    { screenWidth < 1280 && !myUser?.showedInfo && (
+                        <InstallAppInstruction />
+                    ) }
 
-            { myUser && !myUser.isActivated && <Inactivated /> }
+                    { !myUser.isActivated && <Inactivated /> }
+                </>
+            ) }
         </>
     );
 };
