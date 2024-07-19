@@ -28,7 +28,9 @@ import { USERS_PAGINATION_LIMIT, WISHES_PAGINATION_LIMIT } from "@/utils/constan
 import { setWishesSearch, setWishStatus } from "@/store/wishes/slice";
 import { getAllUsers } from "@/store/users/thunks";
 import { setUsersSearch } from "@/store/users/slice";
-import YouTubeIcon from '@/assets/images/social-networks/youtube.svg';
+import StylesVariables from '@/styles/utils/variables.module.scss';
+import YouTubeIcon from '@/assets/images/social-networks/YouTubeIcon';
+import SocialNetworks from "@/components/SocialNetworks";
 
 interface IProps {
     showHeader: boolean;
@@ -155,76 +157,99 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         anchor={ anchor }
                         setAnchor={ setAnchor }
                         actionIcon={
-                            <div className="avatar-box">
-                                <Avatar
-                                    alt={ myUser?.firstName }
-                                    src={ myUser?.avatar }
-                                    sx={ { width: '100%', height: '100%' } }
-                                />
-                            </div>
+                            <>
+                                <div className={ "header-user-data" + (myUser && anchor ? ' show' : '') }>
+                                    <span className="header-user-name">
+                                        { myUser?.firstName } { myUser?.lastName }
+                                    </span>
+                                    <span className="header-user-email">
+                                        {myUser?.email}
+                                    </span>
+                                </div>
+                                <div className="avatar-box">
+                                    <Avatar
+                                        alt={ myUser?.firstName }
+                                        src={ myUser?.avatar }
+                                        sx={ { width: '100%', height: '100%' } }
+                                    />
+                                </div>
+                            </>
                         }
                     >
                         <div className="header-popup">
-                            <div className="header-popup-auth">
-                                <Button onClick={ handleSingIn } variant="text">{ t('sing-in') }</Button>
-                                <Button onClick={ handleSingUp }>{ t('sing-up') }</Button>
-                            </div>
+                            { !myUser && (
+                                <div className="header-popup-auth">
+                                    <Button onClick={ handleSingIn } variant="text">{ t('sing-in') }</Button>
+                                    <Button onClick={ handleSingUp }>{ t('sing-up') }</Button>
+                                </div>
+                            ) }
 
                             <div className="header-popup-box">
-                                <Button
-                                    variant="text"
-                                    color="primary-color"
-                                    type="button"
-                                    onClick={ handleSelectWish }
-                                >
-                                    <img className="wish-hub-icon" src={ LogoIcon } alt={ t('wish_hub_icon') } />
-                                    { t('main-page.my-wishes') }
-                                </Button>
+                                { myUser && (
+                                    <>
+                                        <Button variant="text" type="button" onClick={ handleSelectWish }>
+                                            <img className="wish-hub-icon"
+                                                 src={ LogoIcon }
+                                                 alt={ t('wish_hub_icon') } />
+                                            { t('main-page.my-wishes') }
+                                        </Button>
 
-                                <Button
-                                    variant="text"
-                                    color="primary-color"
-                                    type="button"
-                                    onClick={ handleShowEditAccount }
-                                >
-                                    <ManageAccountsIcon />
-                                    { t('main-page.account_settings') }
-                                </Button>
-                            </div>
+                                        <Button variant="text" type="button" onClick={ handleShowEditAccount }>
+                                            <ManageAccountsIcon />
+                                            { t('main-page.account_settings') }
+                                        </Button>
+                                    </>
+                                ) }
 
-                            <Button to="/instruction" variant="text" color="primary-color">
-                                <img className="wish-hub-icon" src={ YouTubeIcon } alt="YouTube icon" />
-                                { t('main-page.instruction') }
-                            </Button>
-
-                            <Button to="/about" variant="text" color="primary-color">
-                                <InfoIcon />
-                                { t('main-page.about') }
-                                <span className="logo-name">Wish Hub</span>
-                            </Button>
-
-                            <div className="header-lang">
-                                <LanguageIcon />
-                                { t('main-page.interface_language') }:
-                                <div className="header-lang-select">
-                                    <LanguageSelection />
+                                <div className="header-lang">
+                                    <LanguageIcon />
+                                    { t('main-page.interface_language') }:
+                                    <div className="header-lang-select">
+                                        <LanguageSelection />
+                                    </div>
                                 </div>
                             </div>
 
-                            <Button variant="text" color="primary-color" type="button" onClick={ handleShowContacts }>
-                                <ForumIcon />
-                                { t('main-page.contacts') }
-                            </Button>
+                            <div className="header-popup-box">
+                                <Button to="/instruction" variant="text">
+                                    <YouTubeIcon
+                                        backgroundColor={ StylesVariables.lightColor }
+                                        playColor={ StylesVariables.backgroundColor }
+                                    />
+                                    { t('main-page.instruction') }
+                                </Button>
 
-                            <Button variant="text" color="primary-color" type="button" onClick={ handleLogout }>
-                                <LogoutIcon />
-                                { t('logout') }
-                            </Button>
+                                <Button to="/about" variant="text">
+                                    <InfoIcon />
+                                    { t('main-page.about') }
+                                    <span className="logo-name">Wish Hub</span>
+                                </Button>
 
-                            <Button to="/privacy-policy" variant="text" color="primary-color">
-                                <PrivacyTipIcon />
-                                { t('privacy-policy-page.title') }
-                            </Button>
+                                <Button variant="text" type="button" onClick={ handleShowContacts }>
+                                    <ForumIcon />
+                                    { t('main-page.contacts') }
+                                </Button>
+                            </div>
+
+                            <div className="header-popup-box">
+                                { myUser && (
+                                    <Button variant="text" type="button" onClick={ handleLogout }>
+                                        <LogoutIcon />
+                                        { t('logout') }
+                                    </Button>
+                                ) }
+
+                                <div className="header-popup-social-networks">
+                                    <div className="header-popup-social-networks-box">
+                                        <SocialNetworks />
+                                    </div>
+
+                                    <Button to="/privacy-policy" variant="text">
+                                        <PrivacyTipIcon />
+                                        { t('privacy-policy-page.title') }
+                                    </Button>
+                                </div>
+                            </div>
                         </div>
                     </Popup>
 

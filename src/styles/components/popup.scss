@@ -1,12 +1,11 @@
 .MuiPaper-root.MuiPopover-paper {
-    border-radius: $radius-lg;
+    border-radius: $radius-xl;
     background-color: $accent-light-color;
     background-image: unset;
+    overflow: hidden;
 }
 
 .MuiPaper-root.MuiMenu-paper {
-    border-radius: $radius-md;
-    background-color: $accent-light-color;
     background-image: unset;
 }
 

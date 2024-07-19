@@ -222,11 +222,17 @@ const WishList = () => {
                         </div>
                     ) }
 
-                    <ShareButton link="welcome" />
+                    {/*{ (myUser?.id === selectedUserId || wishes.list.length > 0) && (*/}
+                    {/*    <div className="head-share">*/}
+                    {/*        <ShareButton link="welcome">*/}
+                    {/*            <span className="head-share-text">{ t('main-page.share-wishes') }</span>*/}
+                    {/*        </ShareButton>*/}
+                    {/*    </div>*/}
+                    {/*) }*/}
                 </div>
 
                 <div className="head-bottom">
-                    { wishes.list.length > 5 && (
+                    { wishes.list.length > -1 && (
                         <div className="wish-search">
                             <Search
                                 id="wish-search"
@@ -236,7 +242,7 @@ const WishList = () => {
                         </div>
                     ) }
 
-                    <ShareButton link="welcome" />
+                    {/*<ShareButton link="welcome" />*/}
                 </div>
             </div>
 

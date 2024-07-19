@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import ShareIcon from '@mui/icons-material/Share';
@@ -8,9 +8,10 @@ import StylesVariables from '@/styles/utils/variables.module.scss';
 interface IProps {
     link?: string;
     wishShow?: 'all' | 'friends' | 'nobody';
+    children?: ReactNode;
 }
 
-const ShareButton: FC<IProps> = ({ link = '', wishShow }) => {
+const ShareButton: FC<IProps> = ({ link = '', wishShow, children }) => {
     const { t } = useTranslation();
 
     const [ show, setShow ] = useState<boolean>(false);
@@ -56,6 +57,7 @@ const ShareButton: FC<IProps> = ({ link = '', wishShow }) => {
     return (
         <>
             <button className="share-button" type="button" onClick={ handleClick }>
+                { children }
                 <ShareIcon sx={ { color: StylesVariables.primaryColor } } />
             </button>
 

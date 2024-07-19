@@ -189,22 +189,131 @@
     width: 100%;
 }
 
+.header-user-data {
+    margin-right: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    transform: scaleX(0);
+    opacity: 0;
+    transform-origin: right;
+    transition: $transition-fast;
+
+    &.show {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+.header-user-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: $light-color;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media only screen and (min-width: 768px) {
+        max-width: 250px;
+    }
+}
+
+.header-user-email {
+    font-size: 16px;
+    color: $special-color;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media only screen and (min-width: 768px) {
+        max-width: 250px;
+    }
+}
+
 .header-popup {
     .header-popup-auth {
-        @include flex-center;
-        gap: 16px;
+        margin: 16px 16px 0;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 8px;
+        border-radius: $radius-lg;
+        background-color: $background-color;
+
+        @media only screen and (min-width: 360px) {
+            flex-direction: row;
+        }
+
+        .button {
+            justify-content: center;
+        }
+
+        .button.text {
+            padding: 8px 16px;
+            border: 1px solid $special-color;
+        }
+
+        .button:not(text) {
+            padding: 9px 16px;
+        }
+
+        a {
+            width: 24px;
+            height: 24px;
+        }
     }
 
-    .header-popup-box {}
+    .header-popup-box {
+        padding: 8px;
+        @include flex-column-left;
+        gap: 4px;
+
+        @media only screen and (min-width: 768px) {
+            padding: 8px 16px;
+        }
+
+        &:first-child {
+            padding-top: 16px;
+        }
+
+        & + .header-popup-box {
+            border-top: 1px solid $white-deep-opacity-color;
+        }
+
+        &:last-child {
+            padding-bottom: 16px;
+        }
+    }
 
     .button {
-        padding: 16px 0;
+        padding: 8px 16px;
+        justify-content: flex-start;
+        width: 100%;
+        transition: $transition;
+
+        &:hover {
+            background-color: $secondary-light-color;
+        }
 
         span {
-            font-size: 18px;
+            font-size: 16px;
+            line-height: 1;
+            color: $light-color;
 
             @media only screen and (min-width: 768px) {
-                font-size: 24px;
+                font-size: 18px;
+            }
+
+            svg,
+            img {
+                margin-right: 8px;
+                width: 24px;
+                height: 24px;
+                filter: grayscale(1);
             }
         }
     }
@@ -212,24 +321,23 @@
     .header-lang {
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 12px;
         white-space: nowrap;
-        color: $primary-color;
-        line-height: 1.5;
+        color: $light-color;
+        line-height: 1;
         font-weight: 700;
-        padding: 2px 0;
-        font-size: 18px;
+        padding: 0 16px;
+        font-size: 16px;
 
         @media only screen and (min-width: 768px) {
-            font-size: 24px;
+            font-size: 18px;
         }
 
         .header-lang-select {
-            padding-left: 8px;
             padding-right: 52px;
 
             @media only screen and (min-width: 768px) {
-                padding-left: 140px;
+                padding-left: 129px;
                 padding-right: 0;
             }
         }
@@ -245,11 +353,53 @@
             background-color: $accent-light-color;
 
             .select-action {
-
                 @media only screen and (min-width: 768px) {
                     padding: 6px 8px 6px 20px;
                 }
             }
+        }
+    }
+
+    .header-popup-social-networks {
+        margin: 8px auto 0;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        border-radius: $radius-lg;
+        background-color: $background-color;
+
+        .button {
+            padding: 2px 16px;
+            justify-content: center;
+            text-decoration: underline;
+
+            &:hover {
+                background-color: transparent;
+            }
+
+            span {
+                font-size: 10px;
+
+                svg {
+                    margin-right: 0;
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+        }
+    }
+
+    .header-popup-social-networks-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 16px;
+
+        a {
+            width: 30px;
+            height: 30px;
         }
     }
 }
