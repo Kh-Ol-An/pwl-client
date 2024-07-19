@@ -1,8 +1,8 @@
 import React from 'react';
-import TikTokIcon from "@/assets/images/social-networks/tiktok.svg";
-import TelegramIcon from "@/assets/images/social-networks/telegram.svg";
-import InstagramIcon from "@/assets/images/social-networks/instagram.svg";
-import FacebookIcon from "@/assets/images/social-networks/facebook.svg";
+import TikTokIcon from "@/assets/images/social-networks/TikTokIcon";
+import TelegramIcon from "@/assets/images/social-networks/TelegramIcon";
+import InstagramIcon from "@/assets/images/social-networks/InstagramIcon";
+import FacebookIcon from "@/assets/images/social-networks/FacebookIcon";
 import YouTubeIcon from "@/assets/images/social-networks/YouTubeIcon";
 // Іконки соціальних мереж взято з https://www.svgrepo.com/
 
@@ -14,7 +14,7 @@ const SocialNetworks = () => {
                 target="_blank"
                 rel="noopener noreferrer external nofollow"
             >
-                <img src={ TikTokIcon } alt="Tik Tok" />
+                <TikTokIcon />
             </a>
 
             <a
@@ -22,7 +22,7 @@ const SocialNetworks = () => {
                 target="_blank"
                 rel="noopener noreferrer external nofollow"
             >
-                <img src={ TelegramIcon } alt="Telegram" />
+                <TelegramIcon />
             </a>
 
             <a
@@ -30,7 +30,7 @@ const SocialNetworks = () => {
                 target="_blank"
                 rel="noopener noreferrer external nofollow"
             >
-                <img src={ InstagramIcon } alt="Instagram" />
+                <InstagramIcon />
             </a>
 
             <a
@@ -38,7 +38,7 @@ const SocialNetworks = () => {
                 target="_blank"
                 rel="noopener noreferrer external nofollow"
             >
-                <img src={ FacebookIcon } alt="Facebook" />
+                <FacebookIcon />
             </a>
 
             <a
