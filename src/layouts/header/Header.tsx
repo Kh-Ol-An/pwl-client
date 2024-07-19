@@ -25,12 +25,13 @@ import Popup from '@/components/Popup';
 import LanguageSelection from '@/components/LanguageSelection';
 import LogoIcon from '@/assets/images/logo.svg';
 import { USERS_PAGINATION_LIMIT, WISHES_PAGINATION_LIMIT } from "@/utils/constants";
-import { setWishesSearch, setWishStatus } from "@/store/wishes/slice";
+import { setWishesSearch, setWishStatus, setWishesSort } from "@/store/wishes/slice";
 import { getAllUsers } from "@/store/users/thunks";
 import { setUsersSearch } from "@/store/users/slice";
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import YouTubeIcon from '@/assets/images/social-networks/YouTubeIcon';
 import SocialNetworks from "@/components/SocialNetworks";
+import { EWishSort } from "@/models/IWish";
 
 interface IProps {
     showHeader: boolean;
@@ -76,13 +77,15 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
         await dispatch(getWishList({
             myId: myUser.id,
             userId: myUser.id,
-            wishStatus: 'all',
+            status: 'all',
             page: 1,
             limit: WISHES_PAGINATION_LIMIT,
             search: '',
+            sort: EWishSort.popular,
         }));
-        await dispatch(setWishesSearch(''));
         await dispatch(setWishStatus('all'));
+        await dispatch(setWishesSearch(''));
+        await dispatch(setWishesSort(EWishSort.popular));
         await dispatch(selectUserId(myUser.id));
         localStorage.setItem('selectedUserId', myUser.id);
         setAnchor(null);

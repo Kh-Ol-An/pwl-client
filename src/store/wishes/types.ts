@@ -1,4 +1,4 @@
-import { TCurrentImage, IWish } from '@/models/IWish';
+import { TCurrentImage, IWish, TWishStatus, EWishSort } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
 import { IQuote } from "@/models/IQuote";
 
@@ -36,7 +36,8 @@ export interface ISendAllWishes {
 export interface ISendWishList extends ISendAllWishes {
     myId: IUser['id'];
     userId: IUser['id'];
-    wishStatus: 'all' | 'fulfilled' | 'unfulfilled';
+    status: TWishStatus;
+    sort: EWishSort;
 }
 
 export interface IGetWish {

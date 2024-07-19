@@ -21,10 +21,11 @@ const useDebounce = (callback: () => void) => {
 interface Props {
     id: string;
     label: string;
+    value?: string;
     changeSearchBar: (value: string) => void;
 }
 
-const Search: FC<Props> = ({ id, label, changeSearchBar }) => {
+const Search: FC<Props> = ({ id, label, value, changeSearchBar }) => {
     const [ searchBar, setSearchBar ] = useState('');
 
     const send = useDebounce(() => changeSearchBar(searchBar.trim()));
@@ -46,6 +47,12 @@ const Search: FC<Props> = ({ id, label, changeSearchBar }) => {
         setSearchBar('');
         send();
     };
+
+    useEffect(() => {
+        if (value !== undefined && value !== searchBar) {
+            setSearchBar(value);
+        }
+    }, [value]);
 
     return (
         <Input

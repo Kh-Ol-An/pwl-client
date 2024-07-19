@@ -3,12 +3,12 @@ import { useInView } from 'react-intersection-observer';
 import { useTranslation } from 'react-i18next';
 import { Modal, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { Close as CloseIcon, AddCircle as AddCircleIcon } from '@mui/icons-material';
+import { Close as CloseIcon, AddCircle as AddCircleIcon, SwapVert as SwapVertIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { selectUserId } from '@/store/selected-user/slice';
-import { setWishStatus, setWishesSearch } from '@/store/wishes/slice';
+import { setWishStatus, setWishesSearch, setWishesSort } from '@/store/wishes/slice';
 import { addAllWishes, getAllWishes, getWishList, addWishList } from '@/store/wishes/thunks';
-import { IWish, TWishStatus } from '@/models/IWish';
+import { EWishSort, IWish, TWishStatus } from '@/models/IWish';
 import EditWish from '@/layouts/wish/edit-wish/EditWish';
 import WishItem from '@/layouts/wish/WishItem';
 import DetailWish from '@/layouts/wish/detail-wish/DetailWish';
@@ -20,6 +20,8 @@ import StylesVariables from '@/styles/utils/variables.module.scss';
 import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
 import Search from "@/components/Search";
 import ShareButton from "@/components/ShareButton";
+import Popup from "@/components/Popup";
+import Button from '@/components/Button';
 
 const WishList = () => {
     const { t } = useTranslation();
@@ -36,6 +38,7 @@ const WishList = () => {
     const dispatch = useAppDispatch();
 
     const [ firstLoad, setFirstLoad ] = useState<boolean>(true);
+    const [ anchor, setAnchor ] = useState<HTMLButtonElement | null>(null);
     const [ showWish, setShowWish ] = useState<boolean>(false);
     const [ showEditWish, setShowEditWish ] = useState<boolean>(false);
     const [ idOfSelectedWish, setIdOfSelectedWish ] = useState<IWish['id'] | null>(null);
@@ -75,29 +78,62 @@ const WishList = () => {
         const value = event.target.value as TWishStatus;
         await dispatch(setWishStatus(value));
 
+        if (!selectedUserId) return;
+
+        dispatch(getWishList({
+            myId: selectedUserId,
+            userId: selectedUserId,
+            status: value,
+            page: 1,
+            limit: WISHES_PAGINATION_LIMIT,
+            search: wishes.search,
+            sort: wishes.sort,
+        }));
+
         if (!wishListRef.current) return;
 
         wishListRef.current.scrollTo(0, 0);
-
-        dispatch(getAllWishes({
-            page: 1,
-            limit: WISHES_PAGINATION_LIMIT,
-            search: value
-        }));
     };
 
-    const handleChangeSearchBar = (value: string) => {
-        setWishesSearch(value);
+    const handleChangeSearchBar = async (value: string) => {
+        await dispatch(setWishesSearch(value));
+
+        if (selectedUserId && myUser) {
+            dispatch(getWishList({
+                myId: myUser?.id,
+                userId: selectedUserId,
+                status: wishes.status,
+                page: 1,
+                limit: WISHES_PAGINATION_LIMIT,
+                search: value,
+                sort: wishes.sort,
+            }));
+        } else {
+            dispatch(getAllWishes({
+                page: 1,
+                limit: WISHES_PAGINATION_LIMIT,
+                search: value
+            }));
+        }
 
         if (!wishListRef.current) return;
 
         wishListRef.current.scrollTo(0, 0);
+    };
 
-        dispatch(getAllWishes({
-            page: 1,
-            limit: WISHES_PAGINATION_LIMIT,
-            search: value
-        }));
+    const handleSortByPopulate = async () => {
+        await dispatch(setWishesSort(EWishSort.popular));
+        setAnchor(null);
+    };
+
+    const handleSortByCreatedUp = () => {
+        console.log('handleSortByCreatedUp');
+        setAnchor(null);
+    };
+
+    const handleSortByCreatedDown = () => {
+        console.log('handleSortByCreatedDown');
+        setAnchor(null);
     };
 
     const handleSelectAllWishes = async () => {
@@ -139,10 +175,11 @@ const WishList = () => {
             dispatch(addWishList({
                 myId: myUser.id,
                 userId: selectedUserId,
-                wishStatus: wishes.status,
+                status: wishes.status,
                 page: wishes.page,
                 limit: WISHES_PAGINATION_LIMIT,
                 search: wishes.search,
+                sort: wishes.sort,
             }));
         } else {
             dispatch(addAllWishes({
@@ -154,19 +191,18 @@ const WishList = () => {
     }, [ inView ]);
 
     useEffect(() => {
-        const selectedUserId = localStorage.getItem('selectedUserId');
-        if (selectedUserId) {
-            if (myUser) {
-                dispatch(getWishList({
-                    myId: myUser.id,
-                    userId: selectedUserId,
-                    wishStatus: wishes.status,
-                    page: 1,
-                    limit: WISHES_PAGINATION_LIMIT,
-                    search: wishes.search,
-                }));
-                dispatch(selectUserId(selectedUserId));
-            }
+        if (myUser) {
+            dispatch(getWishList({
+                myId: myUser.id,
+                userId: myUser.id,
+                status: wishes.status,
+                page: 1,
+                limit: WISHES_PAGINATION_LIMIT,
+                search: wishes.search,
+                sort: wishes.sort,
+            }));
+            dispatch(selectUserId(myUser.id));
+            localStorage.setItem('selectedUserId', myUser.id);
         } else {
             dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: wishes.search }));
         }
@@ -237,12 +273,31 @@ const WishList = () => {
                             <Search
                                 id="wish-search"
                                 label={ t('main-page.wishes-search') }
+                                value={ wishes.search }
                                 changeSearchBar={ handleChangeSearchBar }
                             />
                         </div>
                     ) }
 
-                    {/*<ShareButton link="welcome" />*/}
+                    <Popup
+                        anchor={ anchor }
+                        setAnchor={ setAnchor }
+                        actionIcon={<SwapVertIcon sx={ { color: StylesVariables.primaryColor } } />}
+                    >
+                        <div className="sort-popup">
+                            <Button variant="text" onClick={handleSortByPopulate}>
+                                By Populate
+                            </Button>
+
+                            <Button variant="text" onClick={handleSortByCreatedUp}>
+                                By created date up
+                            </Button>
+
+                            <Button variant="text" onClick={handleSortByCreatedDown}>
+                                By created date down
+                            </Button>
+                        </div>
+                    </Popup>
                 </div>
             </div>
 

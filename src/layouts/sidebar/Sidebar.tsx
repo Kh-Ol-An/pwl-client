@@ -74,9 +74,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
     };
 
     const updateUsers = () => {
-        if (!myUser || !userListRef.current) return;
-
-        userListRef.current.scrollTo(0, 0);
+        if (!myUser) return;
 
         dispatch(getUsers({
             page: 1,
@@ -85,6 +83,10 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
             userType,
             search: users.search
         }));
+
+        if (!userListRef.current) return;
+
+        userListRef.current.scrollTo(0, 0);
     };
 
     useEffect(() => {

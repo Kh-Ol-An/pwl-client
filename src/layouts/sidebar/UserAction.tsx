@@ -25,7 +25,8 @@ import CustomModal from '@/components/CustomModal';
 import Button from '@/components/Button';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
-import { setWishesSearch, setWishStatus } from "@/store/wishes/slice";
+import { setWishesSearch, setWishStatus, setWishesSort } from "@/store/wishes/slice";
+import { EWishSort } from "@/models/IWish";
 
 interface IProps {
     user: IUser;
@@ -70,13 +71,15 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
         await dispatch(getWishList({
             myId: myUser.id,
             userId: user.id,
-            wishStatus: 'all',
+            status: 'all',
             page: 1,
             limit: WISHES_PAGINATION_LIMIT,
             search: '',
+            sort: EWishSort.popular,
         }));
-        await dispatch(setWishesSearch(''));
         await dispatch(setWishStatus('all'));
+        await dispatch(setWishesSearch(''));
+        await dispatch(setWishesSort(EWishSort.popular));
         await dispatch(selectUserId(user.id));
         localStorage.setItem('selectedUserId', user.id);
         hideSidebar();

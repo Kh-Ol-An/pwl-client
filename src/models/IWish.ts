@@ -29,6 +29,12 @@ interface ILike {
 
 export type TWishStatus = 'all' | 'unfulfilled' | 'fulfilled';
 
+export enum EWishSort {
+    popular = 'sortByLikes:desc',
+    createdDesc = 'createdAt:desc',
+    createdAsc = 'createdAt:asc',
+}
+
 export interface IWish {
     id: string;
     userId: IUser['id'];
