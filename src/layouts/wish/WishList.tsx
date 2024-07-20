@@ -86,10 +86,10 @@ const WishList = () => {
         const value = event.target.value as EWishStatus;
         await dispatch(setWishStatus(value));
 
-        if (!selectedUserId) return;
+        if (!myUser || !selectedUserId) return;
 
         dispatch(getWishList({
-            myId: selectedUserId,
+            myId: myUser.id,
             userId: selectedUserId,
             status: value,
             page: 1,
@@ -108,7 +108,7 @@ const WishList = () => {
 
         if (selectedUserId && myUser) {
             dispatch(getWishList({
-                myId: myUser?.id,
+                myId: myUser.id,
                 userId: selectedUserId,
                 status: wishes.status,
                 page: 1,
@@ -278,13 +278,13 @@ const WishList = () => {
                         </div>
                     ) }
 
-                    { (myUser?.id === selectedUserId || wishes.list.length > 0) && (
-                        <div className="head-share">
-                            <ShareButton link="welcome">
-                                <span className="head-share-text">{ t('main-page.share-wishes') }</span>
-                            </ShareButton>
-                        </div>
-                    ) }
+                    {/*{ (myUser?.id === selectedUserId || wishes.list.length > 0) && (*/}
+                    {/*    <div className="head-share">*/}
+                    {/*        <ShareButton link="welcome">*/}
+                    {/*            <span className="head-share-text">{ t('main-page.share-wishes') }</span>*/}
+                    {/*        </ShareButton>*/}
+                    {/*    </div>*/}
+                    {/*) }*/}
                 </div>
 
                 <div className="head-bottom">
