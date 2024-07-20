@@ -142,6 +142,17 @@
         max-width: 50%;
     }
 
+    .sort-popup-action-text {
+        font-size: 14px;
+        color: $special-color;
+        text-align: right;
+        white-space: nowrap;
+
+        @media only screen and (min-width: 1366px) {
+            font-size: 16px;
+        }
+    }
+
     .list {
         padding: 10px 10px 10px 16px;
         display: grid;
@@ -259,4 +270,15 @@
 
 .sort-popup {
     padding: 8px 16px;
+
+    .button {
+        padding: 4px 16px;
+        width: 100%;
+        justify-content: flex-end;
+        transition: $transition;
+
+        &:hover {
+            background-color: $secondary-light-color;
+        }
+    }
 }

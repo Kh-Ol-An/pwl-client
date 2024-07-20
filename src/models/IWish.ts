@@ -27,12 +27,18 @@ interface ILike {
     userFullName: string;
 }
 
-export type TWishStatus = 'all' | 'unfulfilled' | 'fulfilled';
+export enum EWishStatus {
+    ALL = 'all',
+    UNFULFILLED = 'unfulfilled',
+    FULFILLED = 'fulfilled',
+}
 
 export enum EWishSort {
-    popular = 'sortByLikes:desc',
-    createdDesc = 'createdAt:desc',
-    createdAsc = 'createdAt:asc',
+    POPULAR = 'sortByLikes:desc',
+    PRICE_DESC = 'priceInBaseCurrency:desc',
+    PRICE_ASC = 'priceInBaseCurrency:asc',
+    CREATED_DESC = 'createdAt:desc',
+    CREATED_ASC = 'createdAt:asc',
 }
 
 export interface IWish {

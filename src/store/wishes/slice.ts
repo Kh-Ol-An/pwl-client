@@ -15,7 +15,7 @@ import {
     getAllWishes,
     addAllWishes,
 } from '@/store/wishes/thunks';
-import { IWish, EWishSort, TWishStatus } from '@/models/IWish';
+import { IWish, EWishSort, EWishStatus } from '@/models/IWish';
 import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
 
 const changeWish = (state: IState, newWish: IWish) => {
@@ -31,7 +31,7 @@ const changeWish = (state: IState, newWish: IWish) => {
 
 interface IState {
     list: IWish[];
-    status: TWishStatus;
+    status: EWishStatus;
     search: string;
     sort: EWishSort;
     page: number;
@@ -43,9 +43,9 @@ interface IState {
 
 const initialState: IState = {
     list: [],
-    status: 'all',
+    status: EWishStatus.ALL,
     search: '',
-    sort: EWishSort.popular,
+    sort: EWishSort.CREATED_DESC,
     page: 1,
     stopRequests: false,
     isLoading: false,
@@ -57,7 +57,7 @@ const wishesSlice = createSlice({
     name: 'wishes',
     initialState,
     reducers: {
-        setWishStatus(state, action: PayloadAction<Partial<TWishStatus>>) {
+        setWishStatus(state, action: PayloadAction<Partial<EWishStatus>>) {
             state.status = action.payload;
         },
         setWishesSearch(state, action: PayloadAction<Partial<string>>) {

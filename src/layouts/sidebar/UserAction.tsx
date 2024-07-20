@@ -14,8 +14,6 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { addFriend, removeFriend } from '@/store/my-user/thunks';
-import { getWishList } from '@/store/wishes/thunks';
-import { selectUserId } from '@/store/selected-user/slice';
 import { IRemoveFriend } from '@/store/my-user/types';
 import { IUser } from '@/models/IUser';
 import { getLang, getMonthWithDate } from "@/utils/lang-action";
@@ -24,9 +22,7 @@ import Popup from '@/components/Popup';
 import CustomModal from '@/components/CustomModal';
 import Button from '@/components/Button';
 import StylesVariables from '@/styles/utils/variables.module.scss';
-import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
-import { setWishesSearch, setWishStatus, setWishesSort } from "@/store/wishes/slice";
-import { EWishSort } from "@/models/IWish";
+import { handleGetWishList } from "@/utils/action-on-wishes";
 
 interface IProps {
     user: IUser;
@@ -68,20 +64,7 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
     const handleSelectWish = async () => {
         if (!myUser) return;
 
-        await dispatch(getWishList({
-            myId: myUser.id,
-            userId: user.id,
-            status: 'all',
-            page: 1,
-            limit: WISHES_PAGINATION_LIMIT,
-            search: '',
-            sort: EWishSort.popular,
-        }));
-        await dispatch(setWishStatus('all'));
-        await dispatch(setWishesSearch(''));
-        await dispatch(setWishesSort(EWishSort.popular));
-        await dispatch(selectUserId(user.id));
-        localStorage.setItem('selectedUserId', user.id);
+        await handleGetWishList(dispatch, myUser.id, user.id);
         hideSidebar();
     };
 

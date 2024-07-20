@@ -13,8 +13,6 @@ import {
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { changeFirsLoaded, logout } from '@/store/my-user/thunks';
-import { getAllWishes, addAllWishes, getWishList } from '@/store/wishes/thunks';
-import { selectUserId } from '@/store/selected-user/slice';
 import DetailAccount from '@/layouts/DetailAccount';
 import EditAccountModal from '@/layouts/header/EditAccountModal';
 import Contacts from '@/layouts/header/Contacts';
@@ -24,14 +22,10 @@ import Button from '@/components/Button';
 import Popup from '@/components/Popup';
 import LanguageSelection from '@/components/LanguageSelection';
 import LogoIcon from '@/assets/images/logo.svg';
-import { USERS_PAGINATION_LIMIT, WISHES_PAGINATION_LIMIT } from "@/utils/constants";
-import { setWishesSearch, setWishStatus, setWishesSort } from "@/store/wishes/slice";
-import { getAllUsers } from "@/store/users/thunks";
-import { setUsersSearch } from "@/store/users/slice";
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import YouTubeIcon from '@/assets/images/social-networks/YouTubeIcon';
 import SocialNetworks from "@/components/SocialNetworks";
-import { EWishSort } from "@/models/IWish";
+import { handleGetAllWishes, handleGetWishList } from "@/utils/action-on-wishes";
 
 interface IProps {
     showHeader: boolean;
@@ -61,33 +55,11 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
         navigate('/auth?register');
     }
 
-    // SelectAllWishes
-    const handleSelectAllWishes = async () => {
-        await dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: '' }));
-        await dispatch(selectUserId(null));
-        localStorage.removeItem('selectedUserId');
-        await dispatch(setWishesSearch(''));
-        await dispatch(setWishStatus('all'));
-    };
-
     // SelectWish
     const handleSelectWish = async () => {
         if (!myUser) return;
 
-        await dispatch(getWishList({
-            myId: myUser.id,
-            userId: myUser.id,
-            status: 'all',
-            page: 1,
-            limit: WISHES_PAGINATION_LIMIT,
-            search: '',
-            sort: EWishSort.popular,
-        }));
-        await dispatch(setWishStatus('all'));
-        await dispatch(setWishesSearch(''));
-        await dispatch(setWishesSort(EWishSort.popular));
-        await dispatch(selectUserId(myUser.id));
-        localStorage.setItem('selectedUserId', myUser.id);
+        await handleGetWishList(dispatch, myUser.id, myUser.id);
         setAnchor(null);
         hideHeader();
     };
@@ -133,9 +105,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     // Logout
     const handleLogout = async () => {
         await dispatch(logout());
-        await dispatch(getAllUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, search: '' }));
-        await dispatch(setUsersSearch(''));
-        await handleSelectAllWishes();
+        await handleGetAllWishes(dispatch);
         setAnchor(null);
         hideHeader();
     };
@@ -150,7 +120,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
         <div className={ "header" + (showHeader ? " show" : "") }>
             <div className="header-inner">
                 <div className="header-content">
-                    <button className="logo" type="button" onClick={ handleSelectAllWishes }>
+                    <button className="logo" type="button" onClick={ () => handleGetAllWishes(dispatch) }>
                         <span className="logo-name">Wish Hub</span>
                     </button>
 
@@ -166,7 +136,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                                         { myUser?.firstName } { myUser?.lastName }
                                     </span>
                                     <span className="header-user-email">
-                                        {myUser?.email}
+                                        { myUser?.email }
                                     </span>
                                 </div>
                                 <div className="avatar-box">
@@ -191,9 +161,11 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                                 { myUser && (
                                     <>
                                         <Button variant="text" type="button" onClick={ handleSelectWish }>
-                                            <img className="wish-hub-icon"
-                                                 src={ LogoIcon }
-                                                 alt={ t('wish_hub_icon') } />
+                                            <img
+                                                className="wish-hub-icon"
+                                                src={ LogoIcon }
+                                                alt={ t('wish_hub_icon') }
+                                            />
                                             { t('main-page.my-wishes') }
                                         </Button>
 

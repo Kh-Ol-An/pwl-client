@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { selectUserId } from '@/store/selected-user/slice';
 import { setWishStatus, setWishesSearch, setWishesSort } from '@/store/wishes/slice';
 import { addAllWishes, getAllWishes, getWishList, addWishList } from '@/store/wishes/thunks';
-import { EWishSort, IWish, TWishStatus } from '@/models/IWish';
+import { EWishSort, IWish, EWishStatus } from '@/models/IWish';
 import EditWish from '@/layouts/wish/edit-wish/EditWish';
 import WishItem from '@/layouts/wish/WishItem';
 import DetailWish from '@/layouts/wish/detail-wish/DetailWish';
@@ -22,6 +22,7 @@ import Search from "@/components/Search";
 import ShareButton from "@/components/ShareButton";
 import Popup from "@/components/Popup";
 import Button from '@/components/Button';
+import { handleGetAllWishes } from "@/utils/action-on-wishes";
 
 const WishList = () => {
     const { t } = useTranslation();
@@ -74,8 +75,15 @@ const WishList = () => {
         </>
     ));
 
+    let wishesSortText;
+    wishes.sort === EWishSort.POPULAR && (wishesSortText = t('main-page.sort.by-popularity'));
+    wishes.sort === EWishSort.PRICE_DESC && (wishesSortText = t('main-page.sort.by-price-down'));
+    wishes.sort === EWishSort.PRICE_ASC && (wishesSortText = t('main-page.sort.by-price-up'));
+    wishes.sort === EWishSort.CREATED_DESC && (wishesSortText = t('main-page.sort.by-created-up'));
+    wishes.sort === EWishSort.CREATED_ASC && (wishesSortText = t('main-page.sort.by-created-down'));
+
     const handleChangeWishStatus = async (event: SelectChangeEvent) => {
-        const value = event.target.value as TWishStatus;
+        const value = event.target.value as EWishStatus;
         await dispatch(setWishStatus(value));
 
         if (!selectedUserId) return;
@@ -112,7 +120,8 @@ const WishList = () => {
             dispatch(getAllWishes({
                 page: 1,
                 limit: WISHES_PAGINATION_LIMIT,
-                search: value
+                search: value,
+                sort: wishes.sort,
             }));
         }
 
@@ -121,28 +130,33 @@ const WishList = () => {
         wishListRef.current.scrollTo(0, 0);
     };
 
-    const handleSortByPopulate = async () => {
-        await dispatch(setWishesSort(EWishSort.popular));
+    const handleSortBy = async (value: EWishSort) => {
+        await dispatch(setWishesSort(value));
+
+        if (selectedUserId && myUser) {
+            dispatch(getWishList({
+                myId: myUser?.id,
+                userId: selectedUserId,
+                status: wishes.status,
+                page: 1,
+                limit: WISHES_PAGINATION_LIMIT,
+                search: wishes.search,
+                sort:value,
+            }));
+        } else {
+            dispatch(getAllWishes({
+                page: 1,
+                limit: WISHES_PAGINATION_LIMIT,
+                search: wishes.search,
+                sort:value,
+            }));
+        }
+
+        if (!wishListRef.current) return;
+
+        wishListRef.current.scrollTo(0, 0);
+
         setAnchor(null);
-    };
-
-    const handleSortByCreatedUp = () => {
-        console.log('handleSortByCreatedUp');
-        setAnchor(null);
-    };
-
-    const handleSortByCreatedDown = () => {
-        console.log('handleSortByCreatedDown');
-        setAnchor(null);
-    };
-
-    const handleSelectAllWishes = async () => {
-        if (!myUser) return;
-
-        await dispatch(addAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: '' }));
-        await dispatch(setWishesSearch(''));
-        await dispatch(selectUserId(null));
-        localStorage.removeItem('selectedUserId');
     };
 
     const handleShowWish = (id: IWish['id'] | null) => {
@@ -185,7 +199,8 @@ const WishList = () => {
             dispatch(addAllWishes({
                 page: wishes.page,
                 limit: WISHES_PAGINATION_LIMIT,
-                search: wishes.search
+                search: wishes.search,
+                sort: wishes.sort,
             }));
         }
     }, [ inView ]);
@@ -204,7 +219,12 @@ const WishList = () => {
             dispatch(selectUserId(myUser.id));
             localStorage.setItem('selectedUserId', myUser.id);
         } else {
-            dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: wishes.search }));
+            dispatch(getAllWishes({
+                page: 1,
+                limit: WISHES_PAGINATION_LIMIT,
+                search: wishes.search,
+                sort: wishes.sort,
+            }));
         }
 
         const handleResize = () => {
@@ -221,7 +241,7 @@ const WishList = () => {
     return (
         <div className="wish-list">
             <div className="head">
-                <button className="wish-hub" type="button" onClick={ handleSelectAllWishes }>
+                <button className="wish-hub" type="button" onClick={ () => handleGetAllWishes(dispatch) }>
                     <span className="logo-name">Wish Hub</span>
                 </button>
 
@@ -258,46 +278,63 @@ const WishList = () => {
                         </div>
                     ) }
 
-                    {/*{ (myUser?.id === selectedUserId || wishes.list.length > 0) && (*/}
-                    {/*    <div className="head-share">*/}
-                    {/*        <ShareButton link="welcome">*/}
-                    {/*            <span className="head-share-text">{ t('main-page.share-wishes') }</span>*/}
-                    {/*        </ShareButton>*/}
-                    {/*    </div>*/}
-                    {/*) }*/}
+                    { (myUser?.id === selectedUserId || wishes.list.length > 0) && (
+                        <div className="head-share">
+                            <ShareButton link="welcome">
+                                <span className="head-share-text">{ t('main-page.share-wishes') }</span>
+                            </ShareButton>
+                        </div>
+                    ) }
                 </div>
 
                 <div className="head-bottom">
-                    { wishes.list.length > -1 && (
-                        <div className="wish-search">
-                            <Search
-                                id="wish-search"
-                                label={ t('main-page.wishes-search') }
-                                value={ wishes.search }
-                                changeSearchBar={ handleChangeSearchBar }
-                            />
-                        </div>
+                    { wishes.list.length > 5 && (
+                        <>
+                            <div className="wish-search">
+                                <Search
+                                    id="wish-search"
+                                    label={ t('main-page.wishes-search') }
+                                    value={ wishes.search }
+                                    changeSearchBar={ handleChangeSearchBar }
+                                />
+                            </div>
+
+                            <Popup
+                                anchor={ anchor }
+                                setAnchor={ setAnchor }
+                                actionIcon={
+                                    <>
+                                <span className="sort-popup-action-text">
+                                    { wishesSortText }
+                                </span>
+                                        <SwapVertIcon sx={ { color: StylesVariables.primaryColor } } />
+                                    </>
+                                }
+                            >
+                                <div className="sort-popup">
+                                    <Button variant="text" onClick={ () => handleSortBy(EWishSort.POPULAR) }>
+                                        { t('main-page.sort.by-popularity') }
+                                    </Button>
+
+                                    <Button variant="text" onClick={ () => handleSortBy(EWishSort.PRICE_DESC) }>
+                                        { t('main-page.sort.by-price-down') }
+                                    </Button>
+
+                                    <Button variant="text" onClick={ () => handleSortBy(EWishSort.PRICE_ASC) }>
+                                        { t('main-page.sort.by-price-up') }
+                                    </Button>
+
+                                    <Button variant="text" onClick={ () => handleSortBy(EWishSort.CREATED_DESC) }>
+                                        { t('main-page.sort.by-created-up') }
+                                    </Button>
+
+                                    <Button variant="text" onClick={ () => handleSortBy(EWishSort.CREATED_ASC) }>
+                                        { t('main-page.sort.by-created-down') }
+                                    </Button>
+                                </div>
+                            </Popup>
+                        </>
                     ) }
-
-                    <Popup
-                        anchor={ anchor }
-                        setAnchor={ setAnchor }
-                        actionIcon={<SwapVertIcon sx={ { color: StylesVariables.primaryColor } } />}
-                    >
-                        <div className="sort-popup">
-                            <Button variant="text" onClick={handleSortByPopulate}>
-                                By Populate
-                            </Button>
-
-                            <Button variant="text" onClick={handleSortByCreatedUp}>
-                                By created date up
-                            </Button>
-
-                            <Button variant="text" onClick={handleSortByCreatedDown}>
-                                By created date down
-                            </Button>
-                        </div>
-                    </Popup>
                 </div>
             </div>
 

@@ -259,6 +259,13 @@
     "does_not_have_": "doesn't have any wishes available for viewing.",
     "does_not_have_fulfilled": "doesn't have any fulfilled wishes available for viewing.",
     "does_not_have_unfulfilled": "doesn't have any unfulfilled wishes available for viewing.",
+    "sort": {
+      "by-popularity": "Popular first",
+      "by-price-up": "Cheap first",
+      "by-price-down": "Expensive first",
+      "by-created-up": "Newest first",
+      "by-created-down": "Oldest first"
+    },
     "wishes-example": {
       "first": "Your gifts",
       "second": "Your wishes",
