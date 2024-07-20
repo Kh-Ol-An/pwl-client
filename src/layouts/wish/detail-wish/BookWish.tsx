@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
@@ -17,19 +18,19 @@ import ConfirmModal from '@/components/ConfirmModal';
 import Button from '@/components/Button';
 import QuoteMessage from "@/components/QuoteMessage";
 import { IWish } from '@/models/IWish';
-import { IUser } from "@/models/IUser";
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     wish: IWish;
-    userId?: IUser['id'];
     close: () => void;
 }
 
-const BookWish: FC<IProps> = ({ wish, userId, close }) => {
+const BookWish: FC<IProps> = ({ wish, close }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
+
+    const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
 
@@ -52,7 +53,7 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
                 return t('main-page.book-end-errors.past');
             }
             case 'maxDate': {
-                return t(`main-page.book-end-errors.max.${ userId === wish.userId ? 'my' : 'another' }`);
+                return t(`main-page.book-end-errors.max.${ myUser?.id === wish.userId ? 'my' : 'another' }`);
             }
             case 'invalidDate': {
                 return t('main-page.book-end-errors.invalid');
@@ -62,6 +63,14 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
             }
         }
     }, [ clickedOnBookWish, bookEnd, bookEndError ]);
+
+    const handleBookWish = () => {
+        if (myUser) {
+            setShow(true);
+        } else {
+            navigate('/auth');
+        }
+    };
 
     const handleSubmit = async () => {
         setClickedOnBookWish(true);
@@ -120,7 +129,7 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
                 type="button"
                 variant="text"
                 color="primary-color"
-                onClick={ () => setShow(true) }
+                onClick={ handleBookWish }
             >
                 { t('main-page.will-fulfill') }
             </Button>
@@ -148,7 +157,7 @@ const BookWish: FC<IProps> = ({ wish, userId, close }) => {
                             format={ getFullShortDate() }
                             dayOfWeekFormatter={ (weekday) => weekday }
                             disablePast
-                            maxDate={ dayjs().add(userId === wish.userId ? 10 : 1, 'year') } // Дозволити вибір дати тільки на рік вперед
+                            maxDate={ dayjs().add(myUser?.id === wish.userId ? 10 : 1, 'year') } // Дозволити вибір дати тільки на рік вперед
                             value={ bookEnd }
                             onChange={ handleChangeDate }
                             onError={ (newError) => setBookEndError(newError) }

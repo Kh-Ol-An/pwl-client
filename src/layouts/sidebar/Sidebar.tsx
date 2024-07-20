@@ -112,14 +112,14 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
     useEffect(() => {
         if (myUser) {
             dispatch(getUsers({
-                page: users.page,
+                page: 1,
                 limit: USERS_PAGINATION_LIMIT,
                 myUserId: myUser.id,
                 userType,
                 search: users.search,
             }));
         } else {
-            dispatch(getAllUsers({ page: users.page, limit: USERS_PAGINATION_LIMIT, search: users.search }));
+            dispatch(getAllUsers({ page: 1, limit: USERS_PAGINATION_LIMIT, search: users.search }));
         }
     }, []);
 

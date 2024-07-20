@@ -104,7 +104,7 @@ const DetailWish: FC<IProps> = ({ wish, selectedUser, editWish, close }) => {
 
                                             {/* Book */ }
                                             { !wish.booking?.end &&
-                                                <BookWish wish={ wish } userId={ myUser?.id } close={ close } /> }
+                                                <BookWish wish={ wish } close={ close } /> }
 
                                             {/* Cancel Book */ }
                                             { showCancelBookWish && (

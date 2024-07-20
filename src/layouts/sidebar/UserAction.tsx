@@ -62,10 +62,12 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
     };
 
     const handleSelectWish = async () => {
-        if (!myUser) return;
-
-        await handleGetWishList(dispatch, myUser.id, user.id);
-        hideSidebar();
+        if (myUser) {
+            await handleGetWishList(dispatch, myUser.id, user.id);
+            hideSidebar()
+        } else {
+            navigate('/auth');
+        }
     };
 
     const handleAddFriend = async () => {

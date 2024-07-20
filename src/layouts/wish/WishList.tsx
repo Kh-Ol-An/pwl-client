@@ -223,8 +223,9 @@ const WishList = () => {
                 page: 1,
                 limit: WISHES_PAGINATION_LIMIT,
                 search: wishes.search,
-                sort: wishes.sort,
+                sort: EWishSort.POPULAR,
             }));
+            dispatch(setWishesSort(EWishSort.POPULAR));
         }
 
         const handleResize = () => {

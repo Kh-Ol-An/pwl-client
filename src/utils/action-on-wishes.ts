@@ -5,7 +5,6 @@ import { selectUserId } from "@/store/selected-user/slice";
 import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
 import { EWishSort, EWishStatus } from "@/models/IWish";
 import { IUser } from "@/models/IUser";
-import { ISendAllWishes } from "@/store/wishes/types";
 
 export const handleGetAllWishes = async (dispatch: AppDispatch) => {
     await dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: '', sort: EWishSort.POPULAR }));
