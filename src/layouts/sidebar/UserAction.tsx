@@ -22,7 +22,7 @@ import Popup from '@/components/Popup';
 import CustomModal from '@/components/CustomModal';
 import Button from '@/components/Button';
 import StylesVariables from '@/styles/utils/variables.module.scss';
-import { handleGetWishList } from "@/utils/action-on-wishes";
+import { handleGetInitialWishList } from "@/utils/action-on-wishes";
 
 interface IProps {
     user: IUser;
@@ -62,12 +62,8 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
     };
 
     const handleSelectWish = async () => {
-        if (myUser) {
-            await handleGetWishList(dispatch, myUser.id, user.id);
-            hideSidebar()
-        } else {
-            navigate('/auth');
-        }
+        await handleGetInitialWishList(dispatch, myUser?.id, user.id);
+        hideSidebar();
     };
 
     const handleAddFriend = async () => {

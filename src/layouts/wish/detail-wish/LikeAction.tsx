@@ -6,7 +6,7 @@ import { dislikeWish, likeWish } from "@/store/wishes/thunks";
 import Popup from "@/components/Popup";
 import { IWish } from "@/models/IWish";
 import { IUser } from "@/models/IUser";
-import { handleGetWishList } from "@/utils/action-on-wishes";
+import { handleGetInitialWishList } from "@/utils/action-on-wishes";
 
 interface IProps {
     wish: IWish;
@@ -32,7 +32,7 @@ const LikeAction: FC<IProps> = ({ wish, type, close }) => {
         e.stopPropagation();
         if (!myUser) return;
 
-        await handleGetWishList(dispatch, myUser.id, userId);
+        await handleGetInitialWishList(dispatch, myUser.id, userId);
         setAnchor(null);
         close && close();
     };

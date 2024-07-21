@@ -35,7 +35,7 @@ export interface ISendAllWishes {
 }
 
 export interface ISendWishList extends ISendAllWishes {
-    myId: IUser['id'];
+    myId?: IUser['id'];
     userId: IUser['id'];
     status: EWishStatus;
 }

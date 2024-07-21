@@ -25,7 +25,7 @@ import LogoIcon from '@/assets/images/logo.svg';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import YouTubeIcon from '@/assets/images/social-networks/YouTubeIcon';
 import SocialNetworks from "@/components/SocialNetworks";
-import { handleGetAllWishes, handleGetWishList } from "@/utils/action-on-wishes";
+import { handleGetInitialAllWishes, handleGetInitialWishList } from "@/utils/action-on-wishes";
 
 interface IProps {
     showHeader: boolean;
@@ -59,7 +59,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     const handleSelectWish = async () => {
         if (!myUser) return;
 
-        await handleGetWishList(dispatch, myUser.id, myUser.id);
+        await handleGetInitialWishList(dispatch, myUser.id, myUser.id);
         setAnchor(null);
         hideHeader();
     };
@@ -105,7 +105,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
     // Logout
     const handleLogout = async () => {
         await dispatch(logout());
-        await handleGetAllWishes(dispatch);
+        await handleGetInitialAllWishes(dispatch);
         setAnchor(null);
         hideHeader();
     };
@@ -120,7 +120,7 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
         <div className={ "header" + (showHeader ? " show" : "") }>
             <div className="header-inner">
                 <div className="header-content">
-                    <button className="logo" type="button" onClick={ () => handleGetAllWishes(dispatch) }>
+                    <button className="logo" type="button" onClick={ () => handleGetInitialAllWishes(dispatch) }>
                         <span className="logo-name">Wish Hub</span>
                     </button>
 
@@ -186,13 +186,13 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                             </div>
 
                             <div className="header-popup-box">
-                                <Button to="/instruction" variant="text">
-                                    <YouTubeIcon
-                                        backgroundColor={ StylesVariables.lightColor }
-                                        playColor={ StylesVariables.backgroundColor }
-                                    />
-                                    { t('main-page.instruction') }
-                                </Button>
+                                {/*<Button to="/instruction" variant="text">*/}
+                                {/*    <YouTubeIcon*/}
+                                {/*        backgroundColor={ StylesVariables.lightColor }*/}
+                                {/*        playColor={ StylesVariables.backgroundColor }*/}
+                                {/*    />*/}
+                                {/*    { t('main-page.instruction') }*/}
+                                {/*</Button>*/}
 
                                 <Button to="/about" variant="text">
                                     <InfoIcon />

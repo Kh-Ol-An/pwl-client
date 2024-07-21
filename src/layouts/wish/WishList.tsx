@@ -22,7 +22,7 @@ import Search from "@/components/Search";
 import ShareButton from "@/components/ShareButton";
 import Popup from "@/components/Popup";
 import Button from '@/components/Button';
-import { handleGetAllWishes } from "@/utils/action-on-wishes";
+import { handleGetInitialAllWishes } from "@/utils/action-on-wishes";
 
 const WishList = () => {
     const { t } = useTranslation();
@@ -64,7 +64,7 @@ const WishList = () => {
         {
             name: t('main-page.wishes-example.fourth'),
         }
-    ]
+    ];
 
     let emptyText;
     myUser?.id !== selectedUserId && (emptyText = (
@@ -74,6 +74,7 @@ const WishList = () => {
             <span>{ t(`main-page.does_not_have_${ wishes.status === 'all' ? '' : wishes.status }`) }</span>
         </>
     ));
+    !selectedUserId && (emptyText = <span>{ t('main-page.no_wishes_found') }</span>);
 
     let wishesSortText;
     wishes.sort === EWishSort.POPULAR && (wishesSortText = t('main-page.sort.by-popularity'));
@@ -106,9 +107,9 @@ const WishList = () => {
     const handleChangeSearchBar = async (value: string) => {
         await dispatch(setWishesSearch(value));
 
-        if (selectedUserId && myUser) {
+        if (selectedUserId) {
             dispatch(getWishList({
-                myId: myUser.id,
+                myId: myUser?.id,
                 userId: selectedUserId,
                 status: wishes.status,
                 page: 1,
@@ -133,7 +134,7 @@ const WishList = () => {
     const handleSortBy = async (value: EWishSort) => {
         await dispatch(setWishesSort(value));
 
-        if (selectedUserId && myUser) {
+        if (selectedUserId) {
             dispatch(getWishList({
                 myId: myUser?.id,
                 userId: selectedUserId,
@@ -185,9 +186,9 @@ const WishList = () => {
 
         if (!inView || wishes.stopRequests) return;
 
-        if (selectedUserId && myUser) {
+        if (selectedUserId) {
             dispatch(addWishList({
-                myId: myUser.id,
+                myId: myUser?.id,
                 userId: selectedUserId,
                 status: wishes.status,
                 page: wishes.page,
@@ -242,7 +243,7 @@ const WishList = () => {
     return (
         <div className="wish-list">
             <div className="head">
-                <button className="wish-hub" type="button" onClick={ () => handleGetAllWishes(dispatch) }>
+                <button className="wish-hub" type="button" onClick={ () => handleGetInitialAllWishes(dispatch) }>
                     <span className="logo-name">Wish Hub</span>
                 </button>
 

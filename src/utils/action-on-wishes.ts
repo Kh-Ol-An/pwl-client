@@ -6,7 +6,7 @@ import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
 import { EWishSort, EWishStatus } from "@/models/IWish";
 import { IUser } from "@/models/IUser";
 
-export const handleGetAllWishes = async (dispatch: AppDispatch) => {
+export const handleGetInitialAllWishes = async (dispatch: AppDispatch) => {
     await dispatch(getAllWishes({ page: 1, limit: WISHES_PAGINATION_LIMIT, search: '', sort: EWishSort.POPULAR }));
     await dispatch(setWishStatus(EWishStatus.ALL));
     await dispatch(setWishesSearch(''));
@@ -15,7 +15,7 @@ export const handleGetAllWishes = async (dispatch: AppDispatch) => {
     localStorage.removeItem('selectedUserId');
 };
 
-export const handleGetWishList = async (dispatch: AppDispatch, myId: IUser['id'], userId: IUser['id']) => {
+export const handleGetInitialWishList = async (dispatch: AppDispatch, myId: IUser['id'] | undefined, userId: IUser['id']) => {
     await dispatch(getWishList({
         myId,
         userId,

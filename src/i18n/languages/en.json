@@ -259,6 +259,7 @@
     "does_not_have_": "doesn't have any wishes available for viewing.",
     "does_not_have_fulfilled": "doesn't have any fulfilled wishes available for viewing.",
     "does_not_have_unfulfilled": "doesn't have any unfulfilled wishes available for viewing.",
+    "no_wishes_found": "According to the specified parameters, no wishes were found.",
     "sort": {
       "by-popularity": "Popular first",
       "by-price-up": "Cheap first",
