@@ -17,12 +17,10 @@ const About: FC = () => {
     };
 
     return (
-        <div className="about-page">
-            <div className="container">
-                <PageHeader />
-            </div>
+        <div className={ "about-page container" + (myUser.user === null ? " logged-out" : "") }>
+            <PageHeader />
 
-            <section className={ "container" + (myUser.user === null ? " logged-out" : "") }>
+            <section>
                 <h1>
                     <button type="button" onClick={ goBack }>
                         <ArrowBackIcon />
@@ -44,7 +42,7 @@ const About: FC = () => {
                 </p>
             </section>
 
-            <section className="container">
+            <section>
                 <h2>{ t('about-page.sub-title') }</h2>
 
                 <p>

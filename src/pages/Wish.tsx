@@ -45,7 +45,7 @@ const Wish: FC = () => {
     }, []);
 
     return (
-        <div className={ "wish" + (myUser.user === null ? " logged-out" : "") }>
+        <div className={ "wish container" + (myUser.user === null ? " logged-out" : "") }>
             <PageHeader />
 
             { wish ? (

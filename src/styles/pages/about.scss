@@ -1,28 +1,17 @@
 .about-page {
     width: 100%;
     min-height: 100svh;
+    padding-top: 60px;
 
-    section:first-of-type {
-        padding-top: 60px;
+    @media only screen and (min-width: 768px) {
+        padding-top: 90px;
+    }
 
-        @media only screen and (min-width: 768px) {
+    &.logged-out {
+        padding-top: 120px;
+
+        @media only screen and (min-width: 500px) {
             padding-top: 90px;
-        }
-
-        &.logged-out {
-            padding-top: 120px;
-
-            @media only screen and (min-width: 500px) {
-                padding-top: 90px;
-            }
-
-            @media only screen and (min-width: 768px) {
-                padding-top: 90px;
-            }
-
-            @media only screen and (min-width: 1280px) {
-                padding-top: 90px;
-            }
         }
     }
 
@@ -34,23 +23,7 @@
         padding: 0 16px 30px;
 
         @media only screen and (min-width: 768px) {
-            padding: 0 20px 40px;
-        }
-
-        &.logged-out {
-            padding: 0 16px 30px;
-
-            @media only screen and (min-width: 500px) {
-                padding: 0 16px 30px;
-            }
-
-            @media only screen and (min-width: 768px) {
-                padding: 0 20px 40px;
-            }
-
-            @media only screen and (min-width: 1280px) {
-                padding: 0 0 40px;
-            }
+            padding: 0 0 40px;
         }
     }
 
