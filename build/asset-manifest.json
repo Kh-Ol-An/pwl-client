@@ -1,37 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.f69a5c27.css",
-    "main.js": "/static/js/main.b49ee009.js",
+    "main.css": "/static/css/main.d67c654d.css",
+    "main.js": "/static/js/main.413704c5.js",
     "static/media/join-bg.png": "/static/media/join-bg.a0853664df05f64e94b0.png",
     "static/media/cover-bg.png": "/static/media/cover-bg.c273fa2ed880ef4cce44.png",
-    "static/media/activation-account-mobile.jpg": "/static/media/activation-account-mobile.353716897381f96f7b2e.jpg",
-    "static/media/sing-up-mobile.jpg": "/static/media/sing-up-mobile.0b8f26c9719920ef3e3e.jpg",
     "static/media/add-app-to-ios-screen.jpg": "/static/media/add-app-to-ios-screen.065a499276f59c79ac87.jpg",
     "static/media/add-app-to-android-screen.jpg": "/static/media/add-app-to-android-screen.ee613cbd1650316479a4.jpg",
     "static/media/safari-share.jpg": "/static/media/safari-share.140d4f4a1e8c3252313b.jpg",
-    "static/media/add.jpg": "/static/media/add.0ece72ad65c3436a54b4.jpg",
     "static/media/open-chrome-menu.jpg": "/static/media/open-chrome-menu.5565b96d857379f3a08c.jpg",
-    "static/media/app-on-ios-screen.jpg": "/static/media/app-on-ios-screen.a2a3246de5d8f9afbf4c.jpg",
-    "static/media/enter-your-account-name-mobile.jpg": "/static/media/enter-your-account-name-mobile.bc8325b93f99ae4b9f40.jpg",
-    "static/media/login-with-google-mobile.jpg": "/static/media/login-with-google-mobile.aaa3624673bccb41cd71.jpg",
     "static/media/benefits-bg.png": "/static/media/benefits-bg.7784098393235cc47b19.png",
-    "static/media/choose-google-account-mobile.jpg": "/static/media/choose-google-account-mobile.a078060d25ba7855501d.jpg",
     "static/media/sing-up-bg.png": "/static/media/sing-up-bg.d39e6d8e7aac3d5eff4f.png",
-    "static/media/install.jpg": "/static/media/install.0a84c32f14a9e218ce78.jpg",
-    "static/media/app-on-android-screen.jpg": "/static/media/app-on-android-screen.3ba39fce855119cdef00.jpg",
-    "static/media/enter-your-password-mobile.jpg": "/static/media/enter-your-password-mobile.d18f2ce0169c9e1f0f9d.jpg",
     "static/media/action-bg.png": "/static/media/action-bg.9f2873d265f69b5c9ba4.png",
-    "static/media/logged-to-wish-hub-mobile.jpg": "/static/media/logged-to-wish-hub-mobile.8b19bbf95dcae4633ba8.jpg",
-    "static/media/login-with-google.png": "/static/media/login-with-google.96a7006a0ae62ddf1ee2.png",
-    "static/media/sing-up.png": "/static/media/sing-up.4f27516bcd7d6d70f615.png",
-    "static/media/choose-google-account.png": "/static/media/choose-google-account.11536c39d8e10fbcb4c6.png",
-    "static/media/logged-to-wish-hub.png": "/static/media/logged-to-wish-hub.0b47a0324726121776c8.png",
-    "static/media/activation-account.png": "/static/media/activation-account.9ee2214f93cd7220df83.png",
     "static/media/invisible-gift.png": "/static/media/invisible-gift.c1e4fd8854b0382f0cf1.png",
     "static/media/wish-bg.png": "/static/media/wish-bg.f67555d7b133ea12da9b.png",
-    "static/media/enter-your-account-name.png": "/static/media/enter-your-account-name.6b10e254f274bf8fce14.png",
     "static/media/algorithm-bg.png": "/static/media/algorithm-bg.207d12c5ff5a22029ddf.png",
-    "static/media/enter-your-password.png": "/static/media/enter-your-password.ba2efc4ffa63e8b46c1b.png",
     "static/media/benefits-gift-big.png": "/static/media/benefits-gift-big.5c83c171ff1660d43a6b.png",
     "static/media/great-emoji.png": "/static/media/great-emoji.b76a8cef90d95648228f.png",
     "static/media/bearded_emoji.png": "/static/media/bearded_emoji.f0a2ffb3b627754537b5.png",
@@ -56,11 +38,11 @@
     "static/media/plus-icon.svg": "/static/media/plus-icon.7705a0fa09066b8968c5c8f5a3380880.svg",
     "static/media/lock-icon.svg": "/static/media/lock-icon.bffa474c12cf43f6deeb3fef4a1f7a11.svg",
     "static/media/star.svg": "/static/media/star.4d42500e0b69077dee5804cd895392d0.svg",
-    "main.f69a5c27.css.map": "/static/css/main.f69a5c27.css.map",
-    "main.b49ee009.js.map": "/static/js/main.b49ee009.js.map"
+    "main.d67c654d.css.map": "/static/css/main.d67c654d.css.map",
+    "main.413704c5.js.map": "/static/js/main.413704c5.js.map"
   },
   "entrypoints": [
-    "static/css/main.f69a5c27.css",
-    "static/js/main.b49ee009.js"
+    "static/css/main.d67c654d.css",
+    "static/js/main.413704c5.js"
   ]
 }
