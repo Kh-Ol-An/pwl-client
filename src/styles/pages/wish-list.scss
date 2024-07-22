@@ -51,12 +51,18 @@
     .wish-list-page-head-avatar {
         min-width: 64px;
         width: 64px;
+        max-width: 64px;
+        min-height: 64px;
         height: 64px;
+        max-height: 64px;
 
         @media only screen and (min-width: 768px) {
             min-width: 124px;
             width: 124px;
+            max-width: 124px;
+            min-height: 124px;
             height: 124px;
+            max-height: 124px;
         }
     }
 

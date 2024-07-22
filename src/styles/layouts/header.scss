@@ -224,11 +224,19 @@
 
 .avatar-box {
     min-width: 42px;
+    width: 42px;
+    max-width: 42px;
+    min-height: 42px;
     height: 42px;
+    max-height: 42px;
 
     @media only screen and (min-width: 768px) {
         min-width: 56px;
+        width: 56px;
+        max-width: 56px;
+        min-height: 56px;
         height: 56px;
+        max-height: 56px;
     }
 }
 
