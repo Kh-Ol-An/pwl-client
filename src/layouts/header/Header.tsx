@@ -19,7 +19,6 @@ const Header: FC<IProps> = ({ showHeader, hideHeader }) => {
                         <span className="logo-name">Wish Hub</span>
                     </button>
 
-                    {/* Settings */ }
                     <HeaderSettings hideHeader={hideHeader} />
                 </div>
             </div>

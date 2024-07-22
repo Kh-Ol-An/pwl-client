@@ -13,6 +13,7 @@ import {
     IDoneWish,
     ISendWishList,
     ISendAllWishes,
+    IGetWishList,
 } from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
 import { TCurrentImage, IWish } from '@/models/IWish';
@@ -191,7 +192,7 @@ const deleteWish = async (userId: IUser['id'], wishId: IWish['id']): Promise<Axi
     }
 };
 
-const getWishList = async (params: ISendWishList): Promise<AxiosResponse<IWish[]>> => {
+const getWishList = async (params: ISendWishList): Promise<AxiosResponse<IGetWishList>> => {
     try {
         return await api.get('/wishes', { params });
     } catch (error: any) {

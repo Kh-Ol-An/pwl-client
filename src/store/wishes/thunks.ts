@@ -11,6 +11,7 @@ import {
     IActionWish,
     ISendWishList,
     ISendAllWishes,
+    IGetWishList,
 } from '@/store/wishes/types';
 import { IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
@@ -105,7 +106,7 @@ export const deleteWish = createAsyncThunk<IWish['id'], [ IUser['id'], IWish['id
     },
 );
 
-export const getWishList = createAsyncThunk<IWish[], ISendWishList>(
+export const getWishList = createAsyncThunk<IGetWishList, ISendWishList>(
     'wishes/getWishList',
     async (params) => {
         const result = await api.getWishList(params);
@@ -115,7 +116,7 @@ export const getWishList = createAsyncThunk<IWish[], ISendWishList>(
 );
 
 // Додавання нових бажань під час infinity scroll
-export const addWishList = createAsyncThunk<IWish[], ISendWishList>(
+export const addWishList = createAsyncThunk<IGetWishList, ISendWishList>(
     'wishes/addWishList',
     async (params) => {
         const result = await api.getWishList(params);

@@ -1,0 +1,94 @@
+.wish-list-page {
+    .wish-list-page-header {
+        @include flex-between;
+        padding: 8px 16px;
+
+        @media only screen and (min-width: 1280px) {
+            padding: 8px 10px 8px 0;
+        }
+    }
+
+    .wish-list-page-content {
+        padding: 16px 16px 20px 16px;
+        height: calc(100svh - 58px);
+
+        @media only screen and (min-width: 768px) {
+            height: calc(100svh - 72px);
+        }
+
+        @media only screen and (min-width: 1280px) {
+            padding: 24px 0 40px 0;
+        }
+    }
+
+    .wish-list-page-head {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        font-size: 20px;
+        color: $light-color;
+        font-weight: 700;
+
+        @media only screen and (min-width: 390px) {
+            font-size: 22px;
+        }
+
+        @media only screen and (min-width: 412px) {
+            font-size: 24px;
+        }
+
+        @media only screen and (min-width: 768px) {
+            gap: 24px;
+        }
+    }
+
+    .wish-list-page-head-user {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .wish-list-page-head-avatar {
+        min-width: 64px;
+        width: 64px;
+        height: 64px;
+
+        @media only screen and (min-width: 768px) {
+            min-width: 124px;
+            width: 124px;
+            height: 124px;
+        }
+    }
+
+    .wish-list-page-head-name {
+        font-size: 24px;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        @media only screen and (min-width: 768px) {
+            gap: 24px;
+            font-size: 36px;
+        }
+    }
+
+    .wish-list {
+        margin-top: 24px;
+        padding: 0 10px 0 0;
+        height: calc(100% - 154px);
+
+        @media only screen and (min-width: 390px) {
+            height: calc(100% - 159px);
+        }
+
+        @media only screen and (min-width: 412px) {
+            height: calc(100% - 164px);
+        }
+
+        @media only screen and (min-width: 768px) {
+            margin-top: 36px;
+            height: calc(100% - 214px);
+        }
+    }
+}

@@ -17,6 +17,7 @@ import {
 } from '@/store/wishes/thunks';
 import { IWish, EWishSort, EWishStatus } from '@/models/IWish';
 import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
+import { IUser } from "@/models/IUser";
 
 const changeWish = (state: IState, newWish: IWish) => {
     // Змінити бажання та покласти його там де було
@@ -31,6 +32,7 @@ const changeWish = (state: IState, newWish: IWish) => {
 
 interface IState {
     list: IWish[];
+    creator: IUser | null;
     status: EWishStatus;
     search: string;
     sort: EWishSort;
@@ -43,6 +45,7 @@ interface IState {
 
 const initialState: IState = {
     list: [],
+    creator: null,
     status: EWishStatus.ALL,
     search: '',
     sort: EWishSort.CREATED_DESC,
@@ -237,9 +240,10 @@ const wishesSlice = createSlice({
                 state.error = action.error.message || t('alerts.wishes-api.get-wish-list.error', { type: 'slice' });
             })
             .addCase(getWishList.fulfilled, (state, action) => {
-                state.list = action.payload;
+                state.list = action.payload.wishes;
+                state.creator = action.payload.creator;
                 state.page = 2;
-                action.payload.length === WISHES_PAGINATION_LIMIT && (state.stopRequests = false);
+                action.payload.wishes.length === WISHES_PAGINATION_LIMIT && (state.stopRequests = false);
                 state.isLoading = false;
                 state.isLocalLoading = false;
                 state.error = null;
@@ -258,9 +262,9 @@ const wishesSlice = createSlice({
                 state.error = action.error.message || t('alerts.wishes-api.get-wish-list.error', { type: 'slice' });
             })
             .addCase(addWishList.fulfilled, (state, action) => {
-                state.list.push(...action.payload);
+                state.list.push(...action.payload.wishes);
                 state.page += 1;
-                action.payload.length === WISHES_PAGINATION_LIMIT && (state.stopRequests = false);
+                action.payload.wishes.length === WISHES_PAGINATION_LIMIT && (state.stopRequests = false);
                 state.isLoading = false;
                 state.isLocalLoading = false;
                 state.error = null;

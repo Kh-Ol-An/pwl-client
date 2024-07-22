@@ -47,6 +47,11 @@ export interface IGetWish {
     wish: IWish;
 }
 
+export interface IGetWishList {
+    creator: IUser;
+    wishes: IWish[];
+}
+
 export interface IBookWish extends IActionWish {
     end: string;
 }

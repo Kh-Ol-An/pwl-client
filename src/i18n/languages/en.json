@@ -550,6 +550,9 @@
     "description": "Description:",
     "empty": "This wish does not exist. It may have been deleted by the user."
   },
+  "wish-list-page": {
+    "title": "The wish list is created by the user:"
+  },
   "privacy-policy-page": {
     "title": "Privacy Policy",
     "updated": "Last updated: April 02, 2024",

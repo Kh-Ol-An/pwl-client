@@ -55,16 +55,6 @@
         }
     }
 
-    .avatar-box {
-        width: 42px;
-        height: 42px;
-
-        @media only screen and (min-width: 768px) {
-            width: 56px;
-            height: 56px;
-        }
-    }
-
     .header-settings-icon {
         margin-left: auto;
         padding: 6px;
@@ -229,6 +219,16 @@
 
     @media only screen and (min-width: 768px) {
         max-width: 250px;
+    }
+}
+
+.avatar-box {
+    min-width: 42px;
+    height: 42px;
+
+    @media only screen and (min-width: 768px) {
+        min-width: 56px;
+        height: 56px;
     }
 }
 
