@@ -10,6 +10,7 @@ import { unencryptedData } from "@/utils/encryption-data";
 import { addingWhiteSpaces } from '@/utils/formating-value';
 import WishSwiper from '@/layouts/wish/detail-wish/WishSwiper';
 import PageHeader from "@/layouts/PageHeader";
+import BookWish from "@/layouts/wish/detail-wish/BookWish";
 
 const Wish: FC = () => {
     const { t } = useTranslation();
@@ -118,6 +119,12 @@ const Wish: FC = () => {
                             ) }
                         </div>
                     </div>
+
+                    { !wish.booking?.end && (
+                        <div className="wish-action">
+                            <BookWish wish={ wish } />
+                        </div>
+                    ) }
                 </>
             ) : (
                 <p className="wish-empty">{ t('wish-page.empty') }</p>

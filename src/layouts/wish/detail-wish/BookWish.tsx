@@ -22,7 +22,7 @@ import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
     wish: IWish;
-    close: () => void;
+    close?: () => void;
 }
 
 const BookWish: FC<IProps> = ({ wish, close }) => {
@@ -96,7 +96,7 @@ const BookWish: FC<IProps> = ({ wish, close }) => {
             console.error(e)
         }
 
-        close();
+        close && close();
     };
 
     const handleHide = () => {

@@ -17,7 +17,7 @@ dayjs.extend(isSameOrBefore);
 interface IProps {
     wish: IWish;
     showWish: () => void;
-    editWish: () => void;
+    editWish?: () => void;
 }
 
 const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
@@ -27,7 +27,7 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
 
     const handleEditWish = (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
-        editWish();
+        editWish && editWish();
     };
 
     return (

@@ -389,14 +389,29 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 <span className="show-label">{ t('main-page.can-see.title') }</span>
 
                 <div className="show-actions">
-                    <Radio
-                        label={ t('main-page.can-see.all') }
-                        id="show-all"
-                        name="show"
-                        checked={ show === 'all' }
-                        value="all"
-                        onChange={ changeShow }
-                    />
+                    <div className="show-item">
+                        <Radio
+                            label={ t('main-page.can-see.all') }
+                            id="show-all"
+                            name="show"
+                            checked={ show === 'all' }
+                            value="all"
+                            onChange={ changeShow }
+                        />
+
+                        <span
+                            className="tooltip"
+                            data-tooltip-id="show-all"
+                            data-tooltip-content={ t('main-page.can-see.all-tooltip') }
+                        >
+                            <InfoIcon sx={ { color: StylesVariables.specialColor } } />
+                        </span>
+                        <Tooltip
+                            id="show-all"
+                            opacity={ 1 }
+                            style={ getTooltipStyles(screenWidth) }
+                        />
+                    </div>
 
                     <div className="show-item">
                         <Radio

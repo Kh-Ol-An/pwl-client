@@ -5,6 +5,7 @@
     .wrap {
         position: relative;
         padding-right: 4px;
+        border-radius: $radius-sm;
 
         &.with-bg {
             background-color: $background-color;

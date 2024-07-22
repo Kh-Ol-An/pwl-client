@@ -1,9 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useTranslation } from 'react-i18next';
 import { Modal, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { Close as CloseIcon, AddCircle as AddCircleIcon, SwapVert as SwapVertIcon } from '@mui/icons-material';
+import {
+    Close as CloseIcon,
+    AddCircle as AddCircleIcon,
+    SwapVert as SwapVertIcon,
+    Info as InfoIcon,
+} from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { selectUserId } from '@/store/selected-user/slice';
 import { setWishStatus, setWishesSearch, setWishesSort } from '@/store/wishes/slice';
@@ -23,6 +28,8 @@ import ShareButton from "@/components/ShareButton";
 import Popup from "@/components/Popup";
 import Button from '@/components/Button';
 import { handleGetInitialAllWishes } from "@/utils/action-on-wishes";
+import { Tooltip } from "react-tooltip";
+import getTooltipStyles from "@/utils/get-tooltip-styles";
 
 const WishList = () => {
     const { t } = useTranslation();
@@ -47,9 +54,19 @@ const WishList = () => {
 
     const wishListRef = useRef<HTMLUListElement>(null);
 
-    const selectedUser = users.list.find(user => user.id === selectedUserId);
+    const selectedUser = useMemo(
+        () => users.list.find(user => user.id === selectedUserId),
+        [ users.list, selectedUserId ],
+    );
+    const detailWish = useMemo(
+        () => wishes.list.find(wish => wish.id === idOfSelectedWish),
+        [ wishes.list, idOfSelectedWish ],
+    );
+    const wishListIncludesShowAllWish = useMemo(
+        () => wishes.list.some(wish => wish.show === 'all'),
+        [ wishes.list ],
+    );
     const lastName = selectedUser?.lastName ? selectedUser.lastName : "";
-    const detailWish = wishes.list.find(wish => wish.id === idOfSelectedWish);
 
     const wishesExample = [
         {
@@ -142,14 +159,14 @@ const WishList = () => {
                 page: 1,
                 limit: WISHES_PAGINATION_LIMIT,
                 search: wishes.search,
-                sort:value,
+                sort: value,
             }));
         } else {
             dispatch(getAllWishes({
                 page: 1,
                 limit: WISHES_PAGINATION_LIMIT,
                 search: wishes.search,
-                sort:value,
+                sort: value,
             }));
         }
 
@@ -241,7 +258,7 @@ const WishList = () => {
     }, []);
 
     return (
-        <div className="wish-list">
+        <div className="wish-list-block">
             <div className="head">
                 <button className="wish-hub" type="button" onClick={ () => handleGetInitialAllWishes(dispatch) }>
                     <span className="logo-name">Wish Hub</span>
@@ -280,13 +297,28 @@ const WishList = () => {
                         </div>
                     ) }
 
-                    {/*{ (myUser?.id === selectedUserId || wishes.list.length > 0) && (*/}
-                    {/*    <div className="head-share">*/}
-                    {/*        <ShareButton link="welcome">*/}
-                    {/*            <span className="head-share-text">{ t('main-page.share-wishes') }</span>*/}
-                    {/*        </ShareButton>*/}
-                    {/*    </div>*/}
-                    {/*) }*/}
+                    { myUser?.id === selectedUserId && (
+                        <div className="head-share">
+                            <span
+                                className="tooltip"
+                                data-tooltip-id="share-wishes"
+                                data-tooltip-content={ t(`main-page.can-see.${wishListIncludesShowAllWish ? '' : 'inactive-'}share-tooltip`) }
+                            >
+                                <InfoIcon sx={ { color: StylesVariables.specialColor } } />
+                            </span>
+                            <Tooltip
+                                id="share-wishes"
+                                place="bottom"
+                                style={ getTooltipStyles(screenWidth) }
+                            />
+
+                            <div className={ wishListIncludesShowAllWish ? '' : ' inactive' }>
+                                <ShareButton link={ `wish-list/${ selectedUserId }` }>
+                                    <span className="head-share-text">{ t('main-page.share-wishes') }</span>
+                                </ShareButton>
+                            </div>
+                        </div>
+                    ) }
                 </div>
 
                 <div className="head-bottom">
@@ -337,7 +369,7 @@ const WishList = () => {
             </div>
 
             { (myUser?.id === selectedUserId || wishes.list.length > 0) ? (
-                <ul className="list" ref={ wishListRef }>
+                <ul className="wish-list" ref={ wishListRef }>
                     { myUser?.id === selectedUserId && (
                         <li className="create-wish">
                             <button

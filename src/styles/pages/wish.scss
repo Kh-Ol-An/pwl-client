@@ -7,7 +7,7 @@
     color: $light-color;
 
     @media only screen and (min-width: 768px) {
-        padding: 90px 20px 40px;
+        padding: 90px 0 40px;
     }
 
     &.logged-out {
@@ -18,17 +18,7 @@
         }
 
         @media only screen and (min-width: 768px) {
-            padding: 100px 20px 40px;
-        }
-    }
-
-    .page-header {
-        .container {
-            max-width: 100%;
-        }
-
-        @media only screen and (min-width: 1280px) {
-            padding: 24px 20px;
+            padding: 100px 0 40px;
         }
     }
 
@@ -42,7 +32,7 @@
 
     .wish-head-user {
         display: flex;
-        gap: 6px;
+        gap: 16px;
         align-items: center;
     }
 
@@ -83,7 +73,7 @@
         }
 
         @media only screen and (min-width: 1366px) {
-            padding: 0 40px;
+            padding: 0 16px 0 0;
             flex-direction: row;
             align-items: flex-start;
             gap: 20px;
@@ -221,5 +211,9 @@
             padding: 40px;
             font-size: 20px;
         }
+    }
+
+    .wish-action {
+        margin-left: auto;
     }
 }

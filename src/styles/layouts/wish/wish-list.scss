@@ -1,4 +1,4 @@
-.wish-list {
+.wish-list-block {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -43,6 +43,12 @@
     .head-share {
         margin-left: auto;
         @include flex-center;
+        gap: 6px;
+
+        .inactive {
+            opacity: 0.2;
+            pointer-events: none;
+        }
     }
 
     .head-share-text {
@@ -153,42 +159,6 @@
         }
     }
 
-    .list {
-        padding: 10px 10px 10px 16px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(44%, 1fr));
-        gap: 8px;
-        width: 100%;
-        height: fit-content;
-        overflow-y: auto;
-
-        @media only screen and (min-width: 768px) {
-            gap: 16px;
-        }
-
-        @media only screen and (min-width: 1024px) {
-            padding: 10px 10px 10px 20px;
-        }
-
-        @media only screen and (min-width: 1366px) {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        @media only screen and (min-width: 1600px) {
-            padding: 10px 14px 14px 20px;
-        }
-
-        &::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background: $special-color;
-            border-radius: $radius-round;
-        }
-    }
-
     .create-wish {
         position: relative;
         @include flex-center;
@@ -265,6 +235,42 @@
             line-height: 30px;
             height: 30px;
         }
+    }
+}
+
+.wish-list {
+    padding: 10px 10px 10px 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(44%, 1fr));
+    gap: 8px;
+    width: 100%;
+    height: fit-content;
+    overflow-y: auto;
+
+    @media only screen and (min-width: 768px) {
+        gap: 16px;
+    }
+
+    @media only screen and (min-width: 1024px) {
+        padding: 10px 10px 10px 20px;
+    }
+
+    @media only screen and (min-width: 1366px) {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    @media only screen and (min-width: 1600px) {
+        padding: 10px 14px 14px 20px;
+    }
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $special-color;
+        border-radius: $radius-round;
     }
 }
 

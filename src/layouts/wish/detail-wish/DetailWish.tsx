@@ -21,7 +21,7 @@ dayjs.extend(isSameOrBefore);
 interface IProps {
     wish: IWish;
     selectedUser?: IUser;
-    editWish: () => void;
+    editWish?: () => void;
     close: () => void;
 }
 
@@ -50,7 +50,7 @@ const DetailWish: FC<IProps> = ({ wish, selectedUser, editWish, close }) => {
     ////// термін виконання минув / не минув
 
     const handleEditWish = () => {
-        editWish();
+        editWish && editWish();
         close();
     };
 
@@ -104,7 +104,8 @@ const DetailWish: FC<IProps> = ({ wish, selectedUser, editWish, close }) => {
 
                                             {/* Book */ }
                                             { !wish.booking?.end &&
-                                                <BookWish wish={ wish } close={ close } /> }
+                                                <BookWish wish={ wish } close={ close } />
+                                            }
 
                                             {/* Cancel Book */ }
                                             { showCancelBookWish && (

@@ -5,6 +5,7 @@
 
     .dropzone {
         padding: 10px;
+        border-radius: $radius-lg;
         border: 2px dashed $special-color;
         cursor: pointer;
 
