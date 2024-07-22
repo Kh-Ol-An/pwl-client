@@ -29,7 +29,11 @@ const options: IOption[] = [
     },
 ];
 
-const LanguageSelection: FC = () => {
+interface IProps {
+    hidPopup?: () => void;
+}
+
+const LanguageSelection: FC<IProps> = ({ hidPopup }) => {
     const myUser = useAppSelector((state) => state.myUser);
 
     const dispatch = useAppDispatch();
@@ -49,6 +53,8 @@ const LanguageSelection: FC = () => {
         } catch (error) {
             console.error('Language Selection: ', error);
         }
+
+        hidPopup && hidPopup();
     };
 
     useEffect(() => {

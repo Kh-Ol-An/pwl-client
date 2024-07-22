@@ -171,19 +171,19 @@ const HeaderSettings: FC<IProps> = ({ hideHeader }) => {
                             <LanguageIcon />
                             { t('main-page.interface_language') }:
                             <div className="header-lang-select">
-                                <LanguageSelection />
+                                <LanguageSelection hidPopup={ () => setAnchor(null) } />
                             </div>
                         </div>
                     </div>
 
                     <div className="header-popup-box">
-                        {/*<Button to="/instruction" variant="text">*/}
-                        {/*    <YouTubeIcon*/}
-                        {/*        backgroundColor={ StylesVariables.lightColor }*/}
-                        {/*        playColor={ StylesVariables.backgroundColor }*/}
-                        {/*    />*/}
-                        {/*    { t('main-page.instruction') }*/}
-                        {/*</Button>*/}
+                        {/*<Button to="/instruction" variant="text">*/ }
+                        {/*    <YouTubeIcon*/ }
+                        {/*        backgroundColor={ StylesVariables.lightColor }*/ }
+                        {/*        playColor={ StylesVariables.backgroundColor }*/ }
+                        {/*    />*/ }
+                        {/*    { t('main-page.instruction') }*/ }
+                        {/*</Button>*/ }
 
                         <Button to="/about" variant="text">
                             <InfoIcon />
