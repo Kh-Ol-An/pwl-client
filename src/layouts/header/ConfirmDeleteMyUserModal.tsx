@@ -14,7 +14,6 @@ import Button from '@/components/Button';
 interface IProps {
     show: boolean;
     hide: () => void;
-    hideHeader: () => void;
 }
 
 type Inputs = {
@@ -22,7 +21,7 @@ type Inputs = {
     password: string
 }
 
-const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
+const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
@@ -55,7 +54,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
                 return;
             }
             await dispatch(deleteMyUser({ email: data.email, password: '', userId: myUser.id }));
-            hideHeader();
+            hide();
         },
     });
 
@@ -71,7 +70,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide, hideHeader }) => {
             }
 
             await dispatch(deleteMyUser({ ...data, userId: myUser.id }));
-            hideHeader();
+            hide();
         } else {
             await getDataFromGoogle();
         }
