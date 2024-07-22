@@ -347,6 +347,8 @@
         }
 
         .custom-select {
+            top: 0;
+            bottom: unset;
             height: fit-content;
             background-color: $accent-light-color;
 
