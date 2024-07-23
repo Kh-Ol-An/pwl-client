@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect, useRef, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
 import { useTranslation } from 'react-i18next';
 import { Avatar, Modal } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
@@ -13,9 +14,15 @@ import StylesVariables from "@/styles/utils/variables.module.scss";
 import HeaderSettings from "@/layouts/header/HeaderSettings";
 import Logo from "@/components/Logo";
 import SearchAndSortWishes from "@/layouts/wish/SearchAndSortWishes";
+import { addWishList } from "@/store/wishes/thunks";
+import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
 
 const Wish: FC = () => {
     const { t } = useTranslation();
+
+    const { ref, inView } = useInView({
+        threshold: 0,
+    });
 
     const myUser = useAppSelector((state) => state.myUser.user);
     const wishes = useAppSelector((state) => state.wishes);
@@ -26,6 +33,7 @@ const Wish: FC = () => {
 
     const dispatch = useAppDispatch();
 
+    const [ firstLoad, setFirstLoad ] = useState<boolean>(true);
     const [ showWish, setShowWish ] = useState<boolean>(false);
     const [ idOfSelectedWish, setIdOfSelectedWish ] = useState<IWish['id'] | null>(null);
 
@@ -52,6 +60,26 @@ const Wish: FC = () => {
     const handleHideWish = () => {
         setShowWish(false);
     };
+
+    useEffect(() => {
+        if (firstLoad) {
+            setFirstLoad(false);
+            return;
+        }
+
+        if (!inView || wishes.stopRequests) return;
+
+        const userId = location.pathname.split('/')[2];
+        dispatch(addWishList({
+            myId: myUser?.id,
+            userId,
+            status: wishes.status,
+            page: wishes.page,
+            limit: WISHES_PAGINATION_LIMIT,
+            search: wishes.search,
+            sort: wishes.sort,
+        }));
+    }, [ inView ]);
 
     useEffect(() => {
         const userId = location.pathname.split('/')[2];
@@ -94,6 +122,12 @@ const Wish: FC = () => {
                                 showWish={ () => handleShowWish(wish.id) }
                             />
                         )) }
+
+                        <div
+                            className="observable-element"
+                            style={ { display: users.stopRequests ? 'none' : 'block' } }
+                            ref={ ref }
+                        ></div>
                     </ul>
                 ) : (
                     <p className="wish-empty">{ t('wish-page.empty') }</p>
