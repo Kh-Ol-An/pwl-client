@@ -10,7 +10,7 @@ const SocialNetworks = () => {
     return (
         <>
             <a
-                href="https://tiktok.com/@wish.hub5"
+                href="https://tiktok.com/@wish.hub.net"
                 target="_blank"
                 rel="noopener noreferrer external nofollow"
             >

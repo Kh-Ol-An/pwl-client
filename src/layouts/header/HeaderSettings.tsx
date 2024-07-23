@@ -131,7 +131,7 @@ const HeaderSettings: FC<IProps> = ({ logoutWithoutUpdate = false, hideHeader })
                                 { myUser?.email }
                             </span>
                         </div>
-                        <div className="avatar-box">
+                        <div className="header-avatar-box">
                             <Avatar
                                 alt={ myUser?.firstName }
                                 src={ myUser?.avatar }
