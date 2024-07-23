@@ -12,6 +12,7 @@ import Action from "@/components/Action";
 import StylesVariables from "@/styles/utils/variables.module.scss";
 import HeaderSettings from "@/layouts/header/HeaderSettings";
 import Logo from "@/components/Logo";
+import SearchAndSortWishes from "@/layouts/wish/SearchAndSortWishes";
 
 const Wish: FC = () => {
     const { t } = useTranslation();
@@ -62,7 +63,7 @@ const Wish: FC = () => {
             <div className="wish-list-page-header container">
                 <Logo />
 
-                <HeaderSettings />
+                <HeaderSettings logoutWithoutUpdate />
             </div>
 
             <div className="wish-list-page-content">
@@ -81,6 +82,8 @@ const Wish: FC = () => {
                         </span>
                     </div>
                 </div>
+
+                <SearchAndSortWishes wishListRefCurrent={wishListRef.current} />
 
                 { wishes.list.length > 0 ? (
                     <ul className="wish-list" ref={ wishListRef }>

@@ -63,11 +63,6 @@
         }
     }
 
-    .head-bottom {
-        @include flex-between;
-        width: 100%;
-    }
-
     .wish-hub {
         width: 112px;
         padding: 6px 0;
@@ -140,22 +135,6 @@
             line-height: 35px;
             height: 35px;
             max-width: 50vw;
-        }
-    }
-
-    .wish-search {
-        width: 100%;
-        max-width: 50%;
-    }
-
-    .sort-popup-action-text {
-        font-size: 14px;
-        color: $special-color;
-        text-align: right;
-        white-space: nowrap;
-
-        @media only screen and (min-width: 1366px) {
-            font-size: 16px;
         }
     }
 
@@ -271,20 +250,5 @@
     &::-webkit-scrollbar-thumb {
         background: $special-color;
         border-radius: $radius-round;
-    }
-}
-
-.sort-popup {
-    padding: 8px 16px;
-
-    .button {
-        padding: 4px 16px;
-        width: 100%;
-        justify-content: flex-end;
-        transition: $transition;
-
-        &:hover {
-            background-color: $secondary-light-color;
-        }
     }
 }

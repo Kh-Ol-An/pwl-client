@@ -1,17 +1,12 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef, FC } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useTranslation } from 'react-i18next';
 import { Modal, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import {
-    Close as CloseIcon,
-    AddCircle as AddCircleIcon,
-    SwapVert as SwapVertIcon,
-    Info as InfoIcon,
-} from '@mui/icons-material';
+import { Close as CloseIcon, AddCircle as AddCircleIcon, Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { selectUserId } from '@/store/selected-user/slice';
-import { setWishStatus, setWishesSearch, setWishesSort } from '@/store/wishes/slice';
+import { setWishStatus, setWishesSort } from '@/store/wishes/slice';
 import { addAllWishes, getAllWishes, getWishList, addWishList } from '@/store/wishes/thunks';
 import { EWishSort, IWish, EWishStatus } from '@/models/IWish';
 import EditWish from '@/layouts/wish/edit-wish/EditWish';
@@ -23,15 +18,13 @@ import CustomModal from '@/components/CustomModal';
 import LogoIcon from "@/assets/images/logo.svg";
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
-import Search from "@/components/Search";
 import ShareButton from "@/components/ShareButton";
-import Popup from "@/components/Popup";
-import Button from '@/components/Button';
 import { handleGetInitialAllWishes } from "@/utils/action-on-wishes";
 import { Tooltip } from "react-tooltip";
 import getTooltipStyles from "@/utils/get-tooltip-styles";
+import SearchAndSortWishes from "@/layouts/wish/SearchAndSortWishes";
 
-const WishList = () => {
+const WishList: FC = () => {
     const { t } = useTranslation();
 
     const { ref, inView } = useInView({
@@ -46,7 +39,6 @@ const WishList = () => {
     const dispatch = useAppDispatch();
 
     const [ firstLoad, setFirstLoad ] = useState<boolean>(true);
-    const [ anchor, setAnchor ] = useState<HTMLButtonElement | null>(null);
     const [ showWish, setShowWish ] = useState<boolean>(false);
     const [ showEditWish, setShowEditWish ] = useState<boolean>(false);
     const [ idOfSelectedWish, setIdOfSelectedWish ] = useState<IWish['id'] | null>(null);
@@ -93,13 +85,6 @@ const WishList = () => {
     ));
     !selectedUserId && (emptyText = <span>{ t('main-page.no_wishes_found') }</span>);
 
-    let wishesSortText;
-    wishes.sort === EWishSort.POPULAR && (wishesSortText = t('main-page.sort.by-popularity'));
-    wishes.sort === EWishSort.PRICE_DESC && (wishesSortText = t('main-page.sort.by-price-down'));
-    wishes.sort === EWishSort.PRICE_ASC && (wishesSortText = t('main-page.sort.by-price-up'));
-    wishes.sort === EWishSort.CREATED_DESC && (wishesSortText = t('main-page.sort.by-created-up'));
-    wishes.sort === EWishSort.CREATED_ASC && (wishesSortText = t('main-page.sort.by-created-down'));
-
     const handleChangeWishStatus = async (event: SelectChangeEvent) => {
         const value = event.target.value as EWishStatus;
         await dispatch(setWishStatus(value));
@@ -119,62 +104,6 @@ const WishList = () => {
         if (!wishListRef.current) return;
 
         wishListRef.current.scrollTo(0, 0);
-    };
-
-    const handleChangeSearchBar = async (value: string) => {
-        await dispatch(setWishesSearch(value));
-
-        if (selectedUserId) {
-            dispatch(getWishList({
-                myId: myUser?.id,
-                userId: selectedUserId,
-                status: wishes.status,
-                page: 1,
-                limit: WISHES_PAGINATION_LIMIT,
-                search: value,
-                sort: wishes.sort,
-            }));
-        } else {
-            dispatch(getAllWishes({
-                page: 1,
-                limit: WISHES_PAGINATION_LIMIT,
-                search: value,
-                sort: wishes.sort,
-            }));
-        }
-
-        if (!wishListRef.current) return;
-
-        wishListRef.current.scrollTo(0, 0);
-    };
-
-    const handleSortBy = async (value: EWishSort) => {
-        await dispatch(setWishesSort(value));
-
-        if (selectedUserId) {
-            dispatch(getWishList({
-                myId: myUser?.id,
-                userId: selectedUserId,
-                status: wishes.status,
-                page: 1,
-                limit: WISHES_PAGINATION_LIMIT,
-                search: wishes.search,
-                sort: value,
-            }));
-        } else {
-            dispatch(getAllWishes({
-                page: 1,
-                limit: WISHES_PAGINATION_LIMIT,
-                search: wishes.search,
-                sort: value,
-            }));
-        }
-
-        if (!wishListRef.current) return;
-
-        wishListRef.current.scrollTo(0, 0);
-
-        setAnchor(null);
     };
 
     const handleShowWish = (id: IWish['id'] | null) => {
@@ -302,7 +231,7 @@ const WishList = () => {
                             <span
                                 className="tooltip"
                                 data-tooltip-id="share-wishes"
-                                data-tooltip-content={ t(`main-page.can-see.${wishListIncludesShowAllWish ? '' : 'inactive-'}share-tooltip`) }
+                                data-tooltip-content={ t(`main-page.can-see.${ wishListIncludesShowAllWish ? '' : 'inactive-' }share-tooltip`) }
                             >
                                 <InfoIcon sx={ { color: StylesVariables.specialColor } } />
                             </span>
@@ -321,51 +250,7 @@ const WishList = () => {
                     ) }
                 </div>
 
-                <div className="head-bottom">
-                    <div className="wish-search">
-                        <Search
-                            id="wish-search"
-                            label={ t('main-page.wishes-search') }
-                            value={ wishes.search }
-                            changeSearchBar={ handleChangeSearchBar }
-                        />
-                    </div>
-
-                    <Popup
-                        anchor={ anchor }
-                        setAnchor={ setAnchor }
-                        actionIcon={
-                            <>
-                                <span className="sort-popup-action-text">
-                                    { wishesSortText }
-                                </span>
-                                <SwapVertIcon sx={ { color: StylesVariables.primaryColor } } />
-                            </>
-                        }
-                    >
-                        <div className="sort-popup">
-                            <Button variant="text" onClick={ () => handleSortBy(EWishSort.POPULAR) }>
-                                { t('main-page.sort.by-popularity') }
-                            </Button>
-
-                            <Button variant="text" onClick={ () => handleSortBy(EWishSort.PRICE_DESC) }>
-                                { t('main-page.sort.by-price-down') }
-                            </Button>
-
-                            <Button variant="text" onClick={ () => handleSortBy(EWishSort.PRICE_ASC) }>
-                                { t('main-page.sort.by-price-up') }
-                            </Button>
-
-                            <Button variant="text" onClick={ () => handleSortBy(EWishSort.CREATED_DESC) }>
-                                { t('main-page.sort.by-created-up') }
-                            </Button>
-
-                            <Button variant="text" onClick={ () => handleSortBy(EWishSort.CREATED_ASC) }>
-                                { t('main-page.sort.by-created-down') }
-                            </Button>
-                        </div>
-                    </Popup>
-                </div>
+                <SearchAndSortWishes wishListRefCurrent={wishListRef.current} />
             </div>
 
             { (myUser?.id === selectedUserId || wishes.list.length > 0) ? (

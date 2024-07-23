@@ -26,10 +26,11 @@ import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { useNavigate } from "react-router-dom";
 
 interface IProps {
+    logoutWithoutUpdate?: boolean;
     hideHeader?: () => void;
 }
 
-const HeaderSettings: FC<IProps> = ({ hideHeader }) => {
+const HeaderSettings: FC<IProps> = ({ logoutWithoutUpdate = false, hideHeader }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
@@ -101,10 +102,10 @@ const HeaderSettings: FC<IProps> = ({ hideHeader }) => {
 
     // Logout
     const handleLogout = async () => {
-        await dispatch(logout());
-        await handleGetInitialAllWishes(dispatch);
         setAnchor(null);
         hideHeader && hideHeader();
+        await dispatch(logout());
+        !logoutWithoutUpdate && await handleGetInitialAllWishes(dispatch);
     };
 
     useEffect(() => {
