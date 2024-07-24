@@ -20,7 +20,7 @@
 }
 
 .sort-popup {
-    padding: 8px 16px;
+    padding: 8px;
 
     .button {
         padding: 4px 16px;
@@ -30,6 +30,10 @@
 
         &:hover {
             background-color: $secondary-light-color;
+        }
+
+        span {
+            color: $light-color;
         }
     }
 }

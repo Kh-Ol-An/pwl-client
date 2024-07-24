@@ -10,17 +10,23 @@
 }
 
 .popup {
-    padding: 8px 16px;
+    padding: 8px;
     @include flex-column-left;
 
     .button {
-        padding: 8px 0;
+        padding: 8px 16px;
         width: 100%;
         justify-content: left;
-        color: $primary-color;
+        color: $light-color;
+
+        &:hover {
+            background-color: $secondary-light-color;
+        }
 
         span {
             color: inherit;
+            line-height: 1;
+            gap: 12px;
         }
     }
 }

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Avatar } from "@mui/material";
 import Button from "@/components/Button";
 import LogoIcon from "@/assets/images/logo.svg";
@@ -7,7 +7,7 @@ import {
     Info as InfoIcon,
     Language as LanguageIcon,
     Logout as LogoutIcon,
-    ManageAccounts as ManageAccountsIcon,
+    Person as PersonIcon,
     PrivacyTip as PrivacyTipIcon,
 } from "@mui/icons-material";
 import 'dayjs/locale/uk';
@@ -15,12 +15,9 @@ import LanguageSelection from "@/components/LanguageSelection";
 import SocialNetworks from "@/components/SocialNetworks";
 import Popup from "@/components/Popup";
 import CustomModal from "@/components/CustomModal";
-import DetailAccount from "@/layouts/DetailAccount";
-import EditAccountModal from "@/layouts/header/EditAccountModal";
 import Contacts from "@/layouts/header/Contacts";
-import ConfirmDeleteMyUserModal from "@/layouts/header/ConfirmDeleteMyUserModal";
 import { handleGetInitialAllWishes, handleGetInitialWishList } from "@/utils/action-on-wishes";
-import { changeFirsLoaded, logout } from "@/store/my-user/thunks";
+import { logout } from "@/store/my-user/thunks";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { useNavigate } from "react-router-dom";
@@ -40,10 +37,7 @@ const HeaderSettings: FC<IProps> = ({ logoutWithoutUpdate = false, hideHeader })
     const dispatch = useAppDispatch();
 
     const [ anchor, setAnchor ] = useState<HTMLButtonElement | null>(null);
-    const [ showDetailAccount, setShowDetailAccount ] = useState<boolean>(false);
-    const [ showEditAccount, setShowEditAccount ] = useState<boolean>(false);
     const [ showContacts, setShowContacts ] = useState<boolean>(false);
-    const [ showConfirmDeleteMyUser, setShowConfirmDeleteMyUser ] = useState<boolean>(false);
 
     const handleSingIn = async () => {
         navigate('/auth');
@@ -62,26 +56,11 @@ const HeaderSettings: FC<IProps> = ({ logoutWithoutUpdate = false, hideHeader })
         hideHeader && hideHeader();
     };
 
-    // DetailAccount
-    const handleShowDetailAccount = () => {
-        setShowDetailAccount(true);
-        hideHeader && hideHeader();
-    };
-    const handleHideDetailAccount = () => {
-        setShowDetailAccount(false);
-    };
-
-    // EditAccount
-    const handleShowEditAccount = () => {
-        setShowEditAccount(true);
+    // navigateToProfile
+    const handleNavigateToProfile = () => {
+        navigate(`/profile/${myUser?.id}`);
         setAnchor(null);
         hideHeader && hideHeader();
-    };
-    const handleHideEditAccount = async () => {
-        setShowEditAccount(false);
-
-        if (!myUser || myUser?.firstLoaded) return;
-        await dispatch(changeFirsLoaded({ userId: myUser.id }));
     };
 
     // Contacts
@@ -94,12 +73,6 @@ const HeaderSettings: FC<IProps> = ({ logoutWithoutUpdate = false, hideHeader })
         setShowContacts(false);
     };
 
-    // ConfirmDeleteMyUser
-    const handleShowConfirmDeleteMyUser = () => {
-        setShowConfirmDeleteMyUser(true);
-        setShowEditAccount(false);
-    };
-
     // Logout
     const handleLogout = async () => {
         setAnchor(null);
@@ -107,12 +80,6 @@ const HeaderSettings: FC<IProps> = ({ logoutWithoutUpdate = false, hideHeader })
         await dispatch(logout());
         !logoutWithoutUpdate && await handleGetInitialAllWishes(dispatch);
     };
-
-    useEffect(() => {
-        if (!myUser || myUser?.firstLoaded) return;
-
-        setShowEditAccount(true);
-    }, []);
 
     return (
         <>
@@ -161,9 +128,9 @@ const HeaderSettings: FC<IProps> = ({ logoutWithoutUpdate = false, hideHeader })
                                     { t('main-page.my-wishes') }
                                 </Button>
 
-                                <Button variant="text" type="button" onClick={ handleShowEditAccount }>
-                                    <ManageAccountsIcon />
-                                    { t('main-page.account_settings') }
+                                <Button variant="text" type="button" onClick={ handleNavigateToProfile }>
+                                    <PersonIcon />
+                                    { t('profile-page.my-profile') }
                                 </Button>
                             </>
                         ) }
@@ -220,34 +187,10 @@ const HeaderSettings: FC<IProps> = ({ logoutWithoutUpdate = false, hideHeader })
                 </div>
             </Popup>
 
-            {/* Detail Account */ }
-            { myUser && (
-                <CustomModal
-                    show={ showDetailAccount }
-                    hide={ handleHideDetailAccount }
-                    classes="modal modal-md"
-                >
-                    <DetailAccount user={ myUser } />
-                </CustomModal>
-            ) }
-
-            {/* Edit Account */ }
-            <EditAccountModal
-                show={ showEditAccount }
-                hide={ handleHideEditAccount }
-                handleShowConfirmDeleteMyUser={ handleShowConfirmDeleteMyUser }
-            />
-
             {/* Contacts */ }
             <CustomModal show={ showContacts } hide={ handleHideContacts }>
                 <Contacts />
             </CustomModal>
-
-            {/* Confirm Delete My User */ }
-            <ConfirmDeleteMyUserModal
-                show={ showConfirmDeleteMyUser }
-                hide={ () => setShowConfirmDeleteMyUser(false) }
-            />
         </>
     );
 };

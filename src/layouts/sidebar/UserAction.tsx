@@ -9,7 +9,12 @@ import {
     ListItemText,
     CircularProgress,
 } from '@mui/material';
-import { PeopleAlt as PeopleAltIcon } from '@mui/icons-material';
+import {
+    PeopleAlt as PeopleAltIcon,
+    Person as PersonIcon,
+    GroupAdd as GroupAddIcon,
+    GroupRemove as GroupRemoveIcon,
+} from '@mui/icons-material';
 import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
@@ -113,8 +118,13 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                     }
                 >
                     <div className="popup">
+                        <Button to={`profile/${user.id}`} variant="text" fontSize="small">
+                            <PersonIcon />
+                            { t('profile-page.user-profile') }
+                        </Button>
                         { showAddFriend && (
                             <Button variant="text" fontSize="small" onClick={ handleAddFriend }>
+                                <GroupAddIcon />
                                 {
                                     myUser?.followFrom.includes(user.id)
                                         ? t('main-page.confirm-friendship')
@@ -124,16 +134,19 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                         ) }
                         { (myUser?.friends.includes(user.id) || myUser?.followTo.includes(user.id)) && (
                             <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('followTo') }>
+                                <GroupRemoveIcon />
                                 { t('main-page.delete-your') } <br /> { t('main-page.delete-request') }
                             </Button>
                         ) }
                         { (myUser?.friends.includes(user.id) || myUser?.followFrom.includes(user.id)) && (
                             <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('followFrom') }>
+                                <GroupRemoveIcon />
                                 { t('main-page.delete-user_s') } <br /> { t('main-page.delete-request') }
                             </Button>
                         ) }
                         { myUser?.friends.includes(user.id) && (
                             <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('friends') }>
+                                <GroupRemoveIcon />
                                 { t('main-page.remove-friend') }
                             </Button>
                         ) }

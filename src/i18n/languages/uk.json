@@ -232,7 +232,6 @@
     "delete-account": "Видалити свій акаунт",
     "update": "Оновити",
     "my-wishes": "Мої бажання",
-    "account_settings": "Налаштування акаунту",
     "about": "Про",
     "instruction": "Інструкція",
     "contacts": "Контакти",
@@ -553,6 +552,10 @@
   },
   "wish-list-page": {
     "title": "Список бажань створений користувачем:"
+  },
+  "profile-page": {
+    "my-profile": "Мій профіль",
+    "user-profile": "Профіль користувача"
   },
   "privacy-policy-page": {
     "title": "Політика конфіденційності",

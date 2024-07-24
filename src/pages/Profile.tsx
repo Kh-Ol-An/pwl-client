@@ -39,6 +39,10 @@ const Wish: FC = () => {
 
     const wishListRef = useRef<HTMLUListElement>(null);
 
+    const profileId = useMemo(
+        () => location.pathname.split('/')[2],
+        [ location.pathname ],
+    );
     const selectedUser = useMemo(
         () => users.list.find(user => user.id === selectedUserId),
         [ users.list, selectedUserId ],
@@ -69,10 +73,9 @@ const Wish: FC = () => {
 
         if (!inView || wishes.stopRequests) return;
 
-        const userId = location.pathname.split('/')[2];
         dispatch(addWishList({
             myId: myUser?.id,
-            userId,
+            userId: profileId,
             status: wishes.status,
             page: wishes.page,
             limit: WISHES_PAGINATION_LIMIT,
@@ -82,9 +85,8 @@ const Wish: FC = () => {
     }, [ inView ]);
 
     useEffect(() => {
-        const userId = location.pathname.split('/')[2];
-        handleGetInitialWishList(dispatch, myUser?.id, userId);
-    }, []);
+        handleGetInitialWishList(dispatch, myUser?.id, profileId);
+    }, [profileId]);
 
     return (
         <div className="wish-list-page container">
@@ -96,7 +98,7 @@ const Wish: FC = () => {
 
             <div className="wish-list-page-content">
                 <div className="wish-list-page-head">
-                    { t('wish-list-page.title') }
+                    { t(`profile-page.${profileId === myUser?.id ? 'my-profile' : 'user-profile'}`) }
 
                     <div className="wish-list-page-head-user">
                         <div className="wish-list-page-head-avatar">

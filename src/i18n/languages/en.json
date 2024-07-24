@@ -232,7 +232,6 @@
     "delete-account": "Delete account",
     "update": "Update",
     "my-wishes": "My wishes",
-    "account_settings": "Account settings",
     "about": "About",
     "instruction": "Instruction",
     "contacts": "Contacts",
@@ -552,6 +551,10 @@
   },
   "wish-list-page": {
     "title": "The wish list is created by the user:"
+  },
+  "profile-page": {
+    "my-profile": "My profile",
+    "user-profile": "User profile"
   },
   "privacy-policy-page": {
     "title": "Privacy Policy",
