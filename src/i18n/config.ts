@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import en from '@/i18n/languages/en.json';
 import uk from '@/i18n/languages/uk.json';
+import { ELang } from "@/models/IUser";
 
 const resources = {
     en: { translation: en },
@@ -14,7 +15,7 @@ i18n
     .use(LanguageDetector)
     .init({
         resources,
-        fallbackLng: 'uk',
+        fallbackLng: ELang.UK,
         interpolation: {
             escapeValue: false
         }

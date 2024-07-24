@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Avatar } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { getWish } from '@/store/wishes/thunks';
-import { IWish } from '@/models/IWish';
+import { ECurrency, IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
 import { unencryptedData } from "@/utils/encryption-data";
 import { addingWhiteSpaces } from '@/utils/formating-value';
@@ -72,7 +72,7 @@ const Wish: FC = () => {
                                         {
                                             addingWhiteSpaces(unencryptedData(wish.price, wish.show))
                                         } {
-                                        unencryptedData(wish.currency, wish.show) || 'UAH'
+                                        unencryptedData(wish.currency, wish.show) || ECurrency.UAH
                                     }
                                     </span>
                                 </div>

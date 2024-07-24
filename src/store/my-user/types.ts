@@ -1,8 +1,8 @@
-import { TCurrentAvatar, IUser } from '@/models/IUser';
+import { TCurrentAvatar, IUser, ELang } from '@/models/IUser';
 
 export interface IForgotPassword {
     email: IUser['email'];
-    lang: IUser['lang'];
+    lang: ELang;
 }
 
 export interface IChangeForgottenPassword {
@@ -13,12 +13,12 @@ export interface IChangeForgottenPassword {
 export interface ILogin {
     email: IUser['email'];
     password: string;
-    lang: IUser['lang'];
+    lang: ELang;
 }
 
 export interface IGoogleAuth {
     email: IUser['email'];
-    lang: IUser['lang'];
+    lang: ELang;
     isActivated: IUser['isActivated'];
     firstName: IUser['firstName'];
     lastName: IUser['lastName'];
@@ -47,7 +47,7 @@ export interface IUpdateMyUser extends IUserId {
 }
 
 export interface IChangeLang extends IUserId {
-    lang: IUser['lang'];
+    lang: ELang;
 }
 
 export interface INotificationSubscribe extends IUserId {
@@ -64,6 +64,12 @@ export interface IAddFriend {
     friendId: IUser['id'];
 }
 
+export enum EWhereRemove {
+    FRIENDS = 'friends',
+    FOLLOW_FROM = 'followFrom',
+    FOLLOW_TO = 'followTo',
+}
+
 export interface IRemoveFriend extends IAddFriend {
-    whereRemove: 'friends' | 'followFrom' | 'followTo';
+    whereRemove: EWhereRemove;
 }

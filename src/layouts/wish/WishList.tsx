@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { selectUserId } from '@/store/selected-user/slice';
 import { setWishStatus, setWishesSort } from '@/store/wishes/slice';
 import { addAllWishes, getAllWishes, getWishList, addWishList } from '@/store/wishes/thunks';
-import { EWishSort, IWish, EWishStatus } from '@/models/IWish';
+import { EWishSort, IWish, EWishStatus, EShow } from '@/models/IWish';
 import EditWish from '@/layouts/wish/edit-wish/EditWish';
 import WishItem from '@/layouts/wish/WishItem';
 import DetailWish from '@/layouts/wish/detail-wish/DetailWish';
@@ -55,7 +55,7 @@ const WishList: FC = () => {
         [ wishes.list, idOfSelectedWish ],
     );
     const wishListIncludesShowAllWish = useMemo(
-        () => wishes.list.some(wish => wish.show === 'all'),
+        () => wishes.list.some(wish => wish.show === EShow.ALL),
         [ wishes.list ],
     );
     const lastName = selectedUser?.lastName ? selectedUser.lastName : "";

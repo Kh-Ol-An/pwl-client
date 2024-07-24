@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import EditIcon from '@mui/icons-material/Edit';
 import { useAppSelector } from '@/store/hook';
-import { IWish } from '@/models/IWish';
+import { ECurrency, IWish } from '@/models/IWish';
 import { addingWhiteSpaces } from '@/utils/formating-value';
 import { unencryptedData } from '@/utils/encryption-data';
 import showBookingExpired from '@/utils/show-booking-expired';
@@ -66,7 +66,7 @@ const WishItem: FC<IProps> = ({ wish, showWish, editWish }) => {
                             {
                                 addingWhiteSpaces(unencryptedData(wish.price, wish.show))
                             } {
-                            unencryptedData(wish.currency, wish.show) || 'UAH'
+                            unencryptedData(wish.currency, wish.show) || ECurrency.UAH
                         }
                         </div>
                     ) }

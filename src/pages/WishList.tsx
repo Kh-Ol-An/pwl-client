@@ -69,10 +69,10 @@ const Wish: FC = () => {
 
         if (!inView || wishes.stopRequests) return;
 
-        const userId = location.pathname.split('/')[2];
+        const creatorId = location.pathname.split('/')[2];
         dispatch(addWishList({
             myId: myUser?.id,
-            userId,
+            userId: creatorId,
             status: wishes.status,
             page: wishes.page,
             limit: WISHES_PAGINATION_LIMIT,
@@ -82,8 +82,8 @@ const Wish: FC = () => {
     }, [ inView ]);
 
     useEffect(() => {
-        const userId = location.pathname.split('/')[2];
-        handleGetInitialWishList(dispatch, myUser?.id, userId);
+        const creatorId = location.pathname.split('/')[2];
+        handleGetInitialWishList(dispatch, myUser?.id, creatorId);
     }, []);
 
     return (

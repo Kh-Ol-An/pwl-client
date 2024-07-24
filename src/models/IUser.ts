@@ -5,12 +5,17 @@ export interface ICandidate {
     firstName?: string;
 }
 
+export enum ELang {
+    EN = 'en',
+    UK = 'uk',
+}
+
 export interface IUser {
     id: string;
     email: string;
     hasPassword: boolean;
     isActivated: boolean;
-    lang: 'en' | 'uk';
+    lang: ELang;
     showedInfo: boolean;
     firstLoaded: boolean;
     firstName: string;

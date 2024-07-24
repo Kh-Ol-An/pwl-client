@@ -15,6 +15,7 @@ import Button from '@/components/Button';
 import showBookingExpired from '@/utils/show-booking-expired';
 import { getFullDate, getLang } from "@/utils/lang-action";
 import { IUser } from "@/models/IUser";
+import { EWhoseWish } from "@/store/wishes/types";
 
 dayjs.extend(isSameOrBefore);
 
@@ -117,7 +118,7 @@ const DetailWish: FC<IProps> = ({ wish, selectedUser, editWish, close }) => {
                                                 <DoneWish
                                                     wish={ wish }
                                                     userId={ myUser?.id }
-                                                    whoseWish={ wish.booking?.userId ? 'someone' : 'my' }
+                                                    whoseWish={ wish.booking?.userId ? EWhoseWish.SOMEONE : EWhoseWish.MY }
                                                     close={ close }
                                                 />
                                             ) }
@@ -127,7 +128,7 @@ const DetailWish: FC<IProps> = ({ wish, selectedUser, editWish, close }) => {
                                                 <BookingExpired
                                                     wish={ wish }
                                                     userId={ myUser?.id }
-                                                    whoseWish={ wish.booking?.userId ? 'someone' : 'my' }
+                                                    whoseWish={ wish.booking?.userId ? EWhoseWish.SOMEONE : EWhoseWish.MY }
                                                     close={ close }
                                                 />
                                             ) }

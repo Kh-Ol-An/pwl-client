@@ -5,7 +5,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { addAllUsers, addUsers, getAllUsers, getUsers } from '@/store/users/thunks';
-import { ISendUsersParams } from '@/store/users/types';
+import { EUserType, ISendUsersParams } from '@/store/users/types';
 import Loading from '@/layouts/Loading';
 import UserAction from '@/layouts/sidebar/UserAction';
 import Search from '@/components/Search';
@@ -32,7 +32,7 @@ const Sidebar: FC<IProps> = ({ showSidebar, hideSidebar }) => {
     const dispatch = useAppDispatch();
 
     const [ firstLoad, setFirstLoad ] = useState<boolean>(true);
-    const [ userType, setUserType ] = useState<ISendUsersParams['userType']>('all');
+    const [ userType, setUserType ] = useState<ISendUsersParams['userType']>(EUserType.ALL);
 
     const userListRef = useRef<HTMLDivElement>(null);
 

@@ -12,7 +12,7 @@ import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import NotFound from '@/pages/NotFound';
 
 export const privateRoutes = [
-    { path: '/profile/:userId', component: Profile },
+    { path: '/profile/:profileId', component: Profile },
     { path: '/activation-link-expired', component: ActivationLinkExpired },
 ];
 
@@ -26,7 +26,7 @@ export const publicRoutes = [
     { path: '/welcome', component: Welcome },
     // { path: '/instruction', component: Instruction },
     { path: '/about', component: About },
-    { path: '/wish-list/:userId', component: WishList },
+    { path: '/wish-list/:creatorId', component: WishList },
     { path: '/wish/:wishId', component: Wish },
     { path: '/privacy-policy', component: PrivacyPolicy },
     { path: '/*', component: NotFound },

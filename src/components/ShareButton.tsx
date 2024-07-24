@@ -4,10 +4,11 @@ import { toast } from 'react-toastify';
 import ShareIcon from '@mui/icons-material/Share';
 import ConfirmModal from '@/components/ConfirmModal';
 import StylesVariables from '@/styles/utils/variables.module.scss';
+import { EShow } from "@/models/IWish";
 
 interface IProps {
     link?: string;
-    wishShow?: 'all' | 'friends' | 'nobody';
+    wishShow?: EShow;
     children?: ReactNode;
 }
 
@@ -51,7 +52,7 @@ const ShareButton: FC<IProps> = ({ link = '', wishShow, children }) => {
     };
 
     const handleClick = () => {
-        wishShow === 'friends' || wishShow === 'nobody' ? setShow(true) : shareContent();
+        wishShow === EShow.FRIENDS || wishShow === EShow.NOBODY ? setShow(true) : shareContent();
     };
 
     return (
@@ -69,7 +70,7 @@ const ShareButton: FC<IProps> = ({ link = '', wishShow, children }) => {
             >
                 <p className="text-lg">
                     {
-                        wishShow === 'nobody'
+                        wishShow === EShow.NOBODY
                             ? t('share-button.question-nobody')
                             : t('share-button.question-friends')
                     }

@@ -2,7 +2,7 @@ import React, { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { addingWhiteSpaces } from '@/utils/formating-value';
 import { unencryptedData } from '@/utils/encryption-data';
-import { IWish } from '@/models/IWish';
+import { ECurrency, EShow, IWish } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
 import ShareButton from '@/components/ShareButton';
 
@@ -21,7 +21,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
             </span> { t('main-page.show-all-3') }
         </>
     );
-    wish.show === 'friends' && (
+    wish.show === EShow.FRIENDS && (
         show = (
             <>
                 { t('main-page.show-friends-1') } <span className="accent">
@@ -30,7 +30,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
             </>
         )
     );
-    wish.show === 'nobody' && (
+    wish.show === EShow.NOBODY && (
         show = (
             <>
                 { t('main-page.show-nobody-1') } <span className="accent">
@@ -78,7 +78,7 @@ const WishContent: FC<IProps> = ({ wish, myUserId }) => {
                                 {
                                     addingWhiteSpaces(unencryptedData(wish.price, wish.show))
                                 } {
-                                unencryptedData(wish.currency, wish.show) || 'UAH'
+                                unencryptedData(wish.currency, wish.show) || ECurrency.UAH
                             }
                             </span>
                         </div>

@@ -19,7 +19,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/uk';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { addFriend, removeFriend } from '@/store/my-user/thunks';
-import { IRemoveFriend } from '@/store/my-user/types';
+import { EWhereRemove, IRemoveFriend } from '@/store/my-user/types';
 import { IUser } from '@/models/IUser';
 import { getLang, getMonthWithDate } from "@/utils/lang-action";
 import DetailAccount from '@/layouts/DetailAccount';
@@ -133,19 +133,19 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                             </Button>
                         ) }
                         { (myUser?.friends.includes(user.id) || myUser?.followTo.includes(user.id)) && (
-                            <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('followTo') }>
+                            <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend(EWhereRemove.FOLLOW_TO) }>
                                 <GroupRemoveIcon />
                                 { t('main-page.delete-your') } <br /> { t('main-page.delete-request') }
                             </Button>
                         ) }
                         { (myUser?.friends.includes(user.id) || myUser?.followFrom.includes(user.id)) && (
-                            <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('followFrom') }>
+                            <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend(EWhereRemove.FOLLOW_FROM) }>
                                 <GroupRemoveIcon />
                                 { t('main-page.delete-user_s') } <br /> { t('main-page.delete-request') }
                             </Button>
                         ) }
                         { myUser?.friends.includes(user.id) && (
-                            <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend('friends') }>
+                            <Button variant="text" fontSize="small" onClick={ () => handleRemoveFriend(EWhereRemove.FRIENDS) }>
                                 <GroupRemoveIcon />
                                 { t('main-page.remove-friend') }
                             </Button>

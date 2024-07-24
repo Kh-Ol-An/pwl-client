@@ -61,6 +61,11 @@ export interface IActionWish {
     wishId: IWish['id'];
 }
 
+export enum EWhoseWish {
+    MY = 'my',
+    SOMEONE = 'someone',
+}
+
 export interface IDoneWish extends IActionWish {
-    whoseWish: 'my' | 'someone';
+    whoseWish: EWhoseWish;
 }

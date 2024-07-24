@@ -9,7 +9,7 @@ import { Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { createWish, deleteWish, updateWish } from '@/store/wishes/thunks';
 import { IWishWithQuote, ICreateWish } from '@/store/wishes/types';
-import { TCurrentImage, IImage, IWish } from '@/models/IWish';
+import { TCurrentImage, IImage, IWish, ECurrency, EShow } from '@/models/IWish';
 import { wishDescriptionValidation, wishNameValidation, wishPriceValidation } from '@/utils/validations';
 import { WISH_DESCRIPTION_MAX_LENGTH } from '@/utils/constants';
 import { removingWhiteSpaces, addingWhiteSpaces } from '@/utils/formating-value';
@@ -58,17 +58,17 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
     } = useForm<Inputs>();
 
     const [ material, setMaterial ] = useState<ICreateWish['material']>(true);
-    const [ show, setShow ] = useState<ICreateWish['show']>('all');
+    const [ show, setShow ] = useState<ICreateWish['show']>(EShow.ALL);
     const [ showConfirmDeleteWish, setShowConfirmDeleteWish ] = useState<boolean>(false);
     const [ images, setImages ] = useState<TCurrentImage[]>([]);
-    const [ currency, setCurrency ] = useState<IWish['currency']>('UAH');
+    const [ currency, setCurrency ] = useState<IWish['currency']>(ECurrency.UAH);
     const [ isTransition, setIsTransition ] = useState<boolean>(false);
     const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         const nonUniqueName = wishList.some((wish) => {
             let wishName = wish.name;
-            if (process.env.REACT_APP_CRYPTO_JS_SECRET && wish.show !== 'all') {
+            if (process.env.REACT_APP_CRYPTO_JS_SECRET && wish.show !== EShow.ALL) {
                 wishName = decryptedData(wish.name, process.env.REACT_APP_CRYPTO_JS_SECRET)
             }
             return wishName === data.name.trim() && wish.id !== idOfSelectedWish;
@@ -93,11 +93,11 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         // price
         const priceWithoutWhiteSpaces = data.price ? removingWhiteSpaces(data.price.trim()) : '';
         const encryptedPrice = encryptedData(priceWithoutWhiteSpaces, process.env.REACT_APP_CRYPTO_JS_SECRET);
-        const sendingPrice = show === 'all' ? priceWithoutWhiteSpaces : encryptedPrice;
+        const sendingPrice = show === EShow.ALL ? priceWithoutWhiteSpaces : encryptedPrice;
 
         // currency
         const encryptedCurrency = encryptedData(currency, process.env.REACT_APP_CRYPTO_JS_SECRET);
-        const sendingCurrency = show === 'all' ? currency : encryptedCurrency;
+        const sendingCurrency = show === EShow.ALL ? currency : encryptedCurrency;
 
         // addresses
         const dataAddresses = (data.addresses && data.addresses.length > 0)
@@ -112,12 +112,12 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                         ? { ...address, value: encryptedData(address.value, process.env.REACT_APP_CRYPTO_JS_SECRET) }
                         : address
             ) : undefined;
-        const sendingAddresses = show === 'all' ? dataAddresses : encryptedAddresses;
+        const sendingAddresses = show === EShow.ALL ? dataAddresses : encryptedAddresses;
 
         // description
         const dataDescription = data.description ? data.description.trim() : '';
         const encryptedDescription = encryptedData(dataDescription, process.env.REACT_APP_CRYPTO_JS_SECRET);
-        const sendingDescription = show === 'all' ? dataDescription : encryptedDescription;
+        const sendingDescription = show === EShow.ALL ? dataDescription : encryptedDescription;
 
         // images
         const encryptedImages = images.map(image => {
@@ -132,12 +132,12 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             userId: myUser.id,
             material,
             show,
-            name: show === 'all' ? data.name.trim() : encryptedName,
+            name: show === EShow.ALL ? data.name.trim() : encryptedName,
             price: material ? sendingPrice : undefined,
             currency: material ? sendingCurrency : undefined,
             addresses: material ? sendingAddresses : undefined,
             description: dataDescription.length > 0 ? sendingDescription : undefined,
-            images: show === 'all' ? images : encryptedImages,
+            images: show === EShow.ALL ? images : encryptedImages,
         };
         if (idOfSelectedWish) {
             try {
@@ -204,7 +204,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         // name
         setValue(
             'name',
-            selectedWish.show === 'all'
+            selectedWish.show === EShow.ALL
                 ? selectedWish.name
                 : decryptedData(selectedWish.name, process.env.REACT_APP_CRYPTO_JS_SECRET),
         );
@@ -213,7 +213,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         selectedWish.price && setValue(
             'price',
             addingWhiteSpaces(
-                selectedWish.show === 'all'
+                selectedWish.show === EShow.ALL
                     ? selectedWish.price
                     : decryptedData(selectedWish.price, process.env.REACT_APP_CRYPTO_JS_SECRET)
             ),
@@ -221,7 +221,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
 
         // currency
         selectedWish.currency && setCurrency(
-            selectedWish.show === 'all'
+            selectedWish.show === EShow.ALL
                 ? selectedWish.currency
                 : decryptedData(selectedWish.currency, process.env.REACT_APP_CRYPTO_JS_SECRET) as IWish['currency']
         );
@@ -229,7 +229,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         // addresses
         selectedWish.addresses && selectedWish.addresses.length > 0 && setValue(
             'addresses',
-            selectedWish.show === 'all'
+            selectedWish.show === EShow.ALL
                 ? selectedWish.addresses
                 : selectedWish.addresses.map(
                     address => process.env.REACT_APP_CRYPTO_JS_SECRET
@@ -241,7 +241,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         // description
         setValue(
             'description',
-            selectedWish.show === 'all'
+            selectedWish.show === EShow.ALL
                 ? selectedWish.description
                 : decryptedData(selectedWish.description, process.env.REACT_APP_CRYPTO_JS_SECRET)
         );
@@ -254,7 +254,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             decryptedImage.path = decryptedData(image.path, process.env.REACT_APP_CRYPTO_JS_SECRET);
             return decryptedImage;
         });
-        setImages(selectedWish.show === 'all' ? selectedWish.images : decryptedImages);
+        setImages(selectedWish.show === EShow.ALL ? selectedWish.images : decryptedImages);
     }, [ idOfSelectedWish, wishList, setValue ]);
 
     useEffect(() => {
@@ -338,9 +338,9 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             value={ currency }
                             onChange={ e => setCurrency(e.target.value as IWish['currency']) }
                         >
-                            <MenuItem value="UAH">UAH</MenuItem>
-                            <MenuItem value="USD">USD</MenuItem>
-                            <MenuItem value="EUR">EUR</MenuItem>
+                            <MenuItem value={ ECurrency.UAH }>{ ECurrency.UAH }</MenuItem>
+                            <MenuItem value={ ECurrency.USD }>{ ECurrency.USD }</MenuItem>
+                            <MenuItem value={ ECurrency.EUR }>{ ECurrency.EUR }</MenuItem>
                         </Select>
                     </div>
                 </div>
@@ -394,8 +394,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             label={ t('main-page.can-see.all') }
                             id="show-all"
                             name="show"
-                            checked={ show === 'all' }
-                            value="all"
+                            checked={ show === EShow.ALL }
+                            value={ EShow.ALL }
                             onChange={ changeShow }
                         />
 
@@ -418,8 +418,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             label={ t('main-page.can-see.friends') }
                             id="show-friends"
                             name="show"
-                            checked={ show === 'friends' }
-                            value="friends"
+                            checked={ show === EShow.FRIENDS }
+                            value={ EShow.FRIENDS }
                             onChange={ changeShow }
                         />
 
@@ -442,8 +442,8 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                             label={ t('main-page.can-see.nobody') }
                             id="show-nobody"
                             name="show"
-                            checked={ show === 'nobody' }
-                            value="nobody"
+                            checked={ show === EShow.NOBODY }
+                            value={ EShow.NOBODY }
                             onChange={ changeShow }
                         />
 

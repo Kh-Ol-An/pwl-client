@@ -4,7 +4,7 @@ import { UA, US } from 'country-flag-icons/react/3x2';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { changeLang } from '@/store/my-user/thunks';
 import { setIsLoading } from '@/store/my-user/slice';
-import { IUser } from '@/models/IUser';
+import { ELang } from '@/models/IUser';
 import CustomSelect, { IOption } from "@/components/CustomSelect";
 import { getLang } from "@/utils/lang-action";
 
@@ -16,7 +16,7 @@ const options: IOption[] = [
                 <span className="lang-text">Eng</span>
             </>
         ),
-        value: 'en',
+        value: ELang.EN,
     },
     {
         label: (
@@ -25,7 +25,7 @@ const options: IOption[] = [
                 <span className="lang-text">Укр</span>
             </>
         ),
-        value: 'uk',
+        value: ELang.UK,
     },
 ];
 
@@ -38,15 +38,15 @@ const LanguageSelection: FC<IProps> = ({ hidPopup }) => {
 
     const dispatch = useAppDispatch();
 
-    const [ lang, setLang ] = useState<IUser['lang']>(getLang());
+    const [ lang, setLang ] = useState<ELang>(getLang());
 
     const handleChangeLanguage = async (value: IOption['value']) => {
         try {
             await i18next.changeLanguage(value);
-            setLang(value as IUser['lang']);
+            setLang(value as ELang);
 
             if (myUser.user !== null) {
-                await dispatch(changeLang({ userId: myUser.user.id, lang: value as IUser['lang'] }));
+                await dispatch(changeLang({ userId: myUser.user.id, lang: value as ELang }));
                 await dispatch(setIsLoading(true));
                 location.reload();
             }

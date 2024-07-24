@@ -6,9 +6,16 @@ export interface ISendAllUsersParams {
     search: string;
 }
 
+export enum EUserType {
+    ALL = 'all',
+    FRIENDS = 'friends',
+    FOLLOW_FROM = 'followFrom',
+    FOLLOW_TO = 'followTo',
+}
+
 export interface ISendUsersParams extends  ISendAllUsersParams {
     myUserId: IUser['id'];
-    userType: 'all' | 'friends' | 'followFrom' | 'followTo';
+    userType: EUserType;
 }
 
 export interface IGetUsers {

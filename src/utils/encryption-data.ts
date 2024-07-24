@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js';
 import { t } from 'i18next';
-import { IWish } from '@/models/IWish';
+import { EShow, IWish } from '@/models/IWish';
 
 export const encryptedData = (data: string, secret: string): string => CryptoJS.AES.encrypt(data, secret).toString();
 
@@ -21,7 +21,7 @@ export const unencryptedData = (data: string, show: IWish['show']): string => {
         return '';
     }
 
-    if (show === 'all' || !process.env.REACT_APP_CRYPTO_JS_SECRET) {
+    if (show === EShow.ALL || !process.env.REACT_APP_CRYPTO_JS_SECRET) {
         return data;
     }
 

@@ -41,15 +41,27 @@ export enum EWishSort {
     CREATED_ASC = 'createdAt:asc',
 }
 
+export enum ECurrency {
+    USD = 'USD',
+    EUR = 'EUR',
+    UAH = 'UAH',
+}
+
+export enum EShow {
+    ALL = 'all',
+    FRIENDS = 'friends',
+    NOBODY = 'nobody',
+}
+
 export interface IWish {
     id: string;
     userId: IUser['id'];
     material: boolean;
-    show: 'all' | 'friends' | 'nobody';
+    show: EShow;
     name: string;
     images: IImage[];
     price?: string;
-    currency: 'UAH' | 'USD' | 'EUR';
+    currency: ECurrency;
     addresses?: IAddress[];
     description: string;
     executed: boolean;
