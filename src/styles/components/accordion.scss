@@ -1,0 +1,9 @@
+div.MuiPaper-root.MuiAccordion-root {
+    border-radius: $radius-lg;
+    border-bottom-left-radius: $radius-lg;
+    border-bottom-right-radius: $radius-lg;
+
+    &::before {
+        display: none;
+    }
+}

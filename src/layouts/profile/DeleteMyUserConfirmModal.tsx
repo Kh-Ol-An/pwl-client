@@ -13,7 +13,7 @@ import Button from '@/components/Button';
 
 interface IProps {
     show: boolean;
-    hide: () => void;
+    hid: () => void;
 }
 
 type Inputs = {
@@ -21,7 +21,7 @@ type Inputs = {
     password: string
 }
 
-const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide }) => {
+const DeleteMyUserConfirmModal: FC<IProps> = ({ show, hid }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
@@ -54,7 +54,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide }) => {
                 return;
             }
             await dispatch(deleteMyUser({ email: data.email, password: '', userId: myUser.id }));
-            hide();
+            hid();
         },
     });
 
@@ -70,7 +70,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide }) => {
             }
 
             await dispatch(deleteMyUser({ ...data, userId: myUser.id }));
-            hide();
+            hid();
         } else {
             await getDataFromGoogle();
         }
@@ -126,7 +126,7 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide }) => {
                             { t('main-page.delete-my-account') }
                         </Button>
 
-                        <Button type="button" onClick={ hide }>
+                        <Button type="button" onClick={ hid }>
                             { t('main-page.stay') }
                         </Button>
                     </div>
@@ -136,4 +136,4 @@ const ConfirmDeleteMyUserModal: FC<IProps> = ({ show, hide }) => {
     );
 };
 
-export default ConfirmDeleteMyUserModal;
+export default DeleteMyUserConfirmModal;

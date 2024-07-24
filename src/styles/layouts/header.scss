@@ -71,110 +71,6 @@
     width: 70px;
 }
 
-.change-edit-account {
-    @include flex-center;
-    gap: 4px;
-
-    @media only screen and (min-width: 430px) {
-        gap: 10px;
-    }
-
-    @media only screen and (min-width: 768px) {
-        gap: 20px;
-    }
-
-    button {
-        font-size: 12px;
-        font-weight: 700;
-        color: $special-color;
-        text-align: center;
-
-        @media only screen and (min-width: 360px) {
-            font-size: 14px;
-        }
-
-        @media only screen and (min-width: 412px) {
-            font-size: 16px;
-        }
-    }
-
-    .primary-color {
-        color: $primary-color;
-    }
-
-    .action-color {
-        color: $action-color;
-    }
-}
-
-.header-actions-account {
-    display: flex;
-}
-
-.header-edit-account,
-.header-change-password {
-    width: 0;
-    transform: scaleX(0);
-    transition: $transition;
-
-    &.show {
-        transform: scaleX(1);
-        width: 232px;
-
-        @media only screen and (min-width: 360px) {
-            width: 272px;
-        }
-
-        @media only screen and (min-width: 375px) {
-            width: 287px;
-        }
-
-        @media only screen and (min-width: 385px) {
-            width: 297px;
-        }
-
-        @media only screen and (min-width: 390px) {
-            width: 302px;
-        }
-
-        @media only screen and (min-width: 393px) {
-            width: 305px;
-        }
-
-        @media only screen and (min-width: 412px) {
-            width: 324px;
-        }
-
-        @media only screen and (min-width: 414px) {
-            width: 326px;
-        }
-
-        @media only screen and (min-width: 428px) {
-            width: 340px;
-        }
-
-        @media only screen and (min-width: 430px) {
-            width: 342px;
-        }
-
-        @media only screen and (min-width: 768px) {
-            width: 378px;
-        }
-
-        @media only screen and (min-width: 1366px) {
-            width: 400px;
-        }
-    }
-}
-
-.header-edit-account {
-    transform-origin: left;
-}
-
-.header-change-password {
-    transform-origin: right;
-}
-
 .modal.confirm .email-box {
     width: 100%;
 }
@@ -244,21 +140,12 @@
 }
 
 .header-avatar-box {
-    min-width: 42px;
-    width: 42px;
-    max-width: 42px;
-    min-height: 42px;
-    height: 42px;
-    max-height: 42px;
-
-    @media only screen and (min-width: 768px) {
-        min-width: 56px;
-        width: 56px;
-        max-width: 56px;
-        min-height: 56px;
-        height: 56px;
-        max-height: 56px;
-    }
+    min-width: 44px;
+    width: 44px;
+    max-width: 44px;
+    min-height: 44px;
+    height: 44px;
+    max-height: 44px;
 }
 
 .header-popup {

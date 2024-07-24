@@ -22,8 +22,7 @@ import { Tooltip } from "react-tooltip";
 import getTooltipStyles from "@/utils/get-tooltip-styles";
 
 interface IProps {
-    close: () => void;
-    handleShowConfirmDeleteMyUser: () => void;
+    cancel: () => void;
 }
 
 type Inputs = {
@@ -32,7 +31,7 @@ type Inputs = {
     deliveryAddress: IUser['deliveryAddress']
 }
 
-const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
+const EditAccount: FC<IProps> = ({ cancel }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
@@ -59,13 +58,13 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
         switch (birthdayError) {
             case 'minDate': {
-                return t('main-page.birthday-error.min-date');
+                return t('profile-page.birthday-error.min-date');
             }
             case 'disableFuture': {
-                return t('main-page.birthday-error.disable-future');
+                return t('profile-page.birthday-error.disable-future');
             }
             case 'invalidDate': {
-                return t('main-page.birthday-error.invalid-date');
+                return t('profile-page.birthday-error.invalid-date');
             }
             default: {
                 return '';
@@ -93,7 +92,6 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
             updateMyUserData.birthday = birthday.format();
         }
         await dispatch(updateMyUser(updateMyUserData));
-        close();
     };
 
     const removeAvatar = () => {
@@ -188,8 +186,8 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
                 id="deliveryAddress"
                 name="deliveryAddress"
                 type="text"
-                label={ t('main-page.delivery-address') }
-                tooltip={ t('main-page.delivery-address-tooltip') }
+                label={ t('profile-page.delivery-address') }
+                tooltip={ t('profile-page.delivery-address-tooltip') }
                 error={ errors?.deliveryAddress?.message }
             />
             <Tooltip
@@ -199,11 +197,11 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
 
             <div
                 className={ "date-picker" + (clickedOnSubmit ? " clicked-on-submit" : "") }
-                title={ t('main-page.when_your_birth') }
+                title={ t('profile-page.when_your_birth') }
             >
                 <DemoContainer components={ [ 'DesktopDatePicker' ] }>
                     <DesktopDatePicker
-                        label={ t('main-page.birthday*') }
+                        label={ t('profile-page.birthday*') }
                         format={ getFullShortDate() }
                         dayOfWeekFormatter={ (weekday) => weekday }
                         minDate={ dayjs().subtract(120, 'years') } // Дозволити вибір дати до 120 років в минулому
@@ -221,8 +219,8 @@ const EditAccount: FC<IProps> = ({ close, handleShowConfirmDeleteMyUser }) => {
             </div>
 
             <div className="actions">
-                <Button type="button" variant="text" color="action-color" onClick={ handleShowConfirmDeleteMyUser }>
-                    { t('main-page.delete-account') }
+                <Button type="button" variant="text" onClick={ cancel }>
+                    { t('profile-page.cancel') }
                 </Button>
 
                 <Button type="submit">{ t('main-page.update') }</Button>

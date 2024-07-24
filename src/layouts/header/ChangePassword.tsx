@@ -10,7 +10,6 @@ import Button from '@/components/Button';
 
 interface IProps {
     userId?: IUser['id'];
-    close: () => void;
 }
 
 type Inputs = {
@@ -18,7 +17,7 @@ type Inputs = {
     newPassword: string
 }
 
-const ChangePassword: FC<IProps> = ({ userId, close }) => {
+const ChangePassword: FC<IProps> = ({ userId }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
@@ -47,7 +46,6 @@ const ChangePassword: FC<IProps> = ({ userId, close }) => {
 
         if (!userId || repeatPasswordError.length > 0) return;
         await dispatch(changePassword({ userId, ...data }))
-        close();
     };
 
     const repeatPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {

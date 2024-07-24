@@ -82,8 +82,8 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                 { type === 'password' && (
                     <button type="button" onClick={ () => setShowPassword(prevState => !prevState) }>
                         { showPassword ?
-                            <VisibilityOffIcon sx={ { color: StylesVariables.accentColor } } /> :
-                            <VisibilityIcon sx={ { color: StylesVariables.accentColor } } /> }
+                            <VisibilityOffIcon sx={ { color: StylesVariables.specialColor } } /> :
+                            <VisibilityIcon sx={ { color: StylesVariables.specialColor } } /> }
                     </button>
                 ) }
 

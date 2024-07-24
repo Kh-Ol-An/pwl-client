@@ -22,9 +22,7 @@ import { addFriend, removeFriend } from '@/store/my-user/thunks';
 import { EWhereRemove, IRemoveFriend } from '@/store/my-user/types';
 import { IUser } from '@/models/IUser';
 import { getLang, getMonthWithDate } from "@/utils/lang-action";
-import DetailAccount from '@/layouts/DetailAccount';
 import Popup from '@/components/Popup';
-import CustomModal from '@/components/CustomModal';
 import Button from '@/components/Button';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import { handleGetInitialWishList } from "@/utils/action-on-wishes";
@@ -160,10 +158,6 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                     alt={ `${ user.firstName } ${ user.lastName ? user.lastName : '' }` }
                     onClick={ handleShowDetailAccount }
                 />
-
-                <CustomModal show={ showDetailAccount } hide={ handleHideDetailAccount } classes="modal modal-md">
-                    <DetailAccount user={ user } />
-                </CustomModal>
             </ListItemAvatar>
 
             <ListItemButton onClick={ handleSelectWish }>

@@ -29,7 +29,6 @@
 
 @import 'layouts/card';
 @import 'layouts/contacts';
-@import 'layouts/detail-account';
 @import 'layouts/edit-account';
 @import 'layouts/header';
 @import 'layouts/inactivated';
@@ -41,6 +40,7 @@
 @import 'layouts/sidebar';
 
 // components
+@import 'components/accordion';
 @import 'components/action';
 @import 'components/avatar';
 @import 'components/burger';
@@ -73,6 +73,7 @@
 @import 'pages/instruction';
 @import 'pages/not-found';
 @import 'pages/privacy-policy';
+@import 'pages/profile';
 @import 'pages/welcome';
 @import 'pages/wish';
 @import 'pages/wish-list';
