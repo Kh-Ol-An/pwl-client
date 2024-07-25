@@ -48,7 +48,7 @@ const LanguageSelection: FC<IProps> = ({ hidPopup }) => {
             if (myUser.user !== null) {
                 await dispatch(changeLang({ userId: myUser.user.id, lang: value as ELang }));
                 await dispatch(setIsLoading(true));
-                location.reload();
+                window.location.reload();
             }
         } catch (error) {
             console.error('Language Selection: ', error);

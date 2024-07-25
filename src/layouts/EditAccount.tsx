@@ -92,6 +92,8 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
             updateMyUserData.birthday = birthday.format();
         }
         await dispatch(updateMyUser(updateMyUserData));
+
+        cancel();
     };
 
     const removeAvatar = () => {
