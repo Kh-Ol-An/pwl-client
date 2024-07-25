@@ -96,7 +96,7 @@ const DetailProfile: FC<IProps> = ({ creator }) => {
                     {
                         creator?.deliveryAddress
                             ? creator?.deliveryAddress
-                            : <>{ t('profile-page.not-specified') }</>
+                            : <>{ t('profile-page.unknown') }</>
                     }
                 </div>
             </div>
@@ -110,7 +110,7 @@ const DetailProfile: FC<IProps> = ({ creator }) => {
                     {
                         creator?.birthday
                             ? dayjs(creator.birthday).locale(getLang()).format(getMonthWithDate())
-                            : <>{ t('profile-page.not-specified') }</>
+                            : <>{ t('profile-page.unknown') }</>
                     }
                 </div>
             </div>

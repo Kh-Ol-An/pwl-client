@@ -73,10 +73,6 @@ const Wish: FC = () => {
         setShowWish(false);
     };
 
-    const handleCancelEditAccount = () => {
-        window.location.reload();
-    };
-
     useEffect(() => {
         if (firstLoad) {
             setFirstLoad(false);
@@ -129,7 +125,7 @@ const Wish: FC = () => {
                     </div>
 
                     { showEdit ? (
-                        <EditAccount cancel={ handleCancelEditAccount } />
+                        <EditAccount cancel={ () => setShowEdit(false) } />
                     ) : (
                         <DetailProfile creator={ wishes.creator } />
                     ) }
