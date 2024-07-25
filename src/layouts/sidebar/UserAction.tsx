@@ -43,7 +43,6 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
 
     const [ anchor, setAnchor ] = useState<HTMLButtonElement | null>(null);
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
-    const [ showDetailAccount, setShowDetailAccount ] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
@@ -56,12 +55,8 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
         || (!myUser?.friends.includes(user.id) && !myUser?.followTo.includes(user.id));
 
     const handleShowDetailAccount = () => {
-        setShowDetailAccount(true);
+        navigate(`/profile/${user.id}`);
         hideSidebar();
-    };
-
-    const handleHideDetailAccount = () => {
-        setShowDetailAccount(false);
     };
 
     const handleSelectWish = async () => {

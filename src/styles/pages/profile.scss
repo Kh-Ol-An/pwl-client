@@ -15,7 +15,7 @@
         height: calc(100svh - 60px);
 
         @media only screen and (min-width: 1280px) {
-            padding: 24px 0 40px 0;
+            padding: 24px 0 24px 0;
         }
     }
 
@@ -121,6 +121,10 @@
         margin-top: auto;
         padding: 8px 0 16px 16px;
         width: 100%;
+
+        @media only screen and (min-width: 1280px) {
+            padding: 8px 0 0 16px;
+        }
 
         .button {
             margin-left: auto;

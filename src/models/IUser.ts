@@ -1,4 +1,5 @@
 import { Dayjs } from 'dayjs';
+import { EShow } from "@/models/IWish";
 
 export interface ICandidate {
     email?: string;
@@ -13,6 +14,7 @@ export enum ELang {
 export interface IUser {
     id: string;
     email: string;
+    showEmail: EShow;
     hasPassword: boolean;
     isActivated: boolean;
     lang: ELang;
@@ -22,7 +24,9 @@ export interface IUser {
     lastName?: string;
     avatar?: string;
     deliveryAddress?: string;
+    showDeliveryAddress: EShow;
     birthday?: Dayjs;
+    showBirthday: EShow;
     wishList: string[];
     successfulWishes: number;
     unsuccessfulWishes: number;
