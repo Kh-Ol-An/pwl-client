@@ -92,6 +92,7 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
             updateMyUserData.birthday = birthday.format();
         }
         await dispatch(updateMyUser(updateMyUserData));
+
         window.location.reload();
     };
 
@@ -183,11 +184,11 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
                     <AvatarValidation avatar={ avatar } />
                 </div>
 
-                <div className="edit-account-email-box">
-                    <span className="edit-account-email">
-                        { myUser?.email }
-                    </span>
-                </div>
+                {/*<div className="edit-account-email-box">*/}
+                {/*    <span className="edit-account-email">*/}
+                {/*        { myUser?.email }*/}
+                {/*    </span>*/}
+                {/*</div>*/}
             </div>
 
             <Input
