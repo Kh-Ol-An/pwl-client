@@ -111,7 +111,7 @@ const Wish: FC = () => {
                             { t(`profile-page.${ profileId === myUser?.id ? 'my-profile' : 'user-profile' }`) }
                         </h1>
 
-                        { !showEdit && (
+                        { !showEdit && profileId === myUser?.id && (
                             <button
                                 className="profile-edit"
                                 type="button"
@@ -130,14 +130,16 @@ const Wish: FC = () => {
                         <DetailProfile creator={wishes.creator} />
                     ) }
 
-                    <CustomAccordion
-                        ariaControls="profile-change-password-content"
-                        titleId="profile-change-password-header"
-                        title={ t('profile-page.change-password-title') }
-                        contentId="profile-change-password-content"
-                    >
-                        <ChangePassword userId={ myUser?.id } />
-                    </CustomAccordion>
+                    { profileId === myUser?.id && (
+                        <CustomAccordion
+                            ariaControls="profile-change-password-content"
+                            titleId="profile-change-password-header"
+                            title={ t('profile-page.change-password-title') }
+                            contentId="profile-change-password-content"
+                        >
+                            <ChangePassword userId={ myUser?.id } />
+                        </CustomAccordion>
+                    ) }
 
                     { !showEdit && (
                         <>

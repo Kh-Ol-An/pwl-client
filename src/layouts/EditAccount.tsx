@@ -150,35 +150,43 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
             />
 
             <div className="avatar-box">
-                <div className="avatar">
-                    <label htmlFor="avatar">
-                        <input
-                            className="hidden"
-                            id="avatar"
-                            ref={ inputRef }
-                            accept={ Object.values(ALLOWED_FILE_EXTENSIONS).join(",") }
-                            type="file"
-                            onChange={ (e) => {
-                                const file = e.target.files?.[0];
-                                if (!file) return;
+                <div>
+                    <div className="avatar">
+                        <label htmlFor="avatar">
+                            <input
+                                className="hidden"
+                                id="avatar"
+                                ref={ inputRef }
+                                accept={ Object.values(ALLOWED_FILE_EXTENSIONS).join(",") }
+                                type="file"
+                                onChange={ (e) => {
+                                    const file = e.target.files?.[0];
+                                    if (!file) return;
 
-                                setAvatar(file);
-                            } }
-                        />
-                        <Avatar
-                            sx={ { cursor: 'pointer', width: '100%', height: '100%' } }
-                            src={ showAvatar() } alt={ `${ myUser?.firstName } ${ myUser?.lastName }` }
-                        />
-                    </label>
+                                    setAvatar(file);
+                                } }
+                            />
+                            <Avatar
+                                sx={ { cursor: 'pointer', width: '100%', height: '100%' } }
+                                src={ showAvatar() } alt={ `${ myUser?.firstName } ${ myUser?.lastName }` }
+                            />
+                        </label>
 
-                    { (avatar instanceof File || (avatar.length > 0 && avatar !== 'delete')) && (
-                        <button className="remove" type="button" onClick={ removeAvatar }>
-                            <CancelIcon sx={ { color: StylesVariables.actionColor } } />
-                        </button>
-                    ) }
+                        { (avatar instanceof File || (avatar.length > 0 && avatar !== 'delete')) && (
+                            <button className="remove" type="button" onClick={ removeAvatar }>
+                                <CancelIcon sx={ { color: StylesVariables.actionColor } } />
+                            </button>
+                        ) }
+                    </div>
+
+                    <AvatarValidation avatar={ avatar } />
                 </div>
 
-                <AvatarValidation avatar={ avatar } />
+                {/*<div className="edit-account-email-box">*/}
+                {/*    <span className="edit-account-email">*/}
+                {/*        { myUser?.email }*/}
+                {/*    </span>*/}
+                {/*</div>*/}
             </div>
 
             <Input

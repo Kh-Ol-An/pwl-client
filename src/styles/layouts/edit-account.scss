@@ -3,6 +3,77 @@
     gap: 20px;
     height: 100%;
 
+    .avatar-box {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .avatar {
+            position: relative;
+            min-width: 64px;
+            width: 64px;
+            max-width: 64px;
+            min-height: 64px;
+            height: 64px;
+            max-height: 64px;
+            border-radius: $radius-round;
+            padding: 2px;
+            border: 1px dashed $light-color;
+
+            @media only screen and (min-width: 768px) {
+                min-width: 124px;
+                width: 124px;
+                max-width: 124px;
+                min-height: 124px;
+                height: 124px;
+                max-height: 124px;
+            }
+        }
+
+        .remove {
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+
+            @media only screen and (min-width: 768px) {
+                top: 8px;
+                right: 8px;
+            }
+        }
+    }
+
+    .input,
+    .avatar-box,
+    .date-picker {
+        @media only screen and (min-width: 768px) {
+            width: 50%;
+        }
+    }
+
+    .edit-account-email-box {
+        width: calc(100% - 76px);
+
+        @media only screen and (min-width: 768px) {
+            width: calc(100% - 136px);
+        }
+    }
+
+    .edit-account-email {
+        font-size: 16px;
+        width: 100%;
+        display: block;
+        color: $special-color;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 18px;
+        }
+    }
+
     .actions {
         margin-top: auto;
         width: 100%;
@@ -20,6 +91,10 @@
         .button {
             margin-left: auto;
             width: fit-content;
+
+            @media only screen and (min-width: 412px) {
+                margin-left: 0;
+            }
         }
 
         .button.text {

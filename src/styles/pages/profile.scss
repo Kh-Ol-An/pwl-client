@@ -56,12 +56,18 @@
     }
 
     .MuiAccordionDetails-root {
-        padding-left: 8px;
-        padding-right: 8px;
+        padding-left: 2px;
+        padding-right: 2px;
+
+        @media only screen and (min-width: 390px) {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
     }
 
     .search-and-sort-wishes {
         margin: 16px 0;
+        padding: 0 10px;
 
         @media only screen and (min-width: 768px) {
             margin: 24px 0;
@@ -69,21 +75,16 @@
     }
 
     .wish-list {
-        grid-template-columns: repeat(auto-fit, minmax(44%, 1fr));
-        padding: 6px;
+        padding: 8px;
         max-height: 500px;
 
         @media only screen and (min-width: 768px) {
             margin-top: 24px;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 349px));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
 
         @media only screen and (min-width: 1024px) {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 314px));
-        }
-
-        @media only screen and (min-width: 1280px) {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 378px));
+            max-height: 800px;
         }
 
         .wish-item {
