@@ -17,9 +17,15 @@ const DetailProfile: FC<IProps> = ({ creator }) => {
     const myUser = useAppSelector((state) => state.myUser.user);
 
     const creatorFullName = creator?.firstName + (creator?.lastName ? ` ${ creator.lastName }` : '');
-    const showEmail = creator?.id === myUser?.id || creator?.showEmail === EShow.ALL || (creator?.showEmail === EShow.FRIENDS && myUser?.friends.includes(creator.id));
-    const showDeliveryAddress = creator?.id === myUser?.id || creator?.showDeliveryAddress === EShow.ALL || (creator?.showDeliveryAddress === EShow.FRIENDS && myUser?.friends.includes(creator.id));
-    const showBirthday = creator?.id === myUser?.id || creator?.showBirthday === EShow.ALL || (creator?.showBirthday === EShow.FRIENDS && myUser?.friends.includes(creator.id));
+    const showEmail = creator?.email && (
+        creator?.id === myUser?.id || creator?.showEmail === EShow.ALL || (creator?.showEmail === EShow.FRIENDS && myUser?.friends.includes(creator.id))
+    );
+    const showDeliveryAddress = creator?.deliveryAddress && (
+        creator?.id === myUser?.id || creator?.showDeliveryAddress === EShow.ALL || (creator?.showDeliveryAddress === EShow.FRIENDS && myUser?.friends.includes(creator.id))
+    );
+    const showBirthday = creator?.birthday && (
+        creator?.id === myUser?.id || creator?.showBirthday === EShow.ALL || (creator?.showBirthday === EShow.FRIENDS && myUser?.friends.includes(creator.id))
+    );
     const successfulWishes = (creator && creator.successfulWishes > 0) ? creator.successfulWishes : 0;
     const unsuccessfulWishes = (creator && creator.unsuccessfulWishes > 0) ? creator.unsuccessfulWishes : 0;
     const tWishSuccess = useMemo(

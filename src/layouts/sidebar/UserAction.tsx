@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -26,6 +26,7 @@ import Popup from '@/components/Popup';
 import Button from '@/components/Button';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import { handleGetInitialWishList } from "@/utils/action-on-wishes";
+import { EShow } from "@/models/IWish";
 
 interface IProps {
     user: IUser;
@@ -53,6 +54,34 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
 
     const showAddFriend = myUser?.followFrom.includes(user.id)
         || (!myUser?.friends.includes(user.id) && !myUser?.followTo.includes(user.id));
+
+    const params = useMemo(
+        () => {
+            const showBirthday = user?.birthday && (
+                user?.id === myUser?.id || user?.showBirthday === EShow.ALL || (user?.showBirthday === EShow.FRIENDS && myUser?.friends.includes(user.id))
+            );
+            if (showBirthday) {
+                return <span className="params">{ t('main-page.bd', { birthday: dayjs(user.birthday).locale(getLang()).format(getMonthWithDate()) }) }</span>;
+            }
+
+            const showDeliveryAddress = user?.deliveryAddress && (
+                user?.id === myUser?.id || user?.showDeliveryAddress === EShow.ALL || (user?.showDeliveryAddress === EShow.FRIENDS && myUser?.friends.includes(user.id))
+            );
+            if (showDeliveryAddress) {
+                return <span className="params">{ user.deliveryAddress }</span>;
+            }
+
+            const showEmail = user?.email && (
+                user?.id === myUser?.id || user?.showEmail === EShow.ALL || (user?.showEmail === EShow.FRIENDS && myUser?.friends.includes(user.id))
+            );
+            if (showEmail) {
+                return <span className="params">{ user.email }</span>;
+            }
+
+            return null;
+        },
+        [ user, myUser ],
+    );
 
     const handleShowDetailAccount = () => {
         navigate(`/profile/${user.id}`);
@@ -167,15 +196,7 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                             { user.firstName } { user.lastName }
                         </span>
                     }
-                    secondary={
-                        <span className="params">
-                            {
-                                user.birthday
-                                    ? t('main-page.bd', { birthday: dayjs(user.birthday).locale(getLang()).format(getMonthWithDate()) })
-                                    : user.email
-                            }
-                        </span>
-                    }
+                    secondary={params}
                     sx={ { color: StylesVariables.whiteColor } }
                 />
             </ListItemButton>
