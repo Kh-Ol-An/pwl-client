@@ -1,0 +1,29 @@
+.privacy-choices {
+    margin: 20px auto 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .privacy-choices-label {
+        font-size: 14px;
+        color: $primary-color;
+    }
+
+    .privacy-choices-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        @media only screen and (min-width: 1180px) {
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+
+    .privacy-choices-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}

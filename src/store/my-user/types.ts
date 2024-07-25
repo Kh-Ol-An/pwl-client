@@ -1,4 +1,5 @@
 import { TCurrentAvatar, IUser, ELang } from '@/models/IUser';
+import { EShow } from "@/models/IWish";
 
 export interface IForgotPassword {
     email: IUser['email'];
@@ -42,8 +43,11 @@ export interface IUpdateMyUser extends IUserId {
     firstName: IUser['firstName']
     lastName?: IUser['lastName'];
     avatar: TCurrentAvatar;
+    showEmail: EShow;
     deliveryAddress?: string;
+    showDeliveryAddress?: EShow;
     birthday?: string;
+    showBirthday?: EShow;
 }
 
 export interface IChangeLang extends IUserId {

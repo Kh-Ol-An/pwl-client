@@ -152,36 +152,6 @@
         }
     }
 
-    .show {
-        margin: 20px auto 0 0;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        .show-label {
-            font-size: 14px;
-            color: $primary-color;
-        }
-
-        .show-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-
-            @media only screen and (min-width: 768px) {
-                flex-direction: row;
-                align-items: center;
-                gap: 20px;
-            }
-        }
-
-        .show-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-    }
-
     .drag-n-drop {
         margin-top: 20px;
     }

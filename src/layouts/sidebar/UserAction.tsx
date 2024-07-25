@@ -155,10 +155,15 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
                 />
             </ListItemAvatar>
 
-            <ListItemButton onClick={ handleSelectWish }>
+            <ListItemButton
+                sx={{
+                    border: `1px dashed ${user.id === selectedUserId ? "#45f3ff90" : "transparent"}`,
+                }}
+                onClick={ handleSelectWish }
+            >
                 <ListItemText
                     primary={
-                        <span className={ "name" + (user.id === selectedUserId ? " selected" : "") }>
+                        <span className="name">
                             { user.firstName } { user.lastName }
                         </span>
                     }

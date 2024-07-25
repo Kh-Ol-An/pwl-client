@@ -20,6 +20,8 @@ import Button from '@/components/Button';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import { Tooltip } from "react-tooltip";
 import getTooltipStyles from "@/utils/get-tooltip-styles";
+import PrivacyChoices from "@/components/PrivacyChoices";
+import { EShow } from "@/models/IWish";
 
 interface IProps {
     cancel: () => void;
@@ -41,6 +43,7 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
     const {
         register,
         setValue,
+        watch,
         handleSubmit,
         formState: { errors },
     } = useForm<Inputs>();
@@ -49,8 +52,11 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
 
     const [ clickedOnSubmit, setClickedOnSubmit ] = useState<boolean>(false);
     const [ avatar, setAvatar ] = useState<TCurrentAvatar>('');
+    const [ showEmail, setShowEmail ] = useState<EShow>(EShow.ALL);
+    const [ showDeliveryAddress, setShowDeliveryAddress ] = useState<EShow>(EShow.ALL);
     const [ birthday, setBirthday ] = useState<Dayjs | null>(null);
     const [ birthdayError, setBirthdayError ] = useState<DateValidationError | null>(null);
+    const [ showBirthday, setShowBirthday ] = useState<EShow>(EShow.ALL);
     const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     const birthdayErrorMessage = useMemo(() => {
@@ -81,15 +87,18 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
             userId: myUser.id,
             firstName: data.firstName.trim(),
             avatar,
+            showEmail,
         };
         if (data.lastName) {
             updateMyUserData.lastName = data.lastName.trim();
         }
         if (data.deliveryAddress) {
             updateMyUserData.deliveryAddress = data.deliveryAddress.trim();
+            updateMyUserData.showDeliveryAddress = showDeliveryAddress;
         }
         if (birthday) {
             updateMyUserData.birthday = birthday.format();
+            updateMyUserData.showBirthday = showBirthday;
         }
         await dispatch(updateMyUser(updateMyUserData));
 
@@ -115,8 +124,11 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
         setValue('firstName', myUser.firstName);
         myUser.lastName && setValue('lastName', myUser.lastName);
         setAvatar(myUser.avatar || '');
+        setShowEmail(myUser.showEmail);
         myUser.deliveryAddress && setValue('deliveryAddress', myUser.deliveryAddress);
+        setShowDeliveryAddress(myUser.showDeliveryAddress);
         myUser.birthday && setBirthday(dayjs(myUser.birthday));
+        setShowBirthday(myUser.showBirthday);
     }, [ myUser, setValue ]);
 
     useEffect(() => {
@@ -184,48 +196,92 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
                     <AvatarValidation avatar={ avatar } />
                 </div>
 
-                {/*<div className="edit-account-email-box">*/}
-                {/*    <span className="edit-account-email">*/}
-                {/*        { myUser?.email }*/}
-                {/*    </span>*/}
-                {/*</div>*/}
+                <div className="edit-account-email-box">
+                    <span className="edit-account-email">
+                        { myUser?.email }
+                    </span>
+
+                    {/* Privacy Choices Email */ }
+                    <PrivacyChoices
+                        id="email"
+                        tooltipContent={{
+                            all: t('main-page.can-see.email-all-tooltip'),
+                            friends: t('main-page.can-see.email-friends-tooltip'),
+                            nobody: t('main-page.can-see.email-nobody-tooltip'),
+                        }}
+                        show={ showEmail }
+                        setShow={ setShowEmail }
+                    />
+                </div>
             </div>
 
-            <Input
-                { ...register("deliveryAddress", accountDeliveryAddress) }
-                id="deliveryAddress"
-                name="deliveryAddress"
-                type="text"
-                label={ t('profile-page.delivery-address') }
-                tooltip={ t('profile-page.delivery-address-tooltip') }
-                error={ errors?.deliveryAddress?.message }
-            />
-            <Tooltip
-                id="deliveryAddress"
-                style={ getTooltipStyles(screenWidth) }
-            />
+            <div className="edit-account-field delivery-address">
+                <Input
+                    { ...register("deliveryAddress", accountDeliveryAddress) }
+                    id="deliveryAddress"
+                    name="deliveryAddress"
+                    type="text"
+                    label={ t('profile-page.delivery-address') }
+                    tooltip={ t('profile-page.delivery-address-tooltip') }
+                    error={ errors?.deliveryAddress?.message }
+                />
+                <Tooltip
+                    id="deliveryAddress"
+                    style={ getTooltipStyles(screenWidth) }
+                />
 
-            <div
-                className={ "date-picker" + (clickedOnSubmit ? " clicked-on-submit" : "") }
-                title={ t('profile-page.when_your_birth') }
-            >
-                <DemoContainer components={ [ 'DesktopDatePicker' ] }>
-                    <DesktopDatePicker
-                        label={ t('profile-page.birthday*') }
-                        format={ getFullShortDate() }
-                        dayOfWeekFormatter={ (weekday) => weekday }
-                        minDate={ dayjs().subtract(120, 'years') } // Дозволити вибір дати до 120 років в минулому
-                        disableFuture
-                        value={ birthday }
-                        onChange={ (value) => setBirthday(value) }
-                        onError={ (newError) => setBirthdayError(newError) }
-                        slotProps={ {
-                            textField: {
-                                helperText: birthdayErrorMessage,
-                            },
-                        } }
+                {/* Privacy Choices Delivery Address */ }
+                {watch('deliveryAddress') && (
+                    <PrivacyChoices
+                        id="delivery-address"
+                        tooltipContent={{
+                            all: t('main-page.can-see.delivery-address-all-tooltip'),
+                            friends: t('main-page.can-see.delivery-address-friends-tooltip'),
+                            nobody: t('main-page.can-see.delivery-address-nobody-tooltip'),
+                        }}
+                        show={ showDeliveryAddress }
+                        setShow={ setShowDeliveryAddress }
                     />
-                </DemoContainer>
+                )}
+            </div>
+
+            <div className="edit-account-field">
+                <div
+                    className={ "date-picker" + (clickedOnSubmit ? " clicked-on-submit" : "") }
+                    title={ t('profile-page.when_your_birth') }
+                >
+                    <DemoContainer components={ [ 'DesktopDatePicker' ] }>
+                        <DesktopDatePicker
+                            label={ t('profile-page.birthday*') }
+                            format={ getFullShortDate() }
+                            dayOfWeekFormatter={ (weekday) => weekday }
+                            minDate={ dayjs().subtract(120, 'years') } // Дозволити вибір дати до 120 років в минулому
+                            disableFuture
+                            value={ birthday }
+                            onChange={ (value) => setBirthday(value) }
+                            onError={ (newError) => setBirthdayError(newError) }
+                            slotProps={ {
+                                textField: {
+                                    helperText: birthdayErrorMessage,
+                                },
+                            } }
+                        />
+                    </DemoContainer>
+                </div>
+
+                {/* Privacy Choices Birthday */ }
+                { birthday && (
+                    <PrivacyChoices
+                        id="birthday"
+                        tooltipContent={{
+                            all: t('main-page.can-see.birthday-all-tooltip'),
+                            friends: t('main-page.can-see.birthday-friends-tooltip'),
+                            nobody: t('main-page.can-see.birthday-nobody-tooltip'),
+                        }}
+                        show={ showBirthday }
+                        setShow={ setShowBirthday }
+                    />
+                ) }
             </div>
 
             <div className="actions">

@@ -59,7 +59,7 @@ const ChangePassword: FC<IProps> = ({ userId }) => {
     };
 
     return (
-        <form className="edit-account" onSubmit={ handleSubmit(onSubmit) }>
+        <form className="change-password" onSubmit={ handleSubmit(onSubmit) }>
             { myUser?.hasPassword && (
                 <Input
                     { ...register("oldPassword", passwordValidation) }

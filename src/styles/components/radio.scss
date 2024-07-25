@@ -1,12 +1,13 @@
 .radio {
     position: relative;
+    @include flex-center;
 
     .radio-action {
         position: absolute;
         top: 50%;
         left: 0;
         transform: translateY(-50%);
-        @include action-box(24px, 24px);
+        @include action-box(18px, 18px);
         padding: 0;
     }
 
@@ -16,6 +17,7 @@
 
     .radio-inner-border {
         @include action-inner-border;
+        border: 4px solid $secondary-color;
     }
 
     .radio-content {

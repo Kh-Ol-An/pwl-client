@@ -97,6 +97,7 @@
 
     .user-list {
         position: relative;
+        padding-right: 8px;
         height: calc(100svh - 236px);
         overflow-y: auto;
 
@@ -132,5 +133,7 @@
 
     .MuiListItemButton-root {
         padding-left: 8px;
+        padding-right: 4px;
+        border-radius: $radius-lg;
     }
 }

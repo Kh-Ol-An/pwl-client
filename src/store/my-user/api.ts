@@ -245,16 +245,22 @@ const updateMyUser = async ({
                                 firstName,
                                 lastName,
                                 avatar,
+                                showEmail,
                                 deliveryAddress,
+                                showDeliveryAddress,
                                 birthday,
+                                showBirthday,
                             }: IUpdateMyUser): Promise<AxiosResponse<IUser>> => {
     const formData = new FormData();
     formData.append('userId', userId);
     formData.append('firstName', firstName);
     lastName && formData.append('lastName', lastName);
     formData.append('avatar', avatar);
+    formData.append('showEmail', showEmail);
     deliveryAddress && formData.append('deliveryAddress', deliveryAddress);
+    showDeliveryAddress && formData.append('showDeliveryAddress', showDeliveryAddress);
     birthday && formData.append('birthday', birthday);
+    showBirthday && formData.append('showBirthday', showBirthday);
 
     try {
         return await api.put(

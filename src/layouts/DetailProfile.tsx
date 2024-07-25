@@ -4,6 +4,8 @@ import dayjs from "dayjs";
 import { getLang, getMonthWithDate } from "@/utils/lang-action";
 import { useTranslation } from "react-i18next";
 import { IUser } from "@/models/IUser";
+import { useAppSelector } from "@/store/hook";
+import { EShow } from "@/models/IWish";
 
 interface IProps {
     creator: IUser | null;
@@ -12,30 +14,14 @@ interface IProps {
 const DetailProfile: FC<IProps> = ({ creator }) => {
     const { t } = useTranslation();
 
-    const creatorFullName = useMemo(
-        () => creator?.firstName + (creator?.lastName ? ` ${ creator.lastName }` : ''),
-        [ creator ],
-    );
-    const successfulWishes = useMemo(
-        () => {
-            if (creator && creator.successfulWishes > 0) {
-                return creator.successfulWishes;
-            }
+    const myUser = useAppSelector((state) => state.myUser.user);
 
-            return 0;
-        },
-        [ creator ],
-    );
-    const unsuccessfulWishes = useMemo(
-        () => {
-            if (creator && creator.unsuccessfulWishes > 0) {
-                return creator.unsuccessfulWishes;
-            }
-
-            return 0;
-        },
-        [ creator ],
-    );
+    const creatorFullName = creator?.firstName + (creator?.lastName ? ` ${ creator.lastName }` : '');
+    const showEmail = creator?.id === myUser?.id || creator?.showEmail === EShow.ALL || (creator?.showEmail === EShow.FRIENDS && myUser?.friends.includes(creator.id));
+    const showDeliveryAddress = creator?.id === myUser?.id || creator?.showDeliveryAddress === EShow.ALL || (creator?.showDeliveryAddress === EShow.FRIENDS && myUser?.friends.includes(creator.id));
+    const showBirthday = creator?.id === myUser?.id || creator?.showBirthday === EShow.ALL || (creator?.showBirthday === EShow.FRIENDS && myUser?.friends.includes(creator.id));
+    const successfulWishes = (creator && creator.successfulWishes > 0) ? creator.successfulWishes : 0;
+    const unsuccessfulWishes = (creator && creator.unsuccessfulWishes > 0) ? creator.unsuccessfulWishes : 0;
     const tWishSuccess = useMemo(
         () => {
             if (successfulWishes === 1) {
@@ -81,9 +67,11 @@ const DetailProfile: FC<IProps> = ({ creator }) => {
                         { creatorFullName }
                     </div>
 
-                    <div className="detail-profile-email">
-                        { creator?.email }
-                    </div>
+                    { showEmail && (
+                        <div className="detail-profile-email">
+                            { creator?.email }
+                        </div>
+                    ) }
                 </div>
             </div>
 
@@ -94,7 +82,7 @@ const DetailProfile: FC<IProps> = ({ creator }) => {
 
                 <div className="detail-profile-data-value">
                     {
-                        creator?.deliveryAddress
+                        showDeliveryAddress
                             ? creator?.deliveryAddress
                             : <>{ t('profile-page.unknown') }</>
                     }
@@ -108,8 +96,8 @@ const DetailProfile: FC<IProps> = ({ creator }) => {
 
                 <div className="detail-profile-data-value">
                     {
-                        creator?.birthday
-                            ? dayjs(creator.birthday).locale(getLang()).format(getMonthWithDate())
+                        showBirthday
+                            ? dayjs(creator?.birthday).locale(getLang()).format(getMonthWithDate())
                             : <>{ t('profile-page.unknown') }</>
                     }
                 </div>

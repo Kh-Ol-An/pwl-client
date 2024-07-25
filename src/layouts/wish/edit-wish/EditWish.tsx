@@ -1,11 +1,10 @@
-import React, { FC, ChangeEvent, useState, useLayoutEffect, useEffect } from 'react';
+import React, { FC, useState, useLayoutEffect, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Tooltip } from 'react-tooltip';
 import { useTranslation } from 'react-i18next';
 import { toast } from "react-toastify";
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { Info as InfoIcon } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { createWish, deleteWish, updateWish } from '@/store/wishes/thunks';
 import { IWishWithQuote, ICreateWish } from '@/store/wishes/types';
@@ -22,9 +21,9 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import DragNDrop from '@/components/DragNDrop';
 import Switch from '@/components/Switch';
-import Radio from '@/components/Radio';
 import QuoteMessage from "@/components/QuoteMessage";
 import StylesVariables from '@/styles/utils/variables.module.scss';
+import PrivacyChoices from "@/components/PrivacyChoices";
 
 interface IProps {
     idOfSelectedWish: IWish['id'] | null;
@@ -165,10 +164,6 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             }
         }
         close();
-    };
-
-    const changeShow = (e: ChangeEvent<HTMLInputElement>) => {
-        setShow(e.target.value as ICreateWish['show']);
     };
 
     const removeAllImages = () => {
@@ -384,84 +379,17 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                 error={ errors?.description?.message }
             />
 
-            {/* show */ }
-            <div className="show">
-                <span className="show-label">{ t('main-page.can-see.title') }</span>
-
-                <div className="show-actions">
-                    <div className="show-item">
-                        <Radio
-                            label={ t('main-page.can-see.all') }
-                            id="show-all"
-                            name="show"
-                            checked={ show === EShow.ALL }
-                            value={ EShow.ALL }
-                            onChange={ changeShow }
-                        />
-
-                        <span
-                            className="tooltip"
-                            data-tooltip-id="show-all"
-                            data-tooltip-content={ t('main-page.can-see.all-tooltip') }
-                        >
-                            <InfoIcon sx={ { color: StylesVariables.specialColor } } />
-                        </span>
-                        <Tooltip
-                            id="show-all"
-                            opacity={ 1 }
-                            style={ getTooltipStyles(screenWidth) }
-                        />
-                    </div>
-
-                    <div className="show-item">
-                        <Radio
-                            label={ t('main-page.can-see.friends') }
-                            id="show-friends"
-                            name="show"
-                            checked={ show === EShow.FRIENDS }
-                            value={ EShow.FRIENDS }
-                            onChange={ changeShow }
-                        />
-
-                        <span
-                            className="tooltip"
-                            data-tooltip-id="show-friends"
-                            data-tooltip-content={ t('main-page.can-see.friends-tooltip') }
-                        >
-                            <InfoIcon sx={ { color: StylesVariables.specialColor } } />
-                        </span>
-                        <Tooltip
-                            id="show-friends"
-                            opacity={ 1 }
-                            style={ getTooltipStyles(screenWidth) }
-                        />
-                    </div>
-
-                    <div className="show-item">
-                        <Radio
-                            label={ t('main-page.can-see.nobody') }
-                            id="show-nobody"
-                            name="show"
-                            checked={ show === EShow.NOBODY }
-                            value={ EShow.NOBODY }
-                            onChange={ changeShow }
-                        />
-
-                        <span
-                            className="tooltip"
-                            data-tooltip-id="show-nobody"
-                            data-tooltip-content={ t('main-page.can-see.nobody-tooltip') }
-                        >
-                            <InfoIcon sx={ { color: StylesVariables.specialColor } } />
-                        </span>
-                        <Tooltip
-                            id="show-nobody"
-                            opacity={ 1 }
-                            style={ getTooltipStyles(screenWidth) }
-                        />
-                    </div>
-                </div>
-            </div>
+            {/* PrivacyChoices */ }
+            <PrivacyChoices
+                id="wish"
+                tooltipContent={{
+                    all: t('main-page.can-see.wish-all-tooltip'),
+                    friends: t('main-page.can-see.wish-friends-tooltip'),
+                    nobody: t('main-page.can-see.wish-nobody-tooltip'),
+                }}
+                show={show}
+                setShow={setShow}
+            />
 
             {/* actions */ }
             <div className="actions">

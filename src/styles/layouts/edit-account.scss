@@ -46,14 +46,35 @@
 
     .input,
     .avatar-box,
-    .date-picker {
+    .edit-account-field {
         @media only screen and (min-width: 768px) {
-            width: 50%;
+            width: 60%;
+        }
+    }
+
+    .edit-account-field {
+        padding: 8px 12px;
+        border-radius: $radius-lg;
+        border: 1px dashed $white-deep-opacity-color;
+
+        &.delivery-address {
+            padding: 18px 12px 8px;
+        }
+
+        .input {
+            width: 100%;
+        }
+
+        .privacy-choices {
+            margin-top: 6px;
         }
     }
 
     .edit-account-email-box {
         width: calc(100% - 76px);
+        padding: 8px 12px;
+        border-radius: $radius-lg;
+        border: 1px dashed $white-deep-opacity-color;
 
         @media only screen and (min-width: 768px) {
             width: calc(100% - 136px);
