@@ -9,7 +9,7 @@
     }
 
     .profile-body {
-        padding: 16px 16px 16px 0;
+        padding: 16px 16px 0;
         display: flex;
         flex-direction: column;
         height: calc(100svh - 60px);
@@ -20,7 +20,6 @@
     }
 
     .profile-content {
-        padding: 0 0 0 16px;
         display: flex;
         flex-direction: column;
         gap: 16px;
@@ -56,151 +55,27 @@
         font-weight: 700;
     }
 
-    .profile-main-data {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-
-    .profile-avatar {
-        min-width: 64px;
-        width: 64px;
-        max-width: 64px;
-        min-height: 64px;
-        height: 64px;
-        max-height: 64px;
-
-        @media only screen and (min-width: 768px) {
-            min-width: 124px;
-            width: 124px;
-            max-width: 124px;
-            min-height: 124px;
-            height: 124px;
-            max-height: 124px;
-        }
-    }
-
-    .profile-main-data-content {
-        display: flex;
-        flex-direction: column;
-        width: calc(100% - 80px);
-    }
-
-    .profile-name {
-        font-size: 24px;
-        font-weight: 700;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        width: 100%;
-
-        @media only screen and (min-width: 768px) {
-            gap: 24px;
-            font-size: 36px;
-        }
-    }
-
-    .profile-email {
-        font-size: 20px;
-        font-weight: 400;
-        color: $special-color;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        width: 100%;
-
-        @media only screen and (min-width: 768px) {
-            font-size: 24px;
-        }
-    }
-
-    .profile-data {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .profile-data-label {
-        font-size: 16px;
-        font-weight: 400;
-        color: $special-color;
-    }
-
-    .profile-data-value {
-        font-size: 18px;
-        font-weight: 700;
-        color: $light-color;
-    }
-
-    .profile-data-field {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .profile-data-field-label {
-        font-size: 16px;
-        font-weight: 400;
-        color: $special-color;
-    }
-
-    .profile-data-field-value {
-        font-size: 16px;
-        color: $light-color;
-
-        &.success {
-            font-weight: 700;
-            color: $success-color;
-        }
-
-        &.unsuccess {
-            font-weight: 700;
-            color: $action-color;
-        }
+    .MuiAccordionDetails-root {
+        padding-left: 8px;
+        padding-right: 8px;
     }
 
     .search-and-sort-wishes {
-        margin-top: 16px;
-        padding-left: 16px;
+        margin: 16px 0;
 
         @media only screen and (min-width: 768px) {
-            margin-top: 24px;
-        }
-
-        .wish-search label {
-            overflow: hidden;
-            max-width: 90px;
-            text-overflow: ellipsis;
-            display: block;
-
-            @media only screen and (min-width: 360px) {
-                overflow: unset;
-                max-width: unset;
-                text-overflow: unset;
-                display: flex;
-            }
+            margin: 24px 0;
         }
     }
 
     .wish-list {
         grid-template-columns: repeat(auto-fit, minmax(44%, 1fr));
-        margin-top: 16px;
-        padding: 8px 8px 8px 16px;
-        height: calc(100% - 150px);
-
-        //@media only screen and (min-width: 390px) {
-        //    height: calc(100% - 180px);
-        //}
-        //
-        //@media only screen and (min-width: 412px) {
-        //    height: calc(100% - 182px);
-        //}
+        padding: 6px;
+        max-height: 500px;
 
         @media only screen and (min-width: 768px) {
             margin-top: 24px;
-            padding: 8px 12px 8px 16px;
             grid-template-columns: repeat(auto-fit, minmax(300px, 349px));
-            //height: calc(100% - 268px);
         }
 
         @media only screen and (min-width: 1024px) {
@@ -211,8 +86,12 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 378px));
         }
 
-        &::-webkit-scrollbar-track {
-            margin: 8px 0 8px;
+        .wish-item {
+            .reserved,
+            .fulfilled {
+                padding: 3px 6px;
+                font-size: 14px;
+            }
         }
     }
 
@@ -238,8 +117,8 @@
     }
 
     .profile-delete {
-        margin-top: 8px;
-        padding: 0 0 20px 16px;
+        margin-top: auto;
+        padding: 8px 0 16px 16px;
         width: 100%;
 
         .button {

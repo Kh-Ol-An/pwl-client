@@ -87,19 +87,19 @@ const Wish: FC = () => {
     }, []);
 
     return (
-        <div className="wish-list-page profile-page container">
-            <div className="profile-header container">
+        <div className="wish-list-page container">
+            <div className="wish-list-page-header container">
                 <Logo />
 
                 <HeaderSettings logoutWithoutUpdate />
             </div>
 
-            <div className="profile-body">
-                <div className="profile-content">
+            <div className="wish-list-page-body">
+                <div className="wish-list-page-content">
                     <h1>{ t('wish-list-page.title') }</h1>
 
-                    <div className="profile-main-data">
-                        <div className="profile-avatar">
+                    <div className="wish-list-page-main-data">
+                        <div className="wish-list-page-avatar">
                             <Avatar
                                 alt={ creatorFullName }
                                 src={ wishes.creator?.avatar }
@@ -107,7 +107,7 @@ const Wish: FC = () => {
                             />
                         </div>
 
-                        <span className="profile-name">
+                        <span className="wish-list-page-name">
                             { creatorFullName }
                         </span>
                     </div>
@@ -132,7 +132,7 @@ const Wish: FC = () => {
                         ></div>
                     </ul>
                 ) : (
-                    <p className="profile-wishes-empty">{ t('profile-page.wishes-empty') }</p>
+                    <p className="wish-list-page-wishes-empty">{ t('profile-page.wishes-empty') }</p>
                 ) }
             </div>
 

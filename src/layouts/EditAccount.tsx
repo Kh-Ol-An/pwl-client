@@ -219,11 +219,13 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
             </div>
 
             <div className="actions">
-                <Button type="button" variant="text" onClick={ cancel }>
-                    { t('profile-page.cancel') }
+                <Button type="submit" variant="text" color="action-color">
+                    { t('main-page.update') }
                 </Button>
 
-                <Button type="submit">{ t('main-page.update') }</Button>
+                <Button type="button" onClick={ cancel }>
+                    { t('profile-page.cancel') }
+                </Button>
             </div>
         </form>
     );

@@ -1,9 +1,8 @@
 import React, { FC, useState, useEffect, useRef, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
-import dayjs from "dayjs";
 import { useTranslation } from 'react-i18next';
-import { Avatar, Modal } from '@mui/material';
+import { Modal } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 import { IWish } from '@/models/IWish';
 import { handleGetInitialWishList } from "@/utils/action-on-wishes";
@@ -17,12 +16,12 @@ import Logo from "@/components/Logo";
 import SearchAndSortWishes from "@/layouts/wish/SearchAndSortWishes";
 import { addWishList } from "@/store/wishes/thunks";
 import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
-import { getLang, getMonthWithDate } from "@/utils/lang-action";
 import DeleteMyUserConfirmModal from "@/layouts/profile/DeleteMyUserConfirmModal";
 import Button from "@/components/Button";
 import CustomAccordion from "@/components/CustomAccordion";
 import EditAccount from "@/layouts/EditAccount";
 import ChangePassword from "@/layouts/header/ChangePassword";
+import DetailProfile from "@/layouts/DetailProfile";
 
 const Wish: FC = () => {
     const { t } = useTranslation();
@@ -59,58 +58,6 @@ const Wish: FC = () => {
     const detailWish = useMemo(
         () => wishes.list.find(wish => wish.id === idOfSelectedWish),
         [ wishes.list, idOfSelectedWish ],
-    );
-    const creatorFullName = useMemo(
-        () => wishes.creator?.firstName + (wishes.creator?.lastName ? ` ${ wishes.creator.lastName }` : ''),
-        [ wishes.creator ],
-    );
-    const successfulWishes = useMemo(
-        () => {
-            if (wishes.creator && wishes.creator.successfulWishes > 0) {
-                return wishes.creator.successfulWishes;
-            }
-
-            return 0;
-        },
-        [ wishes.creator ],
-    );
-    const unsuccessfulWishes = useMemo(
-        () => {
-            if (wishes.creator && wishes.creator.unsuccessfulWishes > 0) {
-                return wishes.creator.unsuccessfulWishes;
-            }
-
-            return 0;
-        },
-        [ wishes.creator ],
-    );
-    const tWishSuccess = useMemo(
-        () => {
-            if (successfulWishes === 1) {
-                return 'wish';
-            }
-
-            if (successfulWishes === 2 || successfulWishes === 3 || successfulWishes === 4) {
-                return 'wish_2_3_4';
-            }
-
-            return 'wishes';
-        },
-        [ successfulWishes ],
-    );
-    const tWishUnsuccess = useMemo(
-        () => {
-            if (unsuccessfulWishes === 1) {
-                return 'wish';
-            }
-
-            if (unsuccessfulWishes === 2 || unsuccessfulWishes === 3 || unsuccessfulWishes === 4) {
-                return 'wish_2_3_4';
-            }
-
-            return 'wishes';
-        },
-        [ unsuccessfulWishes ],
     );
 
     const handleEditAccount = () => {
@@ -180,75 +127,7 @@ const Wish: FC = () => {
                     { showEdit ? (
                         <EditAccount cancel={() => setShowEdit(false)} />
                     ) : (
-                        <>
-                            <div className="profile-main-data">
-                                <div className="profile-avatar">
-                                    <Avatar
-                                        alt={ creatorFullName }
-                                        src={ wishes.creator?.avatar }
-                                        sx={ { width: '100%', height: '100%' } }
-                                    />
-                                </div>
-
-                                <div className="profile-main-data-content">
-                                    <div className="profile-name">
-                                        { creatorFullName }
-                                    </div>
-
-                                    <div className="profile-email">
-                                        { wishes.creator?.email }
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="profile-data">
-                                <div className="profile-data-label">
-                                    { t('profile-page.delivery-address') }:
-                                </div>
-
-                                <div className="profile-data-value">
-                                    {
-                                        wishes.creator?.deliveryAddress
-                                            ? wishes.creator?.deliveryAddress
-                                            : <>{ t('profile-page.not-specified') }</>
-                                    }
-                                </div>
-                            </div>
-
-                            <div className="profile-data">
-                                <div className="profile-data-label">
-                                    { t('profile-page.birthday') }:
-                                </div>
-
-                                <div className="profile-data-value">
-                                    {
-                                        wishes.creator?.birthday
-                                            ? dayjs(wishes.creator.birthday).locale(getLang()).format(getMonthWithDate())
-                                            : <>{ t('profile-page.not-specified') }</>
-                                    }
-                                </div>
-                            </div>
-
-                            <div className="profile-data-field">
-                                <div className="profile-data-field-label">{ t('profile-page.i_have_fulfilled') }</div>
-
-                                <div className={ "profile-data-field-value" + (successfulWishes > 0 ? " success" : "") }>
-                                    { successfulWishes }
-                                </div>
-
-                                <div className="profile-data-field-label">{ t(`profile-page.${ tWishSuccess }`) }</div>
-                            </div>
-
-                            <div className="profile-data-field">
-                                <div className="profile-data-field-label">{ t('profile-page.i_did_not_fulfill') }</div>
-
-                                <div className={ "profile-data-field-value" + (unsuccessfulWishes > 0 ? " unsuccess" : "") }>
-                                    { unsuccessfulWishes }
-                                </div>
-
-                                <div className="profile-data-field-label">{ t(`profile-page.${ tWishUnsuccess }`) }</div>
-                            </div>
-                        </>
+                        <DetailProfile creator={wishes.creator} />
                     ) }
 
                     <CustomAccordion
@@ -259,33 +138,40 @@ const Wish: FC = () => {
                     >
                         <ChangePassword userId={ myUser?.id } />
                     </CustomAccordion>
+
+                    { !showEdit && (
+                        <>
+                            <CustomAccordion
+                                ariaControls="profile-wish-list-content"
+                                titleId="profile-wish-list-header"
+                                title={ t('profile-page.wish-list-title') }
+                                contentId="profile-wish-list-content"
+                            >
+                                <SearchAndSortWishes wishListRefCurrent={ wishListRef.current } />
+
+                                { wishes.list.length > 0 ? (
+                                    <ul className="wish-list" ref={ wishListRef }>
+                                        { wishes.list.map((wish, idx) => (
+                                            <WishItem
+                                                key={ wish.id + idx }
+                                                wish={ wish }
+                                                showWish={ () => handleShowWish(wish.id) }
+                                            />
+                                        )) }
+
+                                        <div
+                                            className="observable-element"
+                                            style={ { display: users.stopRequests ? 'none' : 'block' } }
+                                            ref={ ref }
+                                        ></div>
+                                    </ul>
+                                ) : (
+                                    <p className="profile-wishes-empty">{ t('profile-page.wishes-empty') }</p>
+                                ) }
+                            </CustomAccordion>
+                        </>
+                    ) }
                 </div>
-
-                { !showEdit && (
-                    <>
-                        <SearchAndSortWishes wishListRefCurrent={ wishListRef.current } />
-
-                        { wishes.list.length > 0 ? (
-                            <ul className="wish-list" ref={ wishListRef }>
-                                { wishes.list.map((wish, idx) => (
-                                    <WishItem
-                                        key={ wish.id + idx }
-                                        wish={ wish }
-                                        showWish={ () => handleShowWish(wish.id) }
-                                    />
-                                )) }
-
-                                <div
-                                    className="observable-element"
-                                    style={ { display: users.stopRequests ? 'none' : 'block' } }
-                                    ref={ ref }
-                                ></div>
-                            </ul>
-                        ) : (
-                            <p className="profile-wishes-empty">{ t('profile-page.wishes-empty') }</p>
-                        ) }
-                    </>
-                ) }
 
                 <div className="profile-delete">
                     <Button

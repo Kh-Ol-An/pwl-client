@@ -1,0 +1,102 @@
+.detail-profile-main-data {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.detail-profile-avatar {
+    min-width: 64px;
+    width: 64px;
+    max-width: 64px;
+    min-height: 64px;
+    height: 64px;
+    max-height: 64px;
+
+    @media only screen and (min-width: 768px) {
+        min-width: 124px;
+        width: 124px;
+        max-width: 124px;
+        min-height: 124px;
+        height: 124px;
+        max-height: 124px;
+    }
+}
+
+.detail-profile-main-data-content {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 80px);
+}
+
+.detail-profile-name {
+    font-size: 24px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+
+    @media only screen and (min-width: 768px) {
+        gap: 24px;
+        font-size: 36px;
+    }
+}
+
+.detail-profile-email {
+    font-size: 20px;
+    font-weight: 400;
+    color: $special-color;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+
+    @media only screen and (min-width: 768px) {
+        font-size: 24px;
+    }
+}
+
+.detail-profile-data {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.detail-profile-data-label {
+    font-size: 16px;
+    font-weight: 400;
+    color: $special-color;
+}
+
+.detail-profile-data-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: $light-color;
+}
+
+.detail-profile-data-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-profile-data-field-label {
+    font-size: 16px;
+    font-weight: 400;
+    color: $special-color;
+}
+
+.detail-profile-data-field-value {
+    font-size: 16px;
+    color: $light-color;
+
+    &.success {
+        font-weight: 700;
+        color: $success-color;
+    }
+
+    &.unsuccess {
+        font-weight: 700;
+        color: $action-color;
+    }
+}

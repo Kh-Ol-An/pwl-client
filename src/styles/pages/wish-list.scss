@@ -1,5 +1,106 @@
 .wish-list-page {
+    .wish-list-page-header {
+        @include flex-between;
+        padding: 8px 16px;
+
+        @media only screen and (min-width: 1280px) {
+            padding: 8px 12px 8px 0;
+        }
+    }
+
+    .wish-list-page-body {
+        padding: 16px 16px 16px 0;
+        display: flex;
+        flex-direction: column;
+        height: calc(100svh - 60px);
+
+        @media only screen and (min-width: 1280px) {
+            padding: 24px 0 40px 0;
+        }
+    }
+
+    .wish-list-page-content {
+        padding: 0 0 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        font-size: 20px;
+        color: $light-color;
+        font-weight: 700;
+
+        @media only screen and (min-width: 390px) {
+            font-size: 22px;
+        }
+
+        @media only screen and (min-width: 412px) {
+            font-size: 24px;
+        }
+
+        @media only screen and (min-width: 768px) {
+            gap: 24px;
+        }
+    }
+
+    .wish-list-page-main-data {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .wish-list-page-avatar {
+        min-width: 64px;
+        width: 64px;
+        max-width: 64px;
+        min-height: 64px;
+        height: 64px;
+        max-height: 64px;
+
+        @media only screen and (min-width: 768px) {
+            min-width: 124px;
+            width: 124px;
+            max-width: 124px;
+            min-height: 124px;
+            height: 124px;
+            max-height: 124px;
+        }
+    }
+
+    .wish-list-page-name {
+        font-size: 24px;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+
+        @media only screen and (min-width: 768px) {
+            gap: 24px;
+            font-size: 36px;
+        }
+    }
+
+    .search-and-sort-wishes {
+        margin: 16px 0;
+        padding-left: 16px;
+
+        .wish-search label {
+            overflow: hidden;
+            max-width: 90px;
+            text-overflow: ellipsis;
+            display: block;
+
+            @media only screen and (min-width: 360px) {
+                overflow: unset;
+                max-width: unset;
+                text-overflow: unset;
+                display: flex;
+            }
+        }
+    }
+
     .wish-list {
+        grid-template-columns: repeat(auto-fit, minmax(44%, 1fr));
+        padding: 8px 8px 8px 16px;
         height: calc(100% - 202px);
 
         @media only screen and (min-width: 390px) {
@@ -11,7 +112,38 @@
         }
 
         @media only screen and (min-width: 768px) {
+            padding: 8px 12px 8px 16px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 349px));
             height: calc(100% - 268px);
+        }
+
+        @media only screen and (min-width: 1024px) {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 314px));
+        }
+
+        @media only screen and (min-width: 1280px) {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 378px));
+        }
+    }
+
+    .wish-list-page-wishes-empty {
+        width: 100%;
+        flex: 1;
+        padding: 16px;
+        @include flex-center;
+        gap: 10px;
+        font-size: 16px;
+        color: $light-color;
+        text-align: center;
+
+        @media only screen and (min-width: 768px) {
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        @media only screen and (min-width: 1366px) {
+            padding: 40px;
+            font-size: 20px;
         }
     }
 }

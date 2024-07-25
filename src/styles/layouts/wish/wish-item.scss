@@ -1,6 +1,7 @@
 .wish-item {
     position: relative;
     width: 100%;
+    display: flex;
     border-radius: $radius-md;
     border-width: 2px;
     border-style: dashed;
@@ -47,7 +48,7 @@
     }
 
     .wish-box {
-        padding: 24px 16px 28px;
+        padding: 24px 16px 42px;
         @include flex-column;
         gap: 16px;
         width: 100%;

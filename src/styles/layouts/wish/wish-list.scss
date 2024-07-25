@@ -15,9 +15,6 @@
 
         @media only screen and (min-width: 1024px) {
             padding: 0 10px 0 20px;
-            //flex-direction: row;
-            //align-items: center;
-            //justify-content: space-between;
 
             & > button {
                 order: 1;
@@ -245,6 +242,10 @@
     &::-webkit-scrollbar {
         width: 6px;
         height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        margin: 10px 0 10px;
     }
 
     &::-webkit-scrollbar-thumb {

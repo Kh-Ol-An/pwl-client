@@ -1,17 +1,50 @@
 .search-and-sort-wishes {
-    @include flex-between;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
     width: 100%;
 
     .wish-search {
         width: 100%;
         max-width: 50%;
+
+        label {
+            overflow: hidden;
+            max-width: 90px;
+            text-overflow: ellipsis;
+            display: block;
+
+            @media only screen and (min-width: 360px) {
+                max-width: 108px;
+            }
+
+            @media only screen and (min-width: 412px) {
+                overflow: unset;
+                max-width: unset;
+                text-overflow: unset;
+                display: flex;
+            }
+        }
     }
 
     .sort-popup-action-text {
+        padding: 7px 0;
+        overflow: hidden;
+        max-width: 100px;
+        text-overflow: ellipsis;
+        display: block;
         font-size: 14px;
         color: $special-color;
         text-align: right;
         white-space: nowrap;
+
+        @media only screen and (min-width: 360px) {
+            max-width: 120px;
+        }
+
+        @media only screen and (min-width: 412px) {
+            max-width: unset;
+        }
 
         @media only screen and (min-width: 768px) {
             font-size: 16px;
