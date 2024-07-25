@@ -125,9 +125,9 @@ const Wish: FC = () => {
                     </div>
 
                     { showEdit ? (
-                        <EditAccount cancel={() => setShowEdit(false)} />
+                        <EditAccount cancel={ () => setShowEdit(false) } />
                     ) : (
-                        <DetailProfile creator={wishes.creator} />
+                        <DetailProfile creator={ wishes.creator } />
                     ) }
 
                     { profileId === myUser?.id && (
@@ -175,16 +175,18 @@ const Wish: FC = () => {
                     ) }
                 </div>
 
-                <div className="profile-delete">
-                    <Button
-                        type="button"
-                        variant="text"
-                        color="action-color"
-                        onClick={ () => setShowConfirmDeleteMyUser(true) }
-                    >
-                        { t('profile-page.delete-account') }
-                    </Button>
-                </div>
+                { profileId === myUser?.id && (
+                    <div className="profile-delete">
+                        <Button
+                            type="button"
+                            variant="text"
+                            color="action-color"
+                            onClick={ () => setShowConfirmDeleteMyUser(true) }
+                        >
+                            { t('profile-page.delete-account') }
+                        </Button>
+                    </div>
+                ) }
             </div>
 
             { detailWish && (
