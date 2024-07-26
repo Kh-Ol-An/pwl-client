@@ -89,7 +89,7 @@ const ChangePassword: FC<IProps> = ({ userId }) => {
             />
 
             <div className="actions">
-                <Button type="submit">{ t('main-page.change-password') }</Button>
+                <Button type="submit" variant="text" color="action-color">{ t('main-page.change-password') }</Button>
             </div>
         </form>
     );
