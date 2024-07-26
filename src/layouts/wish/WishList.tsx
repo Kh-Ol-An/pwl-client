@@ -24,6 +24,7 @@ import { Tooltip } from "react-tooltip";
 import getTooltipStyles from "@/utils/get-tooltip-styles";
 import SearchAndSortWishes from "@/layouts/wish/SearchAndSortWishes";
 import CreateWish from "@/layouts/wish/edit-wish/CreateWish";
+import { resetWishCandidate } from "@/store/wishes/slice";
 
 const WishList: FC = () => {
     const { t } = useTranslation();
@@ -121,6 +122,7 @@ const WishList: FC = () => {
     };
     const handleHideCreateWish = () => {
         setShowCreateWish(false);
+        dispatch(resetWishCandidate(null));
     };
 
     const handleShowEditWish = (id: IWish['id'] | null) => {

@@ -72,10 +72,13 @@ const wishesSlice = createSlice({
         setWishesSort(state, action: PayloadAction<Partial<EWishSort>>) {
             state.sort = action.payload;
         },
+        resetWishCandidate(state, action: PayloadAction<Partial<null>>) {
+            state.wishCandidate = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
-            // create
+            // fetchWishDataFromLink
             .addCase(fetchWishDataFromLink.pending, (state) => {
                 state.isLoading = true;
                 state.isLocalLoading = false;
@@ -334,6 +337,6 @@ const wishesSlice = createSlice({
     },
 });
 
-export const { setWishStatus, setWishesSearch, setWishesSort } = wishesSlice.actions;
+export const { setWishStatus, setWishesSearch, setWishesSort, resetWishCandidate } = wishesSlice.actions;
 
 export default wishesSlice.reducer;
