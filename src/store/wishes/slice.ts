@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { t } from 'i18next';
 import {
+    fetchWishDataFromLink,
     createWish,
     updateWish,
     bookWish,
@@ -15,7 +16,7 @@ import {
     getAllWishes,
     addAllWishes,
 } from '@/store/wishes/thunks';
-import { IWish, EWishSort, EWishStatus } from '@/models/IWish';
+import { IWish, EWishSort, EWishStatus, IWishCandidate } from '@/models/IWish';
 import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
 import { IUser } from "@/models/IUser";
 
@@ -32,6 +33,7 @@ const changeWish = (state: IState, newWish: IWish) => {
 
 interface IState {
     list: IWish[];
+    wishCandidate: IWishCandidate | null;
     creator: IUser | null;
     status: EWishStatus;
     search: string;
@@ -45,6 +47,7 @@ interface IState {
 
 const initialState: IState = {
     list: [],
+    wishCandidate: null,
     creator: null,
     status: EWishStatus.ALL,
     search: '',
@@ -72,6 +75,23 @@ const wishesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            // create
+            .addCase(fetchWishDataFromLink.pending, (state) => {
+                state.isLoading = true;
+                state.isLocalLoading = false;
+                state.error = null;
+            })
+            .addCase(fetchWishDataFromLink.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = action.error.message || t('alerts.wishes-api.fetch-wish-data.error', { type: 'slice' });
+            })
+            .addCase(fetchWishDataFromLink.fulfilled, (state, action) => {
+                state.wishCandidate = action.payload;
+                state.isLoading = false;
+                state.isLocalLoading = false;
+                state.error = null;
+            })
             // create
             .addCase(createWish.pending, (state) => {
                 state.isLoading = true;

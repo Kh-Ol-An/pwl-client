@@ -3,10 +3,11 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { Tooltip } from 'react-tooltip';
 import { useTranslation } from 'react-i18next';
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from 'uuid';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
-import { createWish, deleteWish, updateWish } from '@/store/wishes/thunks';
+import { createWish } from '@/store/wishes/thunks';
 import { IWishWithQuote, ICreateWish } from '@/store/wishes/types';
 import { TCurrentImage, IImage, IWish, ECurrency, EShow } from '@/models/IWish';
 import { wishDescriptionValidation, wishNameValidation, wishPriceValidation } from '@/utils/validations';
@@ -16,7 +17,6 @@ import { decryptedData, encryptedData } from '@/utils/encryption-data';
 import getTooltipStyles from '@/utils/get-tooltip-styles';
 import { getLang } from "@/utils/lang-action";
 import Addresses from '@/layouts/wish/edit-wish/Addresses';
-import ConfirmModal from '@/components/ConfirmModal';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import DragNDrop from '@/components/DragNDrop';
@@ -24,9 +24,9 @@ import Switch from '@/components/Switch';
 import QuoteMessage from "@/components/QuoteMessage";
 import StylesVariables from '@/styles/utils/variables.module.scss';
 import PrivacyChoices from "@/components/PrivacyChoices";
+import FastWish from "@/layouts/wish/edit-wish/FastWish";
 
 interface IProps {
-    idOfSelectedWish: IWish['id'] | null;
     close: () => void;
 }
 
@@ -37,7 +37,7 @@ export type TInputs = {
     description: IWish['description']
 }
 
-const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
+const CreateWish: FC<IProps> = ({ close }) => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
@@ -56,9 +56,9 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         formState: { errors },
     } = useForm<TInputs>();
 
+    const [ isFastWish, setIsFastWish ] = useState<boolean>(true);
     const [ material, setMaterial ] = useState<ICreateWish['material']>(true);
     const [ show, setShow ] = useState<ICreateWish['show']>(EShow.ALL);
-    const [ showConfirmDeleteWish, setShowConfirmDeleteWish ] = useState<boolean>(false);
     const [ images, setImages ] = useState<TCurrentImage[]>([]);
     const [ currency, setCurrency ] = useState<IWish['currency']>(ECurrency.UAH);
     const [ isTransition, setIsTransition ] = useState<boolean>(false);
@@ -70,7 +70,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             if (process.env.REACT_APP_CRYPTO_JS_SECRET && wish.show !== EShow.ALL) {
                 wishName = decryptedData(wish.name, process.env.REACT_APP_CRYPTO_JS_SECRET)
             }
-            return wishName === data.name.trim() && wish.id !== idOfSelectedWish;
+            return wishName === data.name.trim();
         });
         if (nonUniqueName) {
             setError(
@@ -138,31 +138,22 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             description: dataDescription.length > 0 ? sendingDescription : undefined,
             images: show === EShow.ALL ? images : encryptedImages,
         };
-        if (idOfSelectedWish) {
-            try {
-                await dispatch(updateWish({
-                    ...wishData,
-                    id: idOfSelectedWish,
-                }));
-            } catch (e: any) {
-                console.error(e)
-            }
-        } else {
-            try {
-                const response = await dispatch(createWish(wishData));
-                const quote = (response.payload as IWishWithQuote).quote[getLang()];
-                toast(
-                    <QuoteMessage
-                        title={ t('alerts.wishes-api.create-wish.success') }
-                        text={ quote?.text }
-                        author={ quote?.author }
-                    />,
-                    { type: 'success' },
-                );
-            } catch (e: any) {
-                console.error(e)
-            }
+
+        try {
+            const response = await dispatch(createWish(wishData));
+            const quote = (response.payload as IWishWithQuote).quote[getLang()];
+            toast(
+                <QuoteMessage
+                    title={ t('alerts.wishes-api.create-wish.success') }
+                    text={ quote?.text }
+                    author={ quote?.author }
+                />,
+                { type: 'success' },
+            );
+        } catch (e: any) {
+            console.error(e)
         }
+
         close();
     };
 
@@ -179,76 +170,21 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         );
     };
 
-    const handleDeleteWish = async () => {
-        if (!myUser || !idOfSelectedWish) return;
-
-        await dispatch(deleteWish([ myUser.id, idOfSelectedWish ]));
-        close();
-    };
-
     useLayoutEffect(() => {
         if (wishes.list.length === 0) return;
 
-        const selectedWish = wishes.list.find((wish) => wish.id === idOfSelectedWish);
-
-        if (!selectedWish || !process.env.REACT_APP_CRYPTO_JS_SECRET) return;
-
-        setMaterial(selectedWish.material);
-        setShow(selectedWish.show);
-
-        // name
-        setValue(
-            'name',
-            selectedWish.show === EShow.ALL
-                ? selectedWish.name
-                : decryptedData(selectedWish.name, process.env.REACT_APP_CRYPTO_JS_SECRET),
-        );
-
-        // price
-        selectedWish.price && setValue(
-            'price',
-            selectedWish.show === EShow.ALL
-                ? selectedWish.price
-                : decryptedData(selectedWish.price, process.env.REACT_APP_CRYPTO_JS_SECRET),
-        );
-
-        // currency
-        selectedWish.currency && setCurrency(
-            selectedWish.show === EShow.ALL
-                ? selectedWish.currency
-                : decryptedData(selectedWish.currency, process.env.REACT_APP_CRYPTO_JS_SECRET) as IWish['currency']
-        );
-
-        // addresses
-        selectedWish.addresses && selectedWish.addresses.length > 0 && setValue(
-            'addresses',
-            selectedWish.show === EShow.ALL
-                ? selectedWish.addresses
-                : selectedWish.addresses.map(
-                    address => process.env.REACT_APP_CRYPTO_JS_SECRET
-                        ? { ...address, value: decryptedData(address.value, process.env.REACT_APP_CRYPTO_JS_SECRET) }
-                        : address
-                ),
-        );
-
-        // description
-        setValue(
-            'description',
-            selectedWish.show === EShow.ALL
-                ? selectedWish.description
-                : decryptedData(selectedWish.description, process.env.REACT_APP_CRYPTO_JS_SECRET)
-        );
-
-        // images
-        const decryptedImages = selectedWish.images.map(image => {
-            if (!process.env.REACT_APP_CRYPTO_JS_SECRET) return image;
-
-            const decryptedImage = { ...image };
-            decryptedImage.path = decryptedData(image.path, process.env.REACT_APP_CRYPTO_JS_SECRET);
-            return decryptedImage;
-        });
-        setImages(selectedWish.show === EShow.ALL ? selectedWish.images : decryptedImages);
-    }, [ idOfSelectedWish, wishes.list, setValue ]);
+        wishes.wishCandidate?.name && setValue('name', wishes.wishCandidate.name);
+        wishes.wishCandidate?.image && setImages([ {
+            path: wishes.wishCandidate.image,
+            position: 0,
+        } ]);
+        wishes.wishCandidate?.price && setValue('price', wishes.wishCandidate.price);
+        wishes.wishCandidate?.url && setValue('addresses', [ {
+            id: uuidv4(),
+            value: wishes.wishCandidate.url
+        }]);
+        wishes.wishCandidate?.description && setValue('description', wishes.wishCandidate.description);
+    }, [ wishes, setValue ]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -267,7 +203,9 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
         };
     }, []);
 
-    return (
+    return isFastWish ? (
+        <FastWish close={ () => setIsFastWish(false) } />
+    ) : (
         <form className="edit-wish" onSubmit={ handleSubmit(onSubmit) }>
             {/* material */ }
             <div className="material">
@@ -380,46 +318,23 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
             {/* PrivacyChoices */ }
             <PrivacyChoices
                 id="wish"
-                tooltipContent={{
+                tooltipContent={ {
                     all: t('main-page.can-see.wish-all-tooltip'),
                     friends: t('main-page.can-see.wish-friends-tooltip'),
                     nobody: t('main-page.can-see.wish-nobody-tooltip'),
-                }}
-                show={show}
-                setShow={setShow}
+                } }
+                show={ show }
+                setShow={ setShow }
             />
 
             {/* actions */ }
             <div className="actions">
-                { idOfSelectedWish && (
-                    <>
-                        <Button
-                            color="action-color"
-                            variant="text"
-                            type="button"
-                            onClick={ () => setShowConfirmDeleteWish(true) }
-                        >
-                            { t('main-page.delete-wish') }
-                        </Button>
-
-                        <ConfirmModal
-                            show={ showConfirmDeleteWish }
-                            confirmText="Видалити"
-                            closeText="Залишити"
-                            close={ () => setShowConfirmDeleteWish(false) }
-                            confirm={ handleDeleteWish }
-                        >
-                            <p className="text-lg">{ t('main-page.are-you-sure') }</p>
-                        </ConfirmModal>
-                    </>
-                ) }
-
                 <Button type="submit">
-                    { t('main-page.update') }
+                    { t('main-page.create') }
                 </Button>
             </div>
         </form>
     );
 };
 
-export default EditWish;
+export default CreateWish;

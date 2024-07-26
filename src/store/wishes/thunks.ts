@@ -13,8 +13,17 @@ import {
     ISendAllWishes,
     IGetWishList,
 } from '@/store/wishes/types';
-import { IWish } from '@/models/IWish';
+import { IWish, IWishCandidate } from '@/models/IWish';
 import { IUser } from '@/models/IUser';
+
+export const fetchWishDataFromLink = createAsyncThunk<IWishCandidate, { url: string }>(
+    'wishes/fetchWishDataFromLink',
+    async (params) => {
+        const result = await api.fetchWishDataFromLink(params);
+
+        return result.data;
+    },
+);
 
 export const createWish = createAsyncThunk<IWishWithQuote, ICreateWish>(
     'wishes/createWish',

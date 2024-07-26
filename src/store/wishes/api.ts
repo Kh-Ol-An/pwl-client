@@ -16,7 +16,7 @@ import {
     IGetWishList,
 } from '@/store/wishes/types';
 import { IUser } from '@/models/IUser';
-import { TCurrentImage, IWish } from '@/models/IWish';
+import { TCurrentImage, IWish, IWishCandidate } from '@/models/IWish';
 
 const processCommonFields = (formData: FormData, commonFields: { [key: string]: string | boolean }) => {
     for (const [ key, value ] of Object.entries(commonFields)) {
@@ -48,6 +48,15 @@ const addDataToFormData = (formData: FormData, data: IUpdateWish | ICreateWish):
     processImages(formData, images);
 
     return formData;
+};
+
+const fetchWishDataFromLink = async (params: { url: string }): Promise<AxiosResponse<IWishCandidate>> => {
+    try {
+        return await api.get('/link-wish', { params });
+    } catch (error: any) {
+        toast(error.response?.data?.message || t('alerts.wishes-api.fetch-wish-data.error', { type: 'api' }), { type: 'error' });
+        throw error;
+    }
 };
 
 const createWish = async (data: ICreateWish): Promise<AxiosResponse<IWishWithQuote>> => {
@@ -217,6 +226,7 @@ const getAllWishes = async (params: ISendAllWishes): Promise<AxiosResponse<IWish
 };
 
 const wishApi = {
+    fetchWishDataFromLink,
     createWish,
     updateWish,
     getWish,

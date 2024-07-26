@@ -2,6 +2,7 @@ import { t } from 'i18next';
 import {
     PASSWORD_MAX_LENGTH,
     PASSWORD_MIN_LENGTH,
+    WISH_NAME_MAX_LENGTH,
     NAME_MAX_LENGTH,
     NAME_MIN_LENGTH,
     WISH_DESCRIPTION_MIN_LENGTH,
@@ -31,17 +32,13 @@ export const wishNameValidation = {
         value: true,
         message: t('validations.wish-name.required')
     },
-    pattern: {
-        value: /^[a-zA-Zа-яА-ЯіІїЇ'єЄ0-9\s-!"№#$%&()*.,;=?@_]+$/,
-        message: t('validations.wish-name.pattern')
-    },
     minLength: {
         value: NAME_MIN_LENGTH,
         message: t('validations.wish-name.min', { min: NAME_MIN_LENGTH - 1 })
     },
     maxLength: {
-        value: NAME_MAX_LENGTH,
-        message: t('validations.wish-name.max', { max: NAME_MAX_LENGTH })
+        value: WISH_NAME_MAX_LENGTH,
+        message: t('validations.wish-name.max', { max: WISH_NAME_MAX_LENGTH })
     }
 };
 

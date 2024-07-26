@@ -5,7 +5,6 @@ import {
     Info as InfoIcon,
     Search as SearchIcon,
 } from '@mui/icons-material';
-import { addingWhiteSpaces } from '@/utils/formating-value';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
@@ -69,12 +68,7 @@ const Input: FC<IProps> = forwardRef<HTMLInputElement | HTMLTextAreaElement, IPr
                             autoComplete={ type }
                             placeholder="hidden"
                             value={ value }
-                            onChange={ (e) => {
-                                if (type === 'number') {
-                                    e.target.value = addingWhiteSpaces(e.target.value);
-                                }
-                                onChange && onChange(e);
-                            } }
+                            onChange={ onChange }
                             { ...props }
                         />
                 }

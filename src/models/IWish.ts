@@ -2,7 +2,7 @@ import { Dayjs } from 'dayjs';
 import { IUser } from '@/models/IUser';
 
 export interface IImage {
-    id: string;
+    id?: string;
     path: string;
     position: number;
     delete?: boolean;
@@ -68,4 +68,12 @@ export interface IWish {
     booking?: IBooking;
     likes: ILike[];
     dislikes: ILike[];
+}
+
+export interface IWishCandidate {
+    name: IWish['name'];
+    image: string;
+    url: string;
+    price: IWish['price'],
+    description: IWish['description'],
 }

@@ -7,15 +7,15 @@ import { Cancel as CancelIcon, AddCircle as AddCircleIcon } from '@mui/icons-mat
 import { ICreateWish } from '@/store/wishes/types';
 import { onlyWhitespaceValidation } from '@/utils/validations';
 import getTooltipStyles from '@/utils/get-tooltip-styles';
-import { Inputs } from '@/layouts/wish/edit-wish/EditWish';
+import { TInputs } from '@/layouts/wish/edit-wish/EditWish';
 import Input from '@/components/Input';
 import StylesVariables from '@/styles/utils/variables.module.scss';
 
 interface IProps {
-    control: Control<Inputs>;
-    getValues: UseFormGetValues<Inputs>;
-    register: UseFormRegister<Inputs>;
-    errors: FieldErrors<Inputs>;
+    control: Control<TInputs>;
+    getValues: UseFormGetValues<TInputs>;
+    register: UseFormRegister<TInputs>;
+    errors: FieldErrors<TInputs>;
     material: ICreateWish['material'];
     screenWidth: number;
 }

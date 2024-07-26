@@ -113,6 +113,9 @@
       }
     },
     "wishes-api": {
+      "fetch-wish-data": {
+        "error": "{{type}}.fetchWishDataFromLink: Failed to get wish data from the link."
+      },
       "create-wish": {
         "error": "{{type}}.createWish: Failed to create a wish.",
         "success": "The wish has been successfully created."
@@ -177,14 +180,13 @@
     "only-whitespace": "The entered data cannot contain only spaces.",
     "wish-name": {
       "required": "It is impossible to create a desire without a name.",
-      "pattern": "The wish name contains invalid characters. Please use only letters of the Latin or Cyrillic alphabet, numbers, spaces, and the following characters: -!\"№#$%&()*.,;=?@_",
       "min": "Why is the name of the wish so short? Please come up with a name that is longer than {{min}} characters.",
       "max": "The name of your wish is too long. Let's try to fit it into {{max}} characters."
     },
     "wish-price": {
       "required": "The material desire that does not have its price cannot be fulfilled by Your universe.",
       "pattern": "The price must be a positive integer and not start with \"0\".",
-      "max": "It is very difficult to imagine what you can buy for this money. Let's try to fit in {{max}} characters."
+      "max": "Let's try to fit in {{max}} characters."
     },
     "wish-description": {
       "min": "What is this short wish description? Please come up with a description that is longer than {{min}} character.",
@@ -356,7 +358,13 @@
     "sadness": "Our sadness knows no bounds... We hope that you will give us another chance and to stay. If you have decided to leave us, please confirm your intention by entering the appropriate data.",
     "delete-my-account": "Delete my account",
     "stay": "Stay",
-    "email-not-match": "This email does not match the email of the account you are trying to delete."
+    "email-not-match": "This email does not match the email of the account you are trying to delete.",
+    "fast_data_filling": "Quickly fill in the data",
+    "product-link": "Link to a product",
+    "product-link-tooltip": "Paste the link to the product from any online store and we will try to automatically fill in the wish data.",
+    "manually": "Fill in manually",
+    "continue": "Continue",
+    "non-unique-wish-name": "You already have a wish with that name."
   },
   "activation-link-expired-page": {
     "expired": "Account activation period has expired.",

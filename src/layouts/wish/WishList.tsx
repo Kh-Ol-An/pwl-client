@@ -23,6 +23,7 @@ import { handleGetInitialAllWishes } from "@/utils/action-on-wishes";
 import { Tooltip } from "react-tooltip";
 import getTooltipStyles from "@/utils/get-tooltip-styles";
 import SearchAndSortWishes from "@/layouts/wish/SearchAndSortWishes";
+import CreateWish from "@/layouts/wish/edit-wish/CreateWish";
 
 const WishList: FC = () => {
     const { t } = useTranslation();
@@ -40,6 +41,7 @@ const WishList: FC = () => {
 
     const [ firstLoad, setFirstLoad ] = useState<boolean>(true);
     const [ showWish, setShowWish ] = useState<boolean>(false);
+    const [ showCreateWish, setShowCreateWish ] = useState<boolean>(false);
     const [ showEditWish, setShowEditWish ] = useState<boolean>(false);
     const [ idOfSelectedWish, setIdOfSelectedWish ] = useState<IWish['id'] | null>(null);
     const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
@@ -110,16 +112,21 @@ const WishList: FC = () => {
         setIdOfSelectedWish(id);
         setShowWish(true);
     };
-
     const handleHideWish = () => {
         setShowWish(false);
+    };
+
+    const handleShowCreateWish = () => {
+        setShowCreateWish(true);
+    };
+    const handleHideCreateWish = () => {
+        setShowCreateWish(false);
     };
 
     const handleShowEditWish = (id: IWish['id'] | null) => {
         setIdOfSelectedWish(id);
         setShowEditWish(true);
     };
-
     const handleHideEditWish = () => {
         setShowEditWish(false);
     };
@@ -260,7 +267,7 @@ const WishList: FC = () => {
                             <button
                                 className="create-wish-action"
                                 type="button"
-                                onClick={ () => handleShowEditWish(null) }
+                                onClick={ handleShowCreateWish }
                             >
                                 <AddCircleIcon className="create-wish-plus" />
                             </button>
@@ -345,6 +352,10 @@ const WishList: FC = () => {
                     </div>
                 </Modal>
             ) }
+
+            <CustomModal show={ showCreateWish } hide={ handleHideCreateWish }>
+                <CreateWish close={ handleHideCreateWish } />
+            </CustomModal>
 
             <CustomModal show={ showEditWish } hide={ handleHideEditWish }>
                 <EditWish idOfSelectedWish={ idOfSelectedWish } close={ handleHideEditWish } />
