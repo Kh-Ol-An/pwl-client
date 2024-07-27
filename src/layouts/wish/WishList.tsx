@@ -162,18 +162,18 @@ const WishList: FC = () => {
     }, [ inView ]);
 
     useEffect(() => {
-        if (myUser) {
+        const localSelectedUserId = localStorage.getItem('selectedUserId');
+        if (localSelectedUserId) {
             dispatch(getWishList({
-                myId: myUser.id,
-                userId: myUser.id,
+                myId: myUser?.id,
+                userId: localSelectedUserId,
                 status: wishes.status,
                 page: 1,
                 limit: WISHES_PAGINATION_LIMIT,
                 search: wishes.search,
                 sort: wishes.sort,
             }));
-            dispatch(selectUserId(myUser.id));
-            localStorage.setItem('selectedUserId', myUser.id);
+            dispatch(selectUserId(localSelectedUserId));
         } else {
             dispatch(getAllWishes({
                 page: 1,
