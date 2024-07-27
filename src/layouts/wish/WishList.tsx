@@ -171,9 +171,12 @@ const WishList: FC = () => {
                 page: 1,
                 limit: WISHES_PAGINATION_LIMIT,
                 search: wishes.search,
-                sort: wishes.sort,
+                sort: myUser?.id === localSelectedUserId ? EWishSort.CREATED_DESC : wishes.sort,
             }));
             dispatch(selectUserId(localSelectedUserId));
+            if (myUser?.id === localSelectedUserId) {
+                dispatch(setWishesSort(EWishSort.CREATED_DESC));
+            }
         } else {
             dispatch(getAllWishes({
                 page: 1,

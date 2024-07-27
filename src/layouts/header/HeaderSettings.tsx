@@ -21,6 +21,7 @@ import { logout } from "@/store/my-user/thunks";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { useNavigate } from "react-router-dom";
+import { EWishSort } from "@/models/IWish";
 
 interface IProps {
     logoutWithoutUpdate?: boolean;
@@ -51,7 +52,7 @@ const HeaderSettings: FC<IProps> = ({ logoutWithoutUpdate = false, hideHeader })
     const handleSelectWish = async () => {
         if (!myUser) return;
 
-        await handleGetInitialWishList(dispatch, myUser.id, myUser.id);
+        await handleGetInitialWishList(dispatch, myUser.id, myUser.id, EWishSort.CREATED_DESC);
         setAnchor(null);
         hideHeader && hideHeader();
     };

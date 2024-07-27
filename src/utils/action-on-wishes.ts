@@ -15,7 +15,7 @@ export const handleGetInitialAllWishes = async (dispatch: AppDispatch) => {
     localStorage.removeItem('selectedUserId');
 };
 
-export const handleGetInitialWishList = async (dispatch: AppDispatch, myId: IUser['id'] | undefined, userId: IUser['id']) => {
+export const handleGetInitialWishList = async (dispatch: AppDispatch, myId: IUser['id'] | undefined, userId: IUser['id'], sort: EWishSort = EWishSort.POPULAR) => {
     await dispatch(getWishList({
         myId,
         userId,
@@ -23,11 +23,11 @@ export const handleGetInitialWishList = async (dispatch: AppDispatch, myId: IUse
         page: 1,
         limit: WISHES_PAGINATION_LIMIT,
         search: '',
-        sort: EWishSort.POPULAR,
+        sort,
     }));
     await dispatch(setWishStatus(EWishStatus.ALL));
     await dispatch(setWishesSearch(''));
-    await dispatch(setWishesSort(EWishSort.POPULAR));
+    await dispatch(setWishesSort(sort));
     await dispatch(selectUserId(userId));
     localStorage.setItem('selectedUserId', userId);
 };
