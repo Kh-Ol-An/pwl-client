@@ -99,7 +99,7 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
             page: 1,
             limit: WISHES_PAGINATION_LIMIT,
             search: '',
-            sort: EWishSort.POPULAR,
+            sort: EWishSort.CREATED_DESC,
         }));
         await dispatch(setWishStatus(EWishStatus.ALL));
         await dispatch(setWishesSearch(''));
