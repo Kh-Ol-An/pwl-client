@@ -149,7 +149,9 @@ const Wish: FC = () => {
                                 title={ t('profile-page.wish-list-title') }
                                 contentId="profile-wish-list-content"
                             >
-                                <SearchAndSortWishes wishListRefCurrent={ wishListRef.current } />
+                                { wishes.creator && wishes.creator.wishList.length > 5 && (
+                                    <SearchAndSortWishes wishListRefCurrent={ wishListRef.current } />
+                                ) }
 
                                 { wishes.list.length > 0 ? (
                                     <ul className="wish-list" ref={ wishListRef }>

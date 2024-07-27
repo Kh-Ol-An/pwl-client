@@ -195,6 +195,9 @@ const WishList: FC = () => {
         };
     }, []);
 
+    const showSearchAndSort =
+        (wishes.creator && wishes.creator.wishList.length > 5) || (!selectedUserId && wishes.list.length > 0);
+
     return (
         <div className="wish-list-block">
             <div className="head">
@@ -259,7 +262,9 @@ const WishList: FC = () => {
                     ) }
                 </div>
 
-                <SearchAndSortWishes wishListRefCurrent={wishListRef.current} />
+                { showSearchAndSort && (
+                    <SearchAndSortWishes wishListRefCurrent={ wishListRef.current } />
+                ) }
             </div>
 
             { (myUser?.id === selectedUserId || wishes.list.length > 0) ? (

@@ -91,53 +91,51 @@ const SearchAndSortWishes: FC<IProps> = ({ wishListRefCurrent }) => {
 
     return (
         <>
-            { wishes.creator && wishes.creator.wishList.length > 5 && (
-                <div className="search-and-sort-wishes">
-                    <div className="wish-search">
-                        <Search
-                            id="wish-search"
-                            label={ t('main-page.wishes-search') }
-                            value={ wishes.search }
-                            changeSearchBar={ handleChangeSearchBar }
-                        />
-                    </div>
-
-                    <Popup
-                        anchor={ anchor }
-                        setAnchor={ setAnchor }
-                        actionIcon={
-                            <>
-                                <span className="sort-popup-action-text">
-                                    { wishesSortText }
-                                </span>
-                                <SwapVertIcon sx={ { color: StylesVariables.primaryColor } } />
-                            </>
-                        }
-                    >
-                        <div className="sort-popup">
-                            <Button variant="text" onClick={ () => handleSortBy(EWishSort.POPULAR) }>
-                                { t('main-page.sort.by-popularity') }
-                            </Button>
-
-                            <Button variant="text" onClick={ () => handleSortBy(EWishSort.PRICE_DESC) }>
-                                { t('main-page.sort.by-price-down') }
-                            </Button>
-
-                            <Button variant="text" onClick={ () => handleSortBy(EWishSort.PRICE_ASC) }>
-                                { t('main-page.sort.by-price-up') }
-                            </Button>
-
-                            <Button variant="text" onClick={ () => handleSortBy(EWishSort.CREATED_DESC) }>
-                                { t('main-page.sort.by-created-up') }
-                            </Button>
-
-                            <Button variant="text" onClick={ () => handleSortBy(EWishSort.CREATED_ASC) }>
-                                { t('main-page.sort.by-created-down') }
-                            </Button>
-                        </div>
-                    </Popup>
+            <div className="search-and-sort-wishes">
+                <div className="wish-search">
+                    <Search
+                        id="wish-search"
+                        label={ t('main-page.wishes-search') }
+                        value={ wishes.search }
+                        changeSearchBar={ handleChangeSearchBar }
+                    />
                 </div>
-            ) }
+
+                <Popup
+                    anchor={ anchor }
+                    setAnchor={ setAnchor }
+                    actionIcon={
+                        <>
+                            <span className="sort-popup-action-text">
+                                { wishesSortText }
+                            </span>
+                            <SwapVertIcon sx={ { color: StylesVariables.primaryColor } } />
+                        </>
+                    }
+                >
+                    <div className="sort-popup">
+                        <Button variant="text" onClick={ () => handleSortBy(EWishSort.POPULAR) }>
+                            { t('main-page.sort.by-popularity') }
+                        </Button>
+
+                        <Button variant="text" onClick={ () => handleSortBy(EWishSort.PRICE_DESC) }>
+                            { t('main-page.sort.by-price-down') }
+                        </Button>
+
+                        <Button variant="text" onClick={ () => handleSortBy(EWishSort.PRICE_ASC) }>
+                            { t('main-page.sort.by-price-up') }
+                        </Button>
+
+                        <Button variant="text" onClick={ () => handleSortBy(EWishSort.CREATED_DESC) }>
+                            { t('main-page.sort.by-created-up') }
+                        </Button>
+
+                        <Button variant="text" onClick={ () => handleSortBy(EWishSort.CREATED_ASC) }>
+                            { t('main-page.sort.by-created-down') }
+                        </Button>
+                    </div>
+                </Popup>
+            </div>
         </>
     );
 };

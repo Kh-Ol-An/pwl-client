@@ -25,8 +25,11 @@ import { getLang, getMonthWithDate } from "@/utils/lang-action";
 import Popup from '@/components/Popup';
 import Button from '@/components/Button';
 import StylesVariables from '@/styles/utils/variables.module.scss';
-import { handleGetInitialWishList } from "@/utils/action-on-wishes";
-import { EShow } from "@/models/IWish";
+import { EShow, EWishSort, EWishStatus } from "@/models/IWish";
+import { getWishList } from "@/store/wishes/thunks";
+import { WISHES_PAGINATION_LIMIT } from "@/utils/constants";
+import { setWishesSearch, setWishesSort, setWishStatus } from "@/store/wishes/slice";
+import { selectUserId } from "@/store/selected-user/slice";
 
 interface IProps {
     user: IUser;
@@ -89,7 +92,20 @@ const UserAction: FC<IProps> = ({ user, updateUsers, hideSidebar }) => {
     };
 
     const handleSelectWish = async () => {
-        await handleGetInitialWishList(dispatch, myUser?.id, user.id);
+        await dispatch(getWishList({
+            myId: myUser?.id,
+            userId: user.id,
+            status: EWishStatus.ALL,
+            page: 1,
+            limit: WISHES_PAGINATION_LIMIT,
+            search: '',
+            sort: EWishSort.POPULAR,
+        }));
+        await dispatch(setWishStatus(EWishStatus.ALL));
+        await dispatch(setWishesSearch(''));
+        await dispatch(setWishesSort(EWishSort.CREATED_DESC));
+        await dispatch(selectUserId(user.id));
+        localStorage.setItem('selectedUserId', user.id);
         hideSidebar();
     };
 
