@@ -51,7 +51,7 @@ const initialState: IState = {
     creator: null,
     status: EWishStatus.ALL,
     search: '',
-    sort: EWishSort.CREATED_DESC,
+    sort: EWishSort.POPULAR,
     page: 1,
     stopRequests: false,
     isLoading: false,

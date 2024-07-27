@@ -102,7 +102,7 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
         }
         await dispatch(updateMyUser(updateMyUserData));
 
-        window.location.reload();
+        cancel();
     };
 
     const removeAvatar = () => {

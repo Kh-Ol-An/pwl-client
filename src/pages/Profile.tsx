@@ -127,7 +127,7 @@ const Wish: FC = () => {
                     { showEdit ? (
                         <EditAccount cancel={ () => setShowEdit(false) } />
                     ) : (
-                        <DetailProfile creator={ wishes.creator } />
+                        <DetailProfile />
                     ) }
 
                     { profileId === myUser?.id && (

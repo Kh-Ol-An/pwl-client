@@ -3,31 +3,79 @@ import { Avatar } from "@mui/material";
 import dayjs from "dayjs";
 import { getLang, getMonthWithDate } from "@/utils/lang-action";
 import { useTranslation } from "react-i18next";
-import { IUser } from "@/models/IUser";
 import { useAppSelector } from "@/store/hook";
 import { EShow } from "@/models/IWish";
 
-interface IProps {
-    creator: IUser | null;
-}
-
-const DetailProfile: FC<IProps> = ({ creator }) => {
+const DetailProfile: FC = () => {
     const { t } = useTranslation();
 
     const myUser = useAppSelector((state) => state.myUser.user);
+    const wishesCreator = useAppSelector((state) => state.wishes.creator);
 
-    const creatorFullName = creator?.firstName + (creator?.lastName ? ` ${ creator.lastName }` : '');
-    const showEmail = creator?.email && (
-        creator?.id === myUser?.id || creator?.showEmail === EShow.ALL || (creator?.showEmail === EShow.FRIENDS && myUser?.friends.includes(creator.id))
+    const creatorFullName = wishesCreator?.firstName + (wishesCreator?.lastName ? ` ${ wishesCreator.lastName }` : '');
+
+    const isMyFriend = useMemo(
+        () => wishesCreator && myUser?.friends.includes(wishesCreator.id),
+        [ wishesCreator, myUser ],
     );
-    const showDeliveryAddress = creator?.deliveryAddress && (
-        creator?.id === myUser?.id || creator?.showDeliveryAddress === EShow.ALL || (creator?.showDeliveryAddress === EShow.FRIENDS && myUser?.friends.includes(creator.id))
+    const showEmail = useMemo(
+        () => {
+            const showAll = wishesCreator?.showEmail === EShow.ALL
+            const showMyFriend = wishesCreator?.showEmail === EShow.FRIENDS && isMyFriend;
+            return wishesCreator?.email && (wishesCreator?.id === myUser?.id || showAll || showMyFriend);
+        },
+        [ wishesCreator, myUser ],
     );
-    const showBirthday = creator?.birthday && (
-        creator?.id === myUser?.id || creator?.showBirthday === EShow.ALL || (creator?.showBirthday === EShow.FRIENDS && myUser?.friends.includes(creator.id))
+    const email = useMemo(
+        () => {
+            if (showEmail && myUser && wishesCreator) {
+                return myUser?.id === wishesCreator?.id ? myUser.email : wishesCreator.email;
+            }
+            return t('profile-page.unknown');
+        },
+        [ showEmail, wishesCreator, myUser ],
     );
-    const successfulWishes = (creator && creator.successfulWishes > 0) ? creator.successfulWishes : 0;
-    const unsuccessfulWishes = (creator && creator.unsuccessfulWishes > 0) ? creator.unsuccessfulWishes : 0;
+
+    const showDeliveryAddress = useMemo(
+        () => {
+            const showAll = wishesCreator?.showDeliveryAddress === EShow.ALL
+            const showMyFriend = wishesCreator?.showDeliveryAddress === EShow.FRIENDS && isMyFriend;
+            return wishesCreator?.deliveryAddress && (wishesCreator?.id === myUser?.id || showAll || showMyFriend);
+        },
+        [ wishesCreator, myUser ],
+    );
+    const deliveryAddress = useMemo(
+        () => {
+            if (showDeliveryAddress && myUser && wishesCreator) {
+                return myUser?.id === wishesCreator?.id ? myUser.deliveryAddress : wishesCreator.deliveryAddress;
+            }
+            return t('profile-page.unknown');
+        },
+        [ showDeliveryAddress, wishesCreator, myUser ],
+    );
+
+    const showBirthday = useMemo(
+        () => {
+            const showAll = wishesCreator?.showBirthday === EShow.ALL
+            const showMyFriend = wishesCreator?.showBirthday === EShow.FRIENDS && isMyFriend;
+            return wishesCreator?.birthday && (wishesCreator?.id === myUser?.id || showAll || showMyFriend);
+        },
+        [ wishesCreator, myUser ],
+    );
+    const birthday = useMemo(
+        () => {
+            if (showBirthday && myUser && wishesCreator) {
+                return myUser?.id === wishesCreator?.id
+                    ? dayjs(myUser?.birthday).locale(getLang()).format(getMonthWithDate())
+                    : dayjs(wishesCreator?.birthday).locale(getLang()).format(getMonthWithDate());
+            }
+            return t('profile-page.unknown');
+        },
+        [ showBirthday, wishesCreator, myUser ],
+    );
+
+    const successfulWishes = (wishesCreator && wishesCreator.successfulWishes > 0) ? wishesCreator.successfulWishes : 0;
+    const unsuccessfulWishes = (wishesCreator && wishesCreator.unsuccessfulWishes > 0) ? wishesCreator.unsuccessfulWishes : 0;
     const tWishSuccess = useMemo(
         () => {
             if (successfulWishes === 1) {
@@ -63,7 +111,7 @@ const DetailProfile: FC<IProps> = ({ creator }) => {
                 <div className="detail-profile-avatar">
                     <Avatar
                         alt={ creatorFullName }
-                        src={ creator?.avatar }
+                        src={ wishesCreator?.avatar }
                         sx={ { width: '100%', height: '100%' } }
                     />
                 </div>
@@ -75,7 +123,7 @@ const DetailProfile: FC<IProps> = ({ creator }) => {
 
                     { showEmail && (
                         <div className="detail-profile-email">
-                            { creator?.email }
+                            { email }
                         </div>
                     ) }
                 </div>
@@ -87,11 +135,7 @@ const DetailProfile: FC<IProps> = ({ creator }) => {
                 </div>
 
                 <div className="detail-profile-data-value">
-                    {
-                        showDeliveryAddress
-                            ? creator?.deliveryAddress
-                            : <>{ t('profile-page.unknown') }</>
-                    }
+                    { deliveryAddress }
                 </div>
             </div>
 
@@ -101,11 +145,7 @@ const DetailProfile: FC<IProps> = ({ creator }) => {
                 </div>
 
                 <div className="detail-profile-data-value">
-                    {
-                        showBirthday
-                            ? dayjs(creator?.birthday).locale(getLang()).format(getMonthWithDate())
-                            : <>{ t('profile-page.unknown') }</>
-                    }
+                    { birthday }
                 </div>
             </div>
 
