@@ -115,7 +115,7 @@ const DeleteMyUserConfirmModal: FC<IProps> = ({ show, hid }) => {
                                 id="password"
                                 name="password"
                                 type="password"
-                                label={ t('auth.password') }
+                                label={ t('auth-page.password') }
                                 error={ errors?.password?.message }
                             />
                         </>

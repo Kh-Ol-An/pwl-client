@@ -12,7 +12,15 @@ const DetailProfile: FC = () => {
     const myUser = useAppSelector((state) => state.myUser.user);
     const wishesCreator = useAppSelector((state) => state.wishes.creator);
 
-    const creatorFullName = wishesCreator?.firstName + (wishesCreator?.lastName ? ` ${ wishesCreator.lastName }` : '');
+    const creatorFullName = useMemo(
+        () => {
+            if (myUser?.id === wishesCreator?.id) {
+                return myUser?.firstName + (myUser?.lastName ? ` ${ myUser.lastName }` : '');
+            }
+            return wishesCreator?.firstName + (wishesCreator?.lastName ? ` ${ wishesCreator.lastName }` : '');
+        },
+        [ wishesCreator, myUser ],
+    );
 
     const isMyFriend = useMemo(
         () => wishesCreator && myUser?.friends.includes(wishesCreator.id),
