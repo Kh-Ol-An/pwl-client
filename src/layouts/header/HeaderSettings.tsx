@@ -20,7 +20,7 @@ import { handleGetInitialAllWishes, handleGetInitialWishList } from "@/utils/act
 import { logout } from "@/store/my-user/thunks";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from 'react-router-dom';
 import { EWishSort } from "@/models/IWish";
 
 interface IProps {
@@ -40,6 +40,8 @@ const HeaderSettings: FC<IProps> = ({ logoutWithoutUpdate = false, hideHeader })
     const [ anchor, setAnchor ] = useState<HTMLButtonElement | null>(null);
     const [ showContacts, setShowContacts ] = useState<boolean>(false);
 
+    const location = useLocation();
+
     const handleSingIn = async () => {
         navigate('/auth');
     }
@@ -50,6 +52,9 @@ const HeaderSettings: FC<IProps> = ({ logoutWithoutUpdate = false, hideHeader })
 
     // SelectWish
     const handleSelectWish = async () => {
+        if (location.pathname.split('/')[1].length > 0) {
+            return navigate('/?my-wishes');
+        }
         if (!myUser) return;
 
         await handleGetInitialWishList(dispatch, myUser.id, myUser.id, EWishSort.CREATED_DESC);

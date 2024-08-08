@@ -25,6 +25,7 @@ import getTooltipStyles from "@/utils/get-tooltip-styles";
 import SearchAndSortWishes from "@/layouts/wish/SearchAndSortWishes";
 import CreateWish from "@/layouts/wish/edit-wish/CreateWish";
 import { resetWishCandidate } from "@/store/wishes/slice";
+import { useLocation } from 'react-router-dom';
 
 const WishList: FC = () => {
     const { t } = useTranslation();
@@ -39,6 +40,8 @@ const WishList: FC = () => {
     const selectedUserId = useAppSelector((state) => state.selectedUser?.id);
 
     const dispatch = useAppDispatch();
+
+    const location = useLocation();
 
     const [ firstLoad, setFirstLoad ] = useState<boolean>(true);
     const [ showWish, setShowWish ] = useState<boolean>(false);
@@ -162,6 +165,22 @@ const WishList: FC = () => {
     }, [ inView ]);
 
     useEffect(() => {
+        const isMyWishes = location.search === '?my-wishes'; // Випадок переходу зі сторінки профілю або зі сторінки списку бажань на власні бажання
+        if (isMyWishes && myUser) {
+            dispatch(getWishList({
+                myId: myUser.id,
+                userId: myUser.id,
+                status: wishes.status,
+                page: 1,
+                limit: WISHES_PAGINATION_LIMIT,
+                search: wishes.search,
+                sort: EWishSort.CREATED_DESC,
+            }));
+            dispatch(selectUserId(myUser.id));
+            dispatch(setWishesSort(EWishSort.CREATED_DESC));
+            return;
+        }
+
         const localSelectedUserId = localStorage.getItem('selectedUserId');
         if (localSelectedUserId) {
             dispatch(getWishList({
