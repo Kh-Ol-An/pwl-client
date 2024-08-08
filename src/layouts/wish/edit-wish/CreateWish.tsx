@@ -58,7 +58,8 @@ const CreateWish: FC<IProps> = ({ close }) => {
 
     const [ isFastWish, setIsFastWish ] = useState<boolean>(true);
     const [ material, setMaterial ] = useState<ICreateWish['material']>(true);
-    const [ show, setShow ] = useState<ICreateWish['show']>(EShow.ALL);
+    const [ show, setShow ] = useState<ICreateWish['show'] | null>(null);
+    const [ showError, setShowError ] = useState<string>('');
     const [ images, setImages ] = useState<TCurrentImage[]>([]);
     const [ currency, setCurrency ] = useState<IWish['currency']>(ECurrency.UAH);
     const [ isTransition, setIsTransition ] = useState<boolean>(false);
@@ -82,6 +83,12 @@ const CreateWish: FC<IProps> = ({ close }) => {
                 { shouldFocus: true },
             );
             return;
+        }
+
+        if (!show) {
+            return setShowError(t('main-page.private-wish-error'));
+        } else {
+            setShowError('');
         }
 
         if (!myUser || !process.env.REACT_APP_CRYPTO_JS_SECRET) return;
@@ -169,6 +176,11 @@ const CreateWish: FC<IProps> = ({ close }) => {
                     })
         );
     };
+
+    const changeShow = (value: EShow) => {
+        setShow(value);
+        setShowError('');
+    }
 
     useLayoutEffect(() => {
         if (wishes.list.length === 0) return;
@@ -324,7 +336,8 @@ const CreateWish: FC<IProps> = ({ close }) => {
                     nobody: t('main-page.can-see.wish-nobody-tooltip'),
                 } }
                 show={ show }
-                setShow={ setShow }
+                showError={ showError }
+                changeShow={ changeShow }
             />
 
             {/* actions */ }

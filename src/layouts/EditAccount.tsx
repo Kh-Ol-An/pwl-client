@@ -210,7 +210,7 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
                             nobody: t('main-page.can-see.email-nobody-tooltip'),
                         }}
                         show={ showEmail }
-                        setShow={ setShowEmail }
+                        changeShow={ setShowEmail }
                     />
                 </div>
             </div>
@@ -240,7 +240,7 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
                             nobody: t('main-page.can-see.delivery-address-nobody-tooltip'),
                         }}
                         show={ showDeliveryAddress }
-                        setShow={ setShowDeliveryAddress }
+                        changeShow={ setShowDeliveryAddress }
                     />
                 )}
             </div>
@@ -279,7 +279,7 @@ const EditAccount: FC<IProps> = ({ cancel }) => {
                             nobody: t('main-page.can-see.birthday-nobody-tooltip'),
                         }}
                         show={ showBirthday }
-                        setShow={ setShowBirthday }
+                        changeShow={ setShowBirthday }
                     />
                 ) }
             </div>

@@ -14,17 +14,18 @@ interface IProps {
         friends: string,
         nobody: string,
     };
-    show: EShow;
-    setShow: (show: EShow) => void;
+    show: EShow | null;
+    showError?: string;
+    changeShow: (show: EShow) => void;
 }
 
-const PrivacyChoices: FC<IProps> = ({ id, tooltipContent, show, setShow }) => {
+const PrivacyChoices: FC<IProps> = ({ id, tooltipContent, show, showError, changeShow }) => {
     const { t } = useTranslation();
 
     const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
-    const changeShow = (e: ChangeEvent<HTMLInputElement>) => {
-        setShow(e.target.value as EShow);
+    const handleChangeShow = (e: ChangeEvent<HTMLInputElement>) => {
+        changeShow(e.target.value as EShow);
     };
 
     useEffect(() => {
@@ -53,7 +54,7 @@ const PrivacyChoices: FC<IProps> = ({ id, tooltipContent, show, setShow }) => {
                         name="show"
                         checked={ show === EShow.ALL }
                         value={ EShow.ALL }
-                        onChange={ changeShow }
+                        onChange={ handleChangeShow }
                     />
 
                     <span
@@ -77,7 +78,7 @@ const PrivacyChoices: FC<IProps> = ({ id, tooltipContent, show, setShow }) => {
                         name="show"
                         checked={ show === EShow.FRIENDS }
                         value={ EShow.FRIENDS }
-                        onChange={ changeShow }
+                        onChange={ handleChangeShow }
                     />
 
                     <span
@@ -101,7 +102,7 @@ const PrivacyChoices: FC<IProps> = ({ id, tooltipContent, show, setShow }) => {
                         name="show"
                         checked={ show === EShow.NOBODY }
                         value={ EShow.NOBODY }
-                        onChange={ changeShow }
+                        onChange={ handleChangeShow }
                     />
 
                     <span
@@ -118,6 +119,10 @@ const PrivacyChoices: FC<IProps> = ({ id, tooltipContent, show, setShow }) => {
                     />
                 </div>
             </div>
+
+            {showError && (
+                <p className="error">{showError}</p>
+            )}
         </div>
     );
 };

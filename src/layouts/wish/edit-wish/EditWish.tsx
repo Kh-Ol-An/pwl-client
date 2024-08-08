@@ -386,7 +386,7 @@ const EditWish: FC<IProps> = ({ idOfSelectedWish, close }) => {
                     nobody: t('main-page.can-see.wish-nobody-tooltip'),
                 }}
                 show={show}
-                setShow={setShow}
+                changeShow={setShow}
             />
 
             {/* actions */ }
