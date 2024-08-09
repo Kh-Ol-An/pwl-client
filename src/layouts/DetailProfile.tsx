@@ -12,7 +12,19 @@ const DetailProfile: FC = () => {
     const myUser = useAppSelector((state) => state.myUser.user);
     const wishesCreator = useAppSelector((state) => state.wishes.creator);
 
-    const creatorFullName = useMemo(
+    // Avatar
+    const avatar = useMemo(
+        () => {
+            if (myUser?.id === wishesCreator?.id) {
+                return myUser?.avatar;
+            }
+            return wishesCreator?.avatar;
+        },
+        [ wishesCreator, myUser ],
+    );
+
+    // Full Name
+    const fullName = useMemo(
         () => {
             if (myUser?.id === wishesCreator?.id) {
                 return myUser?.firstName + (myUser?.lastName ? ` ${ myUser.lastName }` : '');
@@ -22,10 +34,13 @@ const DetailProfile: FC = () => {
         [ wishesCreator, myUser ],
     );
 
+    // isMyFriend
     const isMyFriend = useMemo(
         () => wishesCreator && myUser?.friends.includes(wishesCreator.id),
         [ wishesCreator, myUser ],
     );
+
+    // Email
     const showEmail = useMemo(
         () => {
             const showAll = wishesCreator?.showEmail === EShow.ALL
@@ -44,6 +59,7 @@ const DetailProfile: FC = () => {
         [ showEmail, wishesCreator, myUser ],
     );
 
+    // Delivery Address
     const showDeliveryAddress = useMemo(
         () => {
             const showAll = wishesCreator?.showDeliveryAddress === EShow.ALL
@@ -62,6 +78,7 @@ const DetailProfile: FC = () => {
         [ showDeliveryAddress, wishesCreator, myUser ],
     );
 
+    // Birthday
     const showBirthday = useMemo(
         () => {
             const showAll = wishesCreator?.showBirthday === EShow.ALL
@@ -82,6 +99,7 @@ const DetailProfile: FC = () => {
         [ showBirthday, wishesCreator, myUser ],
     );
 
+    // Count of successful and unsuccessful wishes
     const successfulWishes = (wishesCreator && wishesCreator.successfulWishes > 0) ? wishesCreator.successfulWishes : 0;
     const unsuccessfulWishes = (wishesCreator && wishesCreator.unsuccessfulWishes > 0) ? wishesCreator.unsuccessfulWishes : 0;
     const tWishSuccess = useMemo(
@@ -118,15 +136,15 @@ const DetailProfile: FC = () => {
             <div className="detail-profile-main-data">
                 <div className="detail-profile-avatar">
                     <Avatar
-                        alt={ creatorFullName }
-                        src={ wishesCreator?.avatar }
+                        src={ avatar }
+                        alt={ fullName }
                         sx={ { width: '100%', height: '100%' } }
                     />
                 </div>
 
                 <div className="detail-profile-main-data-content">
                     <div className="detail-profile-name">
-                        { creatorFullName }
+                        { fullName }
                     </div>
 
                     { showEmail && (
