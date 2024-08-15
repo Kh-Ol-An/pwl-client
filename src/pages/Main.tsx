@@ -21,21 +21,6 @@ const Main: FC = () => {
     };
 
     useEffect(() => {
-        const handlePopState = () => {
-            if (showHeaderAndSidebar) {
-                setShowHeaderAndSidebar(false);
-                window.history.go(1);
-            }
-        };
-
-        window.addEventListener('popstate', handlePopState);
-
-        return () => {
-            window.removeEventListener('popstate', handlePopState);
-        };
-    }, [showHeaderAndSidebar]);
-
-    useEffect(() => {
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
         };
