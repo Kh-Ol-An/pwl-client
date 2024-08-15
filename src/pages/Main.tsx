@@ -24,6 +24,7 @@ const Main: FC = () => {
         const handlePopState = () => {
             if (showHeaderAndSidebar) {
                 setShowHeaderAndSidebar(false);
+                window.history.go(1);
             }
         };
 
