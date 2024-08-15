@@ -13,26 +13,16 @@ const Main: FC = () => {
     const [ screenWidth, setScreenWidth ] = useState<number>(window.innerWidth);
 
     const handleToggleHeaderAndSidebar = () => {
-        setShowHeaderAndSidebar(prevState => {
-            if (prevState) {
-                window.history.back();
-                return false;
-            }
-
-            window.history.pushState(null, '', window.location.href);
-            return true;
-        });
+        setShowHeaderAndSidebar(prevState => !prevState);
     };
 
     const hideHeaderAndSidebar = () => {
-        window.history.back();
         setShowHeaderAndSidebar(false);
     };
 
     useEffect(() => {
         const handlePopState = () => {
             if (showHeaderAndSidebar) {
-                window.history.back();
                 setShowHeaderAndSidebar(false);
             }
         };
